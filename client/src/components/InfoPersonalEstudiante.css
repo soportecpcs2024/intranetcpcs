@@ -1,0 +1,43 @@
+.info-personal-container {
+    display: flex;
+    flex-direction: column;
+    /* Otros estilos según necesidades */
+  }
+  
+  .info-personal-content {
+    display: flex;
+    flex-direction: column;
+    /* Estilos para el contenido principal */
+}
+
+.perdida-container {
+    color: red;
+    display: flex;
+    flex-direction: row;
+    
+    justify-content: flex-start;
+    align-items: center;
+    /* Estilos específicos para la clase 'perdida-container' */
+}
+
+.perdida {
+    font-weight: bold;
+    background-color: red;
+    font-size: 35px;
+    padding: 5px;
+    border-radius: 8px;
+    
+    
+    /* Otros estilos específicos para el texto 'Perdida' */
+  }
+  
+  .info-personal-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    /* Estilos para los botones u otras acciones */
+  }
+  
+  
+  
