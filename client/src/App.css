@@ -236,6 +236,12 @@ form {
 .input-group label {
   color: rgb(0, 0, 0);
   margin: 10px 0px;
+  font-weight: 600;
+}
+
+input::placeholder {
+  color: rgb(0, 0, 0); /* Cambia "red" al color que desees */
+  opacity: 1; /* Si deseas que el color tenga opacidad completa */
 }
 .input-group input {
   padding: 10px ;
@@ -243,6 +249,8 @@ form {
   border: 1px solid hsla(0, 0%, 100%, 0.507);
   outline: none;
   border-radius: 5px;
+  color: black;
+  font-weight: 300;
    
   font-weight: lighter;
   box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
@@ -308,7 +316,48 @@ form {
 }
 
 
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
 
+.password-container input {
+  padding-right: 40px; /* Espacio para el ícono */
+}
+
+.toggle-password-button {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-size: 1.2em;
+}
+
+.login-button {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background-color: #0056b3;
+}
+
+.error {
+  color: red;
+  margin-top: 1rem;
+}
  
 
  
@@ -588,6 +637,16 @@ form {
   background-color: rgba(253, 252, 252, 0.936);
 }
 
+.linkNav-espacio-p{
+  display: flex;
+  justify-content: flex-end;
+  align-items:end;
+  text-align: center;
+  padding: 0px;
+  margin: -6px 8px;
+  margin-bottom: 8px;
+  color: rgba(255, 255, 255, 0.304);
+}
 
 
   /* styles.css */

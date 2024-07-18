@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -10,7 +11,8 @@ const LoginForm = () => {
     password: ''
   });
   const [error, setError] = useState('');
-  
+  const [showPassword, setShowPassword] = useState(false);
+
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -57,29 +59,42 @@ const LoginForm = () => {
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="input-group">
-        <label>Email:</label>
+        <label>Correo:</label>
         <input 
           type="email" 
           name="email" 
           value={formData.email} 
           onChange={handleChange} 
-          placeholder="¡Email please!" 
+          placeholder="¡Ingresa el correo!" 
         />
       </div>
       <div className="input-group">
-        <label>Password:</label>
-        <input 
-          type="password" 
-          name="password" 
-          value={formData.password} 
-          onChange={handleChange} 
-          placeholder="¡Password!" 
-        />
+        <label>Contraseña:</label>
+        <div className="password-container">
+          <input 
+            type={showPassword ? 'text' : 'password'} 
+            name="password" 
+            value={formData.password} 
+            onChange={handleChange} 
+            placeholder="¡Ingresa tu contraseña!" 
+          />
+          <button 
+            type="button" 
+            className="toggle-password-button" 
+            onClick={togglePasswordVisibility}
+          >
+            {showPassword ? <FaEyeSlash /> : <FaEye />}
+          </button>
+        </div>
       </div>
-      <button type="submit" className="login-button">Enter</button>
+      <button type="submit" className="login-button">Entrar</button>
       {error && <p className="error" style={{color: 'red'}}>{error}</p>}
     </form>
   );

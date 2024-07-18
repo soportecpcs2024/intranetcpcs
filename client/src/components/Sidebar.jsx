@@ -47,6 +47,9 @@ const Sidebar = () => {
             <p>Estadística individual</p>
           </div>
         </Link>
+        <div className="linkNav-espacio-p">
+          <p>_______________</p>
+        </div>
         <Link
           className={`linkNav ${
             location.pathname === "/admin/academico/estdificultades"

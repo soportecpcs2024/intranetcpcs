@@ -36,7 +36,7 @@ const DatatableBuscador = ({ students, selectedArea, error, onStudentSelect }) =
             <th>Nombre</th>
             <th>Grupo</th>
             <th>Promedio</th>
-            <th>Ver</th>
+            <th>Detalles</th>
           </tr>
         </thead>
         <tbody>

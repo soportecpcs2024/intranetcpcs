@@ -18,7 +18,8 @@ const Auth = () => {
     <div className="auth">
       <div className="header-login">
         <h1>CPCS</h1>
-        <h3><span>Celebrating 30 years</span>of shaping leaders in Christ for Colombia and the nations</h3>
+        <h3><span>Celebrando 30 años</span>
+        formando líderes en Cristo para Colombia y las naciones</h3>
        
       </div>
       <div className="form-base">
@@ -32,13 +33,13 @@ const Auth = () => {
                 className={activeTab === "login" ? "active" : ""}
                 onClick={() => handleTabChange("login")}
               >
-                Login Up
+                Acceder
               </button>
               <button
                 className={activeTab === "register" ? "active" : ""}
                 onClick={() => handleTabChange("register")}
               >
-                Register
+                Registrarse
               </button>
             </div>
             <div className="auth__forms">
