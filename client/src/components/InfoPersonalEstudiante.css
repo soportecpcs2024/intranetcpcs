@@ -6,12 +6,19 @@
   
   .info-personal-content {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-between;
     /* Estilos para el contenido principal */
 }
 
+.info-personal-content p{
+  line-height: 20px;
+
+}
+
 .perdida-container {
-    color: red;
+     
     display: flex;
     flex-direction: row;
     
@@ -20,12 +27,14 @@
     /* Estilos específicos para la clase 'perdida-container' */
 }
 
+
 .perdida {
     font-weight: bold;
     background-color: red;
-    font-size: 35px;
+     
     padding: 5px;
-    border-radius: 8px;
+    border-radius: 4px;
+    color: white;
     
     
     /* Otros estilos específicos para el texto 'Perdida' */
@@ -38,6 +47,45 @@
     align-items: center;
     /* Estilos para los botones u otras acciones */
   }
+
+
+  /* Card.css */
+
+.card-container {
+  background-color: #fff; /* Fondo blanco para la tarjeta */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  padding: 16px; /* Espaciado interno */
+  margin: 16px; /* Margen externo */
+  max-width: 400px; /* Ancho máximo de la tarjeta */
+  border: 1px solid #ddd; /* Borde gris claro */
+}
+
+.card-header {
+  margin-bottom: 12px; /* Espaciado debajo del encabezado */
+}
+
+.card-header h3 {
+  margin: 0; /* Elimina el margen por defecto del encabezado */
+  color: #333; /* Color del texto del encabezado */
+}
+
+.card-body {
+  font-size: 16px; /* Tamaño de fuente del cuerpo */
+  color: #555; /* Color del texto del cuerpo */
+}
+
+.observaciones-text {
+  margin: 0;
+  line-height: 40px;
+  text-align: justify; /* Elimina el margen por defecto del párrafo */
+}
+
+.observaciones-text strong {
+  line-height: 50px; /* Elimina el margen por defecto del párrafo */
+  color: #007bff; /* Color azul para la etiqueta 'Observaciones' */
+}
+
   
   
   

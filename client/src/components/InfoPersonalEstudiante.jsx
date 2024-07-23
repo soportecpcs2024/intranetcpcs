@@ -52,31 +52,65 @@ const InfoPersonalEstudiante = ({ student }) => {
 
   return (
     <div className="info-personal-container" ref={componentRef}>
+      <h2>Informacion estudiante</h2>
       <div className="info-personal-content">
-        <h2>Informacion estudiante</h2>
-        
-        <p> {renderValue("Nombre", student.nombre)}</p>
-        {renderValue("Grupo", student.grupo)}
-        {renderValue("Periodo", student.periodo)}
-        {renderValue("Promedio", student.promedio)}
-        {renderValue("Ciencias Naturales", student.ciencias_naturales)}
-        {renderValue("Física", student.fisica)}
-        {renderValue("Química", student.quimica)}
-        {renderValue(
-          "Ciencias Políticas Económicas",
-          student.ciencias_politicas_economicas
-        )}
-        {renderValue("Ciencias Sociales", student.ciencias_sociales)}
-        {renderValue("Cívica y Constitución", student.civica_y_constitucion)}
-        {renderValue("Educación Artística", student.educacion_artistica)}
-        {renderValue("Educación Cristiana", student.educacion_cristiana)}
-        {renderValue("Educación Ética", student.educacion_etica)}
-        {renderValue("Educación Física", student.educacion_fisica)}
-        {renderValue("Filosofía", student.filosofia)}
-        {renderValue("Idioma Extranjero", student.idioma_extranjero)}
-        {renderValue("Lengua Castellana", student.lengua_castellana)}
-        {renderValue("Matemáticas", student.matematicas)}
-        {renderValue("Tecnología", student.tecnologia)}
+        <div>
+          {renderValue("Nombre", student.nombre)}
+          {renderValue("Grupo", student.grupo)}
+          {renderValue("Periodo", student.periodo)}
+          {renderValue("Promedio", student.promedio)}
+          {renderValue("Ciencias Naturales", student.ciencias_naturales)}
+          {renderValue("Física", student.fisica)}
+          {renderValue("Química", student.quimica)}
+          {renderValue(
+            "Ciencias Políticas Económicas",
+            student.ciencias_politicas_economicas
+          )}
+          {renderValue("Ciencias Sociales", student.ciencias_sociales)}
+          {renderValue("Cívica y Constitución", student.civica_y_constitucion)}
+          {renderValue("Educación Artística", student.educacion_artistica)}
+          {renderValue("Educación Cristiana", student.educacion_cristiana)}
+          {renderValue("Educación Ética", student.educacion_etica)}
+          {renderValue("Educación Física", student.educacion_fisica)}
+          {renderValue("Filosofía", student.filosofia)}
+          {renderValue("Idioma Extranjero", student.idioma_extranjero)}
+          {renderValue("Lengua Castellana", student.lengua_castellana)}
+          {renderValue("Matemáticas", student.matematicas)}
+          {renderValue("Tecnología", student.tecnologia)}
+        </div>
+        <div>
+          <div className="card-container">
+            <label htmlFor="">
+              <strong>Observaciones:</strong>{" "}
+            </label>
+            <div className="card-body">
+              <p className="observaciones-text">
+                {student.observaciones || "No hay observaciones disponibles"}
+              </p>
+            </div>
+          </div>
+          <div className="card-container">
+            <label htmlFor="">
+              <strong>Metas:</strong>{" "}
+            </label>
+            <div className="card-body">
+              <p className="observaciones-text">
+                {student.metas || "No hay observaciones disponibles"}
+              </p>
+            </div>
+          </div>
+          <div className="card-container">
+            <div className="card-body">
+              <label htmlFor="">
+                <strong>Reporte de nivelación:</strong>{" "}
+              </label>
+              <p className="observaciones-text">
+                {student.reporte_nivelacion ||
+                  "No hay observaciones disponibles"}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
       <div className="info-personal-actions">
         <button

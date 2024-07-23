@@ -992,6 +992,7 @@ box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
 
 
 .estdificultades-cards{
+  background-color: white;
   display: flex;
   flex-direction: row;
   gap: 4px;
