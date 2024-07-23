@@ -66,8 +66,11 @@ async function refreshAccessToken(req, res) {
   if (!token) return res.status(400).send({ msg: "Token requerido" });
 
   try {
-    const { user_id } = jwt.decoded(token);
-    const userStorage = await Usuario.findOne({ _id: user_id });
+    const decoded = jwt.verifyToken(token);
+    if (!decoded) return res.status(400).send({ msg: "Token inválido" });
+
+    const { user_id } = decoded;
+    const userStorage = await Usuario.findById(user_id);
 
     if (!userStorage) {
       return res.status(404).send({ msg: "Usuario no encontrado" });
@@ -78,6 +81,7 @@ async function refreshAccessToken(req, res) {
       refresh: jwt.createRefreshToken(userStorage),
     });
   } catch (error) {
+    console.error('Error refreshing access token:', error);
     res.status(500).send({ msg: "Error del servidor" });
   }
 }

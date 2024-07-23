@@ -70,6 +70,7 @@ const DashboardEstDificultades = () => {
     <div >
 
       <div  >
+          <h3 className="estdificultades-cards-h3">Estudiantes con dificultades académicas que comprometen el año lectivo</h3>
         <div className="estdificultades-cards" >
           {filteredStudents.length > 0 ? (
             filteredStudents.map((student) => (

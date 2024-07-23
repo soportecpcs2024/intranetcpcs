@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
-import { FaEye, FaEdit } from "react-icons/fa";
+import { CiEdit } from "react-icons/ci";
 import StudentModal from "./StudentModal";
 import axios from 'axios';
-import { CiEdit } from "react-icons/ci";
 
 const DatatableAreas = ({ students, selectedArea, error }) => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -12,6 +11,7 @@ const DatatableAreas = ({ students, selectedArea, error }) => {
   const [selectedStudent, setSelectedStudent] = useState(null);
   const itemsPerPage = 15; // Número de elementos por página
 
+  // Áreas predeterminadas
   const allAreas = [
     "ciencias_naturales",
     "fisica",
@@ -28,42 +28,45 @@ const DatatableAreas = ({ students, selectedArea, error }) => {
     "tecnologia",
   ];
 
+  // Áreas seleccionadas
   const selectedAreas = selectedArea ? [selectedArea] : allAreas;
 
+  // Manejo de cambio de página
   const handlePageClick = (event) => {
     setCurrentPage(event.selected);
   };
 
+  // Actualizar los estudiantes filtrados cuando cambia la lista de estudiantes
   useEffect(() => {
     setFilteredStudents(students);
     setCurrentPage(0);
   }, [students]);
 
+  // Calcular elementos actuales de la página
   const offset = currentPage * itemsPerPage;
   const currentPageItems = filteredStudents.slice(offset, offset + itemsPerPage);
-
   const pageCount = Math.ceil(filteredStudents.length / itemsPerPage);
 
+  // Abrir el modal
   const openModal = (student) => {
     setSelectedStudent(student);
     setModalIsOpen(true);
   };
 
+  // Cerrar el modal
   const closeModal = () => {
     setModalIsOpen(false);
     setSelectedStudent(null);
   };
 
+  // Actualizar observaciones en la base de datos y estado
   const updateObservations = async (id, newObservations, newMetas, newRepNivelacion) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/student_notes/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ observaciones: newObservations, metas: newMetas, reporte_nivelacion: newRepNivelacion })
+      const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/student_notes/${id}`, {
+        observaciones: newObservations,
+        metas: newMetas,
+        reporte_nivelacion: newRepNivelacion
       });
-      const updatedStudent = await response.json();
       setFilteredStudents((prevStudents) =>
         prevStudents.map((student) =>
           student._id === id ? { ...student, observaciones: newObservations, metas: newMetas, reporte_nivelacion: newRepNivelacion } : student
@@ -81,8 +84,10 @@ const DatatableAreas = ({ students, selectedArea, error }) => {
           <tr>
             <th>Nombre</th>
             <th>Grupo</th>
-            {selectedAreas.map((area, index) => (
-              <th key={index}>{area.split("_").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")}</th>
+            {selectedAreas.map((area) => (
+              <th key={area}>
+                {area.split("_").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")}
+              </th>
             ))}
             <th>Observaciones</th>
             <th>Metas</th>
@@ -91,21 +96,20 @@ const DatatableAreas = ({ students, selectedArea, error }) => {
           </tr>
         </thead>
         <tbody>
-          {currentPageItems.map((student, index) => (
-            <tr key={index}>
+          {currentPageItems.map((student) => (
+            <tr key={student._id}>
               <td>{student.nombre}</td>
               <td className="td-areas">{student.grupo}</td>
-              {selectedAreas.map((area, idx) => (
-                <td className="td-areas" key={idx}>{Number(student[area]).toFixed(2)}</td>
+              {selectedAreas.map((area) => (
+                <td className="td-areas" key={area}>
+                  {Number(student[area]).toFixed(2)}
+                </td>
               ))}
               <td>{student.observaciones}</td>
               <td>{student.metas}</td>
               <td>{student.reporte_nivelacion}</td>
               <td className="td-areas">
-                
-                <CiEdit className="edit-icons" onClick={() => openModal(student)}/>
-               
-                 
+                <CiEdit className="edit-icons" onClick={() => openModal(student)} />
               </td>
             </tr>
           ))}

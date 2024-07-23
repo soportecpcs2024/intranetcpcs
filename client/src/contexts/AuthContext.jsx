@@ -22,6 +22,11 @@ export const AuthProvider = (props) => {
   }, []);
 
   const fetchUserData = async (token) => {
+    if (!token) {
+      console.error("Token no proporcionado");
+      return;
+    }
+    
     try {
       const response = await axiosInstance.get(`${import.meta.env.VITE_BACKEND_URL}/api/users/user/me`, {
         headers: {
@@ -30,9 +35,11 @@ export const AuthProvider = (props) => {
       });
       setUser(response.data);
     } catch (error) {
-      console.error("Error fetching user data:", error);
+      console.error("Error fetching user data:", error.response?.data || error.message);
     }
   };
+  
+  
 
   const login = async (accessToken, refreshToken) => {
      
@@ -51,13 +58,14 @@ export const AuthProvider = (props) => {
     setUser(null);
   };
 
+
   const refreshAccessToken = async () => {
     try {
-      const response = await axiosInstance.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/refresh_access_token`, {
-        refresh_token: refreshToken,
+      const response = await axiosInstance.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/refresh_access_token`, { // Usa la URL relativa
+        token: refreshToken, // Asegúrate de que esto coincida con lo que espera el backend
       });
-      if (response.data.success) {
-        const newAccessToken = response.data.token;
+      if (response.data.accessToken) {
+        const newAccessToken = response.data.accessToken;
         localStorage.setItem('token', newAccessToken);
         setToken(newAccessToken);
         return newAccessToken;
@@ -67,15 +75,21 @@ export const AuthProvider = (props) => {
       logout();
     }
   };
+  
 
   useEffect(() => {
     if (token) {
       const interval = setInterval(async () => {
-        await refreshAccessToken();
+        try {
+          await refreshAccessToken();
+        } catch (error) {
+          console.error("Error in interval token refresh:", error);
+        }
       }, 15 * 60 * 1000); // Refresh token every 15 minutes
       return () => clearInterval(interval);
     }
   }, [token, refreshToken]);
+  
 
   const data = {
     accessToken: token,

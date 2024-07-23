@@ -994,40 +994,53 @@ box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
 .estdificultades-cards{
   display: flex;
   flex-direction: row;
-  gap: 10px;
-  
+  gap: 4px;
+   
   justify-content: flex-start;
   margin: 20px;
 }
-
-.student-card {
+.estdificultades-cards-h3{
+  margin-left: 20px;
+}
+.student-card-deficient {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  width: 46%;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 16px;
-  margin: 16px;
-  
+  margin: 10px;
+  width: 600px;
+   
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   -webkit-box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
   -moz-box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
   box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
 }
 
-.card-header {
+.card-header-deficient {
+   width: 50%;
   margin-bottom: 16px;
 }
 
-.card-header h2 {
+.card-header-deficient h2 {
   margin: 0;
-  font-size: 1.5em;
+  padding: 0;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.card-header-deficient p {
+  font-size: 14px;
+  margin-top: -8px;
 }
 
-.card-body p {
-  margin: 8px 0;
-   
-}
+ 
 
 .card-footer {
-  margin-top: 16px;
+  width: 50%;
+  
 }
 
 .student-table {
@@ -1037,8 +1050,8 @@ box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
 }
 
 .student-table td {
-  padding: 5px;
-  border: 1px solid #ddd;
+  padding: 2px;
+  border: 1px solid #ddddddb4;
 }
 
 .student-table tr:nth-child(even) {

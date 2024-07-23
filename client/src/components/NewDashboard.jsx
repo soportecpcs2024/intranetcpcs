@@ -38,13 +38,13 @@ const NewDashboard = () => {
 
     if (selectedGroup) {
       filtered = filtered.filter(
-        (student) => student.grupo.trim() === selectedGroup
+        (student) => student.grupo && student.grupo.trim() === selectedGroup
       );
     }
 
     if (selectedPeriodo) {
       filtered = filtered.filter(
-        (student) => student.periodo.trim() === selectedPeriodo
+        (student) => student.periodo && student.periodo.trim() === selectedPeriodo
       );
     }
 
@@ -133,6 +133,4 @@ const NewDashboard = () => {
 };
 
 export default NewDashboard;
-
-
 

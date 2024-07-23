@@ -7,7 +7,7 @@ import FiltrosAreas from "./FiltrosAreas";
 import BarChartComponentAreas from "./BarChartComponentAreas";
 import DatatableAreas from "./DataTableAreas";
 import PieChartComponentAreas from "./PieChartComponentAreas";
- 
+import StudentModal from "./StudentModal"; // Importar el modal
 
 const DashboardAreas = () => {
   const [students, setStudents] = useState([]);
@@ -16,8 +16,10 @@ const DashboardAreas = () => {
   const [selectedGroup, setSelectedGroup] = useState("");
   const [selectedPeriodo, setSelectedPeriodo] = useState("");
   const [selectedScale, setSelectedScale] = useState("");
-  const [selectedArea, setSelectedArea] = useState("ciencias_naturales"); // Estado para el área seleccionada
+  const [selectedArea, setSelectedArea] = useState("ciencias_naturales");
   const [loading, setLoading] = useState(true);
+  const [selectedStudent, setSelectedStudent] = useState(null);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
     async function fetchStudents() {
@@ -39,19 +41,19 @@ const DashboardAreas = () => {
 
     if (selectedGroup) {
       filtered = filtered.filter(
-        (student) => student.grupo.trim() === selectedGroup
+        (student) => student.grupo && student.grupo.trim() === selectedGroup
       );
     }
 
     if (selectedPeriodo) {
       filtered = filtered.filter(
-        (student) => student.periodo.trim() === selectedPeriodo
+        (student) => student.periodo && student.periodo.trim() === selectedPeriodo
       );
     }
 
     if (selectedScale) {
       filtered = filtered.filter((student) => {
-        const value = parseFloat(student[selectedArea]); // Obtén el valor del área seleccionada
+        const value = parseFloat(student[selectedArea]);
         let group;
         if (value < 3) {
           group = "DI";
@@ -75,9 +77,28 @@ const DashboardAreas = () => {
     setFilteredStudents(filtered);
   }, [students, selectedGroup, selectedPeriodo, selectedScale, selectedArea]);
 
+  const handleUpdateObservations = (studentId, observaciones, metas, repNivelacion) => {
+    // Actualiza las observaciones en la lista de estudiantes
+    setStudents(prevStudents => 
+      prevStudents.map(student => 
+        student._id === studentId 
+          ? { ...student, observaciones, metas, reporte_nivelacion: repNivelacion }
+          : student
+      )
+    );
+    // Cierra el modal
+    setModalIsOpen(false);
+  };
+
+  const openModal = (student) => {
+    setSelectedStudent(student);
+    setModalIsOpen(true);
+  };
+
   if (loading) {
     return <LoadingSpinner />;
   }
+
   return (
     <div className="dashboard_div">
       <div className="dashboard_div_filtros">
@@ -88,8 +109,8 @@ const DashboardAreas = () => {
           setSelectedGroup={setSelectedGroup}
           selectedScale={selectedScale}
           setSelectedScale={setSelectedScale}
-          selectedArea={selectedArea} // Pasar el área seleccionada
-          setSelectedArea={setSelectedArea} // Pasar la función para cambiar el área seleccionada
+          selectedArea={selectedArea}
+          setSelectedArea={setSelectedArea}
         />
         <PromedioGrupos
           className="promedio_grupos"
@@ -113,6 +134,7 @@ const DashboardAreas = () => {
             students={filteredStudents}
             selectedArea={selectedArea}
             error={error}
+            onStudentClick={openModal} // Agregar el manejador de clics en los estudiantes
           />
         </div>
         <div className="box_prom_tables">
@@ -123,9 +145,16 @@ const DashboardAreas = () => {
           />
         </div>
       </div>
-      <div>
-        
-      </div>
+
+      {selectedStudent && (
+        <StudentModal
+          isOpen={modalIsOpen}
+          onRequestClose={() => setModalIsOpen(false)}
+          student={selectedStudent}
+          selectedArea={selectedArea}
+          updateObservations={handleUpdateObservations}
+        />
+      )}
     </div>
   );
 };

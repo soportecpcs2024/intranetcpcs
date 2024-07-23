@@ -55,7 +55,7 @@ const InfoPersonalEstudiante = ({ student }) => {
       <div className="info-personal-content">
         <h2>Informacion estudiante</h2>
         
-        {renderValue("Nombre", student.nombre)}
+        <p> {renderValue("Nombre", student.nombre)}</p>
         {renderValue("Grupo", student.grupo)}
         {renderValue("Periodo", student.periodo)}
         {renderValue("Promedio", student.promedio)}
