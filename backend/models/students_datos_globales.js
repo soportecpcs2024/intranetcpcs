@@ -6,12 +6,12 @@ const StudentSGlobaleschema = new mongoose.Schema({
   primer_nombre: { type: String, required: true },
   segundo_nombre: { type: String },
   primer_apellido: { type: String, required: true },
-  segundo_apellido: { type: String, required: true },
+  segundo_apellido: { type: String },
   tipo_documento: { type: String, required: true },
-  numero_identificacion: { type: String, required: true },
-  municipio_exp_documento: { type: String, required: true },
+  num_identificacion: { type: String, required: true },
+  munexpdocumento: { type: String},
   fecha_nacimiento: { type: Date, required: true },
-  municipio_nacimiento: { type: String, required: true },
+  municipio_nacimiento: { type: String },
   telefono: { type: String },
   celular: { type: String },
   email: { type: String },
@@ -27,14 +27,14 @@ const StudentSGlobaleschema = new mongoose.Schema({
   grupo_sisben: { type: String },
   zona: { type: String },
   estado: { type: String },
-  tiene_subsidio: { type: Boolean },
+  tiene_subsidio: { type: String },
   ips: { type: String },
   numero_carnet_sisben: { type: String },
   fuente_recursos: { type: String },
   madre_cabeza_familia: { type: Boolean },
-  beneficiario_heroe_nacion: { type: Boolean },
+  beneficiario_heroe_nacion: { type: String },
   beneficiario_madre_cabeza_familia: { type: Boolean },
-  beneficiario_veterano_fuerza_publica: { type: Boolean },
+  beneficiario_veterano_fuerza_publica: { type: String },
   proviene_sector_privado: { type: Boolean },
   proviene_otro_municipio: { type: Boolean },
   institucion_bienestar_origen: { type: String },
@@ -55,7 +55,7 @@ const StudentSGlobaleschema = new mongoose.Schema({
   usuario: { type: String },
   ultima_fecha_actualizacion: { type: Date },
   edad: { type: Number },
-  pertenece_regimen_contributivo: { type: Boolean }
+  pertenece_regimen_contributivo: { type: String }
 });
 
 module.exports = mongoose.model('Students_datos_globales', StudentSGlobaleschema);

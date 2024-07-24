@@ -32,6 +32,18 @@ exports.getStudent = async (req, res) => {
   }
 };
 
+exports.getStudentByNumIdentificacion = async (req, res) => {
+  try {
+    const student = await StudentDataGlobales.findOne({ num_identificacion: req.params.num_identificacion });
+    if (!student) {
+      return res.status(404).send();
+    }
+    res.status(200).send(student);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
 exports.updateStudent = async (req, res) => {
   try {
     const student = await StudentDataGlobales.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
@@ -44,9 +56,37 @@ exports.updateStudent = async (req, res) => {
   }
 };
 
+exports.updateStudentByNumIdentificacion = async (req, res) => {
+  try {
+    const student = await StudentDataGlobales.findOneAndUpdate(
+      { num_identificacion: req.params.num_identificacion },
+      req.body,
+      { new: true, runValidators: true }
+    );
+    if (!student) {
+      return res.status(404).send();
+    }
+    res.status(200).send(student);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
+
 exports.deleteStudent = async (req, res) => {
   try {
     const student = await StudentDataGlobales.findByIdAndDelete(req.params.id);
+    if (!student) {
+      return res.status(404).send();
+    }
+    res.status(200).send(student);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+exports.deleteStudentByNumIdentificacion = async (req, res) => {
+  try {
+    const student = await StudentDataGlobales.findOneAndDelete({ num_identificacion: req.params.num_identificacion });
     if (!student) {
       return res.status(404).send();
     }

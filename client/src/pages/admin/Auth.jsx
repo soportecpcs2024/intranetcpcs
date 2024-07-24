@@ -35,12 +35,12 @@ const Auth = () => {
               >
                 Acceder
               </button>
-              <button
+              {/* <button
                 className={activeTab === "register" ? "active" : ""}
                 onClick={() => handleTabChange("register")}
               >
                 Registrarse
-              </button>
+              </button> */}
             </div>
             <div className="auth__forms">
               {activeTab === "login" && <LoginForm />}

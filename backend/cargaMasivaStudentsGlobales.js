@@ -1,92 +1,40 @@
-const fs = require("fs");
-const path = require("path");
-const csv = require("csv-parser");
-const mongoose = require("./db"); // Asegúrate de que tu archivo db.js esté configurado correctamente
-const StudentNotes = require("./models/students_datos_globales"); // Importa tu modelo de notas de estudiantes
+const fs = require('fs');
+const path = require('path');
+const mongoose = require('./db'); // Asegúrate de que tu archivo db.js esté configurado correctamente
+const StudentNotes = require('./models/students_datos_globales'); // Importa tu modelo de notas de estudiantes
 
-// Ruta del archivo CSV
-const csvFilePath = path.join(__dirname, "../EstudiantesGlobales.csv"); // Reemplaza con la ruta correcta a tu archivo CSV
+// Ruta del archivo JSON
+const jsonFilePath = path.join(__dirname, './estudiantesGlobales.json'); // Reemplaza con la ruta correcta a tu archivo JSON
 
-fs.createReadStream(csvFilePath, { encoding: "utf8" })
-  .pipe(csv()) // No es necesario especificar el separador si el CSV usa comas por defecto
-  .on("data", async (row) => {
-    try {
-      // Convertir los valores numéricos de las notas a números
-      const numericFields = [
-        "codigo_matricula",
-        "primer_nombre",
-        "segundo_nombre",
-        "primer_apellido",
-        "segundo_apellido",
-        "tipo_documento",
-        "numero_identificacion",
-        "municipio_exp_documento",
-        "fecha_nacimiento",
-        "municipio_nacimiento",
-        "telefono",
-        "celular",
-        "email",
-        "direccion",
-        "pais",
-        "municipio_direccion",
-        "barrio_direccion",
-        "sexo",
-        "estrato",
-        "tipo_sangre",
-        "eps",
-        "ars",
-        "grupo_sisben",
-        "zona",
-        "estado",
-        "tiene_subsidio",
-        "ips",
-        "numero_carnet_sisben",
-        "fuente_recursos",
-        "madre_cabeza_familia",
-        "beneficiario_heroe_nacion",
-        "beneficiario_madre_cabeza_familia",
-        "beneficiario_veterano_fuerza_publica",
-        "proviene_sector_privado",
-        "proviene_otro_municipio",
-        "institucion_bienestar_origen",
-        "poblacion_victima_conflicto",
-        "municipio_expulsor",
-        "tipo_discapacidad",
-        "capacidad_excepcional",
-        "etnia",
-        "folio",
-        "fecha_matricula",
-        "sede",
-        "formalizada",
-        "jornada",
-        "grupo",
-        "grado",
-        "ano_lectivo",
-        "nivel",
-        "usuario",
-        "ultima_fecha_actualizacion",
-        "edad",
-        "pertenece_regimen_contributivo",
-      ];
+async function cargarDatosDesdeJson() {
+  try {
+    // Leer el archivo JSON
+    const data = fs.readFileSync(jsonFilePath, 'utf8');
+    const estudiantes = JSON.parse(data);
 
-      // Asegurarse de que los campos numéricos sean números
-      for (let key in row) {
-        if (numericFields.includes(key)) {
-          row[key] = parseFloat(row[key]); // Convertir a número
-        }
-      }
-
-      // Crear un nuevo documento basado en el modelo y guardar en MongoDB
-      const newStudentNote = new StudentNotes(row);
-      const savedNote = await newStudentNote.save();
-      console.log("Documento guardado:", savedNote);
-    } catch (err) {
-      console.error("Error al guardar el documento:", err);
+    // Verificar que los datos sean un array
+    if (!Array.isArray(estudiantes)) {
+      throw new Error('El archivo JSON no contiene un array.');
     }
-  })
-  .on("end", () => {
-    console.log("Proceso de inserción de datos finalizado");
-  })
-  .on("error", (err) => {
-    console.error("Error al leer el archivo CSV:", err);
-  });
+
+    // Guardar los documentos en MongoDB en lotes para evitar problemas de memoria
+    const batchSize = 100; // Tamaño del lote
+    for (let i = 0; i < estudiantes.length; i += batchSize) {
+      const batch = estudiantes.slice(i, i + batchSize);
+      try {
+        // Guardar el lote de documentos en MongoDB
+        await StudentNotes.insertMany(batch);
+        console.log(`Lote ${Math.ceil((i + batchSize) / batchSize)} guardado correctamente.`);
+      } catch (err) {
+        console.error(`Error al guardar el lote ${Math.ceil((i + batchSize) / batchSize)}:`, err);
+      }
+    }
+
+    console.log('Proceso de inserción de datos finalizado');
+  } catch (err) {
+    console.error('Error al leer el archivo JSON:', err);
+  }
+}
+
+// Ejecuta la función de carga de datos
+cargarDatosDesdeJson();

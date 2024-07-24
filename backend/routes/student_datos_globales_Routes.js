@@ -10,4 +10,9 @@ router.get('/:id', studentDataController.getStudent);
 router.patch('/:id', studentDataController.updateStudent);
 router.delete('/:id', studentDataController.deleteStudent);
 
+// Nuevas rutas para operaciones basadas en num_identificacion
+router.get('/identificacion/:num_identificacion', studentDataController.getStudentByNumIdentificacion);
+router.patch('/identificacion/:num_identificacion', studentDataController.updateStudentByNumIdentificacion);
+router.delete('/identificacion/:num_identificacion', studentDataController.deleteStudentByNumIdentificacion);
+
 module.exports = router;
