@@ -14,7 +14,7 @@ const DashboardAreas = () => {
   const [filteredStudents, setFilteredStudents] = useState([]);
   const [error, setError] = useState(null);
   const [selectedGroup, setSelectedGroup] = useState("");
-  const [selectedPeriodo, setSelectedPeriodo] = useState("");
+  const [selectedPeriodo, setSelectedPeriodo] = useState("PERIODO 1");
   const [selectedScale, setSelectedScale] = useState("");
   const [selectedArea, setSelectedArea] = useState("ciencias_naturales");
   const [loading, setLoading] = useState(true);
@@ -77,17 +77,8 @@ const DashboardAreas = () => {
     setFilteredStudents(filtered);
   }, [students, selectedGroup, selectedPeriodo, selectedScale, selectedArea]);
 
-  const handleUpdateObservations = (studentId, observaciones, metas, repNivelacion) => {
-    // Actualiza las observaciones en la lista de estudiantes
-    setStudents(prevStudents => 
-      prevStudents.map(student => 
-        student._id === studentId 
-          ? { ...student, observaciones, metas, reporte_nivelacion: repNivelacion }
-          : student
-      )
-    );
-    // Cierra el modal
-    setModalIsOpen(false);
+  const handleUpdateObservations = (studentId, area, newObservation) => {
+    // Lógica para actualizar observaciones en el estado local y en la base de datos
   };
 
   const openModal = (student) => {

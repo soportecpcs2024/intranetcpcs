@@ -10,25 +10,25 @@ const StudentModal = ({
   student,
   selectedArea,
   updateObservations,
+  updateMeta,
+  updateReporte
 }) => {
-  const [observaciones, setObservaciones] = useState(
-    student?.observaciones || ""
-  );
-  const [metas, setMetas] = useState(student?.metas || "");
-  const [repNivelacion, setRepNivelacion] = useState(
-    student?.reporte_nivelacion || ""
-  );
+  const [observacion, setObservacion] = useState("");
+  const [meta, setMeta] = useState("");
+  const [reporteEva, setReporteEva] = useState("");
 
   useEffect(() => {
-    if (student) {
-      setObservaciones(student.observaciones || "");
-      setMetas(student.metas || "");
-      setRepNivelacion(student.reporte_nivelacion || "");
+    if (student && selectedArea) {
+      setObservacion(student[`observaciones_${selectedArea}`] || "");
+      setMeta(student[`metas_${selectedArea}`] || "");
+      setReporteEva(student[`rep_eva_${selectedArea}`] || "");
     }
-  }, [student]);
+  }, [student, selectedArea]);
 
   const handleSave = () => {
-    updateObservations(student._id, observaciones, metas, repNivelacion);
+    updateObservations(student._id, selectedArea, observacion);
+    updateMeta(student._id, selectedArea, meta);
+    updateReporte(student._id, selectedArea, reporteEva);
     onRequestClose();
   };
 
@@ -48,31 +48,40 @@ const StudentModal = ({
           <label>
             Observaciones:
             <textarea
-              value={observaciones}
-              onChange={(e) => setObservaciones(e.target.value)}
-            />
-          </label>
-          <label>
-            Metas:
-            <textarea
-              value={metas}
-              onChange={(e) => setMetas(e.target.value)}
-            />
-          </label>
-          <label>
-            Reporte de nivelación:
-            <textarea
-              value={repNivelacion}
-              onChange={(e) => setRepNivelacion(e.target.value)}
+              value={observacion}
+              onChange={(e) => setObservacion(e.target.value)}
             />
           </label>
         </div>
-        <button className="modal-body-btn-save" onClick={handleSave}>Guardar</button>
-        <button className="modal-body-btn-close" type="button" onClick={onRequestClose}>
+        <div>
+          <label>
+            Metas:
+            <textarea
+              value={meta}
+              onChange={(e) => setMeta(e.target.value)}
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            Reporte evaluación:
+            <textarea
+              value={reporteEva}
+              onChange={(e) => setReporteEva(e.target.value)}
+            />
+          </label>
+        </div>
+        <button className="modal-body-btn-save" onClick={handleSave}>
+          Guardar
+        </button>
+        <button
+          className="modal-body-btn-close"
+          type="button"
+          onClick={onRequestClose}
+        >
           Cancelar
         </button>
       </div>
-     
     </Modal>
   );
 };

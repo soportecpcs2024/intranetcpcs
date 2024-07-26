@@ -28,6 +28,93 @@ const renderValue = (label, value) => {
   return content;
 };
 
+const renderObservations = (student) => {
+  const observationFields = [
+    { label: "Ciencias Naturales", value: student.observaciones_ciencias_naturales },
+    { label: "Ciencias Sociales", value: student.observaciones_ciencias_sociales },
+    { label: "Cívica y Constitución", value: student.observaciones_civica_y_constitucion },
+    { label: "Educación Artística", value: student.observaciones_educacion_artistica },
+    { label: "Educación Cristiana", value: student.observaciones_educacion_cristiana },
+    { label: "Educación Ética", value: student.observaciones_educacion_etica },
+    { label: "Educación Física", value: student.observaciones_educacion_fisica },
+    { label: "Filosofía", value: student.observaciones_filosofia },
+    { label: "Idioma Extranjero", value: student.observaciones_idioma_extranjero },
+    { label: "Lengua Castellana", value: student.observaciones_lengua_castellana },
+    { label: "Matemáticas", value: student.observaciones_matematicas },
+    { label: "Tecnología", value: student.observaciones_tecnologia }
+  ];
+
+  return (
+    <ul>
+      {observationFields
+        .filter((field) => field.value && field.value !== "Pendiente")
+        .map((field, index) => (
+          <li key={index}>
+            <strong>{field.label}:</strong> {field.value}
+          </li>
+        ))}
+    </ul>
+  );
+};
+
+const renderMetas = (student) => {
+  const metasFields = [
+    { label: "Ciencias Naturales", value: student.metas_ciencias_naturales },
+    { label: "Ciencias Sociales", value: student.metas_ciencias_sociales },
+    { label: "Cívica y Constitución", value: student.metas_civica_y_constitucion },
+    { label: "Educación Artística", value: student.metas_educacion_artistica },
+    { label: "Educación Cristiana", value: student.metas_educacion_cristiana },
+    { label: "Educación Ética", value: student.metas_educacion_etica },
+    { label: "Educación Física", value: student.metas_educacion_fisica },
+    { label: "Filosofía", value: student.metas_filosofia },
+    { label: "Idioma Extranjero", value: student.metas_idioma_extranjero },
+    { label: "Lengua Castellana", value: student.metas_lengua_castellana },
+    { label: "Matemáticas", value: student.metas_matematicas },
+    { label: "Tecnología", value: student.metas_tecnologia }
+  ];
+
+  return (
+    <ul>
+      {metasFields
+        .filter((field) => field.value && field.value !== "Pendiente")
+        .map((field, index) => (
+          <li key={index}>
+            <strong>{field.label}:</strong> {field.value}
+          </li>
+        ))}
+    </ul>
+  );
+};
+
+const renderReport = (student) => {
+  const reportFields = [
+    { label: "Ciencias Naturales", value: student.rep_eva_ciencias_naturales },
+    { label: "Ciencias Sociales", value: student.rep_eva_ciencias_sociales },
+    { label: "Cívica y Constitución", value: student.rep_eva_civica_y_constitucion },
+    { label: "Educación Artística", value: student.rep_eva_educacion_artistica },
+    { label: "Educación Cristiana", value: student.rep_eva_educacion_cristiana },
+    { label: "Educación Ética", value: student.rep_eva_educacion_etica },
+    { label: "Educación Física", value: student.rep_eva_educacion_fisica },
+    { label: "Filosofía", value: student.rep_eva_filosofia },
+    { label: "Idioma Extranjero", value: student.rep_eva_idioma_extranjero },
+    { label: "Lengua Castellana", value: student.rep_eva_lengua_castellana },
+    { label: "Matemáticas", value: student.rep_eva_matematicas },
+    { label: "Tecnología", value: student.rep_eva_tecnologia }
+  ];
+
+  return (
+    <ul>
+      {reportFields
+        .filter((field) => field.value && field.value !== "Pendiente")
+        .map((field, index) => (
+          <li key={index}>
+            <strong>{field.label}:</strong> {field.value}
+          </li>
+        ))}
+    </ul>
+  );
+};
+
 const InfoPersonalEstudiante = ({ student }) => {
   const componentRef = useRef(null);
 
@@ -84,9 +171,7 @@ const InfoPersonalEstudiante = ({ student }) => {
               <strong>Observaciones:</strong>{" "}
             </label>
             <div className="card-body">
-              <p className="observaciones-text">
-                {student.observaciones || "No hay observaciones disponibles"}
-              </p>
+              {renderObservations(student)}
             </div>
           </div>
           <div className="card-container">
@@ -94,22 +179,19 @@ const InfoPersonalEstudiante = ({ student }) => {
               <strong>Metas:</strong>{" "}
             </label>
             <div className="card-body">
-              <p className="observaciones-text">
-                {student.metas || "No hay observaciones disponibles"}
-              </p>
+              {renderMetas(student)}
             </div>
           </div>
           <div className="card-container">
+            <label htmlFor="">
+              <strong>Reporte de evaluación:</strong>{" "}
+            </label>
             <div className="card-body">
-              <label htmlFor="">
-                <strong>Reporte de nivelación:</strong>{" "}
-              </label>
-              <p className="observaciones-text">
-                {student.reporte_nivelacion ||
-                  "No hay observaciones disponibles"}
-              </p>
+              {renderReport(student)}
             </div>
           </div>
+          
+           
         </div>
       </div>
       <div className="info-personal-actions">

@@ -13,17 +13,22 @@ const NewDashboard = () => {
   const [students, setStudents] = useState([]);
   const [filteredStudents, setFilteredStudents] = useState([]);
   const [error, setError] = useState(null);
-  const [selectedGroup, setSelectedGroup] = useState("");
+  const [selectedGroup, setSelectedGroup] = useState("1. A");
   const [selectedPeriodo, setSelectedPeriodo] = useState("PERIODO 1"); // Por defecto selecciona "PERIODO 1"
   const [selectedScale, setSelectedScale] = useState("");
   const [loading, setLoading] = useState(true);
+  const [initialLoading, setInitialLoading] = useState(true);
 
   useEffect(() => {
     async function fetchStudents() {
       try {
         const data = await Students();
-        setStudents(data);
-        setLoading(false); // Cambia el estado de carga a falso cuando los datos se han cargado
+        setStudents(data.slice(0, 50)); // Cargar los primeros 50 registros
+        setInitialLoading(false); // Finaliza la carga inicial
+        setTimeout(() => {
+          setStudents(data); // Cargar el resto después de 5 segundos
+          setLoading(false); // Finaliza la carga total
+        }, 5000);
       } catch (error) {
         setError("Error fetching students");
         setLoading(false); // Cambia el estado de carga a falso en caso de error
@@ -86,8 +91,8 @@ const NewDashboard = () => {
     }
   };
 
-  if (loading) {
-    return <LoadingSpinner />; // Muestra el spinner mientras los datos están cargando
+  if (initialLoading) {
+    return <LoadingSpinner />; // Muestra el spinner durante la carga inicial
   }
 
   return (
@@ -133,4 +138,3 @@ const NewDashboard = () => {
 };
 
 export default NewDashboard;
-

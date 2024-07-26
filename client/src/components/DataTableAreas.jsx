@@ -11,26 +11,6 @@ const DatatableAreas = ({ students, selectedArea, error }) => {
   const [selectedStudent, setSelectedStudent] = useState(null);
   const itemsPerPage = 15; // Número de elementos por página
 
-  // Áreas predeterminadas
-  const allAreas = [
-    "ciencias_naturales",
-    "fisica",
-    "quimica",
-    "ciencias_politicas_economicas",
-    "ciencias_sociales",
-    "educacion_cristiana",
-    "educacion_etica",
-    "educacion_fisica",
-    "filosofia",
-    "idioma_extranjero",
-    "lengua_castellana",
-    "matematicas",
-    "tecnologia",
-  ];
-
-  // Áreas seleccionadas
-  const selectedAreas = selectedArea ? [selectedArea] : allAreas;
-
   // Manejo de cambio de página
   const handlePageClick = (event) => {
     setCurrentPage(event.selected);
@@ -60,20 +40,50 @@ const DatatableAreas = ({ students, selectedArea, error }) => {
   };
 
   // Actualizar observaciones en la base de datos y estado
-  const updateObservations = async (id, newObservations, newMetas, newRepNivelacion) => {
+  const updateObservations = async (id, area, newObservation) => {
     try {
       const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/student_notes/${id}`, {
-        observaciones: newObservations,
-        metas: newMetas,
-        reporte_nivelacion: newRepNivelacion
+        [`observaciones_${area}`]: newObservation
       });
       setFilteredStudents((prevStudents) =>
         prevStudents.map((student) =>
-          student._id === id ? { ...student, observaciones: newObservations, metas: newMetas, reporte_nivelacion: newRepNivelacion } : student
+          student._id === id ? { ...student, [`observaciones_${area}`]: newObservation } : student
         )
       );
     } catch (error) {
       console.error('Error updating observations:', error);
+    }
+  };
+
+  // Actualizar metas en la base de datos y estado
+  const updateMeta = async (id, area, newMeta) => {
+    try {
+      const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/student_notes/${id}`, {
+        [`metas_${area}`]: newMeta
+      });
+      setFilteredStudents((prevStudents) =>
+        prevStudents.map((student) =>
+          student._id === id ? { ...student, [`metas_${area}`]: newMeta } : student
+        )
+      );
+    } catch (error) {
+      console.error('Error updating metas:', error);
+    }
+  };
+
+  // Actualizar reporte de evaluación en la base de datos y estado
+  const updateReporte = async (id, area, newReporte) => {
+    try {
+      const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/student_notes/${id}`, {
+        [`rep_eva_${area}`]: newReporte
+      });
+      setFilteredStudents((prevStudents) =>
+        prevStudents.map((student) =>
+          student._id === id ? { ...student, [`rep_eva_${area}`]: newReporte } : student
+        )
+      );
+    } catch (error) {
+      console.error('Error updating reporte:', error);
     }
   };
 
@@ -84,14 +94,10 @@ const DatatableAreas = ({ students, selectedArea, error }) => {
           <tr>
             <th>Nombre</th>
             <th>Grupo</th>
-            {selectedAreas.map((area) => (
-              <th key={area}>
-                {area.split("_").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")}
-              </th>
-            ))}
+            <th>{selectedArea.split("_").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")}</th>
             <th>Observaciones</th>
             <th>Metas</th>
-            <th>Rep. Nivelación</th>
+            <th>Reporte evaluación</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -100,14 +106,10 @@ const DatatableAreas = ({ students, selectedArea, error }) => {
             <tr key={student._id}>
               <td>{student.nombre}</td>
               <td className="td-areas">{student.grupo}</td>
-              {selectedAreas.map((area) => (
-                <td className="td-areas" key={area}>
-                  {Number(student[area]).toFixed(2)}
-                </td>
-              ))}
-              <td>{student.observaciones}</td>
-              <td>{student.metas}</td>
-              <td>{student.reporte_nivelacion}</td>
+              <td className="td-areas">{Number(student[selectedArea]).toFixed(2)}</td>
+              <td className="td-areas">{student[`observaciones_${selectedArea}`]}</td>
+              <td className="td-areas">{student[`metas_${selectedArea}`]}</td>
+              <td className="td-areas">{student[`rep_eva_${selectedArea}`]}</td>
               <td className="td-areas">
                 <CiEdit className="edit-icons" onClick={() => openModal(student)} />
               </td>
@@ -146,6 +148,8 @@ const DatatableAreas = ({ students, selectedArea, error }) => {
           student={selectedStudent}
           selectedArea={selectedArea}
           updateObservations={updateObservations}
+          updateMeta={updateMeta}
+          updateReporte={updateReporte}
         />
       )}
     </div>
