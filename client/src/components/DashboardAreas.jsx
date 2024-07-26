@@ -32,6 +32,7 @@ const DashboardAreas = () => {
         setLoading(false);
       }
     }
+    
 
     fetchStudents();
   }, []);
