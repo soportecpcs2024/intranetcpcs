@@ -1,10 +1,10 @@
 const fs = require('fs');
 const path = require('path');
-const mongoose = require('./db'); // Asegúrate de que tu archivo db.js esté configurado correctamente
-const StudentNotes = require('./models/students_datos_globales'); // Importa tu modelo de notas de estudiantes
+const mongoose = require('../db'); // Asegúrate de que tu archivo db.js esté configurado correctamente
+const StudentNotes = require('../models/student_notes_sheet_model'); // Importa tu modelo de notas de estudiantes
 
 // Ruta del archivo JSON
-const jsonFilePath = path.join(__dirname, './estudiantesGlobales.json'); // Reemplaza con la ruta correcta a tu archivo JSON
+const jsonFilePath = path.join(__dirname, './consolidadoNotas.json'); // Reemplaza con la ruta correcta a tu archivo JSON
 
 async function cargarDatosDesdeJson() {
   try {
@@ -38,3 +38,4 @@ async function cargarDatosDesdeJson() {
 
 // Ejecuta la función de carga de datos
 cargarDatosDesdeJson();
+

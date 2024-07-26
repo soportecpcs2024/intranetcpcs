@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const csv = require('csv-parser');
-const mongoose = require('./db'); // Asegúrate de que tu archivo db.js esté configurado correctamente
-const StudentNotes = require('./models/student_notes_sheet_model'); // Importa tu modelo de notas de estudiantes
+const mongoose = require('../db'); // Asegúrate de que tu archivo db.js esté configurado correctamente
+const StudentNotes = require('../models/student_notes_sheet_model'); // Importa tu modelo de notas de estudiantes
 
 // Ruta del archivo CSV
 const csvFilePath = path.join(__dirname, '../resultados_periodo2.csv'); // Reemplaza con la ruta correcta a tu archivo CSV
