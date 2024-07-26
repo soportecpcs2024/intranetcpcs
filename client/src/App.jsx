@@ -11,29 +11,25 @@ import {
 } from "./pages/admin";
 import { Home } from "./pages/web";
 import AdminLayout from "./layouts/adminLayouts/AdminLayout";
-import ClientLayouts from "./layouts/clientLayouts/ClientLayouts";
-import Colegio from "./pages/web/Colegio";
-import Contactos from "./pages/web/Contactos";
-import Q10Web from "./pages/web/Q10web";
-import './App.css'
+
+import "./App.css";
 import General from "./pages/admin/academicos/General";
 import Areas from "./pages/admin/academicos/Areas";
 import Layout from "./components/Layout";
-import InformeAcademico from "./pages/admin/InformeAcademico";
+
 import DashboardEstDificultades from "./components/DashboardEstDificultades";
 import Documentos from "./pages/admin/academicos/Documentos";
-import InformeAreaGrupPDF from "./pages/admin/academicos/InformeAreaGrupPDF";
+
 import DescargarPdf from "./components/DescargarPdf";
 import { InfoIndividual } from "./pages/admin/academicos/InfoIndividual";
-
 
 const App = () => {
   useEffect(() => {
     // Establece la marca temporal cuando la página se carga
-    localStorage.setItem('lastActivity', Date.now().toString());
+    localStorage.setItem("lastActivity", Date.now().toString());
 
     // Verifica la actividad al cargar la página
-    const lastActivity = localStorage.getItem('lastActivity');
+    const lastActivity = localStorage.getItem("lastActivity");
     if (lastActivity) {
       const now = Date.now();
       const timeDifference = now - parseInt(lastActivity, 10);
@@ -51,10 +47,10 @@ const App = () => {
       localStorage.clear();
     };
 
-    window.addEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener("beforeunload", handleBeforeUnload);
 
     return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, []);
 
@@ -84,14 +80,20 @@ const AppContent = () => {
             <Route path="/admin/academico" element={<Layout />}>
               <Route index element={<General />} />
               <Route path="/admin/academico/general" element={<General />} />
-              <Route path="/admin/academico/areas" element={<Areas />} />              
-              <Route path="/admin/academico/individual" element={<InfoIndividual />} />              
-              <Route path="/admin/academico/estdificultades" element={<DashboardEstDificultades />} />
+              <Route path="/admin/academico/areas" element={<Areas />} />
+              <Route
+                path="/admin/academico/individual"
+                element={<InfoIndividual />}
+              />
+              <Route
+                path="/admin/academico/estdificultades"
+                element={<DashboardEstDificultades />}
+              />
             </Route>
-            <Route path="/admin/documentos" element={<Documentos />} />              
-            <Route path="/admin/descargarpdf" element={<DescargarPdf />} />              
+            <Route path="/admin/documentos" element={<Documentos />} />
+            <Route path="/admin/descargarpdf" element={<DescargarPdf />} />
             <Route path="/admin/administracion" element={<Administrativos />} />
-            <Route path="/admin/q10" element={<Q10 />} />
+
             <Route path="/admin/*" element={<Navigate to="/admin/users" />} />
           </Route>
         )}

@@ -24,8 +24,9 @@ const AdminHeader = () => {
         <img className="admin-layout-header-logo" src={Logo} alt="Logo CPCS" />
         <div className="admin-layout-header-text">
           <p>
-            <span className="admin-layout-header-text-span">Celebrando 30 años</span>
-              
+            <span className="admin-layout-header-text-span">
+              Celebrando 30 años
+            </span>
           </p>
         </div>
 
@@ -56,7 +57,12 @@ const AdminHeader = () => {
               <Link to="/admin/administracion">Administración</Link>
             </li>
             <li>
-              <Link to="/admin/q10">Q10</Link>
+              <Link
+                to="https://site2.q10.com/login?ReturnUrl=%2F&aplentId=d12efeb8-f609-4dd1-87cd-1cb0c95d32e2"
+                target="_blank"
+              >
+                Q 10
+              </Link>
             </li>
           </ul>
         </nav>
