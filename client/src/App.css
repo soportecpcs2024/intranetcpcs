@@ -998,22 +998,23 @@ box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
   gap: 4px;
    
   justify-content: flex-start;
-  margin: 20px;
+  margin: 10px;
 }
 .estdificultades-cards-h3{
   margin-left: 20px;
 }
 .student-card-deficient {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
-  width: 46%;
+   
+  width: 100%;
   border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 16px;
+  padding: 8px;
   margin: 10px;
-  width: 600px;
+   
+   gap: 2px;
    
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   -webkit-box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
@@ -1021,9 +1022,19 @@ box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
   box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
 }
 
+.student-card-deficient-title{
+  margin: 20px 0px;
+}
+
 .card-header-deficient {
-   width: 50%;
+   width: 100%;
   margin-bottom: 16px;
+   
+}
+.student-card-deficient-container{
+  display: flex;
+  flex-direction: row;
+  
 }
 
 .card-header-deficient h2 {
@@ -1033,14 +1044,20 @@ box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
   margin-bottom: 10px;
 }
 .card-header-deficient p {
-  font-size: 14px;
+  font-size: 12px;
   margin-top: -8px;
 }
 
- 
+.card-body-estdificuntades{
+  background-color: red;
+}
+
+
 
 .card-footer {
-  width: 50%;
+  display: flex;
+  flex-direction: column;
+  width:100%;
   
 }
 
@@ -1052,16 +1069,15 @@ box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
 
 .student-table td {
   padding: 2px;
-  border: 1px solid #ddddddb4;
+  border-bottom: 1px solid #ddddddb4;
 }
 
-.student-table tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
+ 
 
 .student-table .highlight {
   color: red;
-  font-weight: 600;
+  font-weight: 500;
+   
 }
 
 .cards-container {
@@ -1074,6 +1090,9 @@ box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
   color: red;
   font-weight: 500;
 }
+
+
+
 
 .edit-icons{
   font-size: 24px;

@@ -1,16 +1,39 @@
 const StudentCard = ({ student }) => {
-  const excludedKeys = ["_id", "__v", "codigo"];
+  const includedKeys = [
+    "ciencias_naturales",
+    "fisica",
+    "quimica",
+    "ciencias_politicas_economicas",
+    "ciencias_sociales",
+    "civica_y_constitucion",
+    "educacion_artistica",
+    "educacion_cristiana",
+    "educacion_etica",
+    "educacion_fisica",
+    "filosofia",
+    "idioma_extranjero",
+    "lengua_castellana",
+    "matematicas",
+    "tecnologia"
+  ];
 
   return (
     <div className="student-card-deficient">
-      <div className="card-header-deficient">
+      <div className="student-card-deficient-title">
         <h2>{student.nombre}</h2>
+      </div>
+      <div>
+
+    <div className="student-card-deficient-container">
+
+     
+       <div className="card-header-deficient">
         <p>Grupo: {student.grupo}</p>
         <p>Periodo: {student.periodo}</p>
-        <p> Promedio: {student.promedio}</p>
-        <p> Puesto: {student.puesto}</p>
-        <div className="card-container">
-          <div className="card-body">
+        <p>Promedio: {student.promedio}</p>
+        <p>Puesto: {student.puesto}</p>
+        <div  >
+          <div className="card-body-estDificuntades">
             <label htmlFor="">
               <strong>Observaciones :</strong>{" "}
             </label>
@@ -19,7 +42,7 @@ const StudentCard = ({ student }) => {
             </p>
           </div>
         </div>
-        <div className="card-container">
+        <div  >
           <div className="card-body">
             <label htmlFor="">
               <strong>Metas :</strong>{" "}
@@ -29,7 +52,7 @@ const StudentCard = ({ student }) => {
             </p>
           </div>
         </div>
-        <div className="card-container">
+        <div  >
           <div className="card-body">
             <label htmlFor="">
               <strong>Reporte de nivelación:</strong>{" "}
@@ -40,35 +63,28 @@ const StudentCard = ({ student }) => {
           </div>
         </div>
       </div>
-
       <div className="card-footer">
         <h3>Detalles Académicos</h3>
         <table className="student-table">
           <tbody>
-            {Object.keys(student).map(
-              (key, index) =>
-                !excludedKeys.includes(key) &&
-                key !== "nombre" &&
-                key !== "puesto" &&
-                key !== "promedio" &&
-                key !== "grupo" &&
-                key !== "periodo" &&
-                key !== "observaciones" &&
-                key !== "metas" &&
-                key !== "reporte_nivelacion" && (
-                  <tr key={index}>
-                    <td>
-                      <strong>{key.replace("_", " ")}:</strong>
-                    </td>
-                    <td className={student[key] < 3 ? "highlight" : ""}>
-                      {student[key]}
-                    </td>
-                  </tr>
-                )
-            )}
+            {includedKeys.map((key, index) => (
+              <tr key={index}>
+                <td>
+                  <strong>{key.replace("_", " ")}:</strong>
+                </td>
+                <td className={student[key] < 3 ? "highlight" : ""}>
+                  {student[key]}
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
+      </div>
+      
+    </div>
+
+     
     </div>
   );
 };
