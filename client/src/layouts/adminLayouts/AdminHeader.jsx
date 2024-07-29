@@ -11,12 +11,14 @@ const AdminHeader = () => {
   };
 
   const navigate = useNavigate();
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
 
   const handleLogout = () => {
     logout(); // Llama a la función de logout del contexto de autenticación
     navigate("/"); // Redirige al usuario a la página de inicio ('/')
   };
+
+  const isAdmin = user && user.role === "admin"; // Verificar si el usuario tiene el rol de admin
 
   return (
     <div className="admin-header">
@@ -31,7 +33,43 @@ const AdminHeader = () => {
         </div>
 
         <nav>
-          <ul>
+          {isAdmin ? (
+            <ul>
+              <li>
+                <Link to="/admin/users">Inicio</Link>
+              </li>
+              {/* <li>
+                <Link to="/admin/blog">Blog</Link>
+              </li> */}
+              <li>
+                <div className="dropdown">
+                  <Link onClick={toggleDropdown}>Académico</Link>
+                  {isDropdownOpen && (
+                    <ul className="dropdown-menu">
+                      <li>
+                        <Link to="/admin/academico">Reporte académico</Link>
+                      </li>
+                      <li>
+                        <Link to="/admin/documentos">Documentos</Link>
+                      </li>
+                    </ul>
+                  )}
+                </div>
+              </li>
+              <li>
+                <Link to="/admin/administracion">Administración</Link>
+              </li>
+              <li>
+                <Link
+                  to="https://site2.q10.com/login?ReturnUrl=%2F&aplentId=d12efeb8-f609-4dd1-87cd-1cb0c95d32e2"
+                  target="_blank"
+                >
+                  Q 10
+                </Link>
+              </li>
+            </ul>
+          ) : (
+            <ul>
             <li>
               <Link to="/admin/users">Inicio</Link>
             </li>
@@ -47,15 +85,13 @@ const AdminHeader = () => {
                       <Link to="/admin/academico">Reporte académico</Link>
                     </li>
                     <li>
-                      <Link to="/admin/documentos">Documentos </Link>
+                      <Link to="/admin/documentos">Documentos</Link>
                     </li>
                   </ul>
                 )}
               </div>
             </li>
-            <li>
-              <Link to="/admin/administracion">Administración</Link>
-            </li>
+            
             <li>
               <Link
                 to="https://site2.q10.com/login?ReturnUrl=%2F&aplentId=d12efeb8-f609-4dd1-87cd-1cb0c95d32e2"
@@ -65,6 +101,7 @@ const AdminHeader = () => {
               </Link>
             </li>
           </ul>
+          )}
         </nav>
         <button className="logout-button" onClick={handleLogout}>
           Cerrar sesión
@@ -75,3 +112,4 @@ const AdminHeader = () => {
 };
 
 export default AdminHeader;
+

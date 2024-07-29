@@ -3,13 +3,13 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import {
   Auth,
-  Users,
+   
   Blog,
   Academicos,
   Administrativos,
   Q10,
 } from "./pages/admin";
-import { Home } from "./pages/web";
+ 
 import AdminLayout from "./layouts/adminLayouts/AdminLayout";
 
 import "./App.css";
@@ -22,8 +22,12 @@ import Documentos from "./pages/admin/academicos/Documentos";
 
 import DescargarPdf from "./components/DescargarPdf";
 import { InfoIndividual } from "./pages/admin/academicos/InfoIndividual";
+import Users from "./pages/admin/User/main/Users";
+
 
 const App = () => {
+
+ 
   useEffect(() => {
     // Establece la marca temporal cuando la página se carga
     localStorage.setItem("lastActivity", Date.now().toString());
@@ -64,6 +68,9 @@ const App = () => {
 const AppContent = () => {
   const { user } = useAuth();
   const [loading, setLoading] = useState(false); // Estado de carga
+  
+   
+   
 
   return (
     <BrowserRouter>

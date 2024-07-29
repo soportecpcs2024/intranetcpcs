@@ -66,7 +66,7 @@ async function refreshAccessToken(req, res) {
   if (!token) return res.status(400).send({ msg: "Token requerido" });
 
   try {
-    const decoded = jwt.verifyToken(token);
+    const decoded = jwt.verifyToken(token); // Aquí ya deberías estar llamando a la función correcta
     if (!decoded) return res.status(400).send({ msg: "Token inválido" });
 
     const { user_id } = decoded;

@@ -371,11 +371,20 @@ input::placeholder {
  
 /* Otras consultas de medios adicionales según sea necesario */
 
-
-.admin-header nav {
-  margin-top: 10px;
+.admin-header{
   
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-image: radial-gradient(circle at 50% -20.71%, #a3a7ff 0, #7a8ffc 25%, #3c78f2 50%, #0063e8 75%, #0051de 100%);
+ 
+  z-index: 1000; /* Asegúrate de que el encabezado esté por encima de otros elementos */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añadir una sombra para destacar el encabezado */
+  padding: 10px 20px;
+  margin-bottom: 3px;
+
 }
+ 
 
  
 
@@ -384,6 +393,7 @@ input::placeholder {
   padding: 0;
   display: flex;
   justify-content: space-around;
+  font-size: 18px;
 }
 
 .admin-header nav ul li {
@@ -393,15 +403,17 @@ input::placeholder {
 
 .admin-header nav ul li a {
   text-decoration: none;
-  color: #555;
+  color: #fbfbfb;
   font-weight: 500;
   padding: 8px 12px;
-  border-radius: 8px;
+  border-radius: 4px;
+   
   transition: background-color 0.3s ease;
 }
 
 .admin-header nav ul li a:hover {
   background-color: #e0e0e0;
+  color: #000000;
 }
 
 .admin-header .dropdown-toggle {
@@ -415,7 +427,8 @@ input::placeholder {
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: #fff;
+  border-radius: 4px;
+  background-color:transparent;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 1;
   display: none;
@@ -427,13 +440,13 @@ input::placeholder {
 }
 
 .dropdown-menu li {
-  padding: 10px;
+  padding: 10px 2px;
   white-space: nowrap;
    
 }
 
 .dropdown-menu li:hover {
-  background-color: #f1f1f1;
+  background-color:transparent;
 }
 
 
@@ -451,7 +464,7 @@ input::placeholder {
 .containerOutlet .box:nth-child(1){
   background-image: radial-gradient(circle at 50% -20.71%,#0051de 100%, #a3a7ff 0, #7a8ffc 25%, #3c78f2 50%, #0063e8 75% );
   flex-basis: calc(15% - 5px);
-  border-radius: 8px;
+  border-radius: 4px;
   height: 100vh;
   
   
@@ -468,6 +481,8 @@ input::placeholder {
 
 .admin-layout{
   background-image: radial-gradient(ellipse farthest-corner at 10px 100px , #fff 50%, rgba(0, 255, 0, 0) 0%, yellow 50%);
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
 }
 
@@ -503,12 +518,12 @@ input::placeholder {
 }
 .admin-layout-header-text-span{
   font-weight: 900;
-  font-size: 20px;
+  font-size: 30px;
   margin: 10px;
-  background: -webkit-linear-gradient(rgb(242, 242, 242),rgb(43, 0, 255));
+ 
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: rgb(71, 80, 255); 
+ 
+  color: rgb(255, 255, 255); 
    
 }
 
@@ -524,14 +539,15 @@ input::placeholder {
   margin: 20px;
 }
 
-.logout-button, .admin-redirect-button {
+.logout-button {
   padding: 10px 20px;
   background-color: #007bff;
   color: white;
   border: none;
+   
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.9s ease;
 }
 
 .logout-button:hover, .admin-redirect-button:hover {
@@ -1053,13 +1069,7 @@ box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
 }
 
 
-
-.card-footer {
-  display: flex;
-  flex-direction: column;
-  width:100%;
-  
-}
+ 
 
 .student-table {
   width: 100%;
@@ -1578,14 +1588,14 @@ textarea {
 /* Users.css */
 
 .users-container {
-  background-image: url('/DSC06282.JPG');
+  /* background-image: url('/DSC06282.JPG');
   background-size: cover;
   background-position: center;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
+  position: relative; */
 }
 
 .overlay {
