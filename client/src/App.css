@@ -428,10 +428,11 @@ input::placeholder {
   top: 100%;
   left: 0;
   border-radius: 4px;
-  background-color:transparent;
+  background-color:rgba(175, 175, 174, 0.66);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 1;
   display: none;
+   
 }
 
 .admin-header .dropdown:hover .dropdown-menu,
@@ -442,11 +443,12 @@ input::placeholder {
 .dropdown-menu li {
   padding: 10px 2px;
   white-space: nowrap;
-   
+  
 }
 
 .dropdown-menu li:hover {
   background-color:transparent;
+  
 }
 
 

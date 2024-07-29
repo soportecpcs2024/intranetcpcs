@@ -19,6 +19,10 @@ const AdminHeader = () => {
   };
 
   const isAdmin = user && user.role === "admin"; // Verificar si el usuario tiene el rol de admin
+  const isAcademic = user && user.role === "usuario"; // Verificar si el usuario tiene el rol de admin
+  const isAdministrator = user && user.role === "administrador"; // Verificar si el usuario tiene el rol de teacher
+  
+
 
   return (
     <div className="admin-header">
@@ -33,7 +37,7 @@ const AdminHeader = () => {
         </div>
 
         <nav>
-          {isAdmin ? (
+          {isAdmin && (
             <ul>
               <li>
                 <Link to="/admin/users">Inicio</Link>
@@ -68,7 +72,7 @@ const AdminHeader = () => {
                 </Link>
               </li>
             </ul>
-          ) : (
+          )}{ isAcademic && (
             <ul>
             <li>
               <Link to="/admin/users">Inicio</Link>
@@ -101,7 +105,28 @@ const AdminHeader = () => {
               </Link>
             </li>
           </ul>
-          )}
+          )} {isAdministrator && 
+            <ul>
+            <li>
+              <Link to="/admin/users">Inicio</Link>
+            </li>
+            {/* <li>
+              <Link to="/admin/blog">Blog</Link>
+            </li> */}
+             
+            <li>
+              <Link to="/admin/administracion">Administración</Link>
+            </li>
+            <li>
+              <Link
+                to="https://site2.q10.com/login?ReturnUrl=%2F&aplentId=d12efeb8-f609-4dd1-87cd-1cb0c95d32e2"
+                target="_blank"
+              >
+                Q 10
+              </Link>
+            </li>
+          </ul>
+          }
         </nav>
         <button className="logout-button" onClick={handleLogout}>
           Cerrar sesión
