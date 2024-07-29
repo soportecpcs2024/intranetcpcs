@@ -1,15 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
-import {
-  Auth,
-   
-  Blog,
-  Academicos,
-  Administrativos,
-  Q10,
-} from "./pages/admin";
- 
+import { Auth, Blog, Academicos, Administrativos, Q10 } from "./pages/admin";
+
 import AdminLayout from "./layouts/adminLayouts/AdminLayout";
 
 import "./App.css";
@@ -23,11 +16,11 @@ import Documentos from "./pages/admin/academicos/Documentos";
 import DescargarPdf from "./components/DescargarPdf";
 import { InfoIndividual } from "./pages/admin/academicos/InfoIndividual";
 import Users from "./pages/admin/User/main/Users";
-
+import LlegadasTarde from "./pages/admin/academicos/llegadast/LlegadasTarde";
+import AgregarLlegadasTarde from "./pages/admin/academicos/llegadast/AgregarLlegadasTarde";
+import SoportLayout from "./layouts/soportLayouts/SoportLayout";
 
 const App = () => {
-
- 
   useEffect(() => {
     // Establece la marca temporal cuando la página se carga
     localStorage.setItem("lastActivity", Date.now().toString());
@@ -68,9 +61,6 @@ const App = () => {
 const AppContent = () => {
   const { user } = useAuth();
   const [loading, setLoading] = useState(false); // Estado de carga
-  
-   
-   
 
   return (
     <BrowserRouter>
@@ -98,11 +88,14 @@ const AppContent = () => {
               />
             </Route>
             <Route path="/admin/documentos" element={<Documentos />} />
+            <Route path="/admin/llegadastarde" element={<LlegadasTarde />} />
             <Route path="/admin/descargarpdf" element={<DescargarPdf />} />
             <Route path="/admin/administracion" element={<Administrativos />} />
+            <Route path="/admin/soporte" element={<AgregarLlegadasTarde />} />
 
             <Route path="/admin/*" element={<Navigate to="/admin/users" />} />
           </Route>
+           
         )}
       </Routes>
     </BrowserRouter>

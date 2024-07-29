@@ -10,3 +10,25 @@ export const Students = async () => {
     throw error;
   }
 };
+export const LlegadasTardeData = async () => {
+  try {
+    const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/llegadastarde`);
+    return response.data;
+  } catch (error) {
+    console.error("Error logging in", error);
+    throw error;
+  }
+};
+export const crearLlegadasTardeData = async (nuevaLlegada) => {
+  try {
+    const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/llegadastarde`, nuevaLlegada, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error creating tardiness entry", error);
+    throw error;
+  }
+};

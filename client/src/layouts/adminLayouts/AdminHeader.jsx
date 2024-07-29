@@ -56,12 +56,18 @@ const AdminHeader = () => {
                       <li>
                         <Link to="/admin/documentos">Documentos</Link>
                       </li>
+                      <li>
+                        <Link to="/admin/llegadastarde">Llegadas tarde</Link>
+                      </li>
                     </ul>
                   )}
                 </div>
               </li>
               <li>
                 <Link to="/admin/administracion">Administración</Link>
+              </li>
+              <li>
+                <Link to="/admin/soporte">Admin Soporte</Link>
               </li>
               <li>
                 <Link

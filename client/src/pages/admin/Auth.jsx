@@ -30,7 +30,7 @@ const Auth = () => {
           <div className="divbtn">
             <div className="auth__tabs">
               <button
-                className={activeTab === "login" ? "active" : ""}
+                className= 'btn-login'
                 onClick={() => handleTabChange("login")}
               >
                 Acceder

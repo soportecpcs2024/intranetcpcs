@@ -1,4 +1,3 @@
-// models/Student.js
 const mongoose = require('mongoose');
 
 const StudentSGlobaleschema = new mongoose.Schema({
@@ -9,7 +8,7 @@ const StudentSGlobaleschema = new mongoose.Schema({
   segundo_apellido: { type: String },
   tipo_documento: { type: String, required: true },
   num_identificacion: { type: String, required: true },
-  munexpdocumento: { type: String},
+  munexpdocumento: { type: String },
   fecha_nacimiento: { type: Date, required: true },
   municipio_nacimiento: { type: String },
   telefono: { type: String },
@@ -58,4 +57,4 @@ const StudentSGlobaleschema = new mongoose.Schema({
   pertenece_regimen_contributivo: { type: String }
 });
 
-module.exports = mongoose.model('Students_datos_globales', StudentSGlobaleschema);
+module.exports = mongoose.models.Students_datos_globales || mongoose.model('Students_datos_globales', StudentSGlobaleschema);

@@ -282,6 +282,12 @@ input::placeholder {
   font-weight: 700;
 }
 
+.btn-login{
+  color: black;
+  font-size: 25px;
+  font-weight: 900;
+}
+
 .login-button:focus {
   background-color: hsla(201, 100%, 50%, 0.5);
 }

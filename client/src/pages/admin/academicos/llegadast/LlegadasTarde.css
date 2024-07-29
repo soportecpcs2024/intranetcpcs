@@ -1,0 +1,141 @@
+/* General Styles */
+.content-select {
+  margin-bottom: 1rem;
+}
+
+.filter-select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 300px;
+  background-color: #333;
+  color: #fff;
+}
+
+/* Container Styles */
+.llegadasTardeContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 80%;
+  margin: 0 auto;
+  background-color: #ffffff; /* Fondo oscuro */
+  color: #fff; /* Texto blanco */
+  padding: 1rem;
+  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+.llegadasTardeContainer-title{
+  color: rgba(57, 57, 57, 0.823);
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 30px;
+}
+
+/* Table Styles */
+.llegadas-tarde-table {
+  width: 100%;
+  border-collapse: collapse;
+   
+  background-color: #c2c2c2; /* Fondo oscuro de la tabla */
+}
+
+.llegadas-tarde-table th, .llegadas-tarde-table td {
+  border: 1px solid #c4c4c4; /* Borde oscuro */
+  padding: 12px;
+  text-align: left;
+  color: #010101; /* Texto blanco */
+}
+
+.llegadas-tarde-table th {
+  background-color: #ffffff;
+  font-size: 18px; /* Fondo ligeramente más claro para los encabezados */
+}
+
+.llegadas-tarde-table tr:nth-child(even) {
+  background-color: #fbfbfb; /* Alterna filas más oscuras */
+  border: none;
+}
+
+.llegadas-tarde-table tr:hover {
+  background-color: #b9b9b9; /* Resaltado al pasar el ratón */
+  transition: background-color 0.3s ease;
+}
+.llegadas-tarde-table li{
+  list-style-type: none;
+  color: red;
+
+}
+
+.llegadas-tarde-table .cantidad{
+  
+  font-size: 20px;
+  font-weight: 900;
+  text-align: center;
+}
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .llegadas-tarde-table, .llegadas-tarde-table thead, .llegadas-tarde-table tbody, .llegadas-tarde-table th, .llegadas-tarde-table td, .llegadas-tarde-table tr {
+    display: block;
+  }
+
+  .llegadas-tarde-table th {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  .llegadas-tarde-table tr {
+    border: 1px solid #444; /* Borde oscuro en filas */
+    margin-bottom: 1rem;
+  }
+
+  .llegadas-tarde-table td {
+    border: none;
+    position: relative;
+    padding-left: 50%;
+    text-align: right;
+    background-color: #ababab; /* Fondo oscuro para celdas en vista móvil */
+  }
+
+  .llegadas-tarde-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding: 0.5rem;
+    white-space: nowrap;
+    font-weight: bold;
+    text-align: left;
+    background-color: #444; /* Fondo para etiquetas en móvil */
+    color: #fff; /* Texto blanco para etiquetas en móvil */
+  }
+}
+
+.header-llegadastarde{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+   
+  padding-left: 20px;
+  padding-right: 20px;
+
+}
+.llegadaTarde-logo{
+  width: 150px;
+}
+
+.header-llegadastarde-text p{
+  margin: 0px;
+  color: rgba(0, 0, 0, 0.685);
+  font-size: 14px;
+
+}
+
+
+.btn-llegadas-tarde{
+  margin-top: 200px;
+  width: 100px;
+}
