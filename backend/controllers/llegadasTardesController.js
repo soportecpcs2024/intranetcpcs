@@ -59,7 +59,8 @@ exports.getAllLlegadasTardes = async (req, res) => {
   }
 };
 
-// Obtener una llegada tarde por ID
+
+// Obtener una llegada tarde por ID y mas
 exports.getLlegadaTardeById = async (req, res) => {
   try {
     const llegadaTarde = await LlegadasTardes.findById(req.params.id);
