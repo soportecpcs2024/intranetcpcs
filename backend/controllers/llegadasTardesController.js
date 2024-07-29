@@ -1,6 +1,6 @@
 // controllers/llegadasTardesController.js
 const LlegadasTardes = require('../models/llegadasTardes');
-const Usuario = require('../models/Students_datos_globales');
+const Usuario = require('../models/students_datos_globales');
 
 // Agregar fechas de llegadas tarde para un usuario
 exports.addLlegadasTardes = async (req, res) => {
