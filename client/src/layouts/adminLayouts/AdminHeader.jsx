@@ -87,19 +87,22 @@ const AdminHeader = () => {
               <Link to="/admin/blog">Blog</Link>
             </li> */}
             <li>
-              <div className="dropdown">
-                <Link onClick={toggleDropdown}>Académico</Link>
-                {isDropdownOpen && (
-                  <ul className="dropdown-menu">
-                    <li>
-                      <Link to="/admin/academico">Reporte académico</Link>
-                    </li>
-                    <li>
-                      <Link to="/admin/documentos">Documentos</Link>
-                    </li>
-                  </ul>
-                )}
-              </div>
+            <div className="dropdown">
+                  <Link onClick={toggleDropdown}>Académico</Link>
+                  {isDropdownOpen && (
+                    <ul className="dropdown-menu">
+                      <li>
+                        <Link to="/admin/academico">Reporte académico</Link>
+                      </li>
+                      <li>
+                        <Link to="/admin/documentos">Documentos</Link>
+                      </li>
+                      <li>
+                        <Link to="/admin/llegadastarde">Llegadas tarde</Link>
+                      </li>
+                    </ul>
+                  )}
+                </div>
             </li>
             
             <li>

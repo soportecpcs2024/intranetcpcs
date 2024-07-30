@@ -7,7 +7,7 @@ const LoadingSpinner = () => {
   useEffect(() => {
     // Simula una carga de datos
     const fetchData = async () => {
-      await new Promise(resolve => setTimeout(resolve, 3000)); // Simula 3 segundos de carga
+      await new Promise(resolve => setTimeout(resolve, 2000)); // Simula 3 segundos de carga
       setLoading(false); // Cambia el estado de carga a false cuando se completa la carga
     };
 
