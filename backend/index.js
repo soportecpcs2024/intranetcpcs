@@ -60,6 +60,11 @@ const studentsGlobalRoutes = require('./routes/student_datos_globales_Routes');
 app.use('/api/studentGlobal', studentsGlobalRoutes);
 
 
+// Rutas para los productos
+const productRoutes = require('./routes/productRoutes');
+app.use('/api/products', productRoutes);
+
+
 
 
 const PORT = process.env.SERVER_PORT || 3000;
