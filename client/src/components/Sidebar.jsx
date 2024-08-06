@@ -47,6 +47,18 @@ const Sidebar = () => {
             <p>Estadística individual</p>
           </div>
         </Link>
+
+        <Link
+          className={`linkNav ${
+            location.pathname === "/admin/academico/nivelSuperior" ? "active" : ""
+          }`}
+          to="/admin/academico/nivelSuperior"
+        >
+          <PiUsersThreeBold className="icons" />
+          <div>
+            <p>Niveles superiores</p>
+          </div>
+        </Link>
         <div className="linkNav-espacio-p">
           <p>_______________</p>
         </div>

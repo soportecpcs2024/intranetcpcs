@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
-import { Auth, Blog, Academicos, Administrativos, Q10 } from "./pages/admin";
-
+import { Auth, Blog, Academicos,  Q10 } from "./pages/admin";
 import AdminLayout from "./layouts/adminLayouts/AdminLayout";
 
 import "./App.css";
@@ -19,6 +18,8 @@ import Users from "./pages/admin/User/main/Users";
 import LlegadasTarde from "./pages/admin/academicos/llegadast/LlegadasTarde";
 import AgregarLlegadasTarde from "./pages/admin/academicos/llegadast/AgregarLlegadasTarde";
 import SoportLayout from "./layouts/soportLayouts/SoportLayout";
+import Administrativos from "./pages/admin/administrativo/Administrativos";
+import NivelSuperior from "./pages/admin/academicos/nivelSuperior/NivelSuperior";
 
 const App = () => {
   useEffect(() => {
@@ -78,6 +79,7 @@ const AppContent = () => {
               <Route index element={<General />} />
               <Route path="/admin/academico/general" element={<General />} />
               <Route path="/admin/academico/areas" element={<Areas />} />
+              <Route path="/admin/academico/nivelSuperior" element={<NivelSuperior />} />
               <Route
                 path="/admin/academico/individual"
                 element={<InfoIndividual />}

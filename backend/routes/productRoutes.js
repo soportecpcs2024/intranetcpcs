@@ -1,20 +1,24 @@
-const express = require("express");
+const express = require('express');
+const multer = require('multer');
+const productController = require('../controllers/productController');
+const { upload } = require("../utils/fileUpload");
 const router = express.Router();
-// const protect = require("../middleWare/authMiddleware");
-const {
-  createProduct,
-  getProducts,
-  getProduct,
-  deleteProduct,
-  updateProduct,
-} = require("../controllers/productController");
-// const { upload } = require("../utils/fileUpload");
 
-router.post('/', createProduct)
-// router.post("/", protect, upload.single("image"), createProduct);
-// router.patch("/:id", protect, upload.single("image"), updateProduct);
-// router.get("/", protect, getProducts);
-// router.get("/:id", protect, getProduct);
-// router.delete("/:id", protect, deleteProduct);
+// // Configurar multer para manejar archivos y form-data
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, 'uploads/');
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, Date.now() + '-' + file.originalname);
+//   }
+// });
+
+// const upload = multer({ storage: storage });
+
+// Ruta para crear un producto
+router.post('/', upload.single('image'), productController.createProduct);
+router.get("/", productController.getProducts);
 
 module.exports = router;
+

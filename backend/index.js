@@ -3,7 +3,7 @@ const cors = require('cors');
 require('dotenv').config();
 const mongoose = require('./db'); // Asegúrate de que la configuración de la base de datos sea correcta
 const bodyParser = require('body-parser');
-
+const path = require("path");
 const app = express();
 
 // Configurar body-parser
@@ -26,7 +26,8 @@ app.use(cors({
 }));
 
 // Middleware para servir archivos estáticos desde la carpeta 'uploads'
-app.use(express.static('uploads'));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 
 // Importar y usar las rutas de notas de estudiantes
 const studentNotesRouter = require('./routes/student_notes_sheet_routes');
@@ -58,6 +59,13 @@ app.use('/api/llegadastarde', llegadasTardeRoutes);
 // Rutas para los datos globales
 const studentsGlobalRoutes = require('./routes/student_datos_globales_Routes');
 app.use('/api/studentGlobal', studentsGlobalRoutes);
+
+
+// Rutas para estudiantes nivel superior
+const studentNivelSuperiorRoutes = require('./routes/nivelesSuperioresRoutes');
+app.use('/api/ns', studentNivelSuperiorRoutes);
+
+
 
 
 // Rutas para los productos

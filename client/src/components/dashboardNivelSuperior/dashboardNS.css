@@ -1,0 +1,54 @@
+.ns-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra los elementos horizontalmente */
+  }
+  
+  .ns-barchart-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en múltiples líneas */
+    gap: 10px; /* Espacio entre los gráficos */
+    justify-content: center; /* Centra los gráficos en la fila */
+    margin: 50px;
+  }
+  
+  .bar-chart-container-ns {
+    flex: 1 1 calc(25% - 20px); /* Permite que cada gráfico ocupe un cuarto del ancho menos el espacio del gap */
+    max-width: 400px; /* Ajusta el tamaño máximo si es necesario */
+    margin: 5px;
+    border: 1px solid rgb(176, 176, 176);
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  }
+  
+  .bar-chart-container-ns-title {
+    margin: 30px 10px;
+  }
+   
+.promedio_grupos-ns{
+     
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+}
+
+.promedio_grupos-ns-grupo{
+    font-size: 25px;
+    font-weight: 900;
+}
+.promedio_grupos-ns-numero{
+    font-size: 26px;
+    margin-left: 50px;
+    font-weight: 900;
+
+}
+.ns-border{
+    border: 1px solid rgba(182, 182, 182, 0.695);
+}
+
+
+.ns-btn{
+    margin: 50px;
+}
