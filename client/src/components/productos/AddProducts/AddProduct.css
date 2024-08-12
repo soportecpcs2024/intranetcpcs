@@ -1,0 +1,55 @@
+.add-product-container {
+  padding: 10px;
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #f9f9f9; /* Fondo más claro para destacar el formulario */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave para darle profundidad */
+}
+
+.add-product-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-product-form input,
+.add-product-form textarea {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 14px; /* Tamaño de fuente adecuado */
+}
+
+/* Estilo del placeholder en campos de entrada */
+.add-product-form input::placeholder,
+.add-product-form textarea::placeholder {
+  color: #999; /* Color del texto del placeholder */
+  font-style: italic; /* Estilo de texto para que el placeholder se diferencie del texto ingresado */
+}
+
+.add-product-form input[type="file"] {
+  margin-bottom: 15px; /* Espaciado adecuado */
+}
+
+.add-product-form .submit-button {
+  padding: 7px 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px; /* Tamaño de fuente del botón */
+}
+
+.add-product-form .submit-button:hover {
+  background-color: #0056b3;
+}
+
+.error-message {
+  color: #ff4d4d; /* Color rojo para errores */
+  font-size: 10px;
+  font-weight: 900;
+   /* Tamaño de fuente más pequeño para el mensaje */
+   
+}

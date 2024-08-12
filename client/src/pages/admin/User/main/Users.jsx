@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './user.css';
+import Footer from '../footer/Footer';
 
 const Users = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -40,6 +41,8 @@ const Users = () => {
   }, [images.length, imagesLoaded]);
 
   return (
+    <>
+   
     <div className="users-container">
       <div className="slideshow">
         <div className="slideshow-text">
@@ -76,7 +79,12 @@ const Users = () => {
           <p>Card description 3</p>
         </div>
       </section>
+      
     </div>
+    <div>
+      <Footer />
+    </div>
+    </>
   );
 };
 

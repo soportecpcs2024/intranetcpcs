@@ -1,0 +1,129 @@
+.product-detail-container {
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+     
+    padding: 15px;
+    
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(102, 102, 102, 0.701);
+    border-radius: 8px;
+  }
+  
+  .product-detail-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: center;
+     
+  }
+  
+  .product-detail-header h2 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .back-button {
+    padding: 10px 20px;
+    margin-top: 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .back-button:hover {
+    background-color: #0056b3;
+  }
+  .product-detail-img-content{
+    width: 100%;
+     
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  }
+  .product-detail-img {
+    width:200px;
+    height: 200px;
+    border-radius: 4px;
+    margin: 5px;
+  }
+
+  .product-detail-img-content-title{
+    width: 100%;
+    text-align: left;
+    border-bottom: 1px solid rgba(107, 107, 107, 0.503);
+  }
+  
+  .product-detail-info {
+    display: flex;
+   flex-direction: column;
+  }
+  .product-detail-info-span{
+    font-weight: 600;
+    line-height: 5px;
+    margin: 0;
+    padding: 0
+    ;
+  }
+  
+  .product-detail-info p {
+    font-size: 13px;
+    color: #555;
+    margin: 2px;
+    padding: 0;
+    text-align: justify;
+  }
+  
+  .product-detail-description {
+    grid-column: span 2;
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.5;
+    margin-top: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .product-detail-container {
+      padding: 15px;
+    }
+  
+    .product-detail-header h2 {
+      font-size: 2rem;
+    }
+  
+    .product-detail-info {
+      grid-template-columns: 1fr;
+    }
+  
+    .product-detail-description {
+      font-size: 1rem;
+    }
+  
+    .product-detail-info p {
+      font-size: 1.1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .product-detail-header h2 {
+      font-size: 1.75rem;
+    }
+  
+    .product-detail-img {
+      max-width: 100%;
+      margin-bottom: 15px;
+    }
+  
+    .product-detail-info p {
+      font-size: 1rem;
+    }
+  
+    .product-detail-description {
+      font-size: 0.95rem;
+    }
+  }
+  

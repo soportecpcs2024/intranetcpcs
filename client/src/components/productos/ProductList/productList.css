@@ -1,0 +1,139 @@
+.product-list {
+    color: #333;
+  
+    .table {
+      padding: 5px;
+      width: 100%;
+      overflow-x: auto;
+  
+      .search {
+        width: 100%;
+        max-width: 300px;
+      }
+  
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 1.4rem;
+  
+        thead {
+          border-top: 2px solid var(--light-blue);
+          border-bottom: 2px solid var(--light-blue);
+        }
+  
+        th {
+          border: 1px solid #eee;
+          padding: 8px;
+          vertical-align: top;
+          text-align: left;
+        }
+  
+        td {
+          vertical-align: top;
+          text-align: left;
+          padding: 8px;
+          
+          &.icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            
+            > * {
+              margin-right: 7px;
+              cursor: pointer;
+              vertical-align: middle;
+              align-self: center;
+            }
+          }
+        }
+  
+        tr {
+          border-bottom: 1px solid #ccc;
+          
+          &:nth-child(even) {
+            background-color: #fff;
+          }
+          
+          &:hover {
+            cursor: pointer;
+            background-color: rgba(31, 147, 255, 0.3);
+          }
+        }
+      }
+    }
+  
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+  
+    .page-num {
+      border: 1px solid #ddd;
+      padding: 5px 10px;
+      margin: 0 2px;
+      cursor: pointer;
+      text-decoration: none;
+      color: #333;
+      border-radius: 5px;
+      font-size: 1rem;
+  
+      &:hover {
+        background-color: #f0f0f0;
+      }
+    }
+  
+    .activePage {
+      background-color: var(--light-blue);
+      color: white;
+      border: 1px solid var(--light-blue);
+    }
+  }
+  
+
+  .icons {
+    display: flex;
+    gap: 10px; /* Espacio entre los íconos */
+    justify-content: center; /* Centra los íconos horizontalmente */
+    align-items: center;
+     
+  }
+  
+  .link-icons{
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .link-icons span:hover {
+    transform: scale(1.1); /* Agranda el icono al pasar el cursor */
+  }
+  
+  .icons span:nth-child(1) {
+    background-color: rgba(128, 0, 128, 0.1); /* Fondo púrpura claro */
+  }
+  
+  .icons span:nth-child(1):hover {
+    background-color: rgba(128, 0, 128, 0.2); /* Aumenta la opacidad al pasar el cursor */
+  }
+  
+  .icons span:nth-child(2) {
+    background-color: rgba(0, 128, 0, 0.1); /* Fondo verde claro */
+  }
+  
+  .icons span:nth-child(2):hover {
+    background-color: rgba(0, 128, 0, 0.2); /* Aumenta la opacidad al pasar el cursor */
+  }
+  
+  .icons span:nth-child(3) {
+    background-color: rgba(255, 0, 0, 0.1); /* Fondo rojo claro */
+  }
+  
+  .icons span:nth-child(3):hover {
+    background-color: rgba(255, 0, 0, 0.2); /* Aumenta la opacidad al pasar el cursor */
+  }
+  

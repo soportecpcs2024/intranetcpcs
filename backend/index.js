@@ -21,7 +21,7 @@ app.use(cors({
     }
     return callback(null, true);
   },
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
@@ -69,7 +69,7 @@ app.use('/api/ns', studentNivelSuperiorRoutes);
 
 
 // Rutas para los productos
-const productRoutes = require('./routes/productRoutes');
+const productRoutes = require('./routes/inventory/productRoutes');
 app.use('/api/products', productRoutes);
 
 

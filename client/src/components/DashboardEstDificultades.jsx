@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Students } from "../api/DataApi";
 import LoadingSpinner from "./LoadingSpinner";
-import Filtros from "./Filtros";
-import PromedioGrupos from "./PromedioGrupos";
+
 import Card from "./Card"; // Componente de card, ajusta según tu estructura
 
 const DashboardEstDificultades = () => {
