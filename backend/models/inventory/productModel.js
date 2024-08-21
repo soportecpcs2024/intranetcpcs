@@ -1,14 +1,19 @@
 const mongoose = require("mongoose");
 
-const productSchema = mongoose.Schema(
+const imageSchema = new mongoose.Schema({
+  fileName: { type: String, required: true },
+  filePath: { type: String, required: true },
+  fileType: { type: String, required: true },
+  fileSize: { type: String, required: true }
+});
+
+const productSchema = new mongoose.Schema(
   {
-     
     name: {
       type: String,
       required: [true, "Please add a name"],
       trim: true,
     },
-
     brand: {
       type: String,
       required: true,
@@ -26,11 +31,6 @@ const productSchema = mongoose.Schema(
       required: [true, "Please add a category"],
       trim: true,
     },
-    quantity: {
-      type: String,
-      required: [true, "Please add a quantity"],
-      trim: true,
-    },
     model: {
       type: String,
       default: "",
@@ -38,13 +38,12 @@ const productSchema = mongoose.Schema(
     },
     dimensions: {
       type: String,
-      required: [true, "Please add a dimensions"],
+      required: [true, "Please add dimensions"],
       trim: true,
     },
     price: {
-      type: String,
+      type: Number,
       required: [true, "Please add a price"],
-      trim: true,
     },
     color: {
       type: String,
@@ -57,8 +56,8 @@ const productSchema = mongoose.Schema(
       trim: true,
     },
     image: {
-      type: Object,
-      default: {},
+      type: imageSchema, // Actualizado para usar el esquema de imagen
+      default: {}
     },
   },
   {

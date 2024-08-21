@@ -13,8 +13,13 @@ const AgregarLlegadasTarde = () => {
 
   const handleAddFecha = async (e) => {
     e.preventDefault();
-    if (!fecha || !numIdentificacion) {
+    
+    const trimmedNumIdentificacion = numIdentificacion.trim();
+    const trimmedFecha = fecha.trim();
+    
+    if (!trimmedFecha || !trimmedNumIdentificacion) {
       setError('Por favor, completa todos los campos.');
+      clearMessage();
       return;
     }
 
@@ -22,27 +27,33 @@ const AgregarLlegadasTarde = () => {
     setError('');
     setSuccess('');
 
-    // Ajustar la fecha seleccionada a UTC teniendo en cuenta la diferencia horaria de Colombia
-    const fechaLocal = new Date(fecha);
-    const fechaUtc = addHours(fechaLocal, 5); // Colombia está en UTC-5
+    const fechaLocal = new Date(trimmedFecha);
+    const fechaUtc = addHours(fechaLocal, 5);
 
     const nuevaLlegada = {
-      num_identificacion: numIdentificacion,
+      num_identificacion: trimmedNumIdentificacion,
       fechas: [fechaUtc.toISOString()],
     };
 
     try {
-      const result = await crearLlegadasTardeData(nuevaLlegada);
+      await crearLlegadasTardeData(nuevaLlegada);
       setFechas([...fechas, fechaLocal]);
-      setFecha(''); // Limpiar campo de fecha
+      setNumIdentificacion('');
+      setFecha('');
       setSuccess('Fecha guardada con éxito');
-      console.log("Fecha guardada con éxito:", result);
     } catch (err) {
-      console.error("Error al guardar la fecha:", err);
       setError('Error al guardar la fecha');
     } finally {
       setLoading(false);
+      clearMessage();
     }
+  };
+
+  const clearMessage = () => {
+    setTimeout(() => {
+      setError('');
+      setSuccess('');
+    }, 4000); // 4 seconds
   };
 
   return (
@@ -54,11 +65,10 @@ const AgregarLlegadasTarde = () => {
           <input
             type="text"
             value={numIdentificacion}
-            onChange={(e) => setNumIdentificacion(e.target.value)}
+            onChange={(e) => setNumIdentificacion(e.target.value.trim())}
             required
+            placeholder='Ingresa el N° de documento'
           />
-        </div>
-        <div className="form-group">
           <label>Fecha:</label>
           <input
             type="date"
@@ -69,18 +79,12 @@ const AgregarLlegadasTarde = () => {
           <button type="submit" disabled={loading}>
             {loading ? 'Guardando...' : 'Agregar Fecha'}
           </button>
+          {error && <p className="error">{error}</p>}
+          {success && <p className="success">{success}</p>}
         </div>
-        <ul>
-          {fechas.map((fecha, idx) => (
-            <li key={idx}>{format(new Date(fecha), 'dd/MM/yyyy')}</li>
-          ))}
-        </ul>
-        {error && <p className="error">{error}</p>}
-        {success && <p className="success">{success}</p>}
       </form>
     </div>
   );
 };
 
 export default AgregarLlegadasTarde;
-

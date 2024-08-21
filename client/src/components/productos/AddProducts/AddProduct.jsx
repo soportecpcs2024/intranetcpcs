@@ -9,7 +9,7 @@ const AddProduct = () => {
     brand: "",
     sku: "",
     category: "",
-    quantity: "",
+     
     model: "",
     dimensions: "",
     price: "",
@@ -23,7 +23,7 @@ const AddProduct = () => {
     brand: "",
     sku: "",
     category: "",
-    quantity: "",
+     
     model: "",
     dimensions: "",
     price: "",
@@ -127,14 +127,7 @@ const AddProduct = () => {
         />
         {errors.category && <p className="error-message">{errors.category}</p>}
 
-        <input
-          type="number"
-          name="quantity"
-          placeholder="Cantidad"
-          value={productData.quantity}
-          onChange={handleChange}
-        />
-        {errors.quantity && <p className="error-message">{errors.quantity}</p>}
+         
 
         <input
           type="text"

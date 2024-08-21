@@ -1,5 +1,6 @@
+// Search.jsx
 import React from "react";
-import "./search.css"; // Importa el CSS normal
+import "./search.css";
 import { BiSearch } from "react-icons/bi";
 
 const Search = ({ value, onChange }) => {

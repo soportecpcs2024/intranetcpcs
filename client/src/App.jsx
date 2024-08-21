@@ -21,6 +21,7 @@ import ProductList from "./components/productos/ProductList/ProductList";
 import AddProduct from "./components/productos/AddProducts/AddProduct";
 import ProductDetail from "./components/productos/ProductDetail/ProductDetail";
 import EditProduct from "./components/productos/editProduct/EditProduct";
+import CreateUnits from "./components/productos/unidades/crearUnidad/CreateUnits";
 
 const App = () => {
   useEffect(() => {
@@ -101,7 +102,8 @@ const AppContent = () => {
             {/* Inventory routes */}
             <Route path="/admin/administracion" element={<DashboardInventory />}>
               <Route path="productList" element={<ProductList />} />
-              <Route path="add-product" element={<AddProduct />} /> {/* Include AddProduct route */}
+              <Route path="add-product" element={<AddProduct />} />  
+              <Route path="assign-product" element={<CreateUnits />} />
               <Route path="/admin/administracion/product-detail/:id" element={<ProductDetail />} />
               <Route path="/admin/administracion/edit-product/:id" element={<EditProduct />} />
             </Route>

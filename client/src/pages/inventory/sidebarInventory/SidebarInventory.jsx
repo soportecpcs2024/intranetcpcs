@@ -1,46 +1,15 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FaTh, FaRegChartBar, FaCommentAlt } from "react-icons/fa";
 import { BiImageAdd } from "react-icons/bi";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { RiProductHuntLine } from "react-icons/ri";
-import "./SidebarInventory.css"; // Asume que moviste el CSS aquí
+import "./SidebarInventory.css";
 
 const SidebarInventory = () => {
   const [isOpen, setIsOpen] = useState(true);
   const toggle = () => setIsOpen(!isOpen);
-
-  const menu = [
-    {
-      title: "Dashboard",
-      icon: <FaTh />,
-      path: "/admin/administracion/productList",
-    },
-    {
-      title: "Add Product",
-      icon: <BiImageAdd />,
-      path: "/admin/administracion/add-product",
-    },
-    {
-      title: "Account",
-      icon: <FaRegChartBar />,
-      children: [
-        {
-          title: "Profile",
-          path: "/profile",
-        },
-        {
-          title: "Edit Profile",
-          path: "/edit-profile",
-        },
-      ],
-    },
-    {
-      title: "Report Bug",
-      icon: <FaCommentAlt />,
-      path: "/contact-us",
-    },
-  ];
+  const location = useLocation();
 
   return (
     <div className="sidebar" style={{ width: isOpen ? "230px" : "60px" }}>
@@ -52,47 +21,88 @@ const SidebarInventory = () => {
           <HiMenuAlt3 onClick={toggle} />
         </div>
       </div>
-      {menu.map((item, index) => (
-        <SidebarItem key={index} item={item} isOpen={isOpen} />
-      ))}
+      <SidebarItem 
+        path="/admin/administracion/productList"
+        icon={<FaTh />}
+        label="Dashboard"
+        isOpen={isOpen}
+        location={location}
+      />
+      <SidebarItem
+        path="/admin/administracion/add-product"
+        icon={<BiImageAdd />}
+        label="Add Product"
+        isOpen={isOpen}
+        location={location}
+      />
+      <SidebarItem
+        path="/admin/administracion/report-bug"
+        icon={<FaCommentAlt />}
+        label="Report Bug"
+        isOpen={isOpen}
+        location={location}
+      />
     </div>
   );
 };
 
-const SidebarItem = ({ item, isOpen }) => {
-  const [open, setOpen] = useState(false);
-  const toggle = () => setOpen(!open);
-
+const SidebarItem = ({ path, icon, label, isOpen, location }) => {
   return (
-    <div className={`sidebar-item ${open ? "open" : ""}`}>
-      
-      <div className="sidebar-title" onClick={item.children ? toggle : null}>
-        <span>
-          <div className="icon">{item.icon}</div>
-          {isOpen && item.children ? (
-            <>
-              {item.title}
-              <div className="arrow-icon">{open ? "▼" : "▶"}</div>
-            </>
-          ) : (
-            <Link to={item.path} className="sublink">
-              {item.title}
-            </Link>
-          )}
-        </span>
-      </div>
-      {item.children && open && (
-        <div className="sidebar-content">
-          {item.children.map((child, index) => (
-            <Link to={child.path} key={index} className="sublink">
-              {child.title}
-            </Link>
-          ))}
-          
+    <div className="sidebar-item-inventory">
+      <Link
+        className={`linkNav-inventory ${
+          location.pathname === path ? "active" : ""
+        }`}
+        to={path}
+      >
+        <div className="linkNav-inventory-icons">
+          {icon}
+          {isOpen && <p>{label}</p>}
         </div>
-      )}
+      </Link>
     </div>
   );
 };
 
 export default SidebarInventory;
+
+// const menu = [
+//   {
+//     title: "Dashboard",
+//     icon: <FaTh />,
+//     path: "/admin/administracion/productList",
+//   },
+//   {
+//     title: "Add Product",
+//     icon: <BiImageAdd />,
+//     path: "/admin/administracion/add-product",
+//   },
+//   {
+//     title: "assign product",
+//     icon: <BiImageAdd />,
+//     path: "/admin/administracion/assign-product",
+//   },
+//   {
+//     title: "Crear nuevo...",
+//     icon: <FaRegChartBar />,
+//     children: [
+//       {
+//         title: "Producto",
+//         path: "/profile",
+//       },
+//       {
+//         title: "Unidad",
+//         path: "/edit-profile",
+//       },
+//       {
+//         title: "Locacion",
+//         path: "/edit-profile",
+//       },
+//     ],
+//   },
+//   {
+//     title: "Report Bug",
+//     icon: <FaCommentAlt />,
+//     path: "/contact-us",
+//   },
+// ];

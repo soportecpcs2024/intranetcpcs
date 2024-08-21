@@ -5,43 +5,56 @@ const ProductContext = createContext();
 
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [locations, setLocations] = useState([]); // Estado para las ubicaciones
+  const [loadingProducts, setLoadingProducts] = useState(true);
+  const [loadingLocations, setLoadingLocations] = useState(true);
+  const [errorProducts, setErrorProducts] = useState(null);
+  const [errorLocations, setErrorLocations] = useState(null);
 
   const fetchProducts = async () => {
+    setLoadingProducts(true);
     try {
       const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products`);
       setProducts(response.data);
+       
     } catch (error) {
       console.error("Error fetching products", error);
-      setError(error);
+      setErrorProducts(error);
     } finally {
-      setLoading(false);
+      setLoadingProducts(false);
+    }
+  };
+
+  const fetchLocations = async () => {
+    setLoadingLocations(true);
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/location`);
+      setLocations(response.data);
+    } catch (error) {
+      console.error("Error fetching locations", error);
+      setErrorLocations(error);
+    } finally {
+      setLoadingLocations(false);
     }
   };
 
   const createProduct = async (productData) => {
     try {
       const formData = new FormData();
-      
-      // Añadir campos del producto a FormData
       for (const [key, value] of Object.entries(productData)) {
         if (key === 'image' && value) {
-          formData.append('image', value); // Añadir el archivo directamente
+          formData.append('image', value);
         } else {
           formData.append(key, value);
         }
       }
-      
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/products`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+        headers: { 'Content-Type': 'multipart/form-data' },
       });
       setProducts((prevProducts) => [...prevProducts, response.data]);
     } catch (error) {
       console.error("Error creating product", error);
-      setError(error);
+      setErrorProducts(error);
     }
   };
 
@@ -51,9 +64,14 @@ export const ProductProvider = ({ children }) => {
 
   const updateProduct = async (id, formData) => {
     try {
+      const updatedFormData = {
+        ...formData,
+        price: parseFloat(formData.price), // Convertir a número
+        quantity: parseInt(formData.quantity, 10) // Convertir a número si es necesario
+      };
       const response = await axios.patch(
         `${import.meta.env.VITE_BACKEND_URL}/api/products/${id}`,
-        formData
+        updatedFormData
       );
       setProducts((prevProducts) =>
         prevProducts.map((product) =>
@@ -62,7 +80,7 @@ export const ProductProvider = ({ children }) => {
       );
     } catch (error) {
       console.error("Error updating product", error);
-      setError(error);
+      setErrorProducts(error);
     }
   };
 
@@ -72,7 +90,17 @@ export const ProductProvider = ({ children }) => {
       setProducts((prevProducts) => prevProducts.filter((product) => product._id !== id));
     } catch (error) {
       console.error("Error deleting product", error);
-      setError(error);
+      setErrorProducts(error);
+    }
+  };
+
+  const createUnits = async (unitsData) => {
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/units`, unitsData);
+      console.log('Units created:', response.data);
+    } catch (error) {
+      console.error("Error creating units", error);
+      setErrorProducts(error);
     }
   };
 
@@ -80,13 +108,18 @@ export const ProductProvider = ({ children }) => {
     <ProductContext.Provider
       value={{
         products,
-        loading,
-        error,
+        locations,
+        loadingProducts,
+        loadingLocations,
+        errorProducts,
+        errorLocations,
         getProductById,
         fetchProducts,
+        fetchLocations,
         updateProduct,
         createProduct,
         removeProduct,
+        createUnits
       }}
     >
       {children}

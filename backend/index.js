@@ -66,11 +66,17 @@ const studentNivelSuperiorRoutes = require('./routes/nivelesSuperioresRoutes');
 app.use('/api/ns', studentNivelSuperiorRoutes);
 
 
-
+// ------------ Rutas para inventario -------------
 
 // Rutas para los productos
 const productRoutes = require('./routes/inventory/productRoutes');
 app.use('/api/products', productRoutes);
+
+const unitRoutes = require('./routes/inventory/unitsRoutes');
+app.use('/api/units', unitRoutes);
+
+const locationRoutes = require('./routes/inventory/locationRoutes');
+app.use('/api/location', locationRoutes);
 
 
 

@@ -15,8 +15,8 @@ const ProductList = () => {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    fetchProducts(); // Asegúrate de que la lista de productos se obtenga desde la base de datos al cargar el componente
-  }, []);
+    fetchProducts(); // Fetch products when the component mounts
+  }, [fetchProducts]);
 
   const confirmDelete = (id) => {
     confirmAlert({
@@ -25,9 +25,7 @@ const ProductList = () => {
       buttons: [
         {
           label: "Eliminar",
-          onClick: () => {
-            removeProduct(id);
-          },
+          onClick: () => removeProduct(id),
         },
         {
           label: "Cancelar",
@@ -44,22 +42,12 @@ const ProductList = () => {
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
-    setCurrentItems(
-      products
-        .filter((product) =>
-          (product.name.toLowerCase().includes(search.toLowerCase()) ||
-           product.category.toLowerCase().includes(search.toLowerCase()))
-        )
-        .slice(itemOffset, endOffset)
+    const filteredProducts = products.filter((product) =>
+      (product.name.toLowerCase().includes(search.toLowerCase()) ||
+       product.category.toLowerCase().includes(search.toLowerCase()))
     );
-    setPageCount(
-      Math.ceil(
-        products.filter((product) =>
-          (product.name.toLowerCase().includes(search.toLowerCase()) ||
-           product.category.toLowerCase().includes(search.toLowerCase()))
-        ).length / itemsPerPage
-      )
-    );
+    setCurrentItems(filteredProducts.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(filteredProducts.length / itemsPerPage));
   }, [itemOffset, itemsPerPage, products, search]);
 
   const handlePageClick = (event) => {
@@ -67,7 +55,7 @@ const ProductList = () => {
     setItemOffset(newOffset);
   };
 
-  // Función para formatear valores en pesos colombianos
+  // Function to format values in Colombian pesos
   const formatCurrency = (value) => {
     return new Intl.NumberFormat('es-CO', {
       style: 'currency',
@@ -97,7 +85,7 @@ const ProductList = () => {
         </div>
 
         <div className="table">
-          {!loading && products.length === 0 ? (
+          {products.length === 0 ? (
             <p>-- No product found, please add a product...</p>
           ) : (
             <table>
@@ -105,20 +93,22 @@ const ProductList = () => {
                 <tr>
                   <th>s/n</th>
                   <th>Nombre</th>
+                  <th>Marca</th>
                   <th>Categoria</th>
                   <th>Precio und</th>
-                  <th>Stock</th>
-                  <th>Valor total</th>
+                  
                   <th>Acciones</th>
                 </tr>
               </thead>
 
               <tbody>
                 {currentItems.map((product, index) => {
-                  const { _id, name, category, price, quantity } = product;
+                  const { _id, name, brand, category, price, quantity } = product;
 
-                  // Convertir price y quantity a números y calcular el totalValue
-                  const parsedPrice = parseFloat(price.replace(/[^0-9.-]+/g, ""));
+                  // Ensure price is a string, otherwise convert it
+                  const parsedPrice = typeof price === 'string'
+                    ? parseFloat(price.replace(/[^0-9.-]+/g, ""))
+                    : parseFloat(price);
                   const parsedQuantity = parseInt(quantity, 10);
                   const totalValue = parsedPrice * parsedQuantity;
 
@@ -126,12 +116,13 @@ const ProductList = () => {
                     <tr key={_id}>
                       <td>{index + 1}</td>
                       <td>{name}</td>
+                      <td>{brand}</td>
+
                       <td>{category}</td>
                       <td>{formatCurrency(parsedPrice)}</td>
-                      <td>{parsedQuantity}</td>
-                      <td>{formatCurrency(totalValue)}</td>
+                      
                       <td className="link-icons">
-                        <span className="">
+                        <span>
                           <Link to={`/admin/administracion/product-detail/${_id}`}>
                             <AiOutlineEye size={25} color={"purple"} />
                           </Link>

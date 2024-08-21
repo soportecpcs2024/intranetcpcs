@@ -85,13 +85,11 @@ const LoginForm = () => {
             onChange={handleChange} 
             placeholder="¡Ingresa tu contraseña!" 
           />
-          <button 
-            type="button" 
-            className="toggle-password-button" 
-            onClick={togglePasswordVisibility}
-          >
-            {showPassword ? <FaEyeSlash /> : <FaEye />}
-          </button>
+          
+            {showPassword ? <FaEyeSlash  className="toggle-password-button" 
+            onClick={togglePasswordVisibility} /> : <FaEye  className="toggle-password-button" 
+            onClick={togglePasswordVisibility}/>}
+         
         </div>
       </div>
       <button type="submit" className="login-button">Entrar</button>
