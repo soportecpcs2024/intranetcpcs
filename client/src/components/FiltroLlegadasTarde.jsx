@@ -8,7 +8,7 @@ const FiltroLlegadasTarde = ({
       <select
         value={selectedGroup}
         onChange={(e) => setSelectedGroup(e.target.value.trim())}
-        className="filter-select"
+        className="filter-select-llegadas"
       >
         <option value="">Todos los Grupos</option>
         <option value="JARDIN">Jardín</option>

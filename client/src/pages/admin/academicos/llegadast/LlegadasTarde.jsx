@@ -1,11 +1,16 @@
-import React, { useEffect, useState, useRef, useMemo, useCallback } from "react";
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  useMemo,
+  useCallback,
+} from "react";
 import { format } from "date-fns";
 import { LlegadasTardeData } from "../../../../api/DataApi";
 import FiltroLlegadasTarde from "../../../../components/FiltroLlegadasTarde";
-import html2canvas from "html2canvas";
-import ReactPaginate from 'react-paginate';
+import domtoimage from "dom-to-image";
+import ReactPaginate from "react-paginate";
 import "./LlegadasTarde.css";
-import Logo from "/logo.png";
 import SpinnerComponent from "../../../../components/SpinnerComponent";
 
 const ITEMS_PER_PAGE = 20;
@@ -26,7 +31,6 @@ const LlegadasTarde = () => {
       const data = await LlegadasTardeData();
       setLlegadasTarde(data);
       setFilteredLlegadasTarde(data);
-      console.log(data);
     } catch (err) {
       setError(err.message || "Error fetching data");
     } finally {
@@ -41,28 +45,49 @@ const LlegadasTarde = () => {
   const filteredData = useMemo(() => {
     return selectedGroup === ""
       ? llegadasTarde
-      : llegadasTarde.filter(llegada => llegada.grupo.trim() === selectedGroup.trim());
+      : llegadasTarde.filter(
+          (llegada) => llegada.grupo.trim() === selectedGroup.trim()
+        );
   }, [selectedGroup, llegadasTarde]);
 
   useEffect(() => {
     const endOffset = (currentPage + 1) * ITEMS_PER_PAGE;
-    setCurrentItems(filteredData.slice(currentPage * ITEMS_PER_PAGE, endOffset));
+    setCurrentItems(
+      filteredData.slice(currentPage * ITEMS_PER_PAGE, endOffset)
+    );
     setPageCount(Math.ceil(filteredData.length / ITEMS_PER_PAGE));
   }, [currentPage, filteredData]);
 
   const formatDate = (date) => {
-    return format(new Date(date), "dd/MM/yyyy");
+    const formattedDate = format(new Date(date), "dd/MM/yyyy");
+    const [day, month, year] = formattedDate.split("/");
+    return { day, month, year };
   };
 
   const handleDownloadImage = () => {
     if (printRef.current) {
-      html2canvas(printRef.current).then((canvas) => {
-        const imgData = canvas.toDataURL("image/png");
-        const link = document.createElement("a");
-        link.href = imgData;
-        link.download = "llegadas_tarde.png";
-        link.click();
-      });
+      const container = printRef.current;
+
+      container.style.width = "auto";
+      container.style.height = "auto";
+      container.style.overflow = "visible";
+
+      domtoimage
+        .toPng(container)
+        .then((dataUrl) => {
+          const link = document.createElement("a");
+          link.href = dataUrl;
+          link.download = "llegadas_tarde.png";
+          link.click();
+        })
+        .catch((error) => {
+          console.error("Error generating image:", error);
+        })
+        .finally(() => {
+          container.style.width = "";
+          container.style.height = "";
+          container.style.overflow = "";
+        });
     }
   };
 
@@ -75,29 +100,19 @@ const LlegadasTarde = () => {
 
   return (
     <div className="llegadasTardeContainer a4-size" ref={printRef}>
-      <div className="header-llegadastarde">
-        <div>
-          <img className="llegadaTarde-logo" src={Logo} alt="Logo CPCS" />
-        </div>
-        <div className="header-llegadastarde-text">
-          <p>Carrera 83 No. 78-30 Medellín - Colombia</p>
-          <p>PBX: 442 06 06</p>
-          <p>https://colombosueco.com/</p>
-          <h6 className="llegadasTardeContainer-title">Llegadas tarde</h6>
-        </div>
-      </div>
       <FiltroLlegadasTarde
         selectedGroup={selectedGroup}
         setSelectedGroup={setSelectedGroup}
       />
 
       <div className="table-container">
+        <h3>Llegadas tarde del grupo : <span>{selectedGroup}</span></h3>
         <table className="llegadas-tarde-table">
           <thead>
             <tr>
               <th>Nombre estudiante</th>
               <th>Identificación</th>
-              <th>Grupo</th>
+             
               <th>Fechas</th>
               <th>Cantidad</th>
             </tr>
@@ -109,29 +124,40 @@ const LlegadasTarde = () => {
                   llegada.segundo_nombre ? llegada.segundo_nombre : ""
                 } ${llegada.primer_apellido} ${llegada.segundo_apellido}`}</td>
                 <td>{llegada.num_identificacion}</td>
-                <td>{llegada.grupo}</td>
+                
                 <td>
-                  <ul>
-                    {llegada.fechas.map((date, idx) => (
-                      <li key={idx}>{formatDate(date)}</li>
-                    ))}
+                  <ul className="fechas">
+                    {llegada.fechas.map((date, idx) => {
+                      const { day, month, year } = formatDate(date);
+                      return (
+                        <li key={idx}>
+                          <span className="day">{day}</span>/
+                          <span className="month">{month}</span>/
+                          <span className="year">{year}</span>
+                          {idx < llegada.fechas.length - 1 && ", "}
+                        </li>
+                      );
+                    })}
                   </ul>
                 </td>
+
                 <td className="cantidad">{llegada.fechas.length}</td>
               </tr>
             ))}
           </tbody>
         </table>
         <ReactPaginate
-          previousLabel={'<<'}
-          nextLabel={'>>'}
+          previousLabel={"<<"}
+          nextLabel={">>"}
           pageCount={pageCount}
           onPageChange={handlePageClick}
-          containerClassName={'pagination'}
-          activeClassName={'active'}
+          containerClassName={"pagination"}
+          activeClassName={"active"}
         />
       </div>
-      <button className='btn-llegadas-tarde' onClick={handleDownloadImage}>Descargar Imagen</button>
+      <button className="btn-llegadas-tarde" onClick={handleDownloadImage}>
+        Descargar Imagen
+      </button>
     </div>
   );
 };
