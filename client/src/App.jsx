@@ -27,7 +27,6 @@ import Reportbug from "./components/productos/Bug/Reportbug";
 import Algomas from "./components/productos/algomas/Algomas";
 import { RiH3 } from "react-icons/ri";
 
-
 const App = () => {
   useEffect(() => {
     localStorage.setItem("lastActivity", Date.now().toString());
@@ -57,7 +56,9 @@ const App = () => {
 
   return (
     <AuthProvider>
-      <ProductProvider> {/* Wrap your app with ProductProvider */}
+      <ProductProvider>
+        {" "}
+        {/* Wrap your app with ProductProvider */}
         <AppContent />
       </ProductProvider>
     </AuthProvider>
@@ -105,14 +106,24 @@ const AppContent = () => {
             <Route path="/admin/*" element={<Navigate to="/admin/users" />} />
 
             {/* Inventory routes */}
-            <Route path="/admin/administracion" element={<DashboardInventory />}>
+            <Route
+              path="/admin/administracion"
+              element={<DashboardInventory />}
+            >
+              <Route index element={<ProductList />} />
               <Route path="productList" element={<ProductList />} />
-              <Route path="add-product" element={<AddProduct />} />  
+              <Route path="add-product" element={<AddProduct />} />
               <Route path="createUnits" element={<CreateUnits />} />
               <Route path="createlocation" element={<AddLocation />} />
               <Route path="repbug" element={<Reportbug />} />
-              <Route path="/admin/administracion/product-detail/:id" element={<ProductDetail />} />
-              <Route path="/admin/administracion/edit-product/:id" element={<EditProduct />} />
+              <Route
+                path="/admin/administracion/product-detail/:id"
+                element={<ProductDetail />}
+              />
+              <Route
+                path="/admin/administracion/edit-product/:id"
+                element={<EditProduct />}
+              />
             </Route>
           </Route>
         )}

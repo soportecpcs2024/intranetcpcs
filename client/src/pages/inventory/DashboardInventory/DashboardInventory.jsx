@@ -12,6 +12,7 @@ const DashboardInventory = () => {
       <div className="layoutInventory">
         <HeaderInventory />
         <div className="content">
+         
           <Outlet />
         </div>
         <FooterInventory />

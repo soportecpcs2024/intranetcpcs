@@ -23,13 +23,16 @@ const SidebarInventory = () => {
           <HiMenuAlt3 onClick={toggle} />
         </div>
       </div>
-      <SidebarItem 
-        path="/admin/administracion/productList"
-        icon={<FaTh />}
-        label="Dashboard"
-        isOpen={isOpen}
-        location={location}
-      />
+      <div>
+        <SidebarItem
+          path="/admin/administracion/productList"
+          icon={<FaTh />}
+          label="Dashboard"
+          isOpen={isOpen}
+          location={location}
+        />
+        <h2 className="SidebarItem-Dashboard-line">_____________________</h2>
+      </div>
       <SidebarItem
         path="/admin/administracion/add-product"
         icon={<BiImageAdd />}
@@ -51,14 +54,16 @@ const SidebarInventory = () => {
         isOpen={isOpen}
         location={location}
       />
-      <SidebarItem
-        path="/admin/administracion/repbug"
-        icon={<FaCommentAlt />}
-        label="Bug Report"
-        isOpen={isOpen}
-        location={location}
-      />
-       
+      <div>
+        <h2 className="SidebarItem-report-line">_____________________</h2>
+        <SidebarItem
+          path="/admin/administracion/repbug"
+          icon={<FaCommentAlt />}
+          label="Bug Report"
+          isOpen={isOpen}
+          location={location}
+        />
+      </div>
     </div>
   );
 };
@@ -77,10 +82,8 @@ const SidebarItem = ({ path, icon, label, isOpen, location }) => {
           {isOpen && <p>{label}</p>}
         </div>
       </Link>
-        
     </div>
   );
 };
 
 export default SidebarInventory;
-
