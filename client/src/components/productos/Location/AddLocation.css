@@ -1,0 +1,63 @@
+.add-product-container {
+    padding: 10px;
+    max-width: 500px;
+     
+    background-color: #f9f9f9; /* Fondo claro */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  }
+  
+  .add-product-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .add-product-form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333; /* Color del texto del label */
+  }
+  
+  .add-product-form input,
+  .add-product-form textarea {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px; /* Tamaño de fuente adecuado */
+    transition: border-color 0.3s ease; /* Transición suave al enfocar */
+  }
+  
+  .add-product-form input:focus,
+  .add-product-form textarea:focus {
+    border-color: #007bff; /* Cambia el borde al enfocarse */
+  }
+  
+  .add-product-form input::placeholder,
+  .add-product-form textarea::placeholder {
+    color: #999; /* Color del texto del placeholder */
+    font-style: italic; /* Placeholder estilizado */
+  }
+  
+  .add-product-form input[type="file"] {
+    margin-bottom: 15px; /* Espaciado adecuado */
+  }
+  
+  .add-product-form .submit-button {
+    padding: 7px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px; /* Tamaño de fuente del botón */
+    transition: background-color 0.3s ease; /* Transición suave al pasar el mouse */
+  }
+  
+  .add-product-form .submit-button:hover {
+    background-color: #0056b3; /* Cambio de color al pasar el mouse */
+  }
+  
+  .error-message {
+    color: #ff4d4
+  

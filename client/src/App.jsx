@@ -22,6 +22,11 @@ import AddProduct from "./components/productos/AddProducts/AddProduct";
 import ProductDetail from "./components/productos/ProductDetail/ProductDetail";
 import EditProduct from "./components/productos/editProduct/EditProduct";
 import CreateUnits from "./components/productos/unidades/crearUnidad/CreateUnits";
+import AddLocation from "./components/productos/Location/AddLocation";
+import Reportbug from "./components/productos/Bug/Reportbug";
+import Algomas from "./components/productos/algomas/Algomas";
+import { RiH3 } from "react-icons/ri";
+
 
 const App = () => {
   useEffect(() => {
@@ -103,7 +108,9 @@ const AppContent = () => {
             <Route path="/admin/administracion" element={<DashboardInventory />}>
               <Route path="productList" element={<ProductList />} />
               <Route path="add-product" element={<AddProduct />} />  
-              <Route path="assign-product" element={<CreateUnits />} />
+              <Route path="createUnits" element={<CreateUnits />} />
+              <Route path="createlocation" element={<AddLocation />} />
+              <Route path="repbug" element={<Reportbug />} />
               <Route path="/admin/administracion/product-detail/:id" element={<ProductDetail />} />
               <Route path="/admin/administracion/edit-product/:id" element={<EditProduct />} />
             </Route>

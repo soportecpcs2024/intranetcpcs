@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useProducts } from "../../../contexts/ProductContext"; // Asegúrate de usar la ruta correcta
-import "./AddProduct.css"; // Asegúrate de que el archivo CSS esté creado y enlazado
+import { useProducts } from "../../../contexts/ProductContext";
+import "./AddProduct.css";
 
 const AddProduct = () => {
   const [productData, setProductData] = useState({
@@ -9,30 +9,16 @@ const AddProduct = () => {
     brand: "",
     sku: "",
     category: "",
-     
     model: "",
     dimensions: "",
     price: "",
     color: "",
     description: "",
-    image: null, // Guarda el archivo directamente
+    image: null,
   });
 
-  const [errors, setErrors] = useState({
-    name: "",
-    brand: "",
-    sku: "",
-    category: "",
-     
-    model: "",
-    dimensions: "",
-    price: "",
-    color: "",
-    description: "",
-    image: "",
-  });
-
-  const { createProduct } = useProducts(); // Accede a createProduct desde el contexto
+  const [errors, setErrors] = useState({});
+  const { createProduct } = useProducts();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -47,39 +33,36 @@ const AddProduct = () => {
     const file = e.target.files[0];
     setProductData((prevData) => ({
       ...prevData,
-      image: file, // Guarda el archivo directamente
+      image: file,
     }));
   };
 
   const validateForm = () => {
-    let valid = true;
     const newErrors = {};
+    let isValid = true;
 
     Object.keys(productData).forEach((key) => {
-      if (key !== "image" && !productData[key]) {
+      if (key !== "image" && !productData[key].trim()) {
         newErrors[key] = `Please add a ${key}`;
-        valid = false;
+        isValid = false;
       }
     });
 
     if (!productData.image) {
       newErrors.image = "Please upload an image";
-      valid = false;
+      isValid = false;
     }
 
     setErrors(newErrors);
-    return valid;
+    return isValid;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!validateForm()) {
-      return;
-    }
+    if (!validateForm()) return;
 
     try {
-      // Asegúrate de que el archivo se incluya en productData
       await createProduct(productData);
       navigate("/admin/administracion/productList");
     } catch (error) {
@@ -91,98 +74,116 @@ const AddProduct = () => {
     <div className="add-product-container">
       <h3>Adicionar Nuevo Producto</h3>
       <form onSubmit={handleSubmit} className="add-product-form">
-        <input
-          type="text"
-          name="name"
-          placeholder="Nombre"
-          value={productData.name}
-          onChange={handleChange}
-        />
-        {errors.name && <p className="error-message">{errors.name}</p>}
+        <label>
+          Nombre:
+          <input
+            type="text"
+            name="name"
+            value={productData.name}
+            onChange={handleChange}
+          />
+          {errors.name && <p className="error-message">{errors.name}</p>}
+        </label>
 
-        <input
-          type="text"
-          name="brand"
-          placeholder="Marca"
-          value={productData.brand}
-          onChange={handleChange}
-        />
-        {errors.brand && <p className="error-message">{errors.brand}</p>}
+        <label>
+          Marca:
+          <input
+            type="text"
+            name="brand"
+            value={productData.brand}
+            onChange={handleChange}
+          />
+          {errors.brand && <p className="error-message">{errors.brand}</p>}
+        </label>
 
-        <input
-          type="text"
-          name="sku"
-          placeholder="Referencia"
-          value={productData.sku}
-          onChange={handleChange}
-        />
-        {errors.sku && <p className="error-message">{errors.sku}</p>}
+        <label>
+          Referencia:
+          <input
+            type="text"
+            name="sku"
+            value={productData.sku}
+            onChange={handleChange}
+          />
+          {errors.sku && <p className="error-message">{errors.sku}</p>}
+        </label>
 
-        <input
-          type="text"
-          name="category"
-          placeholder="Categoría"
-          value={productData.category}
-          onChange={handleChange}
-        />
-        {errors.category && <p className="error-message">{errors.category}</p>}
+        <label>
+          Categoría:
+          <input
+            type="text"
+            name="category"
+            value={productData.category}
+            onChange={handleChange}
+          />
+          {errors.category && <p className="error-message">{errors.category}</p>}
+        </label>
 
-         
+        <label>
+          Modelo:
+          <input
+            type="text"
+            name="model"
+            value={productData.model}
+            onChange={handleChange}
+          />
+          {errors.model && <p className="error-message">{errors.model}</p>}
+        </label>
 
-        <input
-          type="text"
-          name="model"
-          placeholder="Modelo"
-          value={productData.model}
-          onChange={handleChange}
-        />
-        {errors.model && <p className="error-message">{errors.model}</p>}
+        <label>
+          Dimensiones:
+          <input
+            type="text"
+            name="dimensions"
+            value={productData.dimensions}
+            onChange={handleChange}
+          />
+          {errors.dimensions && <p className="error-message">{errors.dimensions}</p>}
+        </label>
 
-        <input
-          type="text"
-          name="dimensions"
-          placeholder="Dimensiones"
-          value={productData.dimensions}
-          onChange={handleChange}
-        />
-        {errors.dimensions && <p className="error-message">{errors.dimensions}</p>}
+        <label>
+          Precio:
+          <input
+            type="number"
+            name="price"
+            value={productData.price}
+            onChange={handleChange}
+          />
+          {errors.price && <p className="error-message">{errors.price}</p>}
+        </label>
 
-        <input
-          type="number"
-          name="price"
-          placeholder="Precio"
-          value={productData.price}
-          onChange={handleChange}
-        />
-        {errors.price && <p className="error-message">{errors.price}</p>}
+        <label>
+          Color:
+          <input
+            type="text"
+            name="color"
+            value={productData.color}
+            onChange={handleChange}
+          />
+          {errors.color && <p className="error-message">{errors.color}</p>}
+        </label>
 
-        <input
-          type="text"
-          name="color"
-          placeholder="Color"
-          value={productData.color}
-          onChange={handleChange}
-        />
-        {errors.color && <p className="error-message">{errors.color}</p>}
+        <label>
+          Descripción:
+          <textarea
+            name="description"
+            value={productData.description}
+            onChange={handleChange}
+          />
+          {errors.description && <p className="error-message">{errors.description}</p>}
+        </label>
 
-        <textarea
-          name="description"
-          placeholder="Descripción"
-          value={productData.description}
-          onChange={handleChange}
-        ></textarea>
-        {errors.description && <p className="error-message">{errors.description}</p>}
+        <label>
+          Imagen:
+          <input
+            type="file"
+            name="image"
+            accept="image/*"
+            onChange={handleImageChange}
+          />
+          {errors.image && <p className="error-message">{errors.image}</p>}
+        </label>
 
-        <input
-          type="file"
-          name="image"
-          onChange={handleImageChange}
-        />
-        {errors.image && <p className="error-message">{errors.image}</p>}
-
-        <button type="submit" className="submit-button">
-          Adicionar Producto
-        </button>
+        <button type="submit">Crear Producto</button>
       </form>
     </div>
   );

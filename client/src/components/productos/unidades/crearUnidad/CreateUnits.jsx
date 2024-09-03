@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useProducts } from "../../../../contexts/ProductContext";
-import './createUnits.css';
+import "./createUnits.css";
 
 const CreateUnits = () => {
-  const { products, locations, createUnits, fetchLocations, loading } = useProducts();
+  const { products, locations, createUnits, fetchLocations, loading } =
+    useProducts();
   const [units, setUnits] = useState([
-    { id_producto: "", location: "", estado: "" }
+    { id_producto: "", location: "", estado: "" },
   ]);
 
   useEffect(() => {
@@ -51,36 +52,40 @@ const CreateUnits = () => {
       <h2>Crear Unidades</h2>
       {units.map((unit, index) => (
         <div key={index}>
-          <label>
-            Producto:
-            <select
-              name="id_producto"
-              value={unit.id_producto}
-              onChange={(e) => handleChange(index, e)}
-            >
-              <option value="">Seleccione un producto</option>
-              {products.map((product) => (
-                <option key={product._id} value={product._id}>
-                  {product.name}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label>
-            Ubicación:
-            <select
-              name="location"
-              value={unit.location} // Corregido para usar la clave correcta
-              onChange={(e) => handleChange(index, e)}
-            >
-              <option value="">Seleccione una ubicación</option>
-              {locations.map((location) => (
-                <option key={location._id} value={location._id}>
-                  {location.nombre}
-                </option>
-              ))}
-            </select>
-          </label>
+          <div>
+            <label>
+              Productos  :
+              </label>
+              <select
+                name="id_producto"
+                value={unit.id_producto}
+                onChange={(e) => handleChange(index, e)}
+              >
+                <option value="">Seleccione un producto</option>
+                {products.map((product) => (
+                  <option key={product._id} value={product._id}>
+                    {product.name}
+                  </option>
+                ))}
+              </select>
+          </div>
+          <div>
+            <label>
+              Ubicación :
+              <select
+                name="location"
+                value={unit.location} // Corregido para usar la clave correcta
+                onChange={(e) => handleChange(index, e)}
+              >
+                <option value="">Seleccione una ubicación</option>
+                {locations.map((location) => (
+                  <option key={location._id} value={location._id}>
+                    {location.nombre}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
           <label>
             Estado:
             <input

@@ -4,6 +4,8 @@ import { FaTh, FaRegChartBar, FaCommentAlt } from "react-icons/fa";
 import { BiImageAdd } from "react-icons/bi";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { RiProductHuntLine } from "react-icons/ri";
+import { BsBuildingFillAdd } from "react-icons/bs";
+import { RiApps2AddLine } from "react-icons/ri";
 import "./SidebarInventory.css";
 
 const SidebarInventory = () => {
@@ -36,12 +38,27 @@ const SidebarInventory = () => {
         location={location}
       />
       <SidebarItem
-        path="/admin/administracion/report-bug"
-        icon={<FaCommentAlt />}
-        label="Report Bug"
+        path="/admin/administracion/createUnits"
+        icon={<RiApps2AddLine />}
+        label="Add Units"
         isOpen={isOpen}
         location={location}
       />
+      <SidebarItem
+        path="/admin/administracion/createlocation"
+        icon={<BsBuildingFillAdd />}
+        label="Add Location"
+        isOpen={isOpen}
+        location={location}
+      />
+      <SidebarItem
+        path="/admin/administracion/repbug"
+        icon={<FaCommentAlt />}
+        label="Bug Report"
+        isOpen={isOpen}
+        location={location}
+      />
+       
     </div>
   );
 };
@@ -60,49 +77,10 @@ const SidebarItem = ({ path, icon, label, isOpen, location }) => {
           {isOpen && <p>{label}</p>}
         </div>
       </Link>
+        
     </div>
   );
 };
 
 export default SidebarInventory;
 
-// const menu = [
-//   {
-//     title: "Dashboard",
-//     icon: <FaTh />,
-//     path: "/admin/administracion/productList",
-//   },
-//   {
-//     title: "Add Product",
-//     icon: <BiImageAdd />,
-//     path: "/admin/administracion/add-product",
-//   },
-//   {
-//     title: "assign product",
-//     icon: <BiImageAdd />,
-//     path: "/admin/administracion/assign-product",
-//   },
-//   {
-//     title: "Crear nuevo...",
-//     icon: <FaRegChartBar />,
-//     children: [
-//       {
-//         title: "Producto",
-//         path: "/profile",
-//       },
-//       {
-//         title: "Unidad",
-//         path: "/edit-profile",
-//       },
-//       {
-//         title: "Locacion",
-//         path: "/edit-profile",
-//       },
-//     ],
-//   },
-//   {
-//     title: "Report Bug",
-//     icon: <FaCommentAlt />,
-//     path: "/contact-us",
-//   },
-// ];

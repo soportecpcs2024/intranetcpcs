@@ -1,34 +1,37 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 import axios from "axios";
 
 const ProductContext = createContext();
 
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
-  const [locations, setLocations] = useState([]); // Estado para las ubicaciones
+  const [locations, setLocations] = useState([]);
   const [loadingProducts, setLoadingProducts] = useState(true);
   const [loadingLocations, setLoadingLocations] = useState(true);
   const [errorProducts, setErrorProducts] = useState(null);
   const [errorLocations, setErrorLocations] = useState(null);
 
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     setLoadingProducts(true);
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products`);
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/products`
+      );
       setProducts(response.data);
-       
     } catch (error) {
       console.error("Error fetching products", error);
       setErrorProducts(error);
     } finally {
       setLoadingProducts(false);
     }
-  };
+  }, []);
 
-  const fetchLocations = async () => {
+  const fetchLocations = useCallback(async () => {
     setLoadingLocations(true);
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/location`);
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/location`
+      );
       setLocations(response.data);
     } catch (error) {
       console.error("Error fetching locations", error);
@@ -36,21 +39,30 @@ export const ProductProvider = ({ children }) => {
     } finally {
       setLoadingLocations(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    fetchProducts();
+    fetchLocations();
+  }, [fetchProducts, fetchLocations]);
 
   const createProduct = async (productData) => {
     try {
       const formData = new FormData();
       for (const [key, value] of Object.entries(productData)) {
-        if (key === 'image' && value) {
-          formData.append('image', value);
+        if (key === "image" && value) {
+          formData.append("image", value);
         } else {
           formData.append(key, value);
         }
       }
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/products`, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/products`,
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
       setProducts((prevProducts) => [...prevProducts, response.data]);
     } catch (error) {
       console.error("Error creating product", error);
@@ -66,8 +78,8 @@ export const ProductProvider = ({ children }) => {
     try {
       const updatedFormData = {
         ...formData,
-        price: parseFloat(formData.price), // Convertir a número
-        quantity: parseInt(formData.quantity, 10) // Convertir a número si es necesario
+        price: parseFloat(formData.price),
+        quantity: parseInt(formData.quantity, 10),
       };
       const response = await axios.patch(
         `${import.meta.env.VITE_BACKEND_URL}/api/products/${id}`,
@@ -86,8 +98,12 @@ export const ProductProvider = ({ children }) => {
 
   const removeProduct = async (id) => {
     try {
-      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/products/${id}`);
-      setProducts((prevProducts) => prevProducts.filter((product) => product._id !== id));
+      await axios.delete(
+        `${import.meta.env.VITE_BACKEND_URL}/api/products/${id}`
+      );
+      setProducts((prevProducts) =>
+        prevProducts.filter((product) => product._id !== id)
+      );
     } catch (error) {
       console.error("Error deleting product", error);
       setErrorProducts(error);
@@ -96,13 +112,34 @@ export const ProductProvider = ({ children }) => {
 
   const createUnits = async (unitsData) => {
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/units`, unitsData);
-      console.log('Units created:', response.data);
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/units`,
+        unitsData
+      );
+      console.log("Units created:", response.data);
     } catch (error) {
       console.error("Error creating units", error);
       setErrorProducts(error);
     }
   };
+
+  const createLocation = async (locationData) => {
+    try {
+      // Envía la solicitud POST a la API con los datos de la ubicación
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/location`,
+        locationData
+      );
+  
+      // Actualiza el estado de las ubicaciones con la nueva ubicación creada
+      setLocations((prevLocations) => [...prevLocations, response.data]);
+    } catch (error) {
+      console.error("Error creating location", error);
+      setErrorLocations(error);
+    }
+  };
+  
+  
 
   return (
     <ProductContext.Provider
@@ -119,7 +156,8 @@ export const ProductProvider = ({ children }) => {
         updateProduct,
         createProduct,
         removeProduct,
-        createUnits
+        createUnits,
+        createLocation
       }}
     >
       {children}

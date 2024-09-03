@@ -79,7 +79,8 @@ const locationRoutes = require('./routes/inventory/locationRoutes');
 app.use('/api/location', locationRoutes);
 
 
-
+const pdfRoutes = require('./routes/generatorPDF/pdfRoutes');
+app.use('/api/pdf', pdfRoutes);
 
 const PORT = process.env.SERVER_PORT || 3000;
 app.listen(PORT, () => {
