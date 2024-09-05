@@ -26,7 +26,7 @@ import AddLocation from "./components/productos/Location/AddLocation";
 import Reportbug from "./components/productos/Bug/Reportbug";
  
 import ListarUnidades from "./components/productos/unidades/ListarUnidades/ListarUnidades";
-import QrView from "./pages/inventory/QR/QrView";
+ 
 import UnitDetail from "./components/productos/unidades/UnitDetail/UnitDetail";
 import QrScanner from "./pages/inventory/QR/QrScanner";
 
@@ -105,7 +105,7 @@ const AppContent = () => {
               <Route path="createlocation" element={<AddLocation />} />
               <Route path="repbug" element={<Reportbug />} />
               <Route path="listunit" element={<ListarUnidades />} />
-              <Route path="qrviewt" element={<QrView />} />
+               
               <Route path="scan-qr" element={<QrScanner />} />
               <Route path="product-detail/:id" element={<ProductDetail />} />
               <Route path="edit-product/:id" element={<EditProduct />} />
