@@ -1,5 +1,3 @@
-
-
 const mongoose = require('mongoose');
 
 const Unitschema = new mongoose.Schema({
@@ -12,12 +10,15 @@ const Unitschema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Location',
         required: true
-      },
+    },
     estado: {
         type: String,
         default: 'disponible' // Ejemplo de valor por defecto
+    },
+    qrCode: {
+        type: String // Campo para almacenar la URL del código QR
     }
-
 });
 
 module.exports = mongoose.model('Units', Unitschema);
+

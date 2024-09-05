@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
-import { ProductProvider } from "./contexts/ProductContext"; // Ensure ProductProvider is imported
+import { ProductProvider } from "./contexts/ProductContext";
 import { Auth, Blog, Academicos, Q10 } from "./pages/admin";
 import AdminLayout from "./layouts/adminLayouts/AdminLayout";
 import "./App.css";
@@ -26,6 +26,10 @@ import AddLocation from "./components/productos/Location/AddLocation";
 import Reportbug from "./components/productos/Bug/Reportbug";
 import Algomas from "./components/productos/algomas/Algomas";
 import { RiH3 } from "react-icons/ri";
+import ListarUnidades from "./components/productos/unidades/ListarUnidades/ListarUnidades";
+import QrView from "./pages/inventory/QR/QrView";
+import UnitDetail from "./components/productos/unidades/UnitDetail/UnitDetail";
+import QrScanner from "./pages/inventory/QR/QrScanner";
 
 const App = () => {
   useEffect(() => {
@@ -57,8 +61,6 @@ const App = () => {
   return (
     <AuthProvider>
       <ProductProvider>
-        {" "}
-        {/* Wrap your app with ProductProvider */}
         <AppContent />
       </ProductProvider>
     </AuthProvider>
@@ -78,52 +80,37 @@ const AppContent = () => {
             <Route path="/admin/*" element={<Navigate to="/admin" />} />
           </>
         ) : (
-          <Route element={<AdminLayout />}>
+          <Route path="/admin/*" element={<AdminLayout />}>
             {/* Admin routes */}
-            <Route path="/admin/users" element={<Users />} />
-            <Route path="/admin/blog" element={<Blog />} />
-            <Route path="/admin/academico" element={<Layout />}>
+            <Route path="users" element={<Users />} />
+            <Route path="blog" element={<Blog />} />
+            <Route path="academico" element={<Layout />}>
               <Route index element={<General />} />
-              <Route path="/admin/academico/general" element={<General />} />
-              <Route path="/admin/academico/areas" element={<Areas />} />
-              <Route
-                path="/admin/academico/nivelSuperior"
-                element={<NivelSuperior />}
-              />
-              <Route
-                path="/admin/academico/individual"
-                element={<InfoIndividual />}
-              />
-              <Route
-                path="/admin/academico/estdificultades"
-                element={<DashboardEstDificultades />}
-              />
+              <Route path="general" element={<General />} />
+              <Route path="areas" element={<Areas />} />
+              <Route path="nivelSuperior" element={<NivelSuperior />} />
+              <Route path="individual" element={<InfoIndividual />} />
+              <Route path="estdificultades" element={<DashboardEstDificultades />} />
             </Route>
-            <Route path="/admin/documentos" element={<Documentos />} />
-            <Route path="/admin/llegadastarde" element={<LlegadasTarde />} />
-            <Route path="/admin/descargarpdf" element={<DescargarPdf />} />
-            <Route path="/admin/soporte" element={<AgregarLlegadasTarde />} />
-            <Route path="/admin/*" element={<Navigate to="/admin/users" />} />
+            <Route path="documentos" element={<Documentos />} />
+            <Route path="llegadastarde" element={<LlegadasTarde />} />
+            <Route path="descargarpdf" element={<DescargarPdf />} />
+            <Route path="soporte" element={<AgregarLlegadasTarde />} />
 
             {/* Inventory routes */}
-            <Route
-              path="/admin/administracion"
-              element={<DashboardInventory />}
-            >
+            <Route path="administracion" element={<DashboardInventory />}>
               <Route index element={<ProductList />} />
               <Route path="productList" element={<ProductList />} />
               <Route path="add-product" element={<AddProduct />} />
               <Route path="createUnits" element={<CreateUnits />} />
               <Route path="createlocation" element={<AddLocation />} />
               <Route path="repbug" element={<Reportbug />} />
-              <Route
-                path="/admin/administracion/product-detail/:id"
-                element={<ProductDetail />}
-              />
-              <Route
-                path="/admin/administracion/edit-product/:id"
-                element={<EditProduct />}
-              />
+              <Route path="listunit" element={<ListarUnidades />} />
+              <Route path="qrviewt" element={<QrView />} />
+              <Route path="scan-qr" element={<QrScanner />} />
+              <Route path="product-detail/:id" element={<ProductDetail />} />
+              <Route path="edit-product/:id" element={<EditProduct />} />
+              <Route path="units/:id" element={<UnitDetail />} /> {/* Added UnitDetail route */}
             </Route>
           </Route>
         )}

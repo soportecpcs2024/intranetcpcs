@@ -14,7 +14,7 @@ const locationSchema = new mongoose.Schema({
   },
   entregado_por: {
     type: String,
-    default: "",
+    required: true,
   },
   recibido_por: {
     type: String,
@@ -25,10 +25,16 @@ const locationSchema = new mongoose.Schema({
     default: "Administración",
   },
   fecha_entrega: {
-    type: Date,  // Corregido a Date para manejar fechas
+    type: Date,  // Date type to handle dates
   },
   fecha_devolucion: {
-    type: Date,  // Corregido a Date para manejar fechas
+    type: Date,  // Date type to handle dates
+  },
+  estado: {
+    type: String,
+    enum: ["activo", "Inactivo"],  // Enum to restrict values
+    default: "Inactivo",  // Default value
+    required: true,  // Making it required
   },
 }, { timestamps: true });
 

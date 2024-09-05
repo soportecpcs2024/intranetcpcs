@@ -6,6 +6,7 @@ import { HiMenuAlt3 } from "react-icons/hi";
 import { RiProductHuntLine } from "react-icons/ri";
 import { BsBuildingFillAdd } from "react-icons/bs";
 import { RiApps2AddLine } from "react-icons/ri";
+import { RiListOrdered2 } from "react-icons/ri";
 import "./SidebarInventory.css";
 
 const SidebarInventory = () => {
@@ -27,12 +28,23 @@ const SidebarInventory = () => {
         <SidebarItem
           path="/admin/administracion/productList"
           icon={<FaTh />}
-          label="Dashboard"
+          label="Productos"
           isOpen={isOpen}
           location={location}
         />
+         <div>
+        
+        <SidebarItem
+          path="/admin/administracion/listunit"
+          icon={<RiListOrdered2 />}
+          label="Unidades Stock"
+          isOpen={isOpen}
+          location={location}
+        />
+      </div>
         <h2 className="SidebarItem-Dashboard-line">_____________________</h2>
       </div>
+      
       <SidebarItem
         path="/admin/administracion/add-product"
         icon={<BiImageAdd />}
@@ -54,6 +66,7 @@ const SidebarInventory = () => {
         isOpen={isOpen}
         location={location}
       />
+      
       <div>
         <h2 className="SidebarItem-report-line">_____________________</h2>
         <SidebarItem
@@ -63,7 +76,18 @@ const SidebarInventory = () => {
           isOpen={isOpen}
           location={location}
         />
+       
+        <SidebarItem
+          path="/admin/administracion/scan-qr"
+          icon={<FaCommentAlt />}
+          label="Scan QR"
+          isOpen={isOpen}
+          location={location}
+        />
       </div>
+      
+     
+     
     </div>
   );
 };
@@ -73,7 +97,7 @@ const SidebarItem = ({ path, icon, label, isOpen, location }) => {
     <div className="sidebar-item-inventory">
       <Link
         className={`linkNav-inventory ${
-          location.pathname === path ? "active" : ""
+          location.pathname === path ? "active-inventory" : ""
         }`}
         to={path}
       >

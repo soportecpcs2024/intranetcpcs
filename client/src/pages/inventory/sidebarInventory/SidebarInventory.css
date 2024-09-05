@@ -83,12 +83,12 @@
   color: var(--color-dark);
 }
 
-.active {
+.active-inventory {
   color: var(--color-primary);
   background-color: #eee;
 }
 
-.active::after {
+.active-inventory::after {
   content: "";
   position: absolute;
   width: 5px;

@@ -6,17 +6,22 @@ const ProductContext = createContext();
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [locations, setLocations] = useState([]);
+  const [units, setUnits] = useState([]);
+  const [qrUnits, setQrUnits] = useState({}); // Estado para almacenar los QR de las unidades
   const [loadingProducts, setLoadingProducts] = useState(true);
   const [loadingLocations, setLoadingLocations] = useState(true);
+  const [loadingUnits, setLoadingUnits] = useState(true);
+  const [loadingQrUnits, setLoadingQrUnits] = useState(false); // Estado de carga de QR
   const [errorProducts, setErrorProducts] = useState(null);
   const [errorLocations, setErrorLocations] = useState(null);
+  const [errorUnits, setErrorUnits] = useState(null);
+  const [errorQrUnits, setErrorQrUnits] = useState(null); // Estado para errores de QR
 
+  // Funciones de obtención de datos
   const fetchProducts = useCallback(async () => {
     setLoadingProducts(true);
     try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/api/products`
-      );
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products`);
       setProducts(response.data);
     } catch (error) {
       console.error("Error fetching products", error);
@@ -29,9 +34,7 @@ export const ProductProvider = ({ children }) => {
   const fetchLocations = useCallback(async () => {
     setLoadingLocations(true);
     try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/api/location`
-      );
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/location`);
       setLocations(response.data);
     } catch (error) {
       console.error("Error fetching locations", error);
@@ -41,11 +44,41 @@ export const ProductProvider = ({ children }) => {
     }
   }, []);
 
+  const fetchUnits = useCallback(async () => {
+    setLoadingUnits(true);
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/units`);
+      setUnits(response.data);
+    } catch (error) {
+      console.error("Error fetching units", error);
+      setErrorUnits(error);
+    } finally {
+      setLoadingUnits(false);
+    }
+  }, []);
+
+  // Función para generar QR para una unidad específica
+  const generateQrForUnit = useCallback(async (unitId) => {
+    setLoadingQrUnits(true);
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/units/${unitId}`);
+      setQrUnits((prevQrUnits) => ({ ...prevQrUnits, [unitId]: response.data.qrCodeUrl }));
+    } catch (error) {
+      console.error("Error generating QR for unit", error.message || error);
+      setErrorQrUnits(error);
+    } finally {
+      setLoadingQrUnits(false);
+    }
+  }, []);
+
+  // Ejecutar las funciones de obtención de datos al montar el componente
   useEffect(() => {
     fetchProducts();
     fetchLocations();
-  }, [fetchProducts, fetchLocations]);
+    fetchUnits();
+  }, [fetchProducts, fetchLocations, fetchUnits]);
 
+  // Funciones para CRUD
   const createProduct = async (productData) => {
     try {
       const formData = new FormData();
@@ -56,22 +89,14 @@ export const ProductProvider = ({ children }) => {
           formData.append(key, value);
         }
       }
-      const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/products`,
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/products`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
       setProducts((prevProducts) => [...prevProducts, response.data]);
     } catch (error) {
       console.error("Error creating product", error);
       setErrorProducts(error);
     }
-  };
-
-  const getProductById = (id) => {
-    return products.find((product) => product._id === id);
   };
 
   const updateProduct = async (id, formData) => {
@@ -81,14 +106,9 @@ export const ProductProvider = ({ children }) => {
         price: parseFloat(formData.price),
         quantity: parseInt(formData.quantity, 10),
       };
-      const response = await axios.patch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/products/${id}`,
-        updatedFormData
-      );
+      const response = await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/api/products/${id}`, updatedFormData);
       setProducts((prevProducts) =>
-        prevProducts.map((product) =>
-          product._id === id ? response.data : product
-        )
+        prevProducts.map((product) => (product._id === id ? response.data : product))
       );
     } catch (error) {
       console.error("Error updating product", error);
@@ -98,66 +118,88 @@ export const ProductProvider = ({ children }) => {
 
   const removeProduct = async (id) => {
     try {
-      await axios.delete(
-        `${import.meta.env.VITE_BACKEND_URL}/api/products/${id}`
-      );
-      setProducts((prevProducts) =>
-        prevProducts.filter((product) => product._id !== id)
-      );
+      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/products/${id}`);
+      setProducts((prevProducts) => prevProducts.filter((product) => product._id !== id));
     } catch (error) {
       console.error("Error deleting product", error);
       setErrorProducts(error);
     }
   };
 
-  const createUnits = async (unitsData) => {
+  const createUnits = async (unitData) => {
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/units`,
-        unitsData
-      );
-      console.log("Units created:", response.data);
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/units`, unitData);
+      if (response.data && response.data.qrCodes) {
+        return { units: response.data.units, qrCodes: response.data.qrCodes };
+      } else {
+        console.error("La respuesta no contiene 'qrCodes'", response.data);
+        return { units: response.data.units, qrCodes: [] };
+      }
     } catch (error) {
-      console.error("Error creating units", error);
-      setErrorProducts(error);
+      console.error("Error creating unit", error);
+      setErrorUnits(error);
+      throw error;
+    }
+  };
+
+  const updateUnit = async (id, unitData) => {
+    try {
+      const response = await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/api/units/${id}`, unitData);
+      setUnits((prevUnits) =>
+        prevUnits.map((unit) => (unit._id === id ? response.data : unit))
+      );
+    } catch (error) {
+      console.error("Error updating unit", error);
+      setErrorUnits(error);
+    }
+  };
+
+  const removeUnit = async (id) => {
+    try {
+      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/units/${id}`);
+      setUnits((prevUnits) => prevUnits.filter((unit) => unit._id !== id));
+    } catch (error) {
+      console.error("Error deleting unit", error);
+      setErrorUnits(error);
     }
   };
 
   const createLocation = async (locationData) => {
     try {
-      // Envía la solicitud POST a la API con los datos de la ubicación
-      const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/location`,
-        locationData
-      );
-  
-      // Actualiza el estado de las ubicaciones con la nueva ubicación creada
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/location`, locationData);
       setLocations((prevLocations) => [...prevLocations, response.data]);
     } catch (error) {
       console.error("Error creating location", error);
       setErrorLocations(error);
     }
   };
-  
-  
 
   return (
     <ProductContext.Provider
       value={{
         products,
         locations,
+        units,
+        qrUnits,
         loadingProducts,
         loadingLocations,
+        loadingUnits,
+        loadingQrUnits,
         errorProducts,
         errorLocations,
-        getProductById,
+        errorUnits,
+        errorQrUnits,
         fetchProducts,
         fetchLocations,
-        updateProduct,
+        fetchUnits,
         createProduct,
+        updateProduct,
         removeProduct,
         createUnits,
-        createLocation
+        updateUnit,
+        removeUnit,
+        createLocation,
+        generateQrForUnit,
       }}
     >
       {children}

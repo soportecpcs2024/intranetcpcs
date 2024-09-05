@@ -27,8 +27,19 @@ const getLocationById = async (req, res) => {
 // Crear una nueva ubicación
 const createLocation = async (req, res) => {
   try {
-    const { nombre, direccion, otros_detalles } = req.body;
-    const newLocation = new Location({ nombre, direccion, otros_detalles });
+    const { nombre, direccion, otros_detalles, entregado_por, recibido_por, aprobado_por, estado } = req.body;
+    
+    // Crea una nueva instancia de Location con los datos proporcionados
+    const newLocation = new Location({
+      nombre,
+      direccion,
+      otros_detalles,
+      entregado_por,
+      recibido_por,
+      aprobado_por,
+      estado,  // Incluye el campo estado
+    });
+    
     const location = await newLocation.save();
     res.status(201).json(location);
   } catch (error) {
@@ -39,8 +50,23 @@ const createLocation = async (req, res) => {
 // Actualizar una ubicación existente
 const updateLocation = async (req, res) => {
   try {
-    const { nombre, direccion, otros_detalles } = req.body;
-    const location = await Location.findByIdAndUpdate(req.params.id, { nombre, direccion, otros_detalles }, { new: true });
+    const { nombre, direccion, otros_detalles, entregado_por, recibido_por, aprobado_por, estado } = req.body;
+
+    // Actualiza la ubicación existente con los nuevos datos
+    const location = await Location.findByIdAndUpdate(
+      req.params.id,
+      {
+        nombre,
+        direccion,
+        otros_detalles,
+        entregado_por,
+        recibido_por,
+        aprobado_por,
+        estado,  // Incluye el campo estado en la actualización
+      },
+      { new: true } // Opciones para devolver el documento actualizado
+    );
+
     if (location) {
       res.json(location);
     } else {

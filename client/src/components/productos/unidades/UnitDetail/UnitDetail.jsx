@@ -1,0 +1,48 @@
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useProducts } from '../../../../contexts/ProductContext'; // Adjust the path as necessary
+
+const UnitDetail = () => {
+    const { id } = useParams(); // Obtiene el ID de la URL
+    const { units, loadingUnits, errorUnits, fetchUnits, generateQrForUnit, qrUnits } = useProducts();
+    const [unit, setUnit] = useState(null);
+
+    useEffect(() => {
+        if (units.length === 0) {
+            fetchUnits();
+        } else {
+            const foundUnit = units.find((unit) => unit._id === id);
+            if (foundUnit) {
+                setUnit(foundUnit);
+            }
+        }
+    }, [id, units, fetchUnits]);
+
+    useEffect(() => {
+        if (unit) {
+            generateQrForUnit(unit._id);
+        }
+    }, [unit, generateQrForUnit]);
+
+    if (loadingUnits) return <div>Loading...</div>;
+    if (errorUnits) return <div>Error: {errorUnits.message}</div>;
+
+    return (
+        <div>
+            <h1>Detalles de la Unidad</h1>
+            {unit ? (
+                <>
+                    <p><strong>ID:</strong> {unit._id}</p>
+                    <p><strong>Producto:</strong> {unit.id_producto.name}</p>
+                    <p><strong>Ubicación:</strong> {unit.location.nombre}</p>
+                    <p><strong>Estado:</strong> {unit.estado}</p>
+                    {qrUnits[unit._id] && <img src={qrUnits[unit._id]} alt="QR Code" />}
+                </>
+            ) : (
+                <p>Unidad no encontrada.</p>
+            )}
+        </div>
+    );
+};
+
+export default UnitDetail;
