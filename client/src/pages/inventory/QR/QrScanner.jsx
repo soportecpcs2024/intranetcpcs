@@ -1,35 +1,36 @@
-import React, { useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { QrReader } from 'react-qr-reader';
-
-import { useProducts } from '../../../contexts/ProductContext';
+import { BrowserMultiFormatReader } from '@zxing/browser';
 
 const QrScanner = () => {
   const [scanResult, setScanResult] = useState('');
-  const { fetchUnits } = useProducts();
+  const videoRef = useRef(null);
   const navigate = useNavigate();
 
-  const handleScan = (data) => {
-    if (data) {
-      setScanResult(data);
-      // Asumiendo que el QR contiene un ID de unidad
-      navigate(`/admin/administracion/units/${data}`);
-    }
-  };
+  useEffect(() => {
+    const codeReader = new BrowserMultiFormatReader();
+    
+    codeReader.decodeFromVideoDevice(null, videoRef.current, (result, error) => {
+      if (result) {
+        setScanResult(result.text);
+        // Asumiendo que el QR contiene un ID de unidad
+        navigate(`/admin/administracion/units/${result.text}`);
+      }
+      if (error) {
+        console.error('Error scanning QR code:', error);
+      }
+    });
 
-  const handleError = (err) => {
-    console.error('Error scanning QR code:', err);
-  };
+    // Cleanup function to stop the video stream
+    return () => {
+      codeReader.reset();
+    };
+  }, [navigate]);
 
   return (
     <div>
       <h3>Escanear QR</h3>
-      <QrReader
-        delay={300}
-        onError={handleError}
-        onScan={handleScan}
-        style={{ width: '100%' }}
-      />
+      <video ref={videoRef} style={{ width: '100%' }} />
       {scanResult && <p>Resultado del escaneo: {scanResult}</p>}
     </div>
   );
