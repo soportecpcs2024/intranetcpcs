@@ -9,7 +9,8 @@ const QrScanner = () => {
 
   useEffect(() => {
     const codeReader = new BrowserMultiFormatReader();
-  
+
+    // Start scanning
     codeReader.decodeFromVideoDevice(null, videoRef.current, (result, error) => {
       if (result) {
         setScanResult(result.text);
@@ -22,13 +23,6 @@ const QrScanner = () => {
     }).catch((error) => {
       console.error('Initialization error:', error);
     });
-  
-    // Cleanup function to stop the video stream
-    return () => {
-      codeReader.reset();
-    };
-  }, [navigate]);
-  
 
     // Cleanup function to stop the video stream
     return () => {
@@ -46,3 +40,4 @@ const QrScanner = () => {
 };
 
 export default QrScanner;
+

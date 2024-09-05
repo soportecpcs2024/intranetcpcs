@@ -24,8 +24,7 @@ import EditProduct from "./components/productos/editProduct/EditProduct";
 import CreateUnits from "./components/productos/unidades/crearUnidad/CreateUnits";
 import AddLocation from "./components/productos/Location/AddLocation";
 import Reportbug from "./components/productos/Bug/Reportbug";
-import Algomas from "./components/productos/algomas/Algomas";
-import { RiH3 } from "react-icons/ri";
+ 
 import ListarUnidades from "./components/productos/unidades/ListarUnidades/ListarUnidades";
 import QrView from "./pages/inventory/QR/QrView";
 import UnitDetail from "./components/productos/unidades/UnitDetail/UnitDetail";
