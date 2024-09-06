@@ -1,9 +1,11 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { BrowserMultiFormatReader } from '@zxing/browser';
 
 const QrScanner = () => {
   const [scanResult, setScanResult] = useState('');
   const videoRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const codeReader = new BrowserMultiFormatReader();
@@ -12,12 +14,17 @@ const QrScanner = () => {
       try {
         await codeReader.decodeFromVideoDevice(null, videoRef.current, (result, error) => {
           if (result) {
-            const scannedText = result.text; // Obtiene el texto del código QR
+            const scannedText = result.text; // Obtén el texto del código QR
             setScanResult(scannedText);
-          } else if (error) {
-            if (!(error instanceof NotFoundException)) {
-              console.error('Error scanning QR code:', error);
+
+            // Extraer el ID o ruta esperada del texto escaneado
+            // Suponiendo que escaneas un ID para navegar a "/units/:id"
+            const unitId = scannedText.replace('http://localhost:3000/units/', ''); // Ajusta la URL base según necesites
+            if (unitId) {
+              navigate(`/units/${unitId}`); // Navega a la ruta de detalles de la unidad
             }
+          } else if (error) {
+            console.error('Error scanning QR code:', error);
           }
         });
       } catch (error) {
@@ -27,20 +34,18 @@ const QrScanner = () => {
 
     startScanning();
 
-    // Cleanup para detener el stream de video al desmontar el componente
     return () => {
       codeReader.reset();
     };
-  }, []);
+  }, [navigate]);
 
   return (
     <div>
       <h3>Escanear QR</h3>
-      <video ref={videoRef} style={{ width: '100%' }} autoPlay />
-      {scanResult && <h2>ID Escaneado: {scanResult}</h2>}
+      <video ref={videoRef} style={{ width: '100%' }} autoPlay playsInline />
+      {scanResult && <p>Resultado del escaneo: {scanResult}</p>}
     </div>
   );
 };
 
 export default QrScanner;
-

@@ -106,10 +106,10 @@ const AppContent = () => {
               <Route path="repbug" element={<Reportbug />} />
               <Route path="listunit" element={<ListarUnidades />} />
                
-              <Route path="scan-qr" element={<QrScanner />} />
+              <Route path="/qr-scanner" element={<QrScanner />} />
               <Route path="product-detail/:id" element={<ProductDetail />} />
               <Route path="edit-product/:id" element={<EditProduct />} />
-              <Route path="units/:id" element={<UnitDetail />} /> {/* Added UnitDetail route */}
+              <Route path="/units/:id" element={<UnitDetail />} /> {/* Added UnitDetail route */}
             </Route>
           </Route>
         )}

@@ -9,9 +9,9 @@ const UnitDetail = () => {
 
     useEffect(() => {
         if (units.length === 0) {
-            fetchUnits();
+            fetchUnits(); // Llama a fetchUnits para cargar las unidades si no están ya cargadas
         } else {
-            const foundUnit = units.find((unit) => unit._id === id);
+            const foundUnit = units.find((unit) => unit._id === id); // Busca la unidad por ID
             if (foundUnit) {
                 setUnit(foundUnit);
             }
@@ -39,3 +39,4 @@ const UnitDetail = () => {
 };
 
 export default UnitDetail;
+
