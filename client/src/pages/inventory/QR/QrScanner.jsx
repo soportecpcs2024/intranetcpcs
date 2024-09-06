@@ -10,21 +10,25 @@ const QrScanner = () => {
   useEffect(() => {
     const codeReader = new BrowserMultiFormatReader();
 
-    // Start scanning
+    // Inicializa la lectura del código QR desde el dispositivo de video
     codeReader.decodeFromVideoDevice(null, videoRef.current, (result, error) => {
       if (result) {
-        setScanResult(result.text);
-        // Asumiendo que el QR contiene un ID de unidad
-        navigate(`/admin/administracion/units/${result.text}`);
-      }
-      if (error) {
+        const scannedUrl = result.text; // Aquí tienes el contenido escaneado
+        setScanResult(scannedUrl);
+
+        // Verifica si la URL escaneada coincide con la estructura esperada
+        // Si el QR contiene solo un ID, ajusta la lógica de la navegación
+        const relativePath = scannedUrl.replace('http://localhost:3000', ''); // Elimina la parte de la URL base
+        navigate(relativePath); // Navega a la ruta relativa de la aplicación
+      } else if (error) {
+        // Maneja errores que no son 'NotFoundException' (es un error común de no encontrar QR válido en cada frame)
         console.error('Error scanning QR code:', error);
       }
     }).catch((error) => {
       console.error('Initialization error:', error);
     });
 
-    // Cleanup function to stop the video stream
+    // Cleanup para detener el stream de video al desmontar el componente
     return () => {
       codeReader.reset();
     };
@@ -40,4 +44,3 @@ const QrScanner = () => {
 };
 
 export default QrScanner;
-
