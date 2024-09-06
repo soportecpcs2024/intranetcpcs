@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BrowserMultiFormatReader } from '@zxing/browser';
+import { BrowserMultiFormatReader, BarcodeFormat } from '@zxing/browser';
 
 const QrScanner = () => {
   const [scanResult, setScanResult] = useState('');
@@ -12,14 +12,21 @@ const QrScanner = () => {
 
     const startScanning = async () => {
       try {
+        // Opciones adicionales para mejorar la detección
+        const hints = new Map();
+        hints.set(BarcodeFormat.QR_CODE, true); // Asegura que solo lea QR codes
+
+        // Inicia la decodificación desde el dispositivo de video
         await codeReader.decodeFromVideoDevice(null, videoRef.current, (result, error) => {
           if (result) {
-            const scannedText = result.text; // Obtén el texto del código QR
+            const scannedText = result.text.trim(); // Obtén y limpia el texto del código QR
             setScanResult(scannedText);
+            
+            // Extraer el ID directamente si está en la forma de URL
+            const unitIdMatch = scannedText.match(/\/units\/([a-zA-Z0-9]+)$/);
+            const unitId = unitIdMatch ? unitIdMatch[1] : scannedText;
 
-            // Extraer el ID o ruta esperada del texto escaneado
-            // Suponiendo que escaneas un ID para navegar a "/units/:id"
-            const unitId = scannedText.replace('http://localhost:3000/units/', ''); // Ajusta la URL base según necesites
+            // Navega si la ID parece válida (puedes ajustar la validación)
             if (unitId) {
               navigate(`/units/${unitId}`); // Navega a la ruta de detalles de la unidad
             }
