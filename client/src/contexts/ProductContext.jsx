@@ -7,15 +7,12 @@ export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [locations, setLocations] = useState([]);
   const [units, setUnits] = useState([]);
-  const [qrUnits, setQrUnits] = useState({}); // Estado para almacenar los QR de las unidades
   const [loadingProducts, setLoadingProducts] = useState(true);
   const [loadingLocations, setLoadingLocations] = useState(true);
   const [loadingUnits, setLoadingUnits] = useState(true);
-  const [loadingQrUnits, setLoadingQrUnits] = useState(false); // Estado de carga de QR
   const [errorProducts, setErrorProducts] = useState(null);
   const [errorLocations, setErrorLocations] = useState(null);
   const [errorUnits, setErrorUnits] = useState(null);
-  const [errorQrUnits, setErrorQrUnits] = useState(null); // Estado para errores de QR
 
   // Funciones de obtención de datos
   const fetchProducts = useCallback(async () => {
@@ -54,20 +51,6 @@ export const ProductProvider = ({ children }) => {
       setErrorUnits(error);
     } finally {
       setLoadingUnits(false);
-    }
-  }, []);
-
-  // Función para generar QR para una unidad específica
-  const generateQrForUnit = useCallback(async (unitId) => {
-    setLoadingQrUnits(true);
-    try {
-      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/units/${unitId}`);
-      setQrUnits((prevQrUnits) => ({ ...prevQrUnits, [unitId]: response.data.qrCodeUrl }));
-    } catch (error) {
-      console.error("Error generating QR for unit", error.message || error);
-      setErrorQrUnits(error);
-    } finally {
-      setLoadingQrUnits(false);
     }
   }, []);
 
@@ -129,12 +112,7 @@ export const ProductProvider = ({ children }) => {
   const createUnits = async (unitData) => {
     try {
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/units`, unitData);
-      if (response.data && response.data.qrCodes) {
-        return { units: response.data.units, qrCodes: response.data.qrCodes };
-      } else {
-        console.error("La respuesta no contiene 'qrCodes'", response.data);
-        return { units: response.data.units, qrCodes: [] };
-      }
+      setUnits((prevUnits) => [...prevUnits, response.data]);
     } catch (error) {
       console.error("Error creating unit", error);
       setErrorUnits(error);
@@ -180,15 +158,12 @@ export const ProductProvider = ({ children }) => {
         products,
         locations,
         units,
-        qrUnits,
         loadingProducts,
         loadingLocations,
         loadingUnits,
-        loadingQrUnits,
         errorProducts,
         errorLocations,
         errorUnits,
-        errorQrUnits,
         fetchProducts,
         fetchLocations,
         fetchUnits,
@@ -199,7 +174,6 @@ export const ProductProvider = ({ children }) => {
         updateUnit,
         removeUnit,
         createLocation,
-        generateQrForUnit,
       }}
     >
       {children}

@@ -14,7 +14,8 @@ exports.crearUnidad = async (req, res) => {
             
             // Generar el código QR para la unidad
             const qrCodeUrl = await QRCode.toDataURL(`http://localhost:3000/api/units/${unidadGuardada._id}`);
-            console.log(qrCodeUrl);
+            console.log({unidadGuardada});
+            
             
             // Añadir el código QR al objeto de unidad
             unidadGuardada.qrCode = qrCodeUrl;

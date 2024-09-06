@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useProducts } from '../../../../contexts/ProductContext'; // Adjust the path as necessary
+import { useProducts } from '../../../../contexts/ProductContext';
 
 const UnitDetail = () => {
     const { id } = useParams(); // Obtiene el ID de la URL
-    const { units, loadingUnits, errorUnits, fetchUnits, generateQrForUnit, qrUnits } = useProducts();
+    const { units, loadingUnits, errorUnits, fetchUnits } = useProducts();
     const [unit, setUnit] = useState(null);
 
     useEffect(() => {
@@ -18,12 +18,6 @@ const UnitDetail = () => {
         }
     }, [id, units, fetchUnits]);
 
-    useEffect(() => {
-        if (unit) {
-            generateQrForUnit(unit._id);
-        }
-    }, [unit, generateQrForUnit]);
-
     if (loadingUnits) return <div>Loading...</div>;
     if (errorUnits) return <div>Error: {errorUnits.message}</div>;
 
@@ -36,7 +30,6 @@ const UnitDetail = () => {
                     <p><strong>Producto:</strong> {unit.id_producto.name}</p>
                     <p><strong>Ubicación:</strong> {unit.location.nombre}</p>
                     <p><strong>Estado:</strong> {unit.estado}</p>
-                    {qrUnits[unit._id] && <img src={qrUnits[unit._id]} alt="QR Code" />}
                 </>
             ) : (
                 <p>Unidad no encontrada.</p>

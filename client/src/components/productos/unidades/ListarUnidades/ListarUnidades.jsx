@@ -70,4 +70,3 @@ const ListarUnidades = () => {
 };
 
 export default ListarUnidades;
-
