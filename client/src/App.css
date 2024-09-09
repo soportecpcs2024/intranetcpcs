@@ -225,6 +225,7 @@ form {
   flex-wrap: wrap;
    
    
+   
 }
  
 .input-group {
@@ -1859,25 +1860,39 @@ p {
    flex-direction: row;
    width: 90%;
   }
+  
   .logo-auth{
-   width: 250px;
+    width: 250px;
   }
   .formulario{
-   margin: 40px;
+    margin: 40px;
   }
 }
 
 
 @media (max-width: 644px) {
   .form-base{
-   flex-direction: column;
-   width: 90%;
+    flex-direction: column;
+    width: 90%;
+    margin-bottom: 10px;
+    
+  }
+  .input-group label {
+    
+    margin: 2px 0px;
+   
   }
   .logo-auth{
-   width: 130px;
+   width: 50px;
   }
   .formulario{
-   margin: 20px;
+   margin: 5px;
   }
+
+  .header-login h1{
+    font-size: 35px;
+    margin-bottom: -10px;
+  }
+  
 }
 /* ----------------------------------------------------- */
