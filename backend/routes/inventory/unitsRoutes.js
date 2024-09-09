@@ -17,4 +17,7 @@ router.put('/:id', unitsController.actualizarUnidad);
 // Ruta para eliminar una unidad por ID
 router.delete('/:id', unitsController.eliminarUnidad);
 
+// Ruta para buscar una unidad por código QR
+router.get('/buscarPorQR/:codigoQR', unitsController.buscarPorCodigoQR);
+
 module.exports = router;

@@ -78,7 +78,7 @@ const SidebarInventory = () => {
         />
        
         <SidebarItem
-          path="/admin/administracion/qr-scanner"
+          path="/admin/administracion/qr"
           icon={<FaCommentAlt />}
           label="Scan QR"
           isOpen={isOpen}

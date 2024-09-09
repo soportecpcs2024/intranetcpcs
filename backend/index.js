@@ -28,7 +28,6 @@ app.use(cors({
 // Middleware para servir archivos estáticos desde la carpeta 'uploads'
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-
 // Importar y usar las rutas de notas de estudiantes
 const studentNotesRouter = require('./routes/student_notes_sheet_routes');
 app.use('/api/student_notes', studentNotesRouter);
@@ -53,6 +52,7 @@ app.use('/api/docentes', docenteRoutes);
 const metasRoutes = require('./routes/metasGrupoRoutes');
 app.use('/api/metas', metasRoutes);
 
+// Rutas para las llegadas tardías
 const llegadasTardeRoutes = require('./routes/llegadasTardesRoutes');
 app.use('/api/llegadastarde', llegadasTardeRoutes);
 
@@ -60,13 +60,9 @@ app.use('/api/llegadastarde', llegadasTardeRoutes);
 const studentsGlobalRoutes = require('./routes/student_datos_globales_Routes');
 app.use('/api/studentGlobal', studentsGlobalRoutes);
 
-
 // Rutas para estudiantes nivel superior
 const studentNivelSuperiorRoutes = require('./routes/nivelesSuperioresRoutes');
 app.use('/api/ns', studentNivelSuperiorRoutes);
-
-
-
 
 // ------------ Rutas para inventario -------------
 
@@ -74,16 +70,19 @@ app.use('/api/ns', studentNivelSuperiorRoutes);
 const productRoutes = require('./routes/inventory/productRoutes');
 app.use('/api/products', productRoutes);
 
+// Rutas para las unidades de inventario
 const unitRoutes = require('./routes/inventory/unitsRoutes');
 app.use('/api/units', unitRoutes);
 
+// Rutas para las ubicaciones
 const locationRoutes = require('./routes/inventory/locationRoutes');
 app.use('/api/location', locationRoutes);
 
-
+// Rutas para la generación de PDFs
 const pdfRoutes = require('./routes/generatorPDF/pdfRoutes');
 app.use('/api/pdf', pdfRoutes);
 
+// Configuración y arranque del servidor
 const PORT = process.env.SERVER_PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);

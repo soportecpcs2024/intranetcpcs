@@ -17,7 +17,6 @@ exports.crearUnidad = async (req, res) => {
             
             console.log({unidadGuardada});
             
-            
             // Añadir el código QR al objeto de unidad
             unidadGuardada.qrCode = qrCodeUrl;
             await unidadGuardada.save(); // Guardar los cambios del QR en la base de datos
@@ -27,13 +26,10 @@ exports.crearUnidad = async (req, res) => {
 
         res.status(201).json({ nuevasUnidades, qrCodes });
     } catch (error) {
-        console.error('Error al crear las unidades:', error); // Añadir logging para depuración
+        console.error('Error al crear las unidades:', error);
         res.status(500).json({ error: 'Error al crear las unidades' });
     }
 };
-
-
-
 
 // Obtener todas las unidades
 exports.obtenerUnidades = async (req, res) => {
@@ -81,5 +77,18 @@ exports.eliminarUnidad = async (req, res) => {
         res.status(200).json({ message: 'Unidad eliminada' });
     } catch (error) {
         res.status(500).json({ error: 'Error al eliminar la unidad' });
+    }
+};
+
+// Buscar una unidad por código QR
+exports.buscarPorCodigoQR = async (req, res) => {
+    try {
+        const unidad = await Unidad.findOne({ qrCode: req.params.codigoQR })
+            .populate('id_producto')  // Población del producto
+            .populate('location');    // Población de la ubicación
+        if (!unidad) return res.status(404).json({ error: 'Unidad no encontrada' });
+        res.status(200).json(unidad);
+    } catch (error) {
+        res.status(500).json({ error: 'Error al buscar la unidad' });
     }
 };

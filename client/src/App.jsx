@@ -29,6 +29,10 @@ import ListarUnidades from "./components/productos/unidades/ListarUnidades/Lista
  
 import UnitDetail from "./components/productos/unidades/UnitDetail/UnitDetail";
 import QrScanner from "./pages/inventory/QR/QrScanner";
+import BuscarUnidadPorQR from "./components/productos/unidades/BuscarUnidad/BuscarUnidadPorQR";
+
+
+
 
 const App = () => {
   useEffect(() => {
@@ -107,6 +111,7 @@ const AppContent = () => {
               <Route path="listunit" element={<ListarUnidades />} />
                
               <Route path="qr-scanner" element={<QrScanner />} />
+              <Route path="qr" element={<BuscarUnidadPorQR />} />
               <Route path="product-detail/:id" element={<ProductDetail />} />
               <Route path="edit-product/:id" element={<EditProduct />} />
               <Route path="units/:id" element={<UnitDetail />} /> {/* Added UnitDetail route */}
