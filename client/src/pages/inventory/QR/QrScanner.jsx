@@ -6,26 +6,34 @@ const QrScanner = () => {
   const [scanResult, setScanResult] = useState('');
   const videoRef = useRef(null);
   const navigate = useNavigate();
+  const codeReader = new BrowserMultiFormatReader();
+  const isScanned = useRef(false); // Para evitar múltiples escaneos
 
   useEffect(() => {
-    const codeReader = new BrowserMultiFormatReader();
-
     const startScanning = async () => {
       try {
-        await codeReader.decodeFromVideoDevice(null, videoRef.current, (result, error) => {
-          if (result) {
-            const scannedText = result.text;
-            setScanResult(scannedText);
+        const devices = await codeReader.listVideoInputDevices();
 
-            // Ajusta la URL según lo necesites
-            const unitId = scannedText.replace('http://localhost:3000/api/units/', '');
-            if (unitId) {
-              navigate(`/units/${unitId}`); // Navegar a la ruta de detalles de la unidad
+        if (devices.length > 0) {
+          await codeReader.decodeFromVideoDevice(devices[0].deviceId, videoRef.current, (result, error) => {
+            if (result && !isScanned.current) {
+              const scannedText = result.text;
+              setScanResult(scannedText);
+              isScanned.current = true; // Marcar como escaneado para prevenir múltiples redirecciones
+
+              // Extraer el ID de la unidad del resultado escaneado
+              const unitId = scannedText.replace('http://localhost:3000/api/units/', '');
+              if (unitId) {
+                navigate(`/units/${unitId}`);
+                codeReader.reset(); // Detiene el escáner una vez que navegas
+              }
+            } else if (error) {
+              console.error('Error scanning QR code:', error);
             }
-          } else if (error) {
-            console.error('Error scanning QR code:', error);
-          }
-        });
+          });
+        } else {
+          console.error('No video input devices found.');
+        }
       } catch (error) {
         console.error('Initialization error:', error);
       }
@@ -33,16 +41,15 @@ const QrScanner = () => {
 
     startScanning();
 
-    // Limpiar el escáner al desmontar el componente
     return () => {
-      codeReader.reset();
+      codeReader.reset(); // Asegúrate de que se detenga el escáner al desmontar el componente
     };
-  }, [navigate]);
+  }, [navigate, codeReader]);
 
   return (
     <div>
       <h3>Escanear QR</h3>
-      <video ref={videoRef} style={{ width: '100%', maxHeight: '400px' }} autoPlay playsInline muted />
+      <video ref={videoRef} style={{ width: '100%' }} autoPlay playsInline />
       {scanResult && <p>Resultado del escaneo: {scanResult}</p>}
     </div>
   );
