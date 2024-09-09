@@ -14,14 +14,13 @@ const QrScanner = () => {
       try {
         await codeReader.decodeFromVideoDevice(null, videoRef.current, (result, error) => {
           if (result) {
-            const scannedText = result.text; // Obtén el texto del código QR
+            const scannedText = result.text;
             setScanResult(scannedText);
 
-            // Extraer el ID o ruta esperada del texto escaneado
-            // Suponiendo que escaneas un ID para navegar a "/units/:id"
-            const unitId = scannedText.replace('http://localhost:3000/api/units/', ''); // Ajusta la URL base según necesites
+            // Ajusta la URL según lo necesites
+            const unitId = scannedText.replace('http://localhost:3000/api/units/', '');
             if (unitId) {
-              navigate(`/units/${unitId}`); // Navega a la ruta de detalles de la unidad
+              navigate(`/units/${unitId}`); // Navegar a la ruta de detalles de la unidad
             }
           } else if (error) {
             console.error('Error scanning QR code:', error);
@@ -34,6 +33,7 @@ const QrScanner = () => {
 
     startScanning();
 
+    // Limpiar el escáner al desmontar el componente
     return () => {
       codeReader.reset();
     };
@@ -42,7 +42,7 @@ const QrScanner = () => {
   return (
     <div>
       <h3>Escanear QR</h3>
-      <video ref={videoRef} style={{ width: '100%' }} autoPlay playsInline />
+      <video ref={videoRef} style={{ width: '100%', maxHeight: '400px' }} autoPlay playsInline muted />
       {scanResult && <p>Resultado del escaneo: {scanResult}</p>}
     </div>
   );
