@@ -1,14 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { BrowserMultiFormatReader } from '@zxing/browser';
 
 function BuscarUnidadPorQR() {
     const [codigoQR, setCodigoQR] = useState('');
     const [unidad, setUnidad] = useState(null);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const [scanning, setScanning] = useState(false);
+    const videoRef = useRef(null);
 
-    const buscarUnidad = async () => {
-        if (!codigoQR.trim()) {
-            setError('Por favor, ingrese un código QR válido.');
+    useEffect(() => {
+        if (scanning) {
+            const codeReader = new BrowserMultiFormatReader();
+            codeReader.decodeFromVideoDevice(null, videoRef.current, (result, err) => {
+                if (result) {
+                    setCodigoQR(result.text);
+                    setScanning(false);
+                    codeReader.reset();
+                    buscarUnidad(result.text);
+                }
+                if (err) {
+                    console.error(err);
+                }
+            }).catch(err => console.error(err));
+        }
+
+        return () => {
+            if (videoRef.current) {
+                videoRef.current.srcObject = null;
+            }
+        };
+    }, [scanning]);
+
+    const buscarUnidad = async (codigo) => {
+        if (!codigo.trim()) {
+            setError('Código QR no válido.');
             return;
         }
 
@@ -17,7 +43,7 @@ function BuscarUnidadPorQR() {
         setUnidad(null);
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/units/buscarPorQR/${codigoQR}`);
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/units/buscarPorQR/${codigo}`);
             if (response.ok) {
                 const data = await response.json();
                 setUnidad(data);
@@ -33,19 +59,17 @@ function BuscarUnidadPorQR() {
         }
     };
 
+    const startScanning = () => {
+        setScanning(true);
+    };
+
     return (
         <div>
-            <input
-                type="text"
-                value={codigoQR}
-                onChange={(e) => setCodigoQR(e.target.value)}
-                placeholder="Ingrese el código QR"
-                disabled={loading} // Desactiva el campo mientras se realiza la búsqueda
-            />
-            <button onClick={buscarUnidad} disabled={loading}>
-                {loading ? 'Buscando...' : 'Buscar'}
+            <button onClick={startScanning} disabled={scanning || loading}>
+                {scanning ? 'Escaneando...' : 'Escanear Código QR'}
             </button>
-
+            <video ref={videoRef} style={{ width: '100%', display: scanning ? 'block' : 'none' }}></video>
+            
             {error && <p style={{ color: 'red' }}>{error}</p>}
             {unidad && (
                 <div>
