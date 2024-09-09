@@ -8,15 +8,15 @@ function BuscarUnidadPorQR() {
     const [loading, setLoading] = useState(false);
     const [scanning, setScanning] = useState(false);
     const videoRef = useRef(null);
+    const codeReader = useRef(null);
 
     useEffect(() => {
         if (scanning) {
-            const codeReader = new BrowserMultiFormatReader();
-            codeReader.decodeFromVideoDevice(null, videoRef.current, (result, err) => {
+            codeReader.current = new BrowserMultiFormatReader();
+            codeReader.current.decodeFromVideoDevice(null, videoRef.current, (result, err) => {
                 if (result) {
                     setCodigoQR(result.text);
                     setScanning(false);
-                    codeReader.reset();
                     buscarUnidad(result.text);
                 }
                 if (err) {
@@ -26,8 +26,15 @@ function BuscarUnidadPorQR() {
         }
 
         return () => {
+            if (codeReader.current) {
+                codeReader.current.reset();
+            }
             if (videoRef.current) {
-                videoRef.current.srcObject = null;
+                const stream = videoRef.current.srcObject;
+                if (stream) {
+                    const tracks = stream.getTracks();
+                    tracks.forEach(track => track.stop());
+                }
             }
         };
     }, [scanning]);
