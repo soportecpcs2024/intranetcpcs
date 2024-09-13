@@ -1856,7 +1856,7 @@ p {
   }
   .admin-header{
 
-    height: 100px; 
+    height: 120px; 
   }
 
  
@@ -1906,7 +1906,7 @@ p {
 }
 .admin-header{
 
-  height: 100px; 
+  height: 120px; 
 }
 
   
@@ -1951,6 +1951,10 @@ p {
   margin-top: -50px;
   margin-right: 100px;
    
+}
+.admin-header{
+
+  height: 160px; 
 }
    
    
@@ -2021,7 +2025,10 @@ p {
      
   }
 
+  .admin-header{
 
+    height: 190px; 
+  }
   
 }
 /* ----------------------------------------------------- */
