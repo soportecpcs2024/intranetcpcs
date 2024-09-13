@@ -242,7 +242,7 @@ form {
 
 input::placeholder {
   color: rgb(0, 0, 0); /* Cambia "red" al color que desees */
-  opacity: 1; /* Si deseas que el color tenga opacidad completa */
+  font-weight: 700;
 }
 .input-group input {
   padding: 10px ;
