@@ -78,9 +78,8 @@ app.use('/api/units', unitRoutes);
 const locationRoutes = require('./routes/inventory/locationRoutes');
 app.use('/api/location', locationRoutes);
 
-// Rutas para la generación de PDFs
-const pdfRoutes = require('./routes/generatorPDF/pdfRoutes');
-app.use('/api/pdf', pdfRoutes);
+ 
+ 
 
 // Configuración y arranque del servidor
 const PORT = process.env.SERVER_PORT || 3000;

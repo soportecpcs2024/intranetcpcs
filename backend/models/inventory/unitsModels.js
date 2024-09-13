@@ -14,10 +14,7 @@ const Unitschema = new mongoose.Schema({
     estado: {
         type: String,
         default: 'disponible' // Ejemplo de valor por defecto
-    },
-    qrCode: {
-        type: String // Campo para almacenar la URL del código QR
-    }
+    } 
 });
 
 module.exports = mongoose.model('Units', Unitschema);

@@ -1,3 +1,4 @@
+// ProductList.jsx
 import React, { useState, useEffect } from "react";
 import { SpinnerImg } from "../Loader/Loader";
 import "./productList.css";
@@ -11,12 +12,42 @@ import { useProducts } from "../../../contexts/ProductContext";
 import { Link } from "react-router-dom";
 
 const ProductList = () => {
-  const { products, loading, error, fetchProducts, removeProduct } = useProducts(); 
+  const { products, loading, error, fetchProducts, removeProduct } = useProducts();
   const [search, setSearch] = useState("");
+  const [currentItems, setCurrentItems] = useState([]);
+  const [pageCount, setPageCount] = useState(0);
+  const [itemOffset, setItemOffset] = useState(0);
+  const itemsPerPage = 5;
 
   useEffect(() => {
     fetchProducts(); // Fetch products when the component mounts
   }, [fetchProducts]);
+
+  useEffect(() => {
+    const endOffset = itemOffset + itemsPerPage;
+
+    // Verifica que los productos están correctamente cargados
+    console.log('Productos cargados:', products);
+
+    // Filtra los productos basados en el término de búsqueda
+    const filteredProducts = products.filter((product) =>
+      (product.name?.toLowerCase().includes(search.toLowerCase()) ||
+       product.category?.toLowerCase().includes(search.toLowerCase()))
+    );
+
+    // Actualiza los elementos actuales para la paginación
+    setCurrentItems(filteredProducts.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(filteredProducts.length / itemsPerPage));
+
+    // Debugging
+    console.log('Término de búsqueda:', search);
+    console.log('Productos filtrados:', filteredProducts);
+  }, [itemOffset, itemsPerPage, products, search]);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % products.length;
+    setItemOffset(newOffset);
+  };
 
   const confirmDelete = (id) => {
     confirmAlert({
@@ -32,27 +63,6 @@ const ProductList = () => {
         },
       ],
     });
-  };
-
-  // Paginación
-  const [currentItems, setCurrentItems] = useState([]);
-  const [pageCount, setPageCount] = useState(0);
-  const [itemOffset, setItemOffset] = useState(0);
-  const itemsPerPage = 5;
-
-  useEffect(() => {
-    const endOffset = itemOffset + itemsPerPage;
-    const filteredProducts = products.filter((product) =>
-      (product.name.toLowerCase().includes(search.toLowerCase()) ||
-       product.category.toLowerCase().includes(search.toLowerCase()))
-    );
-    setCurrentItems(filteredProducts.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(filteredProducts.length / itemsPerPage));
-  }, [itemOffset, itemsPerPage, products, search]);
-
-  const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % products.length;
-    setItemOffset(newOffset);
   };
 
   // Function to format values in Colombian pesos
@@ -80,7 +90,7 @@ const ProductList = () => {
             <h3>Inventario de Productos</h3>
           </span>
           <span>
-            <Search value={search} onChange={(e) => setSearch(e.target.value)} />
+            <Search value={search} onChange={(e) => setSearch(e.target.value.trim())} />
           </span>
         </div>
 
@@ -96,7 +106,6 @@ const ProductList = () => {
                   <th>Marca</th>
                   <th>Categoria</th>
                   <th>Precio und</th>
-                  
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -105,7 +114,7 @@ const ProductList = () => {
                 {currentItems.map((product, index) => {
                   const { _id, name, brand, category, price, quantity } = product;
 
-                  // Ensure price is a string, otherwise convert it
+                  // Ensure price is a number
                   const parsedPrice = typeof price === 'string'
                     ? parseFloat(price.replace(/[^0-9.-]+/g, ""))
                     : parseFloat(price);
@@ -117,10 +126,8 @@ const ProductList = () => {
                       <td>{index + 1}</td>
                       <td>{name}</td>
                       <td>{brand}</td>
-
                       <td>{category}</td>
                       <td>{formatCurrency(parsedPrice)}</td>
-                      
                       <td className="link-icons">
                         <span>
                           <Link to={`/admin/administracion/product-detail/${_id}`}>

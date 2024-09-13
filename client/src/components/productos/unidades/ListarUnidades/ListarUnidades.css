@@ -1,7 +1,7 @@
 /* Archivo: ListarUnidades.css */
 
 .container {
-    padding: 2rem;
+    
     max-width: 1200px;
     margin: 0 auto;
   }
@@ -16,7 +16,7 @@
   table {
     width: 100%;
     border-collapse: collapse;
-    margin: 1rem 0;
+    margin: 5px;
   }
   
   thead {
@@ -39,7 +39,7 @@
   }
   
   tbody td {
-    padding: 0.75rem;
+   
     border-bottom: 1px solid #ddd;
     color: #666;
   }
@@ -80,4 +80,22 @@
   }
   
 
- 
+  .item-count {
+    margin: 10px 0;
+    font-size: 24px;
+    color: #666;
+  }
+  
+
+  .container-listUnits-Search{
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      align-items: center;
+    }
+    
+    .container-listUnits-Search-ps{
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+  }

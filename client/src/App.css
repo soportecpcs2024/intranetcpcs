@@ -404,11 +404,14 @@ input::placeholder {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añadir una sombra para destacar el encabezado */
   padding: 10px 20px;
   margin-bottom: 3px;
-
+   
+   
 }
  
 
- 
+.admin-layout-header-logo{
+  width: 80px;
+}
 
 .admin-header nav ul {
   list-style-type: none;
@@ -516,11 +519,10 @@ input::placeholder {
   justify-content: space-evenly;
   align-items: center;
   height: 80px;
+   
 }
 
-.admin-layout-header-logo{
-  width: 80px;
-}
+
 .admin-layout-header-text{
   text-align: center;
   color: white;
@@ -530,10 +532,10 @@ input::placeholder {
   font-weight: 700; /* Peso de fuente bold */
   color: #000000; /* Color de texto */
   text-align: center; /* Alineación centrada */
-   
+    
   text-transform: uppercase; /* Transformación de texto a mayúsculas */
   letter-spacing: 2px; /* Espaciado entre letras */
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.642); /* Sombra de texto */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.415); /* Sombra de texto */
    
 }
 .admin-layout-header-text p{
@@ -549,7 +551,7 @@ input::placeholder {
   -webkit-background-clip: text;
  
   color: yellow; 
-  box-shadow: rgba(255, 255, 255, 0.438) 0px 6px 24px 0px, rgba(255, 255, 255, 0.208) 0px 0px 0px 1px;
+  box-shadow: rgba(255, 255, 255, 0.281) 0px 6px 24px 0px, rgba(255, 255, 255, 0.208) 0px 0px 0px 1px;
 }
 
 .web-layout{
@@ -1621,6 +1623,7 @@ textarea {
   justify-content: center;
   align-items: center;
   position: relative; */
+   
 }
 
 .overlay {
@@ -1871,6 +1874,43 @@ p {
 
 
 @media (max-width: 644px) {
+  .admin-layout-header{
+    flex-direction: column;
+    height: auto;
+  }
+  .admin-layout-header-logo{
+    width: 60px;
+    height: auto;
+    margin: 0px;
+    padding: 0px;
+  }
+  .admin-layout-header-slogan{
+    display: flex;
+    align-items: center;
+    margin: 0px;
+    padding: 0px;
+  }
+
+  .admin-header nav ul {
+    display: flex;
+    
+    
+    flex-direction: column;
+    text-align: start;
+    
+    font-size: 12px;
+     
+  }
+  .admin-layout-header-links{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0px;
+    margin-top: -20px;
+    
+  }
+  
   .form-base{
     flex-direction: column;
     width: 90%;
@@ -1894,5 +1934,15 @@ p {
     margin-bottom: -10px;
   }
   
+
+  .logout-button{
+    padding: 10px 20px;
+    width: 100%;
+    margin-left: 0px;
+    
+    background-image: radial-gradient(circle at 50% -20.71%, #a3a7ff 0, #7a8ffc 25%, #3c78f2 50%, #0063e8 75%, #0051de 100%);
+   
+     
+  }
 }
 /* ----------------------------------------------------- */
