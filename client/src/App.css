@@ -422,17 +422,15 @@ input::placeholder {
 }
 
 .admin-header nav ul li {
-  margin: 0 10px;
-  position: relative;
+  margin: 0 2px;
 }
 
 .admin-header nav ul li a {
+   
   text-decoration: none;
   color: #fbfbfb;
-  font-weight: 500;
-  padding: 8px 12px;
+  padding: 4px;
   border-radius: 4px;
-   
   transition: background-color 0.3s ease;
 }
 
@@ -518,13 +516,13 @@ input::placeholder {
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  height: 80px;
+  
    
 }
 
 
 .admin-layout-header-text{
-  text-align: center;
+  
   color: white;
 }
 .admin-layout-header-text h1{
@@ -544,14 +542,11 @@ input::placeholder {
 }
 .admin-layout-header-text-span{
    
-  font-size: 30px;
-  padding: 10px 30px;
-  font-family: "Great Vibes", cursive;
- border-radius: 8px;
+  font-size: 35px;
+  border-radius: 8px;
   -webkit-background-clip: text;
- 
   color: yellow; 
-  box-shadow: rgba(255, 255, 255, 0.281) 0px 6px 24px 0px, rgba(255, 255, 255, 0.208) 0px 0px 0px 1px;
+  /* box-shadow: rgba(255, 255, 255, 0.281) 0px 6px 24px 0px, rgba(255, 255, 255, 0.208) 0px 0px 0px 1px; */
 }
 
 .web-layout{
@@ -1874,41 +1869,64 @@ p {
 
 
 @media (max-width: 644px) {
+  .admin-header{
+    margin: 0; /* Elimina el margen */
+  padding: 0; /* Elimina el relleno */
+  }
   .admin-layout-header{
     flex-direction: column;
-    height: auto;
+    margin: 0; /* Elimina el margen */
+  padding: 0; /* Elimina el relleno */
+  height: auto;
+     
+    
+  }
+  .admin-layout-header-logo-pre{
+    display: flex;
+    justify-content: space-between;
+    
+     
   }
   .admin-layout-header-logo{
-    width: 60px;
-    height: auto;
-    margin: 0px;
+    width: 120px;
+    height: 120px; 
+    
     padding: 0px;
   }
   .admin-layout-header-slogan{
     display: flex;
     align-items: center;
-    margin: 0px;
-    padding: 0px;
+    margin: 0px; 
   }
-
+  .admin-layout-header-text-span{
+   
+    font-size: 25px;
+    
+  }
+.admin-layout-header-links-pre{
+  margin: 0;
+}
   .admin-header nav ul {
     display: flex;
     
     
-    flex-direction: column;
-    text-align: start;
+     
+    flex-direction: row;
     
-    font-size: 12px;
+    
+    font-size: 16px;
      
   }
-  .admin-layout-header-links{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-    margin: 0px;
-    margin-top: -20px;
+  .admin-layout-header-links li{
+     font-size: 12px;
+     align-items: start;
+
+  }
+
+  .admin-layout-header-links-a{
     
+    margin: 0; /* Elimina el margen */
+    padding: 0; /* Elimina el relleno */
   }
   
   .form-base{
@@ -1938,7 +1956,9 @@ p {
   .logout-button{
     padding: 10px 20px;
     width: 100%;
-    margin-left: 0px;
+    margin: 0; /* Elimina el margen */
+    margin-top: -50px;
+  
     
     background-image: radial-gradient(circle at 50% -20.71%, #a3a7ff 0, #7a8ffc 25%, #3c78f2 50%, #0063e8 75%, #0051de 100%);
    

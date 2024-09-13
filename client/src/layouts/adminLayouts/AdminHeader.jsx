@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Outlet, useNavigate, Link } from "react-router-dom";
 import Logo from "/logo.png";
 import { useAuth } from "../../contexts/AuthContext";
-
+import { HiMenuAlt3 } from "react-icons/hi"; // Importa el icono del menú hamburguesa
 const AdminHeader = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
@@ -26,7 +26,7 @@ const AdminHeader = () => {
     <div className="admin-header">
       <div className="admin-layout-header">
         <div className="admin-layout-header-slogan">
-          <div>
+          <div className="admin-layout-header-logo-pre">
             <img
               className="admin-layout-header-logo"
               src={Logo}
@@ -36,57 +36,70 @@ const AdminHeader = () => {
           <div className="admin-layout-header-text">
             <p>
               <span className="admin-layout-header-text-span">
-                Celebrando 30 años
+                COLEGIO PANAMERICANO COLOMBO SUECO
               </span>
             </p>
           </div>
         </div>
 
-        <div className="admin-layout-header-links" >
-          <div>
+        <div className="admin-layout-header-links-pre">
+          <div className="admin-layout-header-links">
             <nav>
               {isAdmin && (
                 <ul>
-                  <li>
-                    <Link to="/admin/users">Inicio</Link>
-                  </li>
-                  {/* <li>
-                <Link to="/admin/blog">Blog</Link>
-                </li> */}
-                  <li>
-                    <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Académico</Link>
-                      {isDropdownOpen && (
-                        <ul className="dropdown-menu">
-                          <li>
-                            <Link to="/admin/academico">Reporte académico</Link>
-                          </li>
-                          <li>
-                            <Link to="/admin/documentos">Documentos</Link>
-                          </li>
-                          <li>
-                            <Link to="/admin/llegadastarde">
-                              Llegadas tarde
-                            </Link>
-                          </li>
-                        </ul>
-                      )}
-                    </div>
-                  </li>
-                  <li>
-                    <Link to="/admin/administracion">Administración</Link>
-                  </li>
-                  <li>
-                    <Link to="/admin/soporte">Admin Soporte</Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="https://site2.q10.com/login?ReturnUrl=%2F&aplentId=d12efeb8-f609-4dd1-87cd-1cb0c95d32e2"
-                      target="_blank"
-                    >
-                      Q 10
-                    </Link>
-                  </li>
+                  <div className="admin-layout-header-links-a">
+                    <li>
+                      <Link to="/admin/users">Inicio</Link>
+                    </li>
+                  </div>
+
+                  <div className="admin-layout-header-links-a">
+                    <li>
+                      <div className="dropdown">
+                        <Link onClick={toggleDropdown}>Académico</Link>
+                        {isDropdownOpen && (
+                          <ul className="dropdown-menu">
+                            <li>
+                              <Link to="/admin/academico">
+                                Reporte académico
+                              </Link>
+                            </li>
+                            <li>
+                              <Link to="/admin/documentos">Documentos</Link>
+                            </li>
+                            <li>
+                              <Link to="/admin/llegadastarde">
+                                Llegadas tarde
+                              </Link>
+                            </li>
+                          </ul>
+                        )}
+                      </div>
+                    </li>
+                  </div>
+
+                  <div className="admin-layout-header-links-a">
+                    <li>
+                      <Link to="/admin/administracion">Administración</Link>
+                    </li>
+                  </div>
+
+                  <div className="admin-layout-header-links-a">
+                    <li>
+                      <Link to="/admin/soporte">Adm Soporte</Link>
+                    </li>
+                  </div>
+
+                  <div className="admin-layout-header-links-a">
+                    <li>
+                      <Link
+                        to="https://site2.q10.com/login?ReturnUrl=%2F&aplentId=d12efeb8-f609-4dd1-87cd-1cb0c95d32e2"
+                        target="_blank"
+                      >
+                        Q 10
+                      </Link>
+                    </li>
+                  </div>
                 </ul>
               )}
               {isAcademic && (
