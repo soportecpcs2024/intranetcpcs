@@ -301,8 +301,8 @@ input::placeholder {
 
 .logout-button{
   padding: 20px 30px;
-  width: 12%;
-  margin-left: 15px;
+   
+  
   border-radius: 5px;
   background-image: radial-gradient(circle at 50% -20.71%, #a3a7ff 0, #7a8ffc 25%, #3c78f2 50%, #0063e8 75%, #0051de 100%);
  
@@ -321,7 +321,7 @@ input::placeholder {
   background-image: radial-gradient(circle at 50% -20.71%, #a3a7ff 0, #7a8ffc 25%, #3c78f2 50%, #0063e8 75%, #ffffff 100%);
  
   color: black;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .logout-button:focus {
@@ -402,8 +402,8 @@ input::placeholder {
  
   z-index: 1000; /* Asegúrate de que el encabezado esté por encima de otros elementos */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añadir una sombra para destacar el encabezado */
-  padding: 10px 20px;
-  margin-bottom: 3px;
+  
+   
    
    
 }
@@ -514,7 +514,7 @@ input::placeholder {
 .admin-layout-header{
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   
    
@@ -522,7 +522,6 @@ input::placeholder {
 
 
 .admin-layout-header-text{
-  
   color: white;
 }
 .admin-layout-header-text h1{
@@ -542,7 +541,7 @@ input::placeholder {
 }
 .admin-layout-header-text-span{
    
-  font-size: 35px;
+  font-size: 25px;
   border-radius: 8px;
   -webkit-background-clip: text;
   color: yellow; 
@@ -594,7 +593,7 @@ input::placeholder {
   
   .header-client nav ul {
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
   }
 
   .admin-layout-header{
@@ -1609,17 +1608,6 @@ textarea {
 
 /* Users.css */
 
-.users-container {
-  /* background-image: url('/DSC06282.JPG');
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative; */
-   
-}
 
 .overlay {
   background-color: rgba(0, 0, 0, 0.5);
@@ -1803,6 +1791,49 @@ p {
   .formulario{
    margin: 40px;
   }
+  .admin-layout-header-links-pre{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .admin-layout-header-slogan{
+    display: flex;
+    align-items: center;
+    margin: 0px; 
+    
+  }
+
+  .admin-layout-header-logo{
+    width: 120px;
+    height: 120px; 
+    
+    padding: 0px;
+  }
+  .admin-layout-header-text-span{
+    font-size: 22px;
+    
+  }
+
+  .admin-layout-header-links li{
+    font-size: 16px;  
+  }
+  
+  .admin-layout-header-links-a{
+    
+   margin: 0 10px; /* Elimina el margen */
+   padding: 0; /* Elimina el relleno */
+    
+ }
+
+ .logout-button{
+  padding: 10px 20px;
+  width: 100%;
+  margin: 0; /* Elimina el margen */
+  margin-top: -50px;
+  margin-right: 100px;
+  background-image: radial-gradient(circle at 50% -20.71%, #a3a7ff 0, #7a8ffc 25%, #3c78f2 50%, #0063e8 75%, #0051de 100%);
+
+}
 }
 
 @media (max-width: 1440px) {
@@ -1816,6 +1847,20 @@ p {
    .formulario{
     margin: 40px;
    }
+   .admin-layout-header-links-a{
+    
+    margin: 0 3px; /* Elimina el margen */
+    padding: 0; /* Elimina el relleno */
+     
+  }
+  .logout-button{
+     
+    width: 70%;
+    margin: 0; /* Elimina el margen */
+    margin-top: -50px;
+    margin-right: 120px;
+     
+  }
 }
 
 @media (max-width: 1280px) {
@@ -1850,6 +1895,40 @@ p {
   .formulario{
    margin: 30px;
   }
+
+  .admin-layout-header-logo{
+    width: 100px;
+    height: 100px; 
+    
+    padding: 0px;
+  }
+  .admin-layout-header-text-span{
+    font-size: 18px;
+    
+  }
+
+  .admin-layout-header-links li{
+    font-size: 14px;  
+  }
+  
+  .admin-layout-header-links-a{
+    
+   margin: 0 3px; /* Elimina el margen */
+   padding: 0; /* Elimina el relleno */
+    
+ }
+
+ .logout-button{
+   
+  width: 70%;
+  margin: 0; /* Elimina el margen */
+  margin-top: -50px;
+  margin-right: 120px;
+   
+}
+ 
+
+  
 }
 
 
@@ -1865,69 +1944,65 @@ p {
   .formulario{
     margin: 40px;
   }
+  
+
+
+  .admin-layout-header-text-span{
+    font-size: 18px;
+    
+  }
+
+  .admin-layout-header-links li{
+    font-size: 14px;  
+  }
+  
+  .admin-layout-header-links-a{
+    
+   margin: 0 3px; /* Elimina el margen */
+   padding: 0; /* Elimina el relleno */
+    
+ }
+
+ .logout-button{
+   
+  width: 60%;
+  margin: 0; /* Elimina el margen */
+  margin-top: -50px;
+  margin-right: 100px;
+   
+}
+   
+   
+ 
+  
+ 
 }
 
 
 @media (max-width: 644px) {
-  .admin-header{
-    margin: 0; /* Elimina el margen */
-  padding: 0; /* Elimina el relleno */
-  }
-  .admin-layout-header{
+   
+   
+ 
+   
+  .admin-layout-header-links-pre{
+    display: flex;
     flex-direction: column;
-    margin: 0; /* Elimina el margen */
-  padding: 0; /* Elimina el relleno */
-  height: auto;
-     
-    
-  }
-  .admin-layout-header-logo-pre{
-    display: flex;
-    justify-content: space-between;
-    
-     
-  }
-  .admin-layout-header-logo{
-    width: 120px;
-    height: 120px; 
-    
-    padding: 0px;
-  }
-  .admin-layout-header-slogan{
-    display: flex;
-    align-items: center;
-    margin: 0px; 
   }
   .admin-layout-header-text-span{
-   
-    font-size: 25px;
-    
+    font-size: 22px;
   }
-.admin-layout-header-links-pre{
-  margin: 0;
-}
-  .admin-header nav ul {
-    display: flex;
-    
-    
-     
-    flex-direction: row;
-    
-    
-    font-size: 16px;
-     
-  }
+
   .admin-layout-header-links li{
-     font-size: 12px;
-     align-items: start;
+    font-size: 12px;
+ }
 
-  }
-
-  .admin-layout-header-links-a{
+ .admin-layout-header-links-a{
+   
+   
+  margin-top: -20px;
+ 
     
-    margin: 0; /* Elimina el margen */
-    padding: 0; /* Elimina el relleno */
-  }
+ }
   
   .form-base{
     flex-direction: column;
@@ -1952,17 +2027,16 @@ p {
     margin-bottom: -10px;
   }
   
-
   .logout-button{
-    padding: 10px 20px;
+   
     width: 100%;
     margin: 0; /* Elimina el margen */
-    margin-top: -50px;
-  
+     
     
-    background-image: radial-gradient(circle at 50% -20.71%, #a3a7ff 0, #7a8ffc 25%, #3c78f2 50%, #0063e8 75%, #0051de 100%);
-   
      
   }
+
+
+  
 }
 /* ----------------------------------------------------- */
