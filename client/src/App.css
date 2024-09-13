@@ -321,7 +321,7 @@ input::placeholder {
   background-image: radial-gradient(circle at 50% -20.71%, #a3a7ff 0, #7a8ffc 25%, #3c78f2 50%, #0063e8 75%, #ffffff 100%);
  
   color: black;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .logout-button:focus {
@@ -394,18 +394,14 @@ input::placeholder {
 /* Otras consultas de medios adicionales según sea necesario */
 
 .admin-header{
-  
+
   position: sticky;
   top: 0;
   width: 100%;
   background-image: radial-gradient(circle at 50% -20.71%, #a3a7ff 0, #7a8ffc 25%, #3c78f2 50%, #0063e8 75%, #0051de 100%);
- 
   z-index: 1000; /* Asegúrate de que el encabezado esté por encima de otros elementos */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añadir una sombra para destacar el encabezado */
-  
-   
-   
-   
+  height: 190px; 
 }
  
 
@@ -422,7 +418,7 @@ input::placeholder {
 }
 
 .admin-header nav ul li {
-  margin: 0 2px;
+  
 }
 
 .admin-header nav ul li a {
@@ -593,7 +589,7 @@ input::placeholder {
   
   .header-client nav ul {
     flex-direction: column;
-    gap: 5px;
+    gap: 1px;
   }
 
   .admin-layout-header{
@@ -1637,41 +1633,11 @@ p {
   animation: background-color-change 4s infinite;
 }
 
-@keyframes background-color-change {
-  0% { background-color: #ff0000; }
-  25% { background-color: #ffa500; }
-  50% { background-color: #ffff00; }
-  75% { background-color: #008000; }
-  100% { background-color: #0000ff; }
-}
+ 
 
-@media (max-width: 768px) {
-  h1 {
-    font-size: 2.5em;
-  }
+ 
 
-  p {
-    font-size: 1.2em;
-  }
-
-  .construction-message {
-    font-size: 1em;
-  }
-}
-
-@media (max-width: 480px) {
-  h1 {
-    font-size: 2em;
-  }
-
-  p {
-    font-size: 1em;
-  }
-
-  .construction-message {
-    font-size: 0.9em;
-  }
-}
+ 
 
 
 /* ------------- Materias PErdidas ------------------- */
@@ -1834,6 +1800,10 @@ p {
   background-image: radial-gradient(circle at 50% -20.71%, #a3a7ff 0, #7a8ffc 25%, #3c78f2 50%, #0063e8 75%, #0051de 100%);
 
 }
+.admin-header{
+
+  height: 120px; 
+}
 }
 
 @media (max-width: 1440px) {
@@ -1861,6 +1831,10 @@ p {
     margin-right: 120px;
      
   }
+  .admin-header{
+
+    height: 100px; 
+  }
 }
 
 @media (max-width: 1280px) {
@@ -1879,6 +1853,10 @@ p {
     gap: 1px;
     font-size: 11px;
     
+  }
+  .admin-header{
+
+    height: 100px; 
   }
 
  
@@ -1926,7 +1904,10 @@ p {
   margin-right: 120px;
    
 }
- 
+.admin-header{
+
+  height: 100px; 
+}
 
   
 }
@@ -1980,7 +1961,10 @@ p {
 
 
 @media (max-width: 644px) {
-   
+  .admin-header{
+
+      height: 90px; 
+  }
    
  
    
@@ -1999,7 +1983,7 @@ p {
  .admin-layout-header-links-a{
    
    
-  margin-top: -20px;
+  margin-top: -30px;
  
     
  }
@@ -2031,6 +2015,7 @@ p {
    
     width: 100%;
     margin: 0; /* Elimina el margen */
+    margin-top: -20px;
      
     
      
