@@ -153,3 +153,19 @@
     flex-basis: 100%; /* Asegura que cada caja ocupe el ancho completo en pantallas pequeñas */
   }
 }
+
+
+/* AddLocation.css */
+.error-message {
+  color: red;
+  margin-bottom: 1rem;
+  font-size: 20px;
+}
+
+.success-message {
+  color: green;
+  font-size: 20px;
+  margin-bottom: 1rem;
+}
+
+/* Asegúrate de que otros estilos se mantengan según tu diseño */

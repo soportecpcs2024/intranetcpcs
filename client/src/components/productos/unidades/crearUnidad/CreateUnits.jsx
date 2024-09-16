@@ -83,7 +83,7 @@ const CreateUnits = () => {
               <option value="">Seleccione una ubicación</option>
               {locations.map((location) => (
                 <option key={location._id} value={location._id}>
-                  {location.nombre}
+                  {location.direccion}
                 </option>
               ))}
             </select>

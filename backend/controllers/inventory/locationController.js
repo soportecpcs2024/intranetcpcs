@@ -28,7 +28,14 @@ const getLocationById = async (req, res) => {
 const createLocation = async (req, res) => {
   try {
     const { nombre, direccion, otros_detalles, entregado_por, recibido_por, aprobado_por, estado } = req.body;
-    
+
+    // Verifica si ya existe una ubicación con el mismo nombre
+    const existingLocation = await Location.findOne({ nombre: nombre.trim(), direccion: direccion.trim(), });
+
+    if (existingLocation) {
+      return res.status(400).json({ error: 'Ya existe una ubicación con este nombre.' });
+    }
+
     // Crea una nueva instancia de Location con los datos proporcionados
     const newLocation = new Location({
       nombre,
@@ -37,13 +44,14 @@ const createLocation = async (req, res) => {
       entregado_por,
       recibido_por,
       aprobado_por,
-      estado,  // Incluye el campo estado
+      estado,
     });
-    
+
     const location = await newLocation.save();
     res.status(201).json(location);
   } catch (error) {
-    res.status(500).json({ error: 'Error al crear ubicación' });
+    console.error('Error al crear ubicación:', error); // Log de error para depuración
+    res.status(500).json({ error: 'Error al crear ubicación.' });
   }
 };
 
@@ -62,7 +70,7 @@ const updateLocation = async (req, res) => {
         entregado_por,
         recibido_por,
         aprobado_por,
-        estado,  // Incluye el campo estado en la actualización
+        estado,
       },
       { new: true } // Opciones para devolver el documento actualizado
     );

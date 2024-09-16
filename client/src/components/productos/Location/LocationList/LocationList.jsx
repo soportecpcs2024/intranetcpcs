@@ -11,7 +11,7 @@ const LocationList = () => {
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
-  const itemsPerPage = 5;
+  const itemsPerPage = 15;
 
   useEffect(() => {
     if (!locations.length) {
@@ -70,7 +70,7 @@ const LocationList = () => {
           </div>
           <div>
             <p className="item-count">
-              {currentItems.length} de {formattedLocations.length} ubicaciones
+              {currentItems.length} de {formattedLocations.length}
             </p>
           </div>
         </div>

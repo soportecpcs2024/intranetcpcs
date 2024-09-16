@@ -15,6 +15,8 @@ const AddLocation = () => {
     fecha_entrega: "",
     fecha_devolucion: "",
   });
+  const [errorMessage, setErrorMessage] = useState(""); // Estado para manejar errores
+  const [successMessage, setSuccessMessage] = useState(""); // Estado para mensajes de éxito
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -26,23 +28,41 @@ const AddLocation = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMessage(""); // Limpia cualquier mensaje de error previo
+    setSuccessMessage(""); // Limpia cualquier mensaje de éxito previo
+
     try {
-      // Llama a la función createLocation con los datos del formulario
-      await createLocation(locationData);
-      // Reinicia los campos del formulario tras la creación exitosa
-      setLocationData({
-        nombre: "",
-        direccion: "",
-        otros_detalles: "",
-        entregado_por: "",
-        recibido_por: "",
-        aprobado_por: "",
-        estado: "Inactivo", // Reinicia el estado a "Inactivo"
-        fecha_entrega: "",
-        fecha_devolucion: "",
-      });
-    } catch (error) {
-      console.error("Error creating location", error);
+      const { success, error } = await createLocation(locationData);
+      if (success) {
+        setSuccessMessage('Ubicación creada con éxito.');
+        // Limpia los campos después de 3 segundos
+        setTimeout(() => {
+          setSuccessMessage(""); // Limpiar el mensaje de éxito
+          setLocationData({
+            nombre: "",
+            direccion: "",
+            otros_detalles: "",
+            entregado_por: "",
+            recibido_por: "",
+            aprobado_por: "",
+            estado: "Inactivo", // Reinicia el estado a "Inactivo"
+            fecha_entrega: "",
+            fecha_devolucion: "",
+          });
+        }, 3000); // 3000 ms = 3 segundos
+      } else {
+        setErrorMessage(error || 'Error al crear la ubicación.');
+        // Limpia el mensaje de error después de 3 segundos
+        setTimeout(() => {
+          setErrorMessage("");
+        }, 3000); // 3000 ms = 3 segundos
+      }
+    } catch (err) {
+      setErrorMessage('Error al crear la ubicación.');
+      // Limpia el mensaje de error después de 3 segundos
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 3000); // 3000 ms = 3 segundos
     }
   };
 
@@ -50,6 +70,9 @@ const AddLocation = () => {
     <div className="add-product-container-location">
       <h3>CREAR UBICACIÓN</h3>
       <form className="add-product-form" onSubmit={handleSubmit}>
+        {errorMessage && <div className="error-message">{errorMessage}</div>} {/* Mostrar mensaje de error */}
+        {successMessage && <div className="success-message">{successMessage}</div>} {/* Mostrar mensaje de éxito */}
+
         <div className="location-name-estado">
           <div className="boxlocation">
             <label htmlFor="nombre">Nombre</label>

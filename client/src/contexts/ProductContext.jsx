@@ -145,12 +145,21 @@ export const ProductProvider = ({ children }) => {
   const createLocation = async (locationData) => {
     try {
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/location`, locationData);
+      if (response.data.error) {
+        // Si la respuesta contiene un error, lanza un error
+        throw new Error(response.data.error);
+      }
       setLocations((prevLocations) => [...prevLocations, response.data]);
+      return { success: true }; // Devuelve un objeto de éxito
     } catch (error) {
+      // Extrae el mensaje de error del objeto error
+      const errorMessage = error.response?.data?.error || error.message || 'Error al crear la ubicación.';
       console.error("Error creating location", error);
-      setErrorLocations(error);
+      setErrorLocations(errorMessage);
+      return { success: false, error: errorMessage }; // Devuelve un objeto de error con el mensaje personalizado
     }
   };
+  
 
   return (
     <ProductContext.Provider
