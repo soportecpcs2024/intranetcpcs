@@ -1,4 +1,3 @@
-// ProductList.jsx
 import React, { useState, useEffect } from "react";
 import { SpinnerImg } from "../Loader/Loader";
 import "./productList.css";
@@ -26,9 +25,6 @@ const ProductList = () => {
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
 
-    // Verifica que los productos están correctamente cargados
-    console.log('Productos cargados:', products);
-
     // Filtra los productos basados en el término de búsqueda
     const filteredProducts = products.filter((product) =>
       (product.name?.toLowerCase().includes(search.toLowerCase()) ||
@@ -38,10 +34,6 @@ const ProductList = () => {
     // Actualiza los elementos actuales para la paginación
     setCurrentItems(filteredProducts.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(filteredProducts.length / itemsPerPage));
-
-    // Debugging
-    console.log('Término de búsqueda:', search);
-    console.log('Productos filtrados:', filteredProducts);
   }, [itemOffset, itemsPerPage, products, search]);
 
   const handlePageClick = (event) => {
@@ -95,6 +87,18 @@ const ProductList = () => {
         </div>
 
         <div className="table">
+          <div className="container-listUnits-Search-ps">
+            {/* Mostrar número de ítems listados */}
+            <div>
+              <p>Productos:</p>
+            </div>
+            <div>
+              <p className="item-count">
+                {currentItems.length} de {products.length} productos
+              </p>
+            </div>
+          </div>
+
           {products.length === 0 ? (
             <p>-- No product found, please add a product...</p>
           ) : (
@@ -154,6 +158,7 @@ const ProductList = () => {
             </table>
           )}
         </div>
+
         <ReactPaginate
           breakLabel="..."
           nextLabel="Siguiente"

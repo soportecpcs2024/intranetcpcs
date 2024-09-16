@@ -22,7 +22,7 @@
   
   height: 400px;
   overflow: hidden;
-   
+  margin-top: -20px;
   margin-bottom: 10px;
   background-image: radial-gradient(circle at 50% -20.71%, #a3a7ff 0, #7a8ffc 25%, #3c78f2 50%, #0063e8 75%, #ffffff 100%);
  
@@ -44,6 +44,7 @@
   font-size: 46px;
   margin-bottom: 10px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  
 }
 
 .slideshow-text p {
@@ -77,10 +78,10 @@
 .cards {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 5px;
   justify-content: center;
   width: 100%;
-  max-width: 90%;
+  max-width: 95%;
   
 }
 
@@ -144,11 +145,11 @@
   }
 
   .slideshow-text h1 {
-    font-size: 22px;
+    font-size: 18px;
   }
 
   .slideshow-text p {
-    font-size: 14px;
+    font-size: 10px;
   }
 
   .card {

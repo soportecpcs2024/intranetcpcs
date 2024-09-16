@@ -32,19 +32,27 @@ const SidebarInventory = () => {
           isOpen={isOpen}
           location={location}
         />
-         <div>
-        
-        <SidebarItem
-          path="/admin/administracion/listunit"
-          icon={<RiListOrdered2 />}
-          label="Unidades Stock"
-          isOpen={isOpen}
-          location={location}
-        />
-      </div>
+        <div>
+          <SidebarItem
+            path="/admin/administracion/listunit"
+            icon={<RiListOrdered2 />}
+            label="Unidades Stock"
+            isOpen={isOpen}
+            location={location}
+          />
+        </div>
+        <div>
+          <SidebarItem
+            path="/admin/administracion/location_list"
+            icon={<RiListOrdered2 />}
+            label="Ubicaciones"
+            isOpen={isOpen}
+            location={location}
+          />
+        </div>
         <h2 className="SidebarItem-Dashboard-line">_____________________</h2>
       </div>
-      
+
       <SidebarItem
         path="/admin/administracion/add-product"
         icon={<BiImageAdd />}
@@ -66,7 +74,7 @@ const SidebarInventory = () => {
         isOpen={isOpen}
         location={location}
       />
-      
+
       <div>
         <h2 className="SidebarItem-report-line">_____________________</h2>
         <SidebarItem
@@ -76,7 +84,7 @@ const SidebarInventory = () => {
           isOpen={isOpen}
           location={location}
         />
-       
+
         <SidebarItem
           path="/admin/administracion/qr"
           icon={<FaCommentAlt />}
@@ -85,9 +93,6 @@ const SidebarInventory = () => {
           location={location}
         />
       </div>
-      
-     
-     
     </div>
   );
 };
