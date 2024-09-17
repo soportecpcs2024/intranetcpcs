@@ -112,7 +112,8 @@ export const ProductProvider = ({ children }) => {
   const createUnits = async (unitData) => {
     try {
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/units`, unitData);
-      setUnits((prevUnits) => [...prevUnits, response.data]);
+      await fetchUnits(); // Actualiza la lista de unidades después de crear una nueva
+      return response.data;
     } catch (error) {
       console.error("Error creating unit", error);
       setErrorUnits(error);
@@ -146,20 +147,17 @@ export const ProductProvider = ({ children }) => {
     try {
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/location`, locationData);
       if (response.data.error) {
-        // Si la respuesta contiene un error, lanza un error
         throw new Error(response.data.error);
       }
       setLocations((prevLocations) => [...prevLocations, response.data]);
-      return { success: true }; // Devuelve un objeto de éxito
+      return { success: true };
     } catch (error) {
-      // Extrae el mensaje de error del objeto error
       const errorMessage = error.response?.data?.error || error.message || 'Error al crear la ubicación.';
       console.error("Error creating location", error);
       setErrorLocations(errorMessage);
-      return { success: false, error: errorMessage }; // Devuelve un objeto de error con el mensaje personalizado
+      return { success: false, error: errorMessage };
     }
   };
-  
 
   return (
     <ProductContext.Provider

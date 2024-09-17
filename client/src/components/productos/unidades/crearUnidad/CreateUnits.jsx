@@ -3,9 +3,9 @@ import { useProducts } from "../../../../contexts/ProductContext";
 import "./createUnits.css";
 
 const CreateUnits = () => {
-  const { products, locations, createUnits, fetchLocations, fetchProducts, loading } = useProducts();
+  const { products, locations, createUnits, fetchLocations, fetchProducts, fetchUnits, loading } = useProducts();
   const [units, setUnits] = useState([{ id_producto: "", location: "", estado: "" }]);
-  const [generatedQRCodes, setGeneratedQRCodes] = useState([]); // Estado para guardar los códigos QR
+  const [generatedQRCodes, setGeneratedQRCodes] = useState([]);
 
   useEffect(() => {
     if (!loading) {
@@ -28,26 +28,25 @@ const CreateUnits = () => {
   const removeUnit = (index) => {
     const newUnits = units.filter((_, i) => i !== index);
     setUnits(newUnits);
-    setGeneratedQRCodes(generatedQRCodes.filter((_, i) => i !== index)); // Actualiza los QR al eliminar unidades
+    setGeneratedQRCodes(generatedQRCodes.filter((_, i) => i !== index));
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await createUnits(units);
-      // Verifica si la respuesta tiene la propiedad qrCodes
-      if (response && response.qrCodes) {
-        setGeneratedQRCodes(response.qrCodes);
-      } else {
-        console.error("La respuesta no contiene 'qrCodes'", response);
-        setGeneratedQRCodes([]);
-      }
+      await createUnits(units);
+      await fetchUnits(); // Actualiza la lista de unidades
       setUnits([{ id_producto: "", location: "", estado: "" }]); // Resetea el formulario
     } catch (error) {
       console.error("Error al crear unidades:", error);
     }
   };
-  
+
+  const sortedLocations = [...locations].sort((a, b) => {
+    const nameA = a.direccion.toLowerCase();
+    const nameB = b.direccion.toLowerCase();
+    return nameA.localeCompare(nameB);
+  });
 
   if (loading) {
     return <div>Loading...</div>;
@@ -68,7 +67,7 @@ const CreateUnits = () => {
               <option value="">Seleccione un producto</option>
               {products.map((product) => (
                 <option key={product._id} value={product._id}>
-                  {product.name}
+                  {product.name} ({product.brand})
                 </option>
               ))}
             </select>
@@ -81,7 +80,7 @@ const CreateUnits = () => {
               onChange={(e) => handleChange(index, e)}
             >
               <option value="">Seleccione una ubicación</option>
-              {locations.map((location) => (
+              {sortedLocations.map((location) => (
                 <option key={location._id} value={location._id}>
                   {location.direccion}
                 </option>
@@ -100,7 +99,6 @@ const CreateUnits = () => {
           <button type="button" className="remove-button" onClick={() => removeUnit(index)}>
             Eliminar Unidad
           </button>
-          {/* Mostrar el código QR generado */}
           {generatedQRCodes[index] && (
             <div className="qr-code">
               <img src={generatedQRCodes[index]} alt="QR Code" />

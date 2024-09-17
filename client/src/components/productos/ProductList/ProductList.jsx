@@ -94,7 +94,7 @@ const ProductList = () => {
             </div>
             <div>
               <p className="item-count">
-                {currentItems.length} de {products.length} productos
+                {currentItems.length} de {products.length}
               </p>
             </div>
           </div>

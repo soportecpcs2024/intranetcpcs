@@ -28,6 +28,7 @@ thead th {
   border-bottom: 2px solid #ddd;
   text-align: left;
   color: #555;
+   
 }
 
 tbody tr:nth-child(even) {
@@ -41,6 +42,7 @@ tbody tr:hover {
 tbody td {
   border-bottom: 1px solid #ddd;
   color: #666;
+  font-size: 12px;
 }
 
 @media (max-width: 768px) {
@@ -57,6 +59,7 @@ tbody td {
   tr {
     border: 1px solid #ccc;
     margin-bottom: 1rem;
+    
   }
 
   td {

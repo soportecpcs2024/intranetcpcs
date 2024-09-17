@@ -76,7 +76,7 @@ const ListarUnidades = () => {
           </div>
           <div>
             <p className="item-count">
-              {currentItems.length}
+              {currentItems.length} de {formattedUnits.length}
               {/* Cantidad unidades {currentItems.length} de {formattedUnits.length} unidades */}
             </p>
           </div>
@@ -88,7 +88,7 @@ const ListarUnidades = () => {
           <tr>
             <th>Producto</th>
             <th>Marca</th>
-            <th>Referencia</th>
+             
             <th>Lugar</th>
             <th>Ubicación</th>
             <th>Estado</th>
@@ -101,7 +101,7 @@ const ListarUnidades = () => {
             <tr key={unit._id}>
               <td>{unit.id_producto?.name || "N/A"}</td>
               <td>{unit.id_producto?.brand || "N/A"}</td>
-              <td>{unit.id_producto?.sku || "N/A"}</td>
+              
               <td>{unit.location?.nombre || "N/A"}</td>
               <td>{unit.location?.direccion || "N/A"}</td>
               <td>{unit.estado || "N/A"}</td>

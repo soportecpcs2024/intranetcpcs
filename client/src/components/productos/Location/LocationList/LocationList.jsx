@@ -84,7 +84,7 @@ const LocationList = () => {
             <th>Detalles</th>
             <th>Entregado Por</th>
             <th>Recibido Por</th>
-            <th>Aprobado Por</th>
+            
             <th>Estado</th>
           </tr>
         </thead>
@@ -96,7 +96,7 @@ const LocationList = () => {
               <td>{location.otros_detalles}</td>
               <td>{location.entregado_por}</td>
               <td>{location.recibido_por}</td>
-              <td>{location.aprobado_por}</td>
+              
               <td>{location.estado}</td>
             </tr>
           ))}

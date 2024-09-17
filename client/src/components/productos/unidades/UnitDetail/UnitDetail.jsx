@@ -28,7 +28,7 @@ const UnitDetail = () => {
                 <>
                     <p><strong>ID:</strong> {unit._id}</p>
                     <p><strong>Producto:</strong> {unit.id_producto.name}</p>
-                    <p><strong>Ubicación:</strong> {unit.location.nombre}</p>
+                    <p><strong>Ubicación:</strong> {unit.location.direccion}</p>
                     <p><strong>Estado:</strong> {unit.estado}</p>
                 </>
             ) : (

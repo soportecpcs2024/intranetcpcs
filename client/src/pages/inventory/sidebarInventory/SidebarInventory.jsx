@@ -7,6 +7,7 @@ import { RiProductHuntLine } from "react-icons/ri";
 import { BsBuildingFillAdd } from "react-icons/bs";
 import { RiApps2AddLine } from "react-icons/ri";
 import { RiListOrdered2 } from "react-icons/ri";
+import { FaListCheck } from "react-icons/fa6";
 import "./SidebarInventory.css";
 
 const SidebarInventory = () => {
@@ -35,7 +36,7 @@ const SidebarInventory = () => {
         <div>
           <SidebarItem
             path="/admin/administracion/listunit"
-            icon={<RiListOrdered2 />}
+            icon={<FaListCheck />}
             label="Unidades Stock"
             isOpen={isOpen}
             location={location}
