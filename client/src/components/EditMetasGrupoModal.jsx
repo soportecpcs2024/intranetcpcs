@@ -106,4 +106,3 @@ const EditMetasGrupoModal = ({ metas, onClose, onUpdate }) => {
 
 export default EditMetasGrupoModal;
 
-
