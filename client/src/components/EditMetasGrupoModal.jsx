@@ -46,14 +46,14 @@ const EditMetasGrupoModal = ({ metas, onClose, onUpdate }) => {
               onChange={handleChange}
             />
           </div>
-          <div>
+          {/* <div>
             <label>Disciplina en el grupo durante el periodo:</label>
             <textarea
               name="disciplinaGrupoPeriodo"
-              value={updatedMetas.disciplinaGrupoPeriodo}
+              value={updatedMetas.disciplinagrupo}
               onChange={handleChange}
             />
-          </div>
+          </div> */}
           <div>
             <label>Estudiantes con dificultad Disciplinarias:</label>
             <textarea

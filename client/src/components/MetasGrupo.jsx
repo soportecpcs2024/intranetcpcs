@@ -51,7 +51,7 @@ const MetasGrupo = ({ selectedGroup, selectedPeriodo }) => {
     }
   };
 
-  const renderTextWithLineBreaks = (text) => {
+  const renderTextWithLineBreaks = (text = '') => {
     return text.split('\n').map((line, index) => (
       <React.Fragment key={index}>
         {line}
@@ -71,6 +71,7 @@ const MetasGrupo = ({ selectedGroup, selectedPeriodo }) => {
   const metasToDisplay = filteredMetas || {
     academicos: defaultText,
     estrategiasImplementarAcademico: defaultText,
+    disciplinagrupo: defaultText,
     estudiantesDificultadDisciplinarias: defaultText,
     estudiantesPendientesDisciplinarios: defaultText,
     estudiantesSancionComite: defaultText,
@@ -90,10 +91,10 @@ const MetasGrupo = ({ selectedGroup, selectedPeriodo }) => {
           <h3>Estrategias a implementar para elevar el nivel académico:</h3>
           <p>{renderTextWithLineBreaks(metasToDisplay.estrategiasImplementarAcademico)}</p>
         </div>
-        <div className="card">
+        {/* <div className="card">
           <h3>Disciplina en el grupo durante el periodo:</h3>
-          <p>{renderTextWithLineBreaks(metasToDisplay.estudiantesDificultadDisciplinarias)}</p>
-        </div>
+          <p>{renderTextWithLineBreaks(metasToDisplay.disciplinagrupo)}</p>
+        </div> */}
       </div>
       <div className="metas-bloque b2">
         <div className="card">
@@ -132,8 +133,3 @@ const MetasGrupo = ({ selectedGroup, selectedPeriodo }) => {
 };
 
 export default MetasGrupo;
-
-
-
-
-

@@ -1,10 +1,13 @@
+// Cargar las variables de entorno
+require('dotenv').config();
+
 const fs = require('fs');
 const path = require('path');
 const mongoose = require('../db'); // Asegúrate de que tu archivo db.js esté configurado correctamente
 const StudentNotes = require('../models/student_notes_sheet_model'); // Importa tu modelo de notas de estudiantes
 
 // Ruta del archivo JSON
-const jsonFilePath = path.join(__dirname, './consolidadoNotas.json'); // Reemplaza con la ruta correcta a tu archivo JSON
+const jsonFilePath = path.join(__dirname, './data3periodo.json'); // Reemplaza con la ruta correcta a tu archivo JSON
 
 async function cargarDatosDesdeJson() {
   try {
