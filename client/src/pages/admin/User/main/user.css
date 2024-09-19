@@ -78,17 +78,24 @@
 .cards {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 10px;
   justify-content: center;
   width: 100%;
-  max-width: 95%;
+  max-width: 90%;
   
+}
+.card-tema{
+  color: red;
+  
+}
+.card-title{
+  margin: 20px;
 }
 
 .card {
   flex: 1 1 calc(33.333% - 40px);
-  background: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background: #ffffffdb;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.792);
   transition: 0.3s;
   border-radius: 10px;
   overflow: hidden;

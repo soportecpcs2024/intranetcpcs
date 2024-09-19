@@ -44,7 +44,7 @@ const Users = () => {
     <>
    
     <div className="users-container">
-      <div className="slideshow">
+      {/* <div className="slideshow">
         <div className="slideshow-text">
           <h1>Colegio Panamericano Colombo Sueco</h1>
           <p>30 Años formando líderes en Cristo para Colombia y las naciones</p>
@@ -61,22 +61,36 @@ const Users = () => {
         ) : (
           <div className="loading">Cargando imágenes...</div>
         )}
+      </div> */}
+      <div className='card-title'>
+        <h2>¿Hola equipo, esto te puede ayudar para el informe académico! </h2>
+
       </div>
       <section className="cards">
         <div className="card">
-          <img src="/DSC06282.JPG" alt="Image 1" />
-          <h3>Card Title 1</h3>
-          <p>Card description 1</p>
+          <h3>Primer paso : <span className='card-tema'>Reporte académico</span> </h3>
+          <p>Luego de ingresar a la plataforma dirígete a académico - reporte Académico</p>
+          <img src="/1_paso.png" alt="Image 1" />
         </div>
         <div className="card">
-          <img src="/DSC06286.JPG" alt="Image 2" />
-          <h3>Card Title 2</h3>
-          <p>Card description 2</p>
+          <h3>Segundo paso: <span className='card-tema'>Estadísticas generales</span> </h3>
+          <p>Si eres director de grupo dirígete a estadísticas generales y allí puedes filtrar según tus necesidades.</p>
+          <img src="/2_paso.png" alt="Image 2" />
         </div>
         <div className="card">
-          <img src="/DSC06302.JPG" alt="Image 3" />
-          <h3>Card Title 3</h3>
-          <p>Card description 3</p>
+          <h3>Tercer paso: <span className='card-tema'>Observaciones generales</span></h3>
+          <p>Como director de grupo puedes visualizar y editar en la parte inferior las observaciones generales de grupo.</p>
+          <img src="/3_paso.png" alt="Image 3" />
+        </div>
+        <div className="card">
+          <h3>Cuarto paso:<span className='card-tema'>Docente área</span> </h3>
+          <p>Dirigente a estadísticas por área y allí puedes filtrar según tus necesidades.</p>
+          <img src="/4_paso.png" alt="Image 3" />
+        </div>
+        <div className="card">
+          <h3>Quinto paso:<span className='card-tema'>Observaciones, metas y reporte evaluación</span> </h3>
+          <p>Allí en acciones puedes editar cada parámetro de forma individual.</p>
+          <img src="/5_paso.png" alt="Image 3" />
         </div>
       </section>
       
