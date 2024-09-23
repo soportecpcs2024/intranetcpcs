@@ -14,7 +14,7 @@ const Unitschema = new mongoose.Schema({
     estado: {
         type: String,
         default: 'disponible' // Ejemplo de valor por defecto
-    } 
+    }
 });
 
 module.exports = mongoose.model('Units', Unitschema);

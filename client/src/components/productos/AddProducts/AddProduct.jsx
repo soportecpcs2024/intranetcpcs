@@ -14,6 +14,8 @@ const AddProduct = () => {
     price: "",
     color: "",
     description: "",
+    useful_life: "", // Vida útil en años
+    purchase_date: "", // Fecha de compra
     image: null,
   });
 
@@ -173,6 +175,28 @@ const AddProduct = () => {
         </label>
 
         <label>
+          Vida útil (años):
+          <input
+            type="number"
+            name="useful_life"
+            value={productData.useful_life}
+            onChange={handleChange}
+          />
+          {errors.useful_life && <p className="error-message">{errors.useful_life}</p>}
+        </label>
+
+        <label>
+          Fecha de compra:
+          <input
+            type="date"
+            name="purchase_date"
+            value={productData.purchase_date}
+            onChange={handleChange}
+          />
+          {errors.purchase_date && <p className="error-message">{errors.purchase_date}</p>}
+        </label>
+
+        <label>
           Imagen:
           <input
             type="file"
@@ -190,3 +214,4 @@ const AddProduct = () => {
 };
 
 export default AddProduct;
+

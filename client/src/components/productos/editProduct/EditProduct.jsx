@@ -17,7 +17,9 @@ const EditProduct = () => {
     price: "",
     color: "",
     description: "",
-    quantity: "" // Añadido campo de cantidad
+    quantity: "",
+    purchase_date: "",
+    useful_life: "", // Añadido campo de vida útil
   });
   const navigate = useNavigate();
 
@@ -36,7 +38,9 @@ const EditProduct = () => {
           price: foundProduct.price,
           color: foundProduct.color,
           description: foundProduct.description,
-          quantity: foundProduct.quantity || "" // Asegúrate de incluir todos los campos
+          quantity: foundProduct.quantity || "",
+          purchase_date: new Date(foundProduct.purchase_date).toISOString().split('T')[0], // Formatear la fecha para el input
+          useful_life: foundProduct.useful_life || "" // Asegúrate de incluir todos los campos
         });
       }
     } else {
@@ -56,8 +60,10 @@ const EditProduct = () => {
     e.preventDefault();
     const updatedProduct = {
       ...formData,
-      price: parseFloat(formData.price), // Asegúrate de convertir el precio a número
-      quantity: parseInt(formData.quantity, 10) // Asegúrate de convertir la cantidad a número
+      price: parseFloat(formData.price), // Convertir el precio a número
+      quantity: parseInt(formData.quantity, 10), // Convertir la cantidad a número
+      purchase_date: new Date(formData.purchase_date).toISOString(), // Convertir la fecha a ISO string
+      useful_life: parseInt(formData.useful_life, 10) // Convertir la vida útil a número
     };
     updateProduct(id, updatedProduct);
     navigate("/admin/administracion/productList");
@@ -136,14 +142,30 @@ const EditProduct = () => {
         <div className="form-group">
           <label>Precio:</label>
           <input
-            type="number" // Cambiado a number
+            type="number"
             name="price"
             value={formData.price}
             onChange={handleChange}
           />
         </div>
-       
-        
+        <div className="form-group">
+          <label>Fecha de compra:</label>
+          <input
+            type="date"
+            name="purchase_date"
+            value={formData.purchase_date}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label>Vida útil (años):</label>
+          <input
+            type="number"
+            name="useful_life"
+            value={formData.useful_life}
+            onChange={handleChange}
+          />
+        </div>
         <div className="form-group">
           <label>Descripción:</label>
           <textarea

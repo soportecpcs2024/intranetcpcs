@@ -107,9 +107,9 @@ const DatatableAreas = ({ students, selectedArea, error }) => {
               <td>{student.nombre}</td>
               <td className="td-areas">{student.grupo}</td>
               <td className="td-areas">{Number(student[selectedArea]).toFixed(2)}</td>
-              <td className="td-areas">{student[`observaciones_${selectedArea}`]}</td>
-              <td className="td-areas">{student[`metas_${selectedArea}`]}</td>
-              <td className="td-areas">{student[`rep_eva_${selectedArea}`]}</td>
+              <td className="td-areas td-areas-data">{student[`observaciones_${selectedArea}`]}</td>
+              <td className="td-areas td-areas-data">{student[`metas_${selectedArea}`]}</td>
+              <td className="td-areas td-areas-data">{student[`rep_eva_${selectedArea}`]}</td>
               <td className="td-areas">
                 <CiEdit className="edit-icons" onClick={() => openModal(student)} />
               </td>

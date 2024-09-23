@@ -15,6 +15,8 @@ const createProduct = asyncHandler(async (req, res) => {
     price,
     color,
     description,
+    purchase_date,
+    useful_life
   } = req.body;
 
   // Verificar si el producto con el mismo nombre o modelo ya existe
@@ -57,6 +59,8 @@ const createProduct = asyncHandler(async (req, res) => {
     price,
     color,
     description,
+    purchase_date,
+    useful_life,
     image: fileData,
   });
 
@@ -75,6 +79,8 @@ const updateProduct = asyncHandler(async (req, res) => {
     price,
     color,
     description,
+    purchase_date,
+    useful_life
   } = req.body;
   const { id } = req.params;
 
@@ -121,6 +127,8 @@ const updateProduct = asyncHandler(async (req, res) => {
       price: price || product.price,
       color: color || product.color,
       description: description || product.description,
+      purchase_date: purchase_date || product.purchase_date,
+      useful_life: useful_life || product.useful_life,
       image: fileData,
     },
     {
