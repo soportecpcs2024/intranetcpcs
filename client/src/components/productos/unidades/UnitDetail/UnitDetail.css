@@ -1,0 +1,94 @@
+/* Estilos para el contenedor principal */
+.unit-detail-container {
+    max-width: 600px;
+     
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .unit-detail-container:hover {
+    transform: scale(1.02); /* Pequeña animación al hacer hover */
+  }
+  
+  /* Estilo del título */
+  .unit-detail-container h2 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  
+  /* Estilo de los textos de información */
+  .unit-detail-container p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+  
+  .unit-detail-container p strong {
+    color: #333;
+    font-weight: 600;
+     
+  }
+  
+  /* Efecto visual para las etiquetas de información */
+  .unit-detail-container p::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #6c63ff;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .unit-detail-container p:last-child {
+    margin-bottom: 0;
+  }
+  
+  /* Estilo para el estado */
+  .unit-detail-container .unit-status {
+    font-weight: bold;
+    text-transform: capitalize;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+  }
+  
+  .unit-status.activo {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .unit-status.inactivo {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  /* Media query para adaptabilidad */
+  @media (max-width: 768px) {
+    .unit-detail-container {
+      padding: 15px;
+    }
+  
+    .unit-detail-container h2 {
+      font-size: 20px;
+    }
+  
+    .unit-detail-container p {
+      font-size: 14px;
+    }
+  }
+  
+
+  .unit-detail-id{
+    font-size: 10px;
+  }

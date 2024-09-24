@@ -1,0 +1,25 @@
+.unit-update-container{
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+     
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group-unit label{
+    
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        color: #555;
+       
+}
+
+.form-group-unit{
+     width: 100%;
+    padding: 5px;
+}
+
+ 

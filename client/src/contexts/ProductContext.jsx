@@ -123,7 +123,7 @@ export const ProductProvider = ({ children }) => {
 
   const updateUnit = async (id, unitData) => {
     try {
-      const response = await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/api/units/${id}`, unitData);
+      const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/units/${id}`, unitData);
       setUnits((prevUnits) =>
         prevUnits.map((unit) => (unit._id === id ? response.data : unit))
       );
@@ -142,6 +142,7 @@ export const ProductProvider = ({ children }) => {
       setErrorUnits(error);
     }
   };
+  
 
   const createLocation = async (locationData) => {
     try {

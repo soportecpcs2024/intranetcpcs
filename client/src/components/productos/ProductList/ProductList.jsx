@@ -135,7 +135,7 @@ const ProductList = () => {
                       <td className="link-icons">
                         <span>
                           <Link to={`/admin/administracion/product-detail/${_id}`}>
-                            <AiOutlineEye size={25} color={"purple"} />
+                            <AiOutlineEye size={25} color={"#3498db"} />
                           </Link>
                         </span>
                         <span>

@@ -12,9 +12,32 @@ const Unitschema = new mongoose.Schema({
         required: true
     },
     estado: {
+      type: String,
+      enum: ["activo", "Inactivo"],  // Enum to restrict values
+      default: "Inactivo",  // Default value
+      required: true,  // Making it required
+    },
+    entregado_por: {
         type: String,
-        default: 'disponible' // Ejemplo de valor por defecto
-    }
+        required: true,
+      },
+      recibido_por: {
+        type: String,
+        default: "Administración",
+      },
+      aprobado_por: {
+        type: String,
+        default: "Administración",
+      },
+      fecha_entrega: {
+        type: Date,  // Date type to handle dates
+      },
+      observaciones: {
+        type: String,
+        required: true,
+      },
+       
+    
 });
 
 module.exports = mongoose.model('Units', Unitschema);

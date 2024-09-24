@@ -5,7 +5,7 @@
     flex-direction: column;
     max-width: 500px;
      
-    padding: 15px;
+    padding: 10px;
     background: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -16,6 +16,29 @@
     margin-bottom: 1.5rem;
     color: #333;
   }
+ 
+  .form-group-entregas{
+    display: flex;
+     gap: 20px;
+    background-color: rgba(224, 224, 224, 0.537);
+    border-radius: 8px;
+     
+
+  }
+  .form-group-entregas .box:nth-child(1){
+    flex-basis: calc(60% - 5px);  
+    margin: 5px 5px;
+    padding: 0px;
+    
+  }
+  .form-group-entregas .box:nth-child(2){
+    flex-basis: calc(40% - 5px);  
+    margin: 5px 5px;
+  }
+
+  
+
+  
   
  
   

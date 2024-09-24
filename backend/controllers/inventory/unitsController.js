@@ -44,12 +44,27 @@ exports.obtenerUnidadPorId = async (req, res) => {
     }
 };
 
-// Actualizar una unidad
+// Actualizar una unidad (solo ciertos campos)
 exports.actualizarUnidad = async (req, res) => {
     try {
-        const unidadActualizada = await Unidad.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        // Solo los campos que deseas actualizar
+        const camposActualizados = {
+            location: req.body.location,
+            estado: req.body.estado,
+            entregado_por: req.body.entregado_por,
+            recibido_por: req.body.recibido_por,
+            fecha_entrega: req.body.fecha_entrega,
+            observaciones: req.body.observaciones
+        };
+
+        const unidadActualizada = await Unidad.findByIdAndUpdate(
+            req.params.id,
+            { $set: camposActualizados }, // Solo actualiza los campos especificados
+            { new: true, runValidators: true } // new: true devuelve el documento actualizado
+        )
             .populate('id_producto')  // Población del producto
             .populate('location');    // Población de la ubicación
+
         if (!unidadActualizada) return res.status(404).json({ error: 'Unidad no encontrada' });
         res.status(200).json(unidadActualizada);
     } catch (error) {

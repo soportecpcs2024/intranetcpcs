@@ -30,6 +30,7 @@ import ListarUnidades from "./components/productos/unidades/ListarUnidades/Lista
 import UnitDetail from "./components/productos/unidades/UnitDetail/UnitDetail";
  
 import LocationList from "./components/productos/Location/LocationList/LocationList";
+import UnitUpdate from "./components/productos/unidades/ActualizarUnidad/UnitUpdate";
 
 
 
@@ -107,6 +108,7 @@ const AppContent = () => {
               <Route path="productList" element={<ProductList />} />
               <Route path="add-product" element={<AddProduct />} />
               <Route path="createUnits" element={<CreateUnits />} />
+
               <Route path="createlocation" element={<AddLocation />} />
               <Route path="repbug" element={<Reportbug />} />
               <Route path="listunit" element={<ListarUnidades />} />
@@ -116,6 +118,7 @@ const AppContent = () => {
               <Route path="product-detail/:id" element={<ProductDetail />} />
               <Route path="edit-product/:id" element={<EditProduct />} />
               <Route path="units/:id" element={<UnitDetail />} /> {/* Added UnitDetail route */}
+              <Route path="updateunits/:id" element={<UnitUpdate />} />
             </Route>
           </Route>
         )}

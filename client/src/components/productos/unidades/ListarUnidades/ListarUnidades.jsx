@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useProducts } from "../../../../contexts/ProductContext";
 import { Link } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import "./ListarUnidades.css";
 import Search from "../../Search/Search";
 import ReactPaginate from "react-paginate"; // Importar ReactPaginate
+import { confirmAlert } from "react-confirm-alert";
 
 const ListarUnidades = () => {
-  const { units, loadingUnits, errorUnits } = useProducts();
+  const { units, loadingUnits, errorUnits, removeUnit } = useProducts(); // Asegúrate de que removeProduct está aquí
   const [formattedUnits, setFormattedUnits] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentItems, setCurrentItems] = useState([]);
@@ -59,6 +61,24 @@ const ListarUnidades = () => {
   if (loadingUnits) return <div>Cargando...</div>;
   if (errorUnits) return <div>Error al cargar unidades.</div>;
 
+  const confirmDelete = (id) => {
+    confirmAlert({
+      title: "Eliminar unidad",
+      message: "¿Estás seguro de que deseas eliminar esta unidad?",
+      buttons: [
+        {
+          label: "Eliminar",
+          onClick: () => {
+            removeUnit(id); // Asegúrate de que esta función esté implementada correctamente en el contexto
+          },
+        },
+        {
+          label: "Cancelar",
+        },
+      ],
+    });
+  };
+
   return (
     <div className="container">
       <h3>Listar Unidades</h3>
@@ -70,14 +90,12 @@ const ListarUnidades = () => {
           />
         </div>
         <div className="container-listUnits-Search-ps">
-          {/* Mostrar número de items listados */}
           <div>
             <p>Unidades : </p>
           </div>
           <div>
             <p className="item-count">
               {currentItems.length} de {formattedUnits.length}
-              {/* Cantidad unidades {currentItems.length} de {formattedUnits.length} unidades */}
             </p>
           </div>
         </div>
@@ -88,12 +106,10 @@ const ListarUnidades = () => {
           <tr>
             <th>Producto</th>
             <th>Marca</th>
-             
             <th>Lugar</th>
             <th>Ubicación</th>
             <th>Estado</th>
-           
-            <th>Ver</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -101,25 +117,36 @@ const ListarUnidades = () => {
             <tr key={unit._id}>
               <td>{unit.id_producto?.name || "N/A"}</td>
               <td>{unit.id_producto?.brand || "N/A"}</td>
-              
               <td>{unit.location?.nombre || "N/A"}</td>
               <td>{unit.location?.direccion || "N/A"}</td>
               <td>{unit.estado || "N/A"}</td>
-               
               <td>
-                <Link
-                  to={`/admin/administracion/units/${unit._id}`}
-                  className="view-icon"
-                >
-                  <FaEye />
-                </Link>
+                <div className="icon-container">
+                  <Link
+                    to={`/admin/administracion/units/${unit._id}`}
+                    className="view-icon"
+                  >
+                    <FaEye size={20} color={"#3498db"} />
+                  </Link>
+                  <Link
+                    to={`/admin/administracion/updateunits/${unit._id}`}
+                    className="view-icon"
+                  >
+                    <FaEdit size={20} color={"green"} />
+                  </Link>
+                  <Link
+                    onClick={() => confirmDelete(unit._id)}
+                    className="view-icon"
+                  >
+                    <FaTrashAlt size={20} color={"red"} />
+                  </Link>
+                </div>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
 
-      {/* Componente de paginación */}
       <ReactPaginate
         breakLabel="..."
         nextLabel="Siguiente"
