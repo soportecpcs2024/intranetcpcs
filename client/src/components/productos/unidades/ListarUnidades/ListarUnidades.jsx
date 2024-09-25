@@ -7,6 +7,8 @@ import "./ListarUnidades.css";
 import Search from "../../Search/Search";
 import ReactPaginate from "react-paginate"; // Importar ReactPaginate
 import { confirmAlert } from "react-confirm-alert";
+import EstadisUnidades from "../estadisticasUnidades/EstadisUnidades";
+EstadisUnidades
 
 const ListarUnidades = () => {
   const { units, loadingUnits, errorUnits, removeUnit } = useProducts(); // Asegúrate de que removeProduct está aquí
@@ -15,7 +17,7 @@ const ListarUnidades = () => {
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
-  const itemsPerPage = 5;
+  const itemsPerPage = 12;
 
   useEffect(() => {
     if (units) {
@@ -38,6 +40,7 @@ const ListarUnidades = () => {
     // Filtrar unidades basadas en el término de búsqueda
     const filteredUnits = formattedUnits.filter((unit) => {
       const name = unit.id_producto?.name?.toLowerCase() || "";
+      const idunit = unit._id?.toLowerCase() || "";
       const locationName = unit.location?.nombre?.toLowerCase() || "";
       const locationAddress = unit.location?.direccion?.toLowerCase() || "";
       const searchTermLower = searchTerm.toLowerCase();
@@ -45,9 +48,10 @@ const ListarUnidades = () => {
       return (
         name.includes(searchTermLower) ||
         locationName.includes(searchTermLower) ||
-        locationAddress.includes(searchTermLower)
+        locationAddress.includes(searchTermLower) ||
+        idunit.includes(searchTermLower)
       );
-    });
+    })
 
     setCurrentItems(filteredUnits.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(filteredUnits.length / itemsPerPage));
@@ -82,6 +86,9 @@ const ListarUnidades = () => {
   return (
     <div className="container">
       <h3>Listar Unidades</h3>
+      <div>
+        <EstadisUnidades />
+      </div>
       <div className="container-listUnits-Search">
         <div>
           <Search
@@ -104,6 +111,7 @@ const ListarUnidades = () => {
       <table>
         <thead>
           <tr>
+            <th>Id</th>
             <th>Producto</th>
             <th>Marca</th>
             <th>Lugar</th>
@@ -115,6 +123,7 @@ const ListarUnidades = () => {
         <tbody>
           {currentItems.map((unit) => (
             <tr key={unit._id}>
+              <td>{unit._id || "N/A"}</td>
               <td>{unit.id_producto?.name || "N/A"}</td>
               <td>{unit.id_producto?.brand || "N/A"}</td>
               <td>{unit.location?.nombre || "N/A"}</td>

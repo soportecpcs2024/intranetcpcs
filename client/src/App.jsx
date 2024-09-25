@@ -14,7 +14,7 @@ import DescargarPdf from "./components/DescargarPdf";
 import { InfoIndividual } from "./pages/admin/academicos/InfoIndividual";
 import Users from "./pages/admin/User/main/Users";
 import LlegadasTarde from "./pages/admin/academicos/llegadast/LlegadasTarde";
-import AgregarLlegadasTarde from "./pages/admin/academicos/llegadast/AgregarLlegadasTarde";
+AgregarLlegadasTarde
 import NivelSuperior from "./pages/admin/academicos/nivelSuperior/NivelSuperior";
 import DashboardInventory from "./pages/inventory/DashboardInventory/DashboardInventory";
 import ProductList from "./components/productos/ProductList/ProductList";
@@ -31,6 +31,7 @@ import UnitDetail from "./components/productos/unidades/UnitDetail/UnitDetail";
  
 import LocationList from "./components/productos/Location/LocationList/LocationList";
 import UnitUpdate from "./components/productos/unidades/ActualizarUnidad/UnitUpdate";
+import AgregarLlegadasTarde from "./pages/admin/soporte/adicionarllegadastarde/AgregarLlegadasTarde";
 
 
 
