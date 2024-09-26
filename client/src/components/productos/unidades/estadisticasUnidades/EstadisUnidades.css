@@ -1,0 +1,40 @@
+.estadisticas-container {
+    margin: 10px 0;
+  }
+  
+  .card-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+  
+  .unit-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 180px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .unit-image {
+    width: 40%;
+    height: 50px;
+    object-fit: cover;
+    margin-top: 5px;
+  }
+  
+  .unit-info {
+    padding: 5px;
+  }
+  
+  .unit-info h4 {
+    font-size: 12px;
+    margin-bottom: 5px;
+  }
+  
+  .unit-info p {
+    font-size: 12px;
+    color: #555;
+  }
+  

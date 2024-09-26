@@ -5,14 +5,14 @@ import { FaEye } from "react-icons/fa";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import "./ListarUnidades.css";
 import Search from "../../Search/Search";
-import ReactPaginate from "react-paginate"; // Importar ReactPaginate
+import ReactPaginate from "react-paginate"; 
 import { confirmAlert } from "react-confirm-alert";
 import EstadisUnidades from "../estadisticasUnidades/EstadisUnidades";
-EstadisUnidades
 
 const ListarUnidades = () => {
-  const { units, loadingUnits, errorUnits, removeUnit } = useProducts(); // Asegúrate de que removeProduct está aquí
+  const { units, loadingUnits, errorUnits, removeUnit } = useProducts();
   const [formattedUnits, setFormattedUnits] = useState([]);
+  const [productStats, setProductStats] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
@@ -31,6 +31,17 @@ const ListarUnidades = () => {
           : "N/A",
       }));
       setFormattedUnits(formatted);
+
+      // Agrupar unidades por nombre de producto y contar cuántas hay de cada uno
+      const stats = formatted.reduce((acc, unit) => {
+        const productName = unit.id_producto?.name || "Desconocido";
+        if (!acc[productName]) {
+          acc[productName] = 0;
+        }
+        acc[productName] += 1;
+        return acc;
+      }, {});
+      setProductStats(stats);  // Guardar estadísticas de productos
     }
   }, [units]);
 
@@ -51,7 +62,7 @@ const ListarUnidades = () => {
         locationAddress.includes(searchTermLower) ||
         idunit.includes(searchTermLower)
       );
-    })
+    });
 
     setCurrentItems(filteredUnits.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(filteredUnits.length / itemsPerPage));
@@ -73,7 +84,7 @@ const ListarUnidades = () => {
         {
           label: "Eliminar",
           onClick: () => {
-            removeUnit(id); // Asegúrate de que esta función esté implementada correctamente en el contexto
+            removeUnit(id); 
           },
         },
         {
@@ -87,7 +98,8 @@ const ListarUnidades = () => {
     <div className="container">
       <h3>Listar Unidades</h3>
       <div>
-        <EstadisUnidades />
+        {/* Pasamos las estadísticas de los productos como props a EstadisUnidades */}
+        <EstadisUnidades productStats={productStats} />
       </div>
       <div className="container-listUnits-Search">
         <div>
