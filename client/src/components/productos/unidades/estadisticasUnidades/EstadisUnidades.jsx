@@ -28,7 +28,7 @@ const EstadisUnidades = () => {
 
   return (
     <div className="estadisticas-container">
-      <h3>Estadísticas de Unidades</h3>
+       
       <div className="card-container">
         {unitCounts.map((unitGroup, index) => (
           <div key={index} className="unit-card">
