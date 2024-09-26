@@ -10,7 +10,7 @@ const EstadisUnidades = () => {
     if (units) {
       // Agrupar las unidades por el nombre del producto y contar la cantidad de cada una
       const groupedUnits = units.reduce((acc, unit) => {
-        const productName = unit.id_producto?.name;
+        const productName = unit.id_producto?.category;
         if (!acc[productName]) {
           acc[productName] = {
             count: 0,
