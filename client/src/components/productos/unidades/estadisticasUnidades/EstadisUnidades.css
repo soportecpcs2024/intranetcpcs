@@ -1,29 +1,39 @@
 .estadisticas-container {
     margin: 10px 0;
-    width: 100%;
-  }
-  
-  .card-container {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
+    border: 1px solid black;
      
   }
   
+  .card-container-units {
+     
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    
+     
+  
+    
+    
+    
+    
+    
+  }
+  
   .unit-card {
+    
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
-    width: 130px;
+    width: 110px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
   .unit-image {
-    width: 40%;
-    height: 50px;
+    width: 50%;
+    height: 40px;
     object-fit: cover;
-    margin-top: 5px;
+    margin-top: 8px;
   }
   
   .unit-info {

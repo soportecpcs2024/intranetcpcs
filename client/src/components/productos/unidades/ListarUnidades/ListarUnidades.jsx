@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useProducts } from "../../../../contexts/ProductContext";
 import { Link } from "react-router-dom";
-import { FaEye } from "react-icons/fa";
-import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { FaEye, FaEdit, FaTrashAlt } from "react-icons/fa";
 import "./ListarUnidades.css";
-import Search from "../../Search/Search";
 import ReactPaginate from "react-paginate"; 
 import { confirmAlert } from "react-confirm-alert";
 import EstadisUnidades from "../estadisticasUnidades/EstadisUnidades";
+import BuscarUnidad from "../BuscarUnidad/BuscarUnidad";
 
 const ListarUnidades = () => {
   const { units, loadingUnits, errorUnits, removeUnit } = useProducts();
   const [formattedUnits, setFormattedUnits] = useState([]);
   const [productStats, setProductStats] = useState({});
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState(""); // Estado para el término de búsqueda
+
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
@@ -51,6 +51,7 @@ const ListarUnidades = () => {
     // Filtrar unidades basadas en el término de búsqueda
     const filteredUnits = formattedUnits.filter((unit) => {
       const name = unit.id_producto?.name?.toLowerCase() || "";
+      const category = unit.id_producto?.category?.toLowerCase() || "";
       const idunit = unit._id?.toLowerCase() || "";
       const locationName = unit.location?.nombre?.toLowerCase() || "";
       const locationAddress = unit.location?.direccion?.toLowerCase() || "";
@@ -58,9 +59,10 @@ const ListarUnidades = () => {
 
       return (
         name.includes(searchTermLower) ||
+        category.includes(searchTermLower) ||
+        idunit.includes(searchTermLower) ||
         locationName.includes(searchTermLower) ||
-        locationAddress.includes(searchTermLower) ||
-        idunit.includes(searchTermLower)
+        locationAddress.includes(searchTermLower)
       );
     });
 
@@ -97,20 +99,16 @@ const ListarUnidades = () => {
   return (
     <div className="container">
       <h3>Listar Unidades</h3>
-      <div>
-        {/* Pasamos las estadísticas de los productos como props a EstadisUnidades */}
+      <div className="container-lis-unit">
         <EstadisUnidades productStats={productStats} />
       </div>
       <div className="container-listUnits-Search">
         <div>
-          <Search
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
+          <BuscarUnidad searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         </div>
         <div className="container-listUnits-Search-ps">
           <div>
-            <p>Unidades : </p>
+            <p>Unidades: </p>
           </div>
           <div>
             <p className="item-count">

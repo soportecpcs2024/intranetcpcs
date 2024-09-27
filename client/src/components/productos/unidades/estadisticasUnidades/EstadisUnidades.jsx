@@ -27,9 +27,9 @@ const EstadisUnidades = () => {
   }, [units]);
 
   return (
-    <div className="estadisticas-container">
+    
        
-      <div className="card-container">
+      <div className="card-container-units">
         {unitCounts.map((unitGroup, index) => (
           <div key={index} className="unit-card">
             <img
@@ -44,7 +44,7 @@ const EstadisUnidades = () => {
           </div>
         ))}
       </div>
-    </div>
+    
   );
 };
 
