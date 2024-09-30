@@ -10,11 +10,13 @@ const NewDatatable = ({ students, error }) => {
       setCurrentPage(event.selected);
     };
   
-    // Actualizar los estudiantes filtrados cuando cambia la lista de estudiantes o se aplican filtros
-    useEffect(() => {
-      setFilteredStudents(students);
-      setCurrentPage(0); // Reiniciar la página actual cuando se aplican filtros
-    }, [students]);
+    // Actualizar los estudiantes filtrados cuando cambia la lista de estudiantes
+useEffect(() => {
+  // Ordenar los estudiantes alfabéticamente por nombre
+  const sortedStudents = [...students].sort((a, b) => a.nombre.localeCompare(b.nombre));
+  setFilteredStudents(sortedStudents);
+  setCurrentPage(0);
+}, [students]);
   
     // Calcular el índice de inicio y fin de la página actual
     const offset = currentPage * itemsPerPage;

@@ -17,10 +17,12 @@ const DatatableAreas = ({ students, selectedArea, error }) => {
   };
 
   // Actualizar los estudiantes filtrados cuando cambia la lista de estudiantes
-  useEffect(() => {
-    setFilteredStudents(students);
-    setCurrentPage(0);
-  }, [students]);
+useEffect(() => {
+  // Ordenar los estudiantes alfabéticamente por nombre
+  const sortedStudents = [...students].sort((a, b) => a.nombre.localeCompare(b.nombre));
+  setFilteredStudents(sortedStudents);
+  setCurrentPage(0);
+}, [students]);
 
   // Calcular elementos actuales de la página
   const offset = currentPage * itemsPerPage;

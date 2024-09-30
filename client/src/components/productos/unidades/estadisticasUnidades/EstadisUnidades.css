@@ -7,16 +7,9 @@
   .card-container-units {
      
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     gap: 10px;
-    
-     
-  
-    
-    
-    
-    
-    
+   
   }
   
   .unit-card {
@@ -24,20 +17,21 @@
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
-    width: 110px;
+    width: 120px; /* Ajustar el ancho */
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
   .unit-image {
-    width: 50%;
-    height: 40px;
-    object-fit: cover;
+    width: 50px; /* Fijar un ancho para todas las imágenes */
+    height: 50px; /* Fijar un alto para todas las imágenes */
+    object-fit: cover; /* Ajustar las imágenes para que llenen el contenedor sin distorsión */
+    border-radius: 5px;
     margin-top: 8px;
   }
   
   .unit-info {
-    padding: 5px;
+    padding: 4px;
   }
   
   .unit-info h4 {
@@ -49,4 +43,3 @@
     font-size: 12px;
     color: #555;
   }
-  
