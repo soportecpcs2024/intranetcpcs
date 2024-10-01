@@ -16,7 +16,7 @@ const LocationDetails = () => {
   useEffect(() => {
     if (units) {
       const grouped = units.reduce((acc, unit) => {
-        const locationName = unit.location.nombre;
+        const locationName = unit.location.nombre; // Nombre de la ubicación
         const productName = unit.id_producto.name;
 
         if (!acc[locationName]) {
@@ -38,20 +38,13 @@ const LocationDetails = () => {
     }
   }, [units]);
 
-  // Filtrar los productos por el término de búsqueda
+  // Filtrar las unidades por el término de búsqueda y paginación
   useEffect(() => {
     const filteredUnits = Object.keys(groupedUnits).reduce((acc, locationName) => {
-      const productsInLocation = Object.keys(groupedUnits[locationName]).filter(productName =>
-        productName.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-
-      if (productsInLocation.length) {
-        acc[locationName] = productsInLocation.reduce((accProd, productName) => {
-          accProd[productName] = groupedUnits[locationName][productName];
-          return accProd;
-        }, {});
+      // Filtrar por nombre de ubicación
+      if (locationName.toLowerCase().includes(searchTerm.toLowerCase())) {
+        acc[locationName] = groupedUnits[locationName]; // Agregar la ubicación si coincide
       }
-
       return acc;
     }, {});
 
@@ -76,13 +69,16 @@ const LocationDetails = () => {
         <div className="search-bar">
           <input
             type="text"
-            placeholder="Buscar producto"
+            placeholder="Buscar ubicación"
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setItemOffset(0); // Resetear el offset al buscar
+            }}
           />
         </div>
 
-        {Object.keys(currentItems).length > 0 ? (
+        {currentItems.length > 0 ? (
           currentItems.map(locationName => (
             <div key={locationName} className="location-card">
               <h3 className="location-title">Ubicación: {locationName}</h3>
@@ -121,9 +117,3 @@ const LocationDetails = () => {
 };
 
 export default LocationDetails;
-
-
-
-
-
-
