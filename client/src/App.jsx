@@ -32,6 +32,7 @@ import UnitDetail from "./components/productos/unidades/UnitDetail/UnitDetail";
 import LocationList from "./components/productos/Location/LocationList/LocationList";
 import UnitUpdate from "./components/productos/unidades/ActualizarUnidad/UnitUpdate";
 import AgregarLlegadasTarde from "./pages/admin/soporte/adicionarllegadastarde/AgregarLlegadasTarde";
+import LocationDetails from "./components/productos/Location/LocationDetails/LocationDetails";
 
 
 
@@ -120,6 +121,7 @@ const AppContent = () => {
               <Route path="edit-product/:id" element={<EditProduct />} />
               <Route path="units/:id" element={<UnitDetail />} /> {/* Added UnitDetail route */}
               <Route path="updateunits/:id" element={<UnitUpdate />} />
+              <Route path="locationdetails" element={<LocationDetails />} />
             </Route>
           </Route>
         )}

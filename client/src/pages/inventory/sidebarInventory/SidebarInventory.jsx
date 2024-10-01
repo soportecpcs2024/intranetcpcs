@@ -8,6 +8,8 @@ import { BsBuildingFillAdd } from "react-icons/bs";
 import { RiApps2AddLine } from "react-icons/ri";
 import { RiListOrdered2 } from "react-icons/ri";
 import { FaListCheck } from "react-icons/fa6";
+import { MdAssignmentAdd } from "react-icons/md";
+
 import "./SidebarInventory.css";
 
 const SidebarInventory = () => {
@@ -76,6 +78,18 @@ const SidebarInventory = () => {
         location={location}
       />
 
+<div>
+        <h2 className="SidebarItem-report-line">_____________________</h2>
+        <SidebarItem
+          path="/admin/administracion/locationdetails"
+          icon={<MdAssignmentAdd />}
+          label="Asignaciones"
+          isOpen={isOpen}
+          location={location}
+        />
+
+        
+      </div>
       <div>
         <h2 className="SidebarItem-report-line">_____________________</h2>
         <SidebarItem
@@ -88,6 +102,7 @@ const SidebarInventory = () => {
 
         
       </div>
+      
     </div>
   );
 };

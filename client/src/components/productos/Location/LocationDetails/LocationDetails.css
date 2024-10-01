@@ -1,0 +1,73 @@
+/* Contenedor principal para las cards de locaciones */
+.location-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+  }
+  
+  /* Estilo para cada card de locación */
+  .location-card {
+     
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 8px;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  /* Efecto hover para cada card */
+  .location-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Título de la locación */
+  .location-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  /* Estilo para los productos dentro de una locación */
+  .product-card {
+    display: flex;
+    justify-content: space-between;
+     
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #fafafa;
+    margin-bottom: 10px;
+    transition: box-shadow 0.2s ease-in-out;
+  }
+  
+  /* Efecto hover para los productos */
+  .product-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Título del producto */
+  .product-name {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #444;
+  }
+  
+  /* Cantidad de producto */
+  .product-quantity {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #007BFF;
+  }
+  
+  /* Estilo para el contenedor cuando no hay productos */
+  .empty-message {
+    font-size: 1rem;
+    color: #999;
+    text-align: center;
+    margin-top: 20px;
+  }
+  

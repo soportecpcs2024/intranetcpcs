@@ -17,4 +17,5 @@ router.put('/:id', locationController.updateLocation);
 // Eliminar una ubicación
 router.delete('/:id', locationController.deleteLocation);
 
+
 module.exports = router;
