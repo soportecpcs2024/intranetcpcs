@@ -5,8 +5,7 @@ import "./UnitUpdate.css";
 
 const UnitUpdate = () => {
   const { id } = useParams(); // Get the unit ID from the URL
-  const { fetchUnits, updateUnit, loading, error, units, locations } =
-    useProducts();
+  const { fetchUnits, updateUnit, loading, error, units, locations } = useProducts();
   const [unit, setUnit] = useState(null);
   const [formData, setFormData] = useState({
     location: "",
@@ -16,6 +15,7 @@ const UnitUpdate = () => {
     aprobado_por: "Administración",
     fecha_entrega: "",
     observaciones: "",
+    producto: "" // Nuevo campo para almacenar el nombre del producto
   });
   const navigate = useNavigate();
 
@@ -34,6 +34,7 @@ const UnitUpdate = () => {
             ? new Date(foundUnit.fecha_entrega).toISOString().split("T")[0]
             : "",
           observaciones: foundUnit.observaciones,
+          producto: foundUnit.id_producto?.name || "Producto no asignado" // Asignar el nombre del producto
         });
       }
     } else {
@@ -92,8 +93,7 @@ const UnitUpdate = () => {
             ) : key === "estado" ? (
               <>
                 <label htmlFor={key}>
-                  {key.charAt(0).toUpperCase() + key.slice(1).replace("_", " ")}
-                  :
+                  {key.charAt(0).toUpperCase() + key.slice(1).replace("_", " ")}:
                 </label>
                 <select
                   name={key}
@@ -105,26 +105,35 @@ const UnitUpdate = () => {
                   <option value="Inactivo">Inactivo</option>
                 </select>
               </>
+            ) : key === "producto" ? ( // Mostrar el nombre del producto sin permitir edición
+              <>
+                <label>Producto asignado:</label>
+                <input
+                  type="text"
+                  name="producto"
+                  id="producto"
+                  value={value}
+                  disabled // Deshabilitar el campo para que no se pueda editar
+                />
+              </>
             ) : key === "observaciones" ? (
               <>
                 <label htmlFor={key}>
-                  {key.charAt(0).toUpperCase() + key.slice(1).replace("_", " ")}
-                  :
+                  {key.charAt(0).toUpperCase() + key.slice(1).replace("_", " ")}:
                 </label>
                 <textarea
                   name={key}
                   id={key}
                   value={value}
                   onChange={handleChange}
-                  rows="4" // Puedes ajustar el número de filas según tus necesidades
-                  style={{ resize: "none", width: "100%" }} // Estilo opcional para el textarea
+                  rows="4"
+                  style={{ resize: "none", width: "100%" }}
                 />
               </>
             ) : (
               <>
                 <label htmlFor={key}>
-                  {key.charAt(0).toUpperCase() + key.slice(1).replace("_", " ")}
-                  :
+                  {key.charAt(0).toUpperCase() + key.slice(1).replace("_", " ")}:
                 </label>
                 <input
                   type={key === "fecha_entrega" ? "date" : "text"}

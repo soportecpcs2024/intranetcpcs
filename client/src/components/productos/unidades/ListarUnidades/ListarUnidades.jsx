@@ -9,7 +9,7 @@ import EstadisUnidades from "../estadisticasUnidades/EstadisUnidades";
 import BuscarUnidad from "../BuscarUnidad/BuscarUnidad";
 
 const ListarUnidades = () => {
-  const { units, loadingUnits, errorUnits, removeUnit } = useProducts();
+  const { units, loadingUnits, errorUnits, removeUnit, fetchUnits } = useProducts();
   const [formattedUnits, setFormattedUnits] = useState([]);
   const [productStats, setProductStats] = useState({});
   const [searchTerm, setSearchTerm] = useState(""); // Estado para el término de búsqueda
@@ -19,7 +19,9 @@ const ListarUnidades = () => {
   const [itemOffset, setItemOffset] = useState(0);
   const itemsPerPage = 12;
 
+  // Log the units when they are loaded
   useEffect(() => {
+    console.log("Units loaded:", units); // Verifica la carga de las unidades
     if (units) {
       const formatted = units.map((unit) => ({
         ...unit,
@@ -66,6 +68,7 @@ const ListarUnidades = () => {
       );
     });
 
+    console.log("Filtered Units:", filteredUnits); // Verifica los productos que pasan el filtro
     setCurrentItems(filteredUnits.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(filteredUnits.length / itemsPerPage));
   }, [itemOffset, itemsPerPage, formattedUnits, searchTerm]);
@@ -74,6 +77,13 @@ const ListarUnidades = () => {
     const newOffset = (event.selected * itemsPerPage) % formattedUnits.length;
     setItemOffset(newOffset);
   };
+
+  // Force reload of products if needed
+  useEffect(() => {
+    if (!loadingUnits && units.length === 0) {
+      fetchUnits();  // Forzar la recarga de productos si no se están cargando
+    }
+  }, [loadingUnits, units, fetchUnits]);
 
   if (loadingUnits) return <div>Cargando...</div>;
   if (errorUnits) return <div>Error al cargar unidades.</div>;

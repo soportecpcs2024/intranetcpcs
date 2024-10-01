@@ -16,13 +16,19 @@ const LocationDetails = () => {
   useEffect(() => {
     if (units) {
       const grouped = units.reduce((acc, unit) => {
-        const locationName = unit.location.nombre; // Nombre de la ubicación
-        const productName = unit.id_producto.name;
+        const locationName = unit.location?.direccion; // Nombre de la ubicación
+        const productName = unit.id_producto?.name;
 
+        if (!locationName || !productName) {
+          return acc; // Si no hay nombre de ubicación o de producto, salimos
+        }
+
+        // Si la ubicación aún no existe, inicializar
         if (!acc[locationName]) {
           acc[locationName] = {};
         }
 
+        // Si el producto aún no existe en la ubicación, inicializar
         if (!acc[locationName][productName]) {
           acc[locationName][productName] = {
             product: unit.id_producto,
@@ -30,10 +36,12 @@ const LocationDetails = () => {
           };
         }
 
+        // Incrementar el conteo del producto
         acc[locationName][productName].count += 1;
 
         return acc;
       }, {});
+      
       setGroupedUnits(grouped);
     }
   }, [units]);
@@ -83,12 +91,13 @@ const LocationDetails = () => {
             <div key={locationName} className="location-card">
               <h3 className="location-title">Ubicación: {locationName}</h3>
 
+              {/* Listar todos los productos para la ubicación */}
               {Object.keys(groupedUnits[locationName]).map(productName => {
                 const { product, count } = groupedUnits[locationName][productName];
                 return (
-                  <div key={product._id} className="product-card">
-                    <h4 className="product-name">{product.name}</h4>
-                    <p className="product-quantity">{count} disponibles</p>
+                  <div key={product?._id} className="product-card">
+                    <h4 className="product-name">{product?.name}</h4>
+                    <p className="product-quantity">{count} unidad(es)</p>
                   </div>
                 );
               })}
