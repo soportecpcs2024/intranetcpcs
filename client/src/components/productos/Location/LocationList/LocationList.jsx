@@ -3,13 +3,12 @@ import { useProducts } from "../../../../contexts/ProductContext";
 import "./LocationList.css";
 import Search from "../../Search/Search";
 import ReactPaginate from "react-paginate"; // Importa ReactPaginate
-import { FaEye } from "react-icons/fa"; // Ícono de "ver"
+import { FaEye, FaEdit, FaTrashAlt } from "react-icons/fa"; // Íconos
 import { Link } from "react-router-dom";
-
+import { confirmAlert } from "react-confirm-alert";
 
 const LocationList = () => {
-  const { locations, loadingLocations, errorLocations, fetchLocations } =
-    useProducts();
+  const { locations, loadingLocations, errorLocations, fetchLocations, removeLocation } = useProducts(); // Asegúrate de incluir `removeLocation` del contexto
   const [formattedLocations, setFormattedLocations] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentItems, setCurrentItems] = useState([]);
@@ -59,11 +58,27 @@ const LocationList = () => {
   if (loadingLocations) return <div>Cargando...</div>;
   if (errorLocations) return <div>Error al cargar locaciones.</div>;
 
+  const confirmDelete = (id) => {
+    confirmAlert({
+      title: "Eliminar ubicación",
+      message: "¿Estás seguro de que deseas eliminar esta ubicación?",
+      buttons: [
+        {
+          label: "Eliminar",
+          onClick: () => {
+            removeLocation(id); // Usa `removeLocation` para eliminar la locación
+          },
+        },
+        {
+          label: "Cancelar",
+        },
+      ],
+    });
+  };
+
   return (
     <div className="location-container">
       <h3>Lista de Ubicaciones</h3>
-
-       
 
       <div className="container-listUnits-Search">
         <div>
@@ -91,10 +106,9 @@ const LocationList = () => {
             <th>Nombre</th>
             <th>Dirección</th>
             <th>Detalles</th>
-             
             <th>Recibido Por</th>
             <th>Estado</th>
-             
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -103,10 +117,24 @@ const LocationList = () => {
               <td>{location.nombre}</td>
               <td>{location.direccion}</td>
               <td>{location.otros_detalles}</td>
-              
               <td>{location.recibido_por}</td>
               <td>{location.estado}</td>
-               
+              <td>
+                <div className="icon-container">
+                  <Link
+                    to={`/admin/administracion/editlocation/${location._id}`}
+                    className="view-icon"
+                  >
+                    <FaEdit size={20} color={"green"} />
+                  </Link>
+                  <Link
+                    onClick={() => confirmDelete(location._id)}
+                    className="view-icon"
+                  >
+                    <FaTrashAlt size={20} color={"red"} />
+                  </Link>
+                </div>
+              </td>
             </tr>
           ))}
         </tbody>

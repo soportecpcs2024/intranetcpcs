@@ -1,0 +1,172 @@
+.add-product-container-location {
+    padding: 10px;
+    max-width: 90%;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+     
+  }
+  
+  .add-product-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .add-product-form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .add-product-form input,
+  .add-product-form textarea {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .add-product-form input:focus,
+  .add-product-form textarea:focus {
+    border-color: #007bff;
+  }
+  
+  .add-product-form input::placeholder,
+  .add-product-form textarea::placeholder {
+    color: #999;
+    font-style: italic;
+  }
+  
+  .add-product-form .submit-button {
+    padding: 7px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-product-form .submit-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .error-message {
+    color: #ff4d44;
+  }
+  
+  .location-estado {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: start;
+    align-items: center;
+    background-color: rgb(201, 201, 201);
+    padding: 6px;
+    border-radius: 6px;
+  }
+  
+  .location-estado input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: #f0f0f0;
+    margin: 0;
+    font: inherit;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #007bff;
+    border-radius: 50%;
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+  
+  .location-estado input[type="checkbox"]:before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 0.2s ease-in-out;
+    box-shadow: inset 1em 1em #007bff;
+  }
+  
+  .location-estado input[type="checkbox"]:checked:before {
+    transform: scale(1);
+  }
+  
+  .location-estado label {
+    margin-left: 10px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .location-estado div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .location-encargados {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .location-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+  }
+  
+  .location-box label {
+    margin-top: 5px;
+  }
+  
+  .location-name-estado {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+  }
+  
+  .location-name-estado .boxlocation {
+    flex-basis: calc(50% - 10px); /* Espacio ajustado para permitir el ajuste en pantallas pequeñas */
+  }
+  
+  @media (max-width: 768px) {
+    .location-encargados {
+      flex-direction: column;
+    }
+  
+    .location-name-estado {
+      flex-direction: column;
+    }
+  
+    .location-name-estado .boxlocation {
+      flex-basis: 100%; /* Asegura que cada caja ocupe el ancho completo en pantallas pequeñas */
+    }
+  }
+  
+  
+  /* AddLocation.css */
+  .error-message {
+    color: red;
+    margin-bottom: 1rem;
+    font-size: 20px;
+  }
+  
+  .success-message {
+    color: green;
+    font-size: 20px;
+    margin-bottom: 1rem;
+  }
+  
+  /* Asegúrate de que otros estilos se mantengan según tu diseño */
+  

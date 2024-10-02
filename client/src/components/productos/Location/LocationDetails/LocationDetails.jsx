@@ -10,7 +10,7 @@ const LocationDetails = () => {
   const [currentItems, setCurrentItems] = useState([]); // Estado para ítems actuales
   const [pageCount, setPageCount] = useState(0); // Estado para el número total de páginas
   const [itemOffset, setItemOffset] = useState(0); // Estado para el offset
-  const itemsPerPage = 10; // Número de ítems por página
+  const itemsPerPage = 8; // Número de ítems por página
 
   // Agrupar las unidades por nombre de la locación y contar productos por nombre
   useEffect(() => {

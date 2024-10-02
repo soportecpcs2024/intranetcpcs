@@ -33,6 +33,7 @@ import LocationList from "./components/productos/Location/LocationList/LocationL
 import UnitUpdate from "./components/productos/unidades/ActualizarUnidad/UnitUpdate";
 import AgregarLlegadasTarde from "./pages/admin/soporte/adicionarllegadastarde/AgregarLlegadasTarde";
 import LocationDetails from "./components/productos/Location/LocationDetails/LocationDetails";
+import EditLocation from "./components/productos/Location/EditLocation/EditLocation";
 
 
 
@@ -122,6 +123,7 @@ const AppContent = () => {
               <Route path="units/:id" element={<UnitDetail />} /> {/* Added UnitDetail route */}
               <Route path="updateunits/:id" element={<UnitUpdate />} />
               <Route path="locationdetails" element={<LocationDetails />} />
+              <Route path="editlocation/:id" element={<EditLocation />} />
             </Route>
           </Route>
         )}
