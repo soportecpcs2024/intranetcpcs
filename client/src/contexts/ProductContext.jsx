@@ -160,6 +160,29 @@ export const ProductProvider = ({ children }) => {
     }
   };
 
+  const updateLocation = async (id, locationData) => {
+    try {
+      const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/location/${id}`, locationData);
+      setLocations((prevLocations) =>
+        prevLocations.map((location) => (location._id === id ? response.data : location))
+      );
+    } catch (error) {
+      console.error("Error updating location", error);
+      setErrorLocations(error.response?.data?.error || error.message);
+    }
+  };
+
+  const removeLocation = async (id) => {
+    try {
+      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/location/${id}`);
+      setLocations((prevLocations) => prevLocations.filter((location) => location._id !== id));
+    } catch (error) {
+      console.error("Error deleting location", error);
+      setErrorLocations(error.response?.data?.error || error.message);
+    }
+  };
+  
+
   return (
     <ProductContext.Provider
       value={{
@@ -182,6 +205,8 @@ export const ProductProvider = ({ children }) => {
         updateUnit,
         removeUnit,
         createLocation,
+        updateLocation,
+        removeLocation
       }}
     >
       {children}

@@ -9,6 +9,10 @@ const Filtros = ({
   selectedScale,
   setSelectedScale,
 }) => {
+
+
+
+  
   return (
     <div className="content-select">
       <select

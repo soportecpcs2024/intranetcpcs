@@ -25,23 +25,26 @@ const LocationDetails = () => {
 
         // Si la ubicación aún no existe, inicializar
         if (!acc[locationName]) {
-          acc[locationName] = {};
+          acc[locationName] = {
+            responsable: unit.location?.recibido_por, // Almacenar el responsable
+            products: {}, // Inicializar productos
+          };
         }
 
         // Si el producto aún no existe en la ubicación, inicializar
-        if (!acc[locationName][productName]) {
-          acc[locationName][productName] = {
+        if (!acc[locationName].products[productName]) {
+          acc[locationName].products[productName] = {
             product: unit.id_producto,
             count: 0,
           };
         }
 
         // Incrementar el conteo del producto
-        acc[locationName][productName].count += 1;
+        acc[locationName].products[productName].count += 1;
 
         return acc;
       }, {});
-      
+
       setGroupedUnits(grouped);
     }
   }, [units]);
@@ -66,6 +69,14 @@ const LocationDetails = () => {
     setItemOffset(newOffset);
   };
 
+  const capitalizeWords = (text) => {
+    return text
+      .toLowerCase() // Convierte todo el texto a minúsculas
+      .split(' ')    // Divide el texto en palabras por espacio
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Convierte la primera letra de cada palabra a mayúscula
+      .join(' ');    // Une las palabras de nuevo en una cadena
+  };
+  
   return (
     <>
       <h2>Asignaciones por ubicación</h2>
@@ -90,10 +101,11 @@ const LocationDetails = () => {
           currentItems.map(locationName => (
             <div key={locationName} className="location-card">
               <h3 className="location-title">Ubicación: {locationName}</h3>
+              <p className="responsable">Responsable: {capitalizeWords(groupedUnits[locationName].responsable)}</p>
 
               {/* Listar todos los productos para la ubicación */}
-              {Object.keys(groupedUnits[locationName]).map(productName => {
-                const { product, count } = groupedUnits[locationName][productName];
+              {Object.keys(groupedUnits[locationName].products).map(productName => {
+                const { product, count } = groupedUnits[locationName].products[productName];
                 return (
                   <div key={product?._id} className="product-card">
                     <h4 className="product-name">{product?.name}</h4>

@@ -174,7 +174,7 @@ const EditProduct = () => {
             onChange={handleChange}
           />
         </div>
-        <button type="submit">Guardar Cambios</button>
+        <button type="submit">Actualizar</button>
       </form>
     </div>
   );
