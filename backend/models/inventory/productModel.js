@@ -31,6 +31,11 @@ const productSchema = new mongoose.Schema(
       required: [true, "Please add a category"],
       trim: true,
     },
+    area: {
+      type: String,
+      default:"",
+      trim: true,
+    },
     model: {
       type: String,
       default: "",
@@ -72,6 +77,8 @@ const productSchema = new mongoose.Schema(
       type: Number,
       default: 0, // Inicializamos en 0 por defecto
     },
+    
+
   },
   {
     timestamps: true,

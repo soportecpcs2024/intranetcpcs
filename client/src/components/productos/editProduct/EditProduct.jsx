@@ -5,13 +5,15 @@ import "./editProduct.css";
 
 const EditProduct = () => {
   const { id } = useParams();
-  const { products, fetchProducts, updateProduct, loading, error } = useProducts();
+  const { products, fetchProducts, updateProduct, loading, error } =
+    useProducts();
   const [product, setProduct] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
     brand: "",
     sku: "",
     category: "",
+    area: "",
     model: "",
     dimensions: "",
     price: "",
@@ -33,14 +35,17 @@ const EditProduct = () => {
           brand: foundProduct.brand,
           sku: foundProduct.sku,
           category: foundProduct.category,
+          area: foundProduct.area,
           model: foundProduct.model,
           dimensions: foundProduct.dimensions,
           price: foundProduct.price,
           color: foundProduct.color,
           description: foundProduct.description,
           quantity: foundProduct.quantity || "",
-          purchase_date: new Date(foundProduct.purchase_date).toISOString().split('T')[0], // Formatear la fecha para el input
-          useful_life: foundProduct.useful_life || "" // Asegúrate de incluir todos los campos
+          purchase_date: new Date(foundProduct.purchase_date)
+            .toISOString()
+            .split("T")[0], // Formatear la fecha para el input
+          useful_life: foundProduct.useful_life || "", // Asegúrate de incluir todos los campos
         });
       }
     } else {
@@ -63,7 +68,7 @@ const EditProduct = () => {
       price: parseFloat(formData.price), // Convertir el precio a número
       quantity: parseInt(formData.quantity, 10), // Convertir la cantidad a número
       purchase_date: new Date(formData.purchase_date).toISOString(), // Convertir la fecha a ISO string
-      useful_life: parseInt(formData.useful_life, 10) // Convertir la vida útil a número
+      useful_life: parseInt(formData.useful_life, 10), // Convertir la vida útil a número
     };
     updateProduct(id, updatedProduct);
     navigate("/admin/administracion/productList");
@@ -121,6 +126,16 @@ const EditProduct = () => {
             onChange={handleChange}
           />
         </div>
+        <div className="form-group">
+          <label>Área:</label>
+          <select name="area" value={formData.area} onChange={handleChange}>
+            <option value="">Selecciona un área</option>
+            <option value="Tecnología">Tecnología</option>
+            <option value="Inmueble">Inmueble</option>
+            <option value="Eléctrica">Eléctrica</option>
+          </select>
+        </div>
+
         <div className="form-group">
           <label>Modelo:</label>
           <input

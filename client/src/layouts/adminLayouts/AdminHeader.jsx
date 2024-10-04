@@ -80,7 +80,24 @@ const AdminHeader = () => {
 
                   <div className="admin-layout-header-links-a">
                     <li>
-                      <Link to="/admin/administracion">Administración</Link>
+                      <div className="dropdown">
+                        <Link onClick={toggleDropdown}>Administración</Link>
+                        
+                        {isDropdownOpen && (
+                          <ul className="dropdown-menu">
+                            <li>
+                              <Link to="/admin/administracion">
+                              Stock
+                              </Link>
+                            </li>
+                            <li>
+                              <Link to="/admin/inventario_estadisticas">Informes</Link>
+                            </li>
+                             
+                             
+                          </ul>
+                        )}
+                      </div>
                     </li>
                   </div>
 

@@ -1,0 +1,129 @@
+.layout-statis {
+    display: flex;
+  }
+  
+  .sidebar-statis {
+    top: 0;
+    left: 0;
+    width: 230px;
+    height: 100vh;
+    flex-shrink: 0;
+    background-image: radial-gradient(circle at 50% -20.71%, #a3a7ff 0, #7a8ffc 25%, #3c78f2 50%, #0063e8 75%, #0051de 100%);
+    overflow: auto;
+    color: black;
+    transition: all 0.5s;
+  }
+  
+  .top_section-statis {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: var(--dark-blue);
+    height: 70px;
+  }
+  
+  .logo-statis {
+    font-size: 30px;
+    color: var(--color-white);
+  }
+  
+  .bars-statis {
+    display: flex;
+    font-size: 25px;
+    margin-left: 70px;
+    cursor: pointer;
+    color: var(--color-white);
+    transition: all 0.3s;
+  }
+  
+  .bars-statis:hover {
+    color: var(--color-primary);
+    font-size: 27px;
+  }
+  
+  .sidebar-item-inventory-statis {
+    padding: 5px;
+    display: block;
+    font-size: 25px;
+    transition: background-color 0.5s;
+    
+  }
+  
+  .linkNav-inventory-statis {
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background-color 0.5s, color 0.3s;
+    background-color: rgba(112, 55, 235, 0.279);
+  }
+  
+  .linkNav-inventory-statis:hover {
+    background-color: #fbfbfb;
+    color: var(--color-primary);
+  }
+  
+  .linkNav-inventory-icons-statis {
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .icons-inventory-statis {
+    font-size: 20px;
+    color: var(--color-dark);
+  }
+  
+  .linkNav-inventory-statis p {
+    margin: 0;
+    font-size: 16px;
+    color: var(--color-dark);
+  }
+  
+  .active-inventory-statis {
+    color: var(--color-primary);
+    background-color: #eee;
+  }
+  
+  .active-inventory-statis::after {
+    content: "";
+    position: absolute;
+    width: 5px;
+    height: 100%;
+    right: 0;
+    top: 0;
+    background-color: var(--light-blue);
+  }
+  
+  /* Extra styles if needed */
+  
+  .menu-sidebar-statis {
+    background-color: red; /* Example, adjust as needed */
+  }
+  
+  
+  .SidebarItem-Dashboard-line-statis{
+    color: rgba(255, 253, 253, 0.323);
+    line-height: normal;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    margin-top: -10px;
+  }
+  
+  .SidebarItem-report-line-statis{
+    margin-top: -30px;
+    color: rgba(255, 253, 253, 0.323);
+    line-height: normal;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+  
+  .pre-title-sidebar-statis{
+    font-weight: 700;
+    padding-left: 5px;
+  }

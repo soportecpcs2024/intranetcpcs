@@ -9,6 +9,7 @@ const AddProduct = () => {
     brand: "",
     sku: "",
     category: "",
+    area: "",
     model: "",
     dimensions: "",
     price: "",
@@ -117,7 +118,19 @@ const AddProduct = () => {
             value={productData.category}
             onChange={handleChange}
           />
-          {errors.category && <p className="error-message">{errors.category}</p>}
+          {errors.category && (
+            <p className="error-message">{errors.category}</p>
+          )}
+        </label>
+        <label>
+          Área:
+          <select name="area" value={productData.area} onChange={handleChange}>
+            <option value="">Seleccione un área</option>
+            <option value="Tecnología">Tecnología</option>
+            <option value="Inmueble">Inmueble</option>
+            <option value="Eléctrica">Eléctrica</option>
+          </select>
+          {errors.area && <p className="error-message">{errors.area}</p>}
         </label>
 
         <label>
@@ -139,7 +152,9 @@ const AddProduct = () => {
             value={productData.dimensions}
             onChange={handleChange}
           />
-          {errors.dimensions && <p className="error-message">{errors.dimensions}</p>}
+          {errors.dimensions && (
+            <p className="error-message">{errors.dimensions}</p>
+          )}
         </label>
 
         <label>
@@ -171,7 +186,9 @@ const AddProduct = () => {
             value={productData.description}
             onChange={handleChange}
           />
-          {errors.description && <p className="error-message">{errors.description}</p>}
+          {errors.description && (
+            <p className="error-message">{errors.description}</p>
+          )}
         </label>
 
         <label>
@@ -182,7 +199,9 @@ const AddProduct = () => {
             value={productData.useful_life}
             onChange={handleChange}
           />
-          {errors.useful_life && <p className="error-message">{errors.useful_life}</p>}
+          {errors.useful_life && (
+            <p className="error-message">{errors.useful_life}</p>
+          )}
         </label>
 
         <label>
@@ -193,7 +212,9 @@ const AddProduct = () => {
             value={productData.purchase_date}
             onChange={handleChange}
           />
-          {errors.purchase_date && <p className="error-message">{errors.purchase_date}</p>}
+          {errors.purchase_date && (
+            <p className="error-message">{errors.purchase_date}</p>
+          )}
         </label>
 
         <label>
@@ -214,4 +235,3 @@ const AddProduct = () => {
 };
 
 export default AddProduct;
-

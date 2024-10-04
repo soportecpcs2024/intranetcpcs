@@ -24,7 +24,7 @@ import EditProduct from "./components/productos/editProduct/EditProduct";
 import CreateUnits from "./components/productos/unidades/crearUnidad/CreateUnits";
 import AddLocation from "./components/productos/Location/AddLocation";
 import Reportbug from "./components/productos/Bug/Reportbug";
- 
+
 import ListarUnidades from "./components/productos/unidades/ListarUnidades/ListarUnidades";
  
 import UnitDetail from "./components/productos/unidades/UnitDetail/UnitDetail";
@@ -34,6 +34,8 @@ import UnitUpdate from "./components/productos/unidades/ActualizarUnidad/UnitUpd
 import AgregarLlegadasTarde from "./pages/admin/soporte/adicionarllegadastarde/AgregarLlegadasTarde";
 import LocationDetails from "./components/productos/Location/LocationDetails/LocationDetails";
 import EditLocation from "./components/productos/Location/EditLocation/EditLocation";
+import Estadisticas from "./components/productos/statistics/prueba/Estadisticas";
+import DashboardStatistics from "./components/productos/statistics/dashboardStatistics/DashboardStatistics";
 
 
 
@@ -108,9 +110,9 @@ const AppContent = () => {
             {/* Inventory routes */}
             <Route path="administracion" element={<DashboardInventory />}>
               <Route index element={<ProductList />} />
-              <Route path="productList" element={<ProductList />} />
               <Route path="add-product" element={<AddProduct />} />
               <Route path="createUnits" element={<CreateUnits />} />
+              <Route path="productList" element={<ProductList />} />
 
               <Route path="createlocation" element={<AddLocation />} />
               <Route path="repbug" element={<Reportbug />} />
@@ -125,6 +127,11 @@ const AppContent = () => {
               <Route path="locationdetails" element={<LocationDetails />} />
               <Route path="editlocation/:id" element={<EditLocation />} />
             </Route>
+
+              <Route path="inventario_estadisticas" element={<DashboardStatistics />}>
+              <Route index element={<Estadisticas />} />
+              
+              </Route>
           </Route>
         )}
       </Routes>

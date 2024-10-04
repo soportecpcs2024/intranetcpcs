@@ -85,6 +85,10 @@ const ProductDetail = () => {
           {product.category}
         </p>
         <p>
+          <span className="product-detail-info-span">Área</span>:{" "}
+          {product.area}
+        </p>
+        <p>
           <span className="product-detail-info-span">Modelo</span>:{" "}
           {product.model}
         </p>

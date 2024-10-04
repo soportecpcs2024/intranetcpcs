@@ -122,3 +122,8 @@
   padding: 0;
   text-align: center;
 }
+
+.pre-title-sidebar{
+  font-weight: 700;
+  padding-left: 5px;
+}

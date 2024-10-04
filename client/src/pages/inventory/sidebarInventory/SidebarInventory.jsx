@@ -28,10 +28,11 @@ const SidebarInventory = () => {
         </div>
       </div>
       <div>
+        <div className="pre-title-sidebar">Lista de:</div>
         <SidebarItem
           path="/admin/administracion/productList"
           icon={<FaTh />}
-          label="Lista Productos"
+          label="Productos"
           isOpen={isOpen}
           location={location}
         />
@@ -54,26 +55,27 @@ const SidebarInventory = () => {
           />
         </div>
         <h2 className="SidebarItem-Dashboard-line">_____________________</h2>
+        <div className="pre-title-sidebar">Crear :</div>
       </div>
 
       <SidebarItem
         path="/admin/administracion/add-product"
         icon={<BiImageAdd />}
-        label="Crear producto"
+        label="Productos"
         isOpen={isOpen}
         location={location}
       />
       <SidebarItem
         path="/admin/administracion/createUnits"
         icon={<RiApps2AddLine />}
-        label="Crear unidad"
+        label="Unidadaes"
         isOpen={isOpen}
         location={location}
       />
       <SidebarItem
         path="/admin/administracion/createlocation"
         icon={<BsBuildingFillAdd />}
-        label="Crear ubicación"
+        label="Ubicaciones"
         isOpen={isOpen}
         location={location}
       />
