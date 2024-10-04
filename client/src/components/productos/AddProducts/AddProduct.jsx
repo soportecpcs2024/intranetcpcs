@@ -77,107 +77,121 @@ const AddProduct = () => {
     <div className="add-product-container">
       <h3>Adicionar Nuevo Producto</h3>
       <form onSubmit={handleSubmit} className="add-product-form">
-        <label>
-          Nombre:
-          <input
-            type="text"
-            name="name"
-            value={productData.name}
-            onChange={handleChange}
-          />
-          {errors.name && <p className="error-message">{errors.name}</p>}
-        </label>
+        <div className="add-product-form-b1">
+          <label>
+            Nombre:
+            <input
+              type="text"
+              name="name"
+              value={productData.name}
+              onChange={handleChange}
+            />
+            {errors.name && <p className="error-message">{errors.name}</p>}
+          </label>
 
-        <label>
-          Marca:
-          <input
-            type="text"
-            name="brand"
-            value={productData.brand}
-            onChange={handleChange}
-          />
-          {errors.brand && <p className="error-message">{errors.brand}</p>}
-        </label>
+          <label>
+            Marca:
+            <input
+              type="text"
+              name="brand"
+              value={productData.brand}
+              onChange={handleChange}
+            />
+            {errors.brand && <p className="error-message">{errors.brand}</p>}
+          </label>
+        </div>
 
-        <label>
-          Referencia:
-          <input
-            type="text"
-            name="sku"
-            value={productData.sku}
-            onChange={handleChange}
-          />
-          {errors.sku && <p className="error-message">{errors.sku}</p>}
-        </label>
+        <div className="add-product-form-b1">
+          <label>
+            Referencia:
+            <input
+              type="text"
+              name="sku"
+              value={productData.sku}
+              onChange={handleChange}
+            />
+            {errors.sku && <p className="error-message">{errors.sku}</p>}
+          </label>
 
-        <label>
-          Categoría:
-          <input
-            type="text"
-            name="category"
-            value={productData.category}
-            onChange={handleChange}
-          />
-          {errors.category && (
-            <p className="error-message">{errors.category}</p>
-          )}
-        </label>
-        <label>
-          Área:
-          <select name="area" value={productData.area} onChange={handleChange}>
-            <option value="">Seleccione un área</option>
-            <option value="Tecnología">Tecnología</option>
-            <option value="Inmueble">Inmueble</option>
-            <option value="Eléctrica">Eléctrica</option>
-          </select>
-          {errors.area && <p className="error-message">{errors.area}</p>}
-        </label>
+          <label>
+            Categoría:
+            <input
+              type="text"
+              name="category"
+              value={productData.category}
+              onChange={handleChange}
+            />
+            {errors.category && (
+              <p className="error-message">{errors.category}</p>
+            )}
+          </label>
+        </div>
 
-        <label>
-          Modelo:
-          <input
-            type="text"
-            name="model"
-            value={productData.model}
-            onChange={handleChange}
-          />
-          {errors.model && <p className="error-message">{errors.model}</p>}
-        </label>
+        <div className="add-product-form-b1">
+          <label>
+            Área:
+            <select
+              name="area"
+              value={productData.area}
+              onChange={handleChange}
+            >
+              <option value="">Seleccione un área</option>
+              <option value="Tecnología">Tecnología</option>
+              <option value="Inmueble">Inmueble</option>
+              <option value="Eléctrica">Eléctrica</option>
+              <option value="Eléctrica">Sonido</option>
+            </select>
+            {errors.area && <p className="error-message">{errors.area}</p>}
+          </label>
 
-        <label>
-          Dimensiones:
-          <input
-            type="text"
-            name="dimensions"
-            value={productData.dimensions}
-            onChange={handleChange}
-          />
-          {errors.dimensions && (
-            <p className="error-message">{errors.dimensions}</p>
-          )}
-        </label>
+          <label>
+            Precio:
+            <input
+              type="number"
+              name="price"
+              value={productData.price}
+              onChange={handleChange}
+            />
+            {errors.price && <p className="error-message">{errors.price}</p>}
+          </label>
+        </div>
 
-        <label>
-          Precio:
-          <input
-            type="number"
-            name="price"
-            value={productData.price}
-            onChange={handleChange}
-          />
-          {errors.price && <p className="error-message">{errors.price}</p>}
-        </label>
+        <div className="add-product-form-b1">
+          <label>
+            Modelo:
+            <input
+              type="text"
+              name="model"
+              value={productData.model}
+              onChange={handleChange}
+            />
+            {errors.model && <p className="error-message">{errors.model}</p>}
+          </label>
 
-        <label>
-          Color:
-          <input
-            type="text"
-            name="color"
-            value={productData.color}
-            onChange={handleChange}
-          />
-          {errors.color && <p className="error-message">{errors.color}</p>}
-        </label>
+          <label>
+            Dimensiones:
+            <input
+              type="text"
+              name="dimensions"
+              value={productData.dimensions}
+              onChange={handleChange}
+            />
+            {errors.dimensions && (
+              <p className="error-message">{errors.dimensions}</p>
+            )}
+          </label>
+
+          <label>
+            Color:
+            <input
+              type="text"
+              name="color"
+              value={productData.color}
+              onChange={handleChange}
+            />
+            {errors.color && <p className="error-message">{errors.color}</p>}
+          </label>
+        </div>
 
         <label>
           Descripción:
@@ -191,32 +205,33 @@ const AddProduct = () => {
           )}
         </label>
 
-        <label>
-          Vida útil (años):
-          <input
-            type="number"
-            name="useful_life"
-            value={productData.useful_life}
-            onChange={handleChange}
-          />
-          {errors.useful_life && (
-            <p className="error-message">{errors.useful_life}</p>
-          )}
-        </label>
+        <div className="add-product-form-b1">
+          <label>
+            Vida útil (años):
+            <input
+              type="number"
+              name="useful_life"
+              value={productData.useful_life}
+              onChange={handleChange}
+            />
+            {errors.useful_life && (
+              <p className="error-message">{errors.useful_life}</p>
+            )}
+          </label>
 
-        <label>
-          Fecha de compra:
-          <input
-            type="date"
-            name="purchase_date"
-            value={productData.purchase_date}
-            onChange={handleChange}
-          />
-          {errors.purchase_date && (
-            <p className="error-message">{errors.purchase_date}</p>
-          )}
-        </label>
-
+          <label>
+            Fecha de compra:
+            <input
+              type="date"
+              name="purchase_date"
+              value={productData.purchase_date}
+              onChange={handleChange}
+            />
+            {errors.purchase_date && (
+              <p className="error-message">{errors.purchase_date}</p>
+            )}
+          </label>
+        </div>
         <label>
           Imagen:
           <input

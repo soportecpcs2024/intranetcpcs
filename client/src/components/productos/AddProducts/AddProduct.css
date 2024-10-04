@@ -1,5 +1,5 @@
 .add-product-container {
-  padding: 10px;
+  padding: 8px;
   max-width: 500px;
    
   background-color: #f9f9f9; /* Fondo más claro para destacar el formulario */
@@ -15,10 +15,10 @@
 .add-product-form input,
 .add-product-form textarea {
   margin-bottom: 10px;
-  padding: 10px;
+  padding: 8px;
   border-radius: 4px;
   border: 1px solid #ccc;
-  font-size: 14px; /* Tamaño de fuente adecuado */
+  font-size: 12px; /* Tamaño de fuente adecuado */
 }
 
 /* Estilo del placeholder en campos de entrada */
@@ -52,4 +52,12 @@
   font-weight: 900;
    /* Tamaño de fuente más pequeño para el mensaje */
    
+}
+
+
+.add-product-form-b1{
+   
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
 }

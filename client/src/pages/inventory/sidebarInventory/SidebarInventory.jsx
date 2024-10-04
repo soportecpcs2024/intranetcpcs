@@ -68,7 +68,7 @@ const SidebarInventory = () => {
       <SidebarItem
         path="/admin/administracion/createUnits"
         icon={<RiApps2AddLine />}
-        label="Unidadaes"
+        label="Unidades"
         isOpen={isOpen}
         location={location}
       />
