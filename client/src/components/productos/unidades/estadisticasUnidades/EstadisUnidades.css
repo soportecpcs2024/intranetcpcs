@@ -23,11 +23,12 @@
   }
   
   .unit-image {
-    width: 50px; /* Fijar un ancho para todas las imágenes */
-    height: 50px; /* Fijar un alto para todas las imágenes */
+    width: 100px; /* Fijar un ancho para todas las imágenes */
+    height: 100px; /* Fijar un alto para todas las imágenes */
     object-fit: cover; /* Ajustar las imágenes para que llenen el contenedor sin distorsión */
     border-radius: 5px;
     margin-top: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.493);
   }
   
   .unit-info {

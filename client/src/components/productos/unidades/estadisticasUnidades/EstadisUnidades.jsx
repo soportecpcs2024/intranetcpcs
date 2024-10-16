@@ -30,6 +30,20 @@ const EstadisUnidades = () => {
     }
   }, [units]);
 
+  // Función para obtener la imagen basada en la categoría
+  const getCategoryImage = (category) => {
+    switch (category) {
+      case "Tecnología":
+        return "/tecnologia.png"; // Imagen 1 para Tecnología
+      case "Electrodoméstico":
+        return "/electrodomesticos.png"; // Imagen 2 para Electrodoméstico
+      case "Inmueble":
+        return "/inmuebles.png"; // Imagen 3 para Inmueble
+      default:
+        return "/path/to/default-image.jpg"; // Imagen por defecto
+    }
+  };
+
   return (
     <div className="card-container-units">
       {unitCounts.length === 0 ? (
@@ -37,15 +51,15 @@ const EstadisUnidades = () => {
       ) : (
         unitCounts.map((unitGroup, index) => (
           <div key={index} className="unit-card">
-            {unitGroup.product && unitGroup.product.image ? (
+            {unitGroup.product ? (
               <img
-                src={unitGroup.product.image.filePath}
+                src={getCategoryImage(unitGroup.product.category)} // Llamamos a la función para obtener la imagen correcta
                 alt={unitGroup.product.name}
                 className="unit-image"
               />
             ) : (
               <img
-                src="/path/to/default-image.jpg" // Reemplaza con la ruta de una imagen por defecto
+                src="/path/to/default-image.jpg" // Reemplaza con la ruta de una imagen por defecto si no hay producto
                 alt="Imagen no disponible"
                 className="unit-image"
               />
