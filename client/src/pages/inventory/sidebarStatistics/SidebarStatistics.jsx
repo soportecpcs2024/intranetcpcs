@@ -39,9 +39,9 @@ const SidebarScatistics = () => {
       <div>
         <div className="pre-title-sidebar-statis">Lista de:</div>
         <SidebarItem
-          path="/admin/administracion/productList"
+          path="/admin/inventario_estadisticas/infostock"
           icon={<FaTh />}
-          label="Productos"
+          label="Stock"
           isOpen={isOpen}
           location={location}
         />

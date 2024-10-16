@@ -9,7 +9,7 @@ const AddProduct = () => {
     brand: "",
     sku: "",
     category: "",
-    area: "",
+    subcategory: "",
     model: "",
     dimensions: "",
     price: "",
@@ -114,37 +114,6 @@ const AddProduct = () => {
           </label>
 
           <label>
-            Categoría:
-            <input
-              type="text"
-              name="category"
-              value={productData.category}
-              onChange={handleChange}
-            />
-            {errors.category && (
-              <p className="error-message">{errors.category}</p>
-            )}
-          </label>
-        </div>
-
-        <div className="add-product-form-b1">
-          <label>
-            Área:
-            <select
-              name="area"
-              value={productData.area}
-              onChange={handleChange}
-            >
-              <option value="">Seleccione un área</option>
-              <option value="Tecnología">Tecnología</option>
-              <option value="Inmueble">Inmueble</option>
-              <option value="Eléctrica">Eléctrica</option>
-              <option value="Eléctrica">Sonido</option>
-            </select>
-            {errors.area && <p className="error-message">{errors.area}</p>}
-          </label>
-
-          <label>
             Precio:
             <input
               type="number"
@@ -154,6 +123,54 @@ const AddProduct = () => {
             />
             {errors.price && <p className="error-message">{errors.price}</p>}
           </label>
+
+        
+        </div>
+
+        <div className="add-product-form-b1">
+        <label>
+            Categoria:
+            <select
+              name="category"
+              value={productData.category}
+              onChange={handleChange}
+            >
+              <option value="">Categoria:</option>
+              <option value="Tecnología">Tecnología</option>
+              <option value="Electrodoméstico">Electrodoméstico</option>
+              <option value="Inmueble">Inmueble</option>
+            </select>
+            {errors.area && <p className="error-message">{errors.category}</p>}
+          </label>
+          <label>
+            Sub Cat:
+            <select
+              name="subcategory"
+              value={productData.subcategory}
+              onChange={handleChange}
+            >
+              <option value="">Sub categoria:</option>
+              <option value="Cp mesa windows">Cp mesa windows</option>
+              <option value="Cp mesa Apple Mac mini">Cp mesa Apple Mac mini</option>
+              <option value="Cp mesa Apple Imac">Cp mesa Apple Imac</option>
+              <option value="Cp portátil windows">Cp portátil windows</option>
+               
+              <option value="Cargador TC">Cargador TC</option>
+              <option value="Cp portátil windows">Celular</option>
+              <option value="Tablet">Tablet</option>
+              <option value="Tv Smart 50">Tv Smart 50</option>
+              <option value="Tv Smart 50">Tv Smart 60</option>
+              <option value="Monitor 24">Monitor 24</option>
+              <option value="Monitor 32">Monitor 32</option>
+              <option value="Sonido">Tv Smart 60</option>
+              <option value="silla">Silla</option>
+               
+               
+            </select>
+            {errors.subcategory && <p className="error-message">{errors.subcategory}</p>}
+          </label>
+
+         
         </div>
 
         <div className="add-product-form-b1">

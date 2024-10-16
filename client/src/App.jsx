@@ -36,6 +36,9 @@ import LocationDetails from "./components/productos/Location/LocationDetails/Loc
 import EditLocation from "./components/productos/Location/EditLocation/EditLocation";
 import Estadisticas from "./components/productos/statistics/prueba/Estadisticas";
 import DashboardStatistics from "./components/productos/statistics/dashboardStatistics/DashboardStatistics";
+import InfoStock from "./components/productos/informes/stock/InfoStock";
+
+
 
 
 
@@ -130,6 +133,7 @@ const AppContent = () => {
 
               <Route path="inventario_estadisticas" element={<DashboardStatistics />}>
               <Route index element={<Estadisticas />} />
+              <Route path="infostock" element={<InfoStock />} />
               
               </Route>
           </Route>
