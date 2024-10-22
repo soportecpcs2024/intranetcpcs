@@ -78,6 +78,11 @@ app.use('/api/units', unitRoutes);
 const locationRoutes = require('./routes/inventory/locationRoutes');
 app.use('/api/location', locationRoutes);
 
+
+// ------------ Rutas para los informes -------------
+const informesRoutes = require('./routes/inventory/informesRoutes');
+app.use('/api/informes', informesRoutes);
+
  
  
 

@@ -52,7 +52,7 @@ const ListarUnidades = () => {
 
     // Filtrar unidades basadas en el término de búsqueda
     const filteredUnits = formattedUnits.filter((unit) => {
-      const name = unit.id_producto?.name?.toLowerCase() || "";
+      const name = unit.id_producto?.subcategory?.toLowerCase() || "";
       const category = unit.id_producto?.category?.toLowerCase() || "";
       const idunit = unit._id?.toLowerCase() || "";
       const locationName = unit.location?.nombre?.toLowerCase() || "";
@@ -144,7 +144,7 @@ const ListarUnidades = () => {
           {currentItems.map((unit) => (
             <tr key={unit._id}>
               <td>{unit._id || "N/A"}</td>
-              <td>{unit.id_producto?.name || "N/A"}</td>
+              <td>{unit.id_producto?.subcategory || "N/A"}</td>
               <td>{unit.id_producto?.brand || "N/A"}</td>
               <td>{unit.location?.nombre || "N/A"}</td>
               <td>{unit.location?.direccion || "N/A"}</td>

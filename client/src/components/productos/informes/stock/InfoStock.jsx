@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useProducts } from "../../../../contexts/ProductContext";
-import { Link } from "react-router-dom";
-import { FaEye, FaEdit, FaTrashAlt } from "react-icons/fa";
+import { useProductStatistics } from "../../../../contexts/InformesContext";
+
 import {
   PieChart,
   Pie,
@@ -10,27 +10,30 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import ReactPaginate from "react-paginate";
-import { confirmAlert } from "react-confirm-alert";
 import "./InforStock.css";
 
 const InfoStock = () => {
-  const { units, loadingUnits, errorUnits, removeUnit, fetchUnits } =
-    useProducts();
+  const { units, loadingUnits, errorUnits, fetchUnits } = useProducts();
   const [formattedUnits, setFormattedUnits] = useState([]);
-  const [productStats, setProductStats] = useState({});
-  const [searchTerm, setSearchTerm] = useState(""); // Estado para el término de búsqueda
-  const [currentItems, setCurrentItems] = useState([]);
-  const [pageCount, setPageCount] = useState(0);
-  const [itemOffset, setItemOffset] = useState(0);
-  const itemsPerPage = 12;
-
-  // Agrupar por subcategoría
   const [subcategoryData, setSubcategoryData] = useState([]);
+  const [totalCostUnits, setTotalCostUnits] = useState(0);
+  const [totalCostCategories, setTotalCostCategories] = useState({});
 
+  const { statistics, loadingStatistics, errorStatistics, fetchProductStatistics } = useProductStatistics();
+
+  // Extracting statistics for categories and subcategories
+  const categorias = statistics?.estadisticas || [];
+  const totalCategorias = statistics?.totalCategorias || 0;
+
+  // Fetch data when the component mounts
   useEffect(() => {
-    console.log("Units loaded:", units); // Verifica la carga de las unidades
-    if (units) {
+    fetchUnits();  // Always fetch units on mount
+    fetchProductStatistics();  // Always fetch statistics on mount
+  }, [fetchUnits, fetchProductStatistics]);
+
+  // Process the units data once fetched
+  useEffect(() => {
+    if (units && units.length > 0) {
       const formatted = units.map((unit) => ({
         ...unit,
         fecha_entrega: unit.fecha_entrega
@@ -42,72 +45,43 @@ const InfoStock = () => {
       }));
       setFormattedUnits(formatted);
 
-      // Agrupar por subcategoría y contar
+      const totalCost = formatted.reduce(
+        (acc, unit) => acc + (unit.id_producto.price || 0),
+        0
+      );
+      setTotalCostUnits(totalCost);
+
       const categoryStats = formatted.reduce((acc, unit) => {
         const category = unit.id_producto?.category || "Desconocido";
         if (!acc[category]) {
-          acc[category] = 0;
+          acc[category] = { count: 0, cost: 0 };
         }
-        acc[category] += 1;
+        acc[category].count += 1;
+        acc[category].cost += unit.price || 0;
         return acc;
       }, {});
 
-      // Formatear para Recharts
+      const totalUnits = formatted.length;
+
       const subcategoryDataFormatted = Object.keys(categoryStats).map(
         (subcategory) => ({
           name: subcategory,
-          value: categoryStats[subcategory],
+          value: categoryStats[subcategory].count,
+          percentage: (
+            (categoryStats[subcategory].count / totalUnits) *
+            100
+          ).toFixed(2),
         })
       );
-      setSubcategoryData(subcategoryDataFormatted);
 
-      setProductStats(categoryStats); // Guardar estadísticas
+      setSubcategoryData(subcategoryDataFormatted);
+      setTotalCostCategories(categoryStats);
     }
   }, [units]);
 
-  // Paginación
-  useEffect(() => {
-    const endOffset = itemOffset + itemsPerPage;
+  if (loadingUnits || loadingStatistics) return <div>Cargando...</div>;
+  if (errorUnits || errorStatistics) return <div>Error al cargar datos.</div>;
 
-    // Filtrar unidades basadas en el término de búsqueda
-    const filteredUnits = formattedUnits.filter((unit) => {
-      const name = unit.id_producto?.name?.toLowerCase() || "";
-      const category = unit.id_producto?.category?.toLowerCase() || "";
-      const subcategory = unit.id_producto?.subcategory?.toLowerCase() || "";
-      const idunit = unit._id?.toLowerCase() || "";
-      const locationName = unit.location?.nombre?.toLowerCase() || "";
-      const locationAddress = unit.location?.direccion?.toLowerCase() || "";
-      const searchTermLower = searchTerm.toLowerCase();
-
-      return (
-        name.includes(searchTermLower) ||
-        category.includes(searchTermLower) ||
-        subcategory.includes(searchTermLower) ||
-        idunit.includes(searchTermLower) ||
-        locationName.includes(searchTermLower) ||
-        locationAddress.includes(searchTermLower)
-      );
-    });
-
-    setCurrentItems(filteredUnits.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(filteredUnits.length / itemsPerPage));
-  }, [itemOffset, itemsPerPage, formattedUnits, searchTerm]);
-
-  const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % formattedUnits.length;
-    setItemOffset(newOffset);
-  };
-
-  useEffect(() => {
-    if (!loadingUnits && units.length === 0) {
-      fetchUnits(); // Forzar la recarga de productos si no se están cargando
-    }
-  }, [loadingUnits, units, fetchUnits]);
-
-  if (loadingUnits) return <div>Cargando...</div>;
-  if (errorUnits) return <div>Error al cargar unidades.</div>;
-
-  // Colores para la gráfica
   const colors = [
     "#8884d8",
     "#82ca9d",
@@ -118,23 +92,42 @@ const InfoStock = () => {
     "#FF8042",
   ];
 
-  return (
-    <div className="container">
-      <h3>Información stock</h3>
+  const renderCustomizedLabel = ({ cx, cy, midAngle, name, percentage }) => {
+    const radius = 170;
+    const x = cx + radius * Math.cos((-midAngle * Math.PI) / 180);
+    const y = cy + radius * Math.sin((-midAngle * Math.PI) / 180);
 
-      <div>
-        {/* Gráfico de pastel basado en la subcategoría */}
-        <div className="pie-chart-container">
+    return (
+      <text
+        x={x}
+        y={y}
+        fill="#333"
+        textAnchor="middle"
+        dominantBaseline="central"
+        style={{ fontSize: "16px" }}
+      >
+        {`${name}: ${percentage}%`}
+      </text>
+    );
+  };
+
+  return (
+    <div className="container-info-inventario">
+      <h3>Stock de inventario CPCS</h3>
+
+      <div className="container-info-inventario-content">
+        <div className="box-info-inventario">
           <ResponsiveContainer width="100%" height={400}>
             <PieChart>
               <Pie
                 data={subcategoryData}
-                innerRadius={60}
+                innerRadius={50}
                 outerRadius={100}
                 fill="#8884d8"
                 paddingAngle={5}
                 dataKey="value"
-                label={({ name, value }) => `${name}: ${value}`}
+                label={renderCustomizedLabel}
+                labelLine={false}
               >
                 {subcategoryData.map((entry, index) => (
                   <Cell
@@ -143,29 +136,45 @@ const InfoStock = () => {
                   />
                 ))}
               </Pie>
-              <Tooltip />
+              <Tooltip
+                formatter={(value, name) => [
+                  `${((value / formattedUnits.length) * 100).toFixed(2)}%`,
+                  name,
+                ]}
+              />
               <Legend />
             </PieChart>
           </ResponsiveContainer>
         </div>
-      </div>
 
-      <div className="totalunidades">
-        <div>{/* Componente de búsqueda */}</div>
-        <div className="container-listUnits-Search-ps">
-          <div>
-            <p>Total Unidades: </p>
-          </div>
-
-          <div className="">
-            <p>{formattedUnits.length}</p>
+        <div className="box-info-inventario">
+          <div className="box-info-inventario-units">
+            <h2 className="box-info-inventario-units-title">
+              Total Categorías: <span>{totalCategorias}</span>
+            </h2>
+            {categorias.map((categoria, index) => (
+              <div key={index} className="box-info-inventario-units-category">
+                <p>
+                  <strong>Categoría:</strong> <span >{categoria.categoria}</span> 
+                </p>
+                <p className="strong-unidades">
+                  Total Unidades: {" "}
+                  {categoria.totalUnidadesPorCategoria}
+                </p>
+                <p>
+                  Total Precio: {" "}
+                  {new Intl.NumberFormat("es-CO", {
+                    style: "currency",
+                    currency: "COP",
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  }).format(categoria.totalPrecioPorCategoria)}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
-
-     
-
-     
     </div>
   );
 };

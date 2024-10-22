@@ -156,14 +156,15 @@ const AddProduct = () => {
               <option value="Cp portátil windows">Cp portátil windows</option>
                
               <option value="Cargador TC">Cargador TC</option>
-              <option value="Cp portátil windows">Celular</option>
               <option value="Tablet">Tablet</option>
               <option value="Tv Smart 50">Tv Smart 50</option>
               <option value="Tv Smart 50">Tv Smart 60</option>
               <option value="Monitor 24">Monitor 24</option>
               <option value="Monitor 32">Monitor 32</option>
               <option value="Sonido">Tv Smart 60</option>
-              <option value="silla">Silla</option>
+              <option value="Parlante">Parlante</option>
+              <option value="Silla">Silla</option>
+              <option value="Cocina">Cocina</option>
                
                
             </select>

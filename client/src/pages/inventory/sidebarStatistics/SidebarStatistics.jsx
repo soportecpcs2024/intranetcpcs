@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FaTh, FaRegChartBar, FaCommentAlt } from "react-icons/fa";
-import { BiImageAdd } from "react-icons/bi";
+ 
 import { HiMenuAlt3 } from "react-icons/hi";
 import { RiProductHuntLine } from "react-icons/ri";
-import { BsBuildingFillAdd } from "react-icons/bs";
-import { RiApps2AddLine } from "react-icons/ri";
-import { RiListOrdered2 } from "react-icons/ri";
-import { FaListCheck } from "react-icons/fa6";
-import { MdAssignmentAdd } from "react-icons/md";
-
+import { MdCategory } from "react-icons/md";
+import { AiOutlineDeploymentUnit } from "react-icons/ai";
 import "./SidebarStatistics.css";
 
 const SidebarScatistics = () => {
@@ -40,8 +36,15 @@ const SidebarScatistics = () => {
         <div className="pre-title-sidebar-statis">Lista de:</div>
         <SidebarItem
           path="/admin/inventario_estadisticas/infostock"
-          icon={<FaTh />}
-          label="Stock"
+          icon={<MdCategory />}
+          label="Categorias"
+          isOpen={isOpen}
+          location={location}
+        />
+        <SidebarItem
+          path="/admin/inventario_estadisticas/subcategory"
+          icon={<AiOutlineDeploymentUnit />}
+          label="Sub ategorias"
           isOpen={isOpen}
           location={location}
         />

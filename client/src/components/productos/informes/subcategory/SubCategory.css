@@ -1,0 +1,44 @@
+/* Archivo: ListarUnidades.css */
+
+.containersubcategory {
+    
+    max-width: 1200px;
+    margin: 0 auto;
+    
+    
+}
+
+ul {
+    list-style-type: none; /* Elimina los puntos de la lista */
+    padding: 0; /* Opcional: elimina el padding de la lista */
+    margin: 0; /* Opcional: elimina el margen de la lista */
+}
+
+.containersubcategory-category{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
+}
+
+.containersubcategory-category-info{
+    
+}
+
+.subcategory-list{
+    border-radius: 8px;
+    margin-top: 10px;
+    box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
+}
+  
+.subcategory-list-card{
+   
+    margin: 10px;
+}
+
+.subcategory-list-card span{
+    font-weight: 700;
+}
+  

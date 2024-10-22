@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useProducts } from "../../../../contexts/ProductContext";
 import "./EstadisUnidades.css"; // Asegúrate de tener el archivo CSS para los estilos
-
+import imgTecnologia from "../../../../assets/png/1.png";
+import imgInmueble from "../../../../assets/png/2.png";
+import imgElectrodomestico from "../../../../assets/png/3.png";
 const EstadisUnidades = () => {
   const { units } = useProducts();
   const [unitCounts, setUnitCounts] = useState([]);
@@ -34,11 +36,11 @@ const EstadisUnidades = () => {
   const getCategoryImage = (category) => {
     switch (category) {
       case "Tecnología":
-        return "/tecnologia.png"; // Imagen 1 para Tecnología
+        return imgTecnologia; // Imagen 1 para Tecnología
       case "Electrodoméstico":
-        return "/electrodomesticos.png"; // Imagen 2 para Electrodoméstico
+        return imgElectrodomestico; // Imagen 2 para Electrodoméstico
       case "Inmueble":
-        return "/inmuebles.png"; // Imagen 3 para Inmueble
+        return imgInmueble; // Imagen 3 para Inmueble
       default:
         return "/path/to/default-image.jpg"; // Imagen por defecto
     }

@@ -31,7 +31,7 @@ const productSchema = new mongoose.Schema(
       required: [true, "Please add a category"],
       trim: true,
     },
-    area: {
+    subcategory: {
       type: String,
       default:"",
       trim: true,
