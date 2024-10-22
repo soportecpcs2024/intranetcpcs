@@ -4,7 +4,7 @@ import { useProducts } from "../../../../contexts/ProductContext";
 import imgTecnologia from "../../../../assets/png/1.png";
 import imgInmueble from "../../../../assets/png/2.png";
 import imgElectrodomestico from "../../../../assets/png/3.png";
-import './SubCategory.css'
+import "./SubCategory.css";
 import { useProductStatistics } from "../../../../contexts/InformesContext";
 
 const SubCategory = () => {
@@ -70,6 +70,16 @@ const SubCategory = () => {
     return categoryStats ? categoryStats.subcategorias : [];
   };
 
+  // Función para formatear el precio en formato numérico
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat("es-CO", {
+      style: "currency",
+      currency: "COP",
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(price);
+  };
+
   return (
     <div className="containersubcategory">
       <div className="containersubcategory-category">
@@ -107,15 +117,19 @@ const SubCategory = () => {
           <div className="subcategory-list">
             <h3>Categoría de {selectedCategory}:</h3>
             <ul>
-                <p>sub categoria:</p>
+              <p>Subcategoría:</p>
               {getSubcategoriesByCategory(selectedCategory).map(
                 (subcategory, index) => (
-                    
                   <li key={index} className="subcategory-list-card">
-                   <p> <span>{subcategory.subcategoria}</span>   </p>  - Unidades:{" "}
-                    {subcategory.totalUnidades} - Precio Total:{" "}
-                    
-                    {subcategory.totalPrecio} 
+                    <div>
+                      <p>
+                        {" "}
+                        <span>{subcategory.subcategoria}</span>{" "}
+                      </p>
+                      Unidades: <span>{subcategory.totalUnidades}</span>{" "}
+                    </div>
+                    {/* Aquí se formatea el totalPrecio con la función formatPrice */}
+                    TOTAL: {formatPrice(subcategory.totalPrecio)}
                   </li>
                 )
               )}

@@ -44,7 +44,7 @@ const SidebarScatistics = () => {
         <SidebarItem
           path="/admin/inventario_estadisticas/subcategory"
           icon={<AiOutlineDeploymentUnit />}
-          label="Sub ategorias"
+          label="Sub Categorias"
           isOpen={isOpen}
           location={location}
         />
