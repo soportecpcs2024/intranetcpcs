@@ -67,9 +67,21 @@ const ProductDistribution = () => {
         <div className="product-details">
           {selectedLocation && groupedByLocation[selectedLocation] ? (
             <>
-              <h2>
-                {groupedByLocation[selectedLocation].locationDetails.direccion}
-              </h2>
+              <div>
+                <h2>
+                  {
+                    groupedByLocation[selectedLocation].locationDetails
+                      .direccion
+                  }
+                </h2>
+                <p>
+                  <span className="product-details-encargado">Encargado :</span>{" "} <span className="product-details-encargado-span">{
+                    groupedByLocation[selectedLocation].locationDetails
+                      .recibido_por
+                  }</span>
+                  
+                </p>
+              </div>
 
               <ul>
                 {Object.keys(groupedByLocation[selectedLocation].products).map(
@@ -79,14 +91,12 @@ const ProductDistribution = () => {
                     return (
                       <li key={product.details._id}>
                         <div className="product-item">
-
                           <div>
                             <strong>{product.details.name}</strong>
                           </div>
                           <div>
                             <p>Unid: {product.count}</p>
                           </div>
-                          
                         </div>
                         {/* Otros campos que quieras mostrar */}
                       </li>
