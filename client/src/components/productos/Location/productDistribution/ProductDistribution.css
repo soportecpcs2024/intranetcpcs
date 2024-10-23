@@ -31,7 +31,7 @@
   }
   
   .location-item {
-    font-size: 18px;
+    font-size: 14px;
     cursor: pointer;
     padding: 10px 15px;
     margin-bottom: 10px;
@@ -39,6 +39,7 @@
     transition: background-color 0.3s, color 0.3s;
     color: #555;
     border: 1px solid transparent;
+    border-bottom: 1px solid rgba(187, 187, 187, 0.445);
   }
   
   .location-item:hover {
