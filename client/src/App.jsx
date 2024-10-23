@@ -39,6 +39,7 @@ import Estadisticas from "./components/productos/statistics/prueba/Estadisticas"
 import DashboardStatistics from "./components/productos/statistics/dashboardStatistics/DashboardStatistics";
 import InfoStock from "./components/productos/informes/stock/InfoStock";
 import SubCategory from "./components/productos/informes/subcategory/SubCategory";
+import ProductDistribution from "./components/productos/Location/productDistribution/ProductDistribution";
 
 
 
@@ -139,8 +140,11 @@ const AppContent = () => {
               <Route index element={<Estadisticas />} />
               <Route path="infostock" element={<InfoStock />} />
               <Route path="subcategory" element={<SubCategory />} />
+              <Route path="distribution" element={<ProductDistribution />} />
             </Route>
           </Route>
+
+        
         )}
       </Routes>
     </BrowserRouter>

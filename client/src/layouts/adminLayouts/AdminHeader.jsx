@@ -93,6 +93,7 @@ const AdminHeader = () => {
                             <li>
                               <Link to="/admin/inventario_estadisticas">Informes</Link>
                             </li>
+                            
                              
                              
                           </ul>

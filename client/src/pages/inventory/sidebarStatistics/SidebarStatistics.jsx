@@ -6,6 +6,7 @@ import { HiMenuAlt3 } from "react-icons/hi";
 import { RiProductHuntLine } from "react-icons/ri";
 import { MdCategory } from "react-icons/md";
 import { AiOutlineDeploymentUnit } from "react-icons/ai";
+import { BsDistributeHorizontal } from "react-icons/bs";
 import "./SidebarStatistics.css";
 
 const SidebarScatistics = () => {
@@ -33,7 +34,7 @@ const SidebarScatistics = () => {
         </div>
       </div>
       <div>
-        <div className="pre-title-sidebar-statis">Lista de:</div>
+        
         <SidebarItem
           path="/admin/inventario_estadisticas/infostock"
           icon={<MdCategory />}
@@ -45,6 +46,16 @@ const SidebarScatistics = () => {
           path="/admin/inventario_estadisticas/subcategory"
           icon={<AiOutlineDeploymentUnit />}
           label="Sub Categorias"
+          isOpen={isOpen}
+          location={location}
+        />
+         
+        <h2 className="SidebarItem-Dashboard-line">_____________________</h2>
+        
+        <SidebarItem
+          path="/admin/inventario_estadisticas/distribution"
+          icon={<BsDistributeHorizontal />}
+          label="Distribución"
           isOpen={isOpen}
           location={location}
         />
