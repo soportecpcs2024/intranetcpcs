@@ -13,15 +13,16 @@ const EditProduct = () => {
     brand: "",
     sku: "",
     category: "",
-    area: "",
+    subcategory: "", // corregido a subcategory
     model: "",
     dimensions: "",
     price: "",
     color: "",
     description: "",
-    quantity: "",
+    supplier: "", // agregado
+    quantity: "", // Cantidad agregada
     purchase_date: "",
-    useful_life: "", // Añadido campo de vida útil
+    useful_life: "", // Vida útil en años
   });
   const navigate = useNavigate();
 
@@ -35,30 +36,31 @@ const EditProduct = () => {
           brand: foundProduct.brand,
           sku: foundProduct.sku,
           category: foundProduct.category,
-          area: foundProduct.area,
+          subcategory: foundProduct.subcategory, // Corregido a subcategory
           model: foundProduct.model,
           dimensions: foundProduct.dimensions,
           price: foundProduct.price,
           color: foundProduct.color,
           description: foundProduct.description,
+          supplier: foundProduct.supplier, // agregado
           quantity: foundProduct.quantity || "",
           purchase_date: new Date(foundProduct.purchase_date)
             .toISOString()
-            .split("T")[0], // Formatear la fecha para el input
-          useful_life: foundProduct.useful_life || "", // Asegúrate de incluir todos los campos
+            .split("T")[0], // Formatear la fecha
+          useful_life: foundProduct.useful_life || "",
         });
       }
     } else {
-      fetchProducts(); // Fetch products if not already loaded
+      fetchProducts(); // Cargar productos si no están ya cargados
     }
   }, [id, products, loading, fetchProducts]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: value,
-    });
+    }));
   };
 
   const handleSubmit = (e) => {
@@ -75,15 +77,15 @@ const EditProduct = () => {
   };
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <p>Cargando...</p>;
   }
 
   if (error) {
-    return <p>Error loading product: {error.message}</p>;
+    return <p>Error al cargar producto: {error.message}</p>;
   }
 
   if (!product) {
-    return <p>Product not found.</p>;
+    return <p>Producto no encontrado.</p>;
   }
 
   return (
@@ -118,21 +120,43 @@ const EditProduct = () => {
           />
         </div>
         <div className="form-group">
-          <label>Categoría:</label>
-          <input
-            type="text"
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-          />
+        <label>
+            Categoria:
+            <select
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+            >
+              <option value="">Categoria:</option>
+              <option value="Tecnología">Tecnología</option>
+              <option value="Electrodoméstico">Electrodoméstico</option>
+              <option value="Inmueble">Inmueble</option>
+            </select>
+             </label>
         </div>
         <div className="form-group">
-          <label>Área:</label>
-          <select name="area" value={formData.area} onChange={handleChange}>
-            <option value="">Selecciona un área</option>
-            <option value="Tecnología">Tecnología</option>
-            <option value="Inmueble">Inmueble</option>
-            <option value="Eléctrica">Eléctrica</option>
+          <label>Subcategoría:</label>
+          <select
+            name="subcategory"
+            value={formData.subcategory}
+            onChange={handleChange}
+          >
+            <option value="">Selecciona una subcategoría</option>
+            <option value="Cp mesa windows">Cp mesa windows</option>
+            <option value="Cp mesa Apple Mac mini">Cp mesa Apple Mac mini</option>
+            <option value="Cp mesa Apple Imac">Cp mesa Apple Imac</option>
+            <option value="Cp portátil windows">Cp portátil windows</option>
+            <option value="Cargador TC">Cargador TC</option>
+            <option value="Tablet">Tablet</option>
+            <option value="Tv Smart 50">Tv Smart 50</option>
+            <option value="Tv Smart 55">Tv Smart 55</option>
+            <option value="Tv Smart 60">Tv Smart 60</option>
+            <option value="Monitor 24">Monitor 24</option>
+            <option value="Monitor 32">Monitor 32</option>
+            <option value="Mixer">Mixer</option>
+            <option value="Parlante">Parlante</option>
+            <option value="Silla">Silla</option>
+            <option value="Cocina">Cocina</option>
           </select>
         </div>
 
@@ -155,29 +179,11 @@ const EditProduct = () => {
           />
         </div>
         <div className="form-group">
-          <label>Precio:</label>
+          <label>Color:</label>
           <input
-            type="number"
-            name="price"
-            value={formData.price}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label>Fecha de compra:</label>
-          <input
-            type="date"
-            name="purchase_date"
-            value={formData.purchase_date}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label>Vida útil (años):</label>
-          <input
-            type="number"
-            name="useful_life"
-            value={formData.useful_life}
+            type="text"
+            name="color"
+            value={formData.color}
             onChange={handleChange}
           />
         </div>
@@ -189,7 +195,48 @@ const EditProduct = () => {
             onChange={handleChange}
           />
         </div>
-        <button type="submit">Actualizar</button>
+
+        <div className="form-group">
+          <label>Proveedor:</label>
+          <input
+            type="text"
+            name="supplier"
+            value={formData.supplier}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Cantidad:</label>
+          <input
+            type="number"
+            name="quantity"
+            value={formData.quantity}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Fecha de compra:</label>
+          <input
+            type="date"
+            name="purchase_date"
+            value={formData.purchase_date}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Vida útil (años):</label>
+          <input
+            type="number"
+            name="useful_life"
+            value={formData.useful_life}
+            onChange={handleChange}
+          />
+        </div>
+
+        <button type="submit">Actualizar Producto</button>
       </form>
     </div>
   );

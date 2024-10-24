@@ -60,6 +60,11 @@ const productSchema = new mongoose.Schema(
       required: [true, "Please add a description"],
       trim: true,
     },
+    supplier:{
+      type:String,
+      default:"",
+      trim: true
+    },
     image: {
       type: imageSchema, // Esquema de imagen
       default: {},

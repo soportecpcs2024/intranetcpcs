@@ -1,5 +1,6 @@
 /* Contenedor principal para las cards de locaciones */
-.location-container {
+.location-container-list {
+    max-width: 600px;
     display: flex;
     flex-direction: column;
     gap: 5px;

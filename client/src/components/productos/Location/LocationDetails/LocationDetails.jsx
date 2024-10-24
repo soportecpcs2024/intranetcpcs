@@ -84,7 +84,7 @@ const LocationDetails = () => {
       {loadingUnits && <p>Cargando unidades...</p>}
       {errorUnits && <p>Error al cargar las unidades</p>}
 
-      <div className="location-container">
+      <div className="location-container-list">
         <div className="search-bar">
           <input
             type="text"
@@ -100,7 +100,7 @@ const LocationDetails = () => {
         {currentItems.length > 0 ? (
           currentItems.map(locationName => (
             <div key={locationName} className="location-card">
-              <h3 className="location-title">Ubicación: {locationName}</h3>
+              <h3 className="location-title"> {locationName}</h3>
               <p className="responsable">Responsable: {capitalizeWords(groupedUnits[locationName].responsable)}</p>
 
               {/* Listar todos los productos para la ubicación */}
@@ -109,7 +109,7 @@ const LocationDetails = () => {
                 return (
                   <div key={product?._id} className="product-card">
                     <h4 className="product-name">{product?.name}</h4>
-                    <p className="product-quantity">{count} unidad(es)</p>
+                    <p className="product-quantity">{count} und</p>
                   </div>
                 );
               })}

@@ -134,7 +134,7 @@ const ListarUnidades = () => {
             <th>Id</th>
             <th>Producto</th>
             <th>Marca</th>
-            <th>Lugar</th>
+            <th>Encargado</th>
             <th>Ubicación</th>
             <th>Estado</th>
             <th>Acciones</th>
@@ -146,7 +146,7 @@ const ListarUnidades = () => {
               <td>{unit._id || "N/A"}</td>
               <td>{unit.id_producto?.subcategory || "N/A"}</td>
               <td>{unit.id_producto?.brand || "N/A"}</td>
-              <td>{unit.location?.nombre || "N/A"}</td>
+              <td>{unit.location?.recibido_por || "N/A"}</td>
               <td>{unit.location?.direccion || "N/A"}</td>
               <td>{unit.estado || "N/A"}</td>
               <td>

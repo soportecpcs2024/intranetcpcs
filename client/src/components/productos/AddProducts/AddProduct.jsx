@@ -15,6 +15,7 @@ const AddProduct = () => {
     price: "",
     color: "",
     description: "",
+    supplier:"",
     useful_life: "", // Vida útil en años
     purchase_date: "", // Fecha de compra
     image: null,
@@ -261,6 +262,16 @@ const AddProduct = () => {
           />
           {errors.image && <p className="error-message">{errors.image}</p>}
         </label>
+        <label>
+            Proveedor:
+            <input
+              type="text"
+              name="supplier"
+              value={productData.supplier}
+              onChange={handleChange}
+            />
+            {errors.supplier && <p className="error-message">{errors.supplier}</p>}
+          </label>
 
         <button type="submit">Crear Producto</button>
       </form>

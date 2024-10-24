@@ -16,6 +16,7 @@ const createProduct = asyncHandler(async (req, res) => {
     price,
     color,
     description,
+    supplier,
     purchase_date,
     useful_life
   } = req.body;
@@ -61,6 +62,7 @@ const createProduct = asyncHandler(async (req, res) => {
     price,
     color,
     description,
+    supplier,
     purchase_date,
     useful_life,
     image: fileData,
@@ -82,6 +84,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     price,
     color,
     description,
+    supplier,
     purchase_date,
     useful_life
   } = req.body;
@@ -131,6 +134,7 @@ const updateProduct = asyncHandler(async (req, res) => {
       price: price || product.price,
       color: color || product.color,
       description: description || product.description,
+      supplier: supplier || product.supplier,
       purchase_date: purchase_date || product.purchase_date,
       useful_life: useful_life || product.useful_life,
       image: fileData,
