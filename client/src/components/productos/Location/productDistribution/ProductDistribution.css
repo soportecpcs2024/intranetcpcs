@@ -2,8 +2,12 @@
     width: 100%;
     padding: 20px;
     font-family: 'Arial', sans-serif;
-    background-color: #f9f9f9;
+    background-color: #f4f4f499;
     color: #333;
+  }
+
+  .product-distribution-container-asignaciones{
+    display: flex;
   }
   
   h2 {
@@ -27,7 +31,7 @@
     border-right: 1px solid #eee;
     background-color: #fafafa;
     padding: 20px;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+    box-shadow: rgba(113, 113, 188, 0.25) 0px 30px 60px -12px inset, rgba(170, 170, 170, 0.3) 0px 18px 36px -18px inset;
   }
   
   .location-item {
@@ -114,4 +118,48 @@
      font-size: 14px;
      text-transform: uppercase;
    
+  }
+
+  .total-ubicaciones{
+    text-align: center;
+    width: 130px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid yellow;
+    margin: 10px;
+    box-shadow: rgba(253, 249, 1, 0.86) 0px 4px 6px, rgba(243, 214, 2, 0.05) 0px 8px 32px;
+  }
+
+  .total-ubicaciones-text{
+    font-size: 12px;
+  }
+  .total-ubicaciones-num{
+    font-size: 25px;
+    font-weight: 900;
+  }
+
+  .total-ubicaciones-btn{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    padding: 5px;
+    border-radius: 8px;
+    margin: 10px 0px;
+    align-items: center;
+     
+  }
+
+  .total-ubicaciones-bloque{
+    text-align: center;
+    width: 100px;
+    height: 80px;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    border: 1px solid rgba(16, 16, 243, 0.33);
+    margin: 5px;
+    box-shadow: rgba(64, 122, 183, 0.86) 0px 4px 6px, rgba(2, 175, 243, 0.05) 0px 8px 32px;
   }

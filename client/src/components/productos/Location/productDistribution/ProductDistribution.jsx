@@ -3,7 +3,8 @@ import { useProducts } from "../../../../contexts/ProductContext";
 import "./ProductDistribution.css";
 
 const ProductDistribution = () => {
-  const { units, loadingUnits, errorUnits, fetchUnits } = useProducts();
+  const { units, loadingUnits, errorUnits, fetchUnits, locations } =
+    useProducts();
   const [selectedLocation, setSelectedLocation] = useState(null); // Estado para la ubicación seleccionada
 
   // Agrupar productos por location_id y contar por producto
@@ -39,25 +40,135 @@ const ProductDistribution = () => {
   if (loadingUnits) return <p>Loading...</p>;
   if (errorUnits) return <p>Error loading units: {errorUnits.message}</p>;
 
+  // Filtrar las ubicaciones que comienzan con "A" en la dirección
+  const locationsBloqueA = Object.keys(groupedByLocation).filter(
+    (locationId) => {
+      const locationDetails = groupedByLocation[locationId].locationDetails;
+      return (
+        locationDetails?.direccion && locationDetails.direccion.startsWith("A")
+      );
+    }
+  );
+  // Filtrar las ubicaciones que comienzan con "A" en la dirección
+  const locationsBloqueB = Object.keys(groupedByLocation).filter(
+    (locationId) => {
+      const locationDetails = groupedByLocation[locationId].locationDetails;
+      return (
+        locationDetails?.direccion && locationDetails.direccion.startsWith("B")
+      );
+    }
+  );
+  // Filtrar las ubicaciones que comienzan con "A" en la dirección
+  const locationsBloqueC = Object.keys(groupedByLocation).filter(
+    (locationId) => {
+      const locationDetails = groupedByLocation[locationId].locationDetails;
+      return (
+        locationDetails?.direccion && locationDetails.direccion.startsWith("C")
+      );
+    }
+  );
+  // Filtrar las ubicaciones que comienzan con "A" en la dirección
+  const locationsBloqueD = Object.keys(groupedByLocation).filter(
+    (locationId) => {
+      const locationDetails = groupedByLocation[locationId].locationDetails;
+      return (
+        locationDetails?.direccion && locationDetails.direccion.startsWith("D")
+      );
+    }
+  );
+  // Filtrar las ubicaciones que comienzan con "A" en la dirección
+  const locationsBloqueE = Object.keys(groupedByLocation).filter(
+    (locationId) => {
+      const locationDetails = groupedByLocation[locationId].locationDetails;
+      return (
+        locationDetails?.direccion && locationDetails.direccion.startsWith("E")
+      );
+    }
+  );
+  // Filtrar las ubicaciones que comienzan con "A" en la dirección
+  const locationsBloqueF = Object.keys(groupedByLocation).filter(
+    (locationId) => {
+      const locationDetails = groupedByLocation[locationId].locationDetails;
+      return (
+        locationDetails?.direccion && locationDetails.direccion.startsWith("F")
+      );
+    }
+  );
+  const handleLocationChange = (e) => {
+    setSelectedLocation(e.target.value);
+  };
+
   return (
     <div className="product-distribution-container">
       <h2>Distribución de Productos</h2>
+      <div className="product-distribution-container-asignaciones">
+        <div className="total-ubicaciones">
+          <p className="total-ubicaciones-text">Total de ubicaciones: </p>
+          <p className="total-ubicaciones-num">
+            {Object.keys(locations).length}
+          </p>
+        </div>
+        <div className="total-ubicaciones">
+          <p className="total-ubicaciones-text">Ubicaciones con asignación: </p>
+          <p className="total-ubicaciones-num">
+            {Object.keys(groupedByLocation).length}
+          </p>
+        </div>
+        <div className="total-ubicaciones-btn">
+          <div className="total-ubicaciones-bloque">
+            <p className="total-ubicaciones-text">Bloque A: </p>
+            <p className="total-ubicaciones-num">{locationsBloqueA.length}</p>
+          </div>
+          <div className="total-ubicaciones-bloque">
+            <p className="total-ubicaciones-text">Bloque B: </p>
+            <p className="total-ubicaciones-num">{locationsBloqueB.length}</p>
+          </div>
+          <div className="total-ubicaciones-bloque">
+            <p className="total-ubicaciones-text">Bloque C: </p>
+            <p className="total-ubicaciones-num">{locationsBloqueC.length}</p>
+          </div>
+          <div className="total-ubicaciones-bloque">
+            <p className="total-ubicaciones-text">Bloque D: </p>
+            <p className="total-ubicaciones-num">{locationsBloqueD.length}</p>
+          </div>
+          <div className="total-ubicaciones-bloque">
+            <p className="total-ubicaciones-text">Bloque E: </p>
+            <p className="total-ubicaciones-num">{locationsBloqueE.length}</p>
+          </div>
+          <div className="total-ubicaciones-bloque">
+            <p className="total-ubicaciones-text">Bloque F: </p>
+            <p className="total-ubicaciones-num">{locationsBloqueF.length}</p>
+          </div>
+        </div>
+      </div>
 
       <div className="layout-container">
         {/* Lista de ubicaciones a la izquierda */}
         <div className="location-list">
           {groupedByLocation && Object.keys(groupedByLocation).length > 0 ? (
-            Object.keys(groupedByLocation).map((locationId) => (
-              <h2
-                key={locationId}
-                className={`location-item ${
-                  selectedLocation === locationId ? "selected" : ""
-                }`}
-                onClick={() => setSelectedLocation(locationId)} // Cambiar la ubicación seleccionada al hacer clic
-              >
-                {groupedByLocation[locationId].locationDetails.nombre}
-              </h2>
-            ))
+            <select
+              value={selectedLocation || ""}
+              onChange={(e) => setSelectedLocation(e.target.value)} // Cambiar la ubicación seleccionada al cambiar el valor
+              className="location-dropdown"
+            >
+              <option value="" disabled>
+                Selecciona una ubicación
+              </option>
+              {Object.keys(groupedByLocation)
+                .sort((a, b) => {
+                  // Ordenar alfabéticamente por el nombre de la ubicación
+                  const nameA =
+                    groupedByLocation[a].locationDetails.nombre.toLowerCase();
+                  const nameB =
+                    groupedByLocation[b].locationDetails.nombre.toLowerCase();
+                  return nameA.localeCompare(nameB);
+                })
+                .map((locationId) => (
+                  <option key={locationId} value={locationId}>
+                    {groupedByLocation[locationId].locationDetails.direccion}
+                  </option>
+                ))}
+            </select>
           ) : (
             <p>No se encontraron unidades</p>
           )}
@@ -74,12 +185,15 @@ const ProductDistribution = () => {
                       .direccion
                   }
                 </h2>
+
                 <p>
-                  <span className="product-details-encargado">Encargado :</span>{" "} <span className="product-details-encargado-span">{
-                    groupedByLocation[selectedLocation].locationDetails
-                      .recibido_por
-                  }</span>
-                  
+                  <span className="product-details-encargado">Encargado :</span>{" "}
+                  <span className="product-details-encargado-span">
+                    {
+                      groupedByLocation[selectedLocation].locationDetails
+                        .recibido_por
+                    }
+                  </span>
                 </p>
               </div>
 
@@ -98,7 +212,6 @@ const ProductDistribution = () => {
                             <p>Unid: {product.count}</p>
                           </div>
                         </div>
-                        {/* Otros campos que quieras mostrar */}
                       </li>
                     );
                   }
