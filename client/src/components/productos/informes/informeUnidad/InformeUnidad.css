@@ -1,0 +1,117 @@
+/* Contenedor principal */
+.container_info_unidad {
+    width: 100%;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f499;
+    color: #333;
+    
+}
+
+h2 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+/* Títulos */
+h3 {
+    text-align: center;
+    color: #4A90E2;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+h4 {
+    color: #333;
+    font-size: 18px;
+    margin-bottom: 10px;
+    
+}
+
+.container_info_unidad-h3{
+    display: flex;
+    flex-direction: row;
+}
+.container_info_unidad-header{
+    margin-top: 20px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.327);
+
+}
+.container_info_unidad-header p{
+    font-size: 12px;
+    margin-bottom: 20px;
+    
+}
+
+/* Contenedor de checks en dos columnas */
+.container_info_unidad_checks {
+    width: 60%;
+    margin: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas */
+    gap: 15px;
+     
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: rgba(71, 71, 101, 0.25) 0px 30px 60px -12px inset, rgba(70, 70, 70, 0.3) 0px 18px 36px -18px inset;
+}
+
+/* Checkbox y etiqueta */
+.container_info_unidad_checks_list {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+}
+
+input[type="checkbox"] {
+    accent-color: #4A90E2;
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+/* Botón Exportar */
+button {
+    background-color: #4A90E2;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 20px auto 0;
+    max-width: 200px;
+    width: 100%;
+    text-align: center;
+}
+
+button:hover {
+    background-color: #357ABD;
+}
+
+/* Responsivo para pantallas pequeñas */
+@media (max-width: 600px) {
+    .container_info_unidad_checks {
+        grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
+    }
+
+    h3 {
+        font-size: 20px;
+    }
+
+    h4 {
+        font-size: 16px;
+    }
+
+    button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}

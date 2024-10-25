@@ -82,6 +82,14 @@ const SubCategory = () => {
 
   return (
     <div className="containersubcategory">
+      <div className="container_info_unidad-header">
+        <h4>Estadisticas por sub categoria:</h4>
+        <p>
+          Permite ver porcentajes, cantidades y valores de las sub categoría de
+          productos.
+        </p>
+      </div>
+
       <div className="containersubcategory-category">
         {unitCounts.length === 0 ? (
           <p>No hay unidades disponibles.</p>

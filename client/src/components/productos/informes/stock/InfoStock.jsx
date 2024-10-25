@@ -19,7 +19,12 @@ const InfoStock = () => {
   const [totalCostUnits, setTotalCostUnits] = useState(0);
   const [totalCostCategories, setTotalCostCategories] = useState({});
 
-  const { statistics, loadingStatistics, errorStatistics, fetchProductStatistics } = useProductStatistics();
+  const {
+    statistics,
+    loadingStatistics,
+    errorStatistics,
+    fetchProductStatistics,
+  } = useProductStatistics();
 
   // Extracting statistics for categories and subcategories
   const categorias = statistics?.estadisticas || [];
@@ -27,8 +32,8 @@ const InfoStock = () => {
 
   // Fetch data when the component mounts
   useEffect(() => {
-    fetchUnits();  // Always fetch units on mount
-    fetchProductStatistics();  // Always fetch statistics on mount
+    fetchUnits(); // Always fetch units on mount
+    fetchProductStatistics(); // Always fetch statistics on mount
   }, [fetchUnits, fetchProductStatistics]);
 
   // Process the units data once fetched
@@ -113,7 +118,14 @@ const InfoStock = () => {
 
   return (
     <div className="container-info-inventario">
-      <h3>Stock de inventario CPCS</h3>
+      <h2>Stock de inventario CPCS</h2>
+      <div className="container_info_unidad-header">
+        <h4>Estadisticas por categoria:</h4>
+        <p>
+          Permite ver porcentajes, cantidades y valores de las categoría de
+          productos.
+        </p>
+      </div>
 
       <div className="container-info-inventario-content">
         <div className="box-info-inventario">
@@ -155,14 +167,13 @@ const InfoStock = () => {
             {categorias.map((categoria, index) => (
               <div key={index} className="box-info-inventario-units-category">
                 <p>
-                  <strong>Categoría:</strong> <span >{categoria.categoria}</span> 
+                  <strong>Categoría:</strong> <span>{categoria.categoria}</span>
                 </p>
                 <p className="strong-unidades">
-                  Total Unidades: {" "}
-                  {categoria.totalUnidadesPorCategoria}
+                  Total Unidades: {categoria.totalUnidadesPorCategoria}
                 </p>
                 <p>
-                  Total Precio: {" "}
+                  Total Precio:{" "}
                   {new Intl.NumberFormat("es-CO", {
                     style: "currency",
                     currency: "COP",

@@ -7,6 +7,7 @@ import { RiProductHuntLine } from "react-icons/ri";
 import { MdCategory } from "react-icons/md";
 import { AiOutlineDeploymentUnit } from "react-icons/ai";
 import { BsDistributeHorizontal } from "react-icons/bs";
+import { TbReport } from "react-icons/tb";
 import "./SidebarStatistics.css";
 
 const SidebarScatistics = () => {
@@ -34,7 +35,26 @@ const SidebarScatistics = () => {
         </div>
       </div>
       <div>
-        
+      <SidebarItem
+          path="/admin/inventario_estadisticas/distribution"
+          icon={<BsDistributeHorizontal />}
+          label="Distribución"
+          isOpen={isOpen}
+          location={location}
+        />
+         
+        <h2 className="SidebarItem-Dashboard-line">_____________________</h2>
+
+        <SidebarItem
+          path="/admin/inventario_estadisticas/unit_report"
+          icon={<TbReport />}
+          label="Unidad personalizado"
+          isOpen={isOpen}
+          location={location}
+        />
+         
+        <h2 className="SidebarItem-Dashboard-line">_____________________</h2>
+
         <SidebarItem
           path="/admin/inventario_estadisticas/infostock"
           icon={<MdCategory />}
@@ -52,16 +72,8 @@ const SidebarScatistics = () => {
          
         <h2 className="SidebarItem-Dashboard-line">_____________________</h2>
         
-        <SidebarItem
-          path="/admin/inventario_estadisticas/distribution"
-          icon={<BsDistributeHorizontal />}
-          label="Distribución"
-          isOpen={isOpen}
-          location={location}
-        />
-         
-        <h2 className="SidebarItem-Dashboard-line">_____________________</h2>
-        <div className="pre-title-sidebar-statis">Crear :</div>
+        
+        {/* <div className="pre-title-sidebar-statis">Crear :</div> */}
       </div>
 
       

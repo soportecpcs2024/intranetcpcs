@@ -1,7 +1,8 @@
 .agregarLlegadasTarde {
+   margin-top: 100px;
   margin-left: auto;
   margin-right: auto;
-     width: 300px;
+     width: 400px;
      display: flex;
      flex-direction: column;
     padding: 1rem;
@@ -12,6 +13,7 @@
   }
   
   .form-group {
+    width: 100%;
     margin-bottom: 1rem;
     display: flex;
      flex-direction: column;

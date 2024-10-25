@@ -19,7 +19,7 @@
   height: auto;
   overflow: visible;
   margin: 0 auto;
-  padding: 10px;
+  padding: 5px;
   background-color: #ffffff;
   color: #000;
   box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
@@ -29,14 +29,20 @@
 }
 
 /* Table Container Styles */
-.table-container {
+.table-container-llegadastarde {
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
   overflow: visible;
   margin-bottom: 1rem;
+   
 }
 
 /* Table Styles */
 .llegadas-tarde-table {
-  width: 100%;
+  width: 95%;
   border-collapse: collapse;
   background-color: #c2c2c2;
 }
@@ -44,7 +50,7 @@
 .llegadas-tarde-table th,
 .llegadas-tarde-table td {
   border: 1px solid #979696;
-  padding: 10px;
+  padding: 5px;
   text-align: left;
   color: #000;
   font-size: 14px;
@@ -59,7 +65,7 @@
 .fechas {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 4px;
 }
 
 .llegadas-tarde-table .day {
@@ -69,13 +75,13 @@
 }
 
 .llegadas-tarde-table .month {
-  color: #4682b4;
+  color: black;
   font-weight: normal;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .llegadas-tarde-table .year {
-  color: #6a5acd;
+  color: black;
   font-weight: lighter;
   font-size: 12px;
 }
@@ -83,7 +89,8 @@
 .llegadas-tarde-table ul {
   text-align: center;
   color: red;
-  font-size: 14px;
+  font-size: 12px;
+  font-weight: 600;
   list-style-type: none;
 }
 

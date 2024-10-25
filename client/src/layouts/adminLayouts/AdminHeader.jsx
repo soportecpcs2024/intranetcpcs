@@ -82,20 +82,17 @@ const AdminHeader = () => {
                     <li>
                       <div className="dropdown">
                         <Link onClick={toggleDropdown}>Administración</Link>
-                        
+
                         {isDropdownOpen && (
                           <ul className="dropdown-menu">
                             <li>
-                              <Link to="/admin/administracion">
-                              Stock
-                              </Link>
+                              <Link to="/admin/administracion">Stock</Link>
                             </li>
                             <li>
-                              <Link to="/admin/inventario_estadisticas">Informes</Link>
+                              <Link to="/admin/inventario_estadisticas">
+                                Informes
+                              </Link>
                             </li>
-                            
-                             
-                             
                           </ul>
                         )}
                       </div>
@@ -168,9 +165,27 @@ const AdminHeader = () => {
               <Link to="/admin/blog">Blog</Link>
               </li> */}
 
-                  <li>
-                    <Link to="/admin/administracion">Administración</Link>
-                  </li>
+                  <div className="admin-layout-header-links-a">
+                    <li>
+                      <div className="dropdown">
+                        <Link onClick={toggleDropdown}>Administración</Link>
+
+                        {isDropdownOpen && (
+                          <ul className="dropdown-menu">
+                            <li>
+                              <Link to="/admin/administracion">Stock</Link>
+                            </li>
+                            <li>
+                              <Link to="/admin/inventario_estadisticas">
+                                Informes
+                              </Link>
+                            </li>
+                          </ul>
+                        )}
+                      </div>
+                    </li>
+                  </div>
+
                   <li>
                     <Link
                       to="https://site2.q10.com/login?ReturnUrl=%2F&aplentId=d12efeb8-f609-4dd1-87cd-1cb0c95d32e2"

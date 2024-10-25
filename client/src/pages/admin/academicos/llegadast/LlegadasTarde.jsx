@@ -105,7 +105,7 @@ const LlegadasTarde = () => {
         setSelectedGroup={setSelectedGroup}
       />
 
-      <div className="table-container">
+      <div className="table-container-llegadastarde">
         <h3>Llegadas tarde del grupo : <span>{selectedGroup}</span></h3>
         <table className="llegadas-tarde-table">
           <thead>
@@ -128,12 +128,12 @@ const LlegadasTarde = () => {
                 <td>
                   <ul className="fechas">
                     {llegada.fechas.map((date, idx) => {
-                      const { day, month, year } = formatDate(date);
+                      const { day, month } = formatDate(date);
                       return (
                         <li key={idx}>
-                          <span className="day">{day}</span>/
-                          <span className="month">{month}</span>/
-                          <span className="year">{year}</span>
+                          <span className="day">{day}</span>-
+                          <span className="month">{month}</span>
+                          
                           {idx < llegada.fechas.length - 1 && ", "}
                         </li>
                       );

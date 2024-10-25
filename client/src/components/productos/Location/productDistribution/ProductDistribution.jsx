@@ -101,6 +101,12 @@ const ProductDistribution = () => {
   return (
     <div className="product-distribution-container">
       <h2>Distribución de Productos</h2>
+      <div className="container_info_unidad-header">
+        <h4>Selecciona la ubicación:</h4>
+        <p>
+        Permite ver específicamente los productos asignados a una ubicación o área en partícula.
+        </p>
+      </div>
       <div className="product-distribution-container-asignaciones">
         <div className="total-ubicaciones">
           <p className="total-ubicaciones-text">Total de ubicaciones: </p>

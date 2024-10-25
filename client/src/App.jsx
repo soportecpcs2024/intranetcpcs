@@ -40,6 +40,8 @@ import DashboardStatistics from "./components/productos/statistics/dashboardStat
 import InfoStock from "./components/productos/informes/stock/InfoStock";
 import SubCategory from "./components/productos/informes/subcategory/SubCategory";
 import ProductDistribution from "./components/productos/Location/productDistribution/ProductDistribution";
+import InformeUnidad from "./components/productos/informes/informeUnidad/InformeUnidad";
+
 
 
 
@@ -141,6 +143,7 @@ const AppContent = () => {
               <Route path="infostock" element={<InfoStock />} />
               <Route path="subcategory" element={<SubCategory />} />
               <Route path="distribution" element={<ProductDistribution />} />
+              <Route path="unit_report" element={<InformeUnidad />} />
             </Route>
           </Route>
 
