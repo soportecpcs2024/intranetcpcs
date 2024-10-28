@@ -70,7 +70,7 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}  >
       <div className="input-group">
         <label>Correo:</label>
         <input
@@ -105,12 +105,12 @@ const LoginForm = () => {
           )}
         </div>
       </div>
-      <div>
-        <div>
+      <div className="input-group-entrar">
+        
           <button type="submit" className="login-button">
             Entrar
           </button>
-        </div>
+        
         <div>{error && <p className="error">{error}</p>}</div>
       </div>
     </form>

@@ -81,7 +81,7 @@ const InformeUnidad = () => {
         <h4>Selecciona los campos a exportar:</h4>
         <p>
           Permite expotar un archivo de Excel la información de las unidades
-          según lso campos requeridos
+          según los campos requeridos
         </p>
       </div>
 

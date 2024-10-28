@@ -1,0 +1,69 @@
+/* Contenedor principal */
+.layout-academico-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+/* Header del sidebar superior */
+.layout-academico-container-header {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 15px;
+  background-color: #f3f4f6;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px;
+}
+
+/* Estilo general para cada enlace del sidebar */
+.link-academico {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+/* Iconos de los enlaces del sidebar */
+.icon-academico {
+  font-size: 35px; /* Tamaño del icono */
+  color: #515458; /* Color del icono */
+  margin-bottom: 5px;
+}
+
+/* Estilo para los enlaces normales */
+.sidebar-link-academico {
+  color: #333;
+  font-size: 14px;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+/* Hover para el link */
+.link-academico:hover {
+  background-color: #e0e0e0;
+}
+
+/* Estado activo del link */
+.active {
+  background-color: #d0e7ff;
+  color: #1a73e8;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+/* Contenido principal */
+.content-academico {
+  flex-grow: 1;
+  padding: 2rem;
+  background-color: #ffffff;
+  color: #2c3e50;
+}
+
+/* Estilo de hover para iconos */
+.icon-academico:hover {
+  color: #007bff; /* Cambia color del icono al hacer hover */
+}

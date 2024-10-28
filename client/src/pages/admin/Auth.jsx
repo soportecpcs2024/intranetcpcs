@@ -18,7 +18,7 @@ const Auth = () => {
     <div className="auth">
       <div className="header-login">
         <h1>CPCS</h1>
-        <h3><span>Celebrando 30 años</span>
+        <h3 className="eslogan"><span>Celebrando 30 años</span>
         formando líderes en Cristo para Colombia y las naciones</h3>
        
       </div>

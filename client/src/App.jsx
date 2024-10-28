@@ -41,6 +41,13 @@ import InfoStock from "./components/productos/informes/stock/InfoStock";
 import SubCategory from "./components/productos/informes/subcategory/SubCategory";
 import ProductDistribution from "./components/productos/Location/productDistribution/ProductDistribution";
 import InformeUnidad from "./components/productos/informes/informeUnidad/InformeUnidad";
+import LayoutInfoAcademicos from "./components/informesAcademicos/DashboardInformesAcademicos/LayoutInfoAcademicos";
+import CertificadoEstudios from "./components/informesAcademicos/CertificadoEstudios/CertificadoEstudios";
+import AcumuladosNotas from "./components/informesAcademicos/AcumuladosNotas/AcumuladosNotas";
+import Estadistico from "./components/informesAcademicos/Estadistico/Estadistico";
+
+
+
 
 
 
@@ -145,6 +152,14 @@ const AppContent = () => {
               <Route path="distribution" element={<ProductDistribution />} />
               <Route path="unit_report" element={<InformeUnidad />} />
             </Route>
+
+          <Route path="infoacademico" element={<LayoutInfoAcademicos />}>
+          <Route path="certificado-estudios" element={<CertificadoEstudios />} />
+          <Route path="acumulados-notas" element={<AcumuladosNotas />} />
+          <Route path="estadistico" element={<Estadistico />} />
+
+
+          </Route>
           </Route>
 
         
