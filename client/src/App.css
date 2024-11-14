@@ -892,34 +892,21 @@ box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
 
 .metas_container{
   display: flex;
-  margin-top: 6px;
+  margin-top: 2px;
   width: 100%;
   background-color: rgb(255, 255, 255);
   border-radius: 6px;
   border-color: #ced4da;
-  gap: 10px;
+  gap: 5px;
    
   -webkit-box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
 -moz-box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
 box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
 }
 
-.metas_container .box_metas_container:nth-child(1){
-  flex-basis: calc(40% - 1rem);
-  padding: 10px;
-  text-align: justify;
-  }
-  
-  .metas_container .box_metas_container:nth-child(2){
-    flex-basis: calc(60% - 1rem);
-    padding: 10px;
-     
-    text-align: justify;
-}
+ 
 
-.box_metas_container_div{
-  margin-top: 20px;
-}
+ 
 
 .table_metas{
   display: flex;
@@ -1169,11 +1156,12 @@ box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
 .metas-container {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
+  
   padding: 5px;
   background-image: radial-gradient(circle at 50% -20.71%,#0051ded6 100%, #a3a8ff90 0, #7a8ffc 25%, #3c78f2 50%, #0063e8 75% );
-  margin: 10px;
-  border-radius: 12px;
+  margin: 5px;
+  border-radius: 8px;
   box-shadow: 0 2px 4px rgb(255, 255, 255);
   -webkit-box-shadow: 8px 8px 14px -11px rgb(255, 255, 255);
   -moz-box-shadow: 8px 8px 14px -11px rgb(255, 255, 255);
@@ -1192,17 +1180,7 @@ box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
   gap: 10px;
 }
 
- .b1 {
  
- margin: 5px;
- padding: 4px;
- border-radius: 5px;
- box-shadow: 0 2px 4px rgba(248, 247, 247, 0.916);
-  -webkit-box-shadow: 8px 8px 14px -11px rgb(220, 220, 220);
-  -moz-box-shadow: 8px 8px 14px -11px rgb(232, 232, 232);
-  box-shadow: 8px 8px 14px -11px rgb(217, 217, 217);
-
-}
 
 .card {
   background-color: #fff;
@@ -1213,28 +1191,30 @@ box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
 
 }
 
-.card h3, .card h4 {
-  margin-left: 10px;
+.card_metas {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  transition: transform 0.2s;
+
+}
+
+.card_metas h3, .card_metas h4 {
+  
    text-align: left;
   font-weight: 600;
 }
 
-.card p {
-  display: flex;
-  flex-direction: column;
+.card_metas p {
+   
   margin: 0;
   color: #555;
-  font-size: 12px;
-  text-align: left;
+  font-size: 14px;
+  text-align: justify;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-}
-
-.metas-container .card:nth-child(odd) {
-  background-color: #f9f9f9;
-}
+ 
 
 
 /* Estilo para las etiquetas de texto del promedio */

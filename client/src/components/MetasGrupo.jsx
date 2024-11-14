@@ -82,39 +82,34 @@ const MetasGrupo = ({ selectedGroup, selectedPeriodo }) => {
   return (
     <div className="metas-container">
       <h2>Observaciones generales del grupo</h2>
-      <div className="metas-bloque b1">
-        <div className="card">
-          <h3>Académicos:</h3>
+      
+        <div className="card_metas">
+          <h4>Académicos:</h4>
           <p>{renderTextWithLineBreaks(metasToDisplay.academicos)}</p>
-        </div>
-        <div className="card">
-          <h3>Estrategias a implementar para elevar el nivel académico:</h3>
+          <h4>Estrategias a implementar para elevar el nivel académico:</h4>
           <p>{renderTextWithLineBreaks(metasToDisplay.estrategiasImplementarAcademico)}</p>
         </div>
+         
         {/* <div className="card">
           <h3>Disciplina en el grupo durante el periodo:</h3>
           <p>{renderTextWithLineBreaks(metasToDisplay.disciplinagrupo)}</p>
         </div> */}
-      </div>
-      <div className="metas-bloque b2">
-        <div className="card">
-          <h4>Estudiantes con dificultad Disciplinarias:</h4>
+     
+      <div  >
+        <div className="card_metas">
+          <h5>Estudiantes con dificultad Disciplinarias:</h5>
           <p>{renderTextWithLineBreaks(metasToDisplay.estudiantesDificultadDisciplinarias)}</p>
-        </div>
-        <div className="card">
-          <h4>Estudiantes pendientes de procesos Disciplinarios:</h4>
+        
+          <h5>Estudiantes pendientes de procesos Disciplinarios:</h5>
           <p>{renderTextWithLineBreaks(metasToDisplay.estudiantesPendientesDisciplinarios)}</p>
-        </div>
-        <div className="card">
-          <h4>Estudiantes con sanción por parte del comité:</h4>
+        
+          <h5>Estudiantes con sanción por parte del comité:</h5>
           <p>{renderTextWithLineBreaks(metasToDisplay.estudiantesSancionComite)}</p>
-        </div>
-        <div className="card">
-          <h4>Faltas que más se repiten en el grupo:</h4>
+        
+          <h5>Faltas que más se repiten en el grupo:</h5>
           <p>{renderTextWithLineBreaks(metasToDisplay.faltasRepetidasGrupo)}</p>
-        </div>
-        <div className="card">
-          <h4>Estrategias a trabajar</h4>
+        
+          <h5>Estrategias a trabajar</h5>
           <p>{renderTextWithLineBreaks(metasToDisplay.estrategiasTrabajar)}</p>
         </div>
       </div>

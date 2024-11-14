@@ -65,7 +65,7 @@ const AdminHeader = () => {
                               </Link>
                             </li>
                             <li>
-                              <Link to="/admin/documentos">Documentos</Link>
+                              <Link to="/admin/documentos">Promedios por materia</Link>
                             </li>
                             <li>
                               <Link to="/admin/llegadastarde">Llegadas tarde</Link>

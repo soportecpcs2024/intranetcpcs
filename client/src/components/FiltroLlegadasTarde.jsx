@@ -10,7 +10,7 @@ const FiltroLlegadasTarde = ({
         onChange={(e) => setSelectedGroup(e.target.value.trim())}
         className="filter-select-llegadas"
       >
-        <option value="">Todos los Grupos</option>
+        <option value="">Selecciona el grupos</option>
         <option value="JARDIN">Jardín</option>
         <option value="PRIMERO A">1. A</option>
         <option value="PRIMERO B">1. B</option>
