@@ -3,7 +3,7 @@ import ReactPaginate from 'react-paginate';
 const NewDatatable = ({ students, error }) => {
     const [currentPage, setCurrentPage] = useState(0);
     const [filteredStudents, setFilteredStudents] = useState([]);
-    const itemsPerPage = 15; // Número de elementos por página
+    const itemsPerPage = 12; // Número de elementos por página
   
     // Función para manejar cambios en la página
     const handlePageClick = (event) => {

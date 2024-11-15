@@ -7,7 +7,7 @@ import MetasGrupo from "./MetasGrupo";
 import PromedioGrupos from "./PromedioGrupos";
 import Filtros from "./Filtros";
 import LoadingSpinner from "./LoadingSpinner";
-import { updateMetasGrupo as updateMetasApi } from '../api/dataMetasGrupos'; // Importa la función API
+import { updateMetasGrupo as updateMetasApi } from "../api/dataMetasGrupos"; // Importa la función API
 
 const NewDashboard = () => {
   const [students, setStudents] = useState([]);
@@ -49,7 +49,8 @@ const NewDashboard = () => {
 
     if (selectedPeriodo) {
       filtered = filtered.filter(
-        (student) => student.periodo && student.periodo.trim() === selectedPeriodo
+        (student) =>
+          student.periodo && student.periodo.trim() === selectedPeriodo
       );
     }
 
@@ -77,7 +78,10 @@ const NewDashboard = () => {
       const updatedMeta = await updateMetasApi(groupId, updatedMetas);
       setStudents((prevStudents) =>
         prevStudents.map((student) => {
-          if (student.grupo === selectedGroup && student.periodo === selectedPeriodo) {
+          if (
+            student.grupo === selectedGroup &&
+            student.periodo === selectedPeriodo
+          ) {
             return {
               ...student,
               metas: updatedMeta,
@@ -113,16 +117,16 @@ const NewDashboard = () => {
         />
       </div>
 
-      <div className="graficas_generales">
-        <BarChartComponent students={filteredStudents} error={error} />
-      </div>
-
       <div className="prom_tables">
         <div className="box_prom_tables">
           <NewDatatable students={filteredStudents} error={error} />
         </div>
         <div className="box_prom_tables">
-          <PieChartComponent students={filteredStudents} error={error} />
+          <BarChartComponent
+            students={filteredStudents}
+            error={error}
+            isScaleChart={true} // Prop para indicar que es el gráfico de escalas
+          />
         </div>
       </div>
 

@@ -1,65 +1,66 @@
-import React from 'react';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, Cell, LabelList } from 'recharts';
+import React from "react";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, LabelList } from "recharts";
 
-const BarChartComponent = ({ students = [], error = null }) => {
-  // Agrupar estudiantes por grupo y calcular el promedio de cada grupo
-  const groupedData = students.reduce((accumulator, student) => {
-    const group = student.grupo.trim();
-    const promedio = parseFloat(student.promedio); // Asegurarse de que el promedio sea un número
+const BarChartComponent = ({ students, error, isScaleChart }) => {
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
 
-    if (!accumulator[group]) {
-      accumulator[group] = { totalPromedio: 0, count: 0 };
-    }
+  if (!students.length) {
+    return <p>No hay datos disponibles</p>;
+  }
 
-    if (!isNaN(promedio)) { // Solo agregar si el promedio es un número válido
-      accumulator[group].totalPromedio += promedio;
-      accumulator[group].count += 1;
-    }
+  let data;
+  if (isScaleChart) {
+    // Agrupación por escalas de desempeño
+    data = ["DI", "BÁSICO", "DA", "DS"].map((scale) => {
+      const count = students.filter((student) => {
+        let group;
+        if (student.promedio < 3) {
+          group = "DI";
+        } else if (student.promedio < 4) {
+          group = "BÁSICO";
+        } else if (student.promedio < 4.6) {
+          group = "DA";
+        } else {
+          group = "DS";
+        }
+        return group === scale;
+      }).length;
 
-    return accumulator;
-  }, {});
+      return { name: scale, value: count };
+    });
+  } else {
+    // Otra lógica para otros gráficos
+    data = students.map((student) => ({
+      name: student.nombre,
+      value: student.promedio,
+    }));
+  }
 
-  // Formatear datos para Recharts
-  const data = Object.keys(groupedData).map(group => ({
-    name: group,
-    average: (groupedData[group].totalPromedio / groupedData[group].count).toFixed(1),
-    count: groupedData[group].count
-  }));
-
-  // Colores para las barras del gráfico
-  const colors = ['#FE0211', '#6C69AC', '#0247FE', '#7cfc00'];
-
-  // Función para definir estilos personalizados de las barras
-  const customBarStyle = (index) => ({
-    fill: colors[index % colors.length],
-    stroke: '#333',
-    strokeWidth: 1,
-    opacity: 0.8,
-  });
+  // Asignar colores según el grupo
+  const COLORS = {
+    DI: "red",
+    BÁSICO: "#ff9933",
+    DA: "#33a8ff",
+    DS: "#25e107",
+  };
 
   return (
-    <div className="bar-chart-container">
-      <ResponsiveContainer width="100%" height={250}>
-        <BarChart data={data}>
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="average" name="Promedios por Grupos">
-            {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} {...customBarStyle(index)} />
-            ))}
-            <LabelList dataKey="average" position="top" formatter={(value) => `${value}`} />
-          </Bar>
-        </BarChart>
-      </ResponsiveContainer>
-      
-      {error && (
-        <div className="error-row">
-          <p>{error}</p>
-        </div>
-      )}
-    </div>
+    <ResponsiveContainer width="100%" height={350}>
+      <BarChart data={data}>
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Bar dataKey="value">
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={COLORS[entry.name]} />
+          ))}
+          {/* Mostrar valores como etiquetas */}
+          <LabelList dataKey="value" position="top" />
+        </Bar>
+      </BarChart>
+    </ResponsiveContainer>
   );
 };
 

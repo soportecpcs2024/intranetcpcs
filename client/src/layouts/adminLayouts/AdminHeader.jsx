@@ -65,13 +65,19 @@ const AdminHeader = () => {
                               </Link>
                             </li>
                             <li>
-                              <Link to="/admin/documentos">Promedios por materia</Link>
+                              <Link to="/admin/documentos">
+                                Promedios por materia
+                              </Link>
                             </li>
                             <li>
-                              <Link to="/admin/llegadastarde">Llegadas tarde</Link>
+                              <Link to="/admin/llegadastarde">
+                                Llegadas tarde
+                              </Link>
                             </li>
                             <li>
-                              <Link to="/admin/infoacademico">Informes Académicos</Link>
+                              <Link to="/admin/infoacademico">
+                                Informes Académicos
+                              </Link>
                             </li>
                           </ul>
                         )}
@@ -115,6 +121,12 @@ const AdminHeader = () => {
                         Q 10
                       </Link>
                     </li>
+                   
+                  </div>
+                  <div className="admin-layout-header-links-a">
+                   
+                      <button className="btn-logaut" onClick={handleLogout}>Cerrar </button>
+                    
                   </div>
                 </ul>
               )}
@@ -154,6 +166,11 @@ const AdminHeader = () => {
                     >
                       Q 10
                     </Link>
+                  </li>
+                  <li>
+                    <button className="logout-button" onClick={handleLogout}>
+                      Cerrar sesión
+                    </button>
                   </li>
                 </ul>
               )}{" "}
@@ -195,14 +212,15 @@ const AdminHeader = () => {
                       Q 10
                     </Link>
                   </li>
+
+                  <li>
+                    <button className="logout-button" onClick={handleLogout}>
+                      Cerrar sesión
+                    </button>
+                  </li>
                 </ul>
               )}
             </nav>
-          </div>
-          <div>
-            <button className="logout-button" onClick={handleLogout}>
-              Cerrar sesión
-            </button>
           </div>
         </div>
       </div>

@@ -418,10 +418,16 @@ input::placeholder {
   position: sticky;
   top: 0;
   width: 100%;
-  background-image: radial-gradient(circle at 50% -20.71%, #a3a7ff 0, #7a8ffc 25%, #3c78f2 50%, #0063e8 75%, #0051de 100%);
+  background-image: radial-gradient(circle at 50% -20.71%,   #3f5ef9 25%, #3c78f2 50%, #0063e8 75%, #0051de 100%);
   z-index: 1000; /* Asegúrate de que el encabezado esté por encima de otros elementos */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añadir una sombra para destacar el encabezado */
   height: 190px; 
+}
+
+.ul-header{
+  margin: 0
+  ;
+  align-items: normal;
 }
  
 
@@ -435,6 +441,7 @@ input::placeholder {
   display: flex;
   justify-content: space-around;
   font-size: 18px;
+  align-items: center;
 }
 
  
@@ -443,7 +450,7 @@ input::placeholder {
    
   text-decoration: none;
   color: #fbfbfb;
-  padding: 4px;
+  padding: 2px;
   border-radius: 4px;
   transition: background-color 0.3s ease;
 }
@@ -459,6 +466,24 @@ input::placeholder {
   cursor: pointer;
   padding: 0;
    
+}
+
+.btn-logaut{
+  margin: 0;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.9s ease;
+  
+}
+
+ 
+
+.btn-logaut:hover, .admin-redirect-button:hover {
+  background-color: #0056b3;
 }
 
 /* ----------------------------------------- */
@@ -543,9 +568,10 @@ input::placeholder {
   justify-content: space-between;
   align-items: center;
   
+  
    
 }
-
+ 
 
 .admin-layout-header-text{
   color: white;
@@ -964,10 +990,10 @@ box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
 }
 
 .prom_tables .box_prom_tables:nth-child(1){
-  flex-basis: calc(60% - 1rem);
+  flex-basis: calc(50% - 1rem);
 }
 .prom_tables .box_prom_tables:nth-child(2){
-  flex-basis: calc(40% - 1rem);
+  flex-basis: calc(50% - 1rem);
   background-color: rgba(255, 255, 255, 0.956);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.312); /* Agrega una sombra sutil */
     border-radius: 8px; /* Bordes redondeados */
@@ -1467,7 +1493,6 @@ box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
   padding: 20px;
   background-image: radial-gradient(ellipse farthest-corner at 45px 30px , #fff 50%, rgba(0, 255, 0, 0) 0%, yellow 50%);
   border-radius: 4px;
-   
   width: 70%;
 }
 
@@ -1775,6 +1800,7 @@ p {
   .admin-layout-header-links-pre{
     display: flex;
     flex-direction: row;
+     
   }
 
   .admin-layout-header-slogan{
@@ -2004,7 +2030,7 @@ p {
 
 @media (max-width: 644px) {
   .admin-header{
-
+ 
       height: 90px; 
   }
    
@@ -2013,6 +2039,8 @@ p {
   .admin-layout-header-links-pre{
     display: flex;
     flex-direction: column;
+    
+     
   }
   .admin-layout-header-text-span{
     font-size: 22px;
@@ -2020,6 +2048,7 @@ p {
 
   .admin-layout-header-links li{
     font-size: 12px;
+    margin: 5px;
  }
 
  .admin-layout-header-links-a{
@@ -2065,7 +2094,7 @@ p {
 
   .admin-header{
 
-    height: 190px; 
+    height: 150px; 
   }
 
   .admin-header .dropdown-menu {
