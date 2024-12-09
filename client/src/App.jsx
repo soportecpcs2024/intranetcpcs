@@ -45,6 +45,7 @@ import LayoutInfoAcademicos from "./components/informesAcademicos/DashboardInfor
 import CertificadoEstudios from "./components/informesAcademicos/CertificadoEstudios/CertificadoEstudios";
 import AcumuladosNotas from "./components/informesAcademicos/AcumuladosNotas/AcumuladosNotas";
 import Estadistico from "./components/informesAcademicos/Estadistico/Estadistico";
+import Quinto_informe from "./components/informesAcademicos/5°_Informe/quinto_informe";
 
 
 
@@ -111,6 +112,7 @@ const AppContent = () => {
               <Route index element={<General />} />
               <Route path="general" element={<General />} />
               <Route path="areas" element={<Areas />} />
+              <Route path="quinto_informe" element={<Quinto_informe />} />
               <Route path="nivelSuperior" element={<NivelSuperior />} />
               <Route path="individual" element={<InfoIndividual />} />
               <Route

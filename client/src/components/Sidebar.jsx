@@ -36,6 +36,8 @@ const Sidebar = () => {
             <p>Estadística por área</p>
           </div>
         </Link>
+
+
         <Link
           className={`linkNav ${
             location.pathname === "/admin/academico/individual" ? "active" : ""
@@ -47,6 +49,21 @@ const Sidebar = () => {
             <p>Estadística individual</p>
           </div>
         </Link>
+
+        <Link
+          className={`linkNav ${
+            location.pathname === "/admin/academico/quinto_informe" ? "active" : ""
+          }`}
+          to="/admin/academico/quinto_informe"
+        >
+          <BsFillPersonVcardFill className="icons" />
+          <div>
+            <p>5° Informe académico</p>
+          </div>
+        </Link>
+        <div className="linkNav-espacio-p">
+          <p>_______________</p>
+        </div>
 
         <Link
           className={`linkNav ${

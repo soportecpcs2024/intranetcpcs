@@ -1,0 +1,16 @@
+.graficas5informe{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    padding-bottom: 50px;
+    background-color: rgb(220, 220, 220);
+   
+}
+
+.graficas5informe_line{
+   width: 50%;
+    background-color: rgb(252, 252, 252);
+    border-radius: 8px;
+}
+
+ 
