@@ -45,7 +45,7 @@ import LayoutInfoAcademicos from "./components/informesAcademicos/DashboardInfor
 import CertificadoEstudios from "./components/informesAcademicos/CertificadoEstudios/CertificadoEstudios";
 import AcumuladosNotas from "./components/informesAcademicos/AcumuladosNotas/AcumuladosNotas";
 import Estadistico from "./components/informesAcademicos/Estadistico/Estadistico";
-import Quinto_informe from "./components/informesAcademicos/5°_Informe/quinto_informe";
+import Quinto_informe from "./components/informesAcademicos/quinto_Informe_b/Quinto_informe";
 
 
 
