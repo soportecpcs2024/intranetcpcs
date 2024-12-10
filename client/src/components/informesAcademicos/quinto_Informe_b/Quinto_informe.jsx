@@ -68,7 +68,14 @@ const Quinto_informe = () => {
           setSelectedArea={setSelectedArea}
         />
       </div>
-      <h3>Promedio General: {overallAverage.toFixed(2)}</h3>
+      <div className="quinto_informe_btn_title">
+        <h3>
+          Promedio Total:{" "}
+          <span className="quinto_informe_btn_total">
+            {overallAverage.toFixed(2)}
+          </span>{" "}
+        </h3>
+      </div>
       <div className="graficas5informe">
         <BarChartComponentAreasQuinto
           students={filteredStudents}
