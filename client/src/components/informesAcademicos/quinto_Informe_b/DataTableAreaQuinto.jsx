@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
-import { CiEdit } from "react-icons/ci";
- 
-import axios from 'axios';
 
 const DatatableAreasQuinto = ({ students, selectedArea, error }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [filteredStudents, setFilteredStudents] = useState([]);
- 
   const itemsPerPage = 15; // Número de elementos por página
 
   // Manejo de cambio de página
@@ -16,97 +12,50 @@ const DatatableAreasQuinto = ({ students, selectedArea, error }) => {
   };
 
   // Actualizar los estudiantes filtrados cuando cambia la lista de estudiantes
-useEffect(() => {
-  // Ordenar los estudiantes alfabéticamente por nombre
-  const sortedStudents = [...students].sort((a, b) => a.nombre.localeCompare(b.nombre));
-  setFilteredStudents(sortedStudents);
-  setCurrentPage(0);
-}, [students]);
+  useEffect(() => {
+    // Filtrar estudiantes con valor en el área seleccionada menor a 4
+    const filtered = students.filter(
+      (student) => Number(student[selectedArea]) < 4
+    );
+
+    // Ordenar los estudiantes alfabéticamente por nombre
+    const sortedStudents = [...filtered].sort((a, b) =>
+      a.nombre.localeCompare(b.nombre)
+    );
+
+    setFilteredStudents(sortedStudents);
+    setCurrentPage(0);
+  }, [students, selectedArea]);
 
   // Calcular elementos actuales de la página
   const offset = currentPage * itemsPerPage;
-  const currentPageItems = filteredStudents.slice(offset, offset + itemsPerPage);
+  const currentPageItems = filteredStudents.slice(
+    offset,
+    offset + itemsPerPage
+  );
   const pageCount = Math.ceil(filteredStudents.length / itemsPerPage);
 
-  // Abrir el modal
-  const openModal = (student) => {
-    setSelectedStudent(student);
-    setModalIsOpen(true);
-  };
-
-  // Cerrar el modal
-  const closeModal = () => {
-    setModalIsOpen(false);
-    setSelectedStudent(null);
-  };
-
-  // Actualizar observaciones en la base de datos y estado
-  const updateObservations = async (id, area, newObservation) => {
-    try {
-      const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/student_notes/${id}`, {
-        [`observaciones_${area}`]: newObservation
-      });
-      setFilteredStudents((prevStudents) =>
-        prevStudents.map((student) =>
-          student._id === id ? { ...student, [`observaciones_${area}`]: newObservation } : student
-        )
-      );
-    } catch (error) {
-      console.error('Error updating observations:', error);
-    }
-  };
-
-  // Actualizar metas en la base de datos y estado
-  const updateMeta = async (id, area, newMeta) => {
-    try {
-      const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/student_notes/${id}`, {
-        [`metas_${area}`]: newMeta
-      });
-      setFilteredStudents((prevStudents) =>
-        prevStudents.map((student) =>
-          student._id === id ? { ...student, [`metas_${area}`]: newMeta } : student
-        )
-      );
-    } catch (error) {
-      console.error('Error updating metas:', error);
-    }
-  };
-
-  // Actualizar reporte de evaluación en la base de datos y estado
-  const updateReporte = async (id, area, newReporte) => {
-    try {
-      const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/student_notes/${id}`, {
-        [`rep_eva_${area}`]: newReporte
-      });
-      setFilteredStudents((prevStudents) =>
-        prevStudents.map((student) =>
-          student._id === id ? { ...student, [`rep_eva_${area}`]: newReporte } : student
-        )
-      );
-    } catch (error) {
-      console.error('Error updating reporte:', error);
-    }
-  };
-
   return (
-    <div className="table-container">
+    <div className="table-container_grafic">
       <table className="table">
         <thead>
           <tr>
             <th>Nombre</th>
-            
-            <th>{selectedArea.split("_").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")}</th>
-            
+            <th>
+              {selectedArea
+                .split("_")
+                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(" ")}
+            </th>
           </tr>
         </thead>
         <tbody>
           {currentPageItems.map((student) => (
             <tr key={student._id}>
               <td>{student.nombre}</td>
-              
-              <td className="td-areas">{Number(student[selectedArea]).toFixed(2)}</td>
-             
-              
+              <td className="td-areas">
+                {Number(student[selectedArea]).toFixed(2)}
+              </td>
             </tr>
           ))}
         </tbody>
@@ -135,7 +84,6 @@ useEffect(() => {
         breakLinkClassName={"page-link"}
         activeClassName={"active"}
       />
-      
     </div>
   );
 };

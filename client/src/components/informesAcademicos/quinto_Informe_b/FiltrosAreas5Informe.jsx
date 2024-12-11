@@ -1,12 +1,14 @@
 import React from "react";
- 
 import Docente from "../../Docente";
+ 
 
 const FiltrosAreas5Informe = ({
-   
+  selectedPeriodo,
+  setSelectedPeriodo,
   selectedGroup,
   setSelectedGroup,
-   
+  selectedScale,
+  setSelectedScale,
   selectedArea, // Agregar el estado para el área seleccionada
   setSelectedArea, // Agregar la función para cambiar el área seleccionada
 }) => {
@@ -76,5 +78,6 @@ const FiltrosAreas5Informe = ({
     </div>
   );
 };
+ 
 
 export default FiltrosAreas5Informe;

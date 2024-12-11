@@ -1,16 +1,22 @@
 .graficas5informe{
     display: flex;
-    justify-content: space-between;
-    padding: 10px;
+    flex-direction: row;
+    
+    
+    justify-content: space-evenly;
+    padding: 5px;
     padding-bottom: 50px;
-    background-color: rgb(220, 220, 220);
+    background-color: rgb(208, 208, 208);
    
 }
 
 .graficas5informe_line{
-   width: 50%;
+    margin: 0px 3px;
+   width: 38%;
+   height: 400px;
     background-color: rgb(252, 252, 252);
     border-radius: 8px;
+    
 }
 
 .quinto_informe_btn_total{
@@ -47,4 +53,15 @@
 
 }
 
+.table-container_grafic {
+    overflow-x: auto;
+    
+    background-color: rgba(255, 255, 255, 0.711);
+    border-radius: 8px;
+    -webkit-box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
+    box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
+  }
+
+ 
  

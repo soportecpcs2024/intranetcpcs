@@ -23,33 +23,23 @@ const LineChartComponentQuinto = ({ students, selectedArea }) => {
     labels: labels, // Etiquetas para el eje X (Períodos)
     datasets: [
       {
-        label: "Promedios por Periodo", // Etiqueta para la línea
+        label: " ", // Etiqueta para la línea
         data: data, // Datos calculados
         fill: false, // No llenar debajo de la línea
         borderColor: "rgb(75, 192, 192)", // Color de la línea
         tension: 0.1, // Curvatura de la línea
-        borderWidth: 3, // Grosor de la línea
+        borderWidth: 1, // Grosor de la línea
         pointRadius: 5, // Radio de los puntos de la línea
         pointHoverRadius: 7, // Radio de los puntos cuando se pasa el mouse
         pointBackgroundColor: "rgb(75, 192, 192)", // Color de fondo de los puntos
       },
-      {
-        label: "Cierre", // Línea adicional para los datos de "dataClose"
-        data: data,
-        fill: false,
-        borderColor: "rgb(255, 99, 132)",
-        tension: 0.1,
-        borderWidth: 3,
-        pointRadius: 5,
-        pointHoverRadius: 7,
-        pointBackgroundColor: "rgb(255, 99, 132)",
-      },
+      
     ],
   };
 
   return (
-    <div className="chart-container" style={{ padding: "20px" }}>
-      <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Promedios por Período</h2>
+    <div className="chart-container" style={{ padding: "10px" }}>
+       
       <Line
         data={chartData}
         options={{

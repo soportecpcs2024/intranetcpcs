@@ -5,13 +5,15 @@ import FiltrosAreas5Informe from "./FiltrosAreas5Informe";
 import LoadingSpinner from "../../LoadingSpinner";
 import BarChartComponentAreasQuinto from "./BarChartComponentAreasQuinto";
 import LineChartComponentQuinto from "./LineChartComponentQuinto";
+
 import "./quintoinforme.css";
+
 const Quinto_informe = () => {
   const [students, setStudents] = useState([]);
   const [filteredStudents, setFilteredStudents] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedGroup, setSelectedGroup] = useState("");
   const [selectedArea, setSelectedArea] = useState("ciencias_naturales");
+  const [selectedGroup, setSelectedGroup] = useState("");
 
   useEffect(() => {
     async function fetchStudents() {
@@ -68,25 +70,30 @@ const Quinto_informe = () => {
           setSelectedArea={setSelectedArea}
         />
       </div>
-      <div className="quinto_informe_btn_title">
-        <h3>
-          Promedio Total:{" "}
-          <span className="quinto_informe_btn_total">
-            {overallAverage.toFixed(2)}
-          </span>{" "}
-        </h3>
-      </div>
-      <div className="graficas5informe">
-        <BarChartComponentAreasQuinto
-          students={filteredStudents}
-          selectedArea={selectedArea}
-        />
 
-        <div className="graficas5informe_line">
-          <LineChartComponentQuinto
-            students={filteredStudents}
-            selectedArea={selectedArea}
-          />
+      <div>
+        <div className="quinto_informe_btn_title">
+          <h3>
+            Promedio Total:{" "}
+            <span className="quinto_informe_btn_total">
+              {overallAverage.toFixed(2)}
+            </span>{" "}
+          </h3>
+        </div>
+        <div className="graficas5 _div">
+          <div className="graficas5informe">
+            <BarChartComponentAreasQuinto
+              students={filteredStudents}
+              selectedArea={selectedArea}
+            />
+
+            <div className="graficas5informe_line">
+              <LineChartComponentQuinto
+                students={filteredStudents}
+                selectedArea={selectedArea}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>

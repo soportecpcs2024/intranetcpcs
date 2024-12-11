@@ -7,6 +7,7 @@ const StudentNotesSchema = new Schema({
   codigo: Number,
   nombre: String,
   periodo: String,
+  acumulado:String,
   puesto: Number,
   promedio: Number,
   ciencias_naturales: Number,
