@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Students } from "../../../api/DataApi";
 import LoadingSpinner from "../../LoadingSpinner";
 import BarChartComponentAreasQuinto from "./BarChartComponentAreasQuinto";
@@ -8,32 +8,43 @@ import FiltrosAreas5Informe from "./FiltrosAreas5Informe";
 
 const Dashboardquinto = () => {
   const [students, setStudents] = useState([]);
-  const [filteredStudents, setFilteredStudents] = useState([]);
-  const [graphStudents, setGraphStudents] = useState([]);
   const [error, setError] = useState(null);
-  const [selectedGroup, setSelectedGroup] = useState("");
+  const [selectedGroup, setSelectedGroup] = useState("1. A"); // Default set to "1. A"
   const [selectedPeriodo, setSelectedPeriodo] = useState("acumulado");
   const [selectedScale, setSelectedScale] = useState("");
   const [selectedArea, setSelectedArea] = useState("ciencias_naturales");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchStudents() {
+    async function fetchInitialStudents() {
       try {
         const data = await Students();
-        setStudents(data);
+        const filteredData = data.filter(
+          (student) => student.grupo && student.grupo.trim() === "1. A"
+        );
+        setStudents(filteredData);
         setLoading(false);
+
+        // Fetch additional data after 3 seconds
+        setTimeout(async () => {
+          try {
+            const additionalData = await Students();
+            setStudents(additionalData);
+          } catch (error) {
+            setError("Error fetching additional students");
+          }
+        }, 3000);
       } catch (error) {
         setError("Error fetching students");
         setLoading(false);
       }
     }
 
-    fetchStudents();
+    fetchInitialStudents();
   }, []);
 
-  useEffect(() => {
-    // Filtrar datos para la tabla (período acumulado)
+  // Filtrar datos para la tabla, memoizando el cálculo
+  const filteredStudents = useMemo(() => {
     let filtered = students;
 
     if (selectedGroup) {
@@ -72,17 +83,18 @@ const Dashboardquinto = () => {
       );
     }
 
-    setFilteredStudents(filtered);
+    return filtered;
   }, [students, selectedGroup, selectedPeriodo, selectedScale, selectedArea]);
 
-  useEffect(() => {
-    // Filtrar datos para las gráficas (períodos específicos)
+  // Filtrar datos para las gráficas, memoizando el cálculo
+  const graphStudents = useMemo(() => {
     const periodosGraficas = [
       "PERIODO 1",
       "PERIODO 2",
       "PERIODO 3",
       "PERIODO 4",
     ];
+
     let graphFiltered = students;
 
     if (selectedGroup) {
@@ -102,16 +114,17 @@ const Dashboardquinto = () => {
       );
     }
 
-    setGraphStudents(graphFiltered);
+    return graphFiltered;
   }, [students, selectedGroup, selectedArea]);
 
-  const calculateOverallAverage = () => {
+  const calculateOverallAverage = useMemo(() => {
     const periodosGraficas = [
       "PERIODO 1",
       "PERIODO 2",
       "PERIODO 3",
       "PERIODO 4",
     ];
+
     const validStudents = students.filter(
       (student) =>
         student[selectedArea] && periodosGraficas.includes(student.periodo)
@@ -123,9 +136,7 @@ const Dashboardquinto = () => {
     }, 0);
 
     return totalSum / validStudents.length;
-  };
-
-  const overallAverage = calculateOverallAverage();
+  }, [students, selectedArea]);
 
   if (loading) {
     return <LoadingSpinner />;
@@ -144,7 +155,6 @@ const Dashboardquinto = () => {
           selectedArea={selectedArea}
           setSelectedArea={setSelectedArea}
         />
-        
       </div>
 
       <div className="graficas5informe">
