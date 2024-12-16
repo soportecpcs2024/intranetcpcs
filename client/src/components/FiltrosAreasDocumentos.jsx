@@ -22,6 +22,7 @@ const FiltrosAreasDocumentos = ({
         <option value="PERIODO 2">Periodo 2</option>
         <option value="PERIODO 3">Periodo 3</option>
         <option value="PERIODO 4">Periodo 4</option>
+        <option value="acumulado">5° Informe</option>
       </select>
 
       <select
