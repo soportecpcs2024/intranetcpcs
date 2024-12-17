@@ -141,22 +141,27 @@ const EditProduct = () => {
             value={formData.subcategory}
             onChange={handleChange}
           >
-            <option value="">Selecciona una subcategoría</option>
-            <option value="Cp mesa windows">Cp mesa windows</option>
-            <option value="Cp mesa Apple Mac mini">Cp mesa Apple Mac mini</option>
-            <option value="Cp mesa Apple Imac">Cp mesa Apple Imac</option>
-            <option value="Cp portátil windows">Cp portátil windows</option>
-            <option value="Cargador TC">Cargador TC</option>
-            <option value="Tablet">Tablet</option>
-            <option value="Tv Smart 50">Tv Smart 50</option>
-            <option value="Tv Smart 55">Tv Smart 55</option>
-            <option value="Tv Smart 60">Tv Smart 60</option>
-            <option value="Monitor 24">Monitor 24</option>
-            <option value="Monitor 32">Monitor 32</option>
-            <option value="Mixer">Mixer</option>
-            <option value="Parlante">Parlante</option>
-            <option value="Silla">Silla</option>
-            <option value="Cocina">Cocina</option>
+           
+           <option value="">Sub categoria:</option>
+              <option value="Cp mesa windows">Cp mesa windows</option>
+              <option value="Cp mesa Apple Mac mini">Cp mesa Apple Mac mini</option>
+              <option value="Cp mesa Apple Imac">Cp mesa Apple Imac</option>
+              <option value="Cp portátil windows">Cp portátil windows</option>
+              <option value="Teclado">Teclado</option>           
+              <option value="Cargador TC">Cargador TC</option>
+              <option value="Tablet">Tablet</option>
+              <option value="Tv Smart 50">Tv Smart 50</option>
+              <option value="Tv Smart 55">Tv Smart 55</option>
+              <option value="Tv Smart 60">Tv Smart 60</option>
+              <option value="Monitor 24">Monitor 24</option>
+              <option value="Monitor 32">Monitor 32</option>
+              <option value="Mixer">Mixer</option>
+              <option value="Parlante">Parlante</option>
+              <option value="Silla">Silla</option>
+              <option value="Cocina">Cocina</option>
+              <option value="Control">Control</option>
+              <option value="Gabinete multitoma">Gabinete multitoma</option>
+               
           </select>
         </div>
 
