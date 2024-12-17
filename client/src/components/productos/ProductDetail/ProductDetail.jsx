@@ -86,7 +86,7 @@ const ProductDetail = () => {
         </p>
         <p>
           <span className="product-detail-info-span">Área</span>:{" "}
-          {product.area}
+          {product.subcategory}
         </p>
         <p>
           <span className="product-detail-info-span">Modelo</span>:{" "}
