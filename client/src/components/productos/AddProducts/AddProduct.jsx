@@ -155,6 +155,7 @@ const AddProduct = () => {
               <option value="Cp mesa Apple Mac mini">Cp mesa Apple Mac mini</option>
               <option value="Cp mesa Apple Imac">Cp mesa Apple Imac</option>
               <option value="Cp portátil windows">Cp portátil windows</option>
+              <option value="Teclado">Teclado</option>
                
               <option value="Cargador TC">Cargador TC</option>
               <option value="Tablet">Tablet</option>
@@ -168,6 +169,7 @@ const AddProduct = () => {
               <option value="Silla">Silla</option>
               <option value="Cocina">Cocina</option>
               <option value="Control">Control</option>
+              <option value="Gabinete multitoma">Gabinete multitoma</option>
                
                
             </select>
