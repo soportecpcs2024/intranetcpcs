@@ -9,14 +9,21 @@ exports.crearUnidad = async (req, res) => {
             return res.status(400).json({ error: 'No se proporcionaron unidades para crear.' });
         }
 
-        const nuevasUnidades = await Unidad.insertMany(unidades);
+        // Validar los datos antes de insertarlos
+        for (const unidad of unidades) {
+            if (!unidad.location || unidad.location.trim() === "") {
+                delete unidad.location; // Elimina el campo si está vacío
+            }
+        }
 
+        const nuevasUnidades = await Unidad.insertMany(unidades);
         res.status(201).json({ nuevasUnidades });
     } catch (error) {
         console.error('Error al crear las unidades:', error);
         res.status(500).json({ error: 'Error al crear las unidades' });
     }
 };
+
 
 // Obtener todas las unidades
 exports.obtenerUnidades = async (req, res) => {
