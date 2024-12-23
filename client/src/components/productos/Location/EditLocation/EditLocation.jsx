@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useProducts } from "../../../../contexts/ProductContext";
-import "./EditLocation.css"; // Asegúrate de importar el archivo CSS
+import { UserContext } from "../../../../contexts/UserContext";
+import "./EditLocation.css";
 
 const EditLocation = () => {
   const { id } = useParams();
   const { locations, fetchLocations, updateLocation, loadingLocations, errorLocations } = useProducts();
+  const { usuarios } = useContext(UserContext); // Obtén los usuarios del contexto
   const [location, setLocation] = useState(null);
   const [formData, setFormData] = useState({
     nombre: "",
@@ -13,6 +15,7 @@ const EditLocation = () => {
     otros_detalles: "",
     entregado_por: "",
     recibido_por: "",
+    email_recibido_por: "",
     aprobado_por: "",
     estado: "activo", // Valor por defecto
   });
@@ -29,6 +32,7 @@ const EditLocation = () => {
           otros_detalles: foundLocation.otros_detalles,
           entregado_por: foundLocation.entregado_por,
           recibido_por: foundLocation.recibido_por,
+          email_recibido_por: foundLocation.email_recibido_por,
           aprobado_por: foundLocation.aprobado_por,
           estado: foundLocation.estado || "activo", // Asegúrate de establecer un estado por defecto si es necesario
         });
@@ -39,10 +43,24 @@ const EditLocation = () => {
   }, [id, locations, loadingLocations, fetchLocations]);
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: type === "checkbox" ? (checked ? value : "inactivo") : value,
+      [name]: value,
+    }));
+  };
+
+  const handleRecibidoPorChange = (e) => {
+    const { value } = e.target;
+    const user = usuarios.find((usuario) => usuario.name === value); // Busca el usuario seleccionado
+    // console.log(user.name);
+    // console.log(user.email);
+
+    // Actualiza los datos en formData
+    setFormData((prevData) => ({
+      ...prevData,
+      recibido_por: value,
+      email_recibido_por: user.email, // Asigna el email del usuario seleccionado
     }));
   };
 
@@ -137,40 +155,55 @@ const EditLocation = () => {
 
         <div className="location-encargados">
           <div className="location-box">
-            <input
-              type="text"
+            <label htmlFor="entregado_por">Asignado por</label>
+            <select
               id="entregado_por"
               name="entregado_por"
-              placeholder="Asignado por"
               value={formData.entregado_por}
               onChange={handleChange}
               required
-            />
-            <label htmlFor="entregado_por">Asignado por</label>
+            >
+              <option value="">Selecciona un usuario</option>
+              {usuarios.map((user) => (
+                <option key={user._id} value={user.nombre}>
+                  {user.name}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="location-box">
-            <input
-              type="text"
+            <label htmlFor="recibido_por">Recibido por</label>
+            <select
               id="recibido_por"
               name="recibido_por"
-              placeholder="Recibido por"
               value={formData.recibido_por}
-              onChange={handleChange}
-            />
-            <label htmlFor="recibido_por">Recibido por</label>
+              onChange={handleRecibidoPorChange} // Usamos el manejador específico para este campo
+            >
+              <option value="">Selecciona un usuario</option>
+              {usuarios.map((user) => (
+                <option key={user._id} value={user.nombre}>
+                  {user.name}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="location-box">
-            <input
-              type="text"
+            <label htmlFor="aprobado_por">Aprobado por</label>
+            <select
               id="aprobado_por"
               name="aprobado_por"
-              placeholder="Aprobado por"
               value={formData.aprobado_por}
               onChange={handleChange}
-            />
-            <label htmlFor="aprobado_por">Aprobado por</label>
+            >
+              <option value="">Selecciona un usuario</option>
+              {usuarios.map((user) => (
+                <option key={user._id} value={user.nombre}>
+                  {user.name}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
 

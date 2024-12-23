@@ -20,6 +20,10 @@ const locationSchema = new mongoose.Schema({
     type: String,
     default: "Administración",
   },
+  email_recibido_por: {
+    type: String,
+     
+  },
   aprobado_por: {
     type: String,
     default: "Administración",

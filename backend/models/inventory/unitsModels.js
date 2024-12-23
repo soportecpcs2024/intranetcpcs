@@ -25,6 +25,10 @@ const Unitschema = new mongoose.Schema({
         type: String,
         default: "Administración",
       },
+      email_recibido_por: {
+        type: String,
+        default: "email",
+      },
       aprobado_por: {
         type: String,
         default: "Administración",

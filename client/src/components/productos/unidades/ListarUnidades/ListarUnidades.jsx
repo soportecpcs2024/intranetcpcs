@@ -21,7 +21,7 @@ const ListarUnidades = () => {
 
   // Log the units when they are loaded
   useEffect(() => {
-    console.log("Units loaded:", units); // Verifica la carga de las unidades
+    // console.log("Units loaded:", units); // Verifica la carga de las unidades
     if (units) {
       const formatted = units.map((unit) => ({
         ...unit,
@@ -68,7 +68,7 @@ const ListarUnidades = () => {
       );
     });
 
-    console.log("Filtered Units:", filteredUnits); // Verifica los productos que pasan el filtro
+    // console.log("Filtered Units:", filteredUnits); // Verifica los productos que pasan el filtro
     setCurrentItems(filteredUnits.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(filteredUnits.length / itemsPerPage));
   }, [itemOffset, itemsPerPage, formattedUnits, searchTerm]);

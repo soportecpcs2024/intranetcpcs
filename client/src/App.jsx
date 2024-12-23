@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import { ProductProvider } from "./contexts/ProductContext";
 import { ProductStatisticsProvider } from "./contexts/InformesContext";
+import { UserProvider } from "./contexts/UserContext";
 import { Auth, Blog, Academicos, Q10 } from "./pages/admin";
 import AdminLayout from "./layouts/adminLayouts/AdminLayout";
 import "./App.css";
@@ -45,14 +46,8 @@ import LayoutInfoAcademicos from "./components/informesAcademicos/DashboardInfor
 import CertificadoEstudios from "./components/informesAcademicos/CertificadoEstudios/CertificadoEstudios";
 import AcumuladosNotas from "./components/informesAcademicos/AcumuladosNotas/AcumuladosNotas";
 import Estadistico from "./components/informesAcademicos/Estadistico/Estadistico";
-import Quinto_informe from "./components/informesAcademicos/quinto_Informe_b/Quinto_informe";
+
 import Dashboardquinto from "./components/informesAcademicos/quinto_Informe_b/Dashboardquinto";
-
-
-
-
-
-
 
 const App = () => {
   useEffect(() => {
@@ -85,7 +80,9 @@ const App = () => {
     <AuthProvider>
       <ProductProvider>
         <ProductStatisticsProvider>
-          <AppContent />
+          <UserProvider>
+            <AppContent />
+          </UserProvider>
         </ProductStatisticsProvider>
       </ProductProvider>
     </AuthProvider>
@@ -113,7 +110,7 @@ const AppContent = () => {
               <Route index element={<General />} />
               <Route path="general" element={<General />} />
               <Route path="areas" element={<Areas />} />
-              <Route path="quinto_informe" element={<Dashboardquinto/>} />
+              <Route path="quinto_informe" element={<Dashboardquinto />} />
               <Route path="nivelSuperior" element={<NivelSuperior />} />
               <Route path="individual" element={<InfoIndividual />} />
               <Route
@@ -156,16 +153,15 @@ const AppContent = () => {
               <Route path="unit_report" element={<InformeUnidad />} />
             </Route>
 
-          <Route path="infoacademico" element={<LayoutInfoAcademicos />}>
-          <Route path="certificado-estudios" element={<CertificadoEstudios />} />
-          <Route path="acumulados-notas" element={<AcumuladosNotas />} />
-          <Route path="estadistico" element={<Estadistico />} />
-
-
+            <Route path="infoacademico" element={<LayoutInfoAcademicos />}>
+              <Route
+                path="certificado-estudios"
+                element={<CertificadoEstudios />}
+              />
+              <Route path="acumulados-notas" element={<AcumuladosNotas />} />
+              <Route path="estadistico" element={<Estadistico />} />
+            </Route>
           </Route>
-          </Route>
-
-        
         )}
       </Routes>
     </BrowserRouter>

@@ -1,6 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useProducts } from "../../../contexts/ProductContext";
-import "./AddLocation.css"; // Asegúrate de importar el archivo CSS
+import { UserContext } from "../../../contexts/UserContext";
+import "./AddLocation.css";
+
+// Función para capitalizar la primera letra de cada palabra
+const capitalizeWords = (str) => {
+  return str
+    .split(" ")
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
+};
 
 const AddLocation = () => {
   const { createLocation } = useProducts();
@@ -10,13 +19,15 @@ const AddLocation = () => {
     otros_detalles: "",
     entregado_por: "",
     recibido_por: "",
+    email_recibido_por: "",
     aprobado_por: "",
-    estado: "Inactivo", // Estado inicializado como "Inactivo" por defecto
+    estado: "Inactivo",
     fecha_entrega: "",
     fecha_devolucion: "",
   });
-  const [errorMessage, setErrorMessage] = useState(""); // Estado para manejar errores
-  const [successMessage, setSuccessMessage] = useState(""); // Estado para mensajes de éxito
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const { usuarios } = useContext(UserContext); // Obtén los usuarios del contexto
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -26,43 +37,56 @@ const AddLocation = () => {
     }));
   };
 
+  const handleRecibidoPorChange = (e) => {
+    const { value } = e.target;
+    setLocationData((prevData) => {
+      const user = usuarios.find((usuario) => usuario.name === value); // Busca el usuario seleccionado
+      console.log(user.name);
+      console.log(user.email);
+
+      return {
+        ...prevData,
+        recibido_por: value,
+        email_recibido_por: user.email , // Asigna el email del usuario seleccionado
+      };
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrorMessage(""); // Limpia cualquier mensaje de error previo
-    setSuccessMessage(""); // Limpia cualquier mensaje de éxito previo
+    setErrorMessage("");
+    setSuccessMessage("");
 
     try {
       const { success, error } = await createLocation(locationData);
       if (success) {
-        setSuccessMessage('Ubicación creada con éxito.');
-        // Limpia los campos después de 3 segundos
+        setSuccessMessage("Ubicación creada con éxito.");
         setTimeout(() => {
-          setSuccessMessage(""); // Limpiar el mensaje de éxito
+          setSuccessMessage("");
           setLocationData({
             nombre: "",
             direccion: "",
             otros_detalles: "",
             entregado_por: "",
             recibido_por: "",
+            email_recibido_por: "",
             aprobado_por: "",
-            estado: "Inactivo", // Reinicia el estado a "Inactivo"
+            estado: "Inactivo",
             fecha_entrega: "",
             fecha_devolucion: "",
           });
-        }, 3000); // 3000 ms = 3 segundos
+        }, 3000);
       } else {
-        setErrorMessage(error || 'Error al crear la ubicación.');
-        // Limpia el mensaje de error después de 3 segundos
+        setErrorMessage(error || "Error al crear la ubicación.");
         setTimeout(() => {
           setErrorMessage("");
-        }, 3000); // 3000 ms = 3 segundos
+        }, 3000);
       }
     } catch (err) {
-      setErrorMessage('Error al crear la ubicación.');
-      // Limpia el mensaje de error después de 3 segundos
+      setErrorMessage("Error al crear la ubicación.");
       setTimeout(() => {
         setErrorMessage("");
-      }, 3000); // 3000 ms = 3 segundos
+      }, 3000);
     }
   };
 
@@ -70,8 +94,8 @@ const AddLocation = () => {
     <div className="add-product-container-location">
       <h3>CREAR UBICACIÓN</h3>
       <form className="add-product-form" onSubmit={handleSubmit}>
-        {errorMessage && <div className="error-message">{errorMessage}</div>} {/* Mostrar mensaje de error */}
-        {successMessage && <div className="success-message">{successMessage}</div>} {/* Mostrar mensaje de éxito */}
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
+        {successMessage && <div className="success-message">{successMessage}</div>}
 
         <div className="location-name-estado">
           <div className="boxlocation">
@@ -88,7 +112,6 @@ const AddLocation = () => {
           </div>
           <div className="boxlocation">
             <label htmlFor="estado">Estado</label>
-
             <div className="location-estado">
               <div>
                 <input
@@ -101,7 +124,6 @@ const AddLocation = () => {
                 />
                 <label htmlFor="estado_activo">Activo</label>
               </div>
-
               <div>
                 <input
                   type="checkbox"
@@ -140,40 +162,55 @@ const AddLocation = () => {
 
         <div className="location-encargados">
           <div className="location-box">
-            <input
-              type="text"
+            <label htmlFor="entregado_por">Asignado por</label>
+            <select
               id="entregado_por"
               name="entregado_por"
-              placeholder="Asignado por"
               value={locationData.entregado_por}
               onChange={handleChange}
               required
-            />
-            <label htmlFor="entregado_por">Asignado por</label>
+            >
+              <option value="">Seleccionar usuario</option>
+              {usuarios.map((usuario) => (
+                <option key={usuario._id} value={usuario.name}>
+                  {capitalizeWords(usuario.name)}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="location-box">
-            <input
-              type="text"
+            <label htmlFor="recibido_por">Recibido por</label>
+            <select
               id="recibido_por"
               name="recibido_por"
-              placeholder="Recibido por"
               value={locationData.recibido_por}
-              onChange={handleChange}
-            />
-            <label htmlFor="recibido_por">Recibido por</label>
+              onChange={handleRecibidoPorChange} // Usamos el manejador específico para este campo
+            >
+              <option value="">Seleccionar usuario</option>
+              {usuarios.map((usuario) => (
+                <option key={usuario._id} value={usuario.name}>
+                  {capitalizeWords(usuario.name)}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="location-box">
-            <input
-              type="text"
+            <label htmlFor="aprobado_por">Aprobado por</label>
+            <select
               id="aprobado_por"
               name="aprobado_por"
-              placeholder="Aprobado por"
               value={locationData.aprobado_por}
               onChange={handleChange}
-            />
-            <label htmlFor="aprobado_por">Aprobado por</label>
+            >
+              <option value="">Seleccionar usuario</option>
+              {usuarios.map((usuario) => (
+                <option key={usuario._id} value={usuario.name}>
+                  {capitalizeWords(usuario.name)}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
 

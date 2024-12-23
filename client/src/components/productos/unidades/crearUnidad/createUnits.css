@@ -3,9 +3,9 @@
 .form-createUnits {
     display: flex;
     flex-direction: column;
-    max-width: 500px;
-     
-    padding: 10px;
+    max-width: 600px;
+    font-size: 13px;
+    padding: 8px;
     background: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -27,19 +27,24 @@
   }
   .form-group-entregas .box:nth-child(1){
     flex-basis: calc(60% - 5px);  
-    margin: 5px 5px;
+    margin: 2px 2px;
     padding: 0px;
     
   }
   .form-group-entregas .box:nth-child(2){
     flex-basis: calc(40% - 5px);  
-    margin: 5px 5px;
+    margin: 5px ;
   }
 
   
 
   
-  
+  .acciones-crear-unidad{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+     
+  }
  
   
   label {
@@ -52,7 +57,7 @@
     padding: 0.75rem;
     border: 1px solid #ddd;
     border-radius: 4px;
-    font-size: 1rem;
+     
   }
   
   input[type="text"] {

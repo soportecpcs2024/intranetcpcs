@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useProducts } from "../../../../contexts/ProductContext";
+import { UserContext } from "../../../../contexts/UserContext";
 import "./createUnits.css";
 
 const CreateUnits = () => {
@@ -13,6 +14,8 @@ const CreateUnits = () => {
     loading,
   } = useProducts();
 
+  const { usuarios } = useContext(UserContext);
+
   const [units, setUnits] = useState([
     {
       id_producto: "",
@@ -22,12 +25,11 @@ const CreateUnits = () => {
       fecha_devolucion: "",
       entregado_por: "",
       recibido_por: "",
+      email_recibido_por: "",
       aprobado_por: "",
       observaciones: "",
     },
   ]);
-
-  const [generatedQRCodes, setGeneratedQRCodes] = useState([]);
 
   useEffect(() => {
     if (!loading) {
@@ -39,11 +41,18 @@ const CreateUnits = () => {
   const handleChange = (index, event) => {
     const { name, value, type, checked } = event.target;
     const newUnits = [...units];
+
     if (type === "checkbox") {
-      newUnits[index].estado = value;
+      newUnits[index].estado = checked ? value : "Inactivo";
     } else {
       newUnits[index][name] = value;
+
+      if (name === "recibido_por") {
+        const selectedUser = usuarios.find((usuario) => usuario.name === value);
+        newUnits[index].email_recibido_por = selectedUser ? selectedUser.email : "";
+      }
     }
+
     setUnits(newUnits);
   };
 
@@ -58,6 +67,7 @@ const CreateUnits = () => {
         fecha_devolucion: "",
         entregado_por: "",
         recibido_por: "",
+        email_recibido_por: "",
         aprobado_por: "",
         observaciones: "",
       },
@@ -67,7 +77,6 @@ const CreateUnits = () => {
   const removeUnit = (index) => {
     const newUnits = units.filter((_, i) => i !== index);
     setUnits(newUnits);
-    setGeneratedQRCodes(generatedQRCodes.filter((_, i) => i !== index));
   };
 
   const handleSubmit = async (event) => {
@@ -84,6 +93,7 @@ const CreateUnits = () => {
           fecha_devolucion: "",
           entregado_por: "",
           recibido_por: "",
+          email_recibido_por: "",
           aprobado_por: "",
           observaciones: "",
         },
@@ -93,11 +103,9 @@ const CreateUnits = () => {
     }
   };
 
-  const sortedLocations = [...locations].sort((a, b) => {
-    const nameA = a.direccion.toLowerCase();
-    const nameB = b.direccion.toLowerCase();
-    return nameA.localeCompare(nameB);
-  });
+  const sortedLocations = locations.sort((a, b) =>
+    a.direccion.localeCompare(b.direccion)
+  );
 
   if (loading) {
     return <div>Loading...</div>;
@@ -143,26 +151,46 @@ const CreateUnits = () => {
           <div className="form-group-entregas">
             <div className="box">
               <label>Entregado por:</label>
-              <input
-                type="text"
+              <select
                 name="entregado_por"
                 value={unit.entregado_por}
                 onChange={(e) => handleChange(index, e)}
-              />
+              >
+                <option value="">Seleccione un usuario</option>
+                {usuarios.map((usuario) => (
+                  <option key={usuario.id} value={usuario.name}>
+                    {usuario.name}
+                  </option>
+                ))}
+              </select>
+
               <label>Responsable:</label>
-              <input
-                type="text"
+              <select
                 name="recibido_por"
                 value={unit.recibido_por}
                 onChange={(e) => handleChange(index, e)}
-              />
+              >
+                <option value="">Seleccione un usuario</option>
+                {usuarios.map((usuario) => (
+                  <option key={usuario.id} value={usuario.name}>
+                    {usuario.name}
+                  </option>
+                ))}
+              </select>
+
               <label>Aprobado por:</label>
-              <input
-                type="text"
+              <select
                 name="aprobado_por"
                 value={unit.aprobado_por}
                 onChange={(e) => handleChange(index, e)}
-              />
+              >
+                <option value="">Seleccione un usuario</option>
+                {usuarios.map((usuario) => (
+                  <option key={usuario._id} value={usuario.name}>
+                    {usuario.name}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div className="box">
@@ -170,7 +198,6 @@ const CreateUnits = () => {
               <input
                 type="date"
                 name="fecha_entrega"
-                className="box"
                 value={unit.fecha_entrega}
                 onChange={(e) => handleChange(index, e)}
               />
@@ -180,42 +207,43 @@ const CreateUnits = () => {
           <div className="form-group">
             <label htmlFor="estado">Estado:</label>
             <div className="location-estado">
-              <div>
+              <label>
                 <input
                   type="checkbox"
-                  id={`estado_activo_${index}`}
                   name="estado"
                   value="activo"
                   checked={unit.estado === "activo"}
                   onChange={(e) => handleChange(index, e)}
                 />
-                <label htmlFor={`estado_activo_${index}`}>Activo</label>
-              </div>
+                Activo
+              </label>
 
-              <div>
+              <label>
                 <input
                   type="checkbox"
-                  id={`estado_inactivo_${index}`}
                   name="estado"
                   value="Inactivo"
                   checked={unit.estado === "Inactivo"}
                   onChange={(e) => handleChange(index, e)}
                 />
-                <label htmlFor={`estado_inactivo_${index}`}>De baja</label>
-              </div>
+                De baja
+              </label>
             </div>
-            <div>
-              <label htmlFor="observaciones">Observaciones</label>
-              <textarea
-                name="observaciones"
-                value={unit.observaciones}
-                onChange={(e) => handleChange(index, e)}
-                rows="4" // puedes ajustar el número de filas según lo que necesites
-                cols="50" // puedes ajustar el número de columnas también
-              />
-            </div>
-          </div>
 
+            <label htmlFor="observaciones">Observaciones</label>
+            <textarea
+              name="observaciones"
+              value={unit.observaciones}
+              onChange={(e) => handleChange(index, e)}
+              rows="4"
+              cols="50"
+            />
+          </div>
+        </div>
+      ))}
+
+      <div className="acciones-crear-unidad">
+      <div>
           <button
             type="button"
             className="remove-button"
@@ -223,21 +251,14 @@ const CreateUnits = () => {
           >
             Eliminar Unidad
           </button>
-
-          {generatedQRCodes[index] && (
-            <div className="qr-code">
-              <img src={generatedQRCodes[index]} alt="QR Code" />
-            </div>
-          )}
         </div>
-      ))}
-
-      <button type="button" className="add-button" onClick={addUnit}>
-        Añadir Otra Unidad
-      </button>
-      <button type="submit" className="submit-button">
-        Crear Unidades
-      </button>
+        <button type="button" className="add-button" onClick={addUnit}>
+          Añadir Otra Unidad
+        </button>
+        <button type="submit" className="submit-button">
+          Crear Unidades
+        </button>
+      </div>
     </form>
   );
 };

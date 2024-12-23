@@ -59,8 +59,7 @@ const LocationDetails = () => {
   useEffect(() => {
     const filteredUnits = Object.keys(groupedUnits).reduce(
       (acc, locationName) => {
-        // Si no hay término de búsqueda, mostramos todo
-        if (searchTerm === "" || locationName.toLowerCase() === searchTerm.toLowerCase()) {
+        if (locationName.toLowerCase().includes(searchTerm.toLowerCase())) {
           acc[locationName] = groupedUnits[locationName];
         }
         return acc;
@@ -96,7 +95,7 @@ const LocationDetails = () => {
       const date = new Date(); // o usa 'formattedDate' si ya tienes una fecha específica
       const options = { year: "numeric", month: "long", day: "numeric" };
       const formattedDate = date.toLocaleDateString("es-ES", options);
-      const imageUrl = "/logoDocheader.png"; // Ruta relativa a la carpeta public
+      const imageUrl = "/public/logoDocheader.png"; // Ruta relativa a la carpeta public
       const imageBlob = await fetch(imageUrl)
         .then((res) => {
           if (!res.ok) throw new Error("Imagen no encontrada");

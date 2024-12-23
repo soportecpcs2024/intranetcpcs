@@ -27,7 +27,7 @@ const getLocationById = async (req, res) => {
 // Crear una nueva ubicación
 const createLocation = async (req, res) => {
   try {
-    const { nombre, direccion, otros_detalles, entregado_por, recibido_por, aprobado_por, estado } = req.body;
+    const { nombre, direccion, otros_detalles, entregado_por, recibido_por, email_recibido_por, aprobado_por, estado } = req.body;
 
     // Verifica si ya existe una ubicación con el mismo nombre
     const existingLocation = await Location.findOne({ nombre: nombre.trim(), direccion: direccion.trim(), });
@@ -43,6 +43,7 @@ const createLocation = async (req, res) => {
       otros_detalles,
       entregado_por,
       recibido_por,
+      email_recibido_por,
       aprobado_por,
       estado,
     });
@@ -58,7 +59,7 @@ const createLocation = async (req, res) => {
 // Actualizar una ubicación existente
 const updateLocation = async (req, res) => {
   try {
-    const { nombre, direccion, otros_detalles, entregado_por, recibido_por, aprobado_por, estado } = req.body;
+    const { nombre, direccion, otros_detalles, entregado_por, recibido_por,email_recibido_por, aprobado_por, estado } = req.body;
 
     // Actualiza la ubicación existente con los nuevos datos
     const location = await Location.findByIdAndUpdate(
@@ -69,6 +70,7 @@ const updateLocation = async (req, res) => {
         otros_detalles,
         entregado_por,
         recibido_por,
+        email_recibido_por,
         aprobado_por,
         estado,
       },
