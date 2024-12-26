@@ -170,6 +170,10 @@ const AddProduct = () => {
               <option value="Cocina">Cocina</option>
               <option value="Control">Control</option>
               <option value="Gabinete multitoma">Gabinete multitoma</option>
+              <option value="Switch Gigabit">Switch Gigabit</option>
+              <option value="Aire acondicionado">Aire acondicionado</option>
+              <option value="Mesa salón 240 x 70">Mesa salón 240 x 70</option>
+              <option value="Mesa salón 70 x 70">Mesa salón 70 x 70</option>
                
                
             </select>
