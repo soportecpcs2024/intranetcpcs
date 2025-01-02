@@ -157,6 +157,8 @@ const AddProduct = () => {
               <option value="Cp portátil windows">Cp portátil windows</option>
               <option value="Teclado">Teclado</option>           
               <option value="Mouse">Mouse</option>           
+              <option value="Impresora">Impresora</option>           
+              <option value="Telefono">Telefono</option>           
               <option value="Cargador TC">Cargador TC</option>
               <option value="Tablet">Tablet</option>
               <option value="Tv Smart 50">Tv Smart 50</option>
@@ -174,6 +176,11 @@ const AddProduct = () => {
               <option value="Aire acondicionado">Aire acondicionado</option>
               <option value="Mesa salón 240 x 70">Mesa salón 240 x 70</option>
               <option value="Mesa salón 70 x 70">Mesa salón 70 x 70</option>
+              <option value="Mesa salón 70 x 70">Mesa salón 70 x 70</option>
+              <option value="Escritorio L">Escritorio L</option>
+              <option value="Escritorio Metálico Operativo">Escritorio Metálico Operativo</option>
+              <option value="Archivador móvil">Archivador móvil</option>
+              <option value="Archivador con entrepaño">Archivador con entrepaño</option>
                
                
             </select>
