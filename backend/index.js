@@ -83,6 +83,10 @@ app.use('/api/location', locationRoutes);
 const informesRoutes = require('./routes/inventory/informesRoutes');
 app.use('/api/informes', informesRoutes);
 
+// ------------ Rutas para actas de grados -------------
+const actasGradosroutes = require('./routes/graduadosCpcs/studentGraduateRoutes');
+app.use('/api/actasGrados', actasGradosroutes);
+
  
  
 
