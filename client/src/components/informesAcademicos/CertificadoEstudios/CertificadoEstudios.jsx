@@ -1172,7 +1172,7 @@ const CertificadoEstudios = () => {
     setError("");
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/actasGrados/studentsGraduate/search?numDocumento=${numDocumento}`
+        `${import.meta.env.VITE_BACKEND_URL}/api/actasGrados/studentsGraduate/search?numDocumento=${numDocumento}`
       );
       setResultados(response.data); // Suponiendo que la respuesta es un array de resultados
       setNumDocumento(""); // Limpiar el campo de búsqueda
