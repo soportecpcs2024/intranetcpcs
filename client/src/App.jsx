@@ -4,6 +4,8 @@ import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import { ProductProvider } from "./contexts/ProductContext";
 import { ProductStatisticsProvider } from "./contexts/InformesContext";
 import { UserProvider } from "./contexts/UserContext";
+ 
+
 import { Auth, Blog, Academicos, Q10 } from "./pages/admin";
 import AdminLayout from "./layouts/adminLayouts/AdminLayout";
 import "./App.css";
@@ -81,7 +83,9 @@ const App = () => {
       <ProductProvider>
         <ProductStatisticsProvider>
           <UserProvider>
-            <AppContent />
+           
+              <AppContent />
+           
           </UserProvider>
         </ProductStatisticsProvider>
       </ProductProvider>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+ 
 import "./CertificadoEstudios.css";
 import {
   Document,
@@ -11,7 +11,7 @@ import {
   PDFDownloadLink,
 } from "@react-pdf/renderer";
 
-import axios from "axios";
+ 
 
 // Define styles for the PDF
 const styles = StyleSheet.create({
@@ -1152,7 +1152,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
     </Page>
   </Document>
 );
-
+import axios from "axios";
 // Componente Principal
 const CertificadoEstudios = () => {
   const [numDocumento, setNumDocumento] = useState("");
@@ -1183,58 +1183,55 @@ const CertificadoEstudios = () => {
     }
   };
 
-  return (
-    <>
-      <div>
-        <h2>Buscador de Estudiantes</h2>
-        <input
-          type="text"
-          value={numDocumento}
-          onChange={(e) => setNumDocumento(e.target.value)}
-          placeholder="Ingresa el número de documento"
-        />
-        <button onClick={buscarEstudiantes} disabled={loading}>
-          {loading ? "Buscando..." : "Buscar"}
-        </button>
-
-        {error && <p style={{ color: "red" }}>{error}</p>}
-
-        <div>
-          <h3>Resultados de búsqueda:</h3>
-          {resultados.length > 0 ? (
-            <ul>
-              {resultados.map((estudiante) => (
-                <li key={estudiante.numDocumento}>
-                  <p>Nombre: {estudiante.nombre}</p>
-                  <p>Documento: {estudiante.numDocumento}</p>
-                  <button onClick={() => setEstudianteSeleccionado(estudiante)}>
-                    Cargar datos
-                  </button>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>No se encontraron estudiantes.</p>
-          )}
-        </div>
-      </div>
-
-      {estudianteSeleccionado && (
-        <PDFDownloadLink
-          document={
-            <CertificadoEstudiosDocument estudiante={estudianteSeleccionado} />
-          }
-          fileName="CertificadoEstudios.pdf"
-        >
-          {({ loading }) =>
-            loading
-              ? "Cargando certificado..."
-              : "Descargar Certificado como PDF"
-          }
-        </PDFDownloadLink>
-      )}
-    </>
-  );
+return (
+  <>
+       <div>
+         <h2>Buscador de Estudiantes</h2>
+         <input
+           type="text"
+           value={numDocumento}
+           onChange={(e) => setNumDocumento(e.target.value)}
+           placeholder="Ingresa el número de documento"
+         />
+         <button onClick={buscarEstudiantes} disabled={loading}>
+           {loading ? 'Buscando...' : 'Buscar'}
+         </button>
+ 
+         {error && <p style={{ color: 'red' }}>{error}</p>}
+ 
+         <div>
+           <h3>Resultados de búsqueda:</h3>
+           {resultados.length > 0 ? (
+             <ul>
+               {resultados.map((estudiante) => (
+                 <li key={estudiante.numDocumento}>
+                   <p>Nombre: {estudiante.nombre}</p>
+                   <p>Documento: {estudiante.numDocumento}</p>
+                   <button onClick={() => setEstudianteSeleccionado(estudiante)}>
+                     Cargar datos
+                   </button>
+                 </li>
+               ))}
+             </ul>
+           ) : (
+             <p>No se encontraron estudiantes.</p>
+           )}
+         </div>
+       </div>
+ 
+       {estudianteSeleccionado && (
+         <PDFDownloadLink
+           document={<CertificadoEstudiosDocument estudiante={estudianteSeleccionado} />}
+           fileName="CertificadoEstudios.pdf"
+         >
+           {({ loading }) =>
+             loading ? "Cargando certificado..." : "Descargar Certificado como PDF"
+           }
+         </PDFDownloadLink>
+       )}
+     </>
+);
 };
 
 export default CertificadoEstudios;
+ 
