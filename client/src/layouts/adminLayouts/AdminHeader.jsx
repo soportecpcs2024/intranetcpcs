@@ -153,7 +153,13 @@ const AdminHeader = () => {
                             <Link to="/admin/llegadastarde">
                               Llegadas tarde
                             </Link>
+                            
                           </li>
+                          <li>
+                              <Link to="/admin/infoacademico">
+                                Informes Académicos
+                              </Link>
+                            </li>
                         </ul>
                       )}
                     </div>

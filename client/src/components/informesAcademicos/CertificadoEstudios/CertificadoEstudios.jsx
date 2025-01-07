@@ -1183,54 +1183,62 @@ const CertificadoEstudios = () => {
     }
   };
 
-return (
-  <>
-       <div>
-         <h2>Buscador de Estudiantes</h2>
-         <input
-           type="text"
-           value={numDocumento}
-           onChange={(e) => setNumDocumento(e.target.value)}
-           placeholder="Ingresa el número de documento"
-         />
-         <button onClick={buscarEstudiantes} disabled={loading}>
-           {loading ? 'Buscando...' : 'Buscar'}
-         </button>
- 
-         {error && <p style={{ color: 'red' }}>{error}</p>}
- 
-         <div>
-           <h3>Resultados de búsqueda:</h3>
-           {resultados.length > 0 ? (
-             <ul>
-               {resultados.map((estudiante) => (
-                 <li key={estudiante.numDocumento}>
-                   <p>Nombre: {estudiante.nombre}</p>
-                   <p>Documento: {estudiante.numDocumento}</p>
-                   <button onClick={() => setEstudianteSeleccionado(estudiante)}>
-                     Cargar datos
-                   </button>
-                 </li>
-               ))}
-             </ul>
-           ) : (
-             <p>No se encontraron estudiantes.</p>
-           )}
-         </div>
-       </div>
- 
-       {estudianteSeleccionado && (
-         <PDFDownloadLink
-           document={<CertificadoEstudiosDocument estudiante={estudianteSeleccionado} />}
-           fileName="CertificadoEstudios.pdf"
-         >
-           {({ loading }) =>
-             loading ? "Cargando certificado..." : "Descargar Certificado como PDF"
-           }
-         </PDFDownloadLink>
-       )}
-     </>
-);
+  // Función para formatear el nombre del archivo
+  const generateFileName = (estudiante) => {
+    const fullName = `${estudiante.nombre}`.trim(); // Asegúrate de que los campos coincidan con tu estructura
+    return `${fullName} certificado de estudio.pdf`;
+  };
+
+  return (
+    <>
+      <div>
+        <h2>Buscar por documento de identidad:</h2>
+        <input
+          type="text"
+          value={numDocumento}
+          onChange={(e) => setNumDocumento(e.target.value)}
+          placeholder="Ingresa el número de documento"
+        />
+        <button onClick={buscarEstudiantes} disabled={loading}>
+          {loading ? "Buscando..." : "Buscar"}
+        </button>
+
+        {error && <p style={{ color: "red" }}>{error}</p>}
+
+        <div>
+          <h3>Resultados de búsqueda:</h3>
+          {resultados.length > 0 ? (
+            <ul>
+              {resultados.map((estudiante) => (
+                <li key={estudiante.numDocumento}>
+                  <p>Nombre: {estudiante.nombre}</p>
+                  <p>Documento: {estudiante.numDocumento}</p>
+                  <button onClick={() => setEstudianteSeleccionado(estudiante)}>
+                    Cargar datos
+                  </button>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No se encontraron estudiantes.</p>
+          )}
+        </div>
+      </div>
+
+      {estudianteSeleccionado && (
+        <PDFDownloadLink
+          document={
+            <CertificadoEstudiosDocument estudiante={estudianteSeleccionado} />
+          }
+          fileName={generateFileName(estudianteSeleccionado)}
+        >
+          {({ loading }) =>
+            loading ? "Cargando certificado..." : "Descargar Certificado de como PDF"
+          }
+        </PDFDownloadLink>
+      )}
+    </>
+  );
 };
 
 export default CertificadoEstudios;
