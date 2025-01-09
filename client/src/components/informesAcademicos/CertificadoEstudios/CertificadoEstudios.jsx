@@ -272,6 +272,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
               textAlign: "center",
               paddingTop: 3,
               paddingBottom: 3,
+              
             }}
           >
             NOTA
