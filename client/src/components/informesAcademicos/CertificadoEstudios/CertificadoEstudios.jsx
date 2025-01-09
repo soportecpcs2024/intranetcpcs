@@ -172,7 +172,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
             color: "#000000",
             textAlign: "center",
             fontWeight: "bold",
-            fontSize: 12,
+            fontSize: 18,
           }}
         >
           COLEGIO COLOMBO SUECO
@@ -217,7 +217,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
             fontWeight: "bold",
           }}
         >
-          Certificado Nº 427
+          Certificado Nº 0001
         </Text>
       </View>
       <Text
@@ -229,8 +229,8 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
           fontWeight: "bold",
         }}
       >
-        Que {estudiante?.nombre}, identificado con T. I. Nº.{" "} {estudiante?.numDocumento} de PENDIENTE, cursó y aprobó en este establecimiento educativo, los estudios correspondientes al grado {" "}
-        {estudiante.grupo} de Básica Secundaria. Para el año lectivo {estudiante.añoLectivo}. Matrícula Nº. {estudiante.codigoMatricula} y
+        Que {estudiante?.nombre}, identificado con T. I. Nº.{" "} {estudiante?.numDocumento}, cursó y aprobó en este establecimiento educativo, los estudios correspondientes al grado {" "}
+        {estudiante.grupo} de Básica primaria. Para el año lectivo {estudiante.añoLectivo}. Matrícula Nº. {estudiante.codigoMatricula} y
         folio del libro de calificaciones Nº. {estudiante.folio}
       </Text>
 
@@ -469,6 +469,69 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
           >
             {(() => {
               const valor = estudiante.educacionFisicaYRecreacionYDeportes;
+              if (valor >= 1.0 && valor <= 2.9) return "BAJO";
+              if (valor >= 3.0 && valor <= 3.9) return "BÁSICO";
+              if (valor >= 4.0 && valor <= 4.5) return "ALTO";
+              if (valor >= 4.6 && valor <= 5.0) return "SUPERIOR";
+              return "";
+            })()}
+          </Text>
+        </View>
+        <View style={styles.tableRow}>
+          <Text
+            style={{
+              fontSize: 9,
+              fontWeight: "bold",
+              flex: 4,
+              border: "1px solid #C0C0C0",
+              textAlign: "left",
+              paddingLeft: 5,
+              paddingTop: 3,
+              paddingBottom: 3,
+            }}
+          >
+            EDUCACIÓN CRISTIANA
+          </Text>
+          <Text
+            style={{
+              fontSize: 8,
+              fontWeight: "bold",
+              flex: 1,
+              border: "1px solid #C0C0C0",
+              textAlign: "center",
+              paddingTop: 3,
+              paddingBottom: 3,
+            }}
+          >
+            3
+          </Text>
+          <Text
+            style={{
+              fontSize: 8,
+              fontWeight: "bold",
+              flex: 1,
+              border: "1px solid #C0C0C0",
+              textAlign: "center",
+              paddingTop: 3,
+              paddingBottom: 3,
+            }}
+          >
+            {estudiante.educacionCristiana}
+          </Text>
+          <Text
+            style={{
+              fontSize: 8,
+              fontWeight: "bold",
+              flex: 1,
+              border: "1px solid #C0C0C0",
+              textAlign: "center",
+              paddingTop: 3,
+              paddingBottom: 3,
+            }}
+          >
+            {(() => {
+              const valor =
+                estudiante.humanidadesLenguaCastellanaEIdiomaExtranjero;
               if (valor >= 1.0 && valor <= 2.9) return "BAJO";
               if (valor >= 3.0 && valor <= 3.9) return "BÁSICO";
               if (valor >= 4.0 && valor <= 4.5) return "ALTO";
@@ -989,7 +1052,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
         febrero 8 de 1994) y su Decreto Reglamentario 1860 del 3 de Agosto de
         1994. De la Jornada y el Horario, según Artículo 57 del decreto 1860.
         Evaluación según el Decreto 1290 de 2009 y la Resolución Rectoral No 417
-        del 30 de noviembre de 2009. Dado en MEDELLÍN el 28/10/2024.
+        del 30 de noviembre de 2009.
       </Text>
       <Text style={styles.escala}>Escala valorativa nacional:</Text>
       <View style={styles.table}>

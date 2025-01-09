@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+ 
 import "./CertificadoEstudios.css";
 import {
   Document,
@@ -11,9 +11,7 @@ import {
   PDFDownloadLink,
 } from "@react-pdf/renderer";
 
-import axios from "axios";
-
-
+ 
 
 // Define styles for the PDF
 const styles = StyleSheet.create({
@@ -135,10 +133,7 @@ const styles = StyleSheet.create({
 });
 
 // PDF Document
-const CertificadoEstudiosDocument = ({estudiante}) => (
-
-
-  
+const CertificadoEstudiosDocument = ({ estudiante }) => (
   <Document>
     <Page size="A4" style={styles.page}>
       <View
@@ -234,10 +229,9 @@ const CertificadoEstudiosDocument = ({estudiante}) => (
           fontWeight: "bold",
         }}
       >
-        Que {estudiante?.nombre}, identificado con T. I. Nº. {estudiante?.numDocumento} de
-        PENDIENTE, cursó y aprobó en este establecimiento educativo, los estudios
-        correspondientes al grado {estudiante.grupo} de Básica Secundaria. Para el año lectivo 
-        {estudiante.añoLectivo}. Matrícula Nº. {estudiante.codigoMatricula} y folio del libro de calificaciones Nº. {estudiante.folio}
+        Que {estudiante?.nombre}, identificado con T. I. Nº.{" "} {estudiante?.numDocumento} de PENDIENTE, cursó y aprobó en este establecimiento educativo, los estudios correspondientes al grado {" "}
+        {estudiante.grupo} de Básica Secundaria. Para el año lectivo {estudiante.añoLectivo}. Matrícula Nº. {estudiante.codigoMatricula} y
+        folio del libro de calificaciones Nº. {estudiante.folio}
       </Text>
 
       {/* Tabla de Desempeño */}
@@ -348,7 +342,14 @@ const CertificadoEstudiosDocument = ({estudiante}) => (
               paddingBottom: 3,
             }}
           >
-            BASICO
+            {(() => {
+              const valor = estudiante.naturalesYEducacionAmbiental;
+              if (valor >= 1.0 && valor <= 2.9) return "BAJO";
+              if (valor >= 3.0 && valor <= 3.9) return "BÁSICO";
+              if (valor >= 4.0 && valor <= 4.5) return "ALTO";
+              if (valor >= 4.6 && valor <= 5.0) return "SUPERIOR";
+              return "";
+            })()}
           </Text>
         </View>
         <View style={styles.tableRow}>
@@ -403,12 +404,17 @@ const CertificadoEstudiosDocument = ({estudiante}) => (
               paddingBottom: 3,
             }}
           >
-            Satisfactorio
+            {(() => {
+              const valor = estudiante.cienciasSociales;
+              if (valor >= 1.0 && valor <= 2.9) return "BAJO";
+              if (valor >= 3.0 && valor <= 3.9) return "BÁSICO";
+              if (valor >= 4.0 && valor <= 4.5) return "ALTO";
+              if (valor >= 4.6 && valor <= 5.0) return "SUPERIOR";
+              return "";
+            })()}
           </Text>
         </View>
-        <View style={styles.tableRow}>
-          
-        </View>
+        <View style={styles.tableRow}></View>
         <View style={styles.tableRow}>
           <Text
             style={{
@@ -461,7 +467,14 @@ const CertificadoEstudiosDocument = ({estudiante}) => (
               paddingBottom: 3,
             }}
           >
-            Regular
+            {(() => {
+              const valor = estudiante.educacionFisicaYRecreacionYDeportes;
+              if (valor >= 1.0 && valor <= 2.9) return "BAJO";
+              if (valor >= 3.0 && valor <= 3.9) return "BÁSICO";
+              if (valor >= 4.0 && valor <= 4.5) return "ALTO";
+              if (valor >= 4.6 && valor <= 5.0) return "SUPERIOR";
+              return "";
+            })()}
           </Text>
         </View>
         <View style={styles.tableRow}>
@@ -516,7 +529,15 @@ const CertificadoEstudiosDocument = ({estudiante}) => (
               paddingBottom: 3,
             }}
           >
-            Regular
+            {(() => {
+              const valor =
+                estudiante.humanidadesLenguaCastellanaEIdiomaExtranjero;
+              if (valor >= 1.0 && valor <= 2.9) return "BAJO";
+              if (valor >= 3.0 && valor <= 3.9) return "BÁSICO";
+              if (valor >= 4.0 && valor <= 4.5) return "ALTO";
+              if (valor >= 4.6 && valor <= 5.0) return "SUPERIOR";
+              return "";
+            })()}
           </Text>
         </View>
         <View style={styles.tableRow}>
@@ -571,7 +592,14 @@ const CertificadoEstudiosDocument = ({estudiante}) => (
               paddingBottom: 3,
             }}
           >
-            Regular
+            {(() => {
+              const valor = estudiante.lenguaCastellana;
+              if (valor >= 1.0 && valor <= 2.9) return "BAJO";
+              if (valor >= 3.0 && valor <= 3.9) return "BÁSICO";
+              if (valor >= 4.0 && valor <= 4.5) return "ALTO";
+              if (valor >= 4.6 && valor <= 5.0) return "SUPERIOR";
+              return "";
+            })()}
           </Text>
         </View>
         <View style={styles.tableRow}>
@@ -626,7 +654,14 @@ const CertificadoEstudiosDocument = ({estudiante}) => (
               paddingBottom: 3,
             }}
           >
-            Regular
+            {(() => {
+              const valor = estudiante.idiomaExtranjeroIngles;
+              if (valor >= 1.0 && valor <= 2.9) return "BAJO";
+              if (valor >= 3.0 && valor <= 3.9) return "BÁSICO";
+              if (valor >= 4.0 && valor <= 4.5) return "ALTO";
+              if (valor >= 4.6 && valor <= 5.0) return "SUPERIOR";
+              return "";
+            })()}
           </Text>
         </View>
         <View style={styles.tableRow}>
@@ -681,7 +716,14 @@ const CertificadoEstudiosDocument = ({estudiante}) => (
               paddingBottom: 3,
             }}
           >
-            Regular
+            {(() => {
+              const valor = estudiante.matematicas;
+              if (valor >= 1.0 && valor <= 2.9) return "BAJO";
+              if (valor >= 3.0 && valor <= 3.9) return "BÁSICO";
+              if (valor >= 4.0 && valor <= 4.5) return "ALTO";
+              if (valor >= 4.6 && valor <= 5.0) return "SUPERIOR";
+              return "";
+            })()}
           </Text>
         </View>
         <View style={styles.tableRow}>
@@ -736,7 +778,14 @@ const CertificadoEstudiosDocument = ({estudiante}) => (
               paddingBottom: 3,
             }}
           >
-            Regular
+            {(() => {
+              const valor = estudiante.tecnologiaEInformatica;
+              if (valor >= 1.0 && valor <= 2.9) return "BAJO";
+              if (valor >= 3.0 && valor <= 3.9) return "BÁSICO";
+              if (valor >= 4.0 && valor <= 4.5) return "ALTO";
+              if (valor >= 4.6 && valor <= 5.0) return "SUPERIOR";
+              return "";
+            })()}
           </Text>
         </View>
         <View style={styles.tableRow}>
@@ -791,7 +840,14 @@ const CertificadoEstudiosDocument = ({estudiante}) => (
               paddingBottom: 3,
             }}
           >
-            ALTO
+            {(() => {
+              const valor = estudiante.educacionEticaYValores;
+              if (valor >= 1.0 && valor <= 2.9) return "BAJO";
+              if (valor >= 3.0 && valor <= 3.9) return "BÁSICO";
+              if (valor >= 4.0 && valor <= 4.5) return "ALTO";
+              if (valor >= 4.6 && valor <= 5.0) return "SUPERIOR";
+              return "";
+            })()}
           </Text>
         </View>
         <View style={styles.tableRow}>
@@ -846,7 +902,14 @@ const CertificadoEstudiosDocument = ({estudiante}) => (
               paddingBottom: 3,
             }}
           >
-            ALTO
+            {(() => {
+              const valor = estudiante.civicaYConstitucion;
+              if (valor >= 1.0 && valor <= 2.9) return "BAJO";
+              if (valor >= 3.0 && valor <= 3.9) return "BÁSICO";
+              if (valor >= 4.0 && valor <= 4.5) return "ALTO";
+              if (valor >= 4.6 && valor <= 5.0) return "SUPERIOR";
+              return "";
+            })()}
           </Text>
         </View>
         <View style={styles.tableRow}>
@@ -901,7 +964,14 @@ const CertificadoEstudiosDocument = ({estudiante}) => (
               paddingBottom: 3,
             }}
           >
-            ALTO
+            {(() => {
+              const valor = estudiante.educacionArtisticaYCultural;
+              if (valor >= 1.0 && valor <= 2.9) return "BAJO";
+              if (valor >= 3.0 && valor <= 3.9) return "BÁSICO";
+              if (valor >= 4.0 && valor <= 4.5) return "ALTO";
+              if (valor >= 4.6 && valor <= 5.0) return "SUPERIOR";
+              return "";
+            })()}
           </Text>
         </View>
       </View>
@@ -1035,8 +1105,9 @@ const CertificadoEstudiosDocument = ({estudiante}) => (
 
       <View style={styles.view_p}>
         <Text style={styles.p}>
-          Se firma en la ciudad de Medellín a los quince (15) días del mes de
-          octubre de 2024.
+          Se firma en la ciudad de Medellín a los {new Date().getDate()} días
+          del mes de {new Date().toLocaleString("es-ES", { month: "long" })} de{" "}
+          {new Date().getFullYear()}.
         </Text>
         <Text style={styles.p}>
           Para cualquier verificación comunicarse al teléfono (604) 442 06 06.
@@ -1047,13 +1118,18 @@ const CertificadoEstudiosDocument = ({estudiante}) => (
           <View style={styles.footer_in}>
             <Text style={styles.p}>{estudiante.rector}</Text>
             <Text style={styles.p}>Rector(a)</Text>
-            <Text style={styles.p}>C.C {estudiante.ccRector} de {estudiante.ciudadExpedicionRector}</Text>
+            <Text style={styles.p}>
+              C.C {estudiante.ccRector} de {estudiante.ciudadExpedicionRector}
+            </Text>
           </View>
 
           <View style={styles.footer_in}>
             <Text style={styles.p}>{estudiante.secretaria}</Text>
             <Text style={styles.p}>Secretaría Académica</Text>
-            <Text style={styles.p}>C.C {estudiante.ccSecretaria} de {estudiante.ciudadExpedicionSecretaria}</Text>
+            <Text style={styles.p}>
+              C.C {estudiante.ccSecretaria} de{" "}
+              {estudiante.ciudadExpedicionSecretaria}
+            </Text>
           </View>
         </View>
 
@@ -1076,85 +1152,94 @@ const CertificadoEstudiosDocument = ({estudiante}) => (
     </Page>
   </Document>
 );
-
+import axios from "axios";
 // Componente Principal
 const CertificadoEstudios = () => {
-    const [numDocumento, setNumDocumento] = useState("");
-    const [resultados, setResultados] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
-    const [estudianteSeleccionado, setEstudianteSeleccionado] = useState(null);
-  
-    // Función para buscar estudiantes por número de documento
-    const buscarEstudiantes = async () => {
-      if (!numDocumento) {
-        setError("Por favor, ingresa un número de documento.");
-        return;
-      }
-  
-      setLoading(true);
-      setError("");
-      try {
-        const response = await axios.get(
-          `http://localhost:3000/api/actasGrados/studentsGraduate/search?numDocumento=${numDocumento}`
-        );
-        setResultados(response.data); // Suponiendo que la respuesta es un array de resultados
-        setNumDocumento(""); // Limpiar el campo de búsqueda
-      } catch (err) {
-        setError("Hubo un error al buscar los estudiantes.");
-      } finally {
-        setLoading(false);
-      }
-    };
+  const [numDocumento, setNumDocumento] = useState("");
+  const [resultados, setResultados] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [estudianteSeleccionado, setEstudianteSeleccionado] = useState(null);
+
+  // Función para buscar estudiantes por número de documento
+  const buscarEstudiantes = async () => {
+    if (!numDocumento) {
+      setError("Por favor, ingresa un número de documento.");
+      return;
+    }
+
+    setLoading(true);
+    setError("");
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/actasGrados/studentsGraduate/search?numDocumento=${numDocumento}`
+      );
+      setResultados(response.data); // Suponiendo que la respuesta es un array de resultados
+      setNumDocumento(""); // Limpiar el campo de búsqueda
+    } catch (err) {
+      setError("Hubo un error al buscar los estudiantes.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Función para formatear el nombre del archivo
+  const generateFileName = (estudiante) => {
+    const fullName = `${estudiante.nombre}`.trim(); // Asegúrate de que los campos coincidan con tu estructura
+    return `${fullName} certificado de estudio.pdf`;
+  };
 
   return (
     <>
-         <div>
-           <h2>Buscador de Estudiantes</h2>
-           <input
-             type="text"
-             value={numDocumento}
-             onChange={(e) => setNumDocumento(e.target.value)}
-             placeholder="Ingresa el número de documento"
-           />
-           <button onClick={buscarEstudiantes} disabled={loading}>
-             {loading ? 'Buscando...' : 'Buscar'}
-           </button>
-   
-           {error && <p style={{ color: 'red' }}>{error}</p>}
-   
-           <div>
-             <h3>Resultados de búsqueda:</h3>
-             {resultados.length > 0 ? (
-               <ul>
-                 {resultados.map((estudiante) => (
-                   <li key={estudiante.numDocumento}>
-                     <p>Nombre: {estudiante.nombre}</p>
-                     <p>Documento: {estudiante.numDocumento}</p>
-                     <button onClick={() => setEstudianteSeleccionado(estudiante)}>
-                       Cargar datos
-                     </button>
-                   </li>
-                 ))}
-               </ul>
-             ) : (
-               <p>No se encontraron estudiantes.</p>
-             )}
-           </div>
-         </div>
-   
-         {estudianteSeleccionado && (
-           <PDFDownloadLink
-             document={<CertificadoEstudiosDocument estudiante={estudianteSeleccionado} />}
-             fileName="CertificadoEstudios.pdf"
-           >
-             {({ loading }) =>
-               loading ? "Cargando certificado..." : "Descargar Certificado como PDF"
-             }
-           </PDFDownloadLink>
-         )}
-       </>
+      <div>
+        <h2>Buscar por documento de identidad:</h2>
+        <input
+          type="text"
+          value={numDocumento}
+          onChange={(e) => setNumDocumento(e.target.value)}
+          placeholder="Ingresa el número de documento"
+        />
+        <button onClick={buscarEstudiantes} disabled={loading}>
+          {loading ? "Buscando..." : "Buscar"}
+        </button>
+
+        {error && <p style={{ color: "red" }}>{error}</p>}
+
+        <div>
+          <h3>Resultados de búsqueda:</h3>
+          {resultados.length > 0 ? (
+            <ul>
+              {resultados.map((estudiante) => (
+                <li key={estudiante.numDocumento}>
+                  <p>Nombre: {estudiante.nombre}</p>
+                  <p>Documento: {estudiante.numDocumento}</p>
+                  <button onClick={() => setEstudianteSeleccionado(estudiante)}>
+                    Cargar datos
+                  </button>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No se encontraron estudiantes.</p>
+          )}
+        </div>
+      </div>
+
+      {estudianteSeleccionado && (
+        <PDFDownloadLink
+          document={
+            <CertificadoEstudiosDocument estudiante={estudianteSeleccionado} />
+          }
+          fileName={generateFileName(estudianteSeleccionado)}
+        >
+          {({ loading }) =>
+            loading ? "Cargando certificado..." : "Descargar Certificado de como PDF"
+          }
+        </PDFDownloadLink>
+      )}
+    </>
   );
 };
 
 export default CertificadoEstudios;
+ 
