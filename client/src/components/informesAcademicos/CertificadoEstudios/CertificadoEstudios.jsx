@@ -316,7 +316,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
               paddingBottom: 3,
             }}
           >
-            4
+            3
           </Text>
           <Text
             style={{
@@ -378,7 +378,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
               paddingBottom: 3,
             }}
           >
-            4
+            3
           </Text>
           <Text
             style={{
@@ -441,7 +441,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
               paddingBottom: 3,
             }}
           >
-            3
+            2
           </Text>
           <Text
             style={{
@@ -531,7 +531,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
           >
             {(() => {
               const valor =
-                estudiante.humanidadesLenguaCastellanaEIdiomaExtranjero;
+                estudiante.educacionCristiana;
               if (valor >= 1.0 && valor <= 2.9) return "BAJO";
               if (valor >= 3.0 && valor <= 3.9) return "BÁSICO";
               if (valor >= 4.0 && valor <= 4.5) return "ALTO";
@@ -566,7 +566,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
               paddingBottom: 3,
             }}
           >
-            3
+            9
           </Text>
           <Text
             style={{
@@ -629,7 +629,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
               paddingBottom: 3,
             }}
           >
-            3
+            6
           </Text>
           <Text
             style={{
@@ -753,7 +753,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
               paddingBottom: 3,
             }}
           >
-            3
+            5
           </Text>
           <Text
             style={{
@@ -815,7 +815,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
               paddingBottom: 3,
             }}
           >
-            3
+            1
           </Text>
           <Text
             style={{
@@ -877,7 +877,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
               paddingBottom: 3,
             }}
           >
-            2
+            1
           </Text>
           <Text
             style={{
