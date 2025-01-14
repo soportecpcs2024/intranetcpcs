@@ -14,6 +14,8 @@ const studentGraduateSchema = new mongoose.Schema({
   promedio: { type: Number, required: true },
   materias: {
     naturalesYEducacionAmbiental: { type: Number, required: true },
+    Fisica: { type: Number, required: true },
+    Quimica: { type: Number, required: true },
     cienciasPoliticasYEconomicas: { type: Number, required: true },
     cienciasSociales: { type: Number, required: true },
     civicaYConstitucion: { type: Number, required: true },
@@ -21,11 +23,25 @@ const studentGraduateSchema = new mongoose.Schema({
     educacionCristiana: { type: Number, required: true },
     educacionEticaYValores: { type: Number, required: true },
     educacionFisicaYRecreacionYDeportes: { type: Number, required: true },
+    filosofia: { type: Number, required: true },
     humanidadesLenguaCastellanaEIdiomaExtranjero: { type: Number, required: true },
     idiomaExtranjeroIngles: { type: Number, required: true },
     lenguaCastellana: { type: Number, required: true },
     matematicas: { type: Number, required: true },
-    tecnologiaEInformatica: { type: Number, required: true }
+    tecnologiaEInformatica: { type: Number, required: true },
+
+    dim_socioafectiva: { type: Number, required: true },
+    dim_cognitiva: { type: Number, required: true },
+    dim_etica: { type: Number, required: true },
+    dim_corporal: { type: Number, required: true },
+    dim_comunicativa: { type: Number, required: true },
+    ingles: { type: Number, required: true },
+    dim_espiritual: { type: Number, required: true },
+    dim_estetica: { type: Number, required: true },
+    musica: { type: Number, required: true },
+    dim_acti_valoratica: { type: Number, required: true },
+     
+    
   },
   rector: { type: String, required: true },
   ccRector: { type: String, required: true },

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
- 
+
 import "./CertificadoEstudios.css";
 import {
   Document,
@@ -10,8 +10,6 @@ import {
   StyleSheet,
   PDFDownloadLink,
 } from "@react-pdf/renderer";
-
- 
 
 // Define styles for the PDF
 const styles = StyleSheet.create({
@@ -42,7 +40,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   section_plan_estudio: {
-    marginTop: 5,
+    marginTop: 10,
     fontSize: 10,
     marginBottom: 10,
     textAlign: "justify",
@@ -96,7 +94,7 @@ const styles = StyleSheet.create({
   },
 
   footer: {
-    marginTop: 30,
+    marginTop: 40,
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
@@ -110,7 +108,7 @@ const styles = StyleSheet.create({
 
   footer_principal: {
     position: "absolute",
-    top: 110,
+    top: 115,
     left: 0,
     right: 0,
     display: "flex",
@@ -145,7 +143,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
           backgroundColor: "#b4dffc",
           borderRadius: 4,
           border: "1px solid #40a3e6",
-          marginBottom: 5,
+          marginBottom: 10,
         }}
       >
         <Image style={styles.image} src="/logo.png" />
@@ -210,19 +208,14 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
         >
           DANE 30500119827
         </Text>
-        <Text  style={{
-            color: "#000000",
-            textAlign: "center",
-            fontWeight: "bold",
-            fontSize: 11,
-          }}>CERTIFICA QUE</Text>
+        <Text>CERTIFICA QUE</Text>
         <Text
           style={{
             fontSize: 10,
             fontWeight: "bold",
           }}
         >
-          Certificado Nº 0002
+          Certificado Nº 0003
         </Text>
       </View>
       <Text
@@ -234,9 +227,12 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
           fontWeight: "bold",
         }}
       >
-        Que {estudiante?.nombre}, identificado con R.C.N Nº.{" "} {estudiante?.numDocumento}, cursó y aprobó en este establecimiento educativo, los estudios correspondientes al grado {" "}
-        {estudiante.grupo} de Básica primaria. Para el año lectivo {estudiante.añoLectivo}. Matrícula Nº. {estudiante.codigoMatricula} y
-        folio del libro de calificaciones Nº. {estudiante.folio}
+        Que {estudiante?.nombre}, identificado con R.C.N Nº.{" "}
+        {estudiante?.numDocumento}, cursó y aprobó en este establecimiento
+        educativo, los estudios correspondientes al grado {estudiante.grupo} de
+        Preescolar. Para el año lectivo {estudiante.añoLectivo}. Matrícula
+        Nº. {estudiante.codigoMatricula} y folio del libro de calificaciones Nº.{" "}
+        {estudiante.folio}
       </Text>
 
       {/* Tabla de Desempeño */}
@@ -244,16 +240,16 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
         <View style={styles.tableHeader}>
           <Text
             style={{
-              fontSize: 11,
+              fontSize: 10,
               fontWeight: "bold",
-              flex: 4,
+              flex: 2,
               border: "1px solid #C0C0C0",
               textAlign: "center",
-              paddingTop: 2,
+              paddingTop: 3,
               paddingBottom: 3,
             }}
           >
-            AREA/MATERIA
+            DIMENCIONES
           </Text>
           <Text
             style={{
@@ -262,7 +258,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
               flex: 1,
               border: "1px solid #C0C0C0",
               textAlign: "center",
-              paddingTop: 2,
+              paddingTop: 3,
               paddingBottom: 3,
             }}
           >
@@ -270,29 +266,16 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
           </Text>
           <Text
             style={{
-              fontSize: 11,
+              fontSize: 10,
               fontWeight: "bold",
               flex: 1,
               border: "1px solid #C0C0C0",
               textAlign: "center",
-              paddingTop: 2,
+              paddingTop: 3,
               paddingBottom: 3,
             }}
           >
-            NOTA
-          </Text>
-          <Text
-            style={{
-              fontSize: 11,
-              fontWeight: "bold",
-              flex: 1,
-              border: "1px solid #C0C0C0",
-              textAlign: "center",
-              paddingTop: 2,
-              paddingBottom: 3,
-            }}
-          >
-            DESEMPEÑO
+            CONCEPTO
           </Text>
         </View>
         <View style={styles.tableRow}>
@@ -300,15 +283,15 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
             style={{
               fontSize: 9,
               fontWeight: "bold",
-              flex: 4,
+              flex: 2,
               border: "1px solid #C0C0C0",
               textAlign: "left",
               paddingLeft: 5,
-              paddingTop: 2,
+              paddingTop: 3,
               paddingBottom: 3,
             }}
           >
-            C.NATURALES Y EDUCACION AMBIENTAL
+            DIMENSIÓN SOCIOAFECTIVA
           </Text>
           <Text
             style={{
@@ -321,7 +304,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
               paddingBottom: 3,
             }}
           >
-            4
+            2
           </Text>
           <Text
             style={{
@@ -334,7 +317,36 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
               paddingBottom: 3,
             }}
           >
-            {estudiante.naturalesYEducacionAmbiental}
+            {estudiante.dim_socioafectiva}
+          </Text>
+        </View>
+        <View style={styles.tableRow}>
+          <Text
+            style={{
+              fontSize: 9,
+              fontWeight: "bold",
+              flex: 2,
+              border: "1px solid #C0C0C0",
+              textAlign: "left",
+              paddingLeft: 5,
+              paddingTop: 3,
+              paddingBottom: 3,
+            }}
+          >
+            DIMENSIÓN COGNITIVA
+          </Text>
+          <Text
+            style={{
+              fontSize: 9,
+              fontWeight: "bold",
+              flex: 1,
+              border: "1px solid #C0C0C0",
+              textAlign: "center",
+              paddingTop: 3,
+              paddingBottom: 3,
+            }}
+          >
+            5
           </Text>
           <Text
             style={{
@@ -347,22 +359,16 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
               paddingBottom: 3,
             }}
           >
-            {(() => {
-              const valor = estudiante.naturalesYEducacionAmbiental;
-              if (valor >= 1.0 && valor <= 2.9) return "BAJO";
-              if (valor >= 3.0 && valor <= 3.9) return "BÁSICO";
-              if (valor >= 4.0 && valor <= 4.5) return "ALTO";
-              if (valor >= 4.6 && valor <= 5.0) return "SUPERIOR";
-              return "";
-            })()}
+            {estudiante.dim_cognitiva}
           </Text>
         </View>
+
         <View style={styles.tableRow}>
           <Text
             style={{
               fontSize: 9,
               fontWeight: "bold",
-              flex: 4,
+              flex: 2,
               border: "1px solid #C0C0C0",
               textAlign: "left",
               paddingLeft: 5,
@@ -370,20 +376,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
               paddingBottom: 3,
             }}
           >
-            CIENCIAS SOCIALES (HIST, GEOG, CONST, DEMOC)
-          </Text>
-          <Text
-            style={{
-              fontSize: 9,
-              fontWeight: "bold",
-              flex: 1,
-              border: "1px solid #C0C0C0",
-              textAlign: "center",
-              paddingTop: 3,
-              paddingBottom: 3,
-            }}
-          >
-            4
+            DIMENSIÓN ÉTICA
           </Text>
           <Text
             style={{
@@ -396,11 +389,11 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
               paddingBottom: 3,
             }}
           >
-            {estudiante.cienciasSociales}
+            1
           </Text>
           <Text
             style={{
-              fontSize: 9,
+              fontSize: 8,
               fontWeight: "bold",
               flex: 1,
               border: "1px solid #C0C0C0",
@@ -409,23 +402,15 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
               paddingBottom: 3,
             }}
           >
-            {(() => {
-              const valor = estudiante.cienciasSociales;
-              if (valor >= 1.0 && valor <= 2.9) return "BAJO";
-              if (valor >= 3.0 && valor <= 3.9) return "BÁSICO";
-              if (valor >= 4.0 && valor <= 4.5) return "ALTO";
-              if (valor >= 4.6 && valor <= 5.0) return "SUPERIOR";
-              return "";
-            })()}
+            {estudiante.dim_etica}
           </Text>
         </View>
-        <View style={styles.tableRow}></View>
         <View style={styles.tableRow}>
           <Text
             style={{
               fontSize: 9,
               fontWeight: "bold",
-              flex: 4,
+              flex: 2,
               border: "1px solid #C0C0C0",
               textAlign: "left",
               paddingLeft: 5,
@@ -433,7 +418,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
               paddingBottom: 3,
             }}
           >
-            EDUCACIÓN FÍSICA, RECREACIÓN Y DEPORTES
+            DIMENSIÓN CORPORAL
           </Text>
           <Text
             style={{
@@ -459,27 +444,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
               paddingBottom: 3,
             }}
           >
-            {estudiante.educacionFisicaYRecreacionYDeportes}
-          </Text>
-          <Text
-            style={{
-              fontSize: 8,
-              fontWeight: "bold",
-              flex: 1,
-              border: "1px solid #C0C0C0",
-              textAlign: "center",
-              paddingTop: 3,
-              paddingBottom: 3,
-            }}
-          >
-            {(() => {
-              const valor = estudiante.educacionFisicaYRecreacionYDeportes;
-              if (valor >= 1.0 && valor <= 2.9) return "BAJO";
-              if (valor >= 3.0 && valor <= 3.9) return "BÁSICO";
-              if (valor >= 4.0 && valor <= 4.5) return "ALTO";
-              if (valor >= 4.6 && valor <= 5.0) return "SUPERIOR";
-              return "";
-            })()}
+            {estudiante.dim_corporal}
           </Text>
         </View>
         <View style={styles.tableRow}>
@@ -487,7 +452,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
             style={{
               fontSize: 9,
               fontWeight: "bold",
-              flex: 4,
+              flex: 2,
               border: "1px solid #C0C0C0",
               textAlign: "left",
               paddingLeft: 5,
@@ -495,70 +460,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
               paddingBottom: 3,
             }}
           >
-            EDUCACIÓN CRISTIANA
-          </Text>
-          <Text
-            style={{
-              fontSize: 8,
-              fontWeight: "bold",
-              flex: 1,
-              border: "1px solid #C0C0C0",
-              textAlign: "center",
-              paddingTop: 3,
-              paddingBottom: 3,
-            }}
-          >
-            3
-          </Text>
-          <Text
-            style={{
-              fontSize: 8,
-              fontWeight: "bold",
-              flex: 1,
-              border: "1px solid #C0C0C0",
-              textAlign: "center",
-              paddingTop: 3,
-              paddingBottom: 3,
-            }}
-          >
-            {estudiante.educacionCristiana}
-          </Text>
-          <Text
-            style={{
-              fontSize: 8,
-              fontWeight: "bold",
-              flex: 1,
-              border: "1px solid #C0C0C0",
-              textAlign: "center",
-              paddingTop: 3,
-              paddingBottom: 3,
-            }}
-          >
-            {(() => {
-              const valor =
-                estudiante.humanidadesLenguaCastellanaEIdiomaExtranjero;
-              if (valor >= 1.0 && valor <= 2.9) return "BAJO";
-              if (valor >= 3.0 && valor <= 3.9) return "BÁSICO";
-              if (valor >= 4.0 && valor <= 4.5) return "ALTO";
-              if (valor >= 4.6 && valor <= 5.0) return "SUPERIOR";
-              return "";
-            })()}
-          </Text>
-        </View>
-        <View style={styles.tableRow}>
-          <Text
-            style={{
-              fontSize: 9,
-              fontWeight: "bold",
-              flex: 4,
-              border: "1px solid #C0C0C0",
-              textAlign: "left",
-              paddingLeft: 5,
-              paddingTop: 3,
-              paddingBottom: 3,
-            }}
-          >
-            HUMANIDADES LENGUA CASTELLANA E IDIOMA EXTRANJERO
+            DIMENSIÓN COMUNICATIVA
           </Text>
           <Text
             style={{
@@ -584,28 +486,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
               paddingBottom: 3,
             }}
           >
-            {estudiante.humanidadesLenguaCastellanaEIdiomaExtranjero}
-          </Text>
-          <Text
-            style={{
-              fontSize: 8,
-              fontWeight: "bold",
-              flex: 1,
-              border: "1px solid #C0C0C0",
-              textAlign: "center",
-              paddingTop: 3,
-              paddingBottom: 3,
-            }}
-          >
-            {(() => {
-              const valor =
-                estudiante.humanidadesLenguaCastellanaEIdiomaExtranjero;
-              if (valor >= 1.0 && valor <= 2.9) return "BAJO";
-              if (valor >= 3.0 && valor <= 3.9) return "BÁSICO";
-              if (valor >= 4.0 && valor <= 4.5) return "ALTO";
-              if (valor >= 4.6 && valor <= 5.0) return "SUPERIOR";
-              return "";
-            })()}
+            {estudiante.dim_comunicativa}
           </Text>
         </View>
         <View style={styles.tableRow}>
@@ -613,7 +494,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
             style={{
               fontSize: 9,
               fontWeight: "bold",
-              flex: 4,
+              flex: 2,
               border: "1px solid #C0C0C0",
               textAlign: "left",
               paddingLeft: 5,
@@ -621,7 +502,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
               paddingBottom: 3,
             }}
           >
-            LENGUA CASTELLANA
+            Ingles
           </Text>
           <Text
             style={{
@@ -634,7 +515,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
               paddingBottom: 3,
             }}
           >
-            5
+            3
           </Text>
           <Text
             style={{
@@ -647,27 +528,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
               paddingBottom: 3,
             }}
           >
-            {estudiante.lenguaCastellana}
-          </Text>
-          <Text
-            style={{
-              fontSize: 8,
-              fontWeight: "bold",
-              flex: 1,
-              border: "1px solid #C0C0C0",
-              textAlign: "center",
-              paddingTop: 3,
-              paddingBottom: 3,
-            }}
-          >
-            {(() => {
-              const valor = estudiante.lenguaCastellana;
-              if (valor >= 1.0 && valor <= 2.9) return "BAJO";
-              if (valor >= 3.0 && valor <= 3.9) return "BÁSICO";
-              if (valor >= 4.0 && valor <= 4.5) return "ALTO";
-              if (valor >= 4.6 && valor <= 5.0) return "SUPERIOR";
-              return "";
-            })()}
+            {estudiante.ingles}
           </Text>
         </View>
         <View style={styles.tableRow}>
@@ -675,7 +536,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
             style={{
               fontSize: 9,
               fontWeight: "bold",
-              flex: 4,
+              flex: 2,
               border: "1px solid #C0C0C0",
               textAlign: "left",
               paddingLeft: 5,
@@ -683,7 +544,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
               paddingBottom: 3,
             }}
           >
-            IDIOMA EXTRANJERO (INGLES)
+            DIMENSIÓN ESPIRITUAL
           </Text>
           <Text
             style={{
@@ -696,7 +557,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
               paddingBottom: 3,
             }}
           >
-            5
+            3
           </Text>
           <Text
             style={{
@@ -709,27 +570,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
               paddingBottom: 3,
             }}
           >
-            {estudiante.idiomaExtranjeroIngles}
-          </Text>
-          <Text
-            style={{
-              fontSize: 8,
-              fontWeight: "bold",
-              flex: 1,
-              border: "1px solid #C0C0C0",
-              textAlign: "center",
-              paddingTop: 3,
-              paddingBottom: 3,
-            }}
-          >
-            {(() => {
-              const valor = estudiante.idiomaExtranjeroIngles;
-              if (valor >= 1.0 && valor <= 2.9) return "BAJO";
-              if (valor >= 3.0 && valor <= 3.9) return "BÁSICO";
-              if (valor >= 4.0 && valor <= 4.5) return "ALTO";
-              if (valor >= 4.6 && valor <= 5.0) return "SUPERIOR";
-              return "";
-            })()}
+            {estudiante.dim_espiritual}
           </Text>
         </View>
         <View style={styles.tableRow}>
@@ -737,7 +578,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
             style={{
               fontSize: 9,
               fontWeight: "bold",
-              flex: 4,
+              flex: 2,
               border: "1px solid #C0C0C0",
               textAlign: "left",
               paddingLeft: 5,
@@ -745,131 +586,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
               paddingBottom: 3,
             }}
           >
-            MATEMATICAS
-          </Text>
-          <Text
-            style={{
-              fontSize: 8,
-              fontWeight: "bold",
-              flex: 1,
-              border: "1px solid #C0C0C0",
-              textAlign: "center",
-              paddingTop: 3,
-              paddingBottom: 3,
-            }}
-          >
-            5
-          </Text>
-          <Text
-            style={{
-              fontSize: 8,
-              fontWeight: "bold",
-              flex: 1,
-              border: "1px solid #C0C0C0",
-              textAlign: "center",
-              paddingTop: 3,
-              paddingBottom: 3,
-            }}
-          >
-            {estudiante.matematicas}
-          </Text>
-          <Text
-            style={{
-              fontSize: 8,
-              fontWeight: "bold",
-              flex: 1,
-              border: "1px solid #C0C0C0",
-              textAlign: "center",
-              paddingTop: 3,
-              paddingBottom: 3,
-            }}
-          >
-            {(() => {
-              const valor = estudiante.matematicas;
-              if (valor >= 1.0 && valor <= 2.9) return "BAJO";
-              if (valor >= 3.0 && valor <= 3.9) return "BÁSICO";
-              if (valor >= 4.0 && valor <= 4.5) return "ALTO";
-              if (valor >= 4.6 && valor <= 5.0) return "SUPERIOR";
-              return "";
-            })()}
-          </Text>
-        </View>
-        <View style={styles.tableRow}>
-          <Text
-            style={{
-              fontSize: 9,
-              fontWeight: "bold",
-              flex: 4,
-              border: "1px solid #C0C0C0",
-              textAlign: "left",
-              paddingLeft: 5,
-              paddingTop: 3,
-              paddingBottom: 3,
-            }}
-          >
-            TECNOLOGIA E INFORMATICA
-          </Text>
-          <Text
-            style={{
-              fontSize: 8,
-              fontWeight: "bold",
-              flex: 1,
-              border: "1px solid #C0C0C0",
-              textAlign: "center",
-              paddingTop: 3,
-              paddingBottom: 3,
-            }}
-          >
-            2
-          </Text>
-          <Text
-            style={{
-              fontSize: 8,
-              fontWeight: "bold",
-              flex: 1,
-              border: "1px solid #C0C0C0",
-              textAlign: "center",
-              paddingTop: 3,
-              paddingBottom: 3,
-            }}
-          >
-            {estudiante.tecnologiaEInformatica}
-          </Text>
-          <Text
-            style={{
-              fontSize: 8,
-              fontWeight: "bold",
-              flex: 1,
-              border: "1px solid #C0C0C0",
-              textAlign: "center",
-              paddingTop: 3,
-              paddingBottom: 3,
-            }}
-          >
-            {(() => {
-              const valor = estudiante.tecnologiaEInformatica;
-              if (valor >= 1.0 && valor <= 2.9) return "BAJO";
-              if (valor >= 3.0 && valor <= 3.9) return "BÁSICO";
-              if (valor >= 4.0 && valor <= 4.5) return "ALTO";
-              if (valor >= 4.6 && valor <= 5.0) return "SUPERIOR";
-              return "";
-            })()}
-          </Text>
-        </View>
-        <View style={styles.tableRow}>
-          <Text
-            style={{
-              fontSize: 9,
-              fontWeight: "bold",
-              flex: 4,
-              border: "1px solid #C0C0C0",
-              textAlign: "left",
-              paddingLeft: 5,
-              paddingTop: 3,
-              paddingBottom: 3,
-            }}
-          >
-            ED. ETICA Y VALORES
+            DIMENSIÓN ESTETICA
           </Text>
           <Text
             style={{
@@ -895,27 +612,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
               paddingBottom: 3,
             }}
           >
-            {estudiante.educacionEticaYValores}
-          </Text>
-          <Text
-            style={{
-              fontSize: 8,
-              fontWeight: "bold",
-              flex: 1,
-              border: "1px solid #C0C0C0",
-              textAlign: "center",
-              paddingTop: 3,
-              paddingBottom: 3,
-            }}
-          >
-            {(() => {
-              const valor = estudiante.educacionEticaYValores;
-              if (valor >= 1.0 && valor <= 2.9) return "BAJO";
-              if (valor >= 3.0 && valor <= 3.9) return "BÁSICO";
-              if (valor >= 4.0 && valor <= 4.5) return "ALTO";
-              if (valor >= 4.6 && valor <= 5.0) return "SUPERIOR";
-              return "";
-            })()}
+            {estudiante.dim_estetica}
           </Text>
         </View>
         <View style={styles.tableRow}>
@@ -923,7 +620,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
             style={{
               fontSize: 9,
               fontWeight: "bold",
-              flex: 4,
+              flex: 2,
               border: "1px solid #C0C0C0",
               textAlign: "left",
               paddingLeft: 5,
@@ -931,69 +628,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
               paddingBottom: 3,
             }}
           >
-            CÍVICA Y CONSTITUCIÓN
-          </Text>
-          <Text
-            style={{
-              fontSize: 8,
-              fontWeight: "bold",
-              flex: 1,
-              border: "1px solid #C0C0C0",
-              textAlign: "center",
-              paddingTop: 3,
-              paddingBottom: 3,
-            }}
-          >
-            1
-          </Text>
-          <Text
-            style={{
-              fontSize: 8,
-              fontWeight: "bold",
-              flex: 1,
-              border: "1px solid #C0C0C0",
-              textAlign: "center",
-              paddingTop: 3,
-              paddingBottom: 3,
-            }}
-          >
-            {estudiante.civicaYConstitucion}
-          </Text>
-          <Text
-            style={{
-              fontSize: 8,
-              fontWeight: "bold",
-              flex: 1,
-              border: "1px solid #C0C0C0",
-              textAlign: "center",
-              paddingTop: 3,
-              paddingBottom: 3,
-            }}
-          >
-            {(() => {
-              const valor = estudiante.civicaYConstitucion;
-              if (valor >= 1.0 && valor <= 2.9) return "BAJO";
-              if (valor >= 3.0 && valor <= 3.9) return "BÁSICO";
-              if (valor >= 4.0 && valor <= 4.5) return "ALTO";
-              if (valor >= 4.6 && valor <= 5.0) return "SUPERIOR";
-              return "";
-            })()}
-          </Text>
-        </View>
-        <View style={styles.tableRow}>
-          <Text
-            style={{
-              fontSize: 9,
-              fontWeight: "bold",
-              flex: 4,
-              border: "1px solid #C0C0C0",
-              textAlign: "left",
-              paddingLeft: 5,
-              paddingTop: 3,
-              paddingBottom: 3,
-            }}
-          >
-            ED.ARTISTICA Y CULTURAL
+            MÚSICA
           </Text>
           <Text
             style={{
@@ -1019,7 +654,23 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
               paddingBottom: 3,
             }}
           >
-            {estudiante.educacionArtisticaYCultural}
+            {estudiante.musica}
+          </Text>
+        </View>
+        <View style={styles.tableRow}>
+          <Text
+            style={{
+              fontSize: 9,
+              fontWeight: "bold",
+              flex: 2,
+              border: "1px solid #C0C0C0",
+              textAlign: "left",
+              paddingLeft: 5,
+              paddingTop: 3,
+              paddingBottom: 3,
+            }}
+          >
+            DIMENSIÓN ACTITUDINAL Y VALORATIVA
           </Text>
           <Text
             style={{
@@ -1032,14 +683,20 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
               paddingBottom: 3,
             }}
           >
-            {(() => {
-              const valor = estudiante.educacionArtisticaYCultural;
-              if (valor >= 1.0 && valor <= 2.9) return "BAJO";
-              if (valor >= 3.0 && valor <= 3.9) return "BÁSICO";
-              if (valor >= 4.0 && valor <= 4.5) return "ALTO";
-              if (valor >= 4.6 && valor <= 5.0) return "SUPERIOR";
-              return "";
-            })()}
+            1
+          </Text>
+          <Text
+            style={{
+              fontSize: 8,
+              fontWeight: "bold",
+              flex: 1,
+              border: "1px solid #C0C0C0",
+              textAlign: "center",
+              paddingTop: 3,
+              paddingBottom: 3,
+            }}
+          >
+            {estudiante.dim_acti_valoratica}
           </Text>
         </View>
       </View>
@@ -1055,121 +712,9 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
       >
         Plan de estudios aprobado según la Ley General de Educación (Ley 115 de
         febrero 8 de 1994) y su Decreto Reglamentario 1860 del 3 de Agosto de
-        1994. De la Jornada y el Horario, según Artículo 57 del decreto 1860.
-        Evaluación según el Decreto 1290 de 2009 y la Resolución Rectoral No 417
-        del 30 de noviembre de 2009.
+        1994. De la Jornada y el Horario, según Artículo 57 del decreto 1860.Intensidad horaria semanal 30 horas. Evaluación preescolar según el Decreto 2247 de 1997.
       </Text>
-      <Text style={styles.escala}>Escala valorativa nacional:</Text>
-      <View style={styles.table}>
-        <View style={styles.tableHeader}>
-          <Text
-            style={{
-              fontSize: 10,
-              fontWeight: "bold",
-              flex: 1,
-              border: "1px solid #C0C0C0",
-              textAlign: "center",
-              paddingTop: 3,
-              paddingBottom: 3,
-            }}
-          >
-            DESEMPENO SUPERIO
-          </Text>
-          <Text
-            style={{
-              fontSize: 10,
-              fontWeight: "bold",
-              flex: 1,
-              border: "1px solid #C0C0C0",
-              textAlign: "center",
-              paddingTop: 3,
-              paddingBottom: 3,
-            }}
-          >
-            DESEMPENO ALTO
-          </Text>
-          <Text
-            style={{
-              fontSize: 10,
-              fontWeight: "bold",
-              flex: 1,
-              border: "1px solid #C0C0C0",
-              textAlign: "center",
-              paddingTop: 3,
-              paddingBottom: 3,
-            }}
-          >
-            DESEMPENO BASICO
-          </Text>
-          <Text
-            style={{
-              fontSize: 10,
-              fontWeight: "bold",
-              flex: 1,
-              border: "1px solid #C0C0C0",
-              textAlign: "center",
-              paddingTop: 3,
-              paddingBottom: 3,
-            }}
-          >
-            DESEMPENO BAJO
-          </Text>
-        </View>
-        <View style={styles.tableRow}>
-          <Text
-            style={{
-              fontSize: 9,
-              fontWeight: "bold",
-              flex: 1,
-              border: "1px solid #C0C0C0",
-              textAlign: "center",
-              paddingTop: 3,
-              paddingBottom: 3,
-            }}
-          >
-            4.6 a 5.0
-          </Text>
-          <Text
-            style={{
-              fontSize: 9,
-              fontWeight: "bold",
-              flex: 1,
-              border: "1px solid #C0C0C0",
-              textAlign: "center",
-              paddingTop: 3,
-              paddingBottom: 3,
-            }}
-          >
-            4.0 a 4.5
-          </Text>
-          <Text
-            style={{
-              fontSize: 9,
-              fontWeight: "bold",
-              flex: 1,
-              border: "1px solid #C0C0C0",
-              textAlign: "center",
-              paddingTop: 3,
-              paddingBottom: 3,
-            }}
-          >
-            3.0 a 3.9
-          </Text>
-          <Text
-            style={{
-              fontSize: 9,
-              fontWeight: "bold",
-              flex: 1,
-              border: "1px solid #C0C0C0",
-              textAlign: "center",
-              paddingTop: 2,
-              paddingBottom: 2,
-            }}
-          >
-            1.0 a 2.9
-          </Text>
-        </View>
-      </View>
+       
 
       <View style={styles.view_p}>
         <Text style={styles.p}>
@@ -1240,7 +785,9 @@ const CertificadoEstudios = () => {
     setError("");
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/api/actasGrados/studentsGraduate/search?numDocumento=${numDocumento}`
+        `${
+          import.meta.env.VITE_BACKEND_URL
+        }/api/actasGrados/studentsGraduate/search?numDocumento=${numDocumento}`
       );
       setResultados(response.data); // Suponiendo que la respuesta es un array de resultados
       setNumDocumento(""); // Limpiar el campo de búsqueda
@@ -1301,7 +848,9 @@ const CertificadoEstudios = () => {
           fileName={generateFileName(estudianteSeleccionado)}
         >
           {({ loading }) =>
-            loading ? "Cargando certificado..." : "Descargar Certificado de como PDF"
+            loading
+              ? "Cargando certificado..."
+              : "Descargar Certificado de como PDF"
           }
         </PDFDownloadLink>
       )}
@@ -1310,4 +859,3 @@ const CertificadoEstudios = () => {
 };
 
 export default CertificadoEstudios;
- 

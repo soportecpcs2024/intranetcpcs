@@ -46,6 +46,7 @@ import ProductDistribution from "./components/productos/Location/productDistribu
 import InformeUnidad from "./components/productos/informes/informeUnidad/InformeUnidad";
 import LayoutInfoAcademicos from "./components/informesAcademicos/DashboardInformesAcademicos/LayoutInfoAcademicos";
 import CertificadoEstudios from "./components/informesAcademicos/CertificadoEstudios/CertificadoEstudios";
+
 import AcumuladosNotas from "./components/informesAcademicos/AcumuladosNotas/AcumuladosNotas";
 import Estadistico from "./components/informesAcademicos/Estadistico/Estadistico";
 
