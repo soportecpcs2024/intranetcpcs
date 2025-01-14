@@ -210,7 +210,7 @@ const CertificadoEstudiosDocumentBPrimaria = ({ estudiante }) => (
                fontWeight: "bold",
              }}
            >
-             Que {estudiante?.nombre}, identificado con R.C.N Nº.{" "} {estudiante?.numDocumento}, cursó y aprobó en este establecimiento educativo, los estudios correspondientes al grado {" "}
+             Que {estudiante?.nombre}, identificado con {} Nº.{" "} {estudiante?.numDocumento}, cursó y aprobó en este establecimiento educativo, los estudios correspondientes al grado {" "}
              {estudiante.grupo} de Básica primaria. Para el año lectivo {estudiante.añoLectivo}. Matrícula Nº. {estudiante.codigoMatricula} y
              folio del libro de calificaciones Nº. {estudiante.folio}
            </Text>
