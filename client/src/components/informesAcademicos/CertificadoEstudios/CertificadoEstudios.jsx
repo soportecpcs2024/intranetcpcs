@@ -21,6 +21,7 @@ import {
 import axios from "axios";
 import CertificadoEstudiosDocumentBPrimaria from "./CertificadoEstudiosDocumentBPrimaria";
 import CertificadoEstudiosDocumentBSecundaria from "./CertificadoEstudiosDocumentBSecundaria";
+import CertificadoEstudiosDocumentPreescolar from "./CertificadoEstudiosDocumentPreescolar";
 // Componente Principal
 const CertificadoEstudios = () => {
   const [numDocumento, setNumDocumento] = useState("");
@@ -106,6 +107,9 @@ const CertificadoEstudios = () => {
            <CertificadoEstudiosDocumentBSecundaria estudiante={estudianteSeleccionado} />
          ) : ["1 A", "1 B", "1 C", "2 A", "2 B", "2 C", "3 A", "3 B", "3 C", "4 A", "4 B", "4 C", "5 A", "5 B", "5 C"].includes(grupoSelect) ? (
            <CertificadoEstudiosDocumentBPrimaria estudiante={estudianteSeleccionado} />
+         ): ["PRE-JARDIN A", "PRE-JARDIN B", "JARDIN A", "JARDIN B","TRANSICIÓN A", "TRANSICIÓN B",].includes(grupoSelect) ? (
+          <CertificadoEstudiosDocumentPreescolar estudiante={estudianteSeleccionado} />
+           
          ) : (
            <p>Selecciona un grupo válido para generar el certificado</p>
          )
