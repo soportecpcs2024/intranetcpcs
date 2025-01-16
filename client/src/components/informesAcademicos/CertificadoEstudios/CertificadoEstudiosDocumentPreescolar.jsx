@@ -728,7 +728,7 @@ const CertificadoEstudiosDocumentPreescolar = ({ estudiante }) => (
              Plan de estudios aprobado según la Ley General de Educación (Ley 115 de
              febrero 8 de 1994) y su Decreto Reglamentario 1860 del 3 de Agosto de
              1994. De la Jornada y el Horario, según Artículo 57 del decreto 1860.
-             Evaluación según el Decreto 1290 de 2009 y la Resolución Rectoral No 417
+             Evaluación según el Decreto 2247 de 1997 y la Resolución Rectoral No 417
              del 30 de noviembre de 2009.
            </Text>
            <Text style={styles.escala}>Escala valorativa nacional:</Text>
