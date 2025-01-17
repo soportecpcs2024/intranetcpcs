@@ -338,7 +338,7 @@ input::placeholder {
   background-image: radial-gradient(circle at 50% -20.71%, #a3a7ff 0, #7a8ffc 25%, #3c78f2 50%, #0063e8 75%, #ffffff 100%);
  
   color: black;
-  font-weight: 600;
+  
 }
 
 .logout-button:focus {
@@ -505,7 +505,7 @@ input::placeholder {
 
 .admin-header .dropdown-menu a:hover {
   font-weight: 700;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  box-shadow: rgba(93, 57, 50, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 .admin-header .dropdown:hover .dropdown-menu,
 .admin-header .dropdown-menu:hover {
@@ -1823,6 +1823,7 @@ p {
 
   .admin-layout-header-links li{
     font-size: 16px;  
+    margin: 10px;
   }
   
   .admin-layout-header-links-a{
@@ -1836,7 +1837,7 @@ p {
   padding: 10px 20px;
   width: 100%;
   margin: 0; /* Elimina el margen */
-  margin-top: -50px;
+  
   margin-right: 100px;
   background-image: radial-gradient(circle at 50% -20.71%, #a3a7ff 0, #7a8ffc 25%, #3c78f2 50%, #0063e8 75%, #0051de 100%);
 
