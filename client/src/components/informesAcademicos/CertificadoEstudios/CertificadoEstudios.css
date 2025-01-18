@@ -5,7 +5,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin: 50px;
+    margin: 20px;
    font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -22,9 +22,9 @@
 
  .main-container-p{
     text-align: justify;
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 600;
-    margin: 5px;
+    margin: 3px;
  }
 
  .main-container-certifica{
@@ -38,3 +38,84 @@
     font-weight: 900;
      
  }
+
+ .certificado-content{
+   padding: 10px;
+    
+   display: flex;
+   align-items: center;
+  
+   justify-content: center;
+    
+ }
+
+ .certificado-content-input{
+   font-size: 12px;
+ }
+ .certificado-content-btn{
+   width: 100px;
+   height: 60px;
+   padding: 16px;
+   margin: 16px;
+   align-items: center;
+   justify-content: center;
+   display: flex;
+    
+ }
+
+ .certificado-content-resultados{
+   display: flex;
+   font-size: 10px;
+   padding: 10px;
+   margin-bottom: 5px;
+   line-height: 1.2;
+   border: 1px solid rgb(226, 226, 226);
+   border-radius: 8px;
+   
+   
+ }
+
+ .certificado-content-resultados-btn{
+   width: 150px;
+   height: 40px;
+   padding: 12px;
+   margin: 16px;
+   align-items: center;
+   justify-content: center;
+   display: flex;
+   font-size: 12px;
+ }
+
+ .datos-cargados-p{
+font-size: 16px;
+margin-left: 10px;
+ 
+ }
+ .datos-cargados-span{
+font-size: 16px;
+ 
+font-weight: 600;
+ 
+ }
+
+
+ .download-container {
+   margin-top: 20px;
+ }
+ 
+ .download-btn {
+   display: flex;
+   align-items: center;
+   padding: 10px 20px;
+   background-color: #4CAF50;
+   color: white;
+   border-radius: 5px;
+   cursor: pointer;
+   font-size: 16px;
+ }
+ 
+ .download-btn:hover {
+   background-color: #45a049;
+ }
+
+ 

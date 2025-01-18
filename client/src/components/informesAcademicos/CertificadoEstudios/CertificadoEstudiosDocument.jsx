@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
 });
 
 // Componente del Documento
-const CertificadoEstudiosDocument = ({ estudiante }) => (
+const CertificadoEstudiosDocument = ({ estudiante, generados }) => (
   <Document>
     <Page size="A4" style={styles.page}>
       <View
@@ -198,7 +198,7 @@ const CertificadoEstudiosDocument = ({ estudiante }) => (
                   fontWeight: "bold",
                 }}
               >
-                Certificado Nº 0002
+                Certificado Nº {generados}
               </Text>
             </View>
        <Text
