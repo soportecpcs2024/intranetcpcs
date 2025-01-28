@@ -87,7 +87,19 @@ app.use('/api/informes', informesRoutes);
 const actasGradosroutes = require('./routes/graduadosCpcs/studentGraduateRoutes');
 app.use('/api/actasGrados', actasGradosroutes);
 
- 
+// ------------ Nuevas rutas para compra de clases ------------
+
+// Rutas para las clases
+const claseRoutes = require('./routes/facturacion/claseRoutes');
+app.use('/api/clases', claseRoutes);
+
+// Rutas de facturación
+const invoiceRoutes = require('./routes/facturacion/invoiceRoutes');
+app.use('/api/invoices', invoiceRoutes);
+
+const studentInvoice = require('./routes/facturacion/studentRoutes');
+app.use('/api/studentinvoice', studentInvoice);
+
  
 
 // Configuración y arranque del servidor
