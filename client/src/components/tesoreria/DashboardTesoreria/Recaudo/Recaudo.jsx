@@ -4,7 +4,7 @@ import BuscadorEstudiante from "./buscador/BuscadorEstudiante";
 import ListaClases from "./ListarClases/ListaClases";
 import GenerarFactura from "./GenerarFactura";
 import ListarFacturas from "./listarFactura/ListarFacturas";
-import GenerarFacturadocumento from "./generarFacturadocumento/GenerarFacturadocumento";
+
 
 const Recaudo = () => {
   const { clases, fetchEstudianteById } = useRecaudo();
@@ -72,7 +72,7 @@ const Recaudo = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:3000/api/recaudo/facturas",
+        `${import.meta.env.VITE_BACKEND_URL}/api/recaudo/facturas`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
