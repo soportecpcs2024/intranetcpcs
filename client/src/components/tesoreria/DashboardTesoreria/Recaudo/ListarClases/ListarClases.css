@@ -1,0 +1,40 @@
+/* ListaClases.css */
+.lista-clases-container{
+  padding: 5px;
+  border-radius: 6px;
+  border: 1px solid rgb(206, 206, 206);
+    
+}
+
+
+.lista-clases-container h4 {
+    font-size: 14px;
+    margin-left: 8px;
+    margin-bottom: 1px;
+  }
+  
+  .lista-clases-container p {
+    font-size: 12px;
+    color: gray;
+  }
+  
+  .clase-button {
+    margin: 2px;
+    padding: 4px;
+    background-color: lightgray;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    border-radius: 5px;
+    color: black;
+  }
+  
+  .clase-button.selected {
+    background-color: rgb(4, 208, 4);
+    color: white;
+  }
+  
+  .lista-clases-container-btn{
+    display: flex;
+    
+  }

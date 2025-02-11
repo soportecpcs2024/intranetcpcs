@@ -1,0 +1,33 @@
+.container-precargafactura {
+    display: block;
+    width: 100%; /* 📌 Toma todo el ancho disponible */
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid rgb(206, 206, 206);
+    box-sizing: border-box; /* 📌 Evita que el padding aumente el ancho */
+}
+
+p {
+    font-size: 12px;
+}
+
+strong {
+    font-weight: 500;
+}
+
+.container-precargafactura-factura {
+    padding: 8px;
+    margin: 5px 0px;
+    border-radius: 6px;
+    border: 1px solid rgb(206, 206, 206);
+}
+
+.total{
+    padding: 10px;
+    text-align: right;
+    
+}
+.container-precargafactura-factura-total{
+    font-size: 18px;
+    
+}

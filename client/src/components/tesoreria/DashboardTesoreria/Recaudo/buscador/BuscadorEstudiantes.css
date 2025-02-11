@@ -1,0 +1,47 @@
+.content_buscador_estudiante_recaudo {
+    display: flex;
+    align-items: center;
+    gap: 4px; /* Espaciado entre elementos */
+    justify-content: flex-start; /* Alineado a la izquierda */
+    padding: 10px;
+    
+  }
+  
+  .content_buscador_estudiante_recaudo h4, p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .content_buscador_estudiante_recaudo input {
+    width: 280px;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    font-size: 14px;
+    transition: border 0.3s;
+  }
+  
+  .content_buscador_estudiante_recaudo input:focus {
+    border-color: #007bff;
+  }
+  
+  .content_buscador_estudiante_recaudo button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+    margin-bottom: auto;
+    margin-top: auto;
+    
+  }
+  
+  .content_buscador_estudiante_recaudo button:hover {
+    background-color: #0056b3;
+  }
+  

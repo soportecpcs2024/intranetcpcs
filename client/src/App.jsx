@@ -4,7 +4,7 @@ import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import { ProductProvider } from "./contexts/ProductContext";
 import { ProductStatisticsProvider } from "./contexts/InformesContext";
 import { UserProvider } from "./contexts/UserContext";
- 
+import { RecaudoProvider } from "./contexts/RecaudoContext";
 
 import { Auth, Blog, Academicos, Q10 } from "./pages/admin";
 import AdminLayout from "./layouts/adminLayouts/AdminLayout";
@@ -18,7 +18,7 @@ import DescargarPdf from "./components/DescargarPdf";
 import { InfoIndividual } from "./pages/admin/academicos/InfoIndividual";
 import Users from "./pages/admin/User/main/Users";
 import LlegadasTarde from "./pages/admin/academicos/llegadast/LlegadasTarde";
-AgregarLlegadasTarde;
+
 import NivelSuperior from "./pages/admin/academicos/nivelSuperior/NivelSuperior";
 import DashboardInventory from "./pages/inventory/DashboardInventory/DashboardInventory";
 import ProductList from "./components/productos/ProductList/ProductList";
@@ -51,6 +51,9 @@ import AcumuladosNotas from "./components/informesAcademicos/AcumuladosNotas/Acu
 import Estadistico from "./components/informesAcademicos/Estadistico/Estadistico";
 
 import Dashboardquinto from "./components/informesAcademicos/quinto_Informe_b/Dashboardquinto";
+import LayoutTesoreria from "./components/tesoreria/DashboardTesoreria/LayoutTesoreria";
+import Recaudo from "./components/tesoreria/DashboardTesoreria/Recaudo/Recaudo";
+import FormularioInscripcion from "./components/tesoreria/Formularios_inscripcion/FormularioInscripcion";
 
 const App = () => {
   useEffect(() => {
@@ -84,9 +87,9 @@ const App = () => {
       <ProductProvider>
         <ProductStatisticsProvider>
           <UserProvider>
-           
+            <RecaudoProvider>
               <AppContent />
-           
+            </RecaudoProvider>
           </UserProvider>
         </ProductStatisticsProvider>
       </ProductProvider>
@@ -165,6 +168,14 @@ const AppContent = () => {
               />
               <Route path="acumulados-notas" element={<AcumuladosNotas />} />
               <Route path="estadistico" element={<Estadistico />} />
+            </Route>
+
+            <Route path="tesoreria" element={<LayoutTesoreria />}>
+              <Route path="recaudo" element={<Recaudo />} />
+              <Route
+                path="formulario_inscripcion"
+                element={<FormularioInscripcion />}
+              />
             </Route>
           </Route>
         )}

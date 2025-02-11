@@ -22,6 +22,7 @@ const AdminHeader = () => {
   const isAcademic = user && user.role === "usuario"; // Verificar si el usuario tiene el rol de admin
   const isAdministrator = user && user.role === "administrador"; // Verificar si el usuario tiene el rol de teacher
   const secretaria = user && user.role === "secretaria"; // Verificar si el usuario tiene el rol de teacher
+  const tesoreria = user && user.role === "tesoreria"; // Verificar si el usuario tiene el rol de teacher
 
   return (
     <div className="admin-header">
@@ -109,6 +110,22 @@ const AdminHeader = () => {
 
                   <div className="admin-layout-header-links-a">
                     <li>
+                      <div className="dropdown">
+                        <Link onClick={toggleDropdown}>Tesoreria</Link>
+
+                        {isDropdownOpen && (
+                          <ul className="dropdown-menu">
+                            <li>
+                              <Link to="tesoreria">Recaudo</Link>
+                            </li>
+                          </ul>
+                        )}
+                      </div>
+                    </li>
+                  </div>
+
+                  <div className="admin-layout-header-links-a">
+                    <li>
                       <Link to="/admin/soporte">Adm Soporte</Link>
                     </li>
                   </div>
@@ -122,12 +139,11 @@ const AdminHeader = () => {
                         Q 10
                       </Link>
                     </li>
-                   
                   </div>
                   <div className="admin-layout-header-links-a">
-                   
-                      <button className="btn-logaut" onClick={handleLogout}>Cerrar </button>
-                    
+                    <button className="btn-logaut" onClick={handleLogout}>
+                      Cerrar{" "}
+                    </button>
                   </div>
                 </ul>
               )}
@@ -154,9 +170,7 @@ const AdminHeader = () => {
                             <Link to="/admin/llegadastarde">
                               Llegadas tarde
                             </Link>
-                            
                           </li>
-                          
                         </ul>
                       )}
                     </div>
@@ -190,16 +204,60 @@ const AdminHeader = () => {
                       <Link onClick={toggleDropdown}>Académico</Link>
                       {isDropdownOpen && (
                         <ul className="dropdown-menu">
-                          
                           <li>
                             <Link to="/admin/documentos">Documentos</Link>
                           </li>
-                          
+
                           <li>
-                              <Link to="/admin/infoacademico">
-                                Informes Académicos
-                              </Link>
-                            </li>
+                            <Link to="/admin/infoacademico">
+                              Informes Académicos
+                            </Link>
+                          </li>
+                        </ul>
+                      )}
+                    </div>
+                  </li>
+
+                  <li>
+                    <Link
+                      to="https://site2.q10.com/login?ReturnUrl=%2F&aplentId=d12efeb8-f609-4dd1-87cd-1cb0c95d32e2"
+                      target="_blank"
+                    >
+                      Q 10
+                    </Link>
+                  </li>
+                  <li>
+                    <button className="logout-button" onClick={handleLogout}>
+                      Cerrar sesión
+                    </button>
+                  </li>
+                </ul>
+              )}
+              {tesoreria && (
+                <ul>
+                  <li>
+                    <Link to="/admin/users">Inicio</Link>
+                  </li>
+                  {/* <li>
+              <Link to="/admin/blog">Blog</Link>
+              </li> */}
+                  <li>
+                    <div className="dropdown">
+                      <Link onClick={toggleDropdown}>Tesoreria</Link>
+                      {isDropdownOpen && (
+                        <ul className="dropdown-menu">
+                          <li>
+                            <Link to="tesoreria">Recaudos</Link>
+                          </li>
+                          <li>
+                            <Link to="tesoreria">Cartera </Link>
+                          </li>
+                          <li>
+                            <Link to="informerecaudo">Informe de recaudo</Link>
+                          </li>
+                          <li>
+                            <Link to="informerecaudo">Informe de cartera</Link>
+                          </li>
                         </ul>
                       )}
                     </div>

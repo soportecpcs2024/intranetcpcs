@@ -1,0 +1,117 @@
+import React, { useState, useEffect } from "react";
+import { useRecaudo } from "../../../../contexts/RecaudoContext";
+import BuscadorEstudiante from "./BuscadorEstudiante";
+import ListaClases from "./ListaClases";
+import GenerarFactura from "./GenerarFactura";
+
+const Recaudo = () => {
+  const { clases, fetchEstudianteById } = useRecaudo();
+  const [loading, setLoading] = useState(true);
+  const [selectedClases, setSelectedClases] = useState([]);
+  const [estudiante, setEstudiante] = useState(null);
+  const [tipoPago, setTipoPago] = useState("");
+  const [showButton, setShowButton] = useState(false);
+  const [isFacturaGenerated, setIsFacturaGenerated] = useState(false);
+
+  useEffect(() => {
+    if (clases.length > 0) {
+      setLoading(false);
+    }
+  }, [clases]);
+
+  const handleSelectClase = (clase) => {
+    setSelectedClases((prevSelected) =>
+      prevSelected.some((c) => c._id === clase._id)
+        ? prevSelected.filter((c) => c._id !== clase._id)
+        : [...prevSelected, clase]
+    );
+  };
+
+  const limpiarClases = () => setSelectedClases([]);
+  const limpiarBuscador = () => setEstudiante(null);
+
+  const handleTipoPagoChange = (event) => {
+    setTipoPago(event.target.value);
+    setShowButton(true);
+  };
+
+  const facturaData = {
+    estudianteId: estudiante?._id,
+    clases: selectedClases.map(({ _id }) => ({ claseId: _id })),
+    tipoPago,
+  };
+
+  const handleGuardarFactura = async () => {
+    if (!estudiante || selectedClases.length === 0 || !tipoPago) {
+      alert("Por favor, seleccione un estudiante, clases y tipo de pago.");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:3000/api/recaudo/facturas", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(facturaData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Error al guardar la factura");
+      }
+
+      alert("Factura guardada exitosamente");
+      setIsFacturaGenerated(true);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  return (
+    <div>
+      <BuscadorEstudiante
+        fetchEstudianteById={fetchEstudianteById}
+        setEstudiante={setEstudiante}
+        setLoading={setLoading}
+        limpiarBuscador={limpiarBuscador}
+      />
+
+      {estudiante && (
+        <div>
+          <h4>Información del Estudiante</h4>
+          <p><strong>Nombre:</strong> {estudiante.nombre}</p>
+          <p><strong>Grado:</strong> {estudiante.grado}</p>
+        </div>
+      )}
+
+      <ListaClases
+        clases={clases}
+        selectedClases={selectedClases}
+        handleSelectClase={handleSelectClase}
+        loading={loading}
+      />
+
+      <div>
+        <h4>Tipo de Pago</h4>
+        <label>
+          <input type="radio" value="Efectivo" checked={tipoPago === "Efectivo"} onChange={handleTipoPagoChange} /> Efectivo
+        </label>
+        <label>
+          <input type="radio" value="Transferencia" checked={tipoPago === "Transferencia"} onChange={handleTipoPagoChange} /> Transferencia
+        </label>
+      </div>
+
+      {showButton && <button onClick={handleGuardarFactura}>Guardar Factura</button>}
+
+      {isFacturaGenerated && selectedClases.length > 0 && (
+        <GenerarFactura
+          facturaData={facturaData}
+          limpiarBuscador={limpiarBuscador}
+          limpiarClases={limpiarClases}
+        />
+      )}
+    </div>
+  );
+};
+
+export default Recaudo;

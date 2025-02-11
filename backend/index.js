@@ -87,20 +87,24 @@ app.use('/api/informes', informesRoutes);
 const actasGradosroutes = require('./routes/graduadosCpcs/studentGraduateRoutes');
 app.use('/api/actasGrados', actasGradosroutes);
 
-// ------------ Nuevas rutas para compra de clases ------------
 
-// Rutas para las clases
-const claseRoutes = require('./routes/facturacion/claseRoutes');
-app.use('/api/clases', claseRoutes);
 
-// Rutas de facturación
-const invoiceRoutes = require('./routes/facturacion/invoiceRoutes');
-app.use('/api/invoices', invoiceRoutes);
+// ------------ Rutas para extra curriculares y otros -------------
 
-const studentInvoice = require('./routes/facturacion/studentRoutes');
-app.use('/api/studentinvoice', studentInvoice);
+// Importar y usar las rutas de clases extracurriculares
+const estudianteRoutesRecaudo = require('./routes/recaudo/estudianteRecaudoRoutes');
+app.use('/api/recaudo', estudianteRoutesRecaudo);
 
- 
+const clasesRoutes = require('./routes/recaudo/clasesRoutes');
+app.use('/api/recaudo', clasesRoutes);
+
+// Importar y usar las rutas de facturas
+const facturasRoutes = require('./routes/recaudo/facturaRoutes');
+app.use('/api/recaudo', facturasRoutes);
+
+// Importar y usar las rutas de reportes de ventas
+const reporteRoutes = require('./routes/recaudo/reporteRoutes');
+app.use('/api/recaudo/reportes', reporteRoutes);
 
 // Configuración y arranque del servidor
 const PORT = process.env.SERVER_PORT || 3000;

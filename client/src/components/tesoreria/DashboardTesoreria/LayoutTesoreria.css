@@ -1,0 +1,109 @@
+/* Contenedor principal */
+.layout-academico-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  
+}
+
+
+/* Header del sidebar superior */
+.layout-academico-container-header {
+  display: flex;
+  justify-content: left;
+  gap: 10px;
+  padding: 10px;
+  background-color: #f3f4f6;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px;
+}
+
+/* Estilo general para cada enlace del sidebar */
+.link-academico {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+/* Iconos de los enlaces del sidebar */
+.icon-academico {
+  font-size: 30px; /* Tamaño del icono */
+  color: #0670fb; /* Color del icono */
+  
+}
+
+/* Estilo para los enlaces normales */
+.sidebar-link-academico {
+  color: #333;
+  font-size: 13px;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+/* Hover para el link */
+.link-academico:hover {
+  background-color: #e0e0e0;
+}
+
+/* Estado activo del link */
+.active {
+  background-color: #d0e7ff;
+  color: #1a73e8;
+   
+  border-radius: 8px;
+}
+
+/* Contenido principal */
+.content-academico {
+  flex-grow: 1;
+  padding: 2rem;
+  background-color: #ffffff;
+  color: #2c3e50;
+}
+
+/* Estilo de hover para iconos */
+.icon-academico:hover {
+  color: #007bff; /* Cambia color del icono al hacer hover */
+}
+
+
+.estudiante_encontrado{
+  padding: 10px 5px;
+  border-bottom: 1px solid rgb(182, 181, 181);
+  border-top: 1px solid black;
+}
+
+.container-tipopago{
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px;
+  border-radius: 6px;
+  border: 1px solid rgb(206, 206, 206);
+}
+
+.container-recaudo{
+  display: flex;
+  gap: 10px;
+   
+}
+
+.container-recaudo .container-recaudo-box:nth-child(1){
+  flex-basis: calc(70% - 1rem);
+}
+  
+.container-recaudo .container-recaudo-box:nth-child(2){
+  flex-basis: calc(30% - 1rem);
+
+  
+}
+
+ 
+
+
+ 
