@@ -6,15 +6,15 @@ const facturaSchema = new mongoose.Schema({
     claseId: { type: mongoose.Schema.Types.ObjectId, ref: 'Clase', required: true },
     nombreClase: { type: String, required: true },
     costo: { type: Number, required: true },
-    dia: { type: String, required: true },
-    hora: { type: String, required: true },
+    dia: { type: String },
+    hora: { type: String },
   }],
   total: { type: Number, required: true },
   fechaCompra: { type: Date, default: Date.now },
   nombreRegistrador: { type: String, default: 'Lina María Hoyos Restrepo' },
   tipoPago: { 
     type: String, 
-    enum: ['Efectivo', 'Transferencia'], 
+    enum: ['Efectivo', 'Datáfono','Nómina'], 
     required: true 
   } // Nuevo campo para tipo de pago
 });

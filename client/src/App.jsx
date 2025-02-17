@@ -54,6 +54,10 @@ import Dashboardquinto from "./components/informesAcademicos/quinto_Informe_b/Da
 import LayoutTesoreria from "./components/tesoreria/DashboardTesoreria/LayoutTesoreria";
 import Recaudo from "./components/tesoreria/DashboardTesoreria/Recaudo/Recaudo";
 import FormularioInscripcion from "./components/tesoreria/Formularios_inscripcion/FormularioInscripcion";
+import RecaudoAntologia from "./components/tesoreria/DashboardTesoreria/Recaudo/RecaudoAntologia";
+import Recaudoep from "./components/tesoreria/DashboardTesoreria/Recaudo/RecaudoEscuelaPadres";
+
+
 
 const App = () => {
   useEffect(() => {
@@ -172,6 +176,8 @@ const AppContent = () => {
 
             <Route path="tesoreria" element={<LayoutTesoreria />}>
               <Route path="recaudo" element={<Recaudo />} />
+              <Route path="antologia" element={<RecaudoAntologia />} />
+              <Route path="escuela_padres" element={<Recaudoep />} />
               <Route
                 path="formulario_inscripcion"
                 element={<FormularioInscripcion />}

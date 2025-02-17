@@ -36,9 +36,9 @@ export const RecaudoProvider = ({ children }) => {
 
   const fetchClases = async () => {
     try {
-      console.log('Cargando clases...'); // Para depuración
+      // console.log('Cargando clases...'); // Para depuración
       const response = await axios.get(`${apiBaseUrl}/api/recaudo/clases`);
-      console.log('Clases obtenidas:', response.data); // Verifica qué devuelve la API
+      // console.log('Clases obtenidas:', response.data); // Verifica qué devuelve la API
       setClases(response.data);
     } catch (error) {
       console.error('Error fetching clases:', error);
@@ -61,7 +61,7 @@ const crearFactura = async (facturaData) => {
   try {
     const response = await axios.post(`${apiBaseUrl}/api/recaudo/facturas`, facturaData);
     setFacturas((prevFacturas) => [...prevFacturas, response.data]); // Añadir la nueva factura al estado
-    console.log('Factura creada:', response.data);
+    // console.log('Factura creada:', response.data); 
   } catch (error) {
     console.error('Error creando factura:', error);
   }
@@ -69,10 +69,10 @@ const crearFactura = async (facturaData) => {
 
 
   useEffect(() => {
-    fetchEstudiantes();
+   
     fetchClases();
     fetchFacturas();
-    fetchEstudianteById();
+    
    
   }, []);
 

@@ -7,7 +7,7 @@ exports.crearFactura = async (req, res) => {
   try {
     const { estudianteId, clases, tipoPago } = req.body;
 
-    if (!['Efectivo', 'Transferencia'].includes(tipoPago)) {
+    if (!['Efectivo', 'Datáfono','Nómina'].includes(tipoPago)) {
       return res.status(400).json({ message: "El tipo de pago debe ser 'Efectivo' o 'Transferencia'." });
     }
 
@@ -28,12 +28,15 @@ exports.crearFactura = async (req, res) => {
     const clasesDetalle = clasesEncontradas.map(clase => ({
       claseId: clase._id,
       nombreClase: clase.nombre,
-      costo: clase.costo,
+      costo: clase.costoDescuento ?? clase.costo, // Usa costoDescuento si existe, sino costo
       dia: clase.dia,
       hora: clase.hora,
     }));
-
+    
     const total = clasesDetalle.reduce((sum, clase) => sum + clase.costo, 0);
+    
+
+     
 
     const factura = new Factura({ estudianteId, clases: clasesDetalle, total, tipoPago });
     await factura.save();
@@ -76,7 +79,7 @@ exports.actualizarFactura = async (req, res) => {
   try {
     const { estudianteId, clases, tipoPago } = req.body;
 
-    if (!['Efectivo', 'Transferencia'].includes(tipoPago)) {
+    if (!['Efectivo', 'Datáfono','Nómina'].includes(tipoPago)) {
       return res.status(400).json({ message: "El tipo de pago debe ser 'Efectivo' o 'Transferencia'." });
     }
 

@@ -5,7 +5,6 @@ import ListaClases from "./ListarClases/ListaClases";
 import GenerarFactura from "./GenerarFactura";
 import ListarFacturas from "./listarFactura/ListarFacturas";
 
-
 const Recaudo = () => {
   const { clases, fetchEstudianteById } = useRecaudo();
   const [loading, setLoading] = useState(true);
@@ -15,8 +14,8 @@ const Recaudo = () => {
   const [showButton, setShowButton] = useState(false);
   const [facturaActual, setFacturaActual] = useState(null);
   const [facturaGuardada, setFacturaGuardada] = useState(null);
-  const [estudiantedata, setEstudiantedata] = useState([]); // Estado para mostrar la factura guardada
-  const [mostrarGenerarFactura, setMostrarGenerarFactura] = useState(false); // Nuevo estado
+  const [estudiantedata, setEstudiantedata] = useState([]);
+  const [mostrarGenerarFactura, setMostrarGenerarFactura] = useState(false);
 
   useEffect(() => {
     if (clases.length > 0) {
@@ -24,23 +23,34 @@ const Recaudo = () => {
     }
   }, [clases]);
 
+  const clasesFiltradas = clases.filter(
+    (clase) =>
+      clase.nombre !== "Antología" &&
+      clase.nombre !== "El arte de ser padres" &&
+      clase.nombre !== "Ciberfamilias"
+  );
+
   const handleSelectClase = (clase) => {
     setSelectedClases((prevSelected) =>
       prevSelected.some((c) => c._id === clase._id)
         ? prevSelected.filter((c) => c._id !== clase._id)
-        : [...prevSelected, clase]
+        : [...prevSelected, { ...clase, descuento: false }]
     );
   };
 
-  const limpiarClases = () => setSelectedClases([]);
-  const limpiarBuscador = () => setEstudiante(null);
+  const aplicarDescuento = (claseId) => {
+    setSelectedClases((prevSelected) =>
+      prevSelected.map((c) =>
+        c._id === claseId ? { ...c, descuento: !c.descuento } : c
+      )
+    );
+  };
 
   const handleTipoPagoChange = (event) => {
     setTipoPago(event.target.value);
     setShowButton(true);
   };
 
-  // Generar factura localmente antes de enviarla
   const generarFacturaLocal = () => {
     if (!estudiante || selectedClases.length === 0 || !tipoPago) {
       alert("Por favor, seleccione un estudiante, clases y tipo de pago.");
@@ -49,12 +59,18 @@ const Recaudo = () => {
 
     const nuevaFactura = {
       estudianteId: estudiante,
-      clases: selectedClases,
+      clases: selectedClases.map((clase) => {
+        const costoAplicado = clase.costoDescuento ?? clase.costo; // Usa costoDescuento si existe, sino costo normal
+        return { ...clase, costoAplicado };
+      }),
       tipoPago,
-      total: selectedClases.reduce((acc, clase) => acc + clase.costo, 0),
+      total: selectedClases.reduce(
+        (acc, clase) => acc + (clase.costoDescuento ?? clase.costo), // Usa costoDescuento si existe
+        0
+      ),
     };
 
-    setFacturaActual(nuevaFactura); // Se actualiza en la UI inmediatamente
+    setFacturaActual(nuevaFactura);
     setEstudiantedata(nuevaFactura);
   };
 
@@ -66,8 +82,12 @@ const Recaudo = () => {
 
     const facturaData = {
       estudianteId: facturaActual.estudianteId._id,
-      clases: facturaActual.clases.map(({ _id }) => ({ claseId: _id })),
+      clases: facturaActual.clases.map(({ _id, costoAplicado }) => ({
+        claseId: _id,
+        costo: costoAplicado, // Se usa el costo aplicado (con o sin descuento)
+      })),
       tipoPago: facturaActual.tipoPago,
+      total: facturaActual.total,
     };
 
     try {
@@ -85,14 +105,10 @@ const Recaudo = () => {
       }
 
       const nuevaFacturaGuardada = await response.json();
-      setFacturaGuardada(nuevaFacturaGuardada); // Guardar factura en estado
+      setFacturaGuardada(nuevaFacturaGuardada);
 
       alert("Factura guardada correctamente");
-
-      // Después de aceptar el alert, mostrar GenerarFactura
       setMostrarGenerarFactura(true);
-
-      // Limpiar los campos después de guardar la factura
       setFacturaActual(null);
       setSelectedClases([]);
       setEstudiante(null);
@@ -110,61 +126,57 @@ const Recaudo = () => {
           fetchEstudianteById={fetchEstudianteById}
           setEstudiante={setEstudiante}
           setLoading={setLoading}
-          limpiarBuscador={limpiarBuscador}
           estudiante={estudiante}
         />
 
         <ListaClases
-          clases={clases}
+          clases={clasesFiltradas}
           selectedClases={selectedClases}
           handleSelectClase={handleSelectClase}
           loading={loading}
         />
 
-        <div className="container-tipopago">
-          <h4>Tipo de Pago :</h4>
-          <label>
-            <input
-              type="radio"
-              value="Efectivo"
-              checked={tipoPago === "Efectivo"}
-              onChange={handleTipoPagoChange}
-            />{" "}
-            Efectivo
-          </label>
-          <label>
-            <input
-              type="radio"
-              value="Transferencia"
-              checked={tipoPago === "Transferencia"}
-              onChange={handleTipoPagoChange}
-            />{" "}
-            Transferencia
-          </label>
-        </div>
-        <div className="container-recaudo-btn">
-          {showButton && (
-            <button onClick={generarFacturaLocal}>Pre Factura</button>
-          )}
+        <div  className="container-tipopago-flex">
+          <div className="container-tipopago">
+            <h4>Tipo de Pago :</h4>
+            {["Efectivo", "Datáfono", "Nómina"].map((tipo) => (
+              <label key={tipo}>
+                <input
+                  type="radio"
+                  value={tipo}
+                  checked={tipoPago === tipo}
+                  onChange={handleTipoPagoChange}
+                />{" "}
+                {tipo}
+              </label>
+            ))}
+          </div>
+
+          <div className="container-tipopago-btn">
+            {showButton && (
+              <button onClick={generarFacturaLocal}>Pre Factura</button>
+            )}
+          </div>
         </div>
       </div>
 
       <div className="container-recaudo-box">
-        <div>
-          <ListarFacturas ultimaFactura={facturaActual} />
-        </div>
-        <div className="container-recaudo-box-btn">
-          <button onClick={handleGuardarFactura}>Guardar Factura</button>
-        </div>
-      </div>
+        <ListarFacturas ultimaFactura={facturaActual} />
 
-      <div className="">
-        {mostrarGenerarFactura && (
-          <GenerarFactura
-            factura={facturaGuardada}
-            estudiante={estudiantedata}
-          />
-        )}
+        <div className="container-recaudo-box-save">
+          <div>
+            <button onClick={handleGuardarFactura}>Guardar Factura</button>
+          </div>
+
+          <div>
+            {mostrarGenerarFactura && (
+              <GenerarFactura
+                factura={facturaGuardada}
+                estudiante={estudiantedata}
+              />
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

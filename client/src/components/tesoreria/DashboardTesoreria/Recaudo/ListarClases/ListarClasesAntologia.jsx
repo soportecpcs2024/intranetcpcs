@@ -1,7 +1,7 @@
 import React from "react";
 import "./ListarClases.css"; // 👉 Importa el archivo CSS
 
-const ListaClases = ({
+const ListaClasesAntologia = ({
   clases,
   selectedClases,
   handleSelectClase,
@@ -22,11 +22,10 @@ const ListaClases = ({
             const selected = selectedClases.find((c) => c._id === clase._id);
             const isSelectedNormal =
               selected && selected.costoAplicado === clase.costo;
-            const isSelectedDescuento =
-              selected && selected.costoAplicado === clase.costoDescuento;
+            
 
             return (
-              <div key={clase._id} className="clase-item">
+              <div key={clase._id} className="clase-item antologia">
                
                 <div className="clase-item-content-btn">
                   {/* Botón para seleccionar costo normal */}
@@ -44,20 +43,7 @@ const ListaClases = ({
                     {clase.nombre}
                   </button>
 
-                  {/* Botón para seleccionar costo descuento */}
-                  <button
-                    onClick={() =>
-                      handleSelectClase({
-                        ...clase,
-                        costoAplicado: clase.costoDescuento,
-                      })
-                    }
-                    className={`clase-button-btn ${
-                      isSelectedDescuento ? "selected" : ""
-                    }`}
-                  >
-                    Descuento 
-                  </button>
+                  
                 </div>
               </div>
             );
@@ -68,4 +54,4 @@ const ListaClases = ({
   );
 };
 
-export default ListaClases;
+export default ListaClasesAntologia;

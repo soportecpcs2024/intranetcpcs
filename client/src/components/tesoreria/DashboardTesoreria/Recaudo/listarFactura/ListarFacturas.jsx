@@ -11,13 +11,11 @@ const ListarFacturas = ({ ultimaFactura }) => {
             <strong>Estudiante :</strong> {ultimaFactura.estudianteId.nombre}
           </p>
           <p>
-            <strong>Documento :</strong>{" "}
-            {ultimaFactura.estudianteId.documentoIdentidad}
+            <strong>Documento :</strong> {ultimaFactura.estudianteId.documentoIdentidad}
           </p>
           <p>
             <strong>Grado :</strong> {ultimaFactura.estudianteId.grado}
           </p>
-
           <p>
             <strong>Tipo de Pago:</strong> {ultimaFactura.tipoPago}
           </p>
@@ -25,18 +23,19 @@ const ListarFacturas = ({ ultimaFactura }) => {
           <ul>
             {ultimaFactura.clases.map((clase) => (
               <li className="container-precargafactura-factura" key={clase._id}>
-                <p>
-                  <strong>Nombre:</strong> {clase.nombre}
-                </p>
-                <p>
-                  <strong>Costo:</strong> ${clase.costo}
-                </p>
-                <p>
-                  <strong>Dia:</strong> {clase.dia}    {clase.hora}
-                </p>
-                <p>
-                
-                </p>
+                <div className="container-precargafactura-factura-servicio">
+                  <div>
+                    <p>
+                      <strong>Nombre:</strong> {clase.nombre}
+                    </p>
+                    <p>
+                    <strong>Costo:</strong> ${clase.costoAplicado}
+                    </p>
+                    <p>
+                      <strong>Dia:</strong> {clase.dia} {clase.hora}
+                    </p>
+                  </div>
+                </div>
               </li>
             ))}
           </ul>

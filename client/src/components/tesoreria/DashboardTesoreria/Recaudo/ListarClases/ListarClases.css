@@ -1,40 +1,95 @@
-/* ListaClases.css */
-.lista-clases-container{
-  padding: 5px;
-  border-radius: 6px;
+.lista-clases-container {
+  padding: 10px;
+  border-radius: 4px;
   border: 1px solid rgb(206, 206, 206);
-    
+  background: #ececec4c;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.lista-clases-container-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.lista-clases-container-btn {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Se ajusta automáticamente */
+  gap: 4px;
+  padding: 2px ;
+}
+
+.clase-item {
+  padding: 4px;
+  border-radius: 4px;
+  background: rgb(255, 255, 255);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 10px;
+  text-align: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+ 
+
+ 
+
+.clase-item-content-btn {
+  display: flex;
+  justify-content: center;
+  gap: 1px;
+  flex-wrap: wrap; /* Permite que los botones se acomoden mejor */
+}
+
+.clase-button {
+  padding: 8px 12px;
+  background-color: #ddd;
+  border: none;
+  cursor: pointer;
+  font-size: 11px;
+  border-radius: 4px;
+  transition: all 0.3s ease-in-out;
+  color: #333;
+  text-align: center;
+  height: 60px;
+  margin-top: 2px;
+  min-width: 100px;
+}
+
+.clase-button-btn{
+  padding:  3px;
+  background-color: yellow;
+  border: none;
+  cursor: pointer; 
+  font-size: 11px;
+  border-radius: 4px;
+  transition: all 0.3s ease-in-out;
+  color: #333;
+  text-align: center;
+  margin-top: 4px;
+  min-width: 100px;
+}
+
+.clase-button:hover {
+  background-color: #4b81ee;
+  color: rgb(255, 255, 255);
+}
+.clase-button-btn:hover {
+  background-color: #4b81ee;
+  color: rgb(255, 255, 255);
+}
+
+.clase-button.selected {
+  background-color: rgb(4, 208, 4);
+  color: white;
+  box-shadow: 0px 0px 8px rgba(4, 208, 4, 0.6);
+}
+.clase-button-btn.selected {
+  background-color: rgb(4, 208, 4);
+  color: white;
+  box-shadow: 0px 0px 8px rgba(4, 208, 4, 0.6);
 }
 
 
-.lista-clases-container h4 {
-    font-size: 14px;
-    margin-left: 8px;
-    margin-bottom: 1px;
-  }
-  
-  .lista-clases-container p {
-    font-size: 12px;
-    color: gray;
-  }
-  
-  .clase-button {
-    margin: 2px;
-    padding: 4px;
-    background-color: lightgray;
-    border: none;
-    cursor: pointer;
-    font-size: 12px;
-    border-radius: 5px;
-    color: black;
-  }
-  
-  .clase-button.selected {
-    background-color: rgb(4, 208, 4);
-    color: white;
-  }
-  
-  .lista-clases-container-btn{
-    display: flex;
-    
-  }
+.antologia{
+ display: flex;
+}

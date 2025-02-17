@@ -155,7 +155,7 @@ const GenerarFactura = ({ factura, estudiante }) => {
               new Paragraph({
                 children: [
                   new TextRun({
-                    text: "Clases seleccionadas:",
+                    text: "Servicios seleccionados:",
                     bold: true,
                     size: 25,
                   }),
@@ -174,7 +174,7 @@ const GenerarFactura = ({ factura, estudiante }) => {
                           new Paragraph({
                             children: [
                               new TextRun({
-                                text: "CLASE",
+                                text: "Descripción",
                                 bold: true,
                                 size: 20,
                               }),

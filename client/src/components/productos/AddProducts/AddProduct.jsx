@@ -140,6 +140,7 @@ const AddProduct = () => {
               <option value="Tecnología">Tecnología</option>
               <option value="Electrodoméstico">Electrodoméstico</option>
               <option value="Inmueble">Inmueble</option>
+              <option value="Material académico">Material académico</option>
             </select>
             {errors.area && <p className="error-message">{errors.category}</p>}
           </label>
@@ -147,7 +148,7 @@ const AddProduct = () => {
             Sub Cat:
             <select
               name="subcategory"
-              value={productData.subcategory}
+              value={productData.subcategory} 
               onChange={handleChange}
             >
               <option value="">Sub categoria:</option>
@@ -183,6 +184,7 @@ const AddProduct = () => {
               <option value="Escritorio Metálico Operativo">Escritorio Metálico Operativo</option>
               <option value="Archivador móvil">Archivador móvil</option>
               <option value="Archivador con entrepaño">Archivador con entrepaño</option>
+              <option value="Libros">Libros</option>
                
                
             </select>

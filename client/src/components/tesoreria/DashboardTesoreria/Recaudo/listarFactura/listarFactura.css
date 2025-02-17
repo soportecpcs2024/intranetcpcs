@@ -31,3 +31,31 @@ strong {
     font-size: 18px;
     
 }
+.container-precargafactura-factura-servicio{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+.btn-descuento-a {
+    background-color: red;
+    color: white;
+    font-size: 10px;
+    padding: 5px 8px;
+    border: none;
+    border-radius: 50%; /* Hace que el botón sea circular */
+    cursor: pointer;
+    width: 60px; /* Ajusta el tamaño del botón */
+    height: 60px; /* Mantiene la forma circular */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Sombra ligera */
+    transition: background-color 0.3s ease;
+}
+
+.btn-descuento-a:hover {
+    background-color: rgb(7, 249, 51);
+    color: black;
+}
+
