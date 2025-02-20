@@ -7,21 +7,21 @@
 }
 
 .lista-clases-container-title {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
   color: #333;
-  margin-bottom: 4px;
+  
 }
 
 .lista-clases-container-btn {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Se ajusta automáticamente */
-  gap: 4px;
-  padding: 2px ;
+  gap: 5px;
+  
 }
 
 .clase-item {
-  padding: 4px;
+  
   border-radius: 4px;
   background: rgb(255, 255, 255);
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 10px;

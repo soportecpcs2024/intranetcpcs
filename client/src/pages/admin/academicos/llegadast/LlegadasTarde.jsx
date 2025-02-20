@@ -106,13 +106,15 @@ const LlegadasTarde = () => {
       />
 
       <div className="table-container-llegadastarde">
-        <h3>Llegadas tarde del grupo : <span>{selectedGroup}</span></h3>
+        <h3>
+          Llegadas tarde del grupo : <span>{selectedGroup}</span>
+        </h3>
         <table className="llegadas-tarde-table">
           <thead>
             <tr>
-              <th>Nombre estudiante</th>
+              <th>Estudiante</th>
               <th>Identificación</th>
-             
+
               <th>Fechas</th>
               <th>Cantidad</th>
             </tr>
@@ -120,11 +122,22 @@ const LlegadasTarde = () => {
           <tbody>
             {currentItems.map((llegada, index) => (
               <tr key={index}>
-                <td>{`${llegada.primer_nombre} ${
-                  llegada.segundo_nombre ? llegada.segundo_nombre : ""
-                } ${llegada.primer_apellido} ${llegada.segundo_apellido}`}</td>
+                <td>
+                  {[
+                    llegada.primer_apellido, // Solo este se ordenará si hay más elementos con el mismo apellido
+                  ]
+                    .filter(Boolean)
+                    .sort()
+                    .concat(
+                      [llegada.segundo_apellido, llegada.primer_nombre].filter(
+                        Boolean
+                      )
+                    ) // Los otros nombres se mantienen en su orden original
+                    .join(" ")}
+                </td>
+
                 <td>{llegada.num_identificacion}</td>
-                
+
                 <td>
                   <ul className="fechas">
                     {llegada.fechas.map((date, idx) => {
@@ -133,7 +146,6 @@ const LlegadasTarde = () => {
                         <li key={idx}>
                           <span className="day">{day}</span>-
                           <span className="month">{month}</span>
-                          
                           {idx < llegada.fechas.length - 1 && ", "}
                         </li>
                       );

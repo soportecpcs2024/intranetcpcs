@@ -56,6 +56,8 @@ import Recaudo from "./components/tesoreria/DashboardTesoreria/Recaudo/Recaudo";
 import FormularioInscripcion from "./components/tesoreria/Formularios_inscripcion/FormularioInscripcion";
 import RecaudoAntologia from "./components/tesoreria/DashboardTesoreria/Recaudo/RecaudoAntologia";
 import Recaudoep from "./components/tesoreria/DashboardTesoreria/Recaudo/RecaudoEscuelaPadres";
+import DescargaArchivoFacturas from "./components/tesoreria/DashboardTesoreria/Recaudo/descarga_archivo/DescargaArchivoFacturas";
+DescargaArchivoFacturas
 
 
 
@@ -178,6 +180,7 @@ const AppContent = () => {
               <Route path="recaudo" element={<Recaudo />} />
               <Route path="antologia" element={<RecaudoAntologia />} />
               <Route path="escuela_padres" element={<Recaudoep />} />
+             
               <Route
                 path="formulario_inscripcion"
                 element={<FormularioInscripcion />}
