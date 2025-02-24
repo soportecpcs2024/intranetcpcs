@@ -31,13 +31,22 @@ const Recaudo = () => {
   );
 
   const handleSelectClase = (clase) => {
-    setSelectedClases((prevSelected) =>
-      prevSelected.some((c) => c._id === clase._id)
-        ? prevSelected.filter((c) => c._id !== clase._id)
-        : [...prevSelected, { ...clase, descuento: false }]
-    );
+    console.log("Clase seleccionada:", clase.nombre);
+    console.log("Costo aplicado antes de guardar:", clase.costoAplicado);
+  
+    setSelectedClases((prevSelected) => {
+      const existeClase = prevSelected.find((c) => c._id === clase._id);
+  
+      if (existeClase) {
+        return prevSelected.filter((c) => c._id !== clase._id);
+      } else {
+        return [...prevSelected, { ...clase, costoAplicado: clase.costoAplicado ?? clase.costo }];
+      }
+    });
   };
-
+  
+   
+  
   const aplicarDescuento = (claseId) => {
     setSelectedClases((prevSelected) =>
       prevSelected.map((c) =>
@@ -56,23 +65,21 @@ const Recaudo = () => {
       alert("Por favor, seleccione un estudiante, clases y tipo de pago.");
       return;
     }
-
+  
     const nuevaFactura = {
       estudianteId: estudiante,
       clases: selectedClases.map((clase) => {
-        const costoAplicado = clase.costoDescuento ?? clase.costo; // Usa costoDescuento si existe, sino costo normal
-        return { ...clase, costoAplicado };
+        console.log("Costo aplicado en generarFacturaLocal:", clase.costoAplicado);
+        return { ...clase, costoAplicado: clase.costoAplicado };
       }),
       tipoPago,
-      total: selectedClases.reduce(
-        (acc, clase) => acc + (clase.costoDescuento ?? clase.costo), // Usa costoDescuento si existe
-        0
-      ),
+      total: selectedClases.reduce((acc, clase) => acc + clase.costoAplicado, 0),
     };
-
+  
     setFacturaActual(nuevaFactura);
     setEstudiantedata(nuevaFactura);
   };
+  
 
   const handleGuardarFactura = async () => {
     if (!facturaActual) {

@@ -141,6 +141,8 @@ const AddProduct = () => {
               <option value="Electrodoméstico">Electrodoméstico</option>
               <option value="Inmueble">Inmueble</option>
               <option value="Material académico">Material académico</option>
+              <option value="Música">Música</option>
+
             </select>
             {errors.area && <p className="error-message">{errors.category}</p>}
           </label>
@@ -179,12 +181,15 @@ const AddProduct = () => {
               <option value="Aire acondicionado">Aire acondicionado</option>
               <option value="Mesa salón 240 x 70">Mesa salón 240 x 70</option>
               <option value="Mesa salón 70 x 70">Mesa salón 70 x 70</option>
-              <option value="Mesa salón 70 x 70">Mesa salón 70 x 70</option>
+              
               <option value="Escritorio L">Escritorio L</option>
               <option value="Escritorio Metálico Operativo">Escritorio Metálico Operativo</option>
               <option value="Archivador móvil">Archivador móvil</option>
               <option value="Archivador con entrepaño">Archivador con entrepaño</option>
               <option value="Libros">Libros</option>
+              <option value="Instrumento_musical">Instrumento musical</option>
+              <option value="Amplificador Inst.">Amplificador Instrumento</option>
+
                
                
             </select>
