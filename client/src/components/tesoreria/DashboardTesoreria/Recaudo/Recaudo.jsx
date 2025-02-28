@@ -16,12 +16,14 @@ const Recaudo = () => {
   const [facturaGuardada, setFacturaGuardada] = useState(null);
   const [estudiantedata, setEstudiantedata] = useState([]);
   const [mostrarGenerarFactura, setMostrarGenerarFactura] = useState(false);
+  const [limpiarCampos, setLimpiarCampos] = useState(false);
 
   useEffect(() => {
     if (clases.length > 0) {
       setLoading(false);
     }
   }, [clases]);
+  
 
   const clasesFiltradas = clases.filter(
     (clase) =>
@@ -30,30 +32,19 @@ const Recaudo = () => {
       clase.nombre !== "Ciberfamilias"
   );
 
-  const handleSelectClase = (clase) => {
-    console.log("Clase seleccionada:", clase.nombre);
-    console.log("Costo aplicado antes de guardar:", clase.costoAplicado);
-  
+  const handleSelectClase = (clase, aplicarDescuento) => {
     setSelectedClases((prevSelected) => {
       const existeClase = prevSelected.find((c) => c._id === clase._id);
   
       if (existeClase) {
         return prevSelected.filter((c) => c._id !== clase._id);
       } else {
-        return [...prevSelected, { ...clase, costoAplicado: clase.costoAplicado ?? clase.costo }];
+        return [...prevSelected, { ...clase, costo: aplicarDescuento ? clase.costo / 2 : clase.costo }];
       }
     });
   };
   
    
-  
-  const aplicarDescuento = (claseId) => {
-    setSelectedClases((prevSelected) =>
-      prevSelected.map((c) =>
-        c._id === claseId ? { ...c, descuento: !c.descuento } : c
-      )
-    );
-  };
 
   const handleTipoPagoChange = (event) => {
     setTipoPago(event.target.value);
@@ -65,66 +56,78 @@ const Recaudo = () => {
       alert("Por favor, seleccione un estudiante, clases y tipo de pago.");
       return;
     }
-  
+
     const nuevaFactura = {
       estudianteId: estudiante,
-      clases: selectedClases.map((clase) => {
-        console.log("Costo aplicado en generarFacturaLocal:", clase.costoAplicado);
-        return { ...clase, costoAplicado: clase.costoAplicado };
-      }),
+      clases: selectedClases.map((clase) => ({
+        _id: clase._id,
+        nombre: clase.nombre,
+        costo: clase.costoAplicado ?? clase.costo,
+        dia: clase.dia,
+        hora:clase.hora
+      })),
       tipoPago,
-      total: selectedClases.reduce((acc, clase) => acc + clase.costoAplicado, 0),
+      total: selectedClases.reduce((acc, clase) => acc + (clase.costoAplicado ?? clase.costo), 0),
     };
-  
+
+    // console.log("Pre Factura Generada:", nuevaFactura);
     setFacturaActual(nuevaFactura);
     setEstudiantedata(nuevaFactura);
   };
-  
 
+ 
   const handleGuardarFactura = async () => {
-    if (!facturaActual) {
-      alert("No hay factura para guardar.");
-      return;
-    }
+  if (!facturaActual) {
+    alert("No hay factura para guardar.");
+    return;
+  }
 
-    const facturaData = {
-      estudianteId: facturaActual.estudianteId._id,
-      clases: facturaActual.clases.map(({ _id, costoAplicado }) => ({
-        claseId: _id,
-        costo: costoAplicado, // Se usa el costo aplicado (con o sin descuento)
-      })),
-      tipoPago: facturaActual.tipoPago,
-      total: facturaActual.total,
-    };
-
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/recaudo/facturas`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(facturaData),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Error al guardar la factura");
-      }
-
-      const nuevaFacturaGuardada = await response.json();
-      setFacturaGuardada(nuevaFacturaGuardada);
-
-      alert("Factura guardada correctamente");
-      setMostrarGenerarFactura(true);
-      setFacturaActual(null);
-      setSelectedClases([]);
-      setEstudiante(null);
-      setTipoPago("");
-      setShowButton(false);
-    } catch (error) {
-      alert(error.message);
-    }
+  const facturaData = {
+    estudianteId: facturaActual.estudianteId._id,
+    clases: facturaActual.clases.map(({ _id, costo }) => ({ claseId: _id, costo })),
+    tipoPago: facturaActual.tipoPago,
+    total: facturaActual.total,
   };
+
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_BACKEND_URL}/api/recaudo/facturas`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(facturaData),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Error al guardar la factura");
+    }
+
+    const nuevaFacturaGuardada = await response.json();
+    setFacturaGuardada(nuevaFacturaGuardada);
+
+    alert("Factura guardada correctamente");
+    setMostrarGenerarFactura(true);
+    setFacturaActual(null);
+    setSelectedClases([]);
+    setEstudiante(null);
+    setTipoPago("");
+    setShowButton(false);
+
+     // Activar la limpieza del input
+     setLimpiarCampos(true);
+    
+     // Restablecer limpiarCampos a false para futuras limpiezas
+     setTimeout(() => setLimpiarCampos(false), 100);
+   
+   
+
+   
+  } catch (error) {
+    alert(error.message);
+  }
+};
+
 
   return (
     <div className="container-recaudo">
@@ -134,6 +137,7 @@ const Recaudo = () => {
           setEstudiante={setEstudiante}
           setLoading={setLoading}
           estudiante={estudiante}
+          limpiarCampos={limpiarCampos} // Pasamos el estado
         />
 
         <ListaClases
@@ -143,7 +147,7 @@ const Recaudo = () => {
           loading={loading}
         />
 
-        <div  className="container-tipopago-flex">
+        <div className="container-tipopago-flex">
           <div className="container-tipopago">
             <h4>Tipo de Pago :</h4>
             {["Efectivo", "Datáfono", "Nómina"].map((tipo) => (
@@ -153,8 +157,7 @@ const Recaudo = () => {
                   value={tipo}
                   checked={tipoPago === tipo}
                   onChange={handleTipoPagoChange}
-                />{" "}
-                {tipo}
+                /> {tipo}
               </label>
             ))}
           </div>
@@ -177,10 +180,8 @@ const Recaudo = () => {
 
           <div>
             {mostrarGenerarFactura && (
-              <GenerarFactura
-                factura={facturaGuardada}
-                estudiante={estudiantedata}
-              />
+              
+              <GenerarFactura factura={facturaGuardada} estudiante={estudiantedata}  />
             )}
           </div>
         </div>

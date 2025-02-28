@@ -29,7 +29,7 @@ const ListarFacturas = ({ ultimaFactura }) => {
                       <strong>Nombre:</strong> {clase.nombre}
                     </p>
                     <p>
-                    <strong>Costo:</strong> ${clase.costoAplicado}
+                    <strong>Costo:</strong> ${clase.costo}
                     </p>
                     <p>
                       <strong>Dia:</strong> {clase.dia} {clase.hora}

@@ -22,12 +22,11 @@ const ListaClases = ({
             const selected = selectedClases.find((c) => c._id === clase._id);
             const isSelectedNormal =
               selected && selected.costoAplicado === clase.costo;
-            const isSelectedDescuento =
-              selected && selected.costoAplicado === clase.costoDescuento;
+            const isSelectedMitad =
+              selected && selected.costoAplicado === clase.costo / 2;
 
             return (
               <div key={clase._id} className="clase-item">
-               
                 <div className="clase-item-content-btn">
                   {/* Botón para seleccionar costo normal */}
                   <button
@@ -44,19 +43,20 @@ const ListaClases = ({
                     {clase.nombre}
                   </button>
 
-                  {/* Botón para seleccionar costo descuento */}
+                  {/* Botón para seleccionar costo reducido al 50% */}
                   <button
-                    onClick={() =>
+                    onClick={() => {
+                      const costoReducido = clase.costo / 2; // Calcular el 50% correctamente
                       handleSelectClase({
                         ...clase,
-                        costoAplicado: clase.costoDescuento,
-                      })
-                    }
+                        costoAplicado: costoReducido, // No es necesario Math.round() a menos que quieras redondear
+                      });
+                    }}
                     className={`clase-button-btn ${
-                      isSelectedDescuento ? "selected" : ""
+                      isSelectedMitad ? "selected" : ""
                     }`}
                   >
-                    Descuento 
+                    50% Descuento
                   </button>
                 </div>
               </div>

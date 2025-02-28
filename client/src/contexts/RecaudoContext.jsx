@@ -1,4 +1,3 @@
-// RecaudoContext.jsx
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 
@@ -13,7 +12,7 @@ export const RecaudoProvider = ({ children }) => {
 
   const apiBaseUrl = import.meta.env.VITE_BACKEND_URL;
 
-  // Funciones de obtención de datos
+  // ✅ Cargar lista de estudiantes
   const fetchEstudiantes = async () => {
     try {
       const response = await axios.get(`${apiBaseUrl}/api/recaudo/estudiantes`);
@@ -23,29 +22,28 @@ export const RecaudoProvider = ({ children }) => {
     }
   };
 
-  const fetchEstudianteById = async (documentoIdentidad) => {
+  // ✅ Buscar estudiante por ID o nombre
+  const fetchEstudianteById = async (nombre) => {
     try {
-      const response = await axios.get(`${apiBaseUrl}/api/recaudo/estudiantes/${documentoIdentidad}`);
-      return response.data; // Devuelve el estudiante encontrado
+      const response = await axios.get(`${apiBaseUrl}/api/recaudo/estudiantes?nombre=${nombre}`);
+      return response.data;
     } catch (error) {
       console.error('Error buscando estudiante:', error);
       return null;
     }
   };
-  
 
+  // ✅ Cargar lista de clases
   const fetchClases = async () => {
     try {
-      // console.log('Cargando clases...'); // Para depuración
       const response = await axios.get(`${apiBaseUrl}/api/recaudo/clases`);
-      // console.log('Clases obtenidas:', response.data); // Verifica qué devuelve la API
       setClases(response.data);
     } catch (error) {
       console.error('Error fetching clases:', error);
     }
   };
-  
 
+  // ✅ Cargar lista de facturas
   const fetchFacturas = async () => {
     try {
       const response = await axios.get(`${apiBaseUrl}/api/recaudo/facturas`);
@@ -55,25 +53,35 @@ export const RecaudoProvider = ({ children }) => {
     }
   };
 
-  // RecaudoContext.jsx
+  // ✅ Crear nueva factura
+  const crearFactura = async (facturaData) => {
+    try {
+      const response = await axios.post(`${apiBaseUrl}/api/recaudo/facturas`, facturaData);
+      setFacturas((prevFacturas) => [...prevFacturas, response.data]);
+    } catch (error) {
+      console.error('Error creando factura:', error);
+    }
+  };
 
-const crearFactura = async (facturaData) => {
-  try {
-    const response = await axios.post(`${apiBaseUrl}/api/recaudo/facturas`, facturaData);
-    setFacturas((prevFacturas) => [...prevFacturas, response.data]); // Añadir la nueva factura al estado
-    // console.log('Factura creada:', response.data); 
-  } catch (error) {
-    console.error('Error creando factura:', error);
-  }
-};
+  const eliminarFactura = async (facturaId) => {
+    try {
+      await axios.delete(`${apiBaseUrl}/api/recaudo/facturas/${facturaId}`);
+      setFacturas((prevFacturas) =>
+        prevFacturas.filter((factura) => factura._id !== facturaId)
+      );
+      alert("Factura eliminada correctamente");
+    } catch (error) {
+      console.error("Error eliminando factura:", error);
+      alert("No se pudo eliminar la factura");
+    }
+  };
+  
 
-
+  // ✅ Ejecutar carga de datos en el montaje del componente
   useEffect(() => {
-   
+    fetchEstudiantes();
     fetchClases();
     fetchFacturas();
-    
-   
   }, []);
 
   useEffect(() => {
@@ -83,7 +91,7 @@ const crearFactura = async (facturaData) => {
   }, [estudiantes, clases, facturas]);
 
   return (
-    <RecaudoContext.Provider value={{ estudiantes, clases, facturas, fetchEstudianteById, fetchClases, loading, crearFactura }}>
+    <RecaudoContext.Provider value={{ estudiantes, clases, facturas, fetchEstudianteById, fetchClases, loading, crearFactura, eliminarFactura }}>
       {children}
     </RecaudoContext.Provider>
   );

@@ -6,6 +6,7 @@ import { SiMdbook } from "react-icons/si";
 import { LiaWpforms } from "react-icons/lia";
 import { GiLovers } from "react-icons/gi";
 import { IoDownloadOutline } from "react-icons/io5";
+import { FaListCheck } from "react-icons/fa6";
 import * as XLSX from "xlsx";
 import { useRecaudo } from "../../../contexts/RecaudoContext"; // Asegúrate de importar el contexto correcto
 
@@ -126,6 +127,21 @@ const LayoutTesoreria = () => {
         </div>
 
         <div className="layout-academico-container-header">
+
+        <div className="link-recaudo">
+            <FaListCheck className="icon-academico" />
+            <NavLink
+              to="lista_facturas"
+              className={({ isActive }) =>
+                isActive
+                  ? "sidebar-link-academico active"
+                  : "sidebar-link-academico"
+              }
+            >
+              <span>Lista de facturas</span>
+            </NavLink>
+          </div>
+
           <div className="link-academico">
             <IoDownloadOutline
               onClick={handleDownloadExcel}

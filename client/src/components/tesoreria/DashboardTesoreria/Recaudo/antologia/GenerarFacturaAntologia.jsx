@@ -16,8 +16,10 @@ import {
 } from "docx";
 import { ImageRun } from "docx";
 
-const GenerarFactura = ({ factura, estudiante, setEstudiantedata }) => {
+const GenerarFacturaAntologia = ({ factura, estudiante, setEstudiantedata }) => {
   const fechaCompra = factura?.fechaCompra || "N/A";
+
+ 
 
   const fechaFormateada =
     fechaCompra !== "N/A"
@@ -157,7 +159,7 @@ const GenerarFactura = ({ factura, estudiante, setEstudiantedata }) => {
                     size: 20,
                   }),
                   new TextRun({
-                    text: estudiante?.estudianteId?.nombre || "N/A", // Este texto no estará en negrita
+                    text: estudiante?.nombre || "N/A", // Este texto no estará en negrita
                     size: 20,
                   }),
                 ],
@@ -172,7 +174,7 @@ const GenerarFactura = ({ factura, estudiante, setEstudiantedata }) => {
                     size: 20,
                   }),
                   new TextRun({
-                    text: estudiante?.estudianteId?.documentoIdentidad || "N/A", // Este texto no estará en negrita
+                    text: estudiante?.documentoIdentidad || "N/A", // Este texto no estará en negrita
                     size: 18,
                   }),
                 ],
@@ -187,7 +189,7 @@ const GenerarFactura = ({ factura, estudiante, setEstudiantedata }) => {
                     size: 20,
                   }),
                   new TextRun({
-                    text: estudiante?.estudianteId?.grado || "N/A", // Este texto no estará en negrita
+                    text: estudiante.grado || "N/A", // Este texto no estará en negrita
                     size: 18,
                   }),
                 ],
@@ -267,20 +269,11 @@ const GenerarFactura = ({ factura, estudiante, setEstudiantedata }) => {
                               new Paragraph({
                                 children: [
                                   new TextRun({
-                                    text: `${clase.nombreClase}: - `,
+                                    text: `${clase.nombreClase} `,
                                     bold: true, // Puedes quitarlo si no quieres negrita
                                     size: 20,
                                   }),
-                                  new TextRun({
-                                    text: clase.dia.toLowerCase(), // Convertir a minúsculas
-                                    color: "FF0000", // Rojo
-                                    size: 20,
-                                  }),
-                                  new TextRun({
-                                    text: ` ${clase.hora}`, // Mantener el espacio antes de la hora
-                                    color: "FF0000", // Rojo
-                                    size: 20,
-                                  }),
+                                  
                                 ],
                               }),
                             ],
@@ -409,7 +402,7 @@ const GenerarFactura = ({ factura, estudiante, setEstudiantedata }) => {
       const blob = await Packer.toBlob(doc);
       saveAs(
         blob,
-        `Factura_${estudiante?.estudianteId?.nombre || "SinNombre"}.docx`,
+        `Factura_${estudiante.nombre || "SinNombre"}.docx`,
         {
           type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
         }
@@ -422,4 +415,4 @@ const GenerarFactura = ({ factura, estudiante, setEstudiantedata }) => {
   return <button onClick={handleDownload}>Descargar Factura</button>;
 };
 
-export default GenerarFactura;
+export default GenerarFacturaAntologia;

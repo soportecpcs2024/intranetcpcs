@@ -25,13 +25,17 @@ exports.crearFactura = async (req, res) => {
       return res.status(404).json({ message: "Algunas clases no fueron encontradas" });
     }
 
-    const clasesDetalle = clasesEncontradas.map(clase => ({
-      claseId: clase._id,
-      nombreClase: clase.nombre,
-      costo: clase.costoDescuento ?? clase.costo, // Usa costoDescuento si existe, sino costo
-      dia: clase.dia,
-      hora: clase.hora,
-    }));
+    const clasesDetalle = clases.map((clase) => {
+      const claseEncontrada = clasesEncontradas.find(c => c._id.toString() === clase.claseId);
+      return {
+        claseId: clase.claseId,
+        nombreClase: claseEncontrada.nombre,
+        costo: clase.costo, // Tomar el costo enviado desde el frontend
+        dia: claseEncontrada.dia,
+        hora: claseEncontrada.hora,
+      };
+    });
+    
     
     const total = clasesDetalle.reduce((sum, clase) => sum + clase.costo, 0);
     
