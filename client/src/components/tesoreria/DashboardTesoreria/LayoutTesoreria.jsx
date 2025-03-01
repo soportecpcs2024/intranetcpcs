@@ -31,7 +31,7 @@ const LayoutTesoreria = () => {
         if (!groupedByClase[clase.nombreClase]) {
           groupedByClase[clase.nombreClase] = [];
         }
-        
+
         // Agregar la factura a la clase correspondiente
         groupedByClase[clase.nombreClase].push({
           "ID Factura": factura._id,
@@ -69,8 +69,14 @@ const LayoutTesoreria = () => {
     <div className="layout-academico-container">
       <header className="layout-academico-container-division">
         <div className="layout-academico-container-header">
-          <div className="link-recaudo">
-            <SiGoogleclassroom className="icon-academico" />
+         
+ 
+
+ 
+
+
+
+          <div className="link-academico">
             <NavLink
               to="recaudo"
               className={({ isActive }) =>
@@ -79,12 +85,15 @@ const LayoutTesoreria = () => {
                   : "sidebar-link-academico"
               }
             >
-              <span>Extra Clases</span>
+              <div className="link-recaudo">
+                <SiGoogleclassroom className="icon-academico" />
+                <span>Extra Clases</span>
+              </div>
             </NavLink>
           </div>
 
-          <div className="link-recaudo">
-            <SiMdbook className="icon-academico" />
+
+          <div className="link-academico">
             <NavLink
               to="antologia"
               className={({ isActive }) =>
@@ -93,12 +102,15 @@ const LayoutTesoreria = () => {
                   : "sidebar-link-academico"
               }
             >
-              <span>Antología</span>
+              <div className="link-recaudo">
+                <SiMdbook className="icon-academico" />
+                <span>Antología</span>
+              </div>
             </NavLink>
           </div>
 
-          <div className="link-recaudo">
-            <GiLovers className="icon-academico" />
+
+          <div className="link-academico">
             <NavLink
               to="escuela_padres"
               className={({ isActive }) =>
@@ -107,12 +119,15 @@ const LayoutTesoreria = () => {
                   : "sidebar-link-academico"
               }
             >
-              <span>Escuela de Padres</span>
+              <div className="link-recaudo">
+                <GiLovers className="icon-academico" />
+                <span>Escuela de Padres</span>
+              </div>
             </NavLink>
           </div>
 
+          
           <div className="link-academico">
-            <LiaWpforms className="icon-academico" />
             <NavLink
               to="formulario_inscripcion"
               className={({ isActive }) =>
@@ -121,15 +136,19 @@ const LayoutTesoreria = () => {
                   : "sidebar-link-academico"
               }
             >
-              <span>Formularios</span>
+              <div className="link-recaudo">
+                <LiaWpforms className="icon-academico" />
+                <span>Formularios</span>
+              </div>
             </NavLink>
           </div>
+
+
         </div>
 
+       
         <div className="layout-academico-container-header">
-
-        <div className="link-recaudo">
-            <FaListCheck className="icon-academico" />
+          <div className="link-recaudo">
             <NavLink
               to="lista_facturas"
               className={({ isActive }) =>
@@ -138,7 +157,10 @@ const LayoutTesoreria = () => {
                   : "sidebar-link-academico"
               }
             >
-              <span>Lista de facturas</span>
+              <div className="link-recaudo">
+                <FaListCheck className="icon-academico" />
+                <span>Lista de facturas</span>
+              </div>
             </NavLink>
           </div>
 

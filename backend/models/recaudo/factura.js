@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const facturaSchema = new mongoose.Schema({
+  numero_factura: { type: String, required: true, unique: true, trim: true },
   estudianteId: { 
     type: mongoose.Schema.Types.ObjectId, 
     ref: 'EstudianteRecaudo', 
@@ -14,7 +15,6 @@ const facturaSchema = new mongoose.Schema({
     },
     nombreClase: { type: String, required: true, trim: true },
     costo: { type: Number, required: true, min: 0 },
-     
     dia: { 
       type: String, 
       trim: true,
@@ -33,4 +33,5 @@ const facturaSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('Factura', facturaSchema);
+const Factura = mongoose.model('Factura', facturaSchema);
+module.exports = Factura;

@@ -104,7 +104,7 @@ const GenerarFacturaAntologia = ({ factura, estudiante, setEstudiantedata }) => 
                                 font: "Arial",
                               }),
                               new TextRun({
-                                text: `${factura?._id || "N/A"}`,
+                                text: `${factura?.numero_factura || "N/A"}`,
                                 size: 18,
                                 font: "Arial",
                               }),
@@ -314,7 +314,7 @@ const GenerarFacturaAntologia = ({ factura, estudiante, setEstudiantedata }) => 
                 spacing: { before: 200, after: 10 },
                 children: [
                   new TextRun({
-                    text: "Tipo de pago: ",
+                    text: "Medio de pago: ",
                     bold: true, // Solo este texto estará en negrita
                     size: 20,
                   }),

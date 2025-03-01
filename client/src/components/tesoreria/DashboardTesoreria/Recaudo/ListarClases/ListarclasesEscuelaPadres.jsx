@@ -25,7 +25,7 @@ const ListaClasesEscuelaPadres = ({
             
 
             return (
-              <div key={clase._id} className="clase-item">
+              <div key={clase._id} className="clase-item antologia">
                
                 <div className="clase-item-content-btn">
                   {/* Botón para seleccionar costo normal */}

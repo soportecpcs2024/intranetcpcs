@@ -2,13 +2,37 @@ const Factura = require('../../models/recaudo/factura');
 const Estudiante = require('../../models/recaudo/EstudianteRecaudo');
 const Clase = require('../../models/recaudo/ClaseExtracurricular');
 
+
+
+// Función para generar un número de factura único con concurrencia controlada
+const generarNumeroFactura = async () => {
+  const ultimaFactura = await Factura.findOne().sort({ numero_factura: -1 });
+
+  let ultimoNumero = 0;
+  if (ultimaFactura && ultimaFactura.numero_factura) {
+    const partes = ultimaFactura.numero_factura.split('-');
+    if (partes.length === 2) {
+      ultimoNumero = parseInt(partes[1], 10) || 0;
+    }
+  }
+
+  return `FAC-${ultimoNumero + 1}`;
+};
+
+
+
+// Función para validar el tipo de pago
+const validarTipoPago = (tipoPago) => {
+  return ['Efectivo', 'Datáfono', 'Nómina'].includes(tipoPago);
+};
+
 // Crear factura
 exports.crearFactura = async (req, res) => {
   try {
     const { estudianteId, clases, tipoPago } = req.body;
 
-    if (!['Efectivo', 'Datáfono','Nómina'].includes(tipoPago)) {
-      return res.status(400).json({ message: "El tipo de pago debe ser 'Efectivo' o 'Transferencia'." });
+    if (!validarTipoPago(tipoPago)) {
+      return res.status(400).json({ message: "El tipo de pago debe ser 'Efectivo', 'Datáfono' o 'Nómina'." });
     }
 
     const estudiante = await Estudiante.findById(estudianteId);
@@ -30,22 +54,20 @@ exports.crearFactura = async (req, res) => {
       return {
         claseId: clase.claseId,
         nombreClase: claseEncontrada.nombre,
-        costo: clase.costo, // Tomar el costo enviado desde el frontend
+        costo: clase.costo,
         dia: claseEncontrada.dia,
         hora: claseEncontrada.hora,
       };
     });
-    
-    
+
     const total = clasesDetalle.reduce((sum, clase) => sum + clase.costo, 0);
-    
+    const numero_factura = await generarNumeroFactura();
 
-     
-
-    const factura = new Factura({ estudianteId, clases: clasesDetalle, total, tipoPago });
+    const factura = new Factura({ numero_factura, estudianteId, clases: clasesDetalle, total, tipoPago });
     await factura.save();
     res.status(201).json(factura);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -59,6 +81,7 @@ exports.obtenerFacturas = async (req, res) => {
 
     res.json(facturas);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -74,6 +97,7 @@ exports.obtenerFacturaPorId = async (req, res) => {
 
     res.json(factura);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -83,8 +107,8 @@ exports.actualizarFactura = async (req, res) => {
   try {
     const { estudianteId, clases, tipoPago } = req.body;
 
-    if (!['Efectivo', 'Datáfono','Nómina'].includes(tipoPago)) {
-      return res.status(400).json({ message: "El tipo de pago debe ser 'Efectivo' o 'Transferencia'." });
+    if (!validarTipoPago(tipoPago)) {
+      return res.status(400).json({ message: "El tipo de pago debe ser 'Efectivo', 'Datáfono' o 'Nómina'." });
     }
 
     const factura = await Factura.findById(req.params.id);
@@ -100,13 +124,16 @@ exports.actualizarFactura = async (req, res) => {
       return res.status(404).json({ message: "Algunas clases no fueron encontradas" });
     }
 
-    const clasesDetalle = clasesEncontradas.map(clase => ({
-      claseId: clase._id,
-      nombreClase: clase.nombre,
-      costo: clase.costo,
-      dia: clase.dia,
-      hora: clase.hora,
-    }));
+    const clasesDetalle = clases.map((clase) => {
+      const claseEncontrada = clasesEncontradas.find(c => c._id.toString() === clase.claseId);
+      return {
+        claseId: clase.claseId,
+        nombreClase: claseEncontrada.nombre,
+        costo: clase.costo,
+        dia: claseEncontrada.dia,
+        hora: claseEncontrada.hora,
+      };
+    });
 
     const total = clasesDetalle.reduce((sum, clase) => sum + clase.costo, 0);
 
@@ -118,9 +145,13 @@ exports.actualizarFactura = async (req, res) => {
 
     res.json(facturaActualizada);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: error.message });
   }
 };
+
+ 
+
 
 // Eliminar factura
 exports.eliminarFactura = async (req, res) => {
@@ -130,6 +161,7 @@ exports.eliminarFactura = async (req, res) => {
 
     res.json({ message: 'Factura eliminada exitosamente' });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: error.message });
   }
 };

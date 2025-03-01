@@ -1,9 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRecaudo } from "../../../../../contexts/RecaudoContext";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
+ 
 import "./ListarFacturas.css";
 
 const ListarFacturas = () => {
-  const { facturas, eliminarFactura } = useRecaudo();
+  const { facturas, eliminarFactura, fetchEstudianteById } = useRecaudo();
+  const [facturasConEstudiante, setFacturasConEstudiante] = useState([]);
+
+  useEffect(() => {
+    const cargarNombresEstudiantes = async () => {
+      const nuevasFacturas = await Promise.all(
+        facturas.map(async (factura) => {
+          if (factura.estudianteId) {
+            const estudiante = await fetchEstudianteById(factura.estudianteId);
+            return {
+              ...factura,
+              nombreEstudiante: estudiante ? estudiante.nombre : "Desconocido",
+            };
+          }
+          return { ...factura, nombreEstudiante: "N/A" };
+        })
+      );
+      setFacturasConEstudiante(nuevasFacturas);
+    };
+
+    if (facturas.length > 0) {
+      cargarNombresEstudiantes();
+    }
+  }, [facturas]);
 
   return (
     <div className="facturas-container">
@@ -13,31 +38,27 @@ const ListarFacturas = () => {
           <tr>
             <th>ID</th>
             <th>Estudiante</th>
-            <th>Clases</th>
-            <th>Tipo de Pago</th>
+            <th>Método de Pago</th>
+            <th>Fecha de compra</th>
             <th>Total</th>
             <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
-          {facturas.length > 0 ? (
-            facturas.map((factura) => (
+          {facturasConEstudiante.length > 0 ? (
+            facturasConEstudiante.map((factura) => (
               <tr key={factura._id}>
-                <td>{factura._id}</td>
-                <td>{factura.estudiante?.nombre || "N/A"}</td>
-                <td>
-                  {factura.clases
-                    .map((clase) => clase.nombre || "N/A")
-                    .join(", ")}
-                </td>
+                <td>{factura.numero_factura}</td>
+                <td>{factura.nombreEstudiante}</td>
                 <td>{factura.tipoPago}</td>
+                <td>{factura.fechaCompra}</td>
                 <td>${factura.total}</td>
                 <td>
                   <button
                     className="delete-btn"
                     onClick={() => eliminarFactura(factura._id)}
                   >
-                    Eliminar
+                    <FaTrashAlt />
                   </button>
                 </td>
               </tr>

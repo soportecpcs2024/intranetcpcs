@@ -64,17 +64,23 @@ export const RecaudoProvider = ({ children }) => {
   };
 
   const eliminarFactura = async (facturaId) => {
+    const confirmacion = window.confirm("¿Seguro que deseas eliminar esta factura?");
+    if (!confirmacion) return;
+  
+    // Eliminación Optimista: Removemos la factura antes de hacer la petición
+    const facturasPrevias = [...facturas];
+    setFacturas(facturas.filter((factura) => factura._id !== facturaId));
+  
     try {
       await axios.delete(`${apiBaseUrl}/api/recaudo/facturas/${facturaId}`);
-      setFacturas((prevFacturas) =>
-        prevFacturas.filter((factura) => factura._id !== facturaId)
-      );
       alert("Factura eliminada correctamente");
     } catch (error) {
       console.error("Error eliminando factura:", error);
       alert("No se pudo eliminar la factura");
+      setFacturas(facturasPrevias); // Restauramos las facturas en caso de error
     }
   };
+  
   
 
   // ✅ Ejecutar carga de datos en el montaje del componente
