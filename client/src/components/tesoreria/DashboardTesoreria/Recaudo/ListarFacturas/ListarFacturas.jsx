@@ -1,12 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useRecaudo } from "../../../../../contexts/RecaudoContext";
-import { FaEdit, FaTrashAlt } from "react-icons/fa";
- 
+import { FaTrashAlt } from "react-icons/fa";
+import { format } from "date-fns";
+
 import "./ListarFacturas.css";
 
 const ListarFacturas = () => {
-  const { facturas, eliminarFactura, fetchEstudianteById } = useRecaudo();
+  const { facturas, eliminarFactura, fetchEstudianteById, fetchFacturas } =
+    useRecaudo();
   const [facturasConEstudiante, setFacturasConEstudiante] = useState([]);
+
+  useEffect(() => {
+    const cargarFacturas = async () => {
+      await fetchFacturas(); // Cargar facturas desde la base de datos
+    };
+
+    cargarFacturas();
+  }, []); // Se ejecuta solo cuando el componente se monta
 
   useEffect(() => {
     const cargarNombresEstudiantes = async () => {
@@ -28,7 +38,7 @@ const ListarFacturas = () => {
     if (facturas.length > 0) {
       cargarNombresEstudiantes();
     }
-  }, [facturas]);
+  }, [facturas]); // Se ejecuta cuando las facturas cambian
 
   return (
     <div className="facturas-container">
@@ -49,14 +59,29 @@ const ListarFacturas = () => {
             facturasConEstudiante.map((factura) => (
               <tr key={factura._id}>
                 <td>{factura.numero_factura}</td>
-                <td>{factura.nombreEstudiante}</td>
+                <td>{factura.estudianteId.nombre}</td>
                 <td>{factura.tipoPago}</td>
-                <td>{factura.fechaCompra}</td>
-                <td>${factura.total}</td>
+                <td>
+                  {factura.fechaCompra
+                    ? format(new Date(factura.fechaCompra), "dd/MM/yyyy")
+                    : "Fecha no disponible"}
+                </td>
+                <td>
+                  {factura.total
+                    ? new Intl.NumberFormat("es-CO", {
+                        style: "currency",
+                        currency: "COP",
+                      }).format(factura.total)
+                    : "$0"}
+                </td>
+
                 <td>
                   <button
                     className="delete-btn"
-                    onClick={() => eliminarFactura(factura._id)}
+                    onClick={() => {
+                      eliminarFactura(factura._id);
+                      fetchFacturas(); // Recargar después de eliminar
+                    }}
                   >
                     <FaTrashAlt />
                   </button>

@@ -1,5 +1,5 @@
 .facturas-container {
-    width: 100%;
+    width: 70%;
     padding: 10px;
     background: #f8f9fa;
     border-radius: 10px;
@@ -34,9 +34,10 @@
   }
   
   .delete-btn {
-    background: #bababa;
-    color: white;
+    background:none;
+    color: rgb(252, 1, 1);
     border: none;
+    font-size: 20px;
     padding: 6px 12px;
     cursor: pointer;
     border-radius: 5px;
@@ -45,5 +46,6 @@
   
   .delete-btn:hover {
     background: #c82333;
+    color: white;
   }
   
