@@ -43,6 +43,7 @@
     "react-pdf": "^9.1.0",
     "react-router-dom": "^6.23.1",
     "react-spinners": "^0.14.1",
+    "react-tooltip": "^5.28.0",
     "semantic-ui-css": "^2.5.0",
     "semantic-ui-react": "^2.1.5",
     "spinners-react": "^1.0.7",

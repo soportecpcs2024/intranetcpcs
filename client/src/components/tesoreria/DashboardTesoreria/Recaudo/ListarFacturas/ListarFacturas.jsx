@@ -6,18 +6,20 @@ import { format } from "date-fns";
 import "./ListarFacturas.css";
 
 const ListarFacturas = () => {
-  const { facturas, eliminarFactura, fetchEstudianteById, fetchFacturas } =
-    useRecaudo();
+  const { facturas, eliminarFactura, fetchEstudianteById, fetchFacturas } = useRecaudo();
   const [facturasConEstudiante, setFacturasConEstudiante] = useState([]);
+  const [reload, setReload] = useState(false); // Estado para forzar recarga
 
+  // Cargar facturas cuando se monta el componente o cuando `reload` cambia
   useEffect(() => {
     const cargarFacturas = async () => {
-      await fetchFacturas(); // Cargar facturas desde la base de datos
+      await fetchFacturas();
     };
 
     cargarFacturas();
-  }, []); // Se ejecuta solo cuando el componente se monta
+  }, [reload]); // Se ejecuta cuando cambia `reload`
 
+  // Cargar nombres de estudiantes cuando `facturas` cambia
   useEffect(() => {
     const cargarNombresEstudiantes = async () => {
       const nuevasFacturas = await Promise.all(
@@ -38,7 +40,7 @@ const ListarFacturas = () => {
     if (facturas.length > 0) {
       cargarNombresEstudiantes();
     }
-  }, [facturas]); // Se ejecuta cuando las facturas cambian
+  }, [facturas]); // Se ejecuta cuando `facturas` cambia
 
   return (
     <div className="facturas-container">
@@ -59,7 +61,7 @@ const ListarFacturas = () => {
             facturasConEstudiante.map((factura) => (
               <tr key={factura._id}>
                 <td>{factura.numero_factura}</td>
-                <td>{factura.estudianteId.nombre}</td>
+                <td>{factura.nombreEstudiante}</td>
                 <td>{factura.tipoPago}</td>
                 <td>
                   {factura.fechaCompra
@@ -74,13 +76,12 @@ const ListarFacturas = () => {
                       }).format(factura.total)
                     : "$0"}
                 </td>
-
                 <td>
                   <button
                     className="delete-btn"
-                    onClick={() => {
-                      eliminarFactura(factura._id);
-                      fetchFacturas(); // Recargar después de eliminar
+                    onClick={async () => {
+                      await eliminarFactura(factura._id);
+                      setReload((prev) => !prev); // Forzar recarga cambiando `reload`
                     }}
                   >
                     <FaTrashAlt />

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import LoginForm from "../../components/LoginForm";
 import RegisterForm from "../../components/RegisterForm";
-import Logo from "/logo.png"; // Ajusta la ruta según la ubicación real de logo.png en tu proyecto
+import Logo from "/LOGO_PNG_REDONDO.png"; // Ajusta la ruta según la ubicación real de logo.png en tu proyecto
 
 const Auth = () => {
   const [activeTab, setActiveTab] = useState("login");
