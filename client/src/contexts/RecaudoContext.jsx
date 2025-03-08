@@ -97,10 +97,21 @@ export const RecaudoProvider = ({ children }) => {
   }, [estudiantes, clases, facturas]);
 
   return (
-    <RecaudoContext.Provider value={{ estudiantes, clases, facturas, fetchEstudianteById, fetchClases, loading, crearFactura, eliminarFactura }}>
+    <RecaudoContext.Provider value={{
+      estudiantes,
+      clases,
+      facturas,
+      fetchEstudianteById,
+      fetchClases,
+      fetchFacturas,  // <-- Agregar esto aquí
+      loading,
+      crearFactura,
+      eliminarFactura
+    }}>
       {children}
     </RecaudoContext.Provider>
   );
+  
 };
 
 // Hook que usa el contexto

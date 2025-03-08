@@ -39,6 +39,7 @@ const LayoutTesoreria = () => {
           Documento: factura.estudianteId?.documentoIdentidad || "N/A",
           Grado: factura.estudianteId?.grado || "N/A",
           "Nombre Clase": clase.nombreClase,
+          "Cod Factura": clase.cod,
           Día: clase.dia,
           Hora: clase.hora,
           "Total Pagado": factura.total,

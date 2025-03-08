@@ -1,29 +1,25 @@
-const Factura = require('../../models/recaudo/factura');
-const Estudiante = require('../../models/recaudo/EstudianteRecaudo');
-const Clase = require('../../models/recaudo/ClaseExtracurricular');
-
-
+const Factura = require("../../models/recaudo/factura");
+const Estudiante = require("../../models/recaudo/EstudianteRecaudo");
+const Clase = require("../../models/recaudo/ClaseExtracurricular");
 
 // Función para generar un número de factura único con concurrencia controlada
 const generarNumeroFactura = async () => {
-  const ultimaFactura = await Factura.findOne().sort({ numero_factura: -1 });
+  const ultimaFactura = await Factura.findOne().sort({ _id: -1 });
 
   let ultimoNumero = 0;
   if (ultimaFactura && ultimaFactura.numero_factura) {
-    const partes = ultimaFactura.numero_factura.split('-');
-    if (partes.length === 2) {
-      ultimoNumero = parseInt(partes[1], 10) || 0;
+    const match = ultimaFactura.numero_factura.match(/FAC-(\d+)/);
+    if (match) {
+      ultimoNumero = parseInt(match[1], 10) || 0;
     }
   }
 
   return `FAC-${ultimoNumero + 1}`;
 };
 
-
-
 // Función para validar el tipo de pago
 const validarTipoPago = (tipoPago) => {
-  return ['Efectivo', 'Datáfono', 'Nómina'].includes(tipoPago);
+  return ["Efectivo", "Datáfono", "Nómina"].includes(tipoPago);
 };
 
 // Crear factura
@@ -32,28 +28,44 @@ exports.crearFactura = async (req, res) => {
     const { estudianteId, clases, tipoPago } = req.body;
 
     if (!validarTipoPago(tipoPago)) {
-      return res.status(400).json({ message: "El tipo de pago debe ser 'Efectivo', 'Datáfono' o 'Nómina'." });
+      return res
+        .status(400)
+        .json({
+          message:
+            "El tipo de pago debe ser 'Efectivo', 'Datáfono' o 'Nómina'.",
+        });
     }
 
     const estudiante = await Estudiante.findById(estudianteId);
-    if (!estudiante) return res.status(404).json({ message: 'Estudiante no encontrado' });
+    if (!estudiante)
+      return res.status(404).json({ message: "Estudiante no encontrado" });
 
     if (!Array.isArray(clases) || clases.length === 0) {
-      return res.status(400).json({ message: "El campo 'clases' debe ser un array con al menos una clase." });
+      return res
+        .status(400)
+        .json({
+          message:
+            "El campo 'clases' debe ser un array con al menos una clase.",
+        });
     }
 
-    const clasesIds = clases.map(c => c.claseId);
+    const clasesIds = clases.map((c) => c.claseId);
     const clasesEncontradas = await Clase.find({ _id: { $in: clasesIds } });
 
     if (clasesEncontradas.length !== clases.length) {
-      return res.status(404).json({ message: "Algunas clases no fueron encontradas" });
+      return res
+        .status(404)
+        .json({ message: "Algunas clases no fueron encontradas" });
     }
 
     const clasesDetalle = clases.map((clase) => {
-      const claseEncontrada = clasesEncontradas.find(c => c._id.toString() === clase.claseId);
+      const claseEncontrada = clasesEncontradas.find(
+        (c) => c._id.toString() === clase.claseId
+      );
       return {
         claseId: clase.claseId,
         nombreClase: claseEncontrada.nombre,
+        cod: claseEncontrada.cod,
         costo: clase.costo,
         dia: claseEncontrada.dia,
         hora: claseEncontrada.hora,
@@ -63,7 +75,13 @@ exports.crearFactura = async (req, res) => {
     const total = clasesDetalle.reduce((sum, clase) => sum + clase.costo, 0);
     const numero_factura = await generarNumeroFactura();
 
-    const factura = new Factura({ numero_factura, estudianteId, clases: clasesDetalle, total, tipoPago });
+    const factura = new Factura({
+      numero_factura,
+      estudianteId,
+      clases: clasesDetalle,
+      total,
+      tipoPago,
+    });
     await factura.save();
     res.status(201).json(factura);
   } catch (error) {
@@ -76,8 +94,8 @@ exports.crearFactura = async (req, res) => {
 exports.obtenerFacturas = async (req, res) => {
   try {
     const facturas = await Factura.find()
-      .populate('estudianteId', 'nombre documentoIdentidad grado')
-      .populate('clases.claseId', 'nombre dia hora');
+      .populate("estudianteId", "nombre documentoIdentidad grado")
+      .populate("clases.claseId", "nombre dia hora");
 
     res.json(facturas);
   } catch (error) {
@@ -90,10 +108,11 @@ exports.obtenerFacturas = async (req, res) => {
 exports.obtenerFacturaPorId = async (req, res) => {
   try {
     const factura = await Factura.findById(req.params.id)
-      .populate('estudianteId', 'nombre documentoIdentidad grado')
-      .populate('clases.claseId', 'nombre dia hora');
+      .populate("estudianteId", "nombre documentoIdentidad grado")
+      .populate("clases.claseId", "nombre dia hora");
 
-    if (!factura) return res.status(404).json({ message: 'Factura no encontrada' });
+    if (!factura)
+      return res.status(404).json({ message: "Factura no encontrada" });
 
     res.json(factura);
   } catch (error) {
@@ -108,27 +127,39 @@ exports.actualizarFactura = async (req, res) => {
     const { estudianteId, clases, tipoPago } = req.body;
 
     if (!validarTipoPago(tipoPago)) {
-      return res.status(400).json({ message: "El tipo de pago debe ser 'Efectivo', 'Datáfono' o 'Nómina'." });
+      return res
+        .status(400)
+        .json({
+          message:
+            "El tipo de pago debe ser 'Efectivo', 'Datáfono' o 'Nómina'.",
+        });
     }
 
     const factura = await Factura.findById(req.params.id);
-    if (!factura) return res.status(404).json({ message: 'Factura no encontrada' });
+    if (!factura)
+      return res.status(404).json({ message: "Factura no encontrada" });
 
     const estudiante = await Estudiante.findById(estudianteId);
-    if (!estudiante) return res.status(404).json({ message: 'Estudiante no encontrado' });
+    if (!estudiante)
+      return res.status(404).json({ message: "Estudiante no encontrado" });
 
-    const clasesIds = clases.map(c => c.claseId);
+    const clasesIds = clases.map((c) => c.claseId);
     const clasesEncontradas = await Clase.find({ _id: { $in: clasesIds } });
 
     if (clasesEncontradas.length !== clases.length) {
-      return res.status(404).json({ message: "Algunas clases no fueron encontradas" });
+      return res
+        .status(404)
+        .json({ message: "Algunas clases no fueron encontradas" });
     }
 
     const clasesDetalle = clases.map((clase) => {
-      const claseEncontrada = clasesEncontradas.find(c => c._id.toString() === clase.claseId);
+      const claseEncontrada = clasesEncontradas.find(
+        (c) => c._id.toString() === clase.claseId
+      );
       return {
         claseId: clase.claseId,
         nombreClase: claseEncontrada.nombre,
+        cod: claseEncontrada.cod,
         costo: clase.costo,
         dia: claseEncontrada.dia,
         hora: claseEncontrada.hora,
@@ -150,16 +181,14 @@ exports.actualizarFactura = async (req, res) => {
   }
 };
 
- 
-
-
 // Eliminar factura
 exports.eliminarFactura = async (req, res) => {
   try {
     const facturaEliminada = await Factura.findByIdAndDelete(req.params.id);
-    if (!facturaEliminada) return res.status(404).json({ message: 'Factura no encontrada' });
+    if (!facturaEliminada)
+      return res.status(404).json({ message: "Factura no encontrada" });
 
-    res.json({ message: 'Factura eliminada exitosamente' });
+    res.json({ message: "Factura eliminada exitosamente" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: error.message });

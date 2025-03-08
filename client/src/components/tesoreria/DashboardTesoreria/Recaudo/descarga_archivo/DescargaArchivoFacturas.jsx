@@ -22,6 +22,7 @@ const DescargaArchivoFacturaEspecifica = () => {
     // Organizar los datos de la factura seleccionada
     const data = [
       ["ID Factura", factura._id["$oid"]],
+      ["Cod Factura", factura.cod["$oid"]],
       ["Estudiante ID", factura.estudianteId["$oid"]],
       ["Nombre Estudiante", factura.estudianteId.nombre],
       ["Documento Identidad", factura.estudianteId.documentoIdentidad],

@@ -15,6 +15,7 @@ const facturaSchema = new mongoose.Schema({
     },
     nombreClase: { type: String, required: true, trim: true },
     costo: { type: Number, required: true, min: 0 },
+    cod: { type: Number, required: true},
     dia: { 
       type: String, 
       trim: true,

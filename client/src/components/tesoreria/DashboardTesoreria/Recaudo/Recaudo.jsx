@@ -61,6 +61,7 @@ const Recaudo = () => {
       estudianteId: estudiante,
       clases: selectedClases.map((clase) => ({
         _id: clase._id,
+        cod: clase.cod,
         nombre: clase.nombre,
         costo: clase.costoAplicado ?? clase.costo,
         dia: clase.dia,

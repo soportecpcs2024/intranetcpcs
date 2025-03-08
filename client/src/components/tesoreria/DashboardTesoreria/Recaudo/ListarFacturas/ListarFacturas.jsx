@@ -41,7 +41,7 @@ const ListarFacturas = () => {
       cargarNombresEstudiantes();
     }
   }, [facturas]); // Se ejecuta cuando `facturas` cambia
-
+ 
   return (
     <div className="facturas-container">
       <h2>Listado de Facturas</h2>
@@ -61,7 +61,7 @@ const ListarFacturas = () => {
             facturasConEstudiante.map((factura) => (
               <tr key={factura._id}>
                 <td>{factura.numero_factura}</td>
-                <td>{factura.nombreEstudiante}</td>
+                <td>{factura.estudianteId.nombre}</td>
                 <td>{factura.tipoPago}</td>
                 <td>
                   {factura.fechaCompra
@@ -79,6 +79,7 @@ const ListarFacturas = () => {
                 <td>
                   <button
                     className="delete-btn"
+                    title="Eliminar factura"
                     onClick={async () => {
                       await eliminarFactura(factura._id);
                       setReload((prev) => !prev); // Forzar recarga cambiando `reload`
