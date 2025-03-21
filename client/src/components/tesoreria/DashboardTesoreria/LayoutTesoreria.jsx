@@ -9,6 +9,8 @@ import { IoDownloadOutline } from "react-icons/io5";
 import { FaListCheck } from "react-icons/fa6";
 import * as XLSX from "xlsx";
 import { useRecaudo } from "../../../contexts/RecaudoContext"; // Asegúrate de importar el contexto correcto
+import { MdLunchDining } from "react-icons/md";
+import { GiMeal } from "react-icons/gi";
 
 import ".//LayoutTesoreria.css";
 
@@ -140,6 +142,23 @@ const LayoutTesoreria = () => {
               <div className="link-recaudo">
                 <LiaWpforms className="icon-academico" />
                 <span>Formularios</span>
+              </div>
+            </NavLink>
+          </div>
+
+
+          <div className="link-academico">
+            <NavLink
+              to="almuerzos"
+              className={({ isActive }) =>
+                isActive
+                  ? "sidebar-link-academico active"
+                  : "sidebar-link-academico"
+              }
+            >
+              <div className="link-recaudo">
+                <GiMeal className="icon-academico" />
+                <span>Almuerzos</span>
               </div>
             </NavLink>
           </div>

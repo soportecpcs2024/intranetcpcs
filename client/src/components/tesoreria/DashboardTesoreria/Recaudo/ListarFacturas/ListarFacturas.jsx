@@ -6,18 +6,21 @@ import { format } from "date-fns";
 import "./ListarFacturas.css";
 
 const ListarFacturas = () => {
-  const { facturas, eliminarFactura, fetchEstudianteById, fetchFacturas } = useRecaudo();
+  const { facturas, eliminarFactura, fetchEstudianteById, fetchFacturas, estudiantes, fetchEstudiantes } = useRecaudo();
   const [facturasConEstudiante, setFacturasConEstudiante] = useState([]);
   const [reload, setReload] = useState(false); // Estado para forzar recarga
-
+  
+  console.log(facturas);
+  
   // Cargar facturas cuando se monta el componente o cuando `reload` cambia
   useEffect(() => {
-    const cargarFacturas = async () => {
-      await fetchFacturas();
-    };
-
-    cargarFacturas();
+    fetchFacturas();
+    fetchEstudiantes();
   }, [reload]); // Se ejecuta cuando cambia `reload`
+  
+ 
+
+  console.log("Estudiantes :", estudiantes);
 
   // Cargar nombres de estudiantes cuando `facturas` cambia
   useEffect(() => {
@@ -61,7 +64,7 @@ const ListarFacturas = () => {
             facturasConEstudiante.map((factura) => (
               <tr key={factura._id}>
                 <td>{factura.numero_factura}</td>
-                <td>{factura.estudianteId.nombre}</td>
+                <td>{factura.nombreEstudiante}</td>
                 <td>{factura.tipoPago}</td>
                 <td>
                   {factura.fechaCompra

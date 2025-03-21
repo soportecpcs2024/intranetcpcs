@@ -1,0 +1,191 @@
+.container-almuerzo{
+   
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    ;
+}
+
+.title-almuerzo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 50px;
+}
+
+.lista-almuerzos {
+    max-width: 500px;
+    margin: auto;
+    padding: 16px;
+    background: #1e293b; /* Azul oscuro */
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    
+  }
+  
+  .almuerzo-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #334155;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .almuerzo-item:hover {
+    background: #475569;
+    transform: scale(1.02);
+  }
+  
+  .icono-almuerzo {
+    font-size: 1.8rem;
+    color: #ef4444; /* Rojo */
+  }
+  
+  .almuerzo-info {
+    flex: 1;
+    margin-left: 10px;
+    color: white;
+    font-size: 1rem;
+  }
+  
+  .almuerzo-conteo {
+    width: 60px;
+    padding: 6px;
+    text-align: center;
+    border: none;
+    border-radius: 6px;
+    background: #0f172a;
+    color: white;
+  }
+  
+  .almuerzo-conteo:focus {
+    outline: 2px solid #22c55e; /* Verde */
+  }
+  
+  .texto-vacio {
+    text-align: center;
+    color: #94a3b8;
+    font-size: 1rem;
+  }
+  
+  .boton-guardar {
+    width: 100%;
+    
+    background: #16a34a;
+    color: white;
+    font-weight: bold;
+    padding: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    border: none;
+    
+  }
+  
+  .boton-guardar:hover {
+    background: #15803d;
+  }
+  
+  @media (max-width: 480px) {
+    .lista-almuerzos {
+      padding: 12px;
+    }
+  
+    .almuerzo-item {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .almuerzo-conteo {
+      width: 100%;
+      margin-top: 8px;
+    }
+  }
+  
+
+  .buscador-estudiante {
+    max-width: 500px;
+    margin: auto;
+    padding: 16px;
+    background: #1e293b; /* Azul oscuro */
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.buscador-input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background: #0f172a;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.3s ease-in-out;
+}
+
+.buscador-input:focus {
+    border: 2px solid #22c55e; /* Verde */
+}
+
+.lista-estudiantes {
+    max-height: 200px;
+    overflow-y: auto;
+    background: #334155;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.estudiante-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: #475569;
+    border-radius: 6px;
+    color: white;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.estudiante-item:hover {
+    background: #64748b;
+    transform: scale(1.02);
+}
+
+.icono-estudiante {
+    font-size: 1.5rem;
+    color: #ef4444; /* Rojo */
+    margin-right: 10px;
+}
+
+.texto-vacio {
+    text-align: center;
+    color: #94a3b8;
+    font-size: 1rem;
+}
+
+
+.almuerzo_btn{
+    
+    display: block;
+    justify-content: space-between;
+}
+
+.almuerzo_btn-p{
+    color: white;
+}
+
+.almuerzo-totales{
+    display: flex;
+    justify-content: space-between;
+}

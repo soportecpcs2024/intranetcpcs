@@ -11,42 +11,55 @@ const LayoutInfoAcademicos = () => {
     <div className="layout-academico-container">
       <header className="layout-academico-container-header">
         <div className="link-academico">
-          <PiCertificateDuotone className="icon-academico" />
           <NavLink
             to="certificado-estudios"
             className={({ isActive }) =>
-              isActive ? "sidebar-link-academico active" : "sidebar-link-academico"
+              isActive
+                ? "sidebar-link-academico active"
+                : "sidebar-link-academico"
             }
           >
-            <span>Certificado de Estudios</span>
+            <div className="link-academico-b">
+              <PiCertificateDuotone className="icon-academico" />
+              <span>Certificados</span>
+            </div>
           </NavLink>
         </div>
 
         <div className="link-academico">
-          <GrNotes className="icon-academico" />
           <NavLink
             to="acumulados-notas"
             className={({ isActive }) =>
-              isActive ? "sidebar-link-academico active" : "sidebar-link-academico"
+              isActive
+                ? "sidebar-link-academico active"
+                : "sidebar-link-academico"
             }
           >
-            <span>Acumulados de Notas Final</span>
+            <div className="link-academico-b">
+              <GrNotes className="icon-academico" />
+              <span>Constancias</span>
+            </div>
           </NavLink>
         </div>
 
         <div className="link-academico">
-          <CiDiscount1 className="icon-academico" />
           <NavLink
             to="estadistico"
             className={({ isActive }) =>
-              isActive ? "sidebar-link-academico active" : "sidebar-link-academico"
+              isActive
+                ? "sidebar-link-academico active"
+                : "sidebar-link-academico"
             }
           >
-            <span>Estadístico</span>
+            <div className="link-academico-b">
+              <CiDiscount1 className="icon-academico" />
+
+              <span>Estadístico</span>
+            </div>
           </NavLink>
         </div>
       </header>
-      
+
       <main className="content-academico">
         <Outlet />
       </main>

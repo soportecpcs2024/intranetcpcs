@@ -27,6 +27,17 @@
   transition: background-color 0.3s ease;
 }
 
+.link-academico-b{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
 /* Iconos de los enlaces del sidebar */
 .icon-academico {
   font-size: 35px; /* Tamaño del icono */

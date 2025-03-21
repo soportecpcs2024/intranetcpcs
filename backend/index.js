@@ -106,6 +106,16 @@ app.use('/api/recaudo', facturasRoutes);
 const reporteRoutes = require('./routes/recaudo/reporteRoutes');
 app.use('/api/recaudo/reportes', reporteRoutes);
 
+
+//------------------ Almuerzos ----------------
+
+const almuerzos = require('./routes/recaudo/Almuerzos/almuerzosRoutes');
+app.use('/api/recaudo/almuerzos', almuerzos);
+
+const almuerzoFactura = require('./routes/recaudo/Almuerzos/almuerzosFacturaRoutes');
+app.use('/api/recaudo/almuerzoFactura', almuerzoFactura);
+
+
 // Configuración y arranque del servidor
 const PORT = process.env.SERVER_PORT || 3000;
 app.listen(PORT, () => {

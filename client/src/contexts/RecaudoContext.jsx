@@ -1,120 +1,151 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
-import axios from 'axios';
+import React, { createContext, useState, useContext, useEffect, useCallback } from "react";
+import axios from "axios";
 
 const RecaudoContext = createContext();
 
-// RecaudoProvider para envolver el árbol de componentes
 export const RecaudoProvider = ({ children }) => {
   const [estudiantes, setEstudiantes] = useState([]);
   const [clases, setClases] = useState([]);
   const [facturas, setFacturas] = useState([]);
+  const [almuerzo, setAlmuerzo] = useState([]);
+  const [almuerzoFactura, setAlmuerzoFactura] = useState({});
   const [loading, setLoading] = useState(true);
 
   const apiBaseUrl = import.meta.env.VITE_BACKEND_URL;
 
-  // ✅ Cargar lista de estudiantes
-  const fetchEstudiantes = async () => {
+  // Cargar lista de estudiantes
+  const fetchEstudiantes = useCallback(async () => {
     try {
       const response = await axios.get(`${apiBaseUrl}/api/recaudo/estudiantes`);
       setEstudiantes(response.data);
     } catch (error) {
-      console.error('Error fetching estudiantes:', error);
+      console.error("Error fetching estudiantes:", error);
     }
-  };
+  }, [apiBaseUrl]);
 
-  // ✅ Buscar estudiante por ID o nombre
   const fetchEstudianteById = async (nombre) => {
     try {
       const response = await axios.get(`${apiBaseUrl}/api/recaudo/estudiantes?nombre=${nombre}`);
       return response.data;
     } catch (error) {
-      console.error('Error buscando estudiante:', error);
+      console.error("Error buscando estudiante:", error);
       return null;
     }
   };
 
-  // ✅ Cargar lista de clases
-  const fetchClases = async () => {
+  // Cargar lista de clases
+  const fetchClases = useCallback(async () => {
     try {
       const response = await axios.get(`${apiBaseUrl}/api/recaudo/clases`);
       setClases(response.data);
     } catch (error) {
-      console.error('Error fetching clases:', error);
+      console.error("Error fetching clases:", error);
     }
-  };
+  }, [apiBaseUrl]);
 
-  // ✅ Cargar lista de facturas
-  const fetchFacturas = async () => {
+  // Cargar lista de facturas
+  const fetchFacturas = useCallback(async () => {
     try {
       const response = await axios.get(`${apiBaseUrl}/api/recaudo/facturas`);
       setFacturas(response.data);
     } catch (error) {
-      console.error('Error fetching facturas:', error);
+      console.error("Error fetching facturas:", error);
     }
-  };
+  }, [apiBaseUrl]);
 
-  // ✅ Crear nueva factura
   const crearFactura = async (facturaData) => {
     try {
       const response = await axios.post(`${apiBaseUrl}/api/recaudo/facturas`, facturaData);
       setFacturas((prevFacturas) => [...prevFacturas, response.data]);
     } catch (error) {
-      console.error('Error creando factura:', error);
+      console.error("Error creando factura:", error);
     }
   };
 
   const eliminarFactura = async (facturaId) => {
     const confirmacion = window.confirm("¿Seguro que deseas eliminar esta factura?");
     if (!confirmacion) return;
-  
-    // Eliminación Optimista: Removemos la factura antes de hacer la petición
+
     const facturasPrevias = [...facturas];
     setFacturas(facturas.filter((factura) => factura._id !== facturaId));
-  
+
     try {
       await axios.delete(`${apiBaseUrl}/api/recaudo/facturas/${facturaId}`);
       alert("Factura eliminada correctamente");
     } catch (error) {
       console.error("Error eliminando factura:", error);
       alert("No se pudo eliminar la factura");
-      setFacturas(facturasPrevias); // Restauramos las facturas en caso de error
+      setFacturas(facturasPrevias);
     }
   };
-  
-  
 
-  // ✅ Ejecutar carga de datos en el montaje del componente
-  useEffect(() => {
-    fetchEstudiantes();
-    fetchClases();
-    fetchFacturas();
-  }, []);
-
-  useEffect(() => {
-    if (estudiantes.length > 0 && clases.length > 0 && facturas.length > 0) {
-      setLoading(false);
+  const crearAlmuerzo = async (almuerzoData) => {
+    try {
+      const response = await axios.post(`${apiBaseUrl}/api/recaudo/almuerzos`, almuerzoData);
+      setAlmuerzo((prevAlmuerzo) => [...prevAlmuerzo, response.data]);
+    } catch (error) {
+      console.error("Error creando Almuerzo:", error);
     }
-  }, [estudiantes, clases, facturas]);
+  };
+
+  const fetchAlmuerzos = useCallback(async () => {
+    try {
+      const response = await axios.get(`${apiBaseUrl}/api/recaudo/almuerzos`);
+      setAlmuerzo(response.data);
+    } catch (error) {
+      console.error("Error fetching almuerzos:", error);
+    }
+  }, [apiBaseUrl]);
+
+  const fetchAlmuerzoFactura = useCallback(async () => {
+    try {
+      const response = await axios.get(`${apiBaseUrl}/api/recaudo/almuerzoFactura`);
+      setAlmuerzoFactura(response.data);
+    } catch (error) {
+      console.error("Error fetching almuerzoFactura:", error);
+    }
+  }, [apiBaseUrl]);
+
+  const crearAlmuerzoFactura = async (factura) => {
+    try {
+      const response = await axios.post(`${apiBaseUrl}/api/recaudo/almuerzoFactura`, factura, {
+        headers: { "Content-Type": "application/json" },
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Error creando almuerzo factura:", error.response?.data || error);
+    }
+  };
+
+  useEffect(() => {
+    Promise.allSettled([fetchEstudiantes(), fetchClases(), fetchFacturas(), fetchAlmuerzos(), fetchAlmuerzoFactura()])
+      .finally(() => setLoading(false));
+  }, [fetchEstudiantes, fetchClases, fetchFacturas, fetchAlmuerzos, fetchAlmuerzoFactura]);
 
   return (
-    <RecaudoContext.Provider value={{
-      estudiantes,
-      clases,
-      facturas,
-      fetchEstudianteById,
-      fetchClases,
-      fetchFacturas,  // <-- Agregar esto aquí
-      loading,
-      crearFactura,
-      eliminarFactura
-    }}>
+    <RecaudoContext.Provider
+      value={{
+        estudiantes,
+        fetchEstudiantes,
+        clases,
+        facturas,
+        fetchEstudianteById,
+        fetchClases,
+        fetchFacturas,
+        loading,
+        crearFactura,
+        eliminarFactura,
+        crearAlmuerzo,
+        crearAlmuerzoFactura,
+        fetchAlmuerzos,
+        almuerzoFactura,
+        almuerzo,
+        fetchAlmuerzoFactura,
+      }}
+    >
       {children}
     </RecaudoContext.Provider>
   );
-  
 };
 
-// Hook que usa el contexto
-export const useRecaudo = () => {
-  return useContext(RecaudoContext);
-};
+export const useRecaudo = () => useContext(RecaudoContext);
