@@ -192,6 +192,23 @@ const GenerarFactura = ({ factura, estudiante, setEstudiantedata }) => {
                   }),
                 ],
               }),
+              new Paragraph({
+                spacing: { after: 100 },
+                children: [
+                  new TextRun({
+                    text: "Mes aplicado: ",
+                    bold: true, // Solo este texto estará en negrita
+                    size: 20,
+                  }),
+                  new TextRun({
+                    text: factura?.mes_aplicado.toUpperCase() || "N/A", // Este texto no estará en negrita
+                    size: 18,
+                    caps: true,
+                  }),
+                ],
+              }),
+
+
 
               new Paragraph({
                 children: [
