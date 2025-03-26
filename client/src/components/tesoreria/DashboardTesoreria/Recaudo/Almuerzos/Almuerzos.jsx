@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRecaudo } from "../../../../../contexts/RecaudoContext";
-import { GiTropicalFish } from "react-icons/gi";
-import BuscadorEstudiante from "../buscador/BuscadorEstudiante";
 import { MdNoFood } from "react-icons/md";
+import BuscadorEstudiante from "../buscador/BuscadorEstudiante";
 import "./Almuerzos.css";
 
 const Almuerzos = () => {
@@ -16,14 +15,19 @@ const Almuerzos = () => {
   const [estudiante, setEstudiante] = useState(null);
   const [limpiarCampos, setLimpiarCampos] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [tipoPago, setTipoPago] = useState("");
+  const [showButton, setShowButton] = useState(false);
 
+  const [ultimaFactura, setUltimaFactura] = useState(null);
+
+  // Cargar almuerzos si no están en el contexto
   useEffect(() => {
     if (almuerzo.length === 0) {
-      console.log("Forzando carga de almuerzos...");
       fetchAlmuerzos();
     }
   }, [almuerzo, fetchAlmuerzos]);
 
+  // Manejar cambios en la cantidad de almuerzos seleccionados
   const handleCantidadChange = (id, cantidad) => {
     setSeleccionados((prev) => ({
       ...prev,
@@ -31,9 +35,53 @@ const Almuerzos = () => {
     }));
   };
 
+  // Obtener la última factura después de guardar
+  const fetchUltimaFactura = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:3000/api/recaudo/almuerzoFactura"
+      );
+      const data = await response.json();
+      if (data.length > 0) {
+        setUltimaFactura(data[data.length - 1]); // Última factura creada
+      }
+    } catch (error) {
+      console.error("Error obteniendo última factura:", error);
+    }
+  };
+
+  // Manejar cambio de tipo de pago y mostrar el botón de Pre Factura
+  const handleTipoPagoChange = (event) => {
+    setTipoPago(event.target.value);
+    setShowButton(true);
+  };
+
+  // Calcular el total a pagar
+  const calcularTotal = () => {
+    const total = Object.entries(seleccionados).reduce(
+      (sum, [id, cantidad]) => {
+        const almuerzoItem = almuerzo.find((item) => item._id === id);
+        return sum + (almuerzoItem ? almuerzoItem.costo * cantidad : 0);
+      },
+      0
+    );
+
+    return total.toLocaleString("es-CO", {
+      style: "currency",
+      currency: "COP",
+      minimumFractionDigits: 0,
+    });
+  };
+
+  // Guardar factura con validaciones
   const guardarFactura = async () => {
     if (!estudiante) {
       alert("Seleccione un estudiante antes de guardar la factura");
+      return;
+    }
+
+    if (!tipoPago) {
+      alert("Seleccione un tipo de pago antes de guardar la factura");
       return;
     }
 
@@ -50,17 +98,19 @@ const Almuerzos = () => {
     }
 
     try {
-      const response = await crearAlmuerzoFactura({
+      await crearAlmuerzoFactura({
         estudianteId: estudiante._id,
         almuerzos: factura,
+        tipoPago, // Se incluye el tipo de pago
       });
 
       alert("Factura guardada correctamente");
-      setSeleccionados({}); // Limpia la selección después de guardar
-      setEstudiante(null); // Reiniciar estudiante seleccionado
+      setSeleccionados({});
+      setEstudiante(null);
+      setTipoPago("");
       setLimpiarCampos(true);
+      setShowButton(false);
 
-      // Resetear limpiarCampos después de un pequeño retraso
       setTimeout(() => setLimpiarCampos(false), 100);
     } catch (error) {
       console.error(
@@ -70,25 +120,12 @@ const Almuerzos = () => {
       alert("Hubo un error al guardar la factura");
     }
   };
-  const calcularTotal = () => {
-    const total = Object.entries(seleccionados).reduce((total, [id, cantidad]) => {
-      const almuerzoItem = almuerzo.find((item) => item._id === id);
-      return total + (almuerzoItem ? almuerzoItem.costo * cantidad : 0);
-    }, 0);
-  
-    return total.toLocaleString("es-CO", {
-      style: "currency",
-      currency: "COP",
-      minimumFractionDigits: 0,
-    });
-  };
-  
-  
 
   return (
     <div className="container-almuerzo">
       <h2 className="title-almuerzo">Seleccionar Almuerzos</h2>
-  
+
+      {/* Buscador de Estudiantes */}
       <BuscadorEstudiante
         fetchEstudianteById={fetchEstudianteById}
         setEstudiante={setEstudiante}
@@ -96,7 +133,8 @@ const Almuerzos = () => {
         estudiante={estudiante}
         limpiarCampos={limpiarCampos}
       />
-  
+
+      {/* Lista de Almuerzos */}
       <div className="lista-almuerzos">
         {almuerzo.length > 0 ? (
           almuerzo.map((item) => (
@@ -122,20 +160,45 @@ const Almuerzos = () => {
         ) : (
           <p className="texto-vacio">No hay almuerzos disponibles</p>
         )}
-  
+
+        {/* Sección de Totales y Tipo de Pago */}
         <div className="almuerzo_btn">
           <div className="almuerzo-totales">
-            <div>
-              <h3>TOTAL</h3>
-            </div>
-            <div>
-              <h2 className="almuerzo_btn-p">{calcularTotal()}</h2>
+            <h3>TOTAL</h3>
+            <h2 className="almuerzo_btn-p">{calcularTotal()}</h2>
+          </div>
+
+          {/* Selección de Tipo de Pago */}
+          <div className="container-tipopago-flex">
+            <div className="container-tipopago">
+              <h4>Tipo de Pago:</h4>
+              {["Efectivo", "Datáfono", "Nómina"].map((tipo) => (
+                <label key={tipo}>
+                  <input
+                    type="radio"
+                    value={tipo}
+                    checked={tipoPago === tipo}
+                    onChange={handleTipoPagoChange}
+                  />{" "}
+                  {tipo}
+                </label>
+              ))}
             </div>
           </div>
+
           <div>
+            {/* Botón para Guardar Factura */}
             <button onClick={guardarFactura} className="boton-guardar">
               Guardar Factura
             </button>
+          </div>
+          
+          <div>
+            {factura && (
+              <button onClick={fetchUltimaFactura} className="boton-guardar">
+                Ultima factura
+              </button>
+            )}
           </div>
         </div>
       </div>

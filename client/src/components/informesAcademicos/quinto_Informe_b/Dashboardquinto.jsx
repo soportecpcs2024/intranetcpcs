@@ -3,8 +3,8 @@ import { Students } from "../../../api/DataApi";
 import LoadingSpinner from "../../LoadingSpinner";
 import BarChartComponentAreasQuinto from "./BarChartComponentAreasQuinto";
 import LineChartComponentQuinto from "./LineChartComponentQuinto";
-import DatatableAreasQuinto from "./DataTableAreaQuinto";
 import FiltrosAreas5Informe from "./FiltrosAreas5Informe";
+import './quintoinforme.css';
 
 const Dashboardquinto = () => {
   const [students, setStudents] = useState([]);
@@ -157,23 +157,20 @@ const Dashboardquinto = () => {
         />
       </div>
 
-      <div className="graficas5informe">
-        <BarChartComponentAreasQuinto
-          students={graphStudents}
-          selectedArea={selectedArea}
-        />
-        <div className="graficas5informe_line">
-          <LineChartComponentQuinto
+      <div className="graficas_5_informe">
+        <div className="box-graficas">
+          <BarChartComponentAreasQuinto
             students={graphStudents}
             selectedArea={selectedArea}
           />
         </div>
 
-        <DatatableAreasQuinto
-          students={filteredStudents}
-          selectedArea={selectedArea}
-          error={error}
-        />
+        <div className="box-graficas">
+          <LineChartComponentQuinto
+            students={graphStudents}
+            selectedArea={selectedArea}
+          />
+        </div>
       </div>
     </div>
   );

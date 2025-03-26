@@ -5,6 +5,30 @@ import ListaClases from "./ListarClases/ListaClases";
 import GenerarFactura from "./GenerarFactura";
 import ListarFacturas from "./listarFactura/ListarFacturas";
 
+const MonthSelector = ({ selectedMonth, setSelectedMonth }) => {
+  const months = [
+    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+  ];
+
+  return (
+    <div className="month-selector">
+    <label htmlFor="month">Aplicado al mes de: </label>
+    <select
+      id="month"
+      value={selectedMonth}
+      onChange={(e) => setSelectedMonth(e.target.value)}
+    >
+      <option value="">Selecciona</option>
+      {months.map((month, index) => (
+        <option key={index} value={month}>{month}</option>
+      ))}
+    </select>
+  </div>
+  
+  );
+};
+
 const Recaudo = () => {
   const { clases, fetchEstudianteById } = useRecaudo();
   const [loading, setLoading] = useState(true);
@@ -17,13 +41,13 @@ const Recaudo = () => {
   const [estudiantedata, setEstudiantedata] = useState([]);
   const [mostrarGenerarFactura, setMostrarGenerarFactura] = useState(false);
   const [limpiarCampos, setLimpiarCampos] = useState(false);
+  const [selectedMonth, setSelectedMonth] = useState("");
 
   useEffect(() => {
     if (clases.length > 0) {
       setLoading(false);
     }
   }, [clases]);
-  
 
   const clasesFiltradas = clases.filter(
     (clase) =>
@@ -43,8 +67,6 @@ const Recaudo = () => {
       }
     });
   };
-  
-   
 
   const handleTipoPagoChange = (event) => {
     setTipoPago(event.target.value);
@@ -65,70 +87,62 @@ const Recaudo = () => {
         nombre: clase.nombre,
         costo: clase.costoAplicado ?? clase.costo,
         dia: clase.dia,
-        hora:clase.hora
+        hora: clase.hora
       })),
       tipoPago,
       total: selectedClases.reduce((acc, clase) => acc + (clase.costoAplicado ?? clase.costo), 0),
+      mes_aplicado:selectedMonth
     };
 
-    // console.log("Pre Factura Generada:", nuevaFactura);
     setFacturaActual(nuevaFactura);
     setEstudiantedata(nuevaFactura);
   };
 
- 
   const handleGuardarFactura = async () => {
-  if (!facturaActual) {
-    alert("No hay factura para guardar.");
-    return;
-  }
-
-  const facturaData = {
-    estudianteId: facturaActual.estudianteId._id,
-    clases: facturaActual.clases.map(({ _id, costo }) => ({ claseId: _id, costo })),
-    tipoPago: facturaActual.tipoPago,
-    total: facturaActual.total,
-  };
-
-  try {
-    const response = await fetch(
-      `${import.meta.env.VITE_BACKEND_URL}/api/recaudo/facturas`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(facturaData),
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error("Error al guardar la factura");
+    if (!facturaActual) {
+      alert("No hay factura para guardar.");
+      return;
     }
 
-    const nuevaFacturaGuardada = await response.json();
-    setFacturaGuardada(nuevaFacturaGuardada);
+    const facturaData = {
+      estudianteId: facturaActual.estudianteId._id,
+      clases: facturaActual.clases.map(({ _id, costo }) => ({ claseId: _id, costo })),
+      tipoPago: facturaActual.tipoPago,
+      total: facturaActual.total,
+      mes_aplicado:selectedMonth
+    };
 
-    alert("Factura guardada correctamente");
-    setMostrarGenerarFactura(true);
-    setFacturaActual(null);
-    setSelectedClases([]);
-    setEstudiante(null);
-    setTipoPago("");
-    setShowButton(false);
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/recaudo/facturas`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(facturaData),
+        }
+      );
 
-     // Activar la limpieza del input
-     setLimpiarCampos(true);
-    
-     // Restablecer limpiarCampos a false para futuras limpiezas
-     setTimeout(() => setLimpiarCampos(false), 100);
-   
-   
+      if (!response.ok) {
+        throw new Error("Error al guardar la factura");
+      }
 
-   
-  } catch (error) {
-    alert(error.message);
-  }
-};
+      const nuevaFacturaGuardada = await response.json();
+      setFacturaGuardada(nuevaFacturaGuardada);
 
+      alert("Factura guardada correctamente");
+      setMostrarGenerarFactura(true);
+      setFacturaActual(null);
+      setSelectedClases([]);
+      setEstudiante(null);
+      setTipoPago("");
+      setShowButton(false);
+      setLimpiarCampos(true);
+      setTimeout(() => setLimpiarCampos(false), 100);
+
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   return (
     <div className="container-recaudo">
@@ -138,7 +152,7 @@ const Recaudo = () => {
           setEstudiante={setEstudiante}
           setLoading={setLoading}
           estudiante={estudiante}
-          limpiarCampos={limpiarCampos} // Pasamos el estado
+          limpiarCampos={limpiarCampos}
         />
 
         <ListaClases
@@ -162,6 +176,9 @@ const Recaudo = () => {
               </label>
             ))}
           </div>
+          <div>
+          <MonthSelector selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} />
+          </div>
 
           <div className="container-tipopago-btn">
             {showButton && (
@@ -170,6 +187,8 @@ const Recaudo = () => {
           </div>
         </div>
       </div>
+
+     
 
       <div className="container-recaudo-box">
         <ListarFacturas ultimaFactura={facturaActual} />
@@ -181,8 +200,7 @@ const Recaudo = () => {
 
           <div>
             {mostrarGenerarFactura && (
-              
-              <GenerarFactura factura={facturaGuardada} estudiante={estudiantedata}  />
+              <GenerarFactura factura={facturaGuardada} estudiante={estudiantedata} />
             )}
           </div>
         </div>

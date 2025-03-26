@@ -6,19 +6,24 @@ import { format } from "date-fns";
 import "./ListarFacturas.css";
 
 const ListarFacturas = () => {
-  const { facturas, eliminarFactura, fetchEstudianteById, fetchFacturas, estudiantes, fetchEstudiantes } = useRecaudo();
+  const {
+    facturas,
+    eliminarFactura,
+    fetchEstudianteById,
+    fetchFacturas,
+    estudiantes,
+    fetchEstudiantes,
+  } = useRecaudo();
   const [facturasConEstudiante, setFacturasConEstudiante] = useState([]);
   const [reload, setReload] = useState(false); // Estado para forzar recarga
-  
+
   console.log(facturas);
-  
+
   // Cargar facturas cuando se monta el componente o cuando `reload` cambia
   useEffect(() => {
-    fetchFacturas();
     fetchEstudiantes();
+    fetchFacturas();
   }, [reload]); // Se ejecuta cuando cambia `reload`
-  
- 
 
   console.log("Estudiantes :", estudiantes);
 
@@ -44,7 +49,7 @@ const ListarFacturas = () => {
       cargarNombresEstudiantes();
     }
   }, [facturas]); // Se ejecuta cuando `facturas` cambia
- 
+
   return (
     <div className="facturas-container">
       <h2>Listado de Facturas</h2>
@@ -55,6 +60,7 @@ const ListarFacturas = () => {
             <th>Estudiante</th>
             <th>Método de Pago</th>
             <th>Fecha de compra</th>
+            <th>Mes Aplicado</th>
             <th>Total</th>
             <th>Acciones</th>
           </tr>
@@ -71,6 +77,7 @@ const ListarFacturas = () => {
                     ? format(new Date(factura.fechaCompra), "dd/MM/yyyy")
                     : "Fecha no disponible"}
                 </td>
+                <td>{factura.mes_aplicado}</td>
                 <td>
                   {factura.total
                     ? new Intl.NumberFormat("es-CO", {

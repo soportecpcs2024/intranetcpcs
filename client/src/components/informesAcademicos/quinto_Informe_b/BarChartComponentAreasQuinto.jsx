@@ -33,12 +33,12 @@ const BarChartComponentAreasQuinto = ({ students, selectedArea }) => {
   return (
     <div
       style={{
-        width: "38%",
-        height: 400,
+        width: "100%",
+        height: 350,
         backgroundColor: "#f8f9fa",
         padding: "20px",
         borderRadius: "8px",
-        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.76)",
       }}
     >
      

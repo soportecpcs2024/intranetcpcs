@@ -25,7 +25,7 @@ const validarTipoPago = (tipoPago) => {
 // Crear factura
 exports.crearFactura = async (req, res) => {
   try {
-    const { estudianteId, clases, tipoPago } = req.body;
+    const { estudianteId, clases, tipoPago, mes_aplicado } = req.body;
 
     if (!validarTipoPago(tipoPago)) {
       return res
@@ -81,6 +81,7 @@ exports.crearFactura = async (req, res) => {
       clases: clasesDetalle,
       total,
       tipoPago,
+      mes_aplicado
     });
     await factura.save();
     res.status(201).json(factura);
@@ -124,7 +125,7 @@ exports.obtenerFacturaPorId = async (req, res) => {
 // Actualizar factura
 exports.actualizarFactura = async (req, res) => {
   try {
-    const { estudianteId, clases, tipoPago } = req.body;
+    const { estudianteId, clases, tipoPago, mes_aplicado } = req.body;
 
     if (!validarTipoPago(tipoPago)) {
       return res
@@ -170,7 +171,7 @@ exports.actualizarFactura = async (req, res) => {
 
     const facturaActualizada = await Factura.findByIdAndUpdate(
       req.params.id,
-      { estudianteId, clases: clasesDetalle, total, tipoPago },
+      { estudianteId, clases: clasesDetalle, total, tipoPago, mes_aplicado },
       { new: true }
     );
 

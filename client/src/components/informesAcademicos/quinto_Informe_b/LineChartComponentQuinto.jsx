@@ -32,13 +32,15 @@ const LineChartComponentQuinto = ({ students, selectedArea }) => {
         pointRadius: 5, // Radio de los puntos de la línea
         pointHoverRadius: 7, // Radio de los puntos cuando se pasa el mouse
         pointBackgroundColor: "rgb(75, 192, 192)", // Color de fondo de los puntos
+        borderRadius: "8px",
+        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.76)",
       },
       
     ],
   };
 
   return (
-    <div className="chart-container" style={{ padding: "10px" }}>
+    <div className="chart-container" style={{ padding: "10px",  }}>
        
       <Line
         data={chartData}

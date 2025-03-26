@@ -19,6 +19,9 @@ const ListarFacturas = ({ ultimaFactura }) => {
           <p>
             <strong>Tipo de Pago:</strong> {ultimaFactura.tipoPago}
           </p>
+          <p>
+            <strong>Mes aplicado:</strong> {ultimaFactura.mes_aplicado}
+          </p>
           <h4>Clases</h4>
           <ul>
             {ultimaFactura.clases.map((clase) => (
