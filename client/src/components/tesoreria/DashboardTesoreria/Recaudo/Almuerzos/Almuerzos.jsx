@@ -35,20 +35,7 @@ const Almuerzos = () => {
     }));
   };
 
-  // Obtener la última factura después de guardar
-  const fetchUltimaFactura = async () => {
-    try {
-      const response = await fetch(
-        "http://localhost:3000/api/recaudo/almuerzoFactura"
-      );
-      const data = await response.json();
-      if (data.length > 0) {
-        setUltimaFactura(data[data.length - 1]); // Última factura creada
-      }
-    } catch (error) {
-      console.error("Error obteniendo última factura:", error);
-    }
-  };
+ 
 
   // Manejar cambio de tipo de pago y mostrar el botón de Pre Factura
   const handleTipoPagoChange = (event) => {
@@ -193,13 +180,7 @@ const Almuerzos = () => {
             </button>
           </div>
           
-          <div>
-            {factura && (
-              <button onClick={fetchUltimaFactura} className="boton-guardar">
-                Ultima factura
-              </button>
-            )}
-          </div>
+           
         </div>
       </div>
     </div>

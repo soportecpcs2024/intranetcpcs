@@ -2,60 +2,78 @@ import React, { useEffect, useState } from "react";
 import { useRecaudo } from "../../../../../contexts/RecaudoContext";
 import { FaTrashAlt } from "react-icons/fa";
 import { format } from "date-fns";
-
+import ReactPaginate from "react-paginate";
 import "./ListarFacturas.css";
 
 const ListarFacturas = () => {
   const {
     facturas,
     eliminarFactura,
-    fetchEstudianteById,
     fetchFacturas,
-    estudiantes,
     fetchEstudiantes,
+    estudiantes,
   } = useRecaudo();
+  
+  const [estudiantesMap, setEstudiantesMap] = useState({});
   const [facturasConEstudiante, setFacturasConEstudiante] = useState([]);
-  const [reload, setReload] = useState(false); // Estado para forzar recarga
+  const [currentItems, setCurrentItems] = useState([]);
+  const [pageCount, setPageCount] = useState(0);
+  const [itemOffset, setItemOffset] = useState(0);
+  const itemsPerPage = 10;
+  
+  
 
-  console.log(facturas);
+  // Recargar datos
+  const handleReload = async () => {
+    await fetchEstudiantes();
+    await fetchFacturas();
+  };
 
-  // Cargar facturas cuando se monta el componente o cuando `reload` cambia
   useEffect(() => {
-    fetchEstudiantes();
-    fetchFacturas();
-  }, [reload]); // Se ejecuta cuando cambia `reload`
+    handleReload();
+  }, []);
 
-  console.log("Estudiantes :", estudiantes);
-
-  // Cargar nombres de estudiantes cuando `facturas` cambia
+  // Crear mapa de estudiantes { id: nombre }
   useEffect(() => {
-    const cargarNombresEstudiantes = async () => {
-      const nuevasFacturas = await Promise.all(
-        facturas.map(async (factura) => {
-          if (factura.estudianteId) {
-            const estudiante = await fetchEstudianteById(factura.estudianteId);
-            return {
-              ...factura,
-              nombreEstudiante: estudiante ? estudiante.nombre : "Desconocido",
-            };
-          }
-          return { ...factura, nombreEstudiante: "N/A" };
-        })
-      );
-      setFacturasConEstudiante(nuevasFacturas);
-    };
+    if (estudiantes.length > 0) {
+      const nuevoMapa = {};
+      estudiantes.forEach((estudiante) => {
+        nuevoMapa[estudiante._id] = estudiante.nombre;
+      });
 
-    if (facturas.length > 0) {
-      cargarNombresEstudiantes();
+      setEstudiantesMap(nuevoMapa);
     }
-  }, [facturas]); // Se ejecuta cuando `facturas` cambia
+  }, [estudiantes]);
 
+  // Asignar nombres a facturas
+  useEffect(() => {
+    if (facturas.length > 0 && Object.keys(estudiantesMap).length > 0) {
+      const nuevasFacturas = facturas.map((factura) => ({
+        ...factura,
+        nombreEstudiante: estudiantesMap[factura.estudianteId] || "Desconocido",
+      }));
+      setFacturasConEstudiante(nuevasFacturas);
+    }
+  }, [facturas, estudiantesMap]);
+
+  // Manejo de paginación
+  useEffect(() => {
+    const endOffset = itemOffset + itemsPerPage;
+    setCurrentItems(facturas.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(facturas.length / itemsPerPage));
+  }, [itemOffset, facturas]);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % facturas.length;
+    setItemOffset(newOffset);
+  };
   return (
     <div className="facturas-container">
       <h2>Listado de Facturas</h2>
       <table className="facturas-table">
         <thead>
           <tr>
+          <th>N°</th>
             <th>ID</th>
             <th>Estudiante</th>
             <th>Método de Pago</th>
@@ -66,11 +84,13 @@ const ListarFacturas = () => {
           </tr>
         </thead>
         <tbody>
-          {facturasConEstudiante.length > 0 ? (
-            facturasConEstudiante.map((factura) => (
+          {currentItems.length > 0 ? (
+            currentItems.map((factura, index) => (
+              
               <tr key={factura._id}>
+                <td>{itemOffset + index + 1}</td>
                 <td>{factura.numero_factura}</td>
-                <td>{factura.nombreEstudiante}</td>
+                <td>{factura.estudianteId.nombre}</td>
                 <td>{factura.tipoPago}</td>
                 <td>
                   {factura.fechaCompra
@@ -92,7 +112,7 @@ const ListarFacturas = () => {
                     title="Eliminar factura"
                     onClick={async () => {
                       await eliminarFactura(factura._id);
-                      setReload((prev) => !prev); // Forzar recarga cambiando `reload`
+                      handleReload();
                     }}
                   >
                     <FaTrashAlt />
@@ -102,11 +122,21 @@ const ListarFacturas = () => {
             ))
           ) : (
             <tr>
-              <td colSpan="6">No hay facturas disponibles</td>
+              <td colSpan="7">No hay facturas disponibles</td>
             </tr>
           )}
         </tbody>
       </table>
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel="Siguiente"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={3}
+        pageCount={pageCount}
+        previousLabel="Anterior"
+        containerClassName="pagination"
+        activeClassName="active"
+      />
     </div>
   );
 };

@@ -1,24 +1,26 @@
 .facturas-container {
-    width: 70%;
-    padding: 5px;
+    width: 60%;
+    padding:  10px;
     background: #f8f9fa;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.416);
+    
   }
   
   .facturas-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 3px;
+    
   }
   
   .facturas-table th{
-    padding: 12px;
+    padding: 10px;
     text-align: left;
     border-bottom: 1px solid #ddd;
   }
   .facturas-table td {
     padding: 0px 6px; /* Más compacto */
+    
   }
   
   .facturas-table th {
@@ -34,7 +36,7 @@
     width: 30%;
     background-color: yellow;
     color: rgb(252, 1, 1);
-    
+     
     padding: 4px 6px;
     margin: 3px;
     font-size: 12px;

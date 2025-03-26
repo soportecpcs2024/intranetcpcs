@@ -17,11 +17,15 @@ export const RecaudoProvider = ({ children }) => {
   const fetchEstudiantes = useCallback(async () => {
     try {
       const response = await axios.get(`${apiBaseUrl}/api/recaudo/estudiantes`);
+      
       setEstudiantes(response.data);
     } catch (error) {
       console.error("Error fetching estudiantes:", error);
     }
   }, [apiBaseUrl]);
+  
+
+ 
 
   const fetchEstudianteById = async (nombre) => {
     try {
@@ -122,6 +126,7 @@ export const RecaudoProvider = ({ children }) => {
       .finally(() => setLoading(false));
   }, [fetchEstudiantes, fetchClases, fetchFacturas, fetchAlmuerzos, fetchAlmuerzoFactura]);
 
+   
   return (
     <RecaudoContext.Provider
       value={{

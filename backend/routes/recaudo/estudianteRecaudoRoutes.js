@@ -7,5 +7,7 @@ router.post('/estudiantes', estudianteController.crearEstudiante);
 
 // Buscar estudiantes por nombre (consulta en tiempo real)
 router.get('/estudiantes', estudianteController.buscarEstudiantes);
+// Buscar estudiantes por nombre (consulta en tiempo real)
+router.get('/estudiantes', estudianteController.obtenerEstudiantes);
 
 module.exports = router;
