@@ -1,7 +1,7 @@
 import React from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, LabelList } from "recharts";
 
-const BarChartComponent = ({ students, error, isScaleChart }) => {
+const BarChartComponent = ({ students = [], error = null, isScaleChart = false }) => {
   if (error) {
     return <p>Error: {error}</p>;
   }
@@ -12,7 +12,6 @@ const BarChartComponent = ({ students, error, isScaleChart }) => {
 
   let data;
   if (isScaleChart) {
-    // Agrupación por escalas de desempeño
     data = ["DI", "BÁSICO", "DA", "DS"].map((scale) => {
       const count = students.filter((student) => {
         let group;
@@ -31,14 +30,12 @@ const BarChartComponent = ({ students, error, isScaleChart }) => {
       return { name: scale, value: count };
     });
   } else {
-    // Otra lógica para otros gráficos
     data = students.map((student) => ({
-      name: student.nombre,
-      value: student.promedio,
+      name: student.nombre || "Desconocido",
+      value: student.promedio || 0,
     }));
   }
 
-  // Asignar colores según el grupo
   const COLORS = {
     DI: "red",
     BÁSICO: "#ff9933",
@@ -49,14 +46,21 @@ const BarChartComponent = ({ students, error, isScaleChart }) => {
   return (
     <ResponsiveContainer width="100%" height={350}>
       <BarChart data={data}>
-        <XAxis dataKey="name" />
-        <YAxis />
+        <XAxis 
+          dataKey="name" 
+          tick={{ fontSize: 12 }} 
+          tickLine={false} // Opcional: Ocultar línea de marca de ticks
+        />
+        <YAxis 
+          domain={[0, "auto"]} 
+          tickFormatter={(value) => value.toFixed(0)} // Evita valores decimales
+          tickLine={false} 
+        />
         <Tooltip />
         <Bar dataKey="value">
           {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[entry.name]} />
+            <Cell key={`cell-${index}`} fill={COLORS[entry.name] || "#8884d8"} />
           ))}
-          {/* Mostrar valores como etiquetas */}
           <LabelList dataKey="value" position="top" />
         </Bar>
       </BarChart>
