@@ -7,6 +7,7 @@ export const RecaudoProvider = ({ children }) => {
   const [estudiantes, setEstudiantes] = useState([]);
   const [clases, setClases] = useState([]);
   const [facturas, setFacturas] = useState([]);
+  const [factura_id, setFactura_id] = useState({})
   const [almuerzo, setAlmuerzo] = useState([]);
   const [almuerzoFactura, setAlmuerzoFactura] = useState({});
   const [loading, setLoading] = useState(true);
@@ -105,6 +106,17 @@ export const RecaudoProvider = ({ children }) => {
     try {
       const response = await axios.get(`${apiBaseUrl}/api/recaudo/almuerzoFactura`);
       setAlmuerzoFactura(response.data);
+     
+    } catch (error) {
+      console.error("Error fetching almuerzoFactura:", error);
+    }
+  }, [apiBaseUrl]);
+
+  const fetchAlmuerzoFacturaId = useCallback(async (factura_id) => {
+    try {
+      const response = await axios.get(`${apiBaseUrl}/api/recaudo/almuerzoFactura?_id=${factura_id}`);
+      setFactura_id(response.data);
+     
     } catch (error) {
       console.error("Error fetching almuerzoFactura:", error);
     }
@@ -146,6 +158,8 @@ export const RecaudoProvider = ({ children }) => {
         almuerzoFactura,
         almuerzo,
         fetchAlmuerzoFactura,
+        fetchAlmuerzoFacturaId,
+        factura_id
       }}
     >
       {children}

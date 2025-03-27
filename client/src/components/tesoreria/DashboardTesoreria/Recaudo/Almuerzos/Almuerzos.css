@@ -1,6 +1,6 @@
 .container-almuerzo{
-   
-    width: 60%;
+    width: 70%;
+    margin-top: -10px;
     margin-left: auto;
     margin-right: auto;
     border-radius: 12px;
@@ -12,7 +12,27 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 50px;
+    margin: 10px;
+}
+
+.container-tipopago-flex{
+  background-color: rgb(252, 252, 252);
+}
+
+.header-almuerzos{
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  margin-bottom: 20px;
+}
+
+.header-descarga{
+  color: rgb(255, 255, 255);
+  margin: 0px;
 }
 
 .lista-almuerzos {
@@ -75,7 +95,6 @@
   
   .boton-guardar {
     width: 100%;
-    
     background: #16a34a;
     color: white;
     font-weight: bold;
