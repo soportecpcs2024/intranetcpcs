@@ -76,22 +76,8 @@ const Sidebar = () => {
             <p>Niveles superiores</p>
           </div>
         </Link>
-        <div className="linkNav-espacio-p">
-          <p>_______________</p>
-        </div>
-        <Link
-          className={`linkNav ${
-            location.pathname === "/admin/academico/estdificultades"
-              ? "active"
-              : ""
-          }`}
-          to="/admin/academico/estdificultades"
-        >
-          <TbStairsDown className="icons" />
-          <div>
-            <p>Deficiente desempeño académico </p>
-          </div>
-        </Link>
+        
+         
       </nav>
     </>
   );

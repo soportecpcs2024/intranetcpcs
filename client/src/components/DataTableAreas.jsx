@@ -9,7 +9,7 @@ const DatatableAreas = ({ students, selectedArea, error }) => {
   const [filteredStudents, setFilteredStudents] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState(null);
-  const itemsPerPage = 15; // Número de elementos por página
+  const itemsPerPage = 12; // Número de elementos por página
 
   // Manejo de cambio de página
   const handlePageClick = (event) => {

@@ -45,12 +45,12 @@ const PieChartComponentAreas = ({ students, selectedArea, error }) => {
 
   return (
     <div className="pie-chart-container">
-      <ResponsiveContainer width="100%" height={420}>
+      <ResponsiveContainer width="100%" height={250}>
         <PieChart>
           <Pie
             data={data}
             innerRadius={40}
-            outerRadius={90}
+            outerRadius={60}
             fill="#8884d8"
             paddingAngle={6}
             dataKey="value"

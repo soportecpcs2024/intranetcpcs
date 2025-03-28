@@ -7,9 +7,9 @@
   .ns-barchart-container {
     display: flex;
     flex-wrap: wrap; /* Permite que los elementos se envuelvan en múltiples líneas */
-    gap: 10px; /* Espacio entre los gráficos */
+    gap: 5px; /* Espacio entre los gráficos */
     justify-content: center; /* Centra los gráficos en la fila */
-    margin: 50px;
+    margin: 20px;
   }
   
   .bar-chart-container-ns {

@@ -32,7 +32,6 @@ const DashboardAreas = () => {
         setLoading(false);
       }
     }
-    
 
     fetchStudents();
   }, []);
@@ -48,7 +47,8 @@ const DashboardAreas = () => {
 
     if (selectedPeriodo) {
       filtered = filtered.filter(
-        (student) => student.periodo && student.periodo.trim() === selectedPeriodo
+        (student) =>
+          student.periodo && student.periodo.trim() === selectedPeriodo
       );
     }
 
@@ -113,23 +113,14 @@ const DashboardAreas = () => {
       </div>
 
       <div className="graficas_generales">
-        <BarChartComponentAreas
-          students={filteredStudents}
-          selectedArea={selectedArea}
-          error={error}
-        />
-      </div>
-
-      <div className="prom_tables">
-        <div className="box_prom_tables">
-          <DatatableAreas
+        <div className="graf-box">
+          <BarChartComponentAreas
             students={filteredStudents}
             selectedArea={selectedArea}
             error={error}
-            onStudentClick={openModal} // Agregar el manejador de clics en los estudiantes
           />
         </div>
-        <div className="box_prom_tables">
+        <div className="graf-box">
           <PieChartComponentAreas
             students={filteredStudents}
             selectedArea={selectedArea}
@@ -137,6 +128,18 @@ const DashboardAreas = () => {
           />
         </div>
       </div>
+
+      <div className="prom_tables">
+        
+          <DatatableAreas
+            students={filteredStudents}
+            selectedArea={selectedArea}
+            error={error}
+            onStudentClick={openModal} // Agregar el manejador de clics en los estudiantes
+          />
+        </div>
+       
+     
 
       {selectedStudent && (
         <StudentModal

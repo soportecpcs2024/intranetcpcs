@@ -401,20 +401,9 @@ input::placeholder {
    
 }
  
-
- 
-  /* Otros estilos para dispositivos móviles pequeños */
-
-
-
- 
-
- 
- 
 /* Otras consultas de medios adicionales según sea necesario */
 
 .admin-header{
-
   position: sticky;
   top: 0;
   width: 100%;
@@ -742,6 +731,7 @@ input::placeholder {
 
 /* Estilo para hacer la tabla responsive */
 .table-container {
+  width: 100%;
   overflow-x: auto;
   margin-top: 6px;
   background-color: rgba(255, 255, 255, 0.711);
@@ -874,11 +864,19 @@ box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
 
 .graficas_generales{
     display: flex;
-    justify-content: space-between;
+    gap: 5px;
     background-color: rgba(255, 255, 255, 0.874);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.312); /* Agrega una sombra sutil */
     border-radius: 8px; /* Bordes redondeados */
     
+  }
+  .graficas_generales .graf-box:nth-child(1){
+    flex-basis: calc(70% - 5px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.511); /* Agrega una sombra sutil */
+  }
+  .graficas_generales .graf-box:nth-child(2){
+    flex-basis: calc(30% - 5px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.511); /* Agrega una sombra sutil */
   }
 
    
@@ -1305,21 +1303,13 @@ box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
   margin-right: auto;
   
   height: 100vh;
+ 
 
 }
-.prom_tables-container .box_prom_tables-doc:nth-child(1){
-  flex-basis: calc(50% - 1rem);
-  padding: 20px;
-}
-.prom_tables-container .box_prom_tables-doc:nth-child(2){
-  flex-basis: calc(50% - 1rem);
+.prom_tables{
   
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.312); /* Agrega una sombra sutil */
-    border-radius: 5px; /* Bordes redondeados */
-    
-   
-   
 }
+ 
 .box_prom_tables-doc {
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px; 
   
