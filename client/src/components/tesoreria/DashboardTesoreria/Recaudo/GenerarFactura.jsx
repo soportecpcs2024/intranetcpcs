@@ -36,7 +36,7 @@ const GenerarFactura = ({ factura, estudiante, setEstudiantedata }) => {
       }
 
       // Cargar la imagen desde el directorio público
-      const response = await fetch("/logoed.png"); // Asegúrate de que el logo esté en 'public/logo.png'
+      const response = await fetch("/LOGOED.jpg"); // Asegúrate de que el logo esté en 'public/logo.png'
       const imageBlob = await response.blob();
       const imageArrayBuffer = await imageBlob.arrayBuffer();
       const imageUint8Array = new Uint8Array(imageArrayBuffer);

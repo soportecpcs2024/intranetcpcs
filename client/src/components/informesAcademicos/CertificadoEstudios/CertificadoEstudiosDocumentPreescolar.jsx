@@ -146,7 +146,7 @@ const CertificadoEstudiosDocumentPreescolar = ({ estudiante }) => (
           marginBottom: 2,
         }}
       >
-        <Image style={styles.image} src="/logoed.png" />
+        <Image style={styles.image} src="/LOGOED.jpg" />
         <View style={styles.membrete_header}>
           <View>
             <Text>Carrera 83 N° 78-30 Medellín -Colombia</Text>
