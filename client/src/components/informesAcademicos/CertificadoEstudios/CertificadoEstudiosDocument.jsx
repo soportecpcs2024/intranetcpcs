@@ -145,7 +145,7 @@ const CertificadoEstudiosDocument = ({ estudiante, generados }) => (
           marginBottom: 2,
         }}
       >
-        <Image style={styles.image} src="/LOGOF.png" />
+        <Image style={styles.image} src="../../../../public/logoed.png" />
         <View style={styles.membrete_header}>
           <View>
             <Text>Carrera 83 N° 78-30 Medellín -Colombia</Text>
