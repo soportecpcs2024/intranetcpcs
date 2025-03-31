@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import LoginForm from "../../components/LoginForm";
 import RegisterForm from "../../components/RegisterForm";
-import Logo from "/LOGOED.jpg";
+import Logo from "../../../public/logo2025.png";
   // Ajusta la ruta según la ubicación real de logo.png en tu proyecto
 
 const Auth = () => {
