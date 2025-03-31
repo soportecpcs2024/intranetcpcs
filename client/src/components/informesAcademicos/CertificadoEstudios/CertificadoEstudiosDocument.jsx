@@ -8,6 +8,7 @@ import {
   Image,
   StyleSheet,
 } from "@react-pdf/renderer";
+import Logo from "/logoed.png";
 
 // Define styles for the PDF
 const styles = StyleSheet.create({
@@ -145,7 +146,7 @@ const CertificadoEstudiosDocument = ({ estudiante, generados }) => (
           marginBottom: 2,
         }}
       >
-        <Image style={styles.image} src="../../../../public/logoed.png" />
+        <Image style={styles.image} src={Logo} alt="Logo CPCS" />
         <View style={styles.membrete_header}>
           <View>
             <Text>Carrera 83 N° 78-30 Medellín -Colombia</Text>
