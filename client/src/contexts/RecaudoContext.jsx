@@ -138,6 +138,7 @@ export const RecaudoProvider = ({ children }) => {
       .finally(() => setLoading(false));
   }, [fetchEstudiantes, fetchClases, fetchFacturas, fetchAlmuerzos, fetchAlmuerzoFactura]);
 
+ 
    
   return (
     <RecaudoContext.Provider

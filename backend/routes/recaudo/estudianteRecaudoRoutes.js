@@ -6,7 +6,7 @@ const estudianteController = require('../../controllers/recaudo/estudianteRecaud
 router.post('/estudiantes', estudianteController.crearEstudiante);
 
 // Buscar estudiantes por nombre (consulta en tiempo real)
-router.get('/estudiantes', estudianteController.buscarEstudiantes);
+router.get('/estudiantes//buscar', estudianteController.buscarEstudiantes);
 // Buscar estudiantes por nombre (consulta en tiempo real)
 router.get('/estudiantes', estudianteController.obtenerEstudiantes);
 

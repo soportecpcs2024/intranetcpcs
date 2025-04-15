@@ -25,6 +25,8 @@ const EditMetasGrupoModal = ({ metas, onClose, onUpdate }) => {
     }
   };
 
+  
+
   return (
     <div className="metas-container-modal">
       <div className="metas-modal-content">

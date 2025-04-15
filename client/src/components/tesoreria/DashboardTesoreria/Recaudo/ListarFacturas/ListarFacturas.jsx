@@ -33,6 +33,7 @@ const ListarFacturas = () => {
     handleReload();
   }, []);
 
+
   // Crear mapa de estudiantes { id: nombre }
   useEffect(() => {
     if (estudiantes.length > 0) {
@@ -45,28 +46,35 @@ const ListarFacturas = () => {
     }
   }, [estudiantes]);
 
+
+  
   // Asignar nombres a facturas
   useEffect(() => {
     if (facturas.length > 0 && Object.keys(estudiantesMap).length > 0) {
       const nuevasFacturas = facturas.map((factura) => ({
         ...factura,
-        nombreEstudiante: estudiantesMap[factura.estudianteId] || "Desconocido",
+        nombreEstudiante: factura.estudianteId?.nombre.trim() || "Desconocido",
       }));
+      
       setFacturasConEstudiante(nuevasFacturas);
     }
   }, [facturas, estudiantesMap]);
 
-  // Manejo de paginación
+ 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
-    setCurrentItems(facturas.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(facturas.length / itemsPerPage));
-  }, [itemOffset, facturas]);
+    setCurrentItems(facturasConEstudiante.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(facturasConEstudiante.length / itemsPerPage));
+  }, [itemOffset, facturasConEstudiante]);
+  
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % facturas.length;
     setItemOffset(newOffset);
   };
+   
+ 
+  
   return (
     <div className="facturas-container">
       <h2>Listado de Facturas</h2>
@@ -90,7 +98,7 @@ const ListarFacturas = () => {
               <tr key={factura._id}>
                 <td>{itemOffset + index + 1}</td>
                 <td>{factura.numero_factura}</td>
-                <td>{factura.estudianteId.nombre}</td>
+                <td >{factura.nombreEstudiante}</td>
                 <td>{factura.tipoPago}</td>
                 <td>
                   {factura.fechaCompra

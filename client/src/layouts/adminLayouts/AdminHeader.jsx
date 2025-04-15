@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Outlet, useNavigate, Link } from "react-router-dom";
-import Logo from "../../../public/logo2025.png";
+import Logo from "/logo2025.png";
 import { useAuth } from "../../contexts/AuthContext";
 import { HiMenuAlt3 } from "react-icons/hi"; // Importa el icono del menú hamburguesa
 const AdminHeader = () => {
