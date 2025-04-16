@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRecaudo } from "../../../../../contexts/RecaudoContext";
 import { MdNoFood } from "react-icons/md";
 import BuscadorEstudiante from "../buscador/BuscadorEstudiante";
+
 import "./Almuerzos.css";
 import {
   Document,
@@ -19,10 +20,13 @@ import {
 } from "docx";
 import { saveAs } from "file-saver";
 import { ImageRun } from "docx";
+import ListaAlmuerzosVendidos from "./ListaAlmuerzosVendidos";
+import EstadisticasAlmuerzo from "./EstadisticasAlmuerzo";
 
 const Almuerzos = () => {
   const {
     almuerzo,
+     
     fetchAlmuerzos,
     almuerzoFactura,
     crearAlmuerzoFactura,
@@ -358,103 +362,114 @@ const Almuerzos = () => {
     }
   };
 
+
+   
   return (
-    <div className="container-almuerzo">
-      <h2 className="title-almuerzo">RECAUDO ALMUERZOS BAZAR 2025 CPCS</h2>
+    <div className="almuerzos">
+      <div className="container-almuerzo box1Almuerzos">
+        <h2 className="title-almuerzo">RECAUDO ALMUERZOS BAZAR 2025 CPCS</h2>
 
-      <div className="header-almuerzos">
-        <div>
-          {/* Buscador de Estudiantes */}
-          <BuscadorEstudiante
-            fetchEstudianteById={fetchEstudianteById}
-            setEstudiante={setEstudiante}
-            setLoading={setLoading}
-            estudiante={estudiante}
-            limpiarCampos={limpiarCampos}
-          />
+        <div className="header-almuerzos">
+          <div>
+            {/* Buscador de Estudiantes */}
+            <BuscadorEstudiante
+              fetchEstudianteById={fetchEstudianteById}
+              setEstudiante={setEstudiante}
+              setLoading={setLoading}
+              estudiante={estudiante}
+              limpiarCampos={limpiarCampos}
+            />
+          </div>
+          <div>
+            {/* Botón para descargar la última factura */}
+            {facturaAceptada && (
+              <button
+                className="header-descarga"
+                onClick={obtenerUltimaFactura}
+              >
+                Descargar factura
+              </button>
+            )}
+          </div>
         </div>
-        <div>
-          {/* Botón para descargar la última factura */}
-          {facturaAceptada && (
-            <button className="header-descarga" onClick={obtenerUltimaFactura}>
-              Descargar factura
-            </button>
+
+        {/* Lista de Almuerzos */}
+        {/* Lista de Almuerzos */}
+        <div className="lista-almuerzos">
+          {almuerzo.length > 0 ? (
+            almuerzo.map((item) => (
+              <div key={item._id} className="almuerzo-item">
+                <MdNoFood className="icono-almuerzo" />
+                <span className="almuerzo-info">
+                  {item.nombre} -{" "}
+                  <strong>
+                    {new Intl.NumberFormat("es-CO", {
+                      style: "currency",
+                      currency: "COP",
+                      minimumFractionDigits: 0,
+                    }).format(item.costo)}
+                  </strong>
+                </span>
+                <input
+                  type="number"
+                  min="0"
+                  className="almuerzo-conteo"
+                  value={seleccionados[item._id] || 0}
+                  onChange={(e) =>
+                    handleCantidadChange(
+                      item._id,
+                      parseInt(e.target.value, 10) || 0
+                    )
+                  }
+                />
+              </div>
+            ))
+          ) : (
+            <p className="texto-vacio">No hay almuerzos disponibles</p>
           )}
+
+          {/* Sección de Totales y Tipo de Pago */}
+          <div className="almuerzo_btn">
+            <div className="almuerzo-totales">
+              <div>
+                <h3>TOTAL</h3>
+              </div>
+              <div>
+                <h2 className="almuerzo_btn-p">{calcularTotal()}</h2>
+              </div>
+            </div>
+
+            {/* Selección de Tipo de Pago */}
+            <div className="container-tipopago-flex">
+              <div className="container-tipopago">
+                <h4>Tipo de Pago:</h4>
+                {["Efectivo", "Datáfono", "Nómina"].map((tipo) => (
+                  <label key={tipo}>
+                    <input
+                      type="radio"
+                      value={tipo}
+                      checked={tipoPago === tipo}
+                      onChange={handleTipoPagoChange}
+                      className="tipopago_radio"
+                    />{" "}
+                    {tipo}
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* Botón para Guardar Factura */}
+            <button onClick={guardarFactura} className="boton-guardar">
+              Registrar Factura
+            </button>
+          </div>
         </div>
       </div>
-       
 
-      {/* Lista de Almuerzos */}
-      {/* Lista de Almuerzos */}
-      <div className="lista-almuerzos">
-        {almuerzo.length > 0 ? (
-          almuerzo.map((item) => (
-            <div key={item._id} className="almuerzo-item">
-              <MdNoFood className="icono-almuerzo" />
-              <span className="almuerzo-info">
-                {item.nombre} -{" "}
-                <strong>
-                  {new Intl.NumberFormat("es-CO", {
-                    style: "currency",
-                    currency: "COP",
-                    minimumFractionDigits: 0,
-                  }).format(item.costo)}
-                </strong>
-              </span>
-              <input
-                type="number"
-                min="0"
-                className="almuerzo-conteo"
-                value={seleccionados[item._id] || 0}
-                onChange={(e) =>
-                  handleCantidadChange(
-                    item._id,
-                    parseInt(e.target.value, 10) || 0
-                  )
-                }
-              />
-            </div>
-          ))
-        ) : (
-          <p className="texto-vacio">No hay almuerzos disponibles</p>
-        )}
-
-        {/* Sección de Totales y Tipo de Pago */}
-        <div className="almuerzo_btn">
-          <div className="almuerzo-totales">
-            <div>
-              <h3>TOTAL</h3>
-            </div>
-            <div>
-              <h2 className="almuerzo_btn-p">{calcularTotal()}</h2>
-            </div>
-          </div>
-
-          {/* Selección de Tipo de Pago */}
-          <div className="container-tipopago-flex">
-            <div className="container-tipopago">
-              <h4>Tipo de Pago:</h4>
-              {["Efectivo", "Datáfono", "Nómina"].map((tipo) => (
-                <label key={tipo}>
-                  <input
-                    type="radio"
-                    value={tipo}
-                    checked={tipoPago === tipo}
-                    onChange={handleTipoPagoChange}
-                    className="tipopago_radio"
-                  />{" "}
-                  {tipo}
-                </label>
-              ))}
-            </div>
-          </div>
-
-          {/* Botón para Guardar Factura */}
-          <button onClick={guardarFactura} className="boton-guardar">
-            Registrar Factura
-          </button>
+      <div className="box1Almuerzos">
+        <EstadisticasAlmuerzo/>
+        <ListaAlmuerzosVendidos/>    
         </div>
-      </div>
     </div>
   );
 };

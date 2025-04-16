@@ -32,7 +32,7 @@ const facturaSchema = new mongoose.Schema({
     required: true, 
     trim: true
   },
-  mes_aplicado: { type: String, required: true, trim: true },
+  mes_aplicado: { type: String, trim: true },
 });
 
 const Factura = mongoose.model('Factura', facturaSchema);
