@@ -1,71 +1,84 @@
 import React, { useState, useEffect } from "react";
-import { useRecaudo } from "../../../../../contexts/RecaudoContext"; 
+import { useRecaudo } from "../../../../../contexts/RecaudoContext";
 import "./BuscadorEstudiantes.css";
 
-
 const BuscadorEstudiante = ({ setEstudiante, setLoading, limpiarCampos }) => {
-  const [searchId, setSearchId] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
+  const [searchText, setSearchText] = useState("");
+  const [allSuggestions, setAllSuggestions] = useState([]);
+  const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [selectedEstudiante, setSelectedEstudiante] = useState(null);
   const { fetchEstudianteById } = useRecaudo();
   const apiBaseUrl = import.meta.env.VITE_BACKEND_URL;
 
-
+  // Reset fields on limpiarCampos
   useEffect(() => {
     if (limpiarCampos) {
-      setSearchId(""); // Limpiar el input
+      setSearchText("");
       setSelectedEstudiante(null);
+      setFilteredSuggestions([]);
     }
-  }, [limpiarCampos]); // Ejecutar cuando limpiarCampos cambie   
-  const fetchSuggestions = async (query) => {
-    if (!query.trim()) {
-      setSuggestions([]);
-      return;
-    }
+  }, [limpiarCampos]);
+
+  // Fetch all suggestions once when user types first time
+  const fetchAllSuggestions = async () => {
     try {
-      const response = await fetch(`${apiBaseUrl}/api/recaudo/estudiantes?nombre=${query}`);
+      const response = await fetch(`${apiBaseUrl}/api/recaudo/estudiantes`);
       const data = await response.json();
-      setSuggestions(data);
+      setAllSuggestions(data);
     } catch (error) {
-      console.error("Error al obtener sugerencias:", error);
+      console.error("Error al obtener estudiantes:", error);
     }
   };
 
+  // Filter as user types
   const handleInputChange = (e) => {
     const value = e.target.value;
-    setSearchId(value);
-    fetchSuggestions(value);
+    setSearchText(value);
+
+    if (value.trim().length === 0) {
+      setFilteredSuggestions([]);
+      return;
+    }
+
+    // Fetch once
+    if (allSuggestions.length === 0) {
+      fetchAllSuggestions();
+    }
+
+    const filtered = allSuggestions.filter((est) =>
+      est.nombre.toLowerCase().startsWith(value.toLowerCase())
+    );
+    setFilteredSuggestions(filtered);
   };
 
-  
   const handleSelectChange = (e) => {
     const selectedId = e.target.value;
-    if (selectedId) {
-      const estudianteSeleccionado = suggestions.find((est) => est._id === selectedId);
-      if (estudianteSeleccionado) {
-        setSearchId(estudianteSeleccionado.nombre);
-        setEstudiante(estudianteSeleccionado);
-        setSelectedEstudiante(estudianteSeleccionado);
-        setSuggestions([]);
-      }
+    const estudiante = allSuggestions.find((est) => est._id === selectedId);
+    if (estudiante) {
+      setSearchText(estudiante.nombre);
+      setEstudiante(estudiante);
+      setSelectedEstudiante(estudiante);
+      setFilteredSuggestions([]);
     }
   };
 
-
-
   const handleSearch = async () => {
-    if (!searchId.trim()) return;
+    if (!searchText.trim()) return;
     setLoading(true);
-    const formattedSearchId = searchId.trim().toUpperCase();
-    const result = await fetchEstudianteById(formattedSearchId);
+    const formatted = searchText.trim().toUpperCase();
+    const result = await fetchEstudianteById(formatted);
     if (!result) {
       alert("Estudiante no encontrado");
-      limpiarCampos();  // Llama la función para limpiar
+      limpiarCampos();
     } else {
       setEstudiante(result);
       setSelectedEstudiante(result);
     }
     setLoading(false);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") handleSearch();
   };
 
   return (
@@ -75,13 +88,26 @@ const BuscadorEstudiante = ({ setEstudiante, setLoading, limpiarCampos }) => {
         <input
           type="text"
           placeholder="Ingrese el nombre"
-          value={searchId}
+          value={searchText}
           onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
+          list="estudiantes-list"
         />
-        {suggestions.length > 0 && (
-          <select onChange={handleSelectChange} className="dropdown-list">
+        <datalist id="estudiantes-list">
+          {filteredSuggestions.map((est) => (
+            <option key={est._id} value={est.nombre} />
+          ))}
+        </datalist>
+
+        {/* Fallback select if needed */}
+        {filteredSuggestions.length > 0 && (
+          <select
+            onChange={handleSelectChange}
+            className="dropdown-list"
+            value={selectedEstudiante ? selectedEstudiante._id : ""}
+          >
             <option value="">Selecciona estudiante</option>
-            {suggestions.map((est) => (
+            {filteredSuggestions.map((est) => (
               <option key={est._id} value={est._id}>
                 {est.nombre}
               </option>
@@ -96,3 +122,4 @@ const BuscadorEstudiante = ({ setEstudiante, setLoading, limpiarCampos }) => {
 };
 
 export default BuscadorEstudiante;
+  

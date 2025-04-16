@@ -4,6 +4,7 @@ import { PiUsersThreeBold } from "react-icons/pi";
 import { FaSchool } from "react-icons/fa";
 import { BsFillPersonVcardFill } from "react-icons/bs";
 import { TbStairsDown } from "react-icons/tb";
+import { SiLeaderprice } from "react-icons/si";
 
 const Sidebar = () => {
   const location = useLocation();
@@ -65,6 +66,21 @@ const Sidebar = () => {
           <p>_______________</p>
         </div>
 
+        <Link
+          className={`linkNav ${
+            location.pathname === "/admin/academico/coordinadores" ? "active" : ""
+          }`}
+          to="/admin/academico/coordinadores"
+        >
+          <SiLeaderprice className="icons" />
+          <div>
+            <p>Otra cosa</p>
+          </div>
+        </Link>
+        
+        <div className="linkNav-espacio-p">
+          <p>_______________</p>
+        </div>
         <Link
           className={`linkNav ${
             location.pathname === "/admin/academico/nivelSuperior" ? "active" : ""

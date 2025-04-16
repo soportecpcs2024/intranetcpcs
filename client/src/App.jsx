@@ -59,6 +59,9 @@ import Recaudoep from "./components/tesoreria/DashboardTesoreria/Recaudo/Recaudo
 import DescargaArchivoFacturas from "./components/tesoreria/DashboardTesoreria/Recaudo/descarga_archivo/DescargaArchivoFacturas";
 import ListarFacturas from "./components/tesoreria/DashboardTesoreria/Recaudo/ListarFacturas/ListarFacturas";
 import Almuerzos from "./components/tesoreria/DashboardTesoreria/Recaudo/Almuerzos/Almuerzos";
+import Coordinadores from "./components/Academico/Coordinadores";
+
+
 
 
 
@@ -130,6 +133,7 @@ const AppContent = () => {
               <Route path="areas" element={<Areas />} />
               <Route path="quinto_informe" element={<Dashboardquinto />} />
               <Route path="nivelSuperior" element={<NivelSuperior />} />
+              <Route path="coordinadores" element={<Coordinadores />} />
               <Route path="individual" element={<InfoIndividual />} />
               <Route
                 path="estdificultades"
