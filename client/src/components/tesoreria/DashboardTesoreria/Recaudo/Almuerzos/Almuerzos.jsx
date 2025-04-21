@@ -468,7 +468,7 @@ const Almuerzos = () => {
 
       <div className="box1Almuerzos">
         <EstadisticasAlmuerzo/>
-        <ListaAlmuerzosVendidos/>    
+       
         </div>
     </div>
   );

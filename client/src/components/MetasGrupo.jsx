@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Metas as fetchMetas, updateMetasGrupo } from '../api/dataMetasGrupos'; // Asegúrate de tener la función updateMetas importada
-import EditMetasGrupoModal from './EditMetasGrupoModal';
+import React, { useState, useEffect } from "react";
+import { Metas as fetchMetas, updateMetasGrupo } from "../api/dataMetasGrupos"; // Asegúrate de tener la función updateMetas importada
+import EditMetasGrupoModal from "./EditMetasGrupoModal";
 
 const MetasGrupo = ({ selectedGroup, selectedPeriodo }) => {
   const [metas, setMetas] = useState([]);
@@ -51,8 +51,8 @@ const MetasGrupo = ({ selectedGroup, selectedPeriodo }) => {
     }
   };
 
-  const renderTextWithLineBreaks = (text = '') => {
-    return text.split('\n').map((line, index) => (
+  const renderTextWithLineBreaks = (text = "") => {
+    return text.split("\n").map((line, index) => (
       <React.Fragment key={index}>
         {line}
         <br />
@@ -81,40 +81,85 @@ const MetasGrupo = ({ selectedGroup, selectedPeriodo }) => {
 
   return (
     <div className="metas-container">
-      <h2>Observaciones generales del grupo</h2>
-      
-        <div className="card_metas">
-          <h4>Académicos:</h4>
-          <p>{renderTextWithLineBreaks(metasToDisplay.academicos)}</p>
-          <h4>Estrategias a implementar para elevar el nivel académico:</h4>
-          <p>{renderTextWithLineBreaks(metasToDisplay.estrategiasImplementarAcademico)}</p>
+      <h2>Plan de mejoramiento académico</h2>
+
+      <div className="card_metas">
+        <h3 className="subtitulometas">Metas académicas:</h3>
+        <div className="text-metas-final">
+          <span>{renderTextWithLineBreaks(metasToDisplay.academicos)}</span>
         </div>
-         
-        {/* <div className="card">
-          <h3>Disciplina en el grupo durante el periodo:</h3>
-          <p>{renderTextWithLineBreaks(metasToDisplay.disciplinagrupo)}</p>
-        </div> */}
-     
-      <div  >
-        <div className="card_metas">
-          <h5>Estudiantes con dificultad Disciplinarias:</h5>
-          <p>{renderTextWithLineBreaks(metasToDisplay.estudiantesDificultadDisciplinarias)}</p>
-        
-          <h5>Estudiantes pendientes de procesos Disciplinarios:</h5>
-          <p>{renderTextWithLineBreaks(metasToDisplay.estudiantesPendientesDisciplinarios)}</p>
-        
-          <h5>Estudiantes con sanción por parte del comité:</h5>
-          <p>{renderTextWithLineBreaks(metasToDisplay.estudiantesSancionComite)}</p>
-        
-          <h5>Faltas que más se repiten en el grupo:</h5>
-          <p>{renderTextWithLineBreaks(metasToDisplay.faltasRepetidasGrupo)}</p>
-        
-          <h5>Estrategias a trabajar</h5>
-          <p>{renderTextWithLineBreaks(metasToDisplay.estrategiasTrabajar)}</p>
+        <h3 className="subtitulometas">
+          Estrategias a implementar para elevar el nivel académico:
+        </h3>
+        <div className="text-metas-final">
+          <span>
+            {renderTextWithLineBreaks(
+              metasToDisplay.estrategiasImplementarAcademico
+            )}
+          </span>
         </div>
       </div>
 
-      <button className="login-button" onClick={() => openEditModal(metasToDisplay)}>Editar</button>
+      <div>
+        <h2>Plan de mejoramiento comportamental</h2>
+        <div className="card_metas">
+          <h3 className="subtitulometas">
+            Estudiantes con dificultad Disciplinarias:
+          </h3>
+          <div className="text-metas-final">
+            <span>
+              {renderTextWithLineBreaks(
+                metasToDisplay.estudiantesDificultadDisciplinarias
+              )}
+            </span>
+          </div>
+
+          <h3 className="subtitulometas">
+            Estudiantes pendientes de procesos Disciplinarios:
+          </h3>
+          <div className="text-metas-final">
+            <span>
+              {renderTextWithLineBreaks(
+                metasToDisplay.estudiantesPendientesDisciplinarios
+              )}
+            </span>
+          </div>
+
+          <h3 className="subtitulometas">
+            Estudiantes con sanción por parte del comité:
+          </h3>
+          <div className="text-metas-final">
+            <span>
+              {renderTextWithLineBreaks(
+                metasToDisplay.estudiantesSancionComite
+              )}
+            </span>
+          </div>
+
+          <h3 className="subtitulometas">
+            Faltas que más se repiten en el grupo:
+          </h3>
+          <div className="text-metas-final">
+            <span>
+              {renderTextWithLineBreaks(metasToDisplay.faltasRepetidasGrupo)}
+            </span>
+          </div>
+
+          <h3 className="subtitulometas">Estrategias a trabajar</h3>
+          <div className="text-metas-final">
+            <span>
+              {renderTextWithLineBreaks(metasToDisplay.estrategiasTrabajar)}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <button
+        className="login-button"
+        onClick={() => openEditModal(metasToDisplay)}
+      >
+        Editar
+      </button>
 
       {editModalOpen && (
         <EditMetasGrupoModal

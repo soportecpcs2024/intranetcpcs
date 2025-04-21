@@ -60,13 +60,10 @@ import DescargaArchivoFacturas from "./components/tesoreria/DashboardTesoreria/R
 import ListarFacturas from "./components/tesoreria/DashboardTesoreria/Recaudo/ListarFacturas/ListarFacturas";
 import Almuerzos from "./components/tesoreria/DashboardTesoreria/Recaudo/Almuerzos/Almuerzos";
 import Coordinadores from "./components/Academico/Coordinadores";
-
-
-
-
-
-
-
+import PreEscolar from "./components/Academico/secciones/pre_escolar/PreEscolar";
+import BasicaPrimaria from "./components/Academico/secciones/basica_primaria/BasicaPrimaria";
+import BasicaSecundaria from "./components/Academico/secciones/basica_secundaria/BasicaSecundaria";
+import MediaAcademica from "./components/Academico/secciones/media_academica/MediaAcademica";
 
 const App = () => {
   useEffect(() => {
@@ -132,14 +129,23 @@ const AppContent = () => {
               <Route path="general" element={<General />} />
               <Route path="areas" element={<Areas />} />
               <Route path="quinto_informe" element={<Dashboardquinto />} />
+
+              <Route path="secciones" element={<Coordinadores />}>
+                <Route path="preescolar" element={<PreEscolar />} />
+                <Route path="bprimaria" element={<BasicaPrimaria />} />
+                <Route path="bsecundaria" element={<BasicaSecundaria />} />
+                <Route path="macademica" element={<MediaAcademica />} />
+              </Route>
+
               <Route path="nivelSuperior" element={<NivelSuperior />} />
-              <Route path="coordinadores" element={<Coordinadores />} />
+
               <Route path="individual" element={<InfoIndividual />} />
               <Route
                 path="estdificultades"
                 element={<DashboardEstDificultades />}
               />
             </Route>
+
             <Route path="documentos" element={<Documentos />} />
             <Route path="llegadastarde" element={<LlegadasTarde />} />
             <Route path="descargarpdf" element={<DescargarPdf />} />
@@ -190,7 +196,7 @@ const AppContent = () => {
               <Route path="escuela_padres" element={<Recaudoep />} />
               <Route path="almuerzos" element={<Almuerzos />} />
               <Route path="lista_facturas" element={<ListarFacturas />} />
-             
+
               <Route
                 path="formulario_inscripcion"
                 element={<FormularioInscripcion />}

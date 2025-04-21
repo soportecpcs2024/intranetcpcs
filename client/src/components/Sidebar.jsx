@@ -68,13 +68,13 @@ const Sidebar = () => {
 
         <Link
           className={`linkNav ${
-            location.pathname === "/admin/academico/coordinadores" ? "active" : ""
+            location.pathname === "/admin/academico/secciones" ? "active" : ""
           }`}
-          to="/admin/academico/coordinadores"
+          to="/admin/academico/secciones"
         >
           <SiLeaderprice className="icons" />
           <div>
-            <p>Otra cosa</p>
+            <p>Informe Lider Sec.</p>
           </div>
         </Link>
         
