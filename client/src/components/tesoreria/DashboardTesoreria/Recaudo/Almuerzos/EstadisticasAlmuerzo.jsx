@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecaudo } from "../../../../../contexts/RecaudoContext";
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
+ 
+ 
 import './Almuerzos.css';
 
 const EstadisticasAlmuerzo = () => {
@@ -38,25 +40,38 @@ const EstadisticasAlmuerzo = () => {
     }
   }, [almuerzoFactura]);
 
+ 
+ 
+
+  
   const handleDownloadExcel = () => {
     if (almuerzoFactura.length === 0) return;
-
-    const data = almuerzoFactura.map(item => ({
-      Total: item.total,
-      "Tipo de pago": item.tipoPago,
-      Fecha: new Date(item.fechaCompra).toLocaleDateString(),
-    }));
-
+  
+    const data = almuerzoFactura.map(item => {
+      const nombresAlmuerzos = item.almuerzos
+        .map(a => `${a.almuerzoId?.nombre || 'Desconocido'} x${a.cantidad}`)
+        .join(', ');
+  
+      return {
+        Estudiante: item.estudianteId?.nombre || "Sin nombre",
+        Almuerzos: nombresAlmuerzos,
+        Total: item.total,
+        "Tipo de pago": item.tipoPago,
+        Fecha: new Date(item.fechaCompra).toLocaleDateString(),
+      };
+    });
+  
     const worksheet = XLSX.utils.json_to_sheet(data);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Almuerzos");
-
+  
     const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
     const blob = new Blob([excelBuffer], { type: "application/octet-stream" });
-
+  
     const fecha = new Date().toISOString().split('T')[0]; // formato YYYY-MM-DD
     saveAs(blob, `almuerzos_vendidos_${fecha}.xlsx`);
   };
+  
 
   return (
     <div className="almuerzo-container">
@@ -81,7 +96,7 @@ const EstadisticasAlmuerzo = () => {
       <div className="almuerzo-section">
         <h3>Lista de Almuerzos Vendidos</h3>
         <button className="download-btn" onClick={handleDownloadExcel}>
-          Descargar Excel
+          Descargar Lista
         </button>
       </div>
     </div>
