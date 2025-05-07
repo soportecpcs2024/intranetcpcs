@@ -37,7 +37,7 @@ const LayoutInfoAcademicos = () => {
           >
             <div className="link-academico-b">
               <GrNotes className="icon-academico" />
-              <span>Constancias</span>
+              <span>Certificados de estudio</span>
             </div>
           </NavLink>
         </div>
