@@ -87,6 +87,10 @@ app.use('/api/informes', informesRoutes);
 const actasGradosroutes = require('./routes/graduadosCpcs/studentGraduateRoutes');
 app.use('/api/actasGrados', actasGradosroutes);
 
+// ------------ Rutas para certificados-------------
+const certificadosEstudio = require('./routes/Certificados/certificadosEstudio2025route');
+app.use('/api/certificadosEstudio', certificadosEstudio);
+
 
 
 // ------------ Rutas para extra curriculares y otros -------------

@@ -21,7 +21,7 @@ const LayoutInfoAcademicos = () => {
           >
             <div className="link-academico-b">
               <PiCertificateDuotone className="icon-academico" />
-              <span>Certificados</span>
+              <span>Constancia de desempeño</span>
             </div>
           </NavLink>
         </div>
