@@ -51,6 +51,7 @@ const AcumuladosNotas = () => {
     }
   };
 
+  console.log("Datos:", resultados);
   // Función para formatear el nombre del archivo
   const generateFileName = (estudiante) => {
     const fullName = `${estudiante.NOMBRE}`.trim(); // Asegúrate de que los campos coincidan con tu estructura

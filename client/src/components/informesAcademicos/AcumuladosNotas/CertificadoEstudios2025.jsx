@@ -7,6 +7,7 @@ import {
   Image,
   StyleSheet,
 } from "@react-pdf/renderer";
+
 import ImageLogo from "/logo2025.png";
 
 // Define styles for the PDF
@@ -19,7 +20,6 @@ const styles = StyleSheet.create({
     color: "#000000",
     textAlign: "center",
     fontWeight: "bold",
-    
   },
   subtitle: {
     fontSize: 8,
@@ -49,12 +49,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 14,
   },
-  view_p: {
-    marginTop: 10,
-  },
+  view_p: {},
   p: {
     fontWeight: "bold",
-    fontSize: 10,
+    fontSize: 18,
   },
   row: {
     flexDirection: "row",
@@ -108,7 +106,7 @@ const styles = StyleSheet.create({
 
   footer_principal: {
     position: "absolute",
-    top: 500,
+    top: 230,
     left: 0,
     right: 0,
     display: "flex",
@@ -117,7 +115,7 @@ const styles = StyleSheet.create({
     color: "#2595f7",
     justifyContent: "center",
     fontWeight: "bold",
-  },  
+  },
   // ... other styles
   membrete_header: {
     display: "flex",
@@ -154,58 +152,111 @@ const CertificadoEstudios2025 = ({ estudiante }) => (
         </View>
       </View>
 
-      <Text style={{marginTop: 50, textAlign: "right",  fontWeight: "bold"}}>DANE  305001019827</Text>
-      
-
-      <Text style={{ marginTop: 20, fontSize: 10, textAlign: "justify" }}>EL COLEGIO PANAMERICANO COLOMBO SUECO, FILIAL DE LA MISION PANAMERICANA DE COLOMBIA, ESTABLECIMIENTO PRIVADO DE CARÁCTER FORMAL APROBADO CON RESOLUCION PARA PREESCOLAR 009070 DEL 14 DE SEPTIEMBRE DE 1994, PARA LA BASICA PRIMARIA Y SECUNDARIA 000108 DEL 26 DE MARZO DE 1996 Y PARA EL NIVEL DE MEDIA ACADÉMICA  4104 DEL 22 DE MAYO DE 2001. </Text>
-
-      <Text style={{ color: "#000000",  fontWeight: "bold",marginTop: 15, textAlign: "center" }}>H A C E   C O N S T A R:</Text>
-      {/* Aquí puedes agregar más contenido del certificado usando los datos del estudiante */}
-      <Text style={{ marginTop: 20, fontSize: 14 }}>
-        El estudiante <Text style={{ fontWeight: "bold" }}>{estudiante.NOMBRE}</Text> identificado(a) con{" "}
-        <Text style={{ fontWeight: "bold" }}>{estudiante.Tipo_de_documento}</Text> {" "}
-        <Text style={{ fontWeight: "bold" }}>{estudiante.Número_de_identificación}</Text> Se encuentra cursando el grado {" "}
-        <Text style={{ fontWeight: "bold" }}>{estudiante.Grado}</Text> de la sección{" "}
-        <Text style={{ fontWeight: "bold" }}>{estudiante.SECCION}</Text> durante el  año lectivo 2025.
+      <Text
+        style={{
+          marginTop: 50,
+          marginBottom: 50,
+          textAlign: "right",
+          fontWeight: "bold",
+        }}
+      >
+        DANE 305001019827
       </Text>
 
-       <View style={styles.view_p}>
-                   <Text style={styles.p}>
-                     Se firma en la ciudad de Medellín a los {new Date().getDate()} días
-                     del mes de {new Date().toLocaleString("es-ES", { month: "long" })} de{" "}
-                     {new Date().getFullYear()}.
-                   </Text>
-                   <Text style={{fontWeight: "bold", fontSize: 10, marginTop:20}}>
-                     Para cualquier verificación comunicarse al teléfono (604) 442 06 06.
-                     Ext 505
-                   </Text>
-           
-                   <View style={styles.footer}>
-                     
-           
-                     <View style={styles.footer_in}>
-                       <Text style={styles.p}>Luz Miriyam Botero</Text>
-                       <Text style={styles.p}>Secretaría Académica</Text>
-                       
-                     </View>
-                   </View>
-           
-                   <View style={styles.footer_principal}>
-                     <View>
-                       <Text>
-                         FILIAL DE LA MISION PANAMERICANA DE COLOMBIA - FUNDADO EN EL 1994
-                       </Text>
-                     </View>
-           
-                     <View>
-                       <Text>PERSONERIA JURIDICA ESPECIAL 867 DE 1996</Text>
-                     </View>
-           
-                     <View>
-                       <Text>NIT.860.007.390-1</Text>
-                     </View>
-                   </View>
-                 </View>
+      <Text style={{ marginTop: 20, fontSize: 12, textAlign: "justify" }}>
+        EL COLEGIO PANAMERICANO COLOMBO SUECO, FILIAL DE LA MISION PANAMERICANA
+        DE COLOMBIA, ESTABLECIMIENTO PRIVADO DE CARÁCTER FORMAL APROBADO CON
+        RESOLUCION PARA PREESCOLAR 009070 DEL 14 DE SEPTIEMBRE DE 1994, PARA LA
+        BASICA PRIMARIA Y SECUNDARIA 000108 DEL 26 DE MARZO DE 1996 Y PARA EL
+        NIVEL DE MEDIA ACADÉMICA 4104 DEL 22 DE MAYO DE 2001.{" "}
+      </Text>
+
+      <Text
+        style={{
+          color: "#000000",
+          fontWeight: "bold",
+          marginTop: 50,
+          textAlign: "center",
+        }}
+      >
+        H A C E C O N S T A R:
+      </Text>
+      {/* Aquí puedes agregar más contenido del certificado usando los datos del estudiante */}
+      <Text style={{ marginTop: 40, textAlign: "justify" }}>
+        El estudiante{" "}
+        <Text style={{ fontWeight: "bold", textDecoration: "underline" }}>
+          {estudiante.NOMBRE}
+        </Text>{" "}
+        identificado(a) con{" "}
+        <Text style={{ fontWeight: "bold", fontSize: 14 }}>
+          {estudiante.Tipo_de_documento}
+        </Text>{" "}
+        <Text
+          style={{
+            fontWeight: "bold",
+            fontSize: 14,
+            textDecoration: "underline",
+          }}
+        >
+          {estudiante.Número_de_identificación}
+        </Text>{" "}
+        Se encuentra cursando el grado{" "}
+        <Text
+          style={{
+            fontWeight: "bold",
+            fontSize: 14,
+            textDecoration: "underline",
+          }}
+        >
+          {estudiante.Grado}
+        </Text>{" "}
+        de la sección{" "}
+        <Text
+          style={{
+            fontWeight: "bold",
+            fontSize: 14,
+            textDecoration: "underline",
+          }}
+        >
+          {estudiante.SECCION}
+        </Text>{" "}
+        durante el año lectivo 2025.
+      </Text>
+
+      <View>
+        <Text style={{ marginTop: 50, fontSize: 13 }}>
+          Se firma en la ciudad de Medellín a los {new Date().getDate()} días
+          del mes de {new Date().toLocaleString("es-ES", { month: "long" })} de{" "}
+          {new Date().getFullYear()}.
+        </Text>
+        <Text style={{ fontWeight: "bold", fontSize: 13, marginTop: 20 }}>
+          Para cualquier verificación comunicarse al teléfono (604) 442 06 06.
+          Ext 505
+        </Text>
+
+        <View style={styles.footer}>
+          <View style={styles.footer_in}>
+            <Text style={styles.p}>Luz Miriyam Botero</Text>
+            <Text style={styles.p}>Secretaría Académica</Text>
+          </View>
+        </View>
+
+        <View style={styles.footer_principal}>
+          <View>
+            <Text>
+              FILIAL DE LA MISION PANAMERICANA DE COLOMBIA - FUNDADO EN EL 1994
+            </Text>
+          </View>
+
+          <View>
+            <Text>PERSONERIA JURIDICA ESPECIAL 867 DE 1996</Text>
+          </View>
+
+          <View>
+            <Text>NIT.860.007.390-1</Text>
+          </View>
+        </View>
+      </View>
     </Page>
   </Document>
 );
