@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   view_p: {},
   p: {
     fontWeight: "bold",
-    fontSize: 18,
+    fontSize: 16,
   },
   row: {
     flexDirection: "row",
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
 
   footer_principal: {
     position: "absolute",
-    top: 230,
+    top: 220,
     left: 0,
     right: 0,
     display: "flex",
