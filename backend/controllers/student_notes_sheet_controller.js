@@ -74,7 +74,7 @@ const deleteNote = async (req, res) => {
 // Controlador para obtener todas las notas de estudiantes filtradas por nivel
 const getAllNotesSection = async (req, res) => {
   try {
-    const { nivel } = req.query;
+    const { nivel, periodo } = req.query;
 
     // Define los grupos según el nivel
     const niveles = {
@@ -91,6 +91,10 @@ const getAllNotesSection = async (req, res) => {
       filtro.grupo = { $in: niveles[nivel] };
     }
 
+    if (periodo) {
+      filtro.periodo = periodo;
+    }
+
     const studentNotes = await StudentNotes.find(filtro);
     res.json(studentNotes);
   } catch (err) {
@@ -102,7 +106,7 @@ const getAllNotesSection = async (req, res) => {
 // Controlador para obtener el promedio por materia y grupo
 const getPromedioPorMateriaYGrupo = async (req, res) => {
   try {
-    const { nivel } = req.query;  // Se puede filtrar por nivel si se pasa como query
+    const { nivel, periodo } = req.query;  // Se puede filtrar por nivel si se pasa como query
 
     // Definir los grupos por nivel
     const niveles = {
@@ -114,16 +118,25 @@ const getPromedioPorMateriaYGrupo = async (req, res) => {
 
     let filtro = {};
 
+    // Validar que se haya proporcionado un nivel válido
+    if (nivel && !niveles[nivel]) {
+      return res.status(400).json({ error: 'Nivel no válido. Los niveles válidos son: preescolar, primaria, secundaria, media.' });
+    }
+
     // Si el nivel es proporcionado en la query, aplicar el filtro correspondiente
     if (nivel && niveles[nivel]) {
       filtro.grupo = { $in: niveles[nivel] };
     }
 
-    // Buscar las notas de los estudiantes según el filtro de nivel (si se aplica)
+     if (periodo) {
+      filtro.periodo = periodo;
+    }
+
+    // Buscar las notas de los estudiantes según el filtro de nivel y periodo
     const studentNotes = await StudentNotes.find(filtro);
 
     if (studentNotes.length === 0) {
-      return res.status(404).json({ error: 'No se encontraron notas de estudiantes' });
+      return res.status(404).json({ error: 'No se encontraron notas de estudiantes para el nivel y período especificado.' });
     }
 
     // Inicializar variables para los totales de las materias y los conteos
@@ -160,28 +173,27 @@ const getPromedioPorMateriaYGrupo = async (req, res) => {
       });
     });
 
-   // Calcular el promedio por materia para cada grupo
-let promediosFinales = {};
+    // Calcular el promedio por materia para cada grupo
+    let promediosFinales = {};
 
-for (let grupo in promediosPorGrupo) {
-  promediosFinales[grupo] = {};
-  for (let materia in promediosPorGrupo[grupo]) {
-    const { suma, cantidad } = promediosPorGrupo[grupo][materia];
-    if (cantidad > 0) {
-      const promedio = parseFloat((suma / cantidad).toFixed(1));
-      // Solo agregar si el promedio es mayor a 0
-      if (promedio > 0  && promedio < 4) {
-        promediosFinales[grupo][materia] = promedio;
+    for (let grupo in promediosPorGrupo) {
+      promediosFinales[grupo] = {};
+      for (let materia in promediosPorGrupo[grupo]) {
+        const { suma, cantidad } = promediosPorGrupo[grupo][materia];
+        if (cantidad > 0) {
+          const promedio = parseFloat((suma / cantidad).toFixed(1));
+          // Solo agregar si el promedio es mayor a 0
+          if (promedio > 0 && promedio < 4) {
+            promediosFinales[grupo][materia] = promedio;
+          }
+        }
+      }
+
+      // Eliminar el grupo si no tiene ninguna materia con promedio válido
+      if (Object.keys(promediosFinales[grupo]).length === 0) {
+        delete promediosFinales[grupo];
       }
     }
-    // Si cantidad es 0, no se agrega la materia
-  }
-
-  // Eliminar el grupo si no tiene ninguna materia con promedio válido
-  if (Object.keys(promediosFinales[grupo]).length === 0) {
-    delete promediosFinales[grupo];
-  }
-}
 
     // Devolver los promedios por grupo y materia
     res.json(promediosFinales);
@@ -190,6 +202,7 @@ for (let grupo in promediosPorGrupo) {
     res.status(500).json({ error: 'Error al calcular los promedios por grupo' });
   }
 };
+
 
 
 

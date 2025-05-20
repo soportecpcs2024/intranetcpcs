@@ -12,10 +12,10 @@ export const Students = async () => {
 };
 
 
-export const StudentsSection = async (nivel) => {
+export const StudentsSection = async (nivel, periodo) => {
   try {
-    const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/student_notes`, {
-      params: { nivel },
+    const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/student_notes/seccion`, {
+      params: { nivel, periodo },
     });
     return response.data;
   } catch (error) {
@@ -23,10 +23,10 @@ export const StudentsSection = async (nivel) => {
     throw error;
   }
 };
-export const StudentsSectionPromedioMaterias = async (nivel) => {
+export const StudentsSectionPromedioMaterias = async (nivel, periodo) => {
   try {
     const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/student_notes/promedio-materia-grupo`, {
-      params: { nivel },
+      params: { nivel, periodo },
     });
     return response.data;
   } catch (error) {

@@ -67,6 +67,12 @@ h1{
   font-style: normal;
 }
 
+.img2{
+  border: 1px solid rgb(164, 164, 164);
+  border-radius: 8px;
+
+}
+
 .roboto-medium-italic {
   font-family: "Roboto", sans-serif;
   font-weight: 500;

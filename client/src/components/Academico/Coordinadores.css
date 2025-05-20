@@ -1,0 +1,50 @@
+.seccion-metas-lideres{
+    background-color: rgb(247, 247, 248);
+    margin: 0;
+}
+.seccion-metas-container{
+    padding: 200px;
+}
+.seccion-metas-lideres{
+    display: flex;
+    gap: 10px;
+}
+.seccion-metas-lideres .seccion-metas-box:nth-child(1){
+     flex-basis: calc(50% - 5px);
+}
+.seccion-metas-lideres .seccion-metas-box:nth-child(2){
+     flex-basis: calc(50% - 5px);
+}
+
+.periodos{
+  display: flex;
+  align-items: center;
+}
+.periodo-buttons-container {
+  display: flex;
+  gap: 3px;
+  margin: 1px 0;
+  width: 30%;
+}
+
+.periodo-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #007bff;
+  background-color: white;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.periodo-button:hover {
+  background-color: #e6f0ff;
+}
+
+.periodo-button.selected {
+  background-color: #007bff;
+  color: white;
+}

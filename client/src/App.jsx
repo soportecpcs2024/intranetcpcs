@@ -64,6 +64,7 @@ import PreEscolar from "./components/Academico/secciones/pre_escolar/PreEscolar"
 import BasicaPrimaria from "./components/Academico/secciones/basica_primaria/BasicaPrimaria";
 import BasicaSecundaria from "./components/Academico/secciones/basica_secundaria/BasicaSecundaria";
 import MediaAcademica from "./components/Academico/secciones/media_academica/MediaAcademica";
+import DashboardEscPadres from "./components/EscPadres/DashboardEP/DashboardEscPadres";
 
 const App = () => {
   useEffect(() => {
@@ -201,6 +202,10 @@ const AppContent = () => {
                 path="formulario_inscripcion"
                 element={<FormularioInscripcion />}
               />
+            </Route>
+
+            <Route path="esc_padres" element={<DashboardEscPadres />}>
+
             </Route>
           </Route>
         )}

@@ -46,6 +46,7 @@ const LayoutTesoreria = () => {
           Hora: clase.hora,
           "Total Pagado": factura.total,
           "Tipo de Pago": factura.tipoPago,
+          "Mes aplicado": factura.mes_aplicado,
           "Fecha Compra": new Date(factura.fechaCompra).toLocaleDateString(),
         });
       });

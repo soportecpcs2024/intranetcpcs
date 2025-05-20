@@ -1,49 +1,22 @@
 import { useEffect, useState } from "react";
-import { StudentsSection, StudentsSectionPromedioMaterias } from "../../../../api/DataApi";
- 
+import {
+  StudentsSection,
+  StudentsSectionPromedioMaterias,
+} from "../../../../api/DataApi";
+
 import BarChartPromediosGruposPrimaria from "../basica_primaria/BarChartPromediosGruposPrimaria";
 import PieChartComponentGruposPrimaria from "../basica_primaria/PieChartComponentGruposPrimaria";
 import "../basica_primaria/basicaPrimaria.css";
 import ListarMaterias from "../../ListarMaterias/ListarMaterias";
-
+import "../../Coordinadores.css";
 
 const MediaAcademica = () => {
   const [dataPrimaria, setDataPrimaria] = useState([]);
-  const [dataMaterias, setDataMaterias] = useState({})
+  const [dataMaterias, setDataMaterias] = useState({});
   const [loading, setLoading] = useState(true);
+  const [selectedPeriodo, setSelectedPeriodo] = useState("PERIODO 1");
 
   const Lideres = ["GONZALEZ VILORIA ANA MARELVIS"];
-
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await StudentsSection("media");
-        setDataPrimaria(data);
-      } catch (error) {
-        console.error("Error al obtener las notas de básica primaria", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-  
-    fetchData();
-  }, []); 
-
-
-  useEffect(() => {
-    const fetchDataMateria = async () => {
-      try {
-        const data = await StudentsSectionPromedioMaterias("media");
-        setDataMaterias(data);
-      } catch (error) {
-        console.error("Error al obtener las notas de básica primaria", error);
-      }
-    };
-
-    fetchDataMateria();
-  }, []);
-
 
   const capitalizar = (str) =>
     str
@@ -51,22 +24,45 @@ const MediaAcademica = () => {
       .split(" ")
       .map((palabra) => palabra.charAt(0).toUpperCase() + palabra.slice(1))
       .join(" ");
-  
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await StudentsSection("media");
-        setDataPrimaria(data);
-      } catch (error) {
-        console.error("Error al obtener las notas de básica primaria", error);
+  const handlePeriodoClick = (periodo) => {
+    setSelectedPeriodo(periodo);
+  };
+
+ useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const data = await StudentsSection("media", selectedPeriodo);
+      setDataPrimaria(data);
+    } catch (error) {
+      console.error("Error al obtener las notas de media", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchData();
+}, [selectedPeriodo]);
+
+useEffect(() => {
+  const fetchDataMateria = async () => {
+    try {
+      const data = await StudentsSectionPromedioMaterias("media", selectedPeriodo);
+      if (data && Object.keys(data).length > 0) {
+        setDataMaterias(data);
+      } else {
+        setDataMaterias(null); // No hay datos
       }
-    };
+    } catch (error) {
+      console.error("Error al obtener los promedios por materia", error);
+      setDataMaterias(null); // Error: también tratar como sin datos
+    }
+  };
 
-    fetchData();
-  }, []);
+  fetchDataMateria();
+}, [selectedPeriodo]);
 
-   return (
+  return (
     <div>
       {loading ? (
         <div className="spinner-container">
@@ -75,42 +71,102 @@ const MediaAcademica = () => {
         </div>
       ) : (
         <div>
-          <div className="container-graficas-seccion-titulo">
-            <div>
-              <h3>Media Académica</h3>
-            </div>
-            
-            <div>
-              <p className="nombre-lider">{capitalizar(Lideres[0])}</p>
-            </div>
-  
-            <div>
-              <p>Estudiantes por sección: {dataPrimaria.length}</p>
-            </div>
-          </div>
-  
-          <div className="container-graficas-seccion">
-            <div className="graficas-seccion-box">
-              <BarChartPromediosGruposPrimaria data={dataPrimaria} />
-            </div>
-            <div className="graficas-seccion-box">
-              <PieChartComponentGruposPrimaria data={dataPrimaria} />
+          {/* Botones de periodo */}
+          <div className="periodos">
+            <div>Periodo</div>
+            <div className="periodo-buttons-container">
+              {["PERIODO 1", "PERIODO 2", "PERIODO 3", "PERIODO 4"].map((periodo) => (
+                <button
+                  key={periodo}
+                  className={`periodo-button ${selectedPeriodo === periodo ? "selected" : ""}`}
+                  onClick={() => handlePeriodoClick(periodo)}
+                >
+                  {periodo.split(" ")[1]}
+                </button>
+              ))}
             </div>
           </div>
 
           <div>
-            <ListarMaterias  dataMaterias={dataMaterias} />
+            <h3>Media Académica</h3>
+          </div>
+          <div>
+            <p className="nombre-lider">{capitalizar(Lideres[0])}</p>
+          </div>
+          <div>
+            <p>Estudiantes por sección: {dataPrimaria.length}</p>
           </div>
 
-          <div className="seccion-metas">
-            Metas
+          <div className="seccion-metas-lideres">
+            <div className="seccion-metas-box">
+              <h3>Plan de mejoramiento académico</h3>
+
+              <div className="card_metas">
+                <h4 className="subtitulometas">Metas académicas:</h4>
+                <div className="text-metas-final"></div>
+                <h4 className="subtitulometas">
+                  Estrategias a implementar para elevar el nivel académico:
+                </h4>
+                <div className="text-metas-final"></div>
+              </div>
+
+              <div>
+                <h3>Plan de mejoramiento comportamental</h3>
+                <div className="card_metas">
+                  <h3 className="subtitulometas">
+                    Estudiantes con dificultad Disciplinarias:
+                  </h3>
+                  <div className="text-metas-final"></div>
+
+                  <h3 className="subtitulometas">
+                    Estudiantes pendientes de procesos Disciplinarios:
+                  </h3>
+                  <div className="text-metas-final"></div>
+
+                  <h3 className="subtitulometas">
+                    Estudiantes con sanción por parte del comité:
+                  </h3>
+                  <div className="text-metas-final"></div>
+
+                  <h3 className="subtitulometas">
+                    Faltas que más se repiten en el grupo:
+                  </h3>
+                  <div className="text-metas-final"></div>
+
+                  <h3 className="subtitulometas">Estrategias a trabajar</h3>
+                  <div className="text-metas-final"></div>
+                </div>
+              </div>
+            </div>
+
+            <div className="seccion-metas-box">
+              <div className="container-graficas-seccion-titulo"></div>
+
+              <div className="container-graficas-seccion">
+                <div className="graficas-seccion-box">
+                  <BarChartPromediosGruposPrimaria data={dataPrimaria} />
+                </div>
+                <div className="graficas-seccion-box">
+                  <PieChartComponentGruposPrimaria data={dataPrimaria} />
+                </div>
+              </div>
+
+              <div>
+  {dataMaterias ? (
+    <ListarMaterias dataMaterias={dataMaterias} />
+  ) : (
+    <p style={{ textAlign: "center", marginTop: "1rem", fontWeight: "bold", color: "#b00" }}>
+      No hay datos de promedios por materia para {selectedPeriodo}.
+    </p>
+  )}
+</div>
+
+            </div>
           </div>
         </div>
       )}
     </div>
   );
 };
-
-
 
 export default MediaAcademica;
