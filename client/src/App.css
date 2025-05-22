@@ -152,7 +152,7 @@ h1{
 .auth__tabs {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
@@ -226,7 +226,7 @@ h1{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 15px;
+  padding: 5px;
   border-radius: 12px;
   border-end-end-radius: 70px;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
@@ -246,7 +246,7 @@ form {
 .input-group {
   display: flex;
   flex-direction: column;
-    
+  
   width: 100%;
 }
 .input-group label {
@@ -271,9 +271,9 @@ input::placeholder {
   border: 1px solid hsla(0, 0%, 100%, 0.507);
   outline: none;
   border-radius: 5px;
-  color: black;
+  color: rgb(0, 0, 0);
   font-weight: 600;
-   
+  font-size: 17px;
   font-weight: lighter;
   box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
 }
@@ -562,6 +562,8 @@ input::placeholder {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  
+  
   
   
    
@@ -1312,9 +1314,7 @@ box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
  
 
 }
-.prom_tables{
-  
-}
+ 
  
 .box_prom_tables-doc {
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px; 
@@ -1796,6 +1796,7 @@ p {
   .admin-layout-header-links-pre{
     display: flex;
     flex-direction: row;
+   
      
   }
 
@@ -1819,7 +1820,8 @@ p {
 
   .admin-layout-header-links li{
     font-size: 16px;  
-    margin: 10px;
+   
+    
   }
   
   .admin-layout-header-links-a{
@@ -1929,8 +1931,10 @@ p {
   }
 
   .admin-layout-header-logo{
-    width: 100px;
-    height: 100px; 
+    margin-top: 5px;
+    margin-right: 10px;
+    width: 50px;
+    height: 50px; 
     
     padding: 0px;
   }
@@ -1999,6 +2003,7 @@ p {
     
    margin: 0 3px; /* Elimina el margen */
    padding: 0; /* Elimina el relleno */
+   
     
  }
 
@@ -2029,29 +2034,29 @@ p {
   .admin-header{
  
       height: 90px; 
+      width: 100%;
+      
   }
    
  
-   
-  .admin-layout-header-links-pre{
-    display: flex;
-    flex-direction: column;
-    
-     
-  }
+ 
+ 
+
+ 
   .admin-layout-header-text-span{
-    font-size: 22px;
+    font-size: 14px;
   }
-
+  
   .admin-layout-header-links li{
-    font-size: 12px;
-    margin: 5px;
- }
-
- .admin-layout-header-links-a{
+    font-size: 10px;  justify-content: center;
+    
+  }
+  
+  .admin-layout-header-links-a{
+    
+    
    
-   
-  margin-top: -30px;
+  margin-top: -50px;
  
     
  }
@@ -2068,7 +2073,7 @@ p {
    
   }
   .logo-auth{
-   width: 50px;
+   width: 100px;
   }
   .formulario{
    margin: 5px;
@@ -2089,10 +2094,7 @@ p {
      
   }
 
-  .admin-header{
-
-    height: 150px; 
-  }
+   
 
   .admin-header .dropdown-menu {
     margin-top: -75px;

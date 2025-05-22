@@ -160,18 +160,9 @@ const AdminHeader = () => {
                     </li>
                   </div>
 
+                 
                   <div className="admin-layout-header-links-a">
-                    <li>
-                      <Link
-                        to="https://site2.q10.com/login?ReturnUrl=%2F&aplentId=d12efeb8-f609-4dd1-87cd-1cb0c95d32e2"
-                        target="_blank"
-                      >
-                        Q 10
-                      </Link>
-                    </li>
-                  </div>
-                  <div className="admin-layout-header-links-a">
-                    <button className="btn-logaut" onClick={handleLogout}>
+                    <button   onClick={handleLogout}>
                       Cerrar{" "}
                     </button>
                   </div>
