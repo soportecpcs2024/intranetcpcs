@@ -119,6 +119,16 @@ app.use('/api/recaudo/almuerzos', almuerzos);
 const almuerzoFactura = require('./routes/recaudo/Almuerzos/almuerzosFacturaRoutes');
 app.use('/api/recaudo/almuerzoFactura', almuerzoFactura);
 
+//------------------ Plan Mejoramiento ----------------
+
+const planMejoramiento = require('./routes/planMejoramientoSeccion/planMejoramientoSeccionesRoutes');
+app.use('/api/planMejora', planMejoramiento);
+
+
+//------------------ Tareas ----------------
+
+const tareas = require('./routes/Tareas/tareasRoutes');
+app.use('/api/tareas', tareas);
 
 // Configuración y arranque del servidor
 const PORT = process.env.SERVER_PORT || 3000;

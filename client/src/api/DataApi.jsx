@@ -54,19 +54,16 @@ export const LlegadasTardeData = async () => {
     throw error;
   }
 };
-export const crearLlegadasTardeData = async (nuevaLlegada) => {
+export const CrearLlegadasTardeData = async (nuevaLlegada) => {
   try {
-    const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/llegadastarde`, nuevaLlegada, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/llegadastarde`, nuevaLlegada);
     return response.data;
   } catch (error) {
     console.error("Error creating tardiness entry", error);
     throw error;
   }
 };
+
 
  
 
@@ -83,6 +80,15 @@ export const verTodosLosProductos = async () => {
 export const verTodosLosUsuarios = async () => {
   try {
     const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/usuarios`);
+    return response;
+  } catch (error) {
+    console.error('Error fetching productos:', error);
+    throw error;
+  }
+};
+export const VerPlanMejoramiento = async () => {
+  try {
+    const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/planMejora`);
     return response;
   } catch (error) {
     console.error('Error fetching productos:', error);

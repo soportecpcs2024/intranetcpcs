@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Outlet, useNavigate, Link } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import Logo from "/logo2025.png";
 import { useAuth } from "../../contexts/AuthContext";
-import { HiMenuAlt3 } from "react-icons/hi"; // Importa el icono del menú hamburguesa
+
 const AdminHeader = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
@@ -130,23 +130,34 @@ const AdminHeader = () => {
                       <Link to="/admin/soporte">Adm Soporte</Link>
                     </li>
                   </div>
+
+
+
+                  
+
+
                   <div className="admin-layout-header-links-a">
-                     <li>
-                    <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Es. Padres</Link>
-                      {isDropdownOpen && (
-                        <ul className="dropdown-menu">
-                          <li>
-                            <Link to="esc_padres">Esc de Padres</Link>
-                          </li>
-                          <li>
-                            <Link to="tesoreria">Cartera </Link>
-                          </li>
-                          
-                        </ul>
-                      )}
-                    </div>
-                  </li>
+                    <li>
+                      <div className="dropdown">
+                        <Link onClick={toggleDropdown}>Es. Padres</Link>
+                        {isDropdownOpen && (
+                          <ul className="dropdown-menu">
+                            <li>
+                              <Link to="esc_padres">Esc de Padres</Link>
+                            </li>
+                            <li>
+                              <Link to="tesoreria">Cartera </Link>
+                            </li>
+                          </ul>
+                        )}
+                      </div>
+                    </li>
+                  </div>
+
+                 <div className="admin-layout-header-links-a">
+                    <li>
+                      <Link to="programadorTareas">Tareas CPCS</Link>
+                    </li>
                   </div>
 
                   <div className="admin-layout-header-links-a">

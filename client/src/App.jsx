@@ -65,6 +65,13 @@ import BasicaPrimaria from "./components/Academico/secciones/basica_primaria/Bas
 import BasicaSecundaria from "./components/Academico/secciones/basica_secundaria/BasicaSecundaria";
 import MediaAcademica from "./components/Academico/secciones/media_academica/MediaAcademica";
 import DashboardEscPadres from "./components/EscPadres/DashboardEP/DashboardEscPadres";
+import DashboardProgramadorTareas from "./components/programadorTareas/DashboardProgramadorTareas/DashboardProgramadorTareas";
+import { TareasProvider } from "./contexts/TareaContext";
+import CrearTarea from "./components/programadorTareas/paginasTareas/CrearTarea";
+import ListarTareas from "./components/programadorTareas/paginasTareas/ListarTareas";
+import EstadisticasTareas from "./components/programadorTareas/paginasTareas/EstadisticasTareas";
+
+
 
 const App = () => {
   useEffect(() => {
@@ -99,7 +106,9 @@ const App = () => {
         <ProductStatisticsProvider>
           <UserProvider>
             <RecaudoProvider>
-              <AppContent />
+              <TareasProvider>
+                <AppContent />
+              </TareasProvider>
             </RecaudoProvider>
           </UserProvider>
         </ProductStatisticsProvider>
@@ -204,8 +213,15 @@ const AppContent = () => {
               />
             </Route>
 
-            <Route path="esc_padres" element={<DashboardEscPadres />}>
+            <Route path="esc_padres" element={<DashboardEscPadres />}></Route>
 
+            <Route
+              path="programadorTareas"
+              element={<DashboardProgramadorTareas />}
+            >
+              <Route path="crear" element={<CrearTarea />} />
+              <Route path="listar" element={<ListarTareas />} />
+              <Route path="estadisticas" element={<EstadisticasTareas />} />
             </Route>
           </Route>
         )}

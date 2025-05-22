@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { format, addHours } from 'date-fns';
+import  { useState } from 'react';
+import { addHours } from 'date-fns';
 import './AgregarLlegadasTarde.css';
-import { crearLlegadasTardeData } from "../../../../api/DataApi";
+import { CrearLlegadasTardeData } from "../../../../api/DataApi";
 
 const AgregarLlegadasTarde = () => {
   const [numIdentificacion, setNumIdentificacion] = useState('');
@@ -36,7 +36,7 @@ const AgregarLlegadasTarde = () => {
     };
 
     try {
-      await crearLlegadasTardeData(nuevaLlegada);
+      await CrearLlegadasTardeData(nuevaLlegada);
       setFechas([...fechas, fechaLocal]);
       setNumIdentificacion('');
       setFecha('');
