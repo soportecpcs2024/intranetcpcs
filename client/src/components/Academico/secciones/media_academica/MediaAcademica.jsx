@@ -3,6 +3,7 @@ import {
   StudentsSection,
   StudentsSectionPromedioMaterias,
   VerPlanMejoramiento,
+  ActualizarPlanMejoramiento,
 } from "../../../../api/DataApi";
 
 import BarChartPromediosGruposPrimaria from "../basica_primaria/BarChartPromediosGruposPrimaria";
@@ -14,10 +15,11 @@ import "../../Coordinadores.css";
 const MediaAcademica = () => {
   const [dataPrimaria, setDataPrimaria] = useState([]);
   const [dataMaterias, setDataMaterias] = useState({});
-  const [planMejora, setPlanMejora] = useState({});
-
+  const [planMejora, setPlanMejora] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedPeriodo, setSelectedPeriodo] = useState("PERIODO 1");
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedPlan, setEditedPlan] = useState({});
 
   const Lideres = ["GONZALEZ VILORIA ANA MARELVIS"];
 
@@ -50,18 +52,11 @@ const MediaAcademica = () => {
   useEffect(() => {
     const fetchDataMateria = async () => {
       try {
-        const data = await StudentsSectionPromedioMaterias(
-          "media",
-          selectedPeriodo
-        );
-        if (data && Object.keys(data).length > 0) {
-          setDataMaterias(data);
-        } else {
-          setDataMaterias(null); // No hay datos
-        }
+        const data = await StudentsSectionPromedioMaterias("media", selectedPeriodo);
+        setDataMaterias(data && Object.keys(data).length > 0 ? data : null);
       } catch (error) {
         console.error("Error al obtener los promedios por materia", error);
-        setDataMaterias(null); // Error: también tratar como sin datos
+        setDataMaterias(null);
       }
     };
 
@@ -72,17 +67,13 @@ const MediaAcademica = () => {
     const fetchDataPlanMejora = async () => {
       try {
         const response = await VerPlanMejoramiento("media", selectedPeriodo);
-        // console.log("Respuesta completa:", response);
-
-        // Si response es un objeto con la propiedad "data" que contiene el array
-        const dataArray = response.data || []; // Usa [] si no hay data
-
+        const dataArray = response.data || [];
         const filtro = dataArray.find(
           (item) => item.seccion === "media" && item.periodo === selectedPeriodo
         );
-
         if (filtro) {
           setPlanMejora(filtro);
+          setEditedPlan(filtro); // Inicializamos el estado editable
         } else {
           setPlanMejora(null);
         }
@@ -95,6 +86,21 @@ const MediaAcademica = () => {
     fetchDataPlanMejora();
   }, [selectedPeriodo]);
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditedPlan((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleGuardarCambios = async () => {
+    try {
+      await ActualizarPlanMejoramiento(planMejora._id, editedPlan);
+      setPlanMejora(editedPlan);
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Error al actualizar el plan de mejoramiento", error);
+    }
+  };
+
   return (
     <div>
       {loading ? (
@@ -104,98 +110,93 @@ const MediaAcademica = () => {
         </div>
       ) : (
         <div>
-          {/* Botones de periodo */}
           <div className="periodos">
             <div>Periodo</div>
             <div className="periodo-buttons-container">
-              {["PERIODO 1", "PERIODO 2", "PERIODO 3", "PERIODO 4"].map(
-                (periodo) => (
-                  <button
-                    key={periodo}
-                    className={`periodo-button ${
-                      selectedPeriodo === periodo ? "selected" : ""
-                    }`}
-                    onClick={() => handlePeriodoClick(periodo)}
-                  >
-                    {periodo.split(" ")[1]}
-                  </button>
-                )
-              )}
+              {["PERIODO 1", "PERIODO 2", "PERIODO 3", "PERIODO 4"].map((periodo) => (
+                <button
+                  key={periodo}
+                  className={`periodo-button ${selectedPeriodo === periodo ? "selected" : ""}`}
+                  onClick={() => handlePeriodoClick(periodo)}
+                >
+                  {periodo.split(" ")[1]}
+                </button>
+              ))}
             </div>
           </div>
 
-          <div>
-            <h3>Media Académica</h3>
-          </div>
-          <div>
-            <p className="nombre-lider">{capitalizar(Lideres[0])}</p>
-          </div>
-          <div>
-            <p>Estudiantes por sección: {dataPrimaria.length}</p>
-          </div>
+          <h3>Media Académica</h3>
+          <p className="nombre-lider">{capitalizar(Lideres[0])}</p>
+          <p className="num_estudiantes_seccion">Estudiantes por sección: {dataPrimaria.length}</p>
 
           <div className="seccion-metas-lideres">
             <div className="seccion-metas-box">
               <h3>Plan de mejoramiento académico</h3>
 
-              <div className="card_metas">
-                <h4 className="subtitulometas">Metas académicas:</h4>
-                <div className="text-metas-final">
-                  <p>{planMejora.metasAcademicas}</p>
-                </div>
-                <h4 className="subtitulometas">
-                  Estrategias a implementar para elevar el nivel académico:
-                </h4>
-                <div className="text-metas-final">
-                  <p>{planMejora.estrategiasElevarNivel}</p>
-                </div>
-              </div>
-
-              <div>
-                <h3>Plan de mejoramiento comportamental</h3>
+              {planMejora ? (
                 <div className="card_metas">
-                  <h3 className="subtitulometas">
-                    Estudiantes con dificultad Disciplinarias:
-                  </h3>
-                  <div className="text-metas-final">
-                    {planMejora.estudiantesDificultadDisciplinarias}
-                  </div>
+                  {isEditing ? (
+                    <>
+                      <h4 className="subtitulometas">Metas académicas:</h4>
+                      <textarea
+                        
+                        name="metasAcademicas"
+                        value={editedPlan.metasAcademicas}
+                        onChange={handleInputChange}
+                      />
 
-                  <h3 className="subtitulometas">
-                    Estudiantes pendientes de procesos Disciplinarios:
-                  </h3>
-                  <div className="text-metas-final">
-                    {planMejora.estudiantesPendientesDisciplinarios}
-                  </div>
+                      <h4 className="subtitulometas">Estrategias a implementar:</h4>
+                      <textarea
+                        name="estrategiasElevarNivel"
+                        value={editedPlan.estrategiasElevarNivel}
+                        onChange={handleInputChange}
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <h4 className="subtitulometas">Metas académicas:</h4>
+                      <p className="text-metas-final">{planMejora.metasAcademicas}</p>
+                      <h4 className="subtitulometas">Estrategias a implementar:</h4>
+                      <p className="text-metas-final">{planMejora.estrategiasElevarNivel}</p>
+                    </>
+                  )}
 
-                  <h3 className="subtitulometas">
-                    Estudiantes con sanción por parte del comité:
-                  </h3>
-                  <div className="text-metas-final">
-                    {" "}
-                    {planMejora.estudiantesSancionComite}
-                  </div>
+                  <h3>Plan de mejoramiento comportamental</h3>
 
-                  <h3 className="subtitulometas">
-                    Faltas que más se repiten en el grupo:
-                  </h3>
-                  <div className="text-metas-final">
-                    {" "}
-                    {planMejora.faltasRepetidasGrupo}
-                  </div>
+                  {["estudiantesDificultadDisciplinarias", "estudiantesPendientesDisciplinarios", "estudiantesSancionComite", "faltasRepetidasGrupo", "estrategiasTrabajar"].map((campo, index) => (
+                    <div key={index}>
+                      <h4 className="subtitulometas">{campo.replace(/([A-Z])/g, " $1")}</h4>
+                      {isEditing ? (
+                        <textarea
+                          name={campo}
+                          value={editedPlan[campo]}
+                          onChange={handleInputChange}
+                        />
+                      ) : (
+                        <p className="text-metas-final">{planMejora[campo]}</p>
+                      )}
+                    </div>
+                  ))}
 
-                  <h3 className="subtitulometas">Estrategias a trabajar</h3>
-                  <div className="text-metas-final">
-                    {" "}
-                    {planMejora.estrategiasTrabajar}
+                  <div style={{ marginTop: "1rem" }}>
+                    {isEditing ? (
+                      <button className="boton-guardar" onClick={handleGuardarCambios}>
+                        Guardar cambios
+                      </button>
+                    ) : (
+                      <button className="boton-editar" onClick={() => setIsEditing(true)}>
+                        Editar plan
+                      </button>
+                    )}
                   </div>
                 </div>
-              </div>
+              ) : (
+                <p>No hay plan de mejoramiento disponible.</p>
+              )}
             </div>
 
             <div className="seccion-metas-box">
               <div className="container-graficas-seccion-titulo"></div>
-
               <div className="container-graficas-seccion">
                 <div className="graficas-seccion-box">
                   <BarChartPromediosGruposPrimaria data={dataPrimaria} />
@@ -217,8 +218,7 @@ const MediaAcademica = () => {
                       color: "#b00",
                     }}
                   >
-                    No hay datos de promedios por materia para {selectedPeriodo}
-                    .
+                    No hay datos de promedios por materia para {selectedPeriodo}.
                   </p>
                 )}
               </div>

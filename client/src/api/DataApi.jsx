@@ -95,3 +95,14 @@ export const VerPlanMejoramiento = async () => {
     throw error;
   }
 };
+
+
+export const ActualizarPlanMejoramiento = async (id, datosActualizados) => {
+  try {
+    const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/planMejora/${id}`, datosActualizados);
+    return response.data;
+  } catch (error) {
+    console.error('Error actualizando el plan de mejoramiento:', error);
+    throw error;
+  }
+};

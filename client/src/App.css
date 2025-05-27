@@ -1205,6 +1205,7 @@ box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
 }
 .td-areas-data{
   text-align: left;
+  
 }
 .metas-bloque {
   display: grid;
@@ -1218,7 +1219,7 @@ box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 10px;
+  padding: 8px;
   transition: transform 0.2s;
 
 }
@@ -1227,23 +1228,27 @@ box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 10px;
+  padding: 8px;
+  
   transition: transform 0.2s;
+  
 
 }
 
 .card_metas h3, .card_metas h4 {
   
    text-align: left;
-  font-weight: 600;
+  font-weight: 900;
+  
 }
 
 .card_metas p {
    
-  margin: 0;
-  color: #555;
-  font-size: 14px;
+ margin-bottom: 15px;
+  color: #000000;
+  font-size: 12px;
   text-align: justify;
+   
 }
 
  

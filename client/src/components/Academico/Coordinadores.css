@@ -1,6 +1,7 @@
 .seccion-metas-lideres{
-    background-color: rgb(247, 247, 248);
+    background-color: rgb(220, 220, 220);
     margin: 0;
+    padding: 10px;
 }
 .seccion-metas-container{
     padding: 200px;
@@ -15,7 +16,11 @@
 .seccion-metas-lideres .seccion-metas-box:nth-child(2){
      flex-basis: calc(50% - 5px);
 }
-
+.num_estudiantes_seccion{
+ color: #007bff;
+ font-size: 14px;
+ margin-top: 10px;
+}
 .periodos{
   display: flex;
   align-items: center;
@@ -47,4 +52,9 @@
 .periodo-button.selected {
   background-color: #40f908;
   color: white;
+}
+
+
+.card_metas-seccion {
+  background-color: red;
 }
