@@ -7,6 +7,8 @@ body, html {
 
 }
 
+ 
+
 h1{
   
   font-family: "Playfair Display", serif;
@@ -400,11 +402,8 @@ input::placeholder {
   background-color: #0056b3;
 }
 
-.error {
-  
-    
+.error {  
   color: red;
-   
 }
  
 /* Otras consultas de medios adicionales según sea necesario */
@@ -416,12 +415,11 @@ input::placeholder {
   background-image: radial-gradient(circle at 50% -20.71%,   #3f5ef9 25%, #3c78f2 50%, #0063e8 75%, #0051de 100%);
   z-index: 1000; /* Asegúrate de que el encabezado esté por encima de otros elementos */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añadir una sombra para destacar el encabezado */
-  height: 190px; 
+  height: auto; 
 }
 
 .ul-header{
-  margin: 0
-  ;
+  margin: 0;
   align-items: normal;
 }
  
@@ -1780,6 +1778,23 @@ p {
 }
 
  
+
+.cerrar-cession-tarea{
+  
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+ 
+}
+
+.cerrar-cession-tarea a{
+  color: white;
+}
+ 
+.cerrar-cession-tarea button{
+ margin-top: -6px;
+}
 /* ----------------------------------------------------- */
 
 
@@ -1801,6 +1816,7 @@ p {
   .admin-layout-header-links-pre{
     display: flex;
     flex-direction: row;
+    justify-content: center;
    
      
   }
@@ -1813,11 +1829,11 @@ p {
   }
 
   .admin-layout-header-logo{
-    width: 120px;
-    height: 120px; 
-    
+    width: 100px;
+    height: 100px; 
     padding: 0px;
   }
+  
   .admin-layout-header-text-span{
     font-size: 22px;
     
@@ -1980,13 +1996,14 @@ p {
    
   width: 70%;
   margin: 0; /* Elimina el margen */
-   
+  
   margin-right: 120px;
    
 }
 .admin-header{
 
   height: 80px; 
+  
 }
 
 .admin-header .dropdown-menu {
@@ -2076,11 +2093,7 @@ p {
   
   .admin-layout-header-links-a{
     
-    
-   
-  margin-top: -50px;
  
-    
  }
   
   .form-base{
@@ -2110,11 +2123,18 @@ p {
    
     width: 100%;
     margin: 0; /* Elimina el margen */
-    margin-top: -20px;
+   
      
     
      
   }
+
+ 
+
+ 
+.cerrar-cession-tarea {
+ margin-top: -26px;
+}
 
    
 

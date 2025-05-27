@@ -24,6 +24,7 @@ const AdminHeader = () => {
   const secretaria = user && user.role === "secretaria"; // Verificar si el usuario tiene el rol de teacher
   const tesoreria = user && user.role === "tesoreria"; // Verificar si el usuario tiene el rol de teacher
   const escuelaPadres = user && user.role === "escuelaPadres"; // Verificar si el usuario tiene el rol de teacher
+  const mantenimiento = user && user.role === "mantenimiento"; // Verificar si el usuario tiene el rol de teacher
 
   return (
     <div className="admin-header">
@@ -112,11 +113,7 @@ const AdminHeader = () => {
                   <div className="admin-layout-header-links-a">
                     <li>
                       <div className="dropdown">
-                         
-                              <Link to="tesoreria">Recaudo</Link>
-                            
-                          
-                         
+                        <Link to="tesoreria">Recaudo</Link>
                       </div>
                     </li>
                   </div>
@@ -127,33 +124,22 @@ const AdminHeader = () => {
                     </li>
                   </div>
 
-
-
-                  
-
-
                   <div className="admin-layout-header-links-a">
                     <li>
                       <div className="dropdown">
-                       
-                              <Link to="esc_padres">Esc de Padres</Link>
-                            
-                        
+                        <Link to="esc_padres">Esc de Padres</Link>
                       </div>
                     </li>
                   </div>
 
-                 <div className="admin-layout-header-links-a">
+                  <div className="admin-layout-header-links-a">
                     <li>
                       <Link to="programadorTareas">Tareas CPCS</Link>
                     </li>
                   </div>
 
-                 
                   <div className="admin-layout-header-links-a">
-                    <button   onClick={handleLogout}>
-                      Cerrar{" "}
-                    </button>
+                    <button onClick={handleLogout}>Cerrar </button>
                   </div>
                 </ul>
               )}
@@ -378,6 +364,16 @@ const AdminHeader = () => {
                     </button>
                   </li>
                 </ul>
+              )}
+              {mantenimiento && (
+                <div className="cerrar-cession-tarea">
+                  <div>
+                    <Link to="programadorTareas">Tareas CPCS</Link>
+                  </div>
+                  <div>
+                    <button onClick={handleLogout}>Cerrar sesión</button>
+                  </div>
+                </div>
               )}
             </nav>
           </div>
