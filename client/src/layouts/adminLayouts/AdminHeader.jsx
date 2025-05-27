@@ -112,15 +112,11 @@ const AdminHeader = () => {
                   <div className="admin-layout-header-links-a">
                     <li>
                       <div className="dropdown">
-                        <Link onClick={toggleDropdown}>Tesoreria</Link>
-
-                        {isDropdownOpen && (
-                          <ul className="dropdown-menu">
-                            <li>
+                         
                               <Link to="tesoreria">Recaudo</Link>
-                            </li>
-                          </ul>
-                        )}
+                            
+                          
+                         
                       </div>
                     </li>
                   </div>
@@ -139,17 +135,10 @@ const AdminHeader = () => {
                   <div className="admin-layout-header-links-a">
                     <li>
                       <div className="dropdown">
-                        <Link onClick={toggleDropdown}>Es. Padres</Link>
-                        {isDropdownOpen && (
-                          <ul className="dropdown-menu">
-                            <li>
+                       
                               <Link to="esc_padres">Esc de Padres</Link>
-                            </li>
-                            <li>
-                              <Link to="tesoreria">Cartera </Link>
-                            </li>
-                          </ul>
-                        )}
+                            
+                        
                       </div>
                     </li>
                   </div>
