@@ -64,8 +64,8 @@ const AdminHeader = () => {
                     <Link to="/admin/users">Inicio</Link>
                   </li>
 
-                  <li>
-                    <div >
+                   <li>
+                    <div className="dropdown">
                       <Link onClick={toggleDropdown}>Académico</Link>
                       {isDropdownOpen && (
                         <ul className="dropdown-menu">
@@ -73,18 +73,11 @@ const AdminHeader = () => {
                             <Link to="/admin/academico">Reporte académico</Link>
                           </li>
                           <li>
-                            <Link to="/admin/documentos">
-                              Promedios por materia
-                            </Link>
+                            <Link to="/admin/documentos">Documentos</Link>
                           </li>
                           <li>
                             <Link to="/admin/llegadastarde">
                               Llegadas tarde
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="/admin/infoacademico">
-                              Informes Académicos
                             </Link>
                           </li>
                         </ul>
