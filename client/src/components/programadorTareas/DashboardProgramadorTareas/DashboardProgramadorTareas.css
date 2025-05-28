@@ -70,3 +70,168 @@
     justify-content: space-between;
   }
 }
+
+
+
+
+/* ------------------------------------------------ */
+
+.crear-tarea-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.form-title {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 24px;
+  color: #333;
+}
+
+.crear-tarea-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.crear-tarea-form input,
+.crear-tarea-form textarea,
+.crear-tarea-form select {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border 0.3s;
+}
+
+.crear-tarea-form input:focus,
+.crear-tarea-form textarea:focus,
+.crear-tarea-form select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.crear-tarea-form button {
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.crear-tarea-form button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .crear-tarea-container {
+    padding: 20px;
+  }
+
+  .form-title {
+    font-size: 20px;
+  }
+}
+
+
+
+/* ---------------------------------------------- */
+
+.kanban-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+  overflow-x: auto;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.kanban-col {
+  background-color: #f5f7fa;
+  border-radius: 12px;
+  padding: 16px;
+  min-width: 300px;
+  max-width: 320px;
+  
+  display: flex;
+  flex-direction: column;
+}
+
+.kanban-header {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #444;
+  text-transform: uppercase;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 5px;
+ 
+}
+
+.kanban-card {
+  background-color: #fff;
+  border-left: 5px solid #007bff;
+  margin-bottom: 12px;
+  padding: 15px;
+  border-radius: 10px;
+  transition: transform 0.2s;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.kanban-card:hover {
+  transform: scale(1.02);
+}
+
+.kanban-card h3 {
+  margin: 0;
+  color: #007bff;
+}
+
+.kanban-card p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.kanban-card span {
+  display: block;
+  font-size: 13px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.mensaje {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 18px;
+  color: #666;
+}
+
+.mensaje.error {
+  color: red;
+}
+
+
+.btn-toggle-estado {
+  margin-top: 10px;
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.btn-toggle-estado:hover {
+  background-color: #3730a3;
+}

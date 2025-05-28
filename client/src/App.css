@@ -1970,11 +1970,11 @@ p {
   }
 
 .admin-header nav ul {
-  
   gap: 10px;
-  
+
 }
-  
+
+
    
   .admin-layout-header-logo{
     margin-top: 10px;
@@ -2039,9 +2039,11 @@ p {
   
 }
 
-.admin-header a {
-  font-size: 10px;
+.admin-header li a{
+ font-size: 16px;
+  
 }
+  
 
 .admin-header .dropdown-menu {
   margin-top: -65px;
@@ -2078,14 +2080,14 @@ p {
   }
 
   .admin-layout-header-links li{
-    font-size: 14px;
+    font-size: 14 px;
     
     
   }
   
   .admin-layout-header-links-a{
     
-    margin: 0 3px; /* Elimina el margen */
+    margin: 0 2px; /* Elimina el margen */
     padding: 0; /* Elimina el relleno */
   
    
@@ -2103,6 +2105,11 @@ p {
 .admin-header{
 
   height: 80px; 
+}
+
+.admin-header li a{
+ font-size: 10px;
+  
 }
    
    
@@ -2142,6 +2149,7 @@ p {
 
   .admin-layout-header-links-pre{
  margin-top: -20px;
+margin-left: 10px;
 }
 
  
