@@ -2,9 +2,15 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Logo from "/logo2025.png";
 import { useAuth } from "../../contexts/AuthContext";
+import { NavLink } from "react-router-dom";
 
 const AdminHeader = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [activo, setActivo] = useState(false);
+
+  const handleClick = () => {
+    setActivo(true);
+  };
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
@@ -45,104 +51,92 @@ const AdminHeader = () => {
             </p>
           </div>
         </div>
+          <button className="cerrar" onClick={handleLogout}>
+                      Cerrar{" "}
+                    </button>
 
         <div className="admin-layout-header-links-pre">
-          <div className="admin-layout-header-links">
+          <div>
             <nav>
               {isAdmin && (
                 <ul>
-                  <div className="admin-layout-header-links-a">
-                    <li>
-                      <Link to="/admin/users">Inicio</Link>
-                    </li>
-                  </div>
+                  <li>
+                    <Link to="/admin/users">Inicio</Link>
+                  </li>
 
-                  <div className="admin-layout-header-links-a">
-                    <li>
-                      <div className="dropdown">
-                        <Link onClick={toggleDropdown}>Académico</Link>
-                        {isDropdownOpen && (
-                          <ul className="dropdown-menu">
-                            <li>
-                              <Link to="/admin/academico">
-                                Reporte académico
-                              </Link>
-                            </li>
-                            <li>
-                              <Link to="/admin/documentos">
-                                Promedios por materia
-                              </Link>
-                            </li>
-                            <li>
-                              <Link to="/admin/llegadastarde">
-                                Llegadas tarde
-                              </Link>
-                            </li>
-                            <li>
-                              <Link to="/admin/infoacademico">
-                                Informes Académicos
-                              </Link>
-                            </li>
-                          </ul>
-                        )}
-                      </div>
-                    </li>
-                  </div>
+                  <li>
+                    <div >
+                      <Link onClick={toggleDropdown}>Académico</Link>
+                      {isDropdownOpen && (
+                        <ul className="dropdown-menu">
+                          <li>
+                            <Link to="/admin/academico">Reporte académico</Link>
+                          </li>
+                          <li>
+                            <Link to="/admin/documentos">
+                              Promedios por materia
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to="/admin/llegadastarde">
+                              Llegadas tarde
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to="/admin/infoacademico">
+                              Informes Académicos
+                            </Link>
+                          </li>
+                        </ul>
+                      )}
+                    </div>
+                  </li>
 
-                  <div className="admin-layout-header-links-a">
-                    <li>
-                      <div className="dropdown">
-                        <Link onClick={toggleDropdown}>Administración</Link>
+                  <li>
+                    <div className="dropdown">
+                      <Link onClick={toggleDropdown}>Administración</Link>
 
-                        {isDropdownOpen && (
-                          <ul className="dropdown-menu">
-                            <li>
-                              <Link to="/admin/administracion">Stock</Link>
-                            </li>
-                            <li>
-                              <Link to="/admin/inventario_estadisticas">
-                                Informes
-                              </Link>
-                            </li>
-                          </ul>
-                        )}
-                      </div>
-                    </li>
-                  </div>
+                      {isDropdownOpen && (
+                        <ul className="dropdown-menu">
+                          <li>
+                            <Link to="/admin/administracion">Stock</Link>
+                          </li>
+                          <li>
+                            <Link to="/admin/inventario_estadisticas">
+                              Informes
+                            </Link>
+                          </li>
+                        </ul>
+                      )}
+                    </div>
+                  </li>
 
-                  <div className="admin-layout-header-links-a">
-                    <li>
-                      <div className="dropdown">
-                        <Link to="tesoreria">Recaudo</Link>
-                      </div>
-                    </li>
-                  </div>
+                  <li>
+                    <div className="dropdown">
+                      <Link to="tesoreria">Recaudo</Link>
+                    </div>
+                  </li>
 
-                  <div className="admin-layout-header-links-a">
+                  {/* <div  >
                     <li>
                       <Link to="/admin/soporte">Adm Soporte</Link>
                     </li>
-                  </div>
+                  </div> */}
 
-                  <div className="admin-layout-header-links-a">
-                    <li>
-                      <div className="dropdown">
-                        <Link to="esc_padres">Esc de Padres</Link>
-                      </div>
-                    </li>
-                  </div>
+                  <li>
+                    <Link to="esc_padres">E.Padres</Link>
+                  </li>
 
-                  <div className="admin-layout-header-links-a">
-                    <li>
-                      <Link to="programadorTareas">Tareas CPCS</Link>
-                    </li>
-                  </div>
+                  <li>
+                    <Link to="programadorTareas">Mantenimineto</Link>
+                  </li>
 
-                  <div className="admin-layout-header-links-a">
-                    <button onClick={handleLogout}>Cerrar </button>
-                  </div>
+                  <li>
+                  </li>
                 </ul>
               )}
+                  
+
               {isAcademic && (
                 <ul>
                   <li>
@@ -368,7 +362,15 @@ const AdminHeader = () => {
               {mantenimiento && (
                 <div className="cerrar-cession-tarea">
                   <div>
-                    <Link to="programadorTareas">Tareas CPCS</Link>
+                    <Link
+                      className={`cerrar-cession-tarea-hover ${
+                        activo ? "activo" : ""
+                      }`}
+                      to="programadorTareas"
+                      onClick={handleClick}
+                    >
+                      Tareas CPCS
+                    </Link>
                   </div>
                   <div>
                     <button onClick={handleLogout}>Cerrar sesión</button>

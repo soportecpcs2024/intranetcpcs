@@ -136,6 +136,20 @@ h1{
   
 }
 
+.cerrar-cession-tarea-hover {
+  padding: 8px 16px;
+  text-decoration: none;
+  color: white;
+  background-color: #048bfa; /* color original */
+  transition: background-color 0.3s;
+  border-radius: 8px;
+}
+
+.cerrar-cession-tarea-hover.activo {
+  background-color: rgb(4, 248, 101);
+  color: #000000; /* cuando está activo */
+}
+
 .icons{
   font-size: 35px;
   margin: 2px;
@@ -234,16 +248,13 @@ h1{
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
- 
-
 
 form {
   display: flex;
   flex-wrap: wrap;
-   
-   
-   
 }
+
+
  
 .input-group {
   display: flex;
@@ -428,13 +439,19 @@ input::placeholder {
   width: 80px;
 }
 
+.admin-layout-header-links-pre{
+  display: flex;
+  width: 100%;
+}
+
+ 
 .admin-header nav ul {
   list-style-type: none;
   padding: 0;
   display: flex;
   justify-content: space-around;
-  font-size: 18px;
-  align-items: center;
+  gap: 20px;
+  align-items: flex-start;
 }
 
  
@@ -442,14 +459,14 @@ input::placeholder {
 .admin-header nav ul li a {
    
   text-decoration: none;
-  color: #fbfbfb;
+  
   padding: 2px;
   border-radius: 4px;
   transition: background-color 0.3s ease;
 }
 
 .admin-header nav ul li a:hover {
-  background-color: #e0e0e0;
+  background-color: #ffffff6f;
   color: #000000;
 }
 
@@ -524,10 +541,6 @@ input::placeholder {
   display: flex;
   width: 100%;
   gap: 1px;
-   
-  
-  
-  
 }
 
 .containerOutlet .box:nth-child(1){
@@ -548,6 +561,7 @@ input::placeholder {
 }
 
 
+
 .admin-layout{
   background-image: radial-gradient(ellipse farthest-corner at 10px 100px , #fff 50%, rgba(0, 255, 0, 0) 0%, yellow 50%);
   display: flex;
@@ -560,11 +574,6 @@ input::placeholder {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  
-  
-  
-  
-   
 }
  
 
@@ -1795,6 +1804,18 @@ p {
 .cerrar-cession-tarea button{
  margin-top: -6px;
 }
+
+
+.cerrar {
+  
+  width: 60px;
+  background-color: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 10px;
+}
+
 /* ----------------------------------------------------- */
 
 
@@ -1818,9 +1839,13 @@ p {
     flex-direction: row;
     justify-content: center;
    
-     
+    
+   
   }
 
+ 
+
+ 
   .admin-layout-header-slogan{
     display: flex;
     align-items: center;
@@ -1839,16 +1864,12 @@ p {
     
   }
 
-  .admin-layout-header-links li{
-    font-size: 16px;  
-   
-    
-  }
+ 
   
   .admin-layout-header-links-a{
-    
-   margin: 0 10px; /* Elimina el margen */
-   padding: 0; /* Elimina el relleno */
+    margin: 0 10px; /* Elimina el margen */
+    padding: 0; /* Elimina el relleno */
+  
     
  }
 
@@ -1862,9 +1883,16 @@ p {
 
 }
   .admin-header{
-
     height: 80px; 
   }
+
+  .admin-header a {
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    font-weight: 900;
+  }
+
+
   .admin-layout-header-logo{
     margin-top: 10px;
     margin-right: 20px;
@@ -1899,14 +1927,13 @@ p {
      
     width: 70%;
     margin: 0; /* Elimina el margen */
-    
     margin-right: 120px;
      
   }
   .admin-header{
-
     height: 80px; 
   }
+
   .admin-layout-header-logo{
     margin-top: 10px;
     margin-right: 20px;
@@ -1938,9 +1965,17 @@ p {
     
   }
   .admin-header{
-
-    height: 80px; 
+    height: 80px;
+    
   }
+
+.admin-header nav ul {
+  
+  gap: 10px;
+  
+}
+  
+   
   .admin-layout-header-logo{
     margin-top: 10px;
     margin-right: 20px;
@@ -1982,15 +2017,13 @@ p {
   }
 
   .admin-layout-header-links li{
-    font-size: 14px;  
+    
+   
+    
+  
   }
   
-  .admin-layout-header-links-a{
-    
-   margin: 0 3px; /* Elimina el margen */
-   padding: 0; /* Elimina el relleno */
-    
- }
+ 
 
  .logout-button{
    
@@ -2004,6 +2037,10 @@ p {
 
   height: 80px; 
   
+}
+
+.admin-header a {
+  font-size: 10px;
 }
 
 .admin-header .dropdown-menu {
@@ -2028,6 +2065,12 @@ p {
   }
   
 
+.admin-layout-header-links-pre{
+  
+  
+  margin-top: -30px;
+  
+}
 
   .admin-layout-header-text-span{
     font-size: 18px;
@@ -2035,13 +2078,16 @@ p {
   }
 
   .admin-layout-header-links li{
-    font-size: 14px;  
+    font-size: 14px;
+    
+    
   }
   
   .admin-layout-header-links-a{
     
-   margin: 0 3px; /* Elimina el margen */
-   padding: 0; /* Elimina el relleno */
+    margin: 0 3px; /* Elimina el margen */
+    padding: 0; /* Elimina el relleno */
+  
    
     
  }
@@ -2074,28 +2120,31 @@ p {
  
       height: 90px; 
       width: 100%;
+     
       
   }
-   
- 
- 
- 
 
- 
+  .admin-layout-header{
+   align-items: flex-start;
+
+  }
+   
   .admin-layout-header-text-span{
     font-size: 14px;
   }
   
   .admin-layout-header-links li{
-    font-size: 10px;  justify-content: center;
+    font-size: 10px;
+    margin-top: -30px;   
+    
     
   }
-  
-  .admin-layout-header-links-a{
-    
+
+  .admin-layout-header-links-pre{
+ margin-top: -20px;
+}
+
  
- }
-  
   .form-base{
     flex-direction: column;
     width: 90%;
@@ -2119,26 +2168,20 @@ p {
     margin-bottom: -10px;
   }
   
+
+  
   .logout-button{
-   
     width: 100%;
-    margin: 0; /* Elimina el margen */
-   
-     
-    
-     
+    margin: 0; /* Elimina el margen */     
   }
 
- 
 
- 
+  
 .cerrar-cession-tarea {
  margin-top: -26px;
 }
 
-   
-
-  .admin-header .dropdown-menu {
+.admin-header .dropdown-menu {
     margin-top: -75px;
     margin-left: 20px;
   }
