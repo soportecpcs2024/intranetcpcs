@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   },
 
   footer: {
-    marginTop: 20,
+    marginTop: 50,
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
@@ -131,30 +131,11 @@ const styles = StyleSheet.create({
 const CertificadoEstudios2025 = ({ estudiante }) => (
   <Document>
     <Page size="A4" style={styles.page}>
-      <View
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          flexDirection: "row",
-          alignItems: "center",
-          backgroundColor: "#b4dffc",
-          borderRadius: 4,
-          border: "1px solid #40a3e6",
-          marginBottom: 2,
-        }}
-      >
-        <Image style={styles.image} src={ImageLogo} />
-        <View style={styles.membrete_header}>
-          <Text>Carrera 83 N° 78-30 Medellín - Colombia</Text>
-          <Text>PBX: 604 442 0606</Text>
-          <Text>Email: info@colombosueco.com</Text>
-          <Text>www.colombosueco.com</Text>
-        </View>
-      </View>
+    
 
       <Text
         style={{
-          marginTop: 50,
+          marginTop: 80,
           marginBottom: 50,
           textAlign: "right",
           fontWeight: "bold",
@@ -163,7 +144,7 @@ const CertificadoEstudios2025 = ({ estudiante }) => (
         DANE 305001019827
       </Text>
 
-      <Text style={{ marginTop: 20, fontSize: 12, textAlign: "justify" }}>
+      <Text style={{ marginTop: 30, fontSize: 12, textAlign: "justify" }}>
         EL COLEGIO PANAMERICANO COLOMBO SUECO, FILIAL DE LA MISION PANAMERICANA
         DE COLOMBIA, ESTABLECIMIENTO PRIVADO DE CARÁCTER FORMAL APROBADO CON
         RESOLUCION PARA PREESCOLAR 009070 DEL 14 DE SEPTIEMBRE DE 1994, PARA LA
@@ -183,11 +164,11 @@ const CertificadoEstudios2025 = ({ estudiante }) => (
       </Text>
       {/* Aquí puedes agregar más contenido del certificado usando los datos del estudiante */}
       <Text style={{ marginTop: 40, textAlign: "justify" }}>
-        El estudiante{" "}
-        <Text style={{ fontWeight: "bold", textDecoration: "underline" }}>
+       
+        <Text style={{ fontWeight: "bold", fontSize: 14, textDecoration: "underline" }}>
           {estudiante.NOMBRE}
         </Text>{" "}
-        identificado(a) con{" "}
+        identificado(a) con{"  "}
         <Text style={{ fontWeight: "bold", fontSize: 14 }}>
           {estudiante.Tipo_de_documento}
         </Text>{" "}
@@ -200,7 +181,7 @@ const CertificadoEstudios2025 = ({ estudiante }) => (
         >
           {estudiante.Número_de_identificación}
         </Text>{" "}
-        Se encuentra cursando el grado{" "}
+        se {"\n"}encuentra cursando el grado{" "}
         <Text
           style={{
             fontWeight: "bold",
@@ -224,7 +205,7 @@ const CertificadoEstudios2025 = ({ estudiante }) => (
       </Text>
 
       <View>
-        <Text style={{ marginTop: 50, fontSize: 13 }}>
+        <Text style={{ marginTop: 90, fontSize: 13 }}>
           Se firma en la ciudad de Medellín a los {new Date().getDate()} días
           del mes de {new Date().toLocaleString("es-ES", { month: "long" })} de{" "}
           {new Date().getFullYear()}.
@@ -242,19 +223,7 @@ const CertificadoEstudios2025 = ({ estudiante }) => (
         </View>
 
         <View style={styles.footer_principal}>
-          <View>
-            <Text>
-              FILIAL DE LA MISION PANAMERICANA DE COLOMBIA - FUNDADO EN EL 1994
-            </Text>
-          </View>
-
-          <View>
-            <Text>PERSONERIA JURIDICA ESPECIAL 867 DE 1996</Text>
-          </View>
-
-          <View>
-            <Text>NIT.860.007.390-1</Text>
-          </View>
+         
         </View>
       </View>
     </Page>
