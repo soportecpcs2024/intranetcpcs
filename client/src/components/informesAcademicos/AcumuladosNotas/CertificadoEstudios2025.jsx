@@ -135,7 +135,7 @@ const CertificadoEstudios2025 = ({ estudiante }) => (
 
       <Text
         style={{
-          marginTop: 80,
+          marginTop: 100,
           marginBottom: 50,
           textAlign: "right",
           fontWeight: "bold",
@@ -144,7 +144,7 @@ const CertificadoEstudios2025 = ({ estudiante }) => (
         DANE 305001019827
       </Text>
 
-      <Text style={{ marginTop: 30, fontSize: 12, textAlign: "justify" }}>
+      <Text style={{ marginTop: 30, fontSize: 10, textAlign: "justify" }}>
         EL COLEGIO PANAMERICANO COLOMBO SUECO, FILIAL DE LA MISION PANAMERICANA
         DE COLOMBIA, ESTABLECIMIENTO PRIVADO DE CARÁCTER FORMAL APROBADO CON
         RESOLUCION PARA PREESCOLAR 009070 DEL 14 DE SEPTIEMBRE DE 1994, PARA LA
@@ -156,7 +156,7 @@ const CertificadoEstudios2025 = ({ estudiante }) => (
         style={{
           color: "#000000",
           fontWeight: "bold",
-          marginTop: 50,
+          marginTop: 30,
           textAlign: "center",
         }}
       >
