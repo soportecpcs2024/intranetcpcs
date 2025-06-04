@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { TareasContext } from "../../../contexts/TareaContext";
-import "../DashboardProgramadorTareas/DashboardProgramadorTareas.css"; // Importa tu CSS aquí
+import "../DashboardProgramadorTareas/DashboardProgramadorTareas.css";
 
 const CrearTarea = () => {
   const { crearTarea } = useContext(TareasContext);
@@ -37,6 +37,7 @@ const CrearTarea = () => {
     <div className="crear-tarea-container">
       <h2 className="form-title">Crear Nueva Tarea</h2>
       <form onSubmit={handleSubmit} className="crear-tarea-form">
+        <label htmlFor="titulo">Tarea:</label>
         <input
           type="text"
           name="titulo"
@@ -45,6 +46,8 @@ const CrearTarea = () => {
           onChange={handleChange}
           required
         />
+
+        <label htmlFor="descripcion">Descripción de la tarea:</label>
         <textarea
           name="descripcion"
           placeholder="Descripción"
@@ -52,13 +55,38 @@ const CrearTarea = () => {
           onChange={handleChange}
           required
         />
+
+        <label htmlFor="fechaLimite">Fecha terminación:</label>
         <input
           type="date"
           name="fechaLimite"
-          value={formData.fechaLimite.split("T")[0]}
+          value={formData.fechaLimite}
           onChange={handleChange}
           required
         />
+
+        <label>Sección:</label>
+        <div className="radio-group">
+          {["preescolar", "primaria", "secundaria", "media"].map((seccion) => (
+            <label
+              key={seccion}
+              className={`radio-button ${
+                formData.seccion === seccion ? "selected" : ""
+              }`}
+            >
+              <input
+                type="radio"
+                name="seccion"
+                value={seccion}
+                checked={formData.seccion === seccion}
+                onChange={handleChange}
+              />
+              {seccion.charAt(0).toUpperCase() + seccion.slice(1)}
+            </label>
+          ))}
+        </div>
+
+        <label htmlFor="responsable">Responsable:</label>
         <input
           type="text"
           name="responsable"
@@ -67,36 +95,30 @@ const CrearTarea = () => {
           onChange={handleChange}
           required
         />
-        <select
-          name="seccion"
-          value={formData.seccion}
-          onChange={handleChange}
-          required
-        >
-          <option value="">Selecciona una sección</option>
-          <option value="preescolar">Preescolar</option>
-          <option value="primaria">Primaria</option>
-          <option value="secundaria">Secundaria</option>
-          <option value="media">Media</option>
-        </select>
 
+        <label htmlFor="observaciones">Observaciones:</label>
         <textarea
           name="observaciones"
           placeholder="Observaciones"
           value={formData.observaciones}
           onChange={handleChange}
         />
+
+        <label htmlFor="nivelComplejidad">Nivel de Complejidad:</label>
         <select
           name="nivelComplejidad"
           value={formData.nivelComplejidad}
           onChange={handleChange}
+          required
         >
           <option value="Baja">Baja</option>
           <option value="Media">Media</option>
           <option value="Alta">Alta</option>
         </select>
 
-        <button type="submit">Crear Tarea</button>
+        <button type="submit" className="submit-button">
+          Crear Tarea
+        </button>
       </form>
     </div>
   );

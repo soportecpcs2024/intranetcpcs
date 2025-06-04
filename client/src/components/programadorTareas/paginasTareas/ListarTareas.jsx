@@ -30,10 +30,13 @@ const ListarTareas = () => {
               tareasPorEstado(estado).map((tarea) => (
                 <div key={tarea._id} className="kanban-card">
                   <h4>{tarea.titulo}</h4>
-                  <p><strong>Responsable:</strong> {tarea.responsable}</p>
                   <p><strong>Sección:</strong> {tarea.seccion}</p>
+                  <p><strong>Responsable:</strong> {tarea.responsable}</p>
+                  <div className="fechaslistartareas">
+                  <p><strong>Fecha de creación: </strong>{new Date(tarea.fechaCreacion).toLocaleDateString()}</p>
                   <p><strong>Fecha límite:</strong> {new Date(tarea.fechaLimite).toLocaleDateString()}</p>
-                  <p><strong>Complejidad:</strong> {tarea.nivelComplejidad}</p>
+                  </div>
+                  <p className="descripciontarea"><strong>Descripción:</strong> {tarea.descripcion}</p>
                   {tarea.observaciones && (
                     <p className="observacion">“{tarea.observaciones}”</p>
                   )}
@@ -41,7 +44,7 @@ const ListarTareas = () => {
                     onClick={() => toggleEstado(tarea)}
                     className="btn-toggle-estado"
                   >
-                    {tarea.estado === "Pendiente" ? "Marcar como Terminado" : "Marcar como Pendiente"}
+                    {tarea.estado === "Pendiente" ? "Terminado" : "Pendiente"}
                   </button>
                 </div>
               ))

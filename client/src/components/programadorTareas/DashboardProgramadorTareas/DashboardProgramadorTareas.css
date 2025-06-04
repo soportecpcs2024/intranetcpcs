@@ -1,6 +1,6 @@
 /* Mobile-first base styles */
 .dashboard-container {
-  padding: 1rem;
+  padding: 5px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f9f9f9;
   min-height: 100vh;
@@ -13,7 +13,7 @@
   flex-direction: column;
   align-items: center;
   background-color: #1f15ee; /* slate-800 */
-  padding: 12px;
+  padding: 8px;
   border-radius: 5px;
   margin-bottom: 1rem;
 }
@@ -26,7 +26,7 @@
   margin: 0.25rem 0;
   background-color: #3b82f6; /* blue-500 */
   border-radius: 5px;
-  border: 1px solid rgba(255, 255, 255, 0.581);
+  border: 1px solid rgba(255, 255, 255, 0.364);
   width: 100%;
   text-align: center;
   transition: background-color 0.3s ease;
@@ -42,7 +42,7 @@
   background-color: #ffffff;
   padding: 1rem;
   border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 8px rgba(11, 109, 229, 0.6);
 }
 
 /* Medium screens (tablets) */
@@ -81,8 +81,8 @@
   margin: 40px auto;
   padding: 30px;
   background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.771);
 }
 
 .form-title {
@@ -101,6 +101,7 @@
 .crear-tarea-form input,
 .crear-tarea-form textarea,
 .crear-tarea-form select {
+  margin-top: -10px;
   padding: 12px;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -121,7 +122,7 @@
   color: white;
   font-size: 16px;
   border: none;
-  border-radius: 8px;
+  border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -180,8 +181,8 @@
   background-color: #fff;
   border-left: 5px solid #007bff;
   margin-bottom: 12px;
-  padding: 15px;
-  border-radius: 10px;
+  padding: 10px;
+  border-radius: 6px;
   transition: transform 0.2s;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
@@ -196,8 +197,8 @@
 }
 
 .kanban-card p {
-  margin: 5px 0;
-  font-size: 14px;
+  margin: 3px 0;
+  font-size: 12px;
   color: #333;
 }
 
@@ -221,12 +222,14 @@
 
 
 .btn-toggle-estado {
+  width: 100%;
   margin-top: 10px;
   background-color: #4f46e5;
   color: white;
+  
   border: none;
   padding: 8px 12px;
-  border-radius: 6px;
+  border-radius: 4px;
   cursor: pointer;
   font-weight: 600;
   transition: background-color 0.3s ease;
@@ -234,4 +237,88 @@
 
 .btn-toggle-estado:hover {
   background-color: #3730a3;
+}
+
+.descripciontarea{
+  padding: 8px;
+  border-radius: 4px;
+  background-color: #abd0f8cd;
+}
+
+.fechaslistartareas{
+  margin-top: 10px;
+  display: flex;
+  padding: 8px;
+  
+  justify-content: space-between;
+  box-shadow: rgba(149, 157, 165, 0.544) 0px 8px 24px;
+}
+
+
+/* ------------------------------------------------------- */
+.radio-group label {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 1rem;
+  cursor: pointer;
+  font-size: 10px;
+  padding: 15px 1rem;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.radio-group input[type="radio"] {
+  display: none;
+}
+
+.radio-group input[type="radio"]:checked + span {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.radio-group label span {
+  padding: 0.25rem;
+}
+
+
+.radio-group {
+  display: flex;
+padding: 5px;
+  justify-content: space-evenly;
+  gap: 5px;
+  margin-bottom: 1rem;  
+  border-radius: 5px;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.radio-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  
+  padding: 0.5rem;
+  border: 2px solid #ccc;
+  border-radius: 9999px; /* Circular */
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.radio-button input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.radio-button.selected {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: white;
+}
+
+.radio-button:hover {
+  background-color: #e6f0ff;
+  border-color: #007bff;
 }
