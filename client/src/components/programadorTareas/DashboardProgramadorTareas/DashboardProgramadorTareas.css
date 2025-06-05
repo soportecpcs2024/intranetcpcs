@@ -80,7 +80,7 @@
   max-width: 600px;
   margin: 40px auto;
   padding: 30px;
-  background-color: #f7f7f7;
+  background-color: #ececec;
   border-radius: 6px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.771);
 }
@@ -89,7 +89,7 @@
   text-align: center;
   margin-bottom: 25px;
   font-size: 24px;
-  color: #000000;
+  color: #333;
   font-weight: 900;
 }
 
@@ -263,7 +263,7 @@
   margin-right: 1rem;
   cursor: pointer;
   font-size: 12px;
-  padding: 11px 1rem;
+  
   border: 2px solid #ccc;
   border-radius: 4px;
   transition: background-color 0.2s, border-color 0.2s;
@@ -274,7 +274,7 @@
 }
 
 .radio-group input[type="radio"]:checked + span {
-  background-color: #007bff;
+  
   color: white;
   border-color: #007bff;
 }
@@ -286,9 +286,9 @@
 
 .radio-group {
   display: flex;
-padding: 5px;
+  padding: 3px;
   justify-content: space-evenly;
-  gap: 5px;
+  
   margin-bottom: 1rem;  
   border-radius: 5px;
   align-items: center;
@@ -328,7 +328,7 @@ padding: 5px;
 .radio-group {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap:  5px;
   margin-bottom: 1rem;
 }
 
@@ -337,7 +337,7 @@ padding: 5px;
   display: flex;
   align-items: center;
   cursor: pointer;
-  padding: 0.5rem 1rem;
+  
   border: 2px solid #ccc;
   border-radius: 999px; /* Esto hace que se vea circular */
   background-color: white;
