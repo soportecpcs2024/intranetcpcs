@@ -295,35 +295,11 @@
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.radio-button {
-  position: relative;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  
-  padding: 0.5rem;
-  border: 2px solid #ccc;
-  border-radius: 9999px; /* Circular */
-  transition: background-color 0.3s, border-color 0.3s;
-}
+ 
+ 
+ 
 
-.radio-button input[type="radio"] {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.radio-button.selected {
-  background-color: #007bff;
-  border-color: #007bff;
-  color: white;
-}
-
-.radio-button:hover {
-  background-color: #e6f0ff;
-  border-color: #007bff;
-}
-
+ 
 
 .radio-group {
   display: flex;
@@ -337,10 +313,10 @@
   display: flex;
   align-items: center;
   cursor: pointer;
-  
+  padding: 6px;
   border: 2px solid #ccc;
   border-radius: 999px; /* Esto hace que se vea circular */
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   transition: all 0.3s ease;
 }
 
@@ -362,5 +338,5 @@
 }
 
 .radio-button:hover {
-  background-color: #e5e5e5;
+   border: 2px solid #024cfa;
 }
