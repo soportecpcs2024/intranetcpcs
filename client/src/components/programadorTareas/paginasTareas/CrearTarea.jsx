@@ -35,7 +35,7 @@ const CrearTarea = () => {
 
   return (
     <div className="crear-tarea-container">
-      <h2 className="form-title">Crear Nueva Tarea</h2>
+      <h2 className="form-title">CREAR TAREA</h2>
       <form onSubmit={handleSubmit} className="crear-tarea-form">
         <label htmlFor="titulo">Tarea:</label>
         <input
@@ -65,9 +65,17 @@ const CrearTarea = () => {
           required
         />
 
-        <label>Sección:</label>
+        <label>Áreas:</label>
         <div className="radio-group">
-          {["preescolar", "primaria", "secundaria", "media"].map((seccion) => (
+          {[
+            "Bloque A",
+            "Bloque B",
+            "Bloque C",
+            "Bloque D",
+            "Coliseo",
+            "Oficinas",
+            "Restaurante",
+          ].map((seccion) => (
             <label
               key={seccion}
               className={`radio-button ${
@@ -81,28 +89,34 @@ const CrearTarea = () => {
                 checked={formData.seccion === seccion}
                 onChange={handleChange}
               />
-              {seccion.charAt(0).toUpperCase() + seccion.slice(1)}
+              <span>{seccion}</span>
             </label>
           ))}
         </div>
 
         <label htmlFor="responsable">Responsable:</label>
-        <input
+        <select
           type="text"
           name="responsable"
           placeholder="Responsable"
           value={formData.responsable}
           onChange={handleChange}
           required
-        />
+        >
+          <option value="">Selecciona empleado</option>
+          <option value="ANTONIO JOSE PEREIRA CHIRINOS">
+            ANTONIO JOSE PEREIRA CHIRINOS
+          </option>
+          <option value="BENITO ANTONIO ARRIETA LOPEZ">
+            BENITO ANTONIO ARRIETA LOPEZ
+          </option>
+          <option value="CARLOS ENRIQUE SOLANO GUEVARA">
+            CARLOS ENRIQUE SOLANO GUEVARA
+          </option>
+          <option value="CARLOS ALFREDO MONTOYA">CARLOS ALFREDO MONTOYA</option>
+        </select>
 
-        <label htmlFor="observaciones">Observaciones:</label>
-        <textarea
-          name="observaciones"
-          placeholder="Observaciones"
-          value={formData.observaciones}
-          onChange={handleChange}
-        />
+        
 
         <label htmlFor="nivelComplejidad">Nivel de Complejidad:</label>
         <select
