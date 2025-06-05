@@ -56,7 +56,7 @@ const CrearTarea = () => {
           required
         />
 
-        <label htmlFor="fechaLimite">Fecha terminación:</label>
+        <label htmlFor="fechaLimite">Fecha Finaliza el dia:</label>
         <input
           type="date"
           name="fechaLimite"
@@ -113,7 +113,7 @@ const CrearTarea = () => {
           <option value="CARLOS ENRIQUE SOLANO GUEVARA">
             CARLOS ENRIQUE SOLANO GUEVARA
           </option>
-          <option value="CARLOS ALFREDO MONTOYA">CARLOS ALFREDO MONTOYA</option>
+         
         </select>
 
         
