@@ -1,0 +1,62 @@
+/* Contenedor principal */
+.layout-extraclases-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+/* Contenedor de enlaces */
+.link-extraclases {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.link-extraclases a {
+  padding: 8px 16px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.link-extraclases a:hover {
+  background-color: #e8e8e8;
+  transform: scale(1.03);
+}
+
+/* Estado activo del link */
+.link-extraclases .active {
+  color: #000000;
+  background-color: #d6e4ff;
+  border-color: #5b8def;
+  box-shadow: rgba(91, 141, 239, 0.6) 0px 4px 12px;
+}
+
+/* Responsive: para pantallas menores a 768px */
+@media screen and (max-width: 768px) {
+  .link-extraclases {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 10px;
+  }
+
+  .link-extraclases a {
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+  }
+}

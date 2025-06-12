@@ -80,6 +80,11 @@ const AdminHeader = () => {
                               Llegadas tarde
                             </Link>
                           </li>
+                          <li>
+                            <Link to="/admin/extraclases">
+                              Extra curricular
+                            </Link>
+                          </li>
                         </ul>
                       )}
                     </div>
@@ -154,6 +159,11 @@ const AdminHeader = () => {
                               Llegadas tarde
                             </Link>
                           </li>
+                           <li>
+                            <Link to="/admin/extraclases">
+                              Extra curricular
+                            </Link>
+                          </li>
                         </ul>
                       )}
                     </div>
@@ -167,13 +177,10 @@ const AdminHeader = () => {
                       Q 10
                     </Link>
                   </li>
-                  <li>
-                    <button className="logout-button" onClick={handleLogout}>
-                      Cerrar sesión
-                    </button>
-                  </li>
+                  
                 </ul>
               )}
+
               {secretaria && (
                 <ul>
                   <li>
@@ -209,13 +216,10 @@ const AdminHeader = () => {
                       Q 10
                     </Link>
                   </li>
-                  <li>
-                    <button className="logout-button" onClick={handleLogout}>
-                      Cerrar sesión
-                    </button>
-                  </li>
+                  
                 </ul>
               )}
+
               {tesoreria && (
                 <ul>
                   <li>
@@ -255,12 +259,11 @@ const AdminHeader = () => {
                     </Link>
                   </li>
                   <li>
-                    <button className="logout-button" onClick={handleLogout}>
-                      Cerrar sesión
-                    </button>
+                  
                   </li>
                 </ul>
               )}
+
               {escuelaPadres && (
                 <ul>
                   <li>
@@ -306,6 +309,7 @@ const AdminHeader = () => {
                   </li>
                 </ul>
               )}
+
               {isAdministrator && (
                 <ul>
                   <li>
@@ -346,12 +350,11 @@ const AdminHeader = () => {
                   </li>
 
                   <li>
-                    <button className="logout-button" onClick={handleLogout}>
-                      Cerrar sesión
-                    </button>
+                    
                   </li>
                 </ul>
               )}
+
               {mantenimiento && (
                 <div className="cerrar-cession-tarea">
                   <div>
@@ -365,11 +368,12 @@ const AdminHeader = () => {
                       Tareas CPCS
                     </Link>
                   </div>
-                  <div>
-                    <button onClick={handleLogout}>Cerrar sesión</button>
-                  </div>
+                  
                 </div>
               )}
+
+              
+
             </nav>
           </div>
         </div>

@@ -71,6 +71,11 @@ import CrearTarea from "./components/programadorTareas/paginasTareas/CrearTarea"
 import ListarTareas from "./components/programadorTareas/paginasTareas/ListarTareas";
 import EstadisticasTareas from "./components/programadorTareas/paginasTareas/EstadisticasTareas";
 
+import DashboardExtraCurricular from "./components/tesoreria/extracurricular/DashboardExtraCurricular";
+import ListarExtraCurricular from "./components/tesoreria/extracurricular/ListarExtraCurricular";
+import ExtraIngles from "./components/tesoreria/extracurricular/ExtraIngles";
+import ExtraPiano from "./components/tesoreria/extracurricular/ExtraPiano";
+import ExtraIniciaMusical from "./components/tesoreria/extracurricular/ExtraIniciaMusical";
 
 
 const App = () => {
@@ -161,6 +166,12 @@ const AppContent = () => {
             <Route path="descargarpdf" element={<DescargarPdf />} />
             <Route path="soporte" element={<AgregarLlegadasTarde />} />
 
+            <Route path="extraclases" element={<DashboardExtraCurricular />}>
+             
+              <Route path="ingles" element={<ExtraIngles />}/>
+              <Route path="iniciamusical" element={<ExtraIniciaMusical />}/>
+              <Route path="piano" element={<ExtraPiano />}/>
+            </Route>
             {/* Inventory routes */}
             <Route path="administracion" element={<DashboardInventory />}>
               <Route index element={<ProductList />} />
