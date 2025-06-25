@@ -224,7 +224,9 @@ const AppContent = () => {
               />
             </Route>
 
-            <Route path="esc_padres" element={<DashboardEscPadres />}></Route>
+            <Route path="esc_padres" element={<DashboardEscPadres />}>
+            
+            </Route>
 
             <Route
               path="programadorTareas"

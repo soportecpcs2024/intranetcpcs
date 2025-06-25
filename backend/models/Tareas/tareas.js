@@ -10,7 +10,7 @@ const tareaSchema = new mongoose.Schema({
   observaciones: String,
   nivelComplejidad: { type: String, enum: ['Baja', 'Media', 'Alta'], required: true },
   estado: { type: String, enum: ['Pendiente', 'Terminado'], default: 'Pendiente' },
-  cumplidoATiempo: { type: String, enum: ['Sí', 'No', 'Sin verificar'], default: 'Sin verificar' }
+   
 });
 
 module.exports = mongoose.model('Tarea', tareaSchema);

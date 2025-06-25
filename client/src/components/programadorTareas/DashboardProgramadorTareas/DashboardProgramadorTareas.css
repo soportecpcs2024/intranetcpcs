@@ -12,7 +12,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #1f15ee; /* slate-800 */
+  background-color: #4e4c6f; /* slate-800 */
   padding: 8px;
   border-radius: 5px;
   margin-bottom: 1rem;
@@ -80,8 +80,9 @@
   max-width: 600px;
   margin: 40px auto;
   padding: 30px;
-  background-color: #ececec;
+  background-color: #41414e; /* slate-800 */
   border-radius: 6px;
+  color: white;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.771);
 }
 
@@ -89,7 +90,7 @@
   text-align: center;
   margin-bottom: 25px;
   font-size: 24px;
-  color: #333;
+  color: white;
   font-weight: 900;
 }
 
@@ -149,12 +150,13 @@
 
 .kanban-container {
   display: flex;
-  gap: 20px;
+  gap: 10px;
   justify-content: center;
-  padding: 20px;
+  padding: 10px;
   overflow-x: auto;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
+
 
 .kanban-col {
   background-color: #f5f7fa;
@@ -188,6 +190,11 @@
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 
+.kanban-title{
+  color: rgb(96, 95, 95);
+  text-align: center;
+}
+
 .kanban-card:hover {
   transform: scale(1.02);
 }
@@ -209,6 +216,15 @@
   color: #666;
   margin-top: 4px;
 }
+
+.kanban-card.pendiente {
+  border-left: 5px solid #ff0000; /* Azul para tareas pendientes */
+}
+
+.kanban-card.terminado {
+  border-left: 5px solid #01fc5d; /* Verde para tareas terminadas */
+}
+
 
 .mensaje {
   text-align: center;
@@ -250,6 +266,7 @@
   margin-top: 10px;
   display: flex;
   padding: 8px;
+  gap: 10px;
   
   justify-content: space-between;
   box-shadow: rgba(149, 157, 165, 0.544) 0px 8px 24px;
@@ -288,13 +305,18 @@
   display: flex;
   padding: 3px;
   justify-content: space-evenly;
-  
+  background-color: rgba(7, 35, 251, 0.368);
   margin-bottom: 1rem;  
   border-radius: 5px;
   align-items: center;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: rgba(253, 253, 253, 0.24) 0px 3px 8px;
 }
 
+option {
+  text-transform: capitalize;
+  font-size: 12px;
+  color: rgb(58, 58, 58);
+}
  
  
  
@@ -339,4 +361,101 @@
 
 .radio-button:hover {
    border: 2px solid #024cfa;
+}
+
+
+/* -----------Paginacion-------------- */
+ 
+
+.pagina-btn {
+  background-color: #e0e0e0;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.pagina-btn:hover {
+  background-color: #a6a6f0;
+}
+
+.pagina-btn.activo {
+  background-color: #4f46e5;
+  color: white;
+}
+
+.paginacion.flechas {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 50px;
+  padding: 10px;
+  width: 100%;
+  background-color: #eff1e8;
+  border-top: 1px solid #ccc;
+  border-radius: 0 0 8px 8px;
+  font-size: 14px;
+}
+
+.paginacion.flechas button {
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.paginacion.flechas button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.paginacion.flechas span {
+  flex-grow: 1;
+  text-align: center;
+  font-weight: 500;
+}
+
+label{
+  color: white;
+  font-weight: 100;
+}
+
+/* ----- Estadisticas ---------------- */
+.estadisticas .card {
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 4px 12px;
+  text-align: center;
+}
+
+.card.eficiencia {
+  background-color: #e0fce7;
+  border-left: 6px solid #10b981;
+}
+
+.card.pendiente {
+  background-color: #fffbe6;
+  border-left: 6px solid #facc15;
+}
+
+.card.terminado {
+  background-color: #e0f7ff;
+  border-left: 6px solid #3b82f6;
+}
+
+.card.cumplidas {
+  background-color: #e6fffa;
+  border-left: 6px solid #14b8a6;
+}
+
+.card.incumplidas {
+  background-color: #ffe6e6;
+  border-left: 6px solid #ef4444;
 }

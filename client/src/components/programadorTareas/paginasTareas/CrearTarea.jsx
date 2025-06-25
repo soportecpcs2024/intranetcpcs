@@ -103,7 +103,24 @@ const CrearTarea = () => {
           onChange={handleChange}
           required
         >
-          <option value="">Selecciona empleado</option>
+          <option value="">Selecciona encargado</option>
+
+          <option value="KAREN MAYERLYN HERNANDEZ CUERVO">
+            KAREN MAYERLYN HERNANDEZ CUERVO
+          </option>
+          <option value="LINA	MARCELA	LUJAN	DURAN">
+            LINA MARCELA LUJAN DURAN
+          </option>
+          <option value="LINA MARIA MONTOYA GOMEZ">
+            LINA MARIA MONTOYA GOMEZ
+          </option>
+          <option value="MARIA CRISTINA VIDAL ROJAS">
+            MARIA CRISTINA VIDAL ROJAS
+          </option>
+          <option value="MARIA OLIVA CANTOR TIRADO">
+            MARIA OLIVA CANTOR TIRADO
+          </option>
+
           <option value="ANTONIO JOSE PEREIRA CHIRINOS">
             ANTONIO JOSE PEREIRA CHIRINOS
           </option>
@@ -113,10 +130,17 @@ const CrearTarea = () => {
           <option value="CARLOS ENRIQUE SOLANO GUEVARA">
             CARLOS ENRIQUE SOLANO GUEVARA
           </option>
-         
-        </select>
+          <option value="RUBEN HUMBERTO GOMEZ GIRALDO">
+            RUBEN HUMBERTO GOMEZ GIRALDO
+          </option>
+          
 
-        
+          <option value="RICHARD ALONSO	OSORNO LOPERA">
+            RICHARD ALONSO OSORNO LOPERA
+          </option>
+
+          <option value="GIOVANNY	ESTRADA	PEREZ">GIOVANNY ESTRADA PEREZ</option>
+        </select>
 
         <label htmlFor="nivelComplejidad">Nivel de Complejidad:</label>
         <select
