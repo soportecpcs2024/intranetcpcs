@@ -176,6 +176,8 @@ const Recaudo = () => {
               </label>
             ))}
           </div>
+
+          
           <div>
           <MonthSelector selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} />
           </div>

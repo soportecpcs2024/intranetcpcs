@@ -304,9 +304,9 @@
 
 .radio-group {
   display: flex;
-  padding: 3px;
+  padding: 15px;
   justify-content: space-evenly;
-  background-color: rgba(7, 35, 251, 0.368);
+  background-color: rgba(186, 186, 186, 0.368);
   margin-bottom: 1rem;  
   border-radius: 5px;
   align-items: center;
@@ -422,9 +422,12 @@ option {
   font-weight: 500;
 }
 
-label{
-  color: white;
-  font-weight: 100;
+.label_crear_tarea{
+  color: rgb(251, 238, 3);
+  font-size: 16px;
+  font-weight: 500;
+ font-style: italic;
+  
 }
 
  .estadisticas .card {

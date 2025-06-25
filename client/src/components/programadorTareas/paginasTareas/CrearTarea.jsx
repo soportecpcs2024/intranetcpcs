@@ -37,7 +37,7 @@ const CrearTarea = () => {
     <div className="crear-tarea-container">
       <h2 className="form-title">CREAR TAREA</h2>
       <form onSubmit={handleSubmit} className="crear-tarea-form">
-        <label htmlFor="titulo">Tarea:</label>
+        <label htmlFor="titulo" className="label_crear_tarea">Tarea:</label>
         <input
           type="text"
           name="titulo"
@@ -47,7 +47,7 @@ const CrearTarea = () => {
           required
         />
 
-        <label htmlFor="descripcion">Descripción de la tarea:</label>
+        <label htmlFor="descripcion" className="label_crear_tarea">Descripción de la tarea:</label>
         <textarea
           name="descripcion"
           placeholder="Descripción"
@@ -56,7 +56,7 @@ const CrearTarea = () => {
           required
         />
 
-        <label htmlFor="fechaLimite">Fecha Finaliza el dia:</label>
+        <label htmlFor="fechaLimite" className="label_crear_tarea">Fecha Finaliza el dia:</label>
         <input
           type="date"
           name="fechaLimite"
@@ -65,7 +65,7 @@ const CrearTarea = () => {
           required
         />
 
-        <label>Áreas:</label>
+        <label className="label_crear_tarea">Áreas:</label>
         <div className="radio-group">
           {[
             "Bloque A",
@@ -94,7 +94,7 @@ const CrearTarea = () => {
           ))}
         </div>
 
-        <label htmlFor="responsable">Responsable:</label>
+        <label htmlFor="responsable" className="label_crear_tarea">Responsable:</label>
         <select
           type="text"
           name="responsable"
@@ -142,7 +142,7 @@ const CrearTarea = () => {
           <option value="GIOVANNY	ESTRADA	PEREZ">GIOVANNY ESTRADA PEREZ</option>
         </select>
 
-        <label htmlFor="nivelComplejidad">Nivel de Complejidad:</label>
+        <label htmlFor="nivelComplejidad" className="label_crear_tarea">Nivel de Complejidad:</label>
         <select
           name="nivelComplejidad"
           value={formData.nivelComplejidad}
