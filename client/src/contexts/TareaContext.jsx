@@ -60,20 +60,11 @@ export const TareasProvider = ({ children }) => {
     }
   };
 
-  // Obtener estadísticas de tareas
-  const obtenerEstadisticas = async () => {
-    try {
-      const response = await axios.get(`${API_URL}/estadisticas`);
-      setEstadisticas(response.data);
-    } catch (err) {
-      console.error("Error al obtener estadísticas:", err);
-      setError(err);
-    }
-  };
+  
 
   useEffect(() => {
     obtenerTareas();
-    obtenerEstadisticas();
+    
   }, []);
 
   return (
@@ -87,7 +78,7 @@ export const TareasProvider = ({ children }) => {
         obtenerTareas,
         actualizarTarea,
         eliminarTarea,
-        obtenerEstadisticas,
+         
       }}
     >
       {children}

@@ -39,7 +39,7 @@
 
 .dashboard-content {
   flex-grow: 1;
-  background-color: #eaeaea;
+  background-color: #ffffff;
   padding: 1rem;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(11, 109, 229, 0.6);
@@ -159,14 +159,15 @@
 
 
 .kanban-col {
-  background-color: #f5f7fa;
+ 
   border-radius: 12px;
   padding: 16px;
-  min-width: 300px;
-  max-width: 320px;
+  min-width: 400px;
+  max-width: 420px;
   
   display: flex;
   flex-direction: column;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
 .kanban-header {
@@ -206,7 +207,7 @@
 
 .kanban-card p {
   margin: 3px 0;
-  font-size: 12px;
+  font-size: 11px;
   color: #333;
 }
 
@@ -218,11 +219,11 @@
 }
 
 .kanban-card.pendiente {
-  border-left: 5px solid #ff0000; /* Azul para tareas pendientes */
+  border-left: 7px solid #ff0000; /* Azul para tareas pendientes */
 }
 
 .kanban-card.terminado {
-  border-left: 5px solid #01fc5d; /* Verde para tareas terminadas */
+  border-left: 7px solid #01fc5d; /* Verde para tareas terminadas */
 }
 
 
@@ -426,8 +427,7 @@ label{
   font-weight: 100;
 }
 
-/* ----- Estadisticas ---------------- */
-.estadisticas .card {
+ .estadisticas .card {
   padding: 1rem;
   border-radius: 8px;
   margin-bottom: 1rem;
@@ -450,12 +450,4 @@ label{
   border-left: 6px solid #3b82f6;
 }
 
-.card.cumplidas {
-  background-color: #e6fffa;
-  border-left: 6px solid #14b8a6;
-}
-
-.card.incumplidas {
-  background-color: #ffe6e6;
-  border-left: 6px solid #ef4444;
-}
+ 

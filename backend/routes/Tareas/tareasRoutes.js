@@ -9,6 +9,6 @@ router.post('/', tareascontroller.crearTarea);
 router.get('/', tareascontroller.obtenerTareas);
 router.patch('/:id', tareascontroller.actualizarEstadoTarea);
 router.delete('/:id', tareascontroller.eliminarTarea);
-router.get('/estadisticas', tareascontroller.obtenerEstadisticas);
+ 
 
 module.exports = router;

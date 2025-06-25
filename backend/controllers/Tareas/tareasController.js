@@ -22,12 +22,30 @@ const obtenerTareas = async (req, res) => {
 
 const actualizarEstadoTarea = async (req, res) => {
   try {
-    const tarea = await Tarea.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    res.json(tarea);
+    const tarea = await Tarea.findById(req.params.id);
+    if (!tarea) {
+      return res.status(404).json({ mensaje: 'Tarea no encontrada' });
+    }
+
+    // Si el estado se cambia a "Terminado", se establece la fecha de terminación y el cumplimiento
+    if (req.body.estado === 'Terminado') {
+      req.body.fechaTerminacion = new Date();
+
+      const fechaLimite = new Date(tarea.fechaLimite);
+      const fechaTerminacion = new Date(req.body.fechaTerminacion);
+
+      req.body.cumplimiento = fechaTerminacion <= fechaLimite ? 'Eficiente' : 'Tardío';
+    }
+
+    const tareaActualizada = await Tarea.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.json(tareaActualizada);
   } catch (error) {
     res.status(500).json({ mensaje: 'Error al actualizar tarea', error });
   }
 };
+
+
+
 
 const eliminarTarea = async (req, res) => {
   try {
@@ -38,24 +56,12 @@ const eliminarTarea = async (req, res) => {
   }
 };
 
-const obtenerEstadisticas = async (req, res) => {
-  try {
-    const total = await Tarea.countDocuments();
-    const pendientes = await Tarea.countDocuments({ estado: 'Pendiente' });
-    const terminadas = await Tarea.countDocuments({ estado: 'Terminado' });
-    const cumplidas = await Tarea.countDocuments({ cumplidoATiempo: 'Sí' });
-    const noCumplidas = await Tarea.countDocuments({ cumplidoATiempo: 'No' });
 
-    res.json({ total, pendientes, terminadas, cumplidas, noCumplidas });
-  } catch (error) {
-    res.status(500).json({ mensaje: 'Error al obtener estadísticas', error });
-  }
-};
 
 module.exports = {
   crearTarea,
   obtenerTareas,
   actualizarEstadoTarea,
-  eliminarTarea,
-  obtenerEstadisticas,
+  eliminarTarea
+   
 };

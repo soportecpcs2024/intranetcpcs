@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const tareaSchema = new mongoose.Schema({
   titulo: { type: String, required: true },
@@ -8,9 +8,26 @@ const tareaSchema = new mongoose.Schema({
   responsable: { type: String, required: true },
   seccion: { type: String, required: true },
   observaciones: String,
-  nivelComplejidad: { type: String, enum: ['Baja', 'Media', 'Alta'], required: true },
-  estado: { type: String, enum: ['Pendiente', 'Terminado'], default: 'Pendiente' },
-   
+  nivelComplejidad: {
+    type: String,
+    enum: ["Baja", "Media", "Alta"],
+    required: true,
+  },
+  estado: {
+    type: String,
+    enum: ["Pendiente", "Terminado"],
+    default: "Pendiente",
+  },
+
+  cumplimiento: {
+    type: String,
+    enum: ["Eficiente", "Tardío"],
+    default: null,
+  },
+  fechaTerminacion: {
+    type: Date,
+    default: null,
+  },
 });
 
-module.exports = mongoose.model('Tarea', tareaSchema);
+module.exports = mongoose.model("Tarea", tareaSchema);

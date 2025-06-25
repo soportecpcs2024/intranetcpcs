@@ -4,7 +4,7 @@ import "../DashboardProgramadorTareas/DashboardProgramadorTareas.css";
 
 const ListarTareas = () => {
   const { tareas, loading, error, actualizarTarea } = useContext(TareasContext);
-  const estados = ["Pendiente", "Terminado"]; // Pendiente a la izquierda
+  const estados = ["Pendiente", "Terminado"];
   const tareasPorPagina = 3;
 
   const [paginaActual, setPaginaActual] = useState({
@@ -24,7 +24,13 @@ const ListarTareas = () => {
 
   const toggleEstado = (tarea) => {
     const nuevoEstado = tarea.estado === "Pendiente" ? "Terminado" : "Pendiente";
-    actualizarTarea(tarea._id, { estado: nuevoEstado });
+
+    const actualizacion = {
+      estado: nuevoEstado,
+      fechaTerminacion: nuevoEstado === "Terminado" ? new Date() : null,
+    };
+
+    actualizarTarea(tarea._id, actualizacion);
   };
 
   if (loading) return <div className="loader">Cargando tareas...</div>;
@@ -46,20 +52,42 @@ const ListarTareas = () => {
                 <p>No hay tareas en esta columna.</p>
               ) : (
                 tareasPaginadas.map((tarea) => (
-                  <div key={tarea._id} className={`kanban-card ${tarea.estado === "Terminado" ? "terminado" : "pendiente"}`}>
+                  <div
+                    key={tarea._id}
+                    className={`kanban-card ${tarea.estado === "Terminado" ? "terminado" : "pendiente"}`}
+                  >
                     <h4>{tarea.titulo}</h4>
                     <p><strong>Sección:</strong> {tarea.seccion}</p>
                     <p><strong>Responsable:</strong> {tarea.responsable}</p>
+
                     <div className="fechaslistartareas">
-                      <p><strong>Fecha creación: </strong>{new Date(tarea.fechaCreacion).toLocaleDateString()}</p>
+                      <p><strong>Fecha creación:</strong> {new Date(tarea.fechaCreacion).toLocaleDateString()}</p>
                       <p><strong>Fecha límite:</strong> {new Date(tarea.fechaLimite).toLocaleDateString()}</p>
                     </div>
-                    <p className="descripciontarea"><strong>Descripción:</strong> {tarea.descripcion}</p>
+
+                    {tarea.fechaTerminacion && (
+                      <p><strong>Terminada el:</strong> {new Date(tarea.fechaTerminacion).toLocaleDateString()}</p>
+                    )}
+
+                    {tarea.cumplimiento && (
+                      <p>
+                        <strong>Cumplimiento:</strong>{" "}
+                        <span style={{ color: tarea.cumplimiento === "Eficiente" ? "green" : "red" }}>
+                          {tarea.cumplimiento}
+                        </span>
+                      </p>
+                    )}
+
+                    <p className="descripciontarea">
+                      <strong>Descripción:</strong> {tarea.descripcion}
+                    </p>
+
                     {tarea.observaciones && (
                       <p className="observacion">“{tarea.observaciones}”</p>
                     )}
+
                     {tarea.estado === "Pendiente" && (
-                      <button 
+                      <button
                         onClick={() => toggleEstado(tarea)}
                         className="btn-toggle-estado"
                       >
