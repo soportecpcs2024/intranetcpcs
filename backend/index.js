@@ -130,6 +130,17 @@ app.use('/api/planMejora', planMejoramiento);
 const tareas = require('./routes/Tareas/tareasRoutes');
 app.use('/api/tareas', tareas);
 
+// ---------------- Escuelas de padres ----------------
+
+const epAsistencia = require('./routes/EPadres/asistenciaRoutes');
+app.use('/api/epAsistencias', epAsistencia);
+
+const epEscuelas = require('./routes/EPadres/escuelasRoutes');
+app.use('/api/epEscuelas', epEscuelas);
+
+const epEstudiantes= require('./routes/EPadres/estudiantesRoutes.js');
+app.use('/api/epEstudiantes', epEstudiantes);
+
 // Configuración y arranque del servidor
 const PORT = process.env.SERVER_PORT || 3000;
 app.listen(PORT, () => {

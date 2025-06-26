@@ -31,6 +31,7 @@ const AdminHeader = () => {
   const tesoreria = user && user.role === "tesoreria"; // Verificar si el usuario tiene el rol de teacher
   const escuelaPadres = user && user.role === "escuelaPadres"; // Verificar si el usuario tiene el rol de teacher
   const mantenimiento = user && user.role === "mantenimiento"; // Verificar si el usuario tiene el rol de teacher
+ 
 
   return (
     <div className="admin-header">
@@ -60,9 +61,7 @@ const AdminHeader = () => {
             <nav>
               {isAdmin && (
                 <ul>
-                  <li>
-                    <Link to="/admin/users">Inicio</Link>
-                  </li>
+                  
 
                    <li>
                     <div className="dropdown">
@@ -126,10 +125,26 @@ const AdminHeader = () => {
                   </li>
 
                   <li>
-                    <Link to="programadorTareas">Mantenimineto</Link>
+                    <Link to="programadorTareas">Mantenimiento</Link>
                   </li>
 
                   <li>
+                    <div className="dropdown">
+                      <Link onClick={toggleDropdown}>Académico</Link>
+                      {isDropdownOpen && (
+                        <ul className="dropdown-menu">
+                          <li>
+                            <Link to="/admin/documentos">Documentos</Link>
+                          </li>
+
+                          <li>
+                            <Link to="/admin/infoacademico">
+                              Informes Académicos
+                            </Link>
+                          </li>
+                        </ul>
+                      )}
+                    </div>
                   </li>
                 </ul>
               )}
@@ -137,9 +152,9 @@ const AdminHeader = () => {
 
               {isAcademic && (
                 <ul>
-                  <li>
+                  {/* <li>
                     <Link to="/admin/users">Inicio</Link>
-                  </li>
+                  </li> */}
                   {/* <li>
               <Link to="/admin/blog">Blog</Link>
               </li> */}
@@ -183,9 +198,9 @@ const AdminHeader = () => {
 
               {secretaria && (
                 <ul>
-                  <li>
+                  {/* <li>
                     <Link to="/admin/users">Inicio</Link>
-                  </li>
+                  </li> */}
                   {/* <li>
               <Link to="/admin/blog">Blog</Link>
               </li> */}
@@ -222,9 +237,9 @@ const AdminHeader = () => {
 
               {tesoreria && (
                 <ul>
-                  <li>
+                  {/* <li>
                     <Link to="/admin/users">Inicio</Link>
-                  </li>
+                  </li> */}
                   {/* <li>
               <Link to="/admin/blog">Blog</Link>
               </li> */}
@@ -266,55 +281,26 @@ const AdminHeader = () => {
 
               {escuelaPadres && (
                 <ul>
-                  <li>
+                  {/* <li>
                     <Link to="/admin/users">Inicio</Link>
-                  </li>
+                  </li> */}
                   {/* <li>
               <Link to="/admin/blog">Blog</Link>
               </li> */}
-                  <li>
-                    <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Escuela de Padres</Link>
-                      {isDropdownOpen && (
-                        <ul className="dropdown-menu">
-                          <li>
-                            <Link to="tesoreria">Recaudos</Link>
-                          </li>
-                          <li>
-                            <Link to="tesoreria">Cartera </Link>
-                          </li>
-                          <li>
-                            <Link to="informerecaudo">Informe de recaudo</Link>
-                          </li>
-                          <li>
-                            <Link to="informerecaudo">Informe de cartera</Link>
-                          </li>
-                        </ul>
-                      )}
-                    </div>
+                    <li>
+                    <Link to="esc_padres">E.Padres</Link>
                   </li>
 
-                  <li>
-                    <Link
-                      to="https://site2.q10.com/login?ReturnUrl=%2F&aplentId=d12efeb8-f609-4dd1-87cd-1cb0c95d32e2"
-                      target="_blank"
-                    >
-                      Q 10
-                    </Link>
-                  </li>
-                  <li>
-                    <button className="logout-button" onClick={handleLogout}>
-                      Cerrar sesión
-                    </button>
-                  </li>
+                  
+                
                 </ul>
               )}
 
               {isAdministrator && (
                 <ul>
-                  <li>
+                  {/* <li>
                     <Link to="/admin/users">Inicio</Link>
-                  </li>
+                  </li> */}
                   {/* <li>
               <Link to="/admin/blog">Blog</Link>
               </li> */}

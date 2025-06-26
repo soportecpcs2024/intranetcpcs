@@ -5,6 +5,7 @@ import { ProductProvider } from "./contexts/ProductContext";
 import { ProductStatisticsProvider } from "./contexts/InformesContext";
 import { UserProvider } from "./contexts/UserContext";
 import { RecaudoProvider } from "./contexts/RecaudoContext";
+import { EscuelaPadresProvider } from "./contexts/EscuelaPadresContext";
 
 import { Auth, Blog, Academicos, Q10 } from "./pages/admin";
 import AdminLayout from "./layouts/adminLayouts/AdminLayout";
@@ -77,7 +78,6 @@ import ExtraIngles from "./components/tesoreria/extracurricular/ExtraIngles";
 import ExtraPiano from "./components/tesoreria/extracurricular/ExtraPiano";
 import ExtraIniciaMusical from "./components/tesoreria/extracurricular/ExtraIniciaMusical";
 
-
 const App = () => {
   useEffect(() => {
     localStorage.setItem("lastActivity", Date.now().toString());
@@ -112,7 +112,9 @@ const App = () => {
           <UserProvider>
             <RecaudoProvider>
               <TareasProvider>
-                <AppContent />
+                <EscuelaPadresProvider>
+                  <AppContent />
+                </EscuelaPadresProvider>
               </TareasProvider>
             </RecaudoProvider>
           </UserProvider>
@@ -138,6 +140,7 @@ const AppContent = () => {
           <Route path="/admin/*" element={<AdminLayout />}>
             {/* Admin routes */}
             <Route path="users" element={<Users />} />
+
             <Route path="blog" element={<Blog />} />
             <Route path="academico" element={<Layout />}>
               <Route index element={<General />} />
@@ -167,10 +170,9 @@ const AppContent = () => {
             <Route path="soporte" element={<AgregarLlegadasTarde />} />
 
             <Route path="extraclases" element={<DashboardExtraCurricular />}>
-             
-              <Route path="ingles" element={<ExtraIngles />}/>
-              <Route path="iniciamusical" element={<ExtraIniciaMusical />}/>
-              <Route path="piano" element={<ExtraPiano />}/>
+              <Route path="ingles" element={<ExtraIngles />} />
+              <Route path="iniciamusical" element={<ExtraIniciaMusical />} />
+              <Route path="piano" element={<ExtraPiano />} />
             </Route>
             {/* Inventory routes */}
             <Route path="administracion" element={<DashboardInventory />}>
@@ -224,9 +226,7 @@ const AppContent = () => {
               />
             </Route>
 
-            <Route path="esc_padres" element={<DashboardEscPadres />}>
-            
-            </Route>
+            <Route path="esc_padres" element={<DashboardEscPadres />}></Route>
 
             <Route
               path="programadorTareas"
