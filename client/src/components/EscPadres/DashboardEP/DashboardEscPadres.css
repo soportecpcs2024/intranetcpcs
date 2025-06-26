@@ -1,16 +1,20 @@
 .escuelas-dashboard {
   padding: 1rem;
-  background-color: #ffffff;
+  background-color: #fafafa;
   font-family: "Segoe UI", sans-serif;
-  margin: 5px;
-  border: 1px solid black;
+  
+  border: 1px solid rgb(193, 194, 195);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .titulo {
-  font-size: 18px;
-  font-weight: bold;
+  font-family: "Bungee", sans-serif;
+  font-weight: 400;
+  font-style: normal;
   margin-bottom: 1rem;
+  text-align: center;
+  font-size: 20px;
+  
 }
 
 .datos{
@@ -23,18 +27,18 @@
   justify-content: space-between;
   align-items: center;
   
- 
+  
 }
 
 /* ---------- Tabs ---------- */
 .escuelas-tabs {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: 2px;
   margin-bottom: 1rem;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px,
               rgba(0, 0, 0, 0.23) 0px 3px 6px;
-  padding-bottom: 50px;
+  
   
 }
 
@@ -42,12 +46,13 @@
   color: black;
   background-color: #ffffff;
   border: 1px solid #ccc;
-  padding: 6px 10px;
+  padding: 6px;
   border-radius: 4px;
   font-weight: 400;
   cursor: pointer;
   font-size: 14px;
   transition: all 0.3s ease;
+  margin: 5px;
 }
 
 .tab-button.active {
@@ -145,6 +150,7 @@
   gap: 1rem;
   margin-top: 1rem;
   align-items: center;
+ 
   
 }
 
@@ -213,8 +219,8 @@
 @media (max-width: 480px) {
   .escuelas-tabs {
     flex-direction: column;
-    gap: 4px;
-    background-color: red;
+    
+     
   }
  
   .tab-button {

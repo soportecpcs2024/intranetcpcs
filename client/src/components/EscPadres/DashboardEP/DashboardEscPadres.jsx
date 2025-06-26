@@ -131,13 +131,9 @@ const DashboardEscPadres = () => {
 
   return (
     <div className="escuelas-dashboard">
-      {asistenciaActual === null && (
-        <p style={{ marginBottom: "1rem", color: "#888", fontStyle: "italic" }}>
-          Este estudiante aún no tiene asistencia registrada.
-        </p>
-      )}
+    
 
-      <h2 className="titulo">Escuela de Padres</h2>
+      <h2 className="titulo">Escuela de Padres CPCS 2025</h2>
 
       {/* Tabs de Escuelas */}
       <div className="escuelas-tabs">
@@ -169,6 +165,11 @@ const DashboardEscPadres = () => {
         buscarEstudiantes={buscarEstudiantes}
         onSelectEstudiante={(est) => setEstudianteSeleccionado(est)}
       />
+        {asistenciaActual === null && (
+        <p style={{ marginBottom: "1rem", color: "#888", fontStyle: "italic" }}>
+          Este estudiante aún no tiene asistencia registrada.
+        </p>
+      )}
 
       {/* Tabla de Asistencia */}
       {estudianteSeleccionado && escuelaSeleccionada && (
