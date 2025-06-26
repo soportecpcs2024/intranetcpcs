@@ -22,7 +22,8 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px; 
+  
+ 
 }
 
 /* ---------- Tabs ---------- */
@@ -34,6 +35,7 @@ box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0p
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px,
               rgba(0, 0, 0, 0.23) 0px 3px 6px;
   padding-bottom: 50px;
+  
 }
 
 .tab-button {
@@ -128,6 +130,7 @@ box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0p
    
   font-size: 15px;
   line-height: normal;
+  
 }
 .class-strong{
    
@@ -142,6 +145,7 @@ box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0p
   gap: 1rem;
   margin-top: 1rem;
   align-items: center;
+  
 }
 
 .opciones-extra label {
@@ -187,6 +191,7 @@ box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0p
   .opciones-extra {
     flex-direction: row;
     align-items: flex-start;
+   
     
   }
 
@@ -201,6 +206,7 @@ box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0p
   align-items: start;
   line-height: normal;
   
+  
 }
 }
 
@@ -208,6 +214,7 @@ box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0p
   .escuelas-tabs {
     flex-direction: column;
     gap: 4px;
+    background-color: red;
   }
  
   .tab-button {
@@ -224,6 +231,8 @@ box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0p
   .tabla-asistencias td {
     padding: 0.5rem;
   }
+
+ 
 
   
 }
