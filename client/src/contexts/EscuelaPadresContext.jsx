@@ -11,7 +11,8 @@ export const EscuelaPadresProvider = ({ children }) => {
   const [asistenciaActual, setAsistenciaActual] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const API_BASE = 'http://localhost:3000';
+  const API_BASE = import.meta.env.VITE_BACKEND_URL;
+    
 
   // 🔄 Cargar escuelas de padres
   const cargarEscuelas = async () => {
