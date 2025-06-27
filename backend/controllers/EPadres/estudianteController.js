@@ -3,18 +3,20 @@ const Estudiante = require('../../models/EPadres/EstudianteModel');
 // Crear estudiante
 const crearEstudiante = async (req, res) => {
   try {
-    const { num_identificacion, nombre, grupo } = req.body;
+    const { codigo, nombre, documento, grupo, grado } = req.body;
 
     // Verificar si ya existe
-    const existe = await Estudiante.findOne({ num_identificacion });
+    const existe = await Estudiante.findOne({ documento });
     if (existe) {
       return res.status(400).json({ message: 'Estudiante ya registrado' });
     }
 
     const nuevoEstudiante = new Estudiante({
-      num_identificacion,
+      codigo,
       nombre,
-      grupo
+      documento,
+      grupo,
+      grado
     });
 
     await nuevoEstudiante.save();

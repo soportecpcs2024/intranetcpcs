@@ -2,7 +2,8 @@
 const mongoose = require('mongoose');
 
 const estudianteSchema = new mongoose.Schema({
-  num_identificacion: {
+  codigo:String,
+ documento: {
     type: String,
     required: true,
     unique: true,
@@ -10,6 +11,8 @@ const estudianteSchema = new mongoose.Schema({
   nombre: String,
    
   grupo: String,
+  grado:String
+   
   
 }, {
   timestamps: true,
