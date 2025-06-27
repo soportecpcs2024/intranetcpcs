@@ -31,7 +31,6 @@ const AdminHeader = () => {
   const tesoreria = user && user.role === "tesoreria"; // Verificar si el usuario tiene el rol de teacher
   const escuelaPadres = user && user.role === "escuelaPadres"; // Verificar si el usuario tiene el rol de teacher
   const mantenimiento = user && user.role === "mantenimiento"; // Verificar si el usuario tiene el rol de teacher
- 
 
   return (
     <div className="admin-header">
@@ -52,18 +51,16 @@ const AdminHeader = () => {
             </p>
           </div>
         </div>
-          <button className="cerrar" onClick={handleLogout}>
-                      Cerrar{" "}
-                    </button>
+        <button className="cerrar" onClick={handleLogout}>
+          Cerrar{" "}
+        </button>
 
         <div className="admin-layout-header-links-pre">
           <div>
             <nav>
               {isAdmin && (
                 <ul>
-                  
-
-                   <li>
+                  <li>
                     <div className="dropdown">
                       <Link onClick={toggleDropdown}>Académico</Link>
                       {isDropdownOpen && (
@@ -119,9 +116,25 @@ const AdminHeader = () => {
                       <Link to="/admin/soporte">Adm Soporte</Link>
                     </li>
                   </div> */}
-
+ 
                   <li>
-                    <Link to="esc_padres">E.Padres</Link>
+                    <div className="dropdown">
+                      <Link onClick={toggleDropdown}>E. Padres</Link>
+
+                      {isDropdownOpen && (
+                        <ul className="dropdown-menu">
+                          <li>
+                            <Link to="esc_padres">Registro Asistencia</Link>
+                          </li>
+                          <li>
+                            <Link to="estadisticas_ep">Estadisticas EP</Link>
+                          </li>
+                          <li>
+                            <Link to="crear_ep">Crear Escuela</Link>
+                          </li>
+                        </ul>
+                      )}
+                    </div>
                   </li>
 
                   <li>
@@ -148,7 +161,6 @@ const AdminHeader = () => {
                   </li>
                 </ul>
               )}
-                  
 
               {isAcademic && (
                 <ul>
@@ -174,7 +186,7 @@ const AdminHeader = () => {
                               Llegadas tarde
                             </Link>
                           </li>
-                           <li>
+                          <li>
                             <Link to="/admin/extraclases">
                               Extra curricular
                             </Link>
@@ -192,7 +204,6 @@ const AdminHeader = () => {
                       Q 10
                     </Link>
                   </li>
-                  
                 </ul>
               )}
 
@@ -231,7 +242,6 @@ const AdminHeader = () => {
                       Q 10
                     </Link>
                   </li>
-                  
                 </ul>
               )}
 
@@ -273,27 +283,30 @@ const AdminHeader = () => {
                       Q 10
                     </Link>
                   </li>
-                  <li>
-                  
-                  </li>
+                  <li></li>
                 </ul>
               )}
 
               {escuelaPadres && (
-                <ul>
-                  {/* <li>
-                    <Link to="/admin/users">Inicio</Link>
-                  </li> */}
-                  {/* <li>
-              <Link to="/admin/blog">Blog</Link>
-              </li> */}
-                    <li>
-                    <Link to="esc_padres">E.Padres</Link>
-                  </li>
+                <li>
+                    <div className="dropdown">
+                      <Link onClick={toggleDropdown}>E. Padres</Link>
 
-                  
-                
-                </ul>
+                      {isDropdownOpen && (
+                        <ul className="dropdown-menu">
+                          <li>
+                            <Link to="esc_padres">Registro Asistencia</Link>
+                          </li>
+                          <li>
+                            <Link to="estadisticas_ep">Estadisticas EP</Link>
+                          </li>
+                          <li>
+                            <Link to="crear_ep">Crear Escuela</Link>
+                          </li>
+                        </ul>
+                      )}
+                    </div>
+                  </li>
               )}
 
               {isAdministrator && (
@@ -335,9 +348,7 @@ const AdminHeader = () => {
                     </Link>
                   </li>
 
-                  <li>
-                    
-                  </li>
+                  <li></li>
                 </ul>
               )}
 
@@ -354,12 +365,8 @@ const AdminHeader = () => {
                       Tareas CPCS
                     </Link>
                   </div>
-                  
                 </div>
               )}
-
-              
-
             </nav>
           </div>
         </div>

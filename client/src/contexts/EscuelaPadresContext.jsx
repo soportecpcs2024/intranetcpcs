@@ -12,7 +12,6 @@ export const EscuelaPadresProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
 
   const API_BASE = import.meta.env.VITE_BACKEND_URL;
-    
 
   // 🔄 Cargar escuelas de padres
   const cargarEscuelas = async () => {
@@ -21,6 +20,41 @@ export const EscuelaPadresProvider = ({ children }) => {
       setEscuelas(res.data);
     } catch (err) {
       console.error('❌ Error al cargar escuelas:', err);
+    }
+  };
+
+  // ✅ Crear escuela
+  const crearEscuela = async (escuelaData) => {
+    try {
+      const res = await axios.post(`${API_BASE}/api/epEscuelas`, escuelaData);
+      await cargarEscuelas();
+      return res.data;
+    } catch (err) {
+      console.error('❌ Error al crear escuela:', err);
+      throw err;
+    }
+  };
+
+  // 📝 Actualizar escuela
+  const actualizarEscuela = async (id, datos) => {
+    try {
+      const res = await axios.put(`${API_BASE}/api/epEscuelas/${id}`, datos);
+      await cargarEscuelas();
+      return res.data;
+    } catch (err) {
+      console.error('❌ Error al actualizar escuela:', err);
+      throw err;
+    }
+  };
+
+  // 🗑️ Eliminar escuela
+  const eliminarEscuela = async (id) => {
+    try {
+      await axios.delete(`${API_BASE}/api/epEscuelas/${id}`);
+      await cargarEscuelas();
+    } catch (err) {
+      console.error('❌ Error al eliminar escuela:', err);
+      throw err;
     }
   };
 
@@ -58,24 +92,20 @@ export const EscuelaPadresProvider = ({ children }) => {
   };
 
   // 📥 Obtener asistencia por escuela + estudiante
-const obtenerAsistencia = async (escuelaPadresId, estudianteId) => {
-  try {
-    const res = await axios.get(`${API_BASE}/api/epasistencias/obtener/${escuelaPadresId}/${estudianteId}`);
-    setAsistenciaActual({ ...res.data }); // nueva referencia
-    return res.data;
-  } catch (err) {
-    if (err.response && err.response.status === 404) {
-      // No mostrar error si es porque no existe el registro aún
-      setAsistenciaActual(null);
-    } else {
-      // Solo mostrar en consola si es otro tipo de error
-      console.error('❌ Error al obtener asistencia:', err);
+  const obtenerAsistencia = async (escuelaPadresId, estudianteId) => {
+    try {
+      const res = await axios.get(`${API_BASE}/api/epasistencias/obtener/${escuelaPadresId}/${estudianteId}`);
+      setAsistenciaActual({ ...res.data });
+      return res.data;
+    } catch (err) {
+      if (err.response && err.response.status === 404) {
+        setAsistenciaActual(null);
+      } else {
+        console.error('❌ Error al obtener asistencia:', err);
+      }
+      return null;
     }
-    return null;
-  }
-};
-
-
+  };
 
   // 📝 Crear asistencia
   const crearAsistencia = async (datos) => {
@@ -119,6 +149,10 @@ const obtenerAsistencia = async (escuelaPadresId, estudianteId) => {
         obtenerAsistencia,
         crearAsistencia,
         actualizarAsistencia,
+        crearEscuela,
+        actualizarEscuela,
+        eliminarEscuela,
+        cargarEscuelas,
         loading,
       }}
     >

@@ -77,6 +77,9 @@ import ListarExtraCurricular from "./components/tesoreria/extracurricular/Listar
 import ExtraIngles from "./components/tesoreria/extracurricular/ExtraIngles";
 import ExtraPiano from "./components/tesoreria/extracurricular/ExtraPiano";
 import ExtraIniciaMusical from "./components/tesoreria/extracurricular/ExtraIniciaMusical";
+import CrearEscuelaPadres from "./components/EscPadres/CrearEscuela/CrearEscuelaPadres";
+import EstadisticasEp from "./components/EscPadres/EstadisticasEP/EstadisticasEp";
+
 
 const App = () => {
   useEffect(() => {
@@ -227,6 +230,8 @@ const AppContent = () => {
             </Route>
 
             <Route path="esc_padres" element={<DashboardEscPadres />}></Route>
+              <Route path="crear_ep" element={<CrearEscuelaPadres />} />
+              <Route path="estadisticas_ep" element={<EstadisticasEp />} />
 
             <Route
               path="programadorTareas"
