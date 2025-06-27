@@ -2,9 +2,9 @@
 const mongoose = require('mongoose');
 
 const estudianteSchema = new mongoose.Schema({
-  codigo:String,
+  codigo:Number,
  documento: {
-    type: String,
+    type: Number,
     required: true,
     unique: true,
   },
