@@ -171,7 +171,8 @@ const DashboardEscPadres = () => {
           Este estudiante aún no tiene asistencia registrada.
         </p>
       )}
-          <div className="datos">
+       {estudianteSeleccionado && escuelaSeleccionada && (
+        <div className="datos">
              
 
               <div>
@@ -206,6 +207,8 @@ const DashboardEscPadres = () => {
               </div>
             </div>
           </div>
+      )}
+         
 
       {/* Tabla de Asistencia */}
       {estudianteSeleccionado && escuelaSeleccionada && (
