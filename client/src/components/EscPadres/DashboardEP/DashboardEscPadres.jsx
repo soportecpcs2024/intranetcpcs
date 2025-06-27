@@ -136,6 +136,7 @@ const DashboardEscPadres = () => {
       <h2 className="titulo">Escuela de Padres CPCS 2025</h2>
 
       {/* Tabs de Escuelas */}
+        <h5>Escuelas disponibles 2025:</h5>
       <div className="escuelas-tabs">
         {escuelas.map((escuela) => (
           <button
@@ -170,10 +171,6 @@ const DashboardEscPadres = () => {
           Este estudiante aún no tiene asistencia registrada.
         </p>
       )}
-
-      {/* Tabla de Asistencia */}
-      {estudianteSeleccionado && escuelaSeleccionada && (
-        <div className="tabla-container">
           <div className="datos">
              
 
@@ -209,6 +206,10 @@ const DashboardEscPadres = () => {
               </div>
             </div>
           </div>
+
+      {/* Tabla de Asistencia */}
+      {estudianteSeleccionado && escuelaSeleccionada && (
+        <div className="tabla-container">
 
           <table className="tabla-asistencias">
             <thead>
