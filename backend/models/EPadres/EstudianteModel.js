@@ -11,7 +11,11 @@ const estudianteSchema = new mongoose.Schema({
   nombre: String,
    
   grupo: String,
-  grado:String
+  grado:String,
+   hermanos: {
+    type: Boolean,
+    default: false,
+  }
    
   
 }, {
