@@ -288,7 +288,7 @@ const AdminHeader = () => {
               )}
 
               {escuelaPadres && (
-                <li>
+                
                     <div className="dropdown">
                       <Link onClick={toggleDropdown}>E. Padres</Link>
 
@@ -306,7 +306,7 @@ const AdminHeader = () => {
                         </ul>
                       )}
                     </div>
-                  </li>
+                  
               )}
 
               {isAdministrator && (
