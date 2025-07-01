@@ -23,18 +23,28 @@ const DashboardEscPadres = () => {
   const [tieneHermano, setTieneHermano] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  // Seleccionar la primera escuela automáticamente
   useEffect(() => {
     if (escuelas.length > 0 && !escuelaSeleccionada) {
       setEscuelaSeleccionada(escuelas[0]);
     }
   }, [escuelas]);
 
+  // Obtener asistencia al seleccionar escuela y estudiante
   useEffect(() => {
     if (escuelaSeleccionada && estudianteSeleccionado) {
       obtenerAsistencia(escuelaSeleccionada._id, estudianteSeleccionado._id);
     }
   }, [escuelaSeleccionada, estudianteSeleccionado]);
 
+  // ✅ Siempre sincronizar "hermanos" desde el estudiante seleccionado
+  useEffect(() => {
+    if (estudianteSeleccionado) {
+      setTieneHermano(estudianteSeleccionado.hermanos || false);
+    }
+  }, [estudianteSeleccionado]);
+
+  // Manejo de datos de asistencia
   useEffect(() => {
     if (!escuelaSeleccionada) return;
 
@@ -65,7 +75,6 @@ const DashboardEscPadres = () => {
 
       setFormAsistencia(formateadas);
       setEntregaMaterial(asistenciaActual.entregaMaterial || false);
-      setTieneHermano(asistenciaActual.tieneHermano || false);
     } else {
       setFormAsistencia(
         fechasDisponibles.map((fecha) => ({
@@ -74,7 +83,6 @@ const DashboardEscPadres = () => {
         }))
       );
       setEntregaMaterial(false);
-      setTieneHermano(false);
     }
   }, [asistenciaActual, escuelaSeleccionada, estudianteSeleccionado]);
 
@@ -131,12 +139,9 @@ const DashboardEscPadres = () => {
 
   return (
     <div className="escuelas-dashboard">
-    
-
       <h2 className="titulo">Escuela de Padres CPCS 2025</h2>
 
-      {/* Tabs de Escuelas */}
-        <h5>Escuelas disponibles 2025:</h5>
+      <h5>Escuelas disponibles 2025:</h5>
       <div className="escuelas-tabs">
         {escuelas.map((escuela) => (
           <button
@@ -158,7 +163,6 @@ const DashboardEscPadres = () => {
         ))}
       </div>
 
-      {/* Buscador separado */}
       <BuscadorEstudiante
         busqueda={busqueda}
         setBusqueda={setBusqueda}
@@ -166,54 +170,55 @@ const DashboardEscPadres = () => {
         buscarEstudiantes={buscarEstudiantes}
         onSelectEstudiante={(est) => setEstudianteSeleccionado(est)}
       />
-        {asistenciaActual === null && (
+
+      {asistenciaActual === null && (
         <p style={{ marginBottom: "1rem", color: "#888", fontStyle: "italic" }}>
           Este estudiante aún no tiene asistencia registrada.
         </p>
       )}
-       {estudianteSeleccionado && escuelaSeleccionada && (
+
+      {estudianteSeleccionado && escuelaSeleccionada && (
         <div className="datos">
-             
+          <div>
+            <p className="pp">
+              Estudiante:{" "}
+              <strong className="class-strong">
+                {estudianteSeleccionado.nombre}
+              </strong>
+            </p>
+            <p className="pp">
+              Grupo:{" "}
+              <strong className="class-strong">
+                {estudianteSeleccionado.grupo}
+              </strong>
+            </p>
+          </div>
 
-              <div>
-                <p className="pp"> Estudiante : <strong className="class-strong"> {estudianteSeleccionado.nombre}</strong> </p>
-              
-                <p className="pp">Grupo: <strong className="class-strong">{estudianteSeleccionado.grupo}</strong> </p>
-              </div>
-
-
-            
+          <div className="opciones-extra">
             <div>
-              {/* Opciones adicionales */}
-              <div className="opciones-extra">
-                <div>
-                  <input
-                    type="checkbox"
-                    checked={entregaMaterial}
-                    onChange={(e) => setEntregaMaterial(e.target.checked)}
-                    className="pp"
-                  />
-                </div>
-                <div>
-                  <p className="pp">Entrega de material</p>
-                </div>
+              <input
+                type="checkbox"
+                checked={entregaMaterial}
+                onChange={(e) => setEntregaMaterial(e.target.checked)}
+                className="pp"
+              />
+              <p className="pp">Entrega de material</p>
+            </div>
 
-                <input
-                  type="checkbox"
-                  checked={tieneHermano}
-                  onChange={(e) => setTieneHermano(e.target.checked)}
-                />
-                <p className="pp">Tiene hermano</p>
-              </div>
+            <div>
+              <input
+                type="checkbox"
+                checked={tieneHermano}
+                onChange={(e) => setTieneHermano(e.target.checked)}
+              />
+              <p className="pp">Tiene hermano</p>
             </div>
           </div>
+        </div>
       )}
-         
 
-      {/* Tabla de Asistencia */}
       {estudianteSeleccionado && escuelaSeleccionada && (
         <div className="tabla-container">
-
           <table className="tabla-asistencias">
             <thead>
               <tr>
