@@ -1,10 +1,63 @@
-.lista_ep_pagas{
+/* Estilo base para escritorio */
+.lista_ep_pagas {
     width: 40%;
     display: flex;
     padding: 10px;
     justify-content: space-between;
     background-color: rgb(254, 254, 254);
-    box-shadow: rgba(50, 50, 93, 0.59) 0px 6px 12px -2px, rgba(0, 0, 0, 0.547) 0px 3px 7px -3px;
+    box-shadow: rgba(50, 50, 93, 0.59) 0px 6px 12px -2px,
+                rgba(0, 0, 0, 0.547) 0px 3px 7px -3px;
     border-radius: 4px;
-    margin: 5px;
+    margin: 5px auto;
+    flex-wrap: wrap;
+}
+
+.conteo-clases {
+    width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+    justify-content: space-around;
+    background-color: rgb(238, 237, 237);
+    box-shadow: rgba(50, 54, 93, 0.59) 0px 6px 12px -2px,
+                rgba(0, 0, 0, 0.547) 0px 3px 7px -3px;
+    border-radius: 4px;
+    margin: 10px auto;
+}
+
+/* Tablet (≤ 1024px) */
+@media screen and (max-width: 1024px) {
+    .lista_ep_pagas {
+        width: 80%;
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 16px;
+    }
+
+    .conteo-clases {
+        width: 95%;
+        flex-direction: column;
+        align-items: center;
+        font-size: 16px;
+    }
+}
+
+/* Móvil (≤ 768px) */
+@media screen and (max-width: 768px) {
+    .lista_ep_pagas {
+        width: 95%;
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .conteo-clases {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        font-size: 14px;
+        padding: 8px;
+    }
 }
