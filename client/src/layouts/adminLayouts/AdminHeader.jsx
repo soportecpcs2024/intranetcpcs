@@ -118,7 +118,7 @@ const AdminHeader = () => {
                   </div> */}
  
                   <li>
-                    <div className="dropdown">
+                      <div className="dropdown">
                       <Link onClick={toggleDropdown}>E. Padres</Link>
 
                       {isDropdownOpen && (
@@ -131,6 +131,9 @@ const AdminHeader = () => {
                           </li>
                           <li>
                             <Link to="crear_ep">Crear Escuela</Link>
+                          </li>
+                          <li>
+                            <Link to="eppagas">Pagos escuelas</Link>
                           </li>
                         </ul>
                       )}
@@ -302,6 +305,9 @@ const AdminHeader = () => {
                           </li>
                           <li>
                             <Link to="crear_ep">Crear Escuela</Link>
+                          </li>
+                          <li>
+                            <Link to="eppagas">Pagos escuelas</Link>
                           </li>
                         </ul>
                       )}

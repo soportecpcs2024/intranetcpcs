@@ -79,6 +79,7 @@ import ExtraPiano from "./components/tesoreria/extracurricular/ExtraPiano";
 import ExtraIniciaMusical from "./components/tesoreria/extracurricular/ExtraIniciaMusical";
 import CrearEscuelaPadres from "./components/EscPadres/CrearEscuela/CrearEscuelaPadres";
 import EstadisticasEp from "./components/EscPadres/EstadisticasEP/EstadisticasEp";
+import ListaEPPagas from "./components/EscPadres/listaEPPagas/ListaEPPagas";
 
 
 const App = () => {
@@ -232,6 +233,7 @@ const AppContent = () => {
             <Route path="esc_padres" element={<DashboardEscPadres />}></Route>
               <Route path="crear_ep" element={<CrearEscuelaPadres />} />
               <Route path="estadisticas_ep" element={<EstadisticasEp />} />
+              <Route path="eppagas" element={<ListaEPPagas />} />
 
             <Route
               path="programadorTareas"
