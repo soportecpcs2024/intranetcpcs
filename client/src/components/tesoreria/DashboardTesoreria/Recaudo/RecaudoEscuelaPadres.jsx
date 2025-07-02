@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRecaudo } from "../../../../contexts/RecaudoContext";
 import BuscadorEstudiante from "./buscador/BuscadorEstudiante";
 import ListaClases from "./ListarClases/ListarClasesAntologia";
 import GenerarFactura from "./antologia/GenerarFacturaAntologia";
 import ListarFacturas from "./listarFactura/ListarFacturas";
-import ListaClasesEscuelaPadres from "./ListarClases/ListarclasesEscuelaPadres";
+ 
 
 const Recaudoep = () => {
   const { clases, fetchEstudianteById } = useRecaudo();
@@ -13,7 +13,7 @@ const Recaudoep = () => {
   const [tipoPago, setTipoPago] = useState("");
   const [facturaActual, setFacturaActual] = useState(null);
   const [facturaGuardada, setFacturaGuardada] = useState(null);
-  const [estudiantedata, setEstudiantedata] = useState([]);
+  
   const [mostrarGenerarFactura, setMostrarGenerarFactura] = useState(false);
   const [limpiarCampos, setLimpiarCampos] = useState(false);
 

@@ -1,6 +1,4 @@
-// src/components/BuscadorEstudiante.jsx
-import React from "react";
- 
+import PropTypes from 'prop-types';
 
 const BuscadorEstudiante = ({
   busqueda,
@@ -38,6 +36,14 @@ const BuscadorEstudiante = ({
       )}
     </div>
   );
+};
+
+BuscadorEstudiante.propTypes = {
+  busqueda: PropTypes.string.isRequired,
+  setBusqueda: PropTypes.func.isRequired,
+  estudiantes: PropTypes.array.isRequired,
+  buscarEstudiantes: PropTypes.func.isRequired,
+  onSelectEstudiante: PropTypes.func.isRequired,
 };
 
 export default BuscadorEstudiante;

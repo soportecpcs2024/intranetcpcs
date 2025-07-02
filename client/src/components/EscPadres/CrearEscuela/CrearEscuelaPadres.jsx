@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useEscuelaPadres } from "../../../contexts/EscuelaPadresContext";
 
 import "./CrearEscuelaPadres.css"; // Importa tu CSS aquí

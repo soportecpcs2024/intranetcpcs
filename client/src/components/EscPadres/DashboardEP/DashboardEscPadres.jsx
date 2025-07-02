@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useEscuelaPadres } from "../../../contexts/EscuelaPadresContext";
 import BuscadorEstudiante from "../../EscPadres/BuecarEstudiante/BuscadorEstudiante";
 import "./DashboardEscPadres.css";
@@ -43,14 +43,14 @@ const formatFechaColombia = (fechaStr) => {
     if (escuelas.length > 0 && !escuelaSeleccionada) {
       setEscuelaSeleccionada(escuelas[0]);
     }
-  }, [escuelas]);
+  }, [escuelas, escuelaSeleccionada]);
 
   // Obtener asistencia al seleccionar escuela y estudiante
   useEffect(() => {
     if (escuelaSeleccionada && estudianteSeleccionado) {
       obtenerAsistencia(escuelaSeleccionada._id, estudianteSeleccionado._id);
     }
-  }, [escuelaSeleccionada, estudianteSeleccionado]);
+  }, [escuelaSeleccionada, estudianteSeleccionado, obtenerAsistencia]);
 
   // ✅ Siempre sincronizar "hermanos" desde el estudiante seleccionado
   useEffect(() => {

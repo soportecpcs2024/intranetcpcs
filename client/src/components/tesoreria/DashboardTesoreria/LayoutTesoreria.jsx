@@ -1,4 +1,4 @@
-import React from "react";
+ 
 import { Outlet, NavLink } from "react-router-dom";
 import Footer from "../../../pages/admin/User/footer/Footer";
 import { SiGoogleclassroom } from "react-icons/si";
@@ -9,7 +9,7 @@ import { IoDownloadOutline } from "react-icons/io5";
 import { FaListCheck } from "react-icons/fa6";
 import * as XLSX from "xlsx";
 import { useRecaudo } from "../../../contexts/RecaudoContext"; // Asegúrate de importar el contexto correcto
-import { MdLunchDining } from "react-icons/md";
+ 
 import { GiMeal } from "react-icons/gi";
 
 import ".//LayoutTesoreria.css";
