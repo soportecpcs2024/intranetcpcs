@@ -23,6 +23,21 @@ const DashboardEscPadres = () => {
   const [tieneHermano, setTieneHermano] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const parseFechaLocal = (fechaStr) => {
+  const [year, month, day] = fechaStr.split("T")[0].split("-");
+  return new Date(Number(year), Number(month) - 1, Number(day));
+};
+
+const formatFechaColombia = (fechaStr) => {
+  const date = parseFechaLocal(fechaStr);
+  return new Intl.DateTimeFormat("es-CO", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  }).format(date);
+};
+
+
   // Seleccionar la primera escuela automáticamente
   useEffect(() => {
     if (escuelas.length > 0 && !escuelaSeleccionada) {
@@ -54,9 +69,9 @@ const DashboardEscPadres = () => {
       const fa = new Date(a);
       const fb = new Date(b);
       return (
-        fa.getDate() === fb.getDate() &&
-        fa.getMonth() === fb.getMonth() &&
-        fa.getFullYear() === fb.getFullYear()
+        fa.getUTCDate() === fb.getUTCDate() &&
+        fa.getUTCMonth() === fb.getUTCMonth() &&
+        fa.getUTCFullYear() === fb.getUTCFullYear()
       );
     };
 
@@ -229,13 +244,8 @@ const DashboardEscPadres = () => {
             <tbody>
               {formAsistencia.map((f, i) => (
                 <tr key={i}>
-                  <td>
-                    {new Date(f.fecha).toLocaleDateString("es-CO", {
-                      day: "2-digit",
-                      month: "long",
-                      year: "numeric",
-                    })}
-                  </td>
+                 <td>{formatFechaColombia(f.fecha)}</td>
+
                   <td>
                     <input
                       type="checkbox"
