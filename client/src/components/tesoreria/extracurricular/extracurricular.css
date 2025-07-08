@@ -1,28 +1,29 @@
-/* Contenedor principal */
+/* Contenedor principal */ 
 .layout-extraclases-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   font-family: Arial, sans-serif;
+  padding: 16px;
 }
 
 /* Contenedor de enlaces */
 .link-extraclases {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 5px;
   align-items: center;
-  justify-content: center;
+   
   text-align: center;
-  padding: 12px;
+  padding: 16px;
   border-radius: 8px;
   background-color: #f9f9f9;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
+/* Estilo de cada enlace */
 .link-extraclases a {
-  padding: 8px 16px;
+  padding: 5px 10px;
   background-color: #ffffff;
   border: 1px solid #ccc;
   border-radius: 6px;
@@ -30,14 +31,18 @@
   color: #333;
   font-weight: 500;
   transition: background-color 0.3s ease, transform 0.2s ease;
+  flex: 1 1 160px; /* Se adapta entre 160px y el espacio disponible */
+  max-width: 200px;
+  box-sizing: border-box;
 }
 
+/* Hover */
 .link-extraclases a:hover {
   background-color: #e8e8e8;
   transform: scale(1.03);
 }
 
-/* Estado activo del link */
+/* Link activo */
 .link-extraclases .active {
   color: #000000;
   background-color: #d6e4ff;
@@ -45,18 +50,28 @@
   box-shadow: rgba(91, 141, 239, 0.6) 0px 4px 12px;
 }
 
-/* Responsive: para pantallas menores a 768px */
+/* Responsivo para pantallas menores a 768px */
 @media screen and (max-width: 768px) {
+  .layout-extraclases-container {
+    margin-top: 20px;
+    padding: 12px;
+  }
+
   .link-extraclases {
     flex-direction: column;
     align-items: stretch;
-    gap: 12px;
-    padding: 10px;
   }
 
   .link-extraclases a {
+    flex: 1 1 auto;
     width: 100%;
-    text-align: center;
+    max-width: none;
     font-size: 1rem;
   }
+}
+
+
+.grup-links{
+  display: flex;
+  gap: 10px;
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useRecaudo } from "../../../../contexts/RecaudoContext";
 import BuscadorEstudiante from "./buscador/BuscadorEstudiante";
 import ListaClases from "./ListarClases/ListaClases";
@@ -53,7 +53,10 @@ const Recaudo = () => {
     (clase) =>
       clase.nombre !== "Antología" &&
       clase.nombre !== "El arte de ser padres" &&
-      clase.nombre !== "Ciberfamilias"
+      clase.nombre !== "Ciberfamilias" &&
+      clase.nombre !== "Mayordomía financiera" &&
+      clase.nombre !== "Guiando a sus adolescentes" 
+
   );
 
   const handleSelectClase = (clase, aplicarDescuento) => {
@@ -143,6 +146,8 @@ const Recaudo = () => {
       alert(error.message);
     }
   };
+
+  
 
   return (
     <div className="container-recaudo">

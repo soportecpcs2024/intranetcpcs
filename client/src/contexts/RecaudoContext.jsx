@@ -7,26 +7,22 @@ export const RecaudoProvider = ({ children }) => {
   const [estudiantes, setEstudiantes] = useState([]);
   const [clases, setClases] = useState([]);
   const [facturas, setFacturas] = useState([]);
-  const [factura_id, setFactura_id] = useState({})
+  const [factura_id, setFactura_id] = useState({});
   const [almuerzo, setAlmuerzo] = useState([]);
   const [almuerzoFactura, setAlmuerzoFactura] = useState({});
+  const [facturasConAsistencias, setFacturasConAsistencias] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const apiBaseUrl = import.meta.env.VITE_BACKEND_URL;
 
-  // Cargar lista de estudiantes
   const fetchEstudiantes = useCallback(async () => {
     try {
       const response = await axios.get(`${apiBaseUrl}/api/recaudo/estudiantes`);
-      
       setEstudiantes(response.data);
     } catch (error) {
       console.error("Error fetching estudiantes:", error);
     }
   }, [apiBaseUrl]);
-  
-
- 
 
   const fetchEstudianteById = async (nombre) => {
     try {
@@ -38,7 +34,6 @@ export const RecaudoProvider = ({ children }) => {
     }
   };
 
-  // Cargar lista de clases
   const fetchClases = useCallback(async () => {
     try {
       const response = await axios.get(`${apiBaseUrl}/api/recaudo/clases`);
@@ -48,7 +43,6 @@ export const RecaudoProvider = ({ children }) => {
     }
   }, [apiBaseUrl]);
 
-  // Cargar lista de facturas
   const fetchFacturas = useCallback(async () => {
     try {
       const response = await axios.get(`${apiBaseUrl}/api/recaudo/facturas`);
@@ -106,7 +100,6 @@ export const RecaudoProvider = ({ children }) => {
     try {
       const response = await axios.get(`${apiBaseUrl}/api/recaudo/almuerzoFactura`);
       setAlmuerzoFactura(response.data);
-     
     } catch (error) {
       console.error("Error fetching almuerzoFactura:", error);
     }
@@ -116,7 +109,6 @@ export const RecaudoProvider = ({ children }) => {
     try {
       const response = await axios.get(`${apiBaseUrl}/api/recaudo/almuerzoFactura?_id=${factura_id}`);
       setFactura_id(response.data);
-     
     } catch (error) {
       console.error("Error fetching almuerzoFactura:", error);
     }
@@ -133,13 +125,49 @@ export const RecaudoProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    Promise.allSettled([fetchEstudiantes(), fetchClases(), fetchFacturas(), fetchAlmuerzos(), fetchAlmuerzoFactura()])
-      .finally(() => setLoading(false));
-  }, [fetchEstudiantes, fetchClases, fetchFacturas, fetchAlmuerzos, fetchAlmuerzoFactura]);
+  // ✅ NUEVO: Obtener facturas con asistencias
+  const fetchFacturasConAsistencias = useCallback(async () => {
+    try {
+      const response = await axios.get(`${apiBaseUrl}/api/asistenciasextra`);
+      setFacturasConAsistencias(response.data);
+    } catch (error) {
+      console.error("Error al obtener facturas con asistencias:", error);
+    }
+  }, [apiBaseUrl]);
 
- 
-   
+  // ✅ NUEVO: Actualizar asistencias por ID de factura
+const actualizarAsistenciasFactura = async (asistenciaId, data) => {
+  try {
+    const response = await axios.put(
+      `${apiBaseUrl}/api/asistenciasextra/${asistenciaId}/asistencias`,
+      data
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error actualizando asistencias:", error);
+  }
+};
+
+
+  // Carga inicial
+  useEffect(() => {
+    Promise.allSettled([
+      fetchEstudiantes(),
+      fetchClases(),
+      fetchFacturas(),
+      fetchAlmuerzos(),
+      fetchAlmuerzoFactura(),
+      fetchFacturasConAsistencias()
+    ]).finally(() => setLoading(false));
+  }, [
+    fetchEstudiantes,
+    fetchClases,
+    fetchFacturas,
+    fetchAlmuerzos,
+    fetchAlmuerzoFactura,
+    fetchFacturasConAsistencias
+  ]);
+
   return (
     <RecaudoContext.Provider
       value={{
@@ -160,7 +188,10 @@ export const RecaudoProvider = ({ children }) => {
         almuerzo,
         fetchAlmuerzoFactura,
         fetchAlmuerzoFacturaId,
-        factura_id
+        factura_id,
+        facturasConAsistencias,
+        fetchFacturasConAsistencias,
+        actualizarAsistenciasFactura // ✅ Nuevo
       }}
     >
       {children}

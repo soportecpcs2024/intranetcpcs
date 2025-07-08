@@ -15,7 +15,7 @@ const facturaSchema = new mongoose.Schema({
     },
     nombreClase: { type: String, required: true, trim: true },
     costo: { type: Number, required: true, min: 0 },
-    cod: { type: Number, required: true},
+    cod: { type: Number, required: true },
     dia: { 
       type: String, 
       trim: true,
@@ -33,6 +33,14 @@ const facturaSchema = new mongoose.Schema({
     trim: true
   },
   mes_aplicado: { type: String, trim: true },
+
+  // NUEVO: asistencias
+  asistencias: {
+    asistencia1: { type: Boolean, default: false },
+    asistencia2: { type: Boolean, default: false },
+    asistencia3: { type: Boolean, default: false },
+    asistencia4: { type: Boolean, default: false }
+  }
 });
 
 const Factura = mongoose.model('Factura', facturaSchema);

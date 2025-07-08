@@ -74,6 +74,20 @@ import ExtraIniciaMusical from "./components/tesoreria/extracurricular/ExtraInic
 import CrearEscuelaPadres from "./components/EscPadres/CrearEscuela/CrearEscuelaPadres";
 import EstadisticasEp from "./components/EscPadres/EstadisticasEP/EstadisticasEp";
 import ListaEPPagas from "./components/EscPadres/listaEPPagas/ListaEPPagas";
+ 
+ 
+ 
+const ExploracionMotris = React.lazy(()=> import("./components/tesoreria/extracurricular/ExploracionMotris"));
+const Artes = React.lazy(()=> import("./components/tesoreria/extracurricular/Artes"));
+const Voleibol = React.lazy(()=> import("./components/tesoreria/extracurricular/Voleibol"));
+const Microfutbol = React.lazy(()=> import("./components/tesoreria/extracurricular/Microfutbol"));
+ 
+const Baloncesto = React.lazy(()=> import("./components/tesoreria/extracurricular/Baloncesto"));
+const Bateria = React.lazy(()=> import("./components/tesoreria/extracurricular/Bateria"));
+const Tecnicavocal = React.lazy(()=> import( "./components/tesoreria/extracurricular/Tecnicavocal"));
+const GuitarraBajo = React.lazy(()=> import( "./components/tesoreria/extracurricular/GuitarraBajo"));
+
+
 
 const App = () => {
   useEffect(() => {
@@ -159,6 +173,14 @@ const AppContent = () => {
                 <Route path="ingles" element={<ExtraIngles />} />
                 <Route path="iniciamusical" element={<ExtraIniciaMusical />} />
                 <Route path="piano" element={<ExtraPiano />} />
+                <Route path="tecnicavocal" element={<Tecnicavocal />} />
+                <Route path="guitarrabajo" element={<GuitarraBajo />} />
+                <Route path="bateria" element={<Bateria />} />
+                <Route path="baloncesto" element={<Baloncesto />} />
+                <Route path="voleibol" element={<Voleibol />} />
+                <Route path="microfutbol" element={<Microfutbol />} />
+                <Route path="arte" element={<Artes />} />
+                <Route path="exploracionmotriz" element={<ExploracionMotris />} />
               </Route>
 
               <Route path="administracion" element={<DashboardInventory />}>

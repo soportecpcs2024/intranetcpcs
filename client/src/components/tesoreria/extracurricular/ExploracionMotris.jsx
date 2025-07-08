@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRecaudo } from "../../../contexts/RecaudoContext";
 
-const ExtraPiano = () => {
+const ExploracionMotris = () => {
   const {
     facturasConAsistencias,
     fetchFacturasConAsistencias,
@@ -60,7 +60,7 @@ const handleCheckboxChange = async (facturaId, key) => {
   const facturasFiltradas = facturasConAsistencias.filter(
   (factura) =>
     factura.mes_aplicado?.toLowerCase() === mesSeleccionado.toLowerCase() &&
-    factura.clases?.[0]?.nombreClase?.toLowerCase() === "piano"
+    factura.clases?.[0]?.nombreClase?.toLowerCase() === "exploración motriz y predeportiva pre"
 );
 
 
@@ -120,5 +120,4 @@ const handleCheckboxChange = async (facturaId, key) => {
 };
 
 
-
-export default ExtraPiano
+export default ExploracionMotris

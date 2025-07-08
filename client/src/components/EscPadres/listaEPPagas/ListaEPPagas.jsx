@@ -1,11 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useRecaudo } from '../../../contexts/RecaudoContext';
+import ReactPaginate from 'react-paginate';
 import './ListaEPPagas.css';
+
+const ITEMS_PER_PAGE = 20;
 
 const ListaEPPagas = () => {
   const { facturas } = useRecaudo();
   const [filteredData, setFilteredData] = useState([]);
   const [conteoClases, setConteoClases] = useState({});
+  const [currentItems, setCurrentItems] = useState([]);
+  const [pageCount, setPageCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
     const codigosPermitidos = [1400, 1600, 1700];
@@ -37,25 +43,17 @@ const ListaEPPagas = () => {
 
     setFilteredData(result);
     setConteoClases(conteo);
-
-    const now = new Date();
-    const next7am = new Date();
-    next7am.setHours(7, 0, 0, 0);
-    if (now > next7am) next7am.setDate(next7am.getDate() + 1);
-    const delay = next7am - now;
-
-    const timer = setTimeout(() => {
-      // Reejecutar el mismo filtro
-      setFilteredData(result);
-      setConteoClases(conteo);
-      setInterval(() => {
-        setFilteredData(result);
-        setConteoClases(conteo);
-      }, 24 * 60 * 60 * 1000);
-    }, delay);
-
-    return () => clearTimeout(timer);
   }, [facturas]);
+
+  useEffect(() => {
+    const endOffset = (currentPage + 1) * ITEMS_PER_PAGE;
+    setCurrentItems(filteredData.slice(currentPage * ITEMS_PER_PAGE, endOffset));
+    setPageCount(Math.ceil(filteredData.length / ITEMS_PER_PAGE));
+  }, [currentPage, filteredData]);
+
+  const handlePageClick = (event) => {
+    setCurrentPage(event.selected);
+  };
 
   const getNombreEscuela = (cod) => {
     switch (cod) {
@@ -78,10 +76,13 @@ const ListaEPPagas = () => {
         <p>🧩 El arte de ser Padres: {conteoClases[1400] || 0}</p>
         <p>👨‍👧‍👦 Guiando a sus adolescentes: {conteoClases[1600] || 0}</p>
         <p>💰 Mayordomía financiera: {conteoClases[1700] || 0}</p>
+        <div>
+          Total estudiantes pagos del mes: <span>{filteredData.length}</span>
+        </div>
       </div>
 
       <ul>
-        {filteredData.map((item, index) => (
+        {currentItems.map((item, index) => (
           <li key={index}>
             <div className="lista_ep_pagas">
               <p>{item.nombreEstudiante} - {item.grado}</p>
@@ -90,6 +91,15 @@ const ListaEPPagas = () => {
           </li>
         ))}
       </ul>
+
+      <ReactPaginate
+        previousLabel={"<<"}
+        nextLabel={">>"}
+        pageCount={pageCount}
+        onPageChange={handlePageClick}
+        containerClassName={"pagination"}
+        activeClassName={"active"}
+      />
     </div>
   );
 };

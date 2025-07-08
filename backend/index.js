@@ -141,6 +141,12 @@ app.use('/api/epEscuelas', epEscuelas);
 const epEstudiantes= require('./routes/EPadres/estudiantesRoutes.js');
 app.use('/api/epEstudiantes', epEstudiantes);
 
+
+// ---------------- asistencias ----------------
+
+const asistenciasExtraCurricular = require('./routes/asistenciasExtraCurricular/asistenciasExtracurricularRoutes');
+app.use('/api/asistenciasextra', asistenciasExtraCurricular);
+
 // Configuración y arranque del servidor
 const PORT = process.env.SERVER_PORT || 3000;
 app.listen(PORT, () => {
