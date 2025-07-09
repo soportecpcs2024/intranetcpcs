@@ -1,9 +1,12 @@
 import { useState, useContext } from "react";
+import moment from "moment-timezone";
+
 import { TareasContext } from "../../../contexts/TareaContext";
 import "../DashboardProgramadorTareas/DashboardProgramadorTareas.css";
 
 const CrearTarea = () => {
   const { crearTarea } = useContext(TareasContext);
+
   const [formData, setFormData] = useState({
     titulo: "",
     descripcion: "",
@@ -14,6 +17,13 @@ const CrearTarea = () => {
     nivelComplejidad: "Baja",
   });
 
+  // ✅ Corrige la visualización en el input eliminando el desfase por zona horaria
+  // ✅ No modificamos la fecha aquí, solo la usamos como viene del input
+  const formatFechaLocalInput = (fechaStr) => {
+    if (!fechaStr) return "";
+    return fechaStr; // ✅ usamos directamente el valor YYYY-MM-DD del input
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -21,7 +31,20 @@ const CrearTarea = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await crearTarea(formData);
+
+    // ✅ formData.fechaLimite es tipo string 'YYYY-MM-DD', así que lo pasamos a moment
+    const fechaColombia = moment.tz(
+      `${formData.fechaLimite}T23:59:59`,
+      "America/Bogota"
+    );
+
+    const formDataAjustado = {
+      ...formData,
+      fechaLimite: fechaColombia.toDate(), // guarda como 23:59:59 hora local
+    };
+
+    await crearTarea(formDataAjustado);
+
     setFormData({
       titulo: "",
       descripcion: "",
@@ -37,7 +60,9 @@ const CrearTarea = () => {
     <div className="crear-tarea-container">
       <h2 className="form-title">CREAR TAREA</h2>
       <form onSubmit={handleSubmit} className="crear-tarea-form">
-        <label htmlFor="titulo" className="label_crear_tarea">Tarea:</label>
+        <label htmlFor="titulo" className="label_crear_tarea">
+          Tarea:
+        </label>
         <input
           type="text"
           name="titulo"
@@ -47,7 +72,9 @@ const CrearTarea = () => {
           required
         />
 
-        <label htmlFor="descripcion" className="label_crear_tarea">Descripción de la tarea:</label>
+        <label htmlFor="descripcion" className="label_crear_tarea">
+          Descripción de la tarea:
+        </label>
         <textarea
           name="descripcion"
           placeholder="Descripción"
@@ -56,11 +83,13 @@ const CrearTarea = () => {
           required
         />
 
-        <label htmlFor="fechaLimite" className="label_crear_tarea">Fecha Finaliza el dia:</label>
+        <label htmlFor="fechaLimite" className="label_crear_tarea">
+          Fecha Finaliza el día:
+        </label>
         <input
           type="date"
           name="fechaLimite"
-          value={formData.fechaLimite}
+          value={formatFechaLocalInput(formData.fechaLimite)}
           onChange={handleChange}
           required
         />
@@ -75,7 +104,7 @@ const CrearTarea = () => {
             "Coliseo",
             "Oficinas",
             "Restaurante",
-            "Compras"
+            "Compras",
           ].map((seccion) => (
             <label
               key={seccion}
@@ -95,21 +124,20 @@ const CrearTarea = () => {
           ))}
         </div>
 
-        <label htmlFor="responsable" className="label_crear_tarea">Responsable:</label>
+        <label htmlFor="responsable" className="label_crear_tarea">
+          Responsable:
+        </label>
         <select
-          type="text"
           name="responsable"
-          placeholder="Responsable"
           value={formData.responsable}
           onChange={handleChange}
           required
         >
           <option value="">Selecciona encargado</option>
-
           <option value="KAREN MAYERLYN HERNANDEZ CUERVO">
             KAREN MAYERLYN HERNANDEZ CUERVO
           </option>
-          <option value="LINA	MARCELA	LUJAN	DURAN">
+          <option value="LINA MARCELA LUJAN DURAN">
             LINA MARCELA LUJAN DURAN
           </option>
           <option value="LINA MARIA MONTOYA GOMEZ">
@@ -121,7 +149,6 @@ const CrearTarea = () => {
           <option value="MARIA OLIVA CANTOR TIRADO">
             MARIA OLIVA CANTOR TIRADO
           </option>
-
           <option value="ANTONIO JOSE PEREIRA CHIRINOS">
             ANTONIO JOSE PEREIRA CHIRINOS
           </option>
@@ -134,16 +161,15 @@ const CrearTarea = () => {
           <option value="RUBEN HUMBERTO GOMEZ GIRALDO">
             RUBEN HUMBERTO GOMEZ GIRALDO
           </option>
-          
-
-          <option value="RICHARD ALONSO	OSORNO LOPERA">
+          <option value="RICHARD ALONSO OSORNO LOPERA">
             RICHARD ALONSO OSORNO LOPERA
           </option>
-
-          <option value="GIOVANNY	ESTRADA	PEREZ">GIOVANNY ESTRADA PEREZ</option>
+          <option value="GIOVANNY ESTRADA PEREZ">GIOVANNY ESTRADA PEREZ</option>
         </select>
 
-        <label htmlFor="nivelComplejidad" className="label_crear_tarea">Nivel de Complejidad:</label>
+        <label htmlFor="nivelComplejidad" className="label_crear_tarea">
+          Nivel de Complejidad:
+        </label>
         <select
           name="nivelComplejidad"
           value={formData.nivelComplejidad}

@@ -6,12 +6,28 @@ import './ListaEPPagas.css';
 const ITEMS_PER_PAGE = 20;
 
 const ListaEPPagas = () => {
-  const { facturas } = useRecaudo();
+  const { facturas, fetchFacturas } = useRecaudo(); // Asegúrate de tener esta función en tu context
   const [filteredData, setFilteredData] = useState([]);
   const [conteoClases, setConteoClases] = useState({});
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
+
+  const formatFechaColombia = (fechaStr) => {
+    if (!fechaStr) return 'N/A';
+    const date = new Date(fechaStr);
+    return date.toLocaleDateString('es-CO', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      timeZone: 'America/Bogota',
+    });
+  };
+
+  // ✅ Recargar datos al montar el componente
+  useEffect(() => {
+    fetchFacturas?.(); // Llamar solo si existe
+  }, [fetchFacturas]);
 
   useEffect(() => {
     const codigosPermitidos = [1400, 1600, 1700];
@@ -35,7 +51,7 @@ const ListaEPPagas = () => {
             total: factura.total,
             tipoPago: factura.tipoPago,
             mesAplicado: factura.mes_aplicado,
-            fechaCompra: new Date(factura.fechaCompra).toLocaleDateString(),
+            fechaCompra: formatFechaColombia(factura.fechaCompra),
           });
         }
       });
@@ -87,6 +103,7 @@ const ListaEPPagas = () => {
             <div className="lista_ep_pagas">
               <p>{item.nombreEstudiante} - {item.grado}</p>
               <p>Escuela: {getNombreEscuela(item.cod)}</p>
+              <p>📅 Compra: {item.fechaCompra}</p>
             </div>
           </li>
         ))}
