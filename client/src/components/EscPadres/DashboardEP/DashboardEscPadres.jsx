@@ -22,44 +22,40 @@ const DashboardEscPadres = () => {
   const [entregaMaterial, setEntregaMaterial] = useState(false);
   const [tieneHermano, setTieneHermano] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isModified, setIsModified] = useState(false); // 🟡 Nuevo estado
 
   const parseFechaLocal = (fechaStr) => {
-  const [year, month, day] = fechaStr.split("T")[0].split("-");
-  return new Date(Number(year), Number(month) - 1, Number(day));
-};
+    const [year, month, day] = fechaStr.split("T")[0].split("-");
+    return new Date(Number(year), Number(month) - 1, Number(day));
+  };
 
-const formatFechaColombia = (fechaStr) => {
-  const date = parseFechaLocal(fechaStr);
-  return new Intl.DateTimeFormat("es-CO", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric",
-  }).format(date);
-};
+  const formatFechaColombia = (fechaStr) => {
+    const date = parseFechaLocal(fechaStr);
+    return new Intl.DateTimeFormat("es-CO", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    }).format(date);
+  };
 
-
-  // Seleccionar la primera escuela automáticamente
   useEffect(() => {
     if (escuelas.length > 0 && !escuelaSeleccionada) {
       setEscuelaSeleccionada(escuelas[0]);
     }
   }, [escuelas, escuelaSeleccionada]);
 
-  // Obtener asistencia al seleccionar escuela y estudiante
   useEffect(() => {
     if (escuelaSeleccionada && estudianteSeleccionado) {
       obtenerAsistencia(escuelaSeleccionada._id, estudianteSeleccionado._id);
     }
   }, [escuelaSeleccionada, estudianteSeleccionado, obtenerAsistencia]);
 
-  // ✅ Siempre sincronizar "hermanos" desde el estudiante seleccionado
   useEffect(() => {
     if (estudianteSeleccionado) {
       setTieneHermano(estudianteSeleccionado.hermanos || false);
     }
   }, [estudianteSeleccionado]);
 
-  // Manejo de datos de asistencia
   useEffect(() => {
     if (!escuelaSeleccionada) return;
 
@@ -88,8 +84,17 @@ const formatFechaColombia = (fechaStr) => {
         };
       });
 
-      setFormAsistencia(formateadas);
-      setEntregaMaterial(asistenciaActual.entregaMaterial || false);
+      // ✅ Solo sobrescribimos si no se han hecho cambios locales
+      setFormAsistencia((prev) => {
+        const algunaModificacion = prev.some((p) =>
+          formateadas.find((f) => f.fecha === p.fecha && f.asistio !== p.asistio)
+        );
+        return isModified && prev.length > 0 ? prev : formateadas;
+      });
+
+      if (!isModified) {
+        setEntregaMaterial(asistenciaActual.entregaMaterial || false);
+      }
     } else {
       setFormAsistencia(
         fechasDisponibles.map((fecha) => ({
@@ -99,12 +104,18 @@ const formatFechaColombia = (fechaStr) => {
       );
       setEntregaMaterial(false);
     }
-  }, [asistenciaActual, escuelaSeleccionada, estudianteSeleccionado]);
+  }, [asistenciaActual, escuelaSeleccionada, estudianteSeleccionado, isModified]);
 
   const handleCheckChange = (fecha) => {
     setFormAsistencia((prev) =>
       prev.map((f) => (f.fecha === fecha ? { ...f, asistio: !f.asistio } : f))
     );
+    setIsModified(true); // 🟢 Activamos bandera de cambio
+  };
+
+  const handleEntregaChange = (checked) => {
+    setEntregaMaterial(checked);
+    setIsModified(true); // 🟢 También marcamos como modificado
   };
 
   const handleGuardar = async () => {
@@ -123,6 +134,8 @@ const formatFechaColombia = (fechaStr) => {
       tieneHermano,
     };
 
+    console.log("📤 Datos enviados:", data);
+
     try {
       let response;
       if (asistenciaActual?._id) {
@@ -133,14 +146,13 @@ const formatFechaColombia = (fechaStr) => {
 
       if (response && response.asistencia) {
         alert("✅ Asistencia guardada correctamente.");
-
-        // Limpiar estado después de guardar
         setEstudianteSeleccionado(null);
         setFormAsistencia([]);
         setEntregaMaterial(false);
         setTieneHermano(false);
         setBusqueda("");
         setAsistenciaActual(null);
+        setIsModified(false);
       } else {
         alert("❌ No se pudo guardar la asistencia. Verifica los datos.");
       }
@@ -171,6 +183,7 @@ const formatFechaColombia = (fechaStr) => {
               setBusqueda("");
               setEntregaMaterial(false);
               setTieneHermano(false);
+              setIsModified(false);
             }}
           >
             {escuela.nombre}
@@ -214,7 +227,7 @@ const formatFechaColombia = (fechaStr) => {
               <input
                 type="checkbox"
                 checked={entregaMaterial}
-                onChange={(e) => setEntregaMaterial(e.target.checked)}
+                onChange={(e) => handleEntregaChange(e.target.checked)}
                 className="pp"
               />
               <p className="pp">Entrega de material</p>
@@ -224,7 +237,10 @@ const formatFechaColombia = (fechaStr) => {
               <input
                 type="checkbox"
                 checked={tieneHermano}
-                onChange={(e) => setTieneHermano(e.target.checked)}
+                onChange={(e) => {
+                  setTieneHermano(e.target.checked);
+                  setIsModified(true);
+                }}
               />
               <p className="pp">Tiene hermano</p>
             </div>
@@ -244,8 +260,7 @@ const formatFechaColombia = (fechaStr) => {
             <tbody>
               {formAsistencia.map((f, i) => (
                 <tr key={i}>
-                 <td>{formatFechaColombia(f.fecha)}</td>
-
+                  <td>{formatFechaColombia(f.fecha)}</td>
                   <td>
                     <input
                       type="checkbox"

@@ -75,3 +75,31 @@
   display: flex;
   gap: 10px;
 }
+
+/* Alineación por defecto (pantallas grandes) */
+.col-estudiante {
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+/* Alineación para pantallas móviles */
+@media screen and (max-width: 768px) {
+  .col-estudiante {
+    text-align: left;
+    font-size: 14px;
+    max-width: 100%; /* Permite que el contenido fluya mejor */
+    white-space: normal; /* Permite el salto de línea */
+  }
+}
+
+/* Forzar alineación a la izquierda solo en la columna del estudiante */
+.extra-table td.col-estudiante {
+  text-align: left !important;
+  white-space: normal !important;
+  word-break: break-word;
+  max-width: 100% !important;
+  font-size: 14px;
+}
