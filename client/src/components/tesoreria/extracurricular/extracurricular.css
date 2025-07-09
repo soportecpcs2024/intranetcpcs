@@ -7,6 +7,26 @@
   padding: 16px;
 }
 
+.lista_extracurricular_pagados{
+   
+  margin: 0px;
+  border-bottom: 1px solid rgb(130, 130, 130);
+  margin-top: 5px;
+  background-color: rgb(244, 244, 244);
+  padding-top: 5px;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.ckeck_asistencias {
+  padding-left: 10px;
+  display: flex;
+  gap: 5px;
+  margin-top: 12px;
+  font-size: 14px;
+  
+}
+
 /* Contenedor de enlaces */
 .link-extraclases {
   display: flex;

@@ -78,16 +78,17 @@ const ExtraIngles = () => {
       {facturasFiltradas.map((factura) => (
         <ul
           key={factura._id}
-          className="bg-white shadow-md rounded-md p-4 mb-4 border border-gray-200"
+          className="lista_extracurricular_pagados"
         >
-          <li><strong>Estudiante:</strong> {factura.estudianteId?.nombre || "Desconocido"}</li>
+          <li>   {factura.estudianteId?.nombre || "Desconocido"}</li>
           <li><strong>Clase:</strong> {factura.clases?.[0]?.nombreClase || "-"}</li>
-          <li><strong>Mes:</strong> {factura.mes_aplicado}</li>
-          <li className="flex gap-4 mt-2">
+         
+          <li >
             {["asistencia1", "asistencia2", "asistencia3", "asistencia4"].map((key) => (
-              <label key={key} className="flex items-center gap-1">
+              <label key={key} className="ckeck_asistencias">
                 <input
                   type="checkbox"
+                   
                   checked={asistenciasLocal?.[factura._id]?.[key] || false}
                   onChange={() => handleCheckboxChange(factura._id, key)}
                 />
