@@ -75,6 +75,7 @@ const CrearTarea = () => {
             "Coliseo",
             "Oficinas",
             "Restaurante",
+            "Compras"
           ].map((seccion) => (
             <label
               key={seccion}
