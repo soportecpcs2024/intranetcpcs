@@ -122,7 +122,7 @@ const ActasGrados = () => {
                 new TextRun({
                   text: `${seleccionado.primer_nombre} ${
                     seleccionado.segundo_nombre || ""
-                  }${seleccionado.primer_apellido} ${
+                  } ${seleccionado.primer_apellido} ${
                     seleccionado.segundo_apellido || ""
                   }`,
                   bold: true,

@@ -48,6 +48,8 @@ export const ActasDeGradoProvider = ({ children }) => {
     setError("Ocurrió un error inesperado al buscar el estudiante.");
     return null;
   }
+
+  
   };
 
   return (
