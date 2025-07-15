@@ -161,7 +161,7 @@ const ActasGrados = () => {
             new Paragraph({
               children: [
                 new TextRun({
-                  text: "Registrado para efectos legales de conformidad con el Decreto número 921 del 6 de mayo de 1994 en el libro de actas de grado número 31, folio 1, número de orden 1.",
+                  text: `Registrado para efectos legales de conformidad con el Decreto número 921 del 6 de mayo de 1994 en el libro de actas de grado número ${seleccionado.acta}, folio ${seleccionado.folio}, número de orden ${seleccionado.orden}.`,
                   size: 26,
                 }),
               ],

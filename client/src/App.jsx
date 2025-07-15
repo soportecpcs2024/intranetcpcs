@@ -76,6 +76,7 @@ import EstadisticasEp from "./components/EscPadres/EstadisticasEP/EstadisticasEp
 import ListaEPPagas from "./components/EscPadres/listaEPPagas/ListaEPPagas";
 import { GraduateProvider } from "./contexts/GraduateContext";
 import { ActasDeGradoProvider } from "./contexts/ActasDeGradoContext";
+import GenerarTodasActas from "./components/informesAcademicos/ActasGrados/GenerarTodasActas";
  
 
  
@@ -219,7 +220,8 @@ const AppContent = () => {
               <Route path="infoacademico" element={<LayoutInfoAcademicos />}>
                 <Route path="certificado-estudios" element={<CertificadoEstudios />} />
                 <Route path="acumulados-notas" element={<AcumuladosNotas />} />
-                <Route path="actas_grados" element={<ActasGrados />} />
+                <Route path="actas_grados_individual" element={<ActasGrados />} />
+                <Route path="actas_grados_grupal" element={<GenerarTodasActas />} />
               </Route>
 
               <Route path="tesoreria" element={<LayoutTesoreria />}>

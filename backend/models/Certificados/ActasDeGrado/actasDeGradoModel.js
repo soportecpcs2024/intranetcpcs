@@ -14,6 +14,9 @@ const estudianteActagradoSchema = new mongoose.Schema({
   grupo: { type: String },
   grado: { type: String, required: true },
   año_lectivo: { type: Number, required: true },
+  folio: { type: Number, required: true },
+  orden: { type: Number, required: true },
+  acta: { type: Number, required: true },
 }, {
   timestamps: true // Agrega campos createdAt y updatedAt automáticamente
 });

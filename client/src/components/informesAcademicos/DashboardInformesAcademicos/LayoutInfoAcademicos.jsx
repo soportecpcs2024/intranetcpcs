@@ -45,7 +45,7 @@ const LayoutInfoAcademicos = () => {
 
         <div className="link-academico">
           <NavLink
-            to="actas_grados"
+            to="actas_grados_individual"
             className={({ isActive }) =>
               isActive
                 ? "sidebar-link-academico active"
@@ -55,7 +55,24 @@ const LayoutInfoAcademicos = () => {
             <div className="link-academico-b">
               <GrCertificate className="icon-academico" />
 
-              <span>Actas de Grado</span>
+              <span>Actas de Grado por estudiante</span>
+            </div>
+          </NavLink>
+        </div>
+
+        <div className="link-academico">
+          <NavLink
+            to="actas_grados_grupal"
+            className={({ isActive }) =>
+              isActive
+                ? "sidebar-link-academico active"
+                : "sidebar-link-academico"
+            }
+          >
+            <div className="link-academico-b">
+              <GrCertificate className="icon-academico" />
+
+              <span>Actas de Grado grupal</span>
             </div>
           </NavLink>
         </div>
