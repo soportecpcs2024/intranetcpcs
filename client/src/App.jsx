@@ -74,7 +74,10 @@ import ExtraIniciaMusical from "./components/tesoreria/extracurricular/ExtraInic
 import CrearEscuelaPadres from "./components/EscPadres/CrearEscuela/CrearEscuelaPadres";
 import EstadisticasEp from "./components/EscPadres/EstadisticasEP/EstadisticasEp";
 import ListaEPPagas from "./components/EscPadres/listaEPPagas/ListaEPPagas";
+import { GraduateProvider } from "./contexts/GraduateContext";
+import { ActasDeGradoProvider } from "./contexts/ActasDeGradoContext";
  
+
  
  
 const ExploracionMotris = React.lazy(()=> import("./components/tesoreria/extracurricular/ExploracionMotris"));
@@ -86,6 +89,9 @@ const Baloncesto = React.lazy(()=> import("./components/tesoreria/extracurricula
 const Bateria = React.lazy(()=> import("./components/tesoreria/extracurricular/Bateria"));
 const Tecnicavocal = React.lazy(()=> import( "./components/tesoreria/extracurricular/Tecnicavocal"));
 const GuitarraBajo = React.lazy(()=> import( "./components/tesoreria/extracurricular/GuitarraBajo"));
+
+const ActasGrados = React.lazy(()=> import("./components/informesAcademicos/ActasGrados/ActasGrados"));
+
 
 
 
@@ -121,7 +127,9 @@ const App = () => {
             <RecaudoProvider>
               <TareasProvider>
                 <EscuelaPadresProvider>
+                 <ActasDeGradoProvider>
                   <AppContent />
+                 </ActasDeGradoProvider>
                 </EscuelaPadresProvider>
               </TareasProvider>
             </RecaudoProvider>
@@ -211,7 +219,7 @@ const AppContent = () => {
               <Route path="infoacademico" element={<LayoutInfoAcademicos />}>
                 <Route path="certificado-estudios" element={<CertificadoEstudios />} />
                 <Route path="acumulados-notas" element={<AcumuladosNotas />} />
-                <Route path="estadistico" element={<Estadistico />} />
+                <Route path="actas_grados" element={<ActasGrados />} />
               </Route>
 
               <Route path="tesoreria" element={<LayoutTesoreria />}>

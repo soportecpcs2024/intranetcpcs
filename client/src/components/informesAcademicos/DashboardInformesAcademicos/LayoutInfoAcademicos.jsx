@@ -4,6 +4,7 @@ import Footer from "../../../pages/admin/User/footer/Footer";
 import { PiCertificateDuotone } from "react-icons/pi";
 import { GrNotes } from "react-icons/gr";
 import { CiDiscount1 } from "react-icons/ci";
+import { GrCertificate } from "react-icons/gr";
 import "./LayoutInfoAcademicos.css";
 
 const LayoutInfoAcademicos = () => {
@@ -44,7 +45,7 @@ const LayoutInfoAcademicos = () => {
 
         <div className="link-academico">
           <NavLink
-            to="estadistico"
+            to="actas_grados"
             className={({ isActive }) =>
               isActive
                 ? "sidebar-link-academico active"
@@ -52,9 +53,9 @@ const LayoutInfoAcademicos = () => {
             }
           >
             <div className="link-academico-b">
-              <CiDiscount1 className="icon-academico" />
+              <GrCertificate className="icon-academico" />
 
-              <span>Estadístico</span>
+              <span>Actas de Grado</span>
             </div>
           </NavLink>
         </div>

@@ -37,6 +37,7 @@ const LayoutTesoreria = () => {
         // Agregar la factura a la clase correspondiente
         groupedByClase[clase.nombreClase].push({
           "ID Factura": factura._id,
+          "N° Factura": factura.numero_factura,
           "Nombre Estudiante": factura.estudianteId?.nombre || "N/A",
           Documento: factura.estudianteId?.documentoIdentidad || "N/A",
           Grado: factura.estudianteId?.grado || "N/A",

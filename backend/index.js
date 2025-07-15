@@ -83,13 +83,16 @@ app.use('/api/location', locationRoutes);
 const informesRoutes = require('./routes/inventory/informesRoutes');
 app.use('/api/informes', informesRoutes);
 
-// ------------ Rutas para actas de grados -------------
+ 
+// ------------ Rutas para certificados-------------
 const actasGradosroutes = require('./routes/graduadosCpcs/studentGraduateRoutes');
 app.use('/api/actasGrados', actasGradosroutes);
 
-// ------------ Rutas para certificados-------------
 const certificadosEstudio = require('./routes/Certificados/certificadosEstudio2025route');
 app.use('/api/certificadosEstudio', certificadosEstudio);
+
+const estudiantesActasGrados = require('./routes/Certificados/ActasDeGrado/actasDegradoRoutes');
+app.use('/api/estudiantesActasgrado', estudiantesActasGrados);
 
 
 
