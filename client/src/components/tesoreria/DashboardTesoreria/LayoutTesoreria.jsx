@@ -4,9 +4,7 @@ import { SiGoogleclassroom } from "react-icons/si";
 import { SiMdbook } from "react-icons/si";
 import { LiaWpforms } from "react-icons/lia";
 import { GiLovers } from "react-icons/gi";
-import { IoDownloadOutline } from "react-icons/io5";
-import { TbReportSearch } from "react-icons/tb";
-import { FaListCheck } from "react-icons/fa6";
+ 
 import * as XLSX from "xlsx";
 import { useRecaudo } from "../../../contexts/RecaudoContext"; // Asegúrate de importar el contexto correcto
 
@@ -156,50 +154,48 @@ const LayoutTesoreria = () => {
         </div>
 
         <div className="layout-academico-container-header">
-          <div className="link-recaudo">
-            <NavLink
-              to="lista_facturas"
-              className={({ isActive }) =>
-                isActive
-                  ? "sidebar-link-academico active"
-                  : "sidebar-link-academico"
-              }
-            >
-              <div className="link-recaudo">
-                <FaListCheck className="icon-academico" />
-                <span>Lista de facturas</span>
-              </div>
-            </NavLink>
-          </div>
-
           <div className="informes-container">
             <div className="informes-lista-titulo">
-              <h5 >Descarga de Informes</h5>
+              <h5>Listar comprar</h5>
             </div>
 
             <ul className="informes-lista">
               <li>
-                <NavLink className="informe-item" to="informe-formularios">Formularios</NavLink>
+                <NavLink  className="informe-item" to="lista_facturas">Extracurriculares</NavLink>
               </li>
-              <li >
-                <NavLink className="informe-item" to="informe-formularios">Extracurricular</NavLink>
-              </li>
-
               <li>
-            <IoDownloadOutline className="icono-des"
-              onClick={handleDownloadExcel}
-              
-            />
-
+                <NavLink className="informe-item" to="lista_formularios">Formularios</NavLink>
               </li>
-              
             </ul>
           </div>
 
-          <div className="link-academico">
+          <div className="informes-container">
+            <div className="informes-lista-titulo">
+              <h5>Descarga de Informe</h5>
+            </div>
+
+            <ul className="informes-lista">
+              <li>
+                <NavLink className="informe-item" to="informe-extracurriculares">
+                  Extracurricular
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="informe-item" to="informe-formularios">
+                  Formularios
+                </NavLink>
+              </li>
+
+              <li>
+                <button
+                  className="informe-item btn-excel"
+                  onClick={handleDownloadExcel}
+                >Excel</button>
+              </li>
+            </ul>
           </div>
 
-         
+          <div className="link-academico"></div>
         </div>
       </header>
 

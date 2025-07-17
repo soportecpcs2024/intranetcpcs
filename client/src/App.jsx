@@ -79,6 +79,8 @@ import { ActasDeGradoProvider } from "./contexts/ActasDeGradoContext";
 import GenerarTodasActas from "./components/informesAcademicos/ActasGrados/GenerarTodasActas";
 import GenerarPreInscripcion from "./components/tesoreria/Formularios_inscripcion/GenerarPreInscripcion";
 import InformeFormularioMensual from "./components/tesoreria/Formularios_inscripcion/InformeFormularioMensual";
+import ListarFormularioCompras from "./components/tesoreria/Formularios_inscripcion/ListarFormularioCompras";
+import InformeClasesExtracurriculares from "./components/tesoreria/extracurricular/InformeClasesExtracurriculares";
  
  
 
@@ -235,8 +237,10 @@ const AppContent = () => {
                 <Route path="escuela_padres" element={<Recaudoep />} />
                 <Route path="almuerzos" element={<Almuerzos />} />
                 <Route path="lista_facturas" element={<ListarFacturas />} />
+                <Route path="lista_formularios" element={<ListarFormularioCompras />} />
                 <Route path="formulario_inscripcion" element={<GenerarPreInscripcion />} />
                 <Route path="informe-formularios" element={<InformeFormularioMensual />} />
+                <Route path="informe-extracurriculares" element={<InformeClasesExtracurriculares />} />
               </Route>
 
               <Route path="esc_padres" element={<DashboardEscPadres />} />

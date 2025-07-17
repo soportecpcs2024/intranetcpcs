@@ -12,8 +12,10 @@ const InformeFormularioMensual = () => {
   const [data, setData] = useState([]);
   const [mesSeleccionado, setMesSeleccionado] = useState(new Date().getMonth()); // mes actual
 
+  const apiBaseUrl = import.meta.env.VITE_BACKEND_URL;
+
   useEffect(() => {
-    axios.get("http://localhost:3000/api/preinscripciones")
+    axios.get(`${apiBaseUrl}/api/preinscripciones`)
       .then(res => setData(res.data))
       .catch(err => console.error(err));
   }, []);
@@ -110,7 +112,7 @@ const InformeFormularioMensual = () => {
         shading: { fill: "#f4f2f2" },
       }),
       new TableCell({
-        children: [new Paragraph({ text: "Tipo de Pago", bold: true })],
+        children: [new Paragraph({ text: "Tipo Pago", bold: true })],
         width: { size: 40, type: WidthType.PERCENTAGE },
         shading: { fill: "#f4f2f2" },
       }),
