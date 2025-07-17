@@ -223,5 +223,53 @@
   outline: none;
 }
 
+.informes-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(242, 242, 242);
+  padding: 4px;
+  border-radius: 4px;
+  border: 1px solid rgba(179, 179, 179, 0.775);
+}
+
+.informes-lista {
+  display: flex;
+  
+  list-style: none;
+  padding: 10px;
+  align-items: center;
+  gap: 5px;
+}
+
+.informe-item {
+  
+  font-size: 1rem;
+  background: none;
+  padding: 10px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 100;
+  border-radius: 4px;
+  
+  transition: background-color 0.2s ease;
+}
+.informes-lista-titulo{
+ margin-bottom: 10px;
+}
+ 
+.icono-des{
+  font-size: 40px;
+    border-radius: 4px;
+   border: 1px solid rgba(179, 179, 179, 0.775);
+}
+
+.informe-item:hover {
+  color: white;
+  background-color: #1f6fe7;
+  border-radius: 4px;
+  
+}
+ 
  
  

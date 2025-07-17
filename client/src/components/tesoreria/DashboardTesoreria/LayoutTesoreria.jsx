@@ -1,4 +1,3 @@
- 
 import { Outlet, NavLink } from "react-router-dom";
 import Footer from "../../../pages/admin/User/footer/Footer";
 import { SiGoogleclassroom } from "react-icons/si";
@@ -6,10 +5,11 @@ import { SiMdbook } from "react-icons/si";
 import { LiaWpforms } from "react-icons/lia";
 import { GiLovers } from "react-icons/gi";
 import { IoDownloadOutline } from "react-icons/io5";
+import { TbReportSearch } from "react-icons/tb";
 import { FaListCheck } from "react-icons/fa6";
 import * as XLSX from "xlsx";
 import { useRecaudo } from "../../../contexts/RecaudoContext"; // Asegúrate de importar el contexto correcto
- 
+
 import { GiMeal } from "react-icons/gi";
 
 import ".//LayoutTesoreria.css";
@@ -74,13 +74,6 @@ const LayoutTesoreria = () => {
     <div className="layout-academico-container">
       <header className="layout-academico-container-division">
         <div className="layout-academico-container-header">
-         
- 
-
- 
-
-
-
           <div className="link-academico">
             <NavLink
               to="recaudo"
@@ -96,7 +89,6 @@ const LayoutTesoreria = () => {
               </div>
             </NavLink>
           </div>
-
 
           <div className="link-academico">
             <NavLink
@@ -114,7 +106,6 @@ const LayoutTesoreria = () => {
             </NavLink>
           </div>
 
-
           <div className="link-academico">
             <NavLink
               to="escuela_padres"
@@ -131,7 +122,6 @@ const LayoutTesoreria = () => {
             </NavLink>
           </div>
 
-          
           <div className="link-academico">
             <NavLink
               to="formulario_inscripcion"
@@ -148,7 +138,6 @@ const LayoutTesoreria = () => {
             </NavLink>
           </div>
 
-
           <div className="link-academico">
             <NavLink
               to="almuerzos"
@@ -164,11 +153,8 @@ const LayoutTesoreria = () => {
               </div>
             </NavLink>
           </div>
-
-
         </div>
 
-       
         <div className="layout-academico-container-header">
           <div className="link-recaudo">
             <NavLink
@@ -186,12 +172,34 @@ const LayoutTesoreria = () => {
             </NavLink>
           </div>
 
-          <div className="link-academico">
-            <IoDownloadOutline
+          <div className="informes-container">
+            <div className="informes-lista-titulo">
+              <h5 >Descarga de Informes</h5>
+            </div>
+
+            <ul className="informes-lista">
+              <li>
+                <NavLink className="informe-item" to="informe-formularios">Formularios</NavLink>
+              </li>
+              <li >
+                <NavLink className="informe-item" to="informe-formularios">Extracurricular</NavLink>
+              </li>
+
+              <li>
+            <IoDownloadOutline className="icono-des"
               onClick={handleDownloadExcel}
-              className="descarga_icon_factura"
+              
             />
+
+              </li>
+              
+            </ul>
           </div>
+
+          <div className="link-academico">
+          </div>
+
+         
         </div>
       </header>
 

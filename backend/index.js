@@ -150,6 +150,16 @@ app.use('/api/epEstudiantes', epEstudiantes);
 const asistenciasExtraCurricular = require('./routes/asistenciasExtraCurricular/asistenciasExtracurricularRoutes');
 app.use('/api/asistenciasextra', asistenciasExtraCurricular);
 
+
+// ---------------- preinscripcion estudiantes ----------------
+
+const preinscripcionEstudiante = require('./routes/recaudo/formularioCompraRoutes');
+app. use('/api/preinscripciones', preinscripcionEstudiante);
+ 
+
+
+
+
 // Configuración y arranque del servidor
 const PORT = process.env.SERVER_PORT || 3000;
 app.listen(PORT, () => {

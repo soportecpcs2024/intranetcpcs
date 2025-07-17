@@ -48,11 +48,11 @@ import InformeUnidad from "./components/productos/informes/informeUnidad/Informe
 import LayoutInfoAcademicos from "./components/informesAcademicos/DashboardInformesAcademicos/LayoutInfoAcademicos";
 import CertificadoEstudios from "./components/informesAcademicos/CertificadoEstudios/CertificadoEstudios";
 import AcumuladosNotas from "./components/informesAcademicos/AcumuladosNotas/AcumuladosNotas";
-import Estadistico from "./components/informesAcademicos/Estadistico/Estadistico";
+ 
 import Dashboardquinto from "./components/informesAcademicos/quinto_Informe_b/Dashboardquinto";
 import LayoutTesoreria from "./components/tesoreria/DashboardTesoreria/LayoutTesoreria";
 import Recaudo from "./components/tesoreria/DashboardTesoreria/Recaudo/Recaudo";
-import FormularioInscripcion from "./components/tesoreria/Formularios_inscripcion/FormularioInscripcion";
+ 
 import RecaudoAntologia from "./components/tesoreria/DashboardTesoreria/Recaudo/antologia/RecaudoAntologia";
 import Recaudoep from "./components/tesoreria/DashboardTesoreria/Recaudo/RecaudoEscuelaPadres";
 import ListarFacturas from "./components/tesoreria/DashboardTesoreria/Recaudo/ListarFacturas/ListarFacturas";
@@ -77,6 +77,9 @@ import ListaEPPagas from "./components/EscPadres/listaEPPagas/ListaEPPagas";
 import { GraduateProvider } from "./contexts/GraduateContext";
 import { ActasDeGradoProvider } from "./contexts/ActasDeGradoContext";
 import GenerarTodasActas from "./components/informesAcademicos/ActasGrados/GenerarTodasActas";
+import GenerarPreInscripcion from "./components/tesoreria/Formularios_inscripcion/GenerarPreInscripcion";
+import InformeFormularioMensual from "./components/tesoreria/Formularios_inscripcion/InformeFormularioMensual";
+ 
  
 
  
@@ -91,8 +94,8 @@ const Bateria = React.lazy(()=> import("./components/tesoreria/extracurricular/B
 const Tecnicavocal = React.lazy(()=> import( "./components/tesoreria/extracurricular/Tecnicavocal"));
 const GuitarraBajo = React.lazy(()=> import( "./components/tesoreria/extracurricular/GuitarraBajo"));
 
+ 
 const ActasGrados = React.lazy(()=> import("./components/informesAcademicos/ActasGrados/ActasGrados"));
-
 
 
 
@@ -122,6 +125,7 @@ const App = () => {
 
   return (
     <AuthProvider>
+    
       <ProductProvider>
         <ProductStatisticsProvider>
           <UserProvider>
@@ -137,6 +141,7 @@ const App = () => {
           </UserProvider>
         </ProductStatisticsProvider>
       </ProductProvider>
+      
     </AuthProvider>
   );
 };
@@ -230,7 +235,8 @@ const AppContent = () => {
                 <Route path="escuela_padres" element={<Recaudoep />} />
                 <Route path="almuerzos" element={<Almuerzos />} />
                 <Route path="lista_facturas" element={<ListarFacturas />} />
-                <Route path="formulario_inscripcion" element={<FormularioInscripcion />} />
+                <Route path="formulario_inscripcion" element={<GenerarPreInscripcion />} />
+                <Route path="informe-formularios" element={<InformeFormularioMensual />} />
               </Route>
 
               <Route path="esc_padres" element={<DashboardEscPadres />} />
@@ -243,6 +249,9 @@ const AppContent = () => {
                 <Route path="listar" element={<ListarTareas />} />
                 <Route path="estadisticas" element={<EstadisticasTareas />} />
               </Route>
+
+                
+
             </Route>
           )}
         </Routes>
