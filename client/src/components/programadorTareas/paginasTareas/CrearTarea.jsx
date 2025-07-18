@@ -164,6 +164,9 @@ const CrearTarea = () => {
           <option value="RICHARD ALONSO OSORNO LOPERA">
             RICHARD ALONSO OSORNO LOPERA
           </option>
+          <option value="WILTON FABIO MONTOYA">
+            RICHARD ALONSO OSORNO LOPERA
+          </option>
           <option value="GIOVANNY ESTRADA PEREZ">GIOVANNY ESTRADA PEREZ</option>
         </select>
 

@@ -1,6 +1,6 @@
 /* Estilo base para escritorio */
 .lista_ep_pagas {
-    width: 40%;
+    width: 60%;
     display: flex;
     padding: 10px;
     justify-content: space-between;

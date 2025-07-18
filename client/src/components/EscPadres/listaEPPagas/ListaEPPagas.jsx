@@ -3,7 +3,7 @@ import { useRecaudo } from '../../../contexts/RecaudoContext';
 import ReactPaginate from 'react-paginate';
 import './ListaEPPagas.css';
 
-const ITEMS_PER_PAGE = 20;
+const ITEMS_PER_PAGE = 10;
 
 const ListaEPPagas = () => {
   const { facturas, fetchFacturas } = useRecaudo(); // Asegúrate de tener esta función en tu context
