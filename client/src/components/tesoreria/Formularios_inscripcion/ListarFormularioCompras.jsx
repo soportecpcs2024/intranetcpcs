@@ -11,9 +11,10 @@ const ListarFormularioCompras = () => {
   const [itemOffset, setItemOffset] = useState(0);
   const itemsPerPage = 10;
 
+    const apiBaseUrl = import.meta.env.VITE_BACKEND_URL;
   const fetchFormularios = async () => {
     try {
-      const res = await fetch("http://localhost:3000/api/preinscripciones");
+      const res = await fetch(`${apiBaseUrl}/api/preinscripciones`);
       const data = await res.json();
       setFormularios(data);
     } catch (error) {
@@ -23,7 +24,7 @@ const ListarFormularioCompras = () => {
 
   const eliminarFormulario = async (id) => {
     try {
-      const res = await fetch(`http://localhost:3000/api/preinscripciones/${id}`, {
+      const res = await fetch(`${apiBaseUrl}/api/preinscripciones/${id}`, {
         method: "DELETE",
       });
       if (res.ok) {
