@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const formularioCompraSchema = new mongoose.Schema({
   nombreEstudiante: { type: String, required: true, trim: true },
   gradoPostula: { type: String, required: true, trim: true },
-  numeroDocumento: { type: String, required: true, trim: true, unique: true },
+ 
   tipoFormulario: {
     type: String,
     required: true,

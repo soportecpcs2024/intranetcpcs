@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import GenerarReciboFormulario from "./GenerarReciboFormulario";
 import "./Admisiones.css";
@@ -7,7 +7,7 @@ const GenerarPreInscripcion = () => {
   const [datosFormulario, setDatosFormulario] = useState({
     nombreEstudiante: "",
     gradoPostula: "",
-    numeroDocumento: "",
+    
     tipoFormulario: "2026",
   });
 
@@ -49,7 +49,7 @@ const GenerarPreInscripcion = () => {
       setDatosFormulario({
         nombreEstudiante: "",
         gradoPostula: "",
-        numeroDocumento: "",
+         
         tipoFormulario: "2026",
       });
       setTipoPago("");
@@ -84,14 +84,7 @@ const GenerarPreInscripcion = () => {
           required
         />
 
-        <label>Número de documento</label>
-        <input
-          type="text"
-          name="numeroDocumento"
-          onChange={handleChange}
-          value={datosFormulario.numeroDocumento}
-          required
-        />
+        
 
         <label>Tipo de formulario</label>
         <select

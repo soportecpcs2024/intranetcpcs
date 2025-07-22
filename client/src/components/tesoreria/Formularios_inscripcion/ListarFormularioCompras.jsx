@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import ReactPaginate from "react-paginate";
 import { FaTrashAlt } from "react-icons/fa";
@@ -61,7 +61,7 @@ const ListarFormularioCompras = () => {
             <th>N°</th>
             <th>Nombre Estudiante</th>
             <th>Grado Postula</th>
-            <th>N° Documento</th>
+           
             <th>Año</th>
             <th>Tipo de Pago</th>
             <th>Fecha Compra</th>
@@ -76,7 +76,7 @@ const ListarFormularioCompras = () => {
                 <td>{itemOffset + index + 1}</td>
                 <td>{formulario.nombreEstudiante}</td>
                 <td>{formulario.gradoPostula}</td>
-                <td>{formulario.numeroDocumento}</td>
+                
                 <td>{formulario.tipoFormulario}</td>
                 <td>{formulario.tipoPago}</td>
                 <td>

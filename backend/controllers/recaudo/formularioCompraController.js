@@ -17,10 +17,10 @@ const calcularCosto = (tipoFormulario) => {
 // Crear nuevo registro
 const crearFormulario = async (req, res) => {
   try {
-    const { nombreEstudiante, gradoPostula, numeroDocumento, tipoFormulario, tipoPago } = req.body;
+    const { nombreEstudiante, gradoPostula, tipoFormulario, tipoPago } = req.body;
 
     // Validación básica
-    if (!nombreEstudiante || !gradoPostula || !numeroDocumento || !tipoFormulario || !tipoPago) {
+    if (!nombreEstudiante || !gradoPostula ||!tipoFormulario || !tipoPago) {
       return res.status(400).json({ error: 'Todos los campos son obligatorios.' });
     }
 
@@ -32,7 +32,7 @@ const crearFormulario = async (req, res) => {
     const nuevoFormulario = new FormularioCompra({
       nombreEstudiante,
       gradoPostula,
-      numeroDocumento,
+     
       tipoFormulario,
       tipoPago,
       costo,
