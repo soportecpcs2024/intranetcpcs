@@ -41,6 +41,21 @@ const ListarFormularioCompras = () => {
     fetchFormularios();
   }, []);
 
+    // 👇 Nueva lógica: recargar datos al volver a la pestaña
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        fetchFormularios();
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
+
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
     setCurrentItems(formularios.slice(itemOffset, endOffset));
