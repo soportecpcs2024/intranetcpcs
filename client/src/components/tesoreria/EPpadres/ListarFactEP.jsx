@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useRecaudo } from "../../../../../contexts/RecaudoContext";
+import { useRecaudo } from "../../../contexts/RecaudoContext";
 import { FaTrashAlt } from "react-icons/fa";
 import { format } from "date-fns";
 import ReactPaginate from "react-paginate";
-import "./ListarFacturas.css";
+import "./ListarFactEP.css";
 
-const ListarFacturas = () => {
+const ListarFactEP = () => {
   const {
     facturas,
     eliminarFactura,
@@ -13,17 +13,15 @@ const ListarFacturas = () => {
     fetchEstudiantes,
     estudiantes,
   } = useRecaudo();
-  
+
   const [estudiantesMap, setEstudiantesMap] = useState({});
   const [facturasConEstudiante, setFacturasConEstudiante] = useState([]);
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
   const itemsPerPage = 10;
-  
  
 
-  // Recargar datos
   const handleReload = async () => {
     await fetchEstudiantes();
     await fetchFacturas();
@@ -33,24 +31,19 @@ const ListarFacturas = () => {
     handleReload();
   }, []);
 
-
-  // Crear mapa de estudiantes { id: nombre }
   useEffect(() => {
     if (estudiantes.length > 0) {
       const nuevoMapa = {};
       estudiantes.forEach((estudiante) => {
         nuevoMapa[estudiante._id] = estudiante.nombre;
       });
-
       setEstudiantesMap(nuevoMapa);
     }
   }, [estudiantes]);
 
-
-  
 useEffect(() => {
   if (facturas.length > 0 && Object.keys(estudiantesMap).length > 0) {
-    const codValidos = ["100","200","300","400","500","600","700","800","900","1000","1100"];
+    const codValidos = ["1300", "1400", "1600", "1700"];
 
     const nuevasFacturas = facturas
       .filter((factura) =>
@@ -67,28 +60,26 @@ useEffect(() => {
   }
 }, [facturas, estudiantesMap]);
 
- 
+
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
     setCurrentItems(facturasConEstudiante.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(facturasConEstudiante.length / itemsPerPage));
   }, [itemOffset, facturasConEstudiante]);
-  
 
   const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % facturas.length;
+    const newOffset =
+      (event.selected * itemsPerPage) % facturasConEstudiante.length;
     setItemOffset(newOffset);
   };
-   
- 
-  
+
   return (
     <div className="facturas-container">
-      <h2>Listado de Facturas Extra Clases</h2>
+      <h2>Listado de Facturas Escuela De Padres</h2>
       <table className="facturas-table">
         <thead>
           <tr>
-          <th>N°</th>
+            <th>N°</th>
             <th>ID</th>
             <th>Estudiante</th>
             <th>Método de Pago</th>
@@ -101,11 +92,10 @@ useEffect(() => {
         <tbody>
           {currentItems.length > 0 ? (
             currentItems.map((factura, index) => (
-              
               <tr key={factura._id}>
                 <td>{itemOffset + index + 1}</td>
                 <td>{factura.numero_factura}</td>
-                <td >{factura.nombreEstudiante}</td>
+                <td>{factura.nombreEstudiante}</td>
                 <td>{factura.tipoPago}</td>
                 <td>
                   {factura.fechaCompra
@@ -137,7 +127,7 @@ useEffect(() => {
             ))
           ) : (
             <tr>
-              <td colSpan="7">No hay facturas disponibles</td>
+              <td colSpan="8">No hay facturas disponibles</td>
             </tr>
           )}
         </tbody>
@@ -156,4 +146,4 @@ useEffect(() => {
   );
 };
 
-export default ListarFacturas;
+export default ListarFactEP;

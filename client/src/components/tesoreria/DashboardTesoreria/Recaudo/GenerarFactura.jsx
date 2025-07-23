@@ -19,6 +19,7 @@ import { ImageRun } from "docx";
 const GenerarFactura = ({ factura, estudiante, setEstudiantedata }) => {
   const fechaCompra = factura?.fechaCompra || "N/A";
 
+  
   const fechaFormateada =
     fechaCompra !== "N/A"
       ? new Date(fechaCompra).toLocaleDateString("es-ES")

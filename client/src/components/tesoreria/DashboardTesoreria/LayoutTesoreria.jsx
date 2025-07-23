@@ -161,10 +161,13 @@ const LayoutTesoreria = () => {
 
             <ul className="informes-lista">
               <li>
-                <NavLink  className="informe-item" to="lista_facturas">Extracurriculares</NavLink>
+                <NavLink  className="informe-item" to="lista_facturas">Extra clases</NavLink>
               </li>
               <li>
                 <NavLink className="informe-item" to="lista_formularios">Formularios</NavLink>
+              </li>
+              <li>
+                <NavLink className="informe-item" to="lista_escuela_padres">Esc. Padres</NavLink>
               </li>
             </ul>
           </div>
@@ -177,13 +180,16 @@ const LayoutTesoreria = () => {
             <ul className="informes-lista">
               <li>
                 <NavLink className="informe-item" to="informe-extracurriculares">
-                  Extracurricular
+                  Extra clases
                 </NavLink>
               </li>
               <li>
                 <NavLink className="informe-item" to="informe-formularios">
                   Formularios
                 </NavLink>
+              </li>
+                <li>
+                <NavLink className="informe-item" to="informe_escuela_padres">Esc. Padres</NavLink>
               </li>
               
 

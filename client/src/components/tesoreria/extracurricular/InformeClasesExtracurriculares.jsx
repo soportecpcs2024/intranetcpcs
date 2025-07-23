@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRecaudo } from "../../../contexts/RecaudoContext";
 import {
   Document,
@@ -16,8 +16,33 @@ import {
 import { saveAs } from "file-saver";
 
 const InformeClasesExtracurriculares = () => {
-  const { facturas } = useRecaudo();
   const [mesSeleccionado, setMesSeleccionado] = useState("");
+  const { facturas } = useRecaudo();
+  const [facturasFiltradas, setFacturasFiltradas] = useState([]);
+
+
+useEffect(() => {
+  if (facturas.length > 0) {
+    const codValidos = [
+      "100", "200", "300", "400", "500", "600", "700",
+      "800", "900", "1000", "1100"
+    ];
+
+    const nuevasFacturas = facturas
+      .filter((factura) =>
+        factura.clases?.some(
+          (clase) => codValidos.includes(clase.cod?.toString())
+        )
+      )
+      .map((factura) => ({
+        ...factura,
+        nombreEstudiante: factura.estudianteId?.nombre?.trim() || "Desconocido",
+      }));
+
+    setFacturasFiltradas(nuevasFacturas);
+  }
+}, [facturas]);
+
 
   const meses = [
     "enero",
@@ -58,14 +83,7 @@ const InformeClasesExtracurriculares = () => {
         return "Arte";
       case "1100":
         return "Exploración Motriz y Predeportiva Pre";
-      case "1300":
-        return "Ciberfamilias";
-      case "1400":
-        return "El arte de ser padres";
-      case "1600":
-        return "Guiando a sus adolescentes";
-      case "1700":
-        return "Mayordomía financiera";
+       
       default:
         return `Código: ${cod}`;
     }
@@ -84,7 +102,7 @@ const InformeClasesExtracurriculares = () => {
 
     const agrupado = {};
 
-    facturas.forEach((factura) => {
+    facturasFiltradas.forEach((factura) => {
       const fecha = new Date(factura.fechaCompra);
       const mesFactura = fecha.toLocaleString("es-ES", { month: "long" });
 
@@ -127,7 +145,7 @@ const InformeClasesExtracurriculares = () => {
         alignment: AlignmentType.CENTER,
         children: [
           new TextRun({
-            text: "Informe general de venta extracurriculares y escuelas",
+            text: "Informe general de venta Clases Extracurriculares",
             size: 26,
           }),
         ],
@@ -391,7 +409,7 @@ const InformeClasesExtracurriculares = () => {
                 className="informe-item btn-excel"
                 onClick={generarInformeWord}
               >
-                Generar Informe Word
+                Generar Informe
               </button>
             </li>
           </ul>
