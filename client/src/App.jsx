@@ -74,13 +74,14 @@ import ExtraIniciaMusical from "./components/tesoreria/extracurricular/ExtraInic
 import CrearEscuelaPadres from "./components/EscPadres/CrearEscuela/CrearEscuelaPadres";
 import EstadisticasEp from "./components/EscPadres/EstadisticasEP/EstadisticasEp";
 import ListaEPPagas from "./components/EscPadres/listaEPPagas/ListaEPPagas";
-import { GraduateProvider } from "./contexts/GraduateContext";
+ 
 import { ActasDeGradoProvider } from "./contexts/ActasDeGradoContext";
 import GenerarTodasActas from "./components/informesAcademicos/ActasGrados/GenerarTodasActas";
 import GenerarPreInscripcion from "./components/tesoreria/Formularios_inscripcion/GenerarPreInscripcion";
 import InformeFormularioMensual from "./components/tesoreria/Formularios_inscripcion/InformeFormularioMensual";
 import ListarFormularioCompras from "./components/tesoreria/Formularios_inscripcion/ListarFormularioCompras";
 import InformeClasesExtracurriculares from "./components/tesoreria/extracurricular/InformeClasesExtracurriculares";
+ 
  
  
 
@@ -240,6 +241,7 @@ const AppContent = () => {
                 <Route path="lista_formularios" element={<ListarFormularioCompras />} />
                 <Route path="formulario_inscripcion" element={<GenerarPreInscripcion />} />
                 <Route path="informe-formularios" element={<InformeFormularioMensual />} />
+              
                 <Route path="informe-extracurriculares" element={<InformeClasesExtracurriculares />} />
               </Route>
 

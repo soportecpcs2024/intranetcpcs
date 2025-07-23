@@ -20,18 +20,18 @@ const InformeClasesExtracurriculares = () => {
   const [mesSeleccionado, setMesSeleccionado] = useState("");
 
   const meses = [
-    "Enero",
-    "Febrero",
-    "Marzo",
-    "Abril",
-    "Mayo",
-    "Junio",
-    "Julio",
-    "Agosto",
-    "Septiembre",
-    "Octubre",
-    "Noviembre",
-    "Diciembre",
+    "enero",
+    "febrero",
+    "marzo",
+    "abril",
+    "mayo",
+    "junio",
+    "julio",
+    "agosto",
+    "septiembre",
+    "octubre",
+    "noviembre",
+    "diciembre",
   ];
 
   const getNombreCodigo = (cod) => {
@@ -58,6 +58,14 @@ const InformeClasesExtracurriculares = () => {
         return "Arte";
       case "1100":
         return "Exploración Motriz y Predeportiva Pre";
+      case "1300":
+        return "Ciberfamilias";
+      case "1400":
+        return "El arte de ser padres";
+      case "1600":
+        return "Guiando a sus adolescentes";
+      case "1700":
+        return "Mayordomía financiera";
       default:
         return `Código: ${cod}`;
     }
@@ -77,7 +85,10 @@ const InformeClasesExtracurriculares = () => {
     const agrupado = {};
 
     facturas.forEach((factura) => {
-      if (factura.mes_aplicado !== mesSeleccionado) return;
+      const fecha = new Date(factura.fechaCompra);
+      const mesFactura = fecha.toLocaleString("es-ES", { month: "long" });
+
+      if (mesFactura.toLowerCase() !== mesSeleccionado.toLowerCase()) return;
 
       factura.clases.forEach((clase) => {
         const cod = clase.cod;
@@ -88,7 +99,7 @@ const InformeClasesExtracurriculares = () => {
           grado: factura.estudianteId?.grado || "N/A",
           total: factura.total,
           tipoPago: factura.tipoPago,
-          mes: factura.mes_aplicado,
+          mes: mesFactura,
         });
       });
     });
@@ -116,39 +127,32 @@ const InformeClasesExtracurriculares = () => {
         alignment: AlignmentType.CENTER,
         children: [
           new TextRun({
-            text: "Informe general de venta extracurriculares",
+            text: "Informe general de venta extracurriculares y escuelas",
             size: 26,
           }),
         ],
         spacing: { after: 200 },
       }),
-       new Paragraph({
-              alignment: AlignmentType.LEFT,
-              children: [
-                new TextRun({ text: `Mes: ${mesSeleccionado}`, bold: true, size: 24 }),
-              ],
-              spacing: { after: 200 },
-            }),
-            new Paragraph({
-              alignment: AlignmentType.LEFT,
-              children: [
-                new TextRun({ text: "Elaborado por: LINA MARIA HOYOS", size: 22 }),
-              ],
-              spacing: { after: 300 },
-            }),
-
-       
+      new Paragraph({
+        alignment: AlignmentType.LEFT,
+        children: [
+          new TextRun({ text: `Mes: ${mesSeleccionado}`, bold: true, size: 24 }),
+        ],
+        spacing: { after: 200 },
+      }),
+      new Paragraph({
+        alignment: AlignmentType.LEFT,
+        children: [
+          new TextRun({ text: "Elaborado por: LINA MARIA HOYOS", size: 22 }),
+        ],
+        spacing: { after: 300 },
+      })
     );
 
-    new Paragraph({
-      children: [
-        new TextRun({
-          text: "Elaborado por: LINA MARIA HOYOS",
-          size: 32, // 16pt (tamaño en "half-points", es decir 32 / 2 = 16pt)
-        }),
-      ],
-      spacing: { after: 400 },
-    });
+    let totalNominaGlobal = 0;
+    let totalDatafonoGlobal = 0;
+    let totalEfectivoGlobal = 0;
+    let totalGlobal = 0;
 
     Object.entries(agrupado).forEach(([cod, items]) => {
       content.push(
@@ -195,7 +199,7 @@ const InformeClasesExtracurriculares = () => {
 
       content.push(tablaDatos);
 
-      // Subtotales
+      // Subtotales por clase
       let subtotalNomina = 0;
       let subtotalDatafono = 0;
       let subtotalEfectivo = 0;
@@ -207,6 +211,12 @@ const InformeClasesExtracurriculares = () => {
       });
 
       const totalGeneral = subtotalNomina + subtotalDatafono + subtotalEfectivo;
+
+      // Acumuladores globales
+      totalNominaGlobal += subtotalNomina;
+      totalDatafonoGlobal += subtotalDatafono;
+      totalEfectivoGlobal += subtotalEfectivo;
+      totalGlobal += totalGeneral;
 
       const resumen = new Table({
         borders: {
@@ -272,18 +282,85 @@ const InformeClasesExtracurriculares = () => {
         ],
       });
 
-      content.push(
-        new Paragraph({ text: "" }), // Espacio
-        resumen
-      );
+      content.push(new Paragraph({ text: "" }), resumen);
     });
+
+    // Resumen final global
+    content.push(
+      new Paragraph({
+        text: "",
+        spacing: { before: 400 },
+      }),
+      new Paragraph({
+        text: "Resumen Final General",
+        heading: HeadingLevel.HEADING_2,
+        spacing: { before: 200, after: 100 },
+      }),
+      new Table({
+        borders: {
+          top: { style: BorderStyle.NONE },
+          bottom: { style: BorderStyle.NONE },
+          left: { style: BorderStyle.NONE },
+          right: { style: BorderStyle.NONE },
+          insideVertical: { style: BorderStyle.NONE },
+        },
+        width: { size: 40, type: WidthType.PERCENTAGE },
+        rows: [
+          new TableRow({
+            children: [
+              new TableCell({ children: [new Paragraph("Total Nómina:")] }),
+              new TableCell({
+                children: [
+                  new Paragraph(`$ ${totalNominaGlobal.toLocaleString()}`),
+                ],
+              }),
+            ],
+          }),
+          new TableRow({
+            children: [
+              new TableCell({ children: [new Paragraph("Total Datáfono:")] }),
+              new TableCell({
+                children: [
+                  new Paragraph(`$ ${totalDatafonoGlobal.toLocaleString()}`),
+                ],
+              }),
+            ],
+          }),
+          new TableRow({
+            children: [
+              new TableCell({ children: [new Paragraph("Total Efectivo:")] }),
+              new TableCell({
+                children: [
+                  new Paragraph(`$ ${totalEfectivoGlobal.toLocaleString()}`),
+                ],
+              }),
+            ],
+          }),
+          new TableRow({
+            children: [
+              new TableCell({
+                children: [new Paragraph({ text: "TOTAL GENERAL:", bold: true })],
+              }),
+              new TableCell({
+                children: [
+                  new Paragraph({
+                    text: `$ ${totalGlobal.toLocaleString()}`,
+                    bold: true,
+                  }),
+                ],
+              }),
+            ],
+          }),
+        ],
+      })
+    );
 
     const doc = new Document({
       sections: [{ children: content }],
     });
 
     Packer.toBlob(doc).then((blob) => {
-      saveAs(blob, `Informe_Clases_${mesSeleccionado}.docx`);
+      saveAs(blob, `Informe_extra_clase_Esc_padres_${mesSeleccionado}.docx`);
     });
   };
 
@@ -304,7 +381,7 @@ const InformeClasesExtracurriculares = () => {
                 <option value="">-- Seleccionar Mes --</option>
                 {meses.map((mes, index) => (
                   <option key={index} value={mes}>
-                    {mes}
+                    {mes.charAt(0).toUpperCase() + mes.slice(1)}
                   </option>
                 ))}
               </select>
