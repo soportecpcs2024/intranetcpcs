@@ -88,7 +88,7 @@ const AdminHeader = () => {
 
                   <li>
                     <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Administración</Link>
+                      <Link onClick={toggleDropdown}>Adm</Link>
 
                       {isDropdownOpen && (
                         <ul className="dropdown-menu">

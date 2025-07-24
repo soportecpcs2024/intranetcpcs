@@ -2131,7 +2131,8 @@ p {
   }
    
   .admin-layout-header-text-span{
-    font-size: 12px;
+    font-size: 19px;
+    
   }
   
   .admin-layout-header-links li{
@@ -2182,7 +2183,23 @@ margin-left: 10px;
   
 .cerrar-cession-tarea {
  margin-top: -26px;
+  
 }
+.cerrar{
+   width: 60px;
+  
+  position: fixed;
+  color: rgba(247, 247, 247, 0.729);
+  margin-top: 30px;
+  border:1px solid rgba(255, 255, 255, 0.753) ;
+  top: 0;
+  font-size: 12px;
+  right: 0;
+  padding: 4px;
+  border-radius: 4px;
+}
+ 
+
 
 .admin-header .dropdown-menu {
     margin-top: -75px;
