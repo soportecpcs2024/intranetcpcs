@@ -1,0 +1,151 @@
+.form-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  background-color: #ffffff;
+  color: #1f2937; /* text-zinc-800 */
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.dark .form-container {
+  background-color: #18181b; /* dark:bg-zinc-900 */
+  color: #ffffff;
+}
+
+.form-container h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.form-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-container input,
+.form-container select,
+.form-container textarea {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+}
+
+.form-container button {
+  background-color: #2563eb; /* blue-600 */
+  color: white;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.form-container button:hover {
+  background-color: #1d4ed8; /* blue-700 */
+}
+
+.form-container .mensaje {
+  font-size: 0.9rem;
+  color: #2563eb;
+}
+
+.dark .form-container .mensaje {
+  color: #4ade80; /* green-400 */
+}
+
+
+
+
+
+
+.seguimiento-container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 2rem;
+  background-color: #fff;
+  color: #1f2937;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.dark .seguimiento-container {
+  background-color: #18181b;
+  color: #fff;
+}
+
+.seguimiento-container h2 {
+  
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.filtros {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.filtros select {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.375rem;
+  
+}
+
+.resumen {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #4b5563;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+font-size: 16px;
+}
+
+thead {
+  background-color: #f3f4f6;
+}
+
+.dark thead {
+  background-color: #27272a;
+}
+
+th, td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+   font-size: 1.05rem !important;      /* ⬅️ Tamaño de fuente más grande (~16.8px) */
+}
+
+.dark td {
+  border-color: #3f3f46;
+}
+
+
+.estado {
+  font-weight: bold;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  text-align: center;
+}
+
+.estado.terminado {
+  background-color: #16a34a; /* verde */
+}
+
+.estado.pendiente {
+  background-color: #dc2626; /* rojo */
+}
+
+
+
+
+

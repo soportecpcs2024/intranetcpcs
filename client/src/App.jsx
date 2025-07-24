@@ -86,9 +86,15 @@ import ListarFactEP from "./components/tesoreria/EPpadres/ListarFactEP";
  
  
  
+ 
+ 
 
  
  
+const CrearMantenimiento = React.lazy(()=> import("./components/programadorTareas/paginasTareas/CrearMantenimiento"));
+const SeguimientoMantenimiento = React.lazy(()=> import("./components/programadorTareas/paginasTareas/SeguimientoMantenimiento"));
+
+
 const ExploracionMotris = React.lazy(()=> import("./components/tesoreria/extracurricular/ExploracionMotris"));
 const Artes = React.lazy(()=> import("./components/tesoreria/extracurricular/Artes"));
 const Voleibol = React.lazy(()=> import("./components/tesoreria/extracurricular/Voleibol"));
@@ -262,6 +268,8 @@ const AppContent = () => {
                 <Route path="estadisticas" element={<EstadisticasTareas />} />
               </Route>
 
+                <Route path="crearMantenimiento" element={<CrearMantenimiento />} />
+                <Route path="seguimientoMantenimiento" element={<SeguimientoMantenimiento />} />
                 
 
             </Route>

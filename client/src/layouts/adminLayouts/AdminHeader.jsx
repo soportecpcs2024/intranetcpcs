@@ -139,9 +139,26 @@ const AdminHeader = () => {
                       )}
                     </div>
                   </li>
+ 
 
                   <li>
-                    <Link to="programadorTareas">Mantenimiento</Link>
+                    <div className="dropdown">
+                      <Link onClick={toggleDropdown}>Tareas y mantenimientos</Link>
+                      {isDropdownOpen && (
+                        <ul className="dropdown-menu">
+                          <li>
+                             <Link to="programadorTareas">Tareas</Link>
+                          </li>
+
+                          <li>
+                            <Link to="crearMantenimiento">Crear mantenimiento</Link>
+                          </li>
+                          <li>
+                            <Link to="seguimientoMantenimiento">Seguimiento mantenimientos</Link>
+                          </li>
+                        </ul>
+                      )}
+                    </div>
                   </li>
 
                   <li>
@@ -362,19 +379,25 @@ const AdminHeader = () => {
               )}
 
               {mantenimiento && (
-                <div className="cerrar-cession-tarea">
-                  <div>
-                    <Link
-                      className={`cerrar-cession-tarea-hover ${
-                        activo ? "activo" : ""
-                      }`}
-                      to="programadorTareas"
-                      onClick={handleClick}
-                    >
-                      Tareas CPCS
-                    </Link>
-                  </div>
-                </div>
+                 <li>
+                    <div className="dropdown">
+                      <Link onClick={toggleDropdown}>Tareas y mantenimientos</Link>
+                      {isDropdownOpen && (
+                        <ul className="dropdown-menu">
+                          <li>
+                             <Link to="programadorTareas">Tareas</Link>
+                          </li>
+
+                          <li>
+                            <Link to="crearMantenimiento">Crear mantenimiento</Link>
+                          </li>
+                          <li>
+                            <Link to="seguimientoMantenimiento">Seguimiento mantenimientos</Link>
+                          </li>
+                        </ul>
+                      )}
+                    </div>
+                  </li>
               )}
             </nav>
           </div>

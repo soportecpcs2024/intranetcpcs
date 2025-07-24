@@ -133,6 +133,9 @@ app.use('/api/planMejora', planMejoramiento);
 const tareas = require('./routes/Tareas/tareasRoutes');
 app.use('/api/tareas', tareas);
 
+const mantenimiento = require('./routes/Tareas/mantenimientoRoutes')
+app.use('/api/mantenimiento', mantenimiento)
+
 // ---------------- Escuelas de padres ----------------
 
 const epAsistencia = require('./routes/EPadres/asistenciaRoutes');
