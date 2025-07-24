@@ -1,6 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
+import ReactPaginate from "react-paginate";
 import { TareasContext } from "../../../contexts/TareaContext";
 import "./mantenimientos.css";
+
+const ITEMS_PER_PAGE = 20;
 
 const SeguimientoMantenimiento = () => {
   const {
@@ -12,6 +15,7 @@ const SeguimientoMantenimiento = () => {
   const [filtroTipo, setFiltroTipo] = useState("");
   const [filtroEstado, setFiltroEstado] = useState("");
   const [filtroMes, setFiltroMes] = useState("");
+  const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
     obtenerMantenimientos();
@@ -26,6 +30,17 @@ const SeguimientoMantenimiento = () => {
         : true;
       return cumpleTipo && cumpleEstado && cumpleMes;
     });
+  };
+
+  const filtrados = filtrarMantenimientos();
+
+  // Paginación
+  const pageCount = Math.ceil(filtrados.length / ITEMS_PER_PAGE);
+  const offset = currentPage * ITEMS_PER_PAGE;
+  const currentItems = filtrados.slice(offset, offset + ITEMS_PER_PAGE);
+
+  const handlePageClick = ({ selected }) => {
+    setCurrentPage(selected);
   };
 
   const resumen = {
@@ -48,8 +63,6 @@ const SeguimientoMantenimiento = () => {
       console.error("Error al marcar como terminado:", error);
     }
   };
-
-  const filtrados = filtrarMantenimientos();
 
   return (
     <div className="seguimiento-container">
@@ -87,7 +100,7 @@ const SeguimientoMantenimiento = () => {
       </div>
 
       <table>
-        <thead className="tabla-cabecera">
+        <thead>
           <tr>
             <th>Título</th>
             <th>Responsable</th>
@@ -99,26 +112,23 @@ const SeguimientoMantenimiento = () => {
           </tr>
         </thead>
         <tbody>
-          {filtrados.map((m) => (
+          {currentItems.map((m) => (
             <tr key={m._id}>
-              <td data-label="Título">{m.titulo}</td>
-              <td data-label="Responsable">{m.responsable}</td>
-              <td data-label="Área">{m.area}</td>
-              <td data-label="Tipo">{m.tipoMantenimiento}</td>
-              <td
-                data-label="Estado"
-                className={m.estado === "Terminado" ? "estado terminado" : "estado pendiente"}
-              >
+              <td>{m.titulo}</td>
+              <td>{m.responsable}</td>
+              <td>{m.area}</td>
+              <td>{m.tipoMantenimiento}</td>
+              <td className={m.estado === "Terminado" ? "estado terminado" : "estado pendiente"}>
                 {m.estado}
               </td>
-              <td data-label="Programado terminar">
+              <td>
                 {new Date(m.fechaProgramada).toLocaleDateString("es-CO", {
                   day: "numeric",
                   month: "long",
                   year: "numeric",
                 })}
               </td>
-              <td data-label="Acción">
+              <td>
                 {m.estado === "Pendiente" ? (
                   <button className="btn-fin" onClick={() => marcarComoTerminado(m._id)}>
                     Terminar
@@ -131,6 +141,21 @@ const SeguimientoMantenimiento = () => {
           ))}
         </tbody>
       </table>
+
+      {/* Paginación */}
+      <ReactPaginate
+        previousLabel={"← Anterior"}
+        nextLabel={"Siguiente →"}
+        breakLabel={"..."}
+        pageCount={pageCount}
+        marginPagesDisplayed={1}
+        pageRangeDisplayed={2}
+        onPageChange={handlePageClick}
+        containerClassName={"paginacion"}
+        activeClassName={"paginacion-activa"}
+        previousClassName={"paginacion-prev"}
+        nextClassName={"paginacion-next"}
+      />
     </div>
   );
 };
