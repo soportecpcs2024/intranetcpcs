@@ -18,7 +18,7 @@ const CrearMantenimiento = () => {
 
   const [mensaje, setMensaje] = useState('');
 
-  const areas = ['Tecnología', 'Planta física', 'Eléctricos', 'Acueducto'];
+  const areas = ['Tecnología', 'Planta física', 'Eléctricos', 'Acueducto','Herramientas',"Zonas Verdes"];
   const tipos = ['Preventivo', 'Correctivo'];
   const servicios = ['Interno', 'Externo'];
 
