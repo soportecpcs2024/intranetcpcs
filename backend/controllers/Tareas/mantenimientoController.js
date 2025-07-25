@@ -3,17 +3,19 @@ const Mantenimiento = require('../../models/Tareas/mantenimiento.jsx');
 // Crear mantenimiento
 const crearMantenimiento = async (req, res) => {
   try {
-    if (!req.body.servicio) {
-      return res.status(400).json({ mensaje: 'El campo "servicio" es obligatorio' });
-    }
+    // console.log("📥 Datos recibidos:", req.body);
 
     const nuevoMantenimiento = new Mantenimiento(req.body);
     await nuevoMantenimiento.save();
+
     res.status(201).json(nuevoMantenimiento);
   } catch (error) {
-    res.status(500).json({ mensaje: 'Error al crear mantenimiento', error });
+    console.error("❌ Error al crear mantenimiento:", error.message);
+    console.error("🧾 Detalles:", error);
+    res.status(500).json({ mensaje: 'Error al crear mantenimiento', error: error.message });
   }
 };
+
 
 
 // Obtener todos los mantenimientos

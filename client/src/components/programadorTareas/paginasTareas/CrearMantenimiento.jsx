@@ -1,26 +1,37 @@
-import { useState, useContext } from 'react';
-import { TareasContext } from '../../../contexts/TareaContext';
-import './mantenimientos.css';
+import { useState, useContext } from "react";
+import { TareasContext } from "../../../contexts/TareaContext";
+import "./mantenimientos.css";
 
 const CrearMantenimiento = () => {
   const { crearMantenimiento } = useContext(TareasContext);
 
   const [form, setForm] = useState({
-    titulo: '',
-    descripcion: '',
-    fechaProgramada: '',
-    responsable: '',
-    area: '',
-    tipoMantenimiento: '',
-    servicio: 'Interno',
-    observaciones: ''
+    titulo: "",
+    descripcion: "",
+    fechaProgramada: "",
+    responsable: "",
+    area: "",
+    tipoMantenimiento: "",
+    servicio: "Interno",
+    observaciones: "",
   });
 
-  const [mensaje, setMensaje] = useState('');
+  const [mensaje, setMensaje] = useState("");
 
-  const areas = ['Tecnología','Música','Sonido', 'Planta física', 'Eléctricos', 'Acueducto','Herramientas',"Zonas Verdes"];
-  const tipos = ['Preventivo', 'Correctivo'];
-  const servicios = ['Interno', 'Externo'];
+ 
+  const areas = [
+  'Tecnología',
+  'Música',
+  'Sonido',
+  'Planta_física',
+  'Eléctricos',
+  'Acueducto',
+  'Herramientas',
+  'Zonas_Verdes'
+];
+
+  const tipos = ["Preventivo", "Correctivo"];
+  const servicios = ["Interno", "Externo"];
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -29,26 +40,33 @@ const CrearMantenimiento = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!form.titulo || !form.fechaProgramada || !form.responsable || !form.area || !form.tipoMantenimiento || !form.servicio) {
-      setMensaje('Por favor completa todos los campos obligatorios.');
+    if (
+      !form.titulo ||
+      !form.fechaProgramada ||
+      !form.responsable ||
+      !form.area ||
+      !form.tipoMantenimiento ||
+      !form.servicio
+    ) {
+      setMensaje("Por favor completa todos los campos obligatorios.");
       return;
     }
 
     try {
       await crearMantenimiento(form);
-      setMensaje('✅ Mantenimiento creado con éxito');
+      setMensaje("✅ Mantenimiento creado con éxito");
       setForm({
-        titulo: '',
-        descripcion: '',
-        fechaProgramada: '',
-        responsable: '',
-        area: '',
-        tipoMantenimiento: '',
-        servicio: 'Interno',
-        observaciones: ''
+        titulo: "",
+        descripcion: "",
+        fechaProgramada: "",
+        responsable: "",
+        area: "",
+        tipoMantenimiento: "",
+        servicio: "Interno",
+        observaciones: "",
       });
     } catch (error) {
-      setMensaje('❌ Error al crear mantenimiento');
+      setMensaje("❌ Error al crear mantenimiento");
     }
   };
 
@@ -96,17 +114,16 @@ const CrearMantenimiento = () => {
           required
         />
 
-        <label>Área:</label>
-        <select
-          name="area"
-          value={form.area}
-          onChange={handleChange}
-          required
-        >
+        <select name="area" value={form.area} onChange={handleChange} required>
           <option value="">Seleccione Área</option>
-          {areas.map((a) => (
-            <option key={a} value={a}>{a}</option>
-          ))}
+          {areas.map((a) => {
+            const trimmedValue = a.trim();
+            return (
+              <option key={trimmedValue} value={trimmedValue}>
+                {a}
+              </option>
+            );
+          })}
         </select>
 
         <label>Tipo de mantenimiento:</label>
@@ -118,7 +135,9 @@ const CrearMantenimiento = () => {
         >
           <option value="">Seleccione Tipo</option>
           {tipos.map((t) => (
-            <option key={t} value={t}>{t}</option>
+            <option key={t} value={t}>
+              {t}
+            </option>
           ))}
         </select>
 
@@ -131,7 +150,9 @@ const CrearMantenimiento = () => {
         >
           <option value="">Seleccione Servicio</option>
           {servicios.map((s) => (
-            <option key={s} value={s}>{s}</option>
+            <option key={s} value={s}>
+              {s}
+            </option>
           ))}
         </select>
 

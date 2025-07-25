@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import  { useContext, useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
 import { TareasContext } from "../../../contexts/TareaContext";
 import "./mantenimientos.css";

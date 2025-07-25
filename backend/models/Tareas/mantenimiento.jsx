@@ -10,7 +10,7 @@ const mantenimientoSchema = new mongoose.Schema({
 
   area: {
     type: String,
-    enum: ["Tecnología", "Planta física", "Eléctricos", "Acueducto"],
+    enum: ['Tecnología','Música','Sonido', 'Planta_física', 'Eléctricos', 'Acueducto','Herramientas',"Zonas_Verdes"],
     required: true,
   },
 
