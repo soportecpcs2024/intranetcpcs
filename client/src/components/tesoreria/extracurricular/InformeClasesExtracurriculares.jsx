@@ -19,30 +19,39 @@ const InformeClasesExtracurriculares = () => {
   const [mesSeleccionado, setMesSeleccionado] = useState("");
   const { facturas } = useRecaudo();
   const [facturasFiltradas, setFacturasFiltradas] = useState([]);
+  console.log(facturasFiltradas);
 
+  useEffect(() => {
+    if (facturas.length > 0) {
+      const codValidos = [
+        "100",
+        "200",
+        "300",
+        "400",
+        "500",
+        "600",
+        "700",
+        "800",
+        "900",
+        "1000",
+        "1100",
+      ];
 
-useEffect(() => {
-  if (facturas.length > 0) {
-    const codValidos = [
-      "100", "200", "300", "400", "500", "600", "700",
-      "800", "900", "1000", "1100"
-    ];
-
-    const nuevasFacturas = facturas
-      .filter((factura) =>
-        factura.clases?.some(
-          (clase) => codValidos.includes(clase.cod?.toString())
+      const nuevasFacturas = facturas
+        .filter((factura) =>
+          factura.clases?.some((clase) =>
+            codValidos.includes(clase.cod?.toString())
+          )
         )
-      )
-      .map((factura) => ({
-        ...factura,
-        nombreEstudiante: factura.estudianteId?.nombre?.trim() || "Desconocido",
-      }));
+        .map((factura) => ({
+          ...factura,
+          nombreEstudiante:
+            factura.estudianteId?.nombre?.trim() || "Desconocido",
+        }));
 
-    setFacturasFiltradas(nuevasFacturas);
-  }
-}, [facturas]);
-
+      setFacturasFiltradas(nuevasFacturas);
+    }
+  }, [facturas]);
 
   const meses = [
     "enero",
@@ -83,7 +92,7 @@ useEffect(() => {
         return "Arte";
       case "1100":
         return "Exploración Motriz y Predeportiva Pre";
-       
+
       default:
         return `Código: ${cod}`;
     }
@@ -114,6 +123,7 @@ useEffect(() => {
 
         agrupado[cod].push({
           estudiante: factura.estudianteId?.nombre || "N/A",
+          nombreClase: clase.nombreClase || getNombreCodigo(clase.cod), // fallback por si falta
           grado: factura.estudianteId?.grado || "N/A",
           total: factura.total,
           tipoPago: factura.tipoPago,
@@ -154,7 +164,11 @@ useEffect(() => {
       new Paragraph({
         alignment: AlignmentType.LEFT,
         children: [
-          new TextRun({ text: `Mes: ${mesSeleccionado}`, bold: true, size: 24 }),
+          new TextRun({
+            text: `Mes: ${mesSeleccionado}`,
+            bold: true,
+            size: 24,
+          }),
         ],
         spacing: { after: 200 },
       }),
@@ -173,6 +187,14 @@ useEffect(() => {
     let totalGlobal = 0;
 
     Object.entries(agrupado).forEach(([cod, items]) => {
+      // Ordenar por tipo de pago
+      items.sort((a, b) =>
+        a.tipoPago
+          .trim()
+          .toLowerCase()
+          .localeCompare(b.tipoPago.trim().toLowerCase())
+      );
+
       content.push(
         new Paragraph({
           text: getNombreCodigo(cod),
@@ -189,7 +211,13 @@ useEffect(() => {
         rows: [
           new TableRow({
             tableHeader: true,
-            children: ["Estudiante", "Grado", "Total", "Tipo de pago"].map(
+            children: [
+              "Estudiante",
+              "Clase",
+              "Grado",
+              "Total",
+              "Tipo de pago",
+            ].map(
               (text) =>
                 new TableCell({
                   children: [new Paragraph({ text })],
@@ -197,26 +225,38 @@ useEffect(() => {
                 })
             ),
           }),
-          ...items.map(
-            (item) =>
-              new TableRow({
-                children: [
-                  new TableCell({ children: [new Paragraph(item.estudiante)] }),
-                  new TableCell({ children: [new Paragraph(item.grado)] }),
-                  new TableCell({
-                    children: [
-                      new Paragraph(`$ ${item.total.toLocaleString()}`),
-                    ],
-                  }),
-                  new TableCell({ children: [new Paragraph(item.tipoPago)] }),
-                ],
-              })
-          ),
+          ...items.map((item) =>
+  new TableRow({
+    children: [
+      new TableCell({ children: [new Paragraph(item.estudiante)] }),
+      new TableCell({ children: [new Paragraph(item.nombreClase)] }),
+      new TableCell({ children: [new Paragraph(item.grado)] }),
+      new TableCell({
+        children: [new Paragraph(`$ ${item.total.toLocaleString()}`)],
+      }),
+      new TableCell({
+        children: [new Paragraph(item.tipoPago)],
+        shading: {
+          fill:
+            item.tipoPago === "Nómina"
+              ? "C6EFCE"
+              : item.tipoPago === "Efectivo"
+              ? "FFEB9C"
+              : item.tipoPago === "Datáfono"
+              ? "D9E1F2"
+              : "FFFFFF",
+        },
+      }),
+    ],
+  })
+),
+
         ],
       });
 
       content.push(tablaDatos);
 
+     
       // Subtotales por clase
       let subtotalNomina = 0;
       let subtotalDatafono = 0;
@@ -357,7 +397,9 @@ useEffect(() => {
           new TableRow({
             children: [
               new TableCell({
-                children: [new Paragraph({ text: "TOTAL GENERAL:", bold: true })],
+                children: [
+                  new Paragraph({ text: "TOTAL GENERAL:", bold: true }),
+                ],
               }),
               new TableCell({
                 children: [

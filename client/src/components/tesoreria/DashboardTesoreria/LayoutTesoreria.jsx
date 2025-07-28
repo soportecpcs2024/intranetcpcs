@@ -120,7 +120,7 @@ const LayoutTesoreria = () => {
             </NavLink>
           </div>
 
-          {/* <div className="link-academico">
+          <div className="link-academico">
             <NavLink
               to="formulario_inscripcion"
               className={({ isActive }) =>
@@ -134,7 +134,7 @@ const LayoutTesoreria = () => {
                 <span>Formularios</span>
               </div>
             </NavLink>
-          </div> */}
+          </div>
 
           <div className="link-academico">
             <NavLink
