@@ -88,11 +88,13 @@ import ListarFactEP from "./components/tesoreria/EPpadres/ListarFactEP";
  
  
  
+ 
 
  
  
 const CrearMantenimiento = React.lazy(()=> import("./components/programadorTareas/paginasTareas/CrearMantenimiento"));
 const SeguimientoMantenimiento = React.lazy(()=> import("./components/programadorTareas/paginasTareas/SeguimientoMantenimiento"));
+const LayoutAdmisiones = React.lazy(()=> import("./components/Admisiones/LayoutAdmisiones"));
 
 
 const ExploracionMotris = React.lazy(()=> import("./components/tesoreria/extracurricular/ExploracionMotris"));
@@ -108,6 +110,7 @@ const GuitarraBajo = React.lazy(()=> import( "./components/tesoreria/extracurric
  
 const ActasGrados = React.lazy(()=> import("./components/informesAcademicos/ActasGrados/ActasGrados"));
 const GenerarWord = React.lazy(()=> import("./components/tesoreria/InformeEscuelasPadres/InformeEScuelasPadres"));
+
 
 
 
@@ -248,13 +251,17 @@ const AppContent = () => {
                 <Route path="almuerzos" element={<Almuerzos />} />
                 <Route path="lista_facturas" element={<ListarFacturas />} />
                 <Route path="lista_formularios" element={<ListarFormularioCompras />} />
-                <Route path="formulario_inscripcion" element={<GenerarPreInscripcion />} />
                 <Route path="informe-formularios" element={<InformeFormularioMensual />} />
                 <Route path="lista_escuela_padres" element={<ListarFactEP />} />
               
                 <Route path="informe-extracurriculares" element={<InformeClasesExtracurriculares />} />
                 <Route path="informe_escuela_padres" element={<GenerarWord />} />
                  
+              </Route>
+
+              <Route path="admisiones" element={<LayoutAdmisiones />}>
+                <Route path="formulario_inscripcion" element={<GenerarPreInscripcion />} />
+              
               </Route>
 
               <Route path="esc_padres" element={<DashboardEscPadres />} />

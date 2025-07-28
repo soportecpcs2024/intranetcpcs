@@ -1,0 +1,275 @@
+/* Contenedor principal */
+.layout-academico-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  
+  
+}
+
+
+/* Header del sidebar superior */
+.layout-academico-container-header {
+  display: flex;
+  justify-content: left;
+  gap: 7px;
+  padding: 4px;
+  
+  
+  
+}
+
+.layout-academico-container-division{
+  background-color: #f5f6f3;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px;
+}
+
+/* Estilo general para cada enlace del sidebar */
+.link-academico {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 5px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+/* Estilo general para cada enlace del sidebar */
+.link-recaudo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+/* Iconos de los enlaces del sidebar */
+.icon-academico {
+  font-size: 20px; /* Tamaño del icono */
+  color: #083672; /* Color del icono */
+  
+}
+ 
+
+/* Estilo para los enlaces normales */
+.sidebar-link-academico {
+  color: #333;
+  font-size: 12px;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+/* Hover para el link */
+.link-academico:hover {
+  background-color: #f7fb03;
+}
+
+/* Estado activo del link */
+.active {
+  
+  color: #000000;
+  box-shadow: rgba(171, 171, 235, 0.623) 0px 50px 100px -20px, rgba(179, 179, 179, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  
+}
+
+/* Contenido principal */
+.content-academico {
+  flex-grow: 1;
+  padding: 2rem;
+  background-color: #ffffff;
+  color: #2c3e50;
+   
+  
+}
+
+/* Estilo de hover para iconos */
+.icon-academico:hover {
+  color: #007bff; /* Cambia color del icono al hacer hover */
+}
+
+
+.estudiante_encontrado{
+  padding: 10px 5px;
+  border-bottom: 1px solid rgb(182, 181, 181);
+  border-top: 1px solid black;
+}
+
+.container-tipopago-flex{
+  display: flex;
+  justify-content: space-between;
+  align-items:self-end;
+  border-radius: 6px;
+  border: 1px solid rgb(206, 206, 206);
+  padding: 5px;
+  margin-top: 3px;
+}
+
+.container-tipopago{
+  
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.container-tipopago-btn{
+  margin-top: -20px;
+  align-items: flex-start;
+}
+
+.container-recaudo{
+  display: flex;
+  gap: 10px;
+  
+  margin-top: -12px;
+   
+}
+
+.container-recaudo .container-recaudo-box:nth-child(1){
+  flex-basis: calc(70% - 1rem);
+}
+  
+.container-recaudo .container-recaudo-box:nth-child(2){
+  flex-basis: calc(30% - 1rem);
+  
+}
+
+.container-recaudo-box-save{
+  background-color: #f3f4f6;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding:8px ;
+  margin-top: 4px;
+  
+}
+.container-recaudo-box-save button{
+  font-size: 12px;
+  margin-top: 1px;
+  
+}
+
+.descarga_icon_factura{
+  
+  font-size: 40px;
+}
+
+
+ 
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.month-selector {
+  width: 240px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  margin-top: 0px;
+   
+}
+
+.month-selector label {
+  font-size: 12px;
+  font-weight: bold;
+  color: #333;
+}
+
+.month-selector select {
+  
+  width: 120px;
+  padding: 10px;
+  font-size: 12px;
+  border: 2px solid #007bff;
+  border-radius: 6px;
+  background-color: white;
+  cursor: pointer;
+  transition: border 0.3s ease-in-out;
+}
+
+.month-selector select:focus {
+  border-color: #1179e9;
+  outline: none;
+}
+
+.informes-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(242, 242, 242);
+  padding: 4px;
+  border-radius: 4px;
+  border: 1px solid rgba(179, 179, 179, 0.775);
+}
+
+.informes-lista {
+  display: flex;
+  
+  list-style: none;
+  padding: 10px;
+  align-items: center;
+  gap: 5px;
+}
+
+.informe-item {
+  
+  font-size: 12px;
+  background: none;
+  padding: 4px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 100;
+  
+  
+  transition: background-color 0.2s ease;
+}
+.informes-lista-titulo{
+ margin-bottom: 10px;
+}
+ 
+.icono-des{
+  font-size: 40px;
+    border-radius: 4px;
+   border: 1px solid rgba(179, 179, 179, 0.775);
+}
+
+.informe-item:hover {
+  color: white;
+  background-color: #1f6fe7;
+  border-radius: 4px;
+  
+}
+ 
+ 
+ 
