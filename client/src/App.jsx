@@ -253,7 +253,7 @@ const AppContent = () => {
                 <Route path="lista_formularios" element={<ListarFormularioCompras />} />
                 <Route path="informe-formularios" element={<InformeFormularioMensual />} />
                 <Route path="lista_escuela_padres" element={<ListarFactEP />} />
-              
+                <Route path="formulario_inscripcion" element={<GenerarPreInscripcion />} />
                 <Route path="informe-extracurriculares" element={<InformeClasesExtracurriculares />} />
                 <Route path="informe_escuela_padres" element={<GenerarWord />} />
                  
