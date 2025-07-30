@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useRecaudo } from "../../../contexts/RecaudoContext";
+import { useRecaudo } from "../../../../../contexts/RecaudoContext";
 import {
   Document,
   Packer,
@@ -15,7 +15,7 @@ import {
 } from "docx";
 import { saveAs } from "file-saver";
 
-const InformeClasesExtracurriculares = () => {
+const InformeAntologia = () => {
   const [mesSeleccionado, setMesSeleccionado] = useState("");
   const { facturas } = useRecaudo();
   const [facturasFiltradas, setFacturasFiltradas] = useState([]);
@@ -24,17 +24,8 @@ const InformeClasesExtracurriculares = () => {
   useEffect(() => {
     if (facturas.length > 0) {
       const codValidos = [
-        "100",
-        "200",
-        "300",
-        "400",
-        "500",
-        "600",
-        "700",
-        "800",
-        "900",
-        "1000",
-        "1100",
+        
+        "1200",
       ];
 
       const nuevasFacturas = facturas
@@ -92,6 +83,8 @@ const InformeClasesExtracurriculares = () => {
         return "Arte";
       case "1100":
         return "Exploración Motriz y Predeportiva Pre";
+      case "1200":
+        return "Antologías";
 
       default:
         return `Código: ${cod}`;
@@ -155,7 +148,7 @@ const InformeClasesExtracurriculares = () => {
         alignment: AlignmentType.CENTER,
         children: [
           new TextRun({
-            text: "Informe general de venta Clases Extracurriculares",
+            text: "Informe general de venta Antologías",
             size: 26,
           }),
         ],
@@ -461,4 +454,5 @@ const InformeClasesExtracurriculares = () => {
   );
 };
 
-export default InformeClasesExtracurriculares;
+
+export default InformeAntologia;

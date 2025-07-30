@@ -82,6 +82,8 @@ import InformeFormularioMensual from "./components/tesoreria/Formularios_inscrip
 import ListarFormularioCompras from "./components/tesoreria/Formularios_inscripcion/ListarFormularioCompras";
 import InformeClasesExtracurriculares from "./components/tesoreria/extracurricular/InformeClasesExtracurriculares";
 import ListarFactEP from "./components/tesoreria/EPpadres/ListarFactEP";
+import ListarAntologias from "./components/tesoreria/Antologias/ListarAntologias";
+import InformeAntologia from "./components/tesoreria/DashboardTesoreria/Recaudo/antologia/InformeAntologia";
  
  
  
@@ -256,6 +258,9 @@ const AppContent = () => {
                 <Route path="formulario_inscripcion" element={<GenerarPreInscripcion />} />
                 <Route path="informe-extracurriculares" element={<InformeClasesExtracurriculares />} />
                 <Route path="informe_escuela_padres" element={<GenerarWord />} />
+                <Route path="listar_antologias" element={<ListarAntologias />} />
+                <Route path="informe_antologias" element={<InformeAntologia />} />
+                
                  
               </Route>
 
