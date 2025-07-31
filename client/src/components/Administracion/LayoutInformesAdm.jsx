@@ -12,7 +12,7 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import "./LayoutInformesAdm.css";
+import "./Layoutinformesadm.css";
 
 const mesesOpciones = [
   "enero",
