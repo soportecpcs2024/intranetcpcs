@@ -11,13 +11,17 @@ import { Auth, Blog } from "./pages/admin";
 import "./App.css";
 
 // Componentes cargados con lazy
-const AdminLayout = React.lazy(() => import("./layouts/adminLayouts/AdminLayout"));
+const AdminLayout = React.lazy(() =>
+  import("./layouts/adminLayouts/AdminLayout")
+);
 const General = React.lazy(() => import("./pages/admin/academicos/General"));
 const Areas = React.lazy(() => import("./pages/admin/academicos/Areas"));
 const Layout = React.lazy(() => import("./components/Layout"));
 const Users = React.lazy(() => import("./pages/admin/User/main/Users"));
 const DescargarPdf = React.lazy(() => import("./components/DescargarPdf"));
-const DashboardEstDificultades = React.lazy(() => import("./components/DashboardEstDificultades"));
+const DashboardEstDificultades = React.lazy(() =>
+  import("./components/DashboardEstDificultades")
+);
 
 // Importación directa (no lazy)
 import Documentos from "./pages/admin/academicos/Documentos";
@@ -48,11 +52,11 @@ import InformeUnidad from "./components/productos/informes/informeUnidad/Informe
 import LayoutInfoAcademicos from "./components/informesAcademicos/DashboardInformesAcademicos/LayoutInfoAcademicos";
 import CertificadoEstudios from "./components/informesAcademicos/CertificadoEstudios/CertificadoEstudios";
 import AcumuladosNotas from "./components/informesAcademicos/AcumuladosNotas/AcumuladosNotas";
- 
+
 import Dashboardquinto from "./components/informesAcademicos/quinto_Informe_b/Dashboardquinto";
 import LayoutTesoreria from "./components/tesoreria/DashboardTesoreria/LayoutTesoreria";
 import Recaudo from "./components/tesoreria/DashboardTesoreria/Recaudo/Recaudo";
- 
+
 import RecaudoAntologia from "./components/tesoreria/DashboardTesoreria/Recaudo/antologia/RecaudoAntologia";
 import Recaudoep from "./components/tesoreria/DashboardTesoreria/Recaudo/RecaudoEscuelaPadres";
 import ListarFacturas from "./components/tesoreria/DashboardTesoreria/Recaudo/ListarFacturas/ListarFacturas";
@@ -74,7 +78,7 @@ import ExtraIniciaMusical from "./components/tesoreria/extracurricular/ExtraInic
 import CrearEscuelaPadres from "./components/EscPadres/CrearEscuela/CrearEscuelaPadres";
 import EstadisticasEp from "./components/EscPadres/EstadisticasEP/EstadisticasEp";
 import ListaEPPagas from "./components/EscPadres/listaEPPagas/ListaEPPagas";
- 
+
 import { ActasDeGradoProvider } from "./contexts/ActasDeGradoContext";
 import GenerarTodasActas from "./components/informesAcademicos/ActasGrados/GenerarTodasActas";
 import GenerarPreInscripcion from "./components/tesoreria/Formularios_inscripcion/GenerarPreInscripcion";
@@ -84,37 +88,54 @@ import InformeClasesExtracurriculares from "./components/tesoreria/extracurricul
 import ListarFactEP from "./components/tesoreria/EPpadres/ListarFactEP";
 import ListarAntologias from "./components/tesoreria/Antologias/ListarAntologias";
 import InformeAntologia from "./components/tesoreria/DashboardTesoreria/Recaudo/antologia/InformeAntologia";
- 
- 
- 
- 
- 
- 
- 
 
- 
- 
-const CrearMantenimiento = React.lazy(()=> import("./components/programadorTareas/paginasTareas/CrearMantenimiento"));
-const SeguimientoMantenimiento = React.lazy(()=> import("./components/programadorTareas/paginasTareas/SeguimientoMantenimiento"));
-const LayoutAdmisiones = React.lazy(()=> import("./components/Admisiones/LayoutAdmisiones"));
+const CrearMantenimiento = React.lazy(() =>
+  import("./components/programadorTareas/paginasTareas/CrearMantenimiento")
+);
+const SeguimientoMantenimiento = React.lazy(() =>
+  import(
+    "./components/programadorTareas/paginasTareas/SeguimientoMantenimiento"
+  )
+);
+const LayoutAdmisiones = React.lazy(() =>
+  import("./components/Admisiones/LayoutAdmisiones")
+);
+const LayoutInformesAdm = React.lazy(() =>
+  import("./components/Administracion/LayoutInformesAdm")
+);
 
+const ExploracionMotris = React.lazy(() =>
+  import("./components/tesoreria/extracurricular/ExploracionMotris")
+);
+const Artes = React.lazy(() =>
+  import("./components/tesoreria/extracurricular/Artes")
+);
+const Voleibol = React.lazy(() =>
+  import("./components/tesoreria/extracurricular/Voleibol")
+);
+const Microfutbol = React.lazy(() =>
+  import("./components/tesoreria/extracurricular/Microfutbol")
+);
 
-const ExploracionMotris = React.lazy(()=> import("./components/tesoreria/extracurricular/ExploracionMotris"));
-const Artes = React.lazy(()=> import("./components/tesoreria/extracurricular/Artes"));
-const Voleibol = React.lazy(()=> import("./components/tesoreria/extracurricular/Voleibol"));
-const Microfutbol = React.lazy(()=> import("./components/tesoreria/extracurricular/Microfutbol"));
- 
-const Baloncesto = React.lazy(()=> import("./components/tesoreria/extracurricular/Baloncesto"));
-const Bateria = React.lazy(()=> import("./components/tesoreria/extracurricular/Bateria"));
-const Tecnicavocal = React.lazy(()=> import( "./components/tesoreria/extracurricular/Tecnicavocal"));
-const GuitarraBajo = React.lazy(()=> import( "./components/tesoreria/extracurricular/GuitarraBajo"));
+const Baloncesto = React.lazy(() =>
+  import("./components/tesoreria/extracurricular/Baloncesto")
+);
+const Bateria = React.lazy(() =>
+  import("./components/tesoreria/extracurricular/Bateria")
+);
+const Tecnicavocal = React.lazy(() =>
+  import("./components/tesoreria/extracurricular/Tecnicavocal")
+);
+const GuitarraBajo = React.lazy(() =>
+  import("./components/tesoreria/extracurricular/GuitarraBajo")
+);
 
- 
-const ActasGrados = React.lazy(()=> import("./components/informesAcademicos/ActasGrados/ActasGrados"));
-const GenerarWord = React.lazy(()=> import("./components/tesoreria/InformeEscuelasPadres/InformeEScuelasPadres"));
-
-
-
+const ActasGrados = React.lazy(() =>
+  import("./components/informesAcademicos/ActasGrados/ActasGrados")
+);
+const GenerarWord = React.lazy(() =>
+  import("./components/tesoreria/InformeEscuelasPadres/InformeEScuelasPadres")
+);
 
 const App = () => {
   useEffect(() => {
@@ -142,23 +163,21 @@ const App = () => {
 
   return (
     <AuthProvider>
-    
       <ProductProvider>
         <ProductStatisticsProvider>
           <UserProvider>
             <RecaudoProvider>
               <TareasProvider>
                 <EscuelaPadresProvider>
-                 <ActasDeGradoProvider>
-                  <AppContent />
-                 </ActasDeGradoProvider>
+                  <ActasDeGradoProvider>
+                    <AppContent />
+                  </ActasDeGradoProvider>
                 </EscuelaPadresProvider>
               </TareasProvider>
             </RecaudoProvider>
           </UserProvider>
         </ProductStatisticsProvider>
       </ProductProvider>
-      
     </AuthProvider>
   );
 };
@@ -192,7 +211,10 @@ const AppContent = () => {
                 </Route>
                 <Route path="nivelSuperior" element={<NivelSuperior />} />
                 <Route path="individual" element={<InfoIndividual />} />
-                <Route path="estdificultades" element={<DashboardEstDificultades />} />
+                <Route
+                  path="estdificultades"
+                  element={<DashboardEstDificultades />}
+                />
               </Route>
 
               <Route path="documentos" element={<Documentos />} />
@@ -211,7 +233,10 @@ const AppContent = () => {
                 <Route path="voleibol" element={<Voleibol />} />
                 <Route path="microfutbol" element={<Microfutbol />} />
                 <Route path="arte" element={<Artes />} />
-                <Route path="exploracionmotriz" element={<ExploracionMotris />} />
+                <Route
+                  path="exploracionmotriz"
+                  element={<ExploracionMotris />}
+                />
               </Route>
 
               <Route path="administracion" element={<DashboardInventory />}>
@@ -230,8 +255,12 @@ const AppContent = () => {
                 <Route path="locationdetails" element={<LocationDetails />} />
                 <Route path="editlocation/:id" element={<EditLocation />} />
               </Route>
+              <Route path="informesgenerales" element={<LayoutInformesAdm />} />
 
-              <Route path="inventario_estadisticas" element={<DashboardStatistics />}>
+              <Route
+                path="inventario_estadisticas"
+                element={<DashboardStatistics />}
+              >
                 <Route index element={<Estadisticas />} />
                 <Route path="infostock" element={<InfoStock />} />
                 <Route path="subcategory" element={<SubCategory />} />
@@ -240,10 +269,19 @@ const AppContent = () => {
               </Route>
 
               <Route path="infoacademico" element={<LayoutInfoAcademicos />}>
-                <Route path="certificado-estudios" element={<CertificadoEstudios />} />
+                <Route
+                  path="certificado-estudios"
+                  element={<CertificadoEstudios />}
+                />
                 <Route path="acumulados-notas" element={<AcumuladosNotas />} />
-                <Route path="actas_grados_individual" element={<ActasGrados />} />
-                <Route path="actas_grados_grupal" element={<GenerarTodasActas />} />
+                <Route
+                  path="actas_grados_individual"
+                  element={<ActasGrados />}
+                />
+                <Route
+                  path="actas_grados_grupal"
+                  element={<GenerarTodasActas />}
+                />
               </Route>
 
               <Route path="tesoreria" element={<LayoutTesoreria />}>
@@ -252,21 +290,42 @@ const AppContent = () => {
                 <Route path="escuela_padres" element={<Recaudoep />} />
                 <Route path="almuerzos" element={<Almuerzos />} />
                 <Route path="lista_facturas" element={<ListarFacturas />} />
-                <Route path="lista_formularios" element={<ListarFormularioCompras />} />
-                <Route path="informe-formularios" element={<InformeFormularioMensual />} />
+                <Route
+                  path="lista_formularios"
+                  element={<ListarFormularioCompras />}
+                />
+                <Route
+                  path="informe-formularios"
+                  element={<InformeFormularioMensual />}
+                />
                 <Route path="lista_escuela_padres" element={<ListarFactEP />} />
-                <Route path="formulario_inscripcion" element={<GenerarPreInscripcion />} />
-                <Route path="informe-extracurriculares" element={<InformeClasesExtracurriculares />} />
-                <Route path="informe_escuela_padres" element={<GenerarWord />} />
-                <Route path="listar_antologias" element={<ListarAntologias />} />
-                <Route path="informe_antologias" element={<InformeAntologia />} />
-                
-                 
+                <Route
+                  path="formulario_inscripcion"
+                  element={<GenerarPreInscripcion />}
+                />
+                <Route
+                  path="informe-extracurriculares"
+                  element={<InformeClasesExtracurriculares />}
+                />
+                <Route
+                  path="informe_escuela_padres"
+                  element={<GenerarWord />}
+                />
+                <Route
+                  path="listar_antologias"
+                  element={<ListarAntologias />}
+                />
+                <Route
+                  path="informe_antologias"
+                  element={<InformeAntologia />}
+                />
               </Route>
 
               <Route path="admisiones" element={<LayoutAdmisiones />}>
-                <Route path="formulario_inscripcion" element={<GenerarPreInscripcion />} />
-              
+                <Route
+                  path="formulario_inscripcion"
+                  element={<GenerarPreInscripcion />}
+                />
               </Route>
 
               <Route path="esc_padres" element={<DashboardEscPadres />} />
@@ -274,16 +333,23 @@ const AppContent = () => {
               <Route path="estadisticas_ep" element={<EstadisticasEp />} />
               <Route path="eppagas" element={<ListaEPPagas />} />
 
-              <Route path="programadorTareas" element={<DashboardProgramadorTareas />}>
+              <Route
+                path="programadorTareas"
+                element={<DashboardProgramadorTareas />}
+              >
                 <Route path="crear" element={<CrearTarea />} />
                 <Route path="listar" element={<ListarTareas />} />
                 <Route path="estadisticas" element={<EstadisticasTareas />} />
               </Route>
 
-                <Route path="crearMantenimiento" element={<CrearMantenimiento />} />
-                <Route path="seguimientoMantenimiento" element={<SeguimientoMantenimiento />} />
-                
-
+              <Route
+                path="crearMantenimiento"
+                element={<CrearMantenimiento />}
+              />
+              <Route
+                path="seguimientoMantenimiento"
+                element={<SeguimientoMantenimiento />}
+              />
             </Route>
           )}
         </Routes>

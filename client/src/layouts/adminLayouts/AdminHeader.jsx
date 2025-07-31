@@ -98,7 +98,12 @@ const AdminHeader = () => {
                           </li>
                           <li>
                             <Link to="/admin/inventario_estadisticas">
-                              Informes
+                              Estadisticas Inventario
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to="/admin/informesgenerales">
+                              Informes Generales
                             </Link>
                           </li>
                         </ul>
