@@ -1,4 +1,4 @@
-  import { useContext, useState, useMemo, useEffect } from "react";
+  import { useContext, useState, useMemo } from "react";
   import { TareasContext } from "../../contexts/TareaContext";
   import {
     PieChart,
@@ -11,6 +11,7 @@
     YAxis,
     Tooltip,
     Legend,
+    
   } from "recharts";
   import "./Layoutinformesadm.css";
 
