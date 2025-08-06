@@ -3,6 +3,7 @@
   --bg: #d5dff6;
   --card-bg: #1e2343;
   --radius: 1rem;
+   
   --shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.4);
   --text: #e3e8ff;
   --muted: #8b94b3;
@@ -45,6 +46,7 @@
   position: relative;
   overflow: hidden;
   border: 1px solid var(--border);
+  margin: 5px;
 }
 
 .card h3 {
@@ -53,7 +55,18 @@
   letter-spacing: 0.5px;
   color: white;
 }
+.card h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  letter-spacing: 0.5px;
+  color: white;
+}
 
+label{
+  color: rgb(254, 254, 254);
+}
+
+ 
 .badge {
   display: inline-block;
   padding: 4px 10px;
@@ -80,17 +93,19 @@
   flex-wrap: wrap;
   align-items: center;
   margin-bottom: 0.75rem;
+  
 }
 
 .select-wrapper select,
 .select-wrapper input[type="radio"] {
-  background: #131944;
+  background: #e7e7e7;
   border: 1px solid var(--border);
   padding: 6px 10px;
   border-radius: var(--radius-sm);
-  color: var(--text);
   font-size: 0.9rem;
   outline: none;
+  font-weight: 700;
+  
 }
 
 .section-grid {
@@ -162,3 +177,4 @@
   margin-top: 2px;
   color: var(--muted);
 }
+

@@ -7,6 +7,7 @@ const DashboardExtraCurricular = () => {
   return (
     <div className="layout-extraclases-container">
       <div className="link-extraclases">
+
         <div className="grup-links">
           <NavLink to="ingles">Inglés</NavLink>
           <NavLink to="iniciamusical">Iniciación musical</NavLink>
@@ -29,7 +30,11 @@ const DashboardExtraCurricular = () => {
           <NavLink to="arte">Arte</NavLink>
           <NavLink to="exploracionmotriz">Exploración Motriz</NavLink>
         </div>
+
+        
       </div>
+
+     
 
       <main className="content-academico">
         <Outlet />

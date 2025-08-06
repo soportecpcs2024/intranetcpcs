@@ -103,8 +103,11 @@ const AdminHeader = () => {
                           </li>
                           <li>
                             <Link to="/admin/informesgenerales">
-                              Informes Generales
+                              Informes de Tareas
                             </Link>
+                          </li>
+                            <li>
+                            <Link to="seguimientoMantenimiento">Seguimiento mantenimientos</Link>
                           </li>
                         </ul>
                       )}
@@ -155,9 +158,7 @@ const AdminHeader = () => {
                           <li>
                             <Link to="crearMantenimiento">Crear mantenimiento</Link>
                           </li>
-                          <li>
-                            <Link to="seguimientoMantenimiento">Seguimiento mantenimientos</Link>
-                          </li>
+                        
                         </ul>
                       )}
                     </div>
