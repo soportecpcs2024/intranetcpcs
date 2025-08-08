@@ -88,10 +88,19 @@ import InformeClasesExtracurriculares from "./components/tesoreria/extracurricul
 import ListarFactEP from "./components/tesoreria/EPpadres/ListarFactEP";
 import ListarAntologias from "./components/tesoreria/Antologias/ListarAntologias";
 import InformeAntologia from "./components/tesoreria/DashboardTesoreria/Recaudo/antologia/InformeAntologia";
+ 
+
+
+
 
 const CrearMantenimiento = React.lazy(() =>
   import("./components/programadorTareas/paginasTareas/CrearMantenimiento")
 );
+const InformeExtraClasesDec = React.lazy(() =>
+  import("./components/Administracion/informesExtraClasesDes/InformeExtraClasesDec")
+);
+
+
 const SeguimientoMantenimiento = React.lazy(() =>
   import(
     "./components/programadorTareas/paginasTareas/SeguimientoMantenimiento"
@@ -101,7 +110,7 @@ const LayoutAdmisiones = React.lazy(() =>
   import("./components/Admisiones/LayoutAdmisiones")
 );
 const LayoutInformesAdm = React.lazy(() =>
-  import("./components/Administracion/LayoutInformesAdm")
+  import("./components/Administracion/informeTareas/LayoutInformesAdm")
 );
 
 const ExploracionMotris = React.lazy(() =>
@@ -256,6 +265,7 @@ const AppContent = () => {
                 <Route path="editlocation/:id" element={<EditLocation />} />
               </Route>
               <Route path="informesgenerales" element={<LayoutInformesAdm />} />
+              <Route path="informesExtraClasesDec" element={<InformeExtraClasesDec />} />
 
               <Route
                 path="inventario_estadisticas"

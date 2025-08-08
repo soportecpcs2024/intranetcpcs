@@ -1,0 +1,95 @@
+.kpi-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 2rem;
+  margin: 2rem auto;
+  justify-content: center;
+  background-color: #fdfdfd;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  max-width: 1200px;
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  color: #2c3e50;
+}
+
+.cardestaditicas {
+  flex: 1 1 300px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease;
+}
+
+.cardestaditicas:hover {
+  transform: translateY(-4px);
+}
+
+.cardestaditicas h4 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: #34495e;
+  border-bottom: 2px solid #dfe6e9;
+  padding-bottom: 0.4rem;
+}
+
+.kpi-container h3 {
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  color: #2980b9;
+  border-left: 4px solid #3498db;
+  padding-left: 0.6rem;
+}
+
+.cardestaditicas ul {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.cardestaditicas li {
+  font-size: 1rem;
+  padding: 0.5rem 0;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #f0f0f0;
+  line-height: 1.5;
+}
+
+.cardestaditicas li strong {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.kpi-container p {
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  margin: 0.5rem 0 1rem;
+  background-color: #f1f6fb;
+  border-left: 4px solid #3498db;
+  border-radius: 6px;
+  color: #2c3e50;
+}
+
+@media (max-width: 768px) {
+  .kpi-container {
+    padding: 1rem;
+    margin: 1rem;
+    flex-direction: column;
+  }
+
+  .cardestaditicas {
+    width: 100%;
+  }
+
+  .cardestaditicas li {
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 0.95rem;
+  }
+
+  .kpi-container p {
+    font-size: 0.95rem;
+  }
+}

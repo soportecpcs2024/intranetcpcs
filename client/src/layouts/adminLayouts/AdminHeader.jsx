@@ -109,6 +109,9 @@ const AdminHeader = () => {
                             <li>
                             <Link to="seguimientoMantenimiento">Seguimiento mantenimientos</Link>
                           </li>
+                            <li>
+                            <Link to="informesExtraClasesDec">Informe Extraclases</Link>
+                          </li>
                         </ul>
                       )}
                     </div>
