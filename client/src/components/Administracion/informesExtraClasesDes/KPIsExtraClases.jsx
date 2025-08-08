@@ -1,6 +1,6 @@
 // components/KPIsExtraClases.jsx
 
-import React from "react";
+ 
 import "./informesExtraclases.css";
 
 const KPIsExtraClases = ({ data }) => {

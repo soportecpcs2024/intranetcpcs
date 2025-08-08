@@ -16,6 +16,9 @@ import {
 } from "docx";
 import { saveAs } from "file-saver";
 import KPIsExtraClases from "./KPIsExtraClases";
+import ReporteAsistencias from "./ReporteAsistencia/ReporteAsistencias";
+
+
 
 const InformeExtraClasesDec = () => {
   const [mesSeleccionado, setMesSeleccionado] = useState("");
@@ -272,8 +275,8 @@ const InformeExtraClasesDec = () => {
 
   return (
     <div className="layout-academico-container">
-      <header className="layout-academico-container-division">
-        <div className="informes-container">
+      <header className="header-extraclases">
+        <div className="header-extraclases-informes">
           <div className="informes-lista-titulo">
             <h5>Generar Informe por Mes</h5>
           </div>
@@ -302,10 +305,22 @@ const InformeExtraClasesDec = () => {
             </li>
           </ul>
         </div>
+        <div className="header-extraclases-informes">
+         
+        </div>
       </header>
 
       <KPIsExtraClases
         data={facturasFiltradas.filter((factura) => {
+          const mesFactura = new Date(factura.fechaCompra).toLocaleString(
+            "es-ES",
+            { month: "long" }
+          );
+          return mesFactura.toLowerCase() === mesSeleccionado.toLowerCase();
+        })}
+      />
+
+      <ReporteAsistencias  data={facturasFiltradas.filter((factura) => {
           const mesFactura = new Date(factura.fechaCompra).toLocaleString(
             "es-ES",
             { month: "long" }
