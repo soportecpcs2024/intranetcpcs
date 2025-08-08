@@ -60,8 +60,7 @@ const KPIsExtraClases = ({ data }) => {
         return "Voleibol";
       case "900":
         return "Microfútbol";
-      case "1000":
-        return "Arte";
+      
       case "1100":
         return "Exploración Motriz y Predeportiva Pre";
       default:
