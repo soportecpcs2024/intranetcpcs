@@ -10,7 +10,7 @@ const KPIsExtraClases = ({ data }) => {
 
   // KPI básicos
   const clasesVendidas = data.length;
-  const estudiantesUnicos = new Set(data.map((f) => f.nombreEstudiante)).size;
+  
 
   let totalRecaudado = 0;
   let totalNomina = 0;
