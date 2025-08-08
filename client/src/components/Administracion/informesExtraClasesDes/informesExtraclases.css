@@ -6,7 +6,7 @@
   margin: 2rem auto;
   justify-content: center;
   background-color: #fdfdfd;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   border-radius: 16px;
   max-width: 1200px;
   font-family: "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
@@ -18,7 +18,7 @@
   background: #ffffff;
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   transition: transform 0.3s ease;
 }
 

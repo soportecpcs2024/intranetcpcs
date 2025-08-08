@@ -71,6 +71,7 @@ const KPIsExtraClases = ({ data }) => {
 
   return (
     <div className="kpi-container">
+        
       <div className="cardestaditicas">
         <h4>📊 Estadísticas Generales</h4>
         <ul>
@@ -108,7 +109,7 @@ const KPIsExtraClases = ({ data }) => {
         <ul>
           {entradas.map(([cod, cantidad], index) => (
             <li key={index}>
-              {getNombreCodigo(cod)} ({cod}) - <strong>{cantidad}</strong>{" "}
+              {getNombreCodigo(cod)} <strong>{cantidad}</strong>{" "}
               ventas
             </li>
           ))}
@@ -119,14 +120,15 @@ const KPIsExtraClases = ({ data }) => {
         <div className="cardestaditicas">
 
       
-        <h4>🏆 Clase más vendida:</h4>
+        <h4>🏆 Ventas:</h4>
+        <h3>📉 Mas vendida:</h3>
         {claseMasVendida && (
           <p>
             {getNombreCodigo(claseMasVendida[0])} ({claseMasVendida[1]} ventas)
           </p>
         )}
 
-        <h3>📉 Clase menos vendida:</h3>
+        <h3>📉 Menos vendida:</h3>
         {claseMenosVendida && (
           <p>
             {getNombreCodigo(claseMenosVendida[0])} ({claseMenosVendida[1]}{" "}
