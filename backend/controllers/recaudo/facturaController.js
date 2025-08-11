@@ -19,7 +19,7 @@ const generarNumeroFactura = async () => {
 
 // Función para validar el tipo de pago
 const validarTipoPago = (tipoPago) => {
-  return ["Efectivo", "Datáfono", "Nómina"].includes(tipoPago);
+  return ["Efectivo", "Datáfono", "Nómina", "Banco"].includes(tipoPago);
 };
 
 // Crear factura
@@ -32,7 +32,7 @@ exports.crearFactura = async (req, res) => {
         .status(400)
         .json({
           message:
-            "El tipo de pago debe ser 'Efectivo', 'Datáfono' o 'Nómina'.",
+            "El tipo de pago debe ser 'Efectivo', 'Datáfono', 'Nómina' o 'Banco'.",
         });
     }
 
