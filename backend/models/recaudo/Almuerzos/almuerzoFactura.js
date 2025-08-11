@@ -15,7 +15,7 @@ const facturaAlmuerzoSchema = new mongoose.Schema({
     total: { type: Number, required: true },
     tipoPago: { 
         type: String, 
-        enum: ['Efectivo', 'Datáfono', 'Nómina'], 
+        enum: ['Efectivo', 'Datáfono', 'Nómina', 'Banco'], 
         required: true, 
         trim: true
       }

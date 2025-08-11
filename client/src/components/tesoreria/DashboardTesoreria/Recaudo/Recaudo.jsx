@@ -170,7 +170,7 @@ const Recaudo = () => {
         <div className="container-tipopago-flex">
           <div className="container-tipopago">
             <h4>Tipo de Pago :</h4>
-            {["Efectivo", "Datáfono", "Nómina"].map((tipo) => (
+            {["Efectivo", "Datáfono", "Nómina","Banco"].map((tipo) => (
               <label key={tipo}>
                 <input
                   type="radio"

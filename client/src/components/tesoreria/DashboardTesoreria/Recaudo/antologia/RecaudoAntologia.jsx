@@ -45,7 +45,7 @@ const RecaudoAntologia = () => {
 
         <div className="container-tipopago">
           <h4>Tipo de Pago :</h4>
-          {["Efectivo", "Datáfono", "Nómina"].map((metodo) => (
+          {["Efectivo", "Datáfono", "Nómina", "Banco"].map((metodo) => (
             <label key={metodo}>
               <input
                 type="radio"

@@ -12,7 +12,7 @@ const formularioCompraSchema = new mongoose.Schema({
   },
   tipoPago: { 
     type: String, 
-    enum: ['Efectivo', 'Datáfono', 'Nómina'], 
+    enum: ['Efectivo', 'Datáfono', 'Nómina', 'Banco'], 
     required: true, 
     trim: true
   },

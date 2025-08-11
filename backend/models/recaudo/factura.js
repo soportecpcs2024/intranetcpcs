@@ -28,7 +28,7 @@ const facturaSchema = new mongoose.Schema({
   nombreRegistrador: { type: String, default: 'Lina María Hoyos Restrepo', trim: true },
   tipoPago: { 
     type: String, 
-    enum: ['Efectivo', 'Datáfono', 'Nómina'], 
+    enum: ['Efectivo', 'Datáfono', 'Nómina', 'Banco'], 
     required: true, 
     trim: true
   },

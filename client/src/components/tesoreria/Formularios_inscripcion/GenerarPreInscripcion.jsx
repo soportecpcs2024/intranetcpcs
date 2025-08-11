@@ -101,7 +101,7 @@ const GenerarPreInscripcion = () => {
         <div className="container-tipopago">
           <h4>Tipo de Pago:</h4>
           <div className="radio-options">
-            {["Efectivo", "Datáfono", "Nómina"].map((metodo) => (
+            {["Efectivo", "Datáfono", "Nómina", "Banco"].map((metodo) => (
               <label key={metodo} className="radio-label">
                 <input
                   type="radio"
