@@ -11,11 +11,13 @@ const EstadisticasAlmuerzo = () => {
   const [totalSum, setTotalSum] = useState(0);
   const [numeroFacturas, setNumeroFacturas] = useState(0);
   const [almuerzoContador, setAlmuerzoContador] = useState({});
+ 
 
   useEffect(() => {
     if (almuerzoFactura.length > 0) {
       let total = 0;
       let contador = {};
+     
 
       almuerzoFactura.forEach(factura => {
         total += factura.total;
@@ -24,7 +26,7 @@ const EstadisticasAlmuerzo = () => {
           factura.almuerzos.forEach(item => {
             const nombre = item.almuerzoId?.nombre || 'Desconocido';
             const cantidad = item.cantidad || 0;
-
+             
             if (contador[nombre]) {
               contador[nombre] += cantidad;
             } else {
@@ -35,6 +37,7 @@ const EstadisticasAlmuerzo = () => {
       });
 
       setTotalSum(total);
+     
       setNumeroFacturas(almuerzoFactura.length);
       setAlmuerzoContador(contador);
     }
