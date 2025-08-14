@@ -88,6 +88,7 @@ import InformeClasesExtracurriculares from "./components/tesoreria/extracurricul
 import ListarFactEP from "./components/tesoreria/EPpadres/ListarFactEP";
 import ListarAntologias from "./components/tesoreria/Antologias/ListarAntologias";
 import InformeAntologia from "./components/tesoreria/DashboardTesoreria/Recaudo/antologia/InformeAntologia";
+import DescargaInformeEPPagasExcel from "./components/EscPadres/DescargarInformeEPPagas/DescargaInformeEPPagas";
  
 
 
@@ -342,6 +343,10 @@ const AppContent = () => {
               <Route path="crear_ep" element={<CrearEscuelaPadres />} />
               <Route path="estadisticas_ep" element={<EstadisticasEp />} />
               <Route path="eppagas" element={<ListaEPPagas />} />
+               <Route
+                  path="informe_escuela_padres"
+                  element={<DescargaInformeEPPagasExcel />}
+                />
 
               <Route
                 path="programadorTareas"

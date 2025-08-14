@@ -106,11 +106,15 @@ const AdminHeader = () => {
                               Informes de Tareas
                             </Link>
                           </li>
-                            <li>
-                            <Link to="seguimientoMantenimiento">Seguimiento mantenimientos</Link>
+                          <li>
+                            <Link to="seguimientoMantenimiento">
+                              Seguimiento mantenimientos
+                            </Link>
                           </li>
-                            <li>
-                            <Link to="informesExtraClasesDec">Informe Extraclases</Link>
+                          <li>
+                            <Link to="informesExtraClasesDec">
+                              Informe Extraclases
+                            </Link>
                           </li>
                         </ul>
                       )}
@@ -123,10 +127,8 @@ const AdminHeader = () => {
                     </div>
                   </li>
 
-                  
- 
                   <li>
-                      <div className="dropdown">
+                    <div className="dropdown">
                       <Link onClick={toggleDropdown}>E. Padres</Link>
 
                       {isDropdownOpen && (
@@ -143,25 +145,32 @@ const AdminHeader = () => {
                           <li>
                             <Link to="eppagas">Pagos escuelas</Link>
                           </li>
+                          <li>
+                            <Link to="informe_escuela_padres">
+                              Informe pagos EP
+                            </Link>
+                          </li>
                         </ul>
                       )}
                     </div>
                   </li>
- 
 
                   <li>
                     <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Tareas y mantenimientos</Link>
+                      <Link onClick={toggleDropdown}>
+                        Tareas y mantenimientos
+                      </Link>
                       {isDropdownOpen && (
                         <ul className="dropdown-menu">
                           <li>
-                             <Link to="programadorTareas">Tareas</Link>
+                            <Link to="programadorTareas">Tareas</Link>
                           </li>
 
                           <li>
-                            <Link to="crearMantenimiento">Crear mantenimiento</Link>
+                            <Link to="crearMantenimiento">
+                              Crear mantenimiento
+                            </Link>
                           </li>
-                        
                         </ul>
                       )}
                     </div>
@@ -186,20 +195,13 @@ const AdminHeader = () => {
                     </div>
                   </li>
 
-                   <li>
+                  <li>
                     <div className="dropdown">
                       <Link to="admisiones">Admisiones</Link>
                     </div>
                   </li>
-
-
-                 
                 </ul>
               )}
-
-
-
-
 
               {isAcademic && (
                 <ul>
@@ -327,28 +329,26 @@ const AdminHeader = () => {
               )}
 
               {escuelaPadres && (
-                
-                    <div className="dropdown">
-                      <Link onClick={toggleDropdown}>E. Padres</Link>
+                <div className="dropdown">
+                  <Link onClick={toggleDropdown}>E. Padres</Link>
 
-                      {isDropdownOpen && (
-                        <ul className="dropdown-menu">
-                          <li>
-                            <Link to="esc_padres">Registro Asistencia</Link>
-                          </li>
-                          <li>
-                            <Link to="estadisticas_ep">Estadisticas EP</Link>
-                          </li>
-                          <li>
-                            <Link to="crear_ep">Crear Escuela</Link>
-                          </li>
-                          <li>
-                            <Link to="eppagas">Pagos escuelas</Link>
-                          </li>
-                        </ul>
-                      )}
-                    </div>
-                  
+                  {isDropdownOpen && (
+                    <ul className="dropdown-menu">
+                      <li>
+                        <Link to="esc_padres">Registro Asistencia</Link>
+                      </li>
+                      <li>
+                        <Link to="estadisticas_ep">Estadisticas EP</Link>
+                      </li>
+                      <li>
+                        <Link to="crear_ep">Crear Escuela</Link>
+                      </li>
+                      <li>
+                        <Link to="eppagas">Pagos escuelas</Link>
+                      </li>
+                    </ul>
+                  )}
+                </div>
               )}
 
               {isAdministrator && (
@@ -395,46 +395,42 @@ const AdminHeader = () => {
               )}
 
               {mantenimiento && (
-                 <li>
-                    <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Tareas y mantenimientos</Link>
-                      {isDropdownOpen && (
-                        <ul className="dropdown-menu">
-                          <li>
-                             <Link to="programadorTareas">Tareas</Link>
-                          </li>
+                <li>
+                  <div className="dropdown">
+                    <Link onClick={toggleDropdown}>
+                      Tareas y mantenimientos
+                    </Link>
+                    {isDropdownOpen && (
+                      <ul className="dropdown-menu">
+                        <li>
+                          <Link to="programadorTareas">Tareas</Link>
+                        </li>
 
-                          <li>
-                            <Link to="crearMantenimiento">Crear mantenimiento</Link>
-                          </li>
-                          <li>
-                            <Link to="seguimientoMantenimiento">Seguimiento mantenimientos</Link>
-                          </li>
-                        </ul>
-                      )}
-                    </div>
-                  </li>
+                        <li>
+                          <Link to="crearMantenimiento">
+                            Crear mantenimiento
+                          </Link>
+                        </li>
+                        <li>
+                          <Link to="seguimientoMantenimiento">
+                            Seguimiento mantenimientos
+                          </Link>
+                        </li>
+                      </ul>
+                    )}
+                  </div>
+                </li>
               )}
 
-
-                {admisiones && (
+              {admisiones && (
                 <ul>
-                  
-
-                  
-
-                   <li>
+                  <li>
                     <div className="dropdown">
                       <Link to="admisiones">Admisiones</Link>
                     </div>
                   </li>
-
-
-                 
                 </ul>
               )}
-
-
             </nav>
           </div>
         </div>
