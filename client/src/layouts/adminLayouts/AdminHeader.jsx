@@ -346,6 +346,11 @@ const AdminHeader = () => {
                       <li>
                         <Link to="eppagas">Pagos escuelas</Link>
                       </li>
+                       <li>
+                            <Link to="informe_escuela_padres">
+                              Informe pagos EP
+                            </Link>
+                          </li>
                     </ul>
                   )}
                 </div>

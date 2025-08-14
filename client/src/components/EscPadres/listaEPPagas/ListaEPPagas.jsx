@@ -29,37 +29,43 @@ const ListaEPPagas = () => {
     fetchFacturas?.(); // Llamar solo si existe
   }, [fetchFacturas]);
 
-  useEffect(() => {
-    const codigosPermitidos = [1400, 1600, 1700];
-    const conteo = { 1400: 0, 1600: 0, 1700: 0 };
-    const result = [];
+useEffect(() => {
+  const codigosPermitidos = [1400, 1600, 1700];
+  const conteo = { 1400: 0, 1600: 0, 1700: 0 };
+  const result = [];
 
-    facturas.forEach((factura) => {
-      factura.clases.forEach((clase) => {
-        if (codigosPermitidos.includes(clase.cod)) {
-          conteo[clase.cod] += 1;
+  facturas.forEach((factura) => {
+    factura.clases.forEach((clase) => {
+      if (codigosPermitidos.includes(clase.cod)) {
+        conteo[clase.cod] += 1;
 
-          result.push({
-            idFactura: factura._id,
-            nombreEstudiante: factura.estudianteId?.nombre || 'N/A',
-            documento: factura.estudianteId?.documentoIdentidad || 'N/A',
-            grado: factura.estudianteId?.grado || 'N/A',
-            nombreClase: clase.nombreClase,
-            cod: clase.cod,
-            dia: clase.dia,
-            hora: clase.hora,
-            total: factura.total,
-            tipoPago: factura.tipoPago,
-            mesAplicado: factura.mes_aplicado,
-            fechaCompra: formatFechaColombia(factura.fechaCompra),
-          });
-        }
-      });
+        result.push({
+          idFactura: factura._id,
+          nombreEstudiante: factura.estudianteId?.nombre || 'N/A',
+          documento: factura.estudianteId?.documentoIdentidad || 'N/A',
+          grado: factura.estudianteId?.grado || 'N/A',
+          nombreClase: clase.nombreClase,
+          cod: clase.cod,
+          dia: clase.dia,
+          hora: clase.hora,
+          total: factura.total,
+          tipoPago: factura.tipoPago,
+          mesAplicado: factura.mes_aplicado,
+          fechaCompra: formatFechaColombia(factura.fechaCompra),
+        });
+      }
     });
+  });
 
-    setFilteredData(result);
-    setConteoClases(conteo);
-  }, [facturas]);
+  // 🔹 Ordenar por nombre de escuela (usando getNombreEscuela)
+  result.sort((a, b) =>
+    getNombreEscuela(a.cod).localeCompare(getNombreEscuela(b.cod))
+  );
+
+  setFilteredData(result);
+  setConteoClases(conteo);
+}, [facturas]);
+
 
   useEffect(() => {
     const endOffset = (currentPage + 1) * ITEMS_PER_PAGE;
@@ -85,7 +91,7 @@ const ListaEPPagas = () => {
   };
 
   return (
-    <div>
+    <div className='container_lista_ep'>
       <h3>Familias con Escuelas Pagas</h3>
 
       <div className="conteo-clases">
@@ -101,9 +107,10 @@ const ListaEPPagas = () => {
         {currentItems.map((item, index) => (
           <li key={index}>
             <div className="lista_ep_pagas">
-              <p>{item.nombreEstudiante} - {item.grado}</p>
-              <p>Escuela: {getNombreEscuela(item.cod)}</p>
-              <p>📅 Compra: {item.fechaCompra}</p>
+              <p>{item.nombreEstudiante}</p>
+              <p>{item.grado}</p>
+              <p style={{ color: "red" }}>Escuela:   {getNombreEscuela(item.cod)}</p>
+             
             </div>
           </li>
         ))}
