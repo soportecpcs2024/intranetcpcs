@@ -8,10 +8,11 @@ import React, {
 import { format } from "date-fns";
 import { LlegadasTardeData } from "../../../../api/DataApi";
 import FiltroLlegadasTarde from "../../../../components/FiltroLlegadasTarde";
-import domtoimage from "dom-to-image";
 import ReactPaginate from "react-paginate";
 import "./LlegadasTarde.css";
 import SpinnerComponent from "../../../../components/SpinnerComponent";
+import ExcelJS from "exceljs";
+import { saveAs } from "file-saver";
 
 const ITEMS_PER_PAGE = 20;
 
@@ -64,31 +65,87 @@ const LlegadasTarde = () => {
     return { day, month, year };
   };
 
-  const handleDownloadImage = () => {
-    if (printRef.current) {
-      const container = printRef.current;
-
-      container.style.width = "auto";
-      container.style.height = "auto";
-      container.style.overflow = "visible";
-
-      domtoimage
-        .toPng(container)
-        .then((dataUrl) => {
-          const link = document.createElement("a");
-          link.href = dataUrl;
-          link.download = "llegadas_tarde.png";
-          link.click();
-        })
-        .catch((error) => {
-          console.error("Error generating image:", error);
-        })
-        .finally(() => {
-          container.style.width = "";
-          container.style.height = "";
-          container.style.overflow = "";
-        });
+  // === Descargar Excel con estilos ===
+  const handleDownloadExcel = async () => {
+    if (!filteredData || filteredData.length === 0) {
+      alert("No hay datos para exportar.");
+      return;
     }
+
+    // Preparar datos
+    const datosExport = filteredData.map((llegada) => ({
+      Estudiante: [
+        llegada.primer_apellido,
+        llegada.segundo_apellido,
+        llegada.primer_nombre,
+      ]
+        .filter(Boolean)
+        .join(" "),
+      Identificación: llegada.num_identificacion,
+      Fechas: llegada.fechas
+        .map((date) => format(new Date(date), "dd/MM/yyyy"))
+        .join(", "),
+      Cantidad: llegada.fechas.length,
+    }));
+
+    // Crear workbook y hoja
+    const workbook = new ExcelJS.Workbook();
+    const sheet = workbook.addWorksheet("LlegadasTarde");
+
+    // Título
+    sheet.mergeCells("A1", "D1");
+    sheet.getCell("A1").value = `Informe Llegadas Tarde - Grupo ${selectedGroup || "Todos"}`;
+    sheet.getCell("A1").font = { size: 16, bold: true };
+    sheet.getCell("A1").alignment = { horizontal: "center" };
+
+    // Encabezados
+    const headers = ["Estudiante", "Identificación", "Fechas", "Cantidad"];
+    const headerRow = sheet.addRow(headers);
+    headerRow.eachCell((cell) => {
+      cell.fill = {
+        type: "pattern",
+        pattern: "solid",
+        fgColor: { argb: "FFD9D9D9" },
+      };
+      cell.font = { bold: true };
+      cell.alignment = { horizontal: "center" };
+      cell.border = {
+        top: { style: "thin" },
+        left: { style: "thin" },
+        bottom: { style: "thin" },
+        right: { style: "thin" },
+      };
+    });
+
+    // Filas con datos
+    datosExport.forEach((dato) => {
+      const row = sheet.addRow([
+        dato.Estudiante,
+        dato.Identificación,
+        dato.Fechas,
+        dato.Cantidad,
+      ]);
+      row.eachCell((cell) => {
+        cell.border = {
+          top: { style: "thin" },
+          left: { style: "thin" },
+          bottom: { style: "thin" },
+          right: { style: "thin" },
+        };
+      });
+    });
+
+    // Ajustar ancho de columnas
+    sheet.columns = [
+      { width: 30 },
+      { width: 20 },
+      { width: 40 },
+      { width: 10 },
+    ];
+
+    // Descargar
+    const buffer = await workbook.xlsx.writeBuffer();
+    saveAs(new Blob([buffer]), `Llegadas_Tarde_${selectedGroup || "Todos"}.xlsx`);
   };
 
   const handlePageClick = (event) => {
@@ -114,7 +171,6 @@ const LlegadasTarde = () => {
             <tr>
               <th>Estudiante</th>
               <th>Identificación</th>
-
               <th>Fechas</th>
               <th>Cantidad</th>
             </tr>
@@ -124,7 +180,7 @@ const LlegadasTarde = () => {
               <tr key={index}>
                 <td>
                   {[
-                    llegada.primer_apellido, // Solo este se ordenará si hay más elementos con el mismo apellido
+                    llegada.primer_apellido,
                   ]
                     .filter(Boolean)
                     .sort()
@@ -132,7 +188,7 @@ const LlegadasTarde = () => {
                       [llegada.segundo_apellido, llegada.primer_nombre].filter(
                         Boolean
                       )
-                    ) // Los otros nombres se mantienen en su orden original
+                    )
                     .join(" ")}
                 </td>
 
@@ -167,8 +223,8 @@ const LlegadasTarde = () => {
           activeClassName={"active"}
         />
       </div>
-      <button className="btn-llegadas-tarde" onClick={handleDownloadImage}>
-        Descargar Imagen
+      <button className="btn-llegadas-tarde" onClick={handleDownloadExcel}>
+        Descargar Excel
       </button>
     </div>
   );

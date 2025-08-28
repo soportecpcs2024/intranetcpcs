@@ -1369,7 +1369,7 @@ box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
 }
 
 .info-title {
-  font-size: 30px;
+  font-size: 20px;
   margin-bottom: 50px;
   font-weight: bold;
   color: #333;
@@ -1384,17 +1384,19 @@ box-shadow: 8px 8px 14px -11px rgba(66, 68, 90, 1);
 
 .info-item {
   
-  font-size: 25px;
+  font-size: 15px;
   margin: 5px 0;
   color: #555;
   display: flex;
-  justify-content: space-between;
+  line-height: 10px;
+   
 }
 
 .info-value {
+  margin-left: 5px;
   font-weight: bold;
   color: #007bff;
-  font-size: 20px;
+  font-size: 16px;
    
 }
 /* Estilos modal de estudiantes */

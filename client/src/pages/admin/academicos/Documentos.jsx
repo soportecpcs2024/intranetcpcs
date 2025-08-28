@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Students } from "../../../api/DataApi";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import FiltrosAreasDocumentos from "../../../components/FiltrosAreasDocumentos";
 import BarChartComponentAreasPDF from "../../../components/BarChartComponentAreasPDF";
 import PieChartComponentAreas from "../../../components/PieChartComponentAreas";
-import html2canvas from "html2canvas";
+ 
 
 const Documentos = () => {
   const [students, setStudents] = useState([]);
@@ -110,21 +110,7 @@ const Documentos = () => {
       ? (totalFilteredPromedio / totalFilteredStudents).toFixed(1)
       : 0;
 
-  const handleSaveAsImage = () => {
-    if (contentRef.current) {
-      const originalScale = window.devicePixelRatio;
-      window.devicePixelRatio = 2; // Aquí aumentas el pixel ratio
-
-      html2canvas(contentRef.current).then((canvas) => {
-        window.devicePixelRatio = originalScale; // Restablece el pixel ratio
-        const imgData = canvas.toDataURL("image/png");
-        const link = document.createElement("a");
-        link.download = "Informe de áreas.png";
-        link.href = imgData;
-        link.click();
-      });
-    }
-  };
+  
 
   return (
     <div className="dashboard_div-doc" ref={contentRef}>
@@ -147,14 +133,14 @@ const Documentos = () => {
               Grupo : <span className="doc-span">{selectedGroup}</span>
             </h2>
           </div>
-          <div>
+          <div>est
             <h2>
               <span className="doc-span">{selectedPeriodo}</span>
             </h2>
           </div>
         </div>
         <div className="BarChartComponent_pdf">
-          <h2 className="info-title">Promedios por materia:</h2>
+          <h4  >Promedios por materia:</h4>
           <BarChartComponentAreasPDF
             students={filteredStudents}
             selectedArea={selectedArea}
@@ -163,7 +149,7 @@ const Documentos = () => {
           />
         </div>
 
-        <div className="prom_tables-container">
+        <div className="">
           <div className="box_prom_tables-doc">
             <div className="info-card">
               <h2 className="info-title">Consolidado de datos:</h2>
@@ -177,38 +163,30 @@ const Documentos = () => {
                   <span className="info-value">{promedioGeneral}</span>
                 </li>
                 <li className="info-item">
-                  Estudiantes con promedio DI{" "}
+                  Estudiantes con promedio DI:  {" "}
                   <span className="info-value">{groupCounts.DI}</span>
                 </li>
                 <li className="info-item">
-                  Estudiantes con promedio BÁSICO{" "}
+                  Estudiantes con promedio BÁSICO:{" "}
                   <span className="info-value">{groupCounts.BÁSICO} </span>
                 </li>
                 <li className="info-item">
-                  Estudiantes con promedio DA{" "}
+                  Estudiantes con promedio DA:{" "}
                   <span className="info-value">{groupCounts.DA}</span>
                 </li>
                 <li className="info-item">
-                  Estudiantes con promedio DS{" "}
+                  Estudiantes con promedio DS:{" "}
                   <span className="info-value">{groupCounts.DS}</span>
                 </li>
               </div>
             </div>
           </div>
 
-          <div className="box_prom_tables-doc">
-            <PieChartComponentAreas
-              students={filteredStudents}
-              selectedArea={selectedArea}
-              error={error}
-            />
-          </div>
+           
         </div>
       </div>
       <div className="documentos-btn">
-        <button className="documentos_btn_btn" onClick={handleSaveAsImage}>
-          Guardar como Imagen
-        </button>
+       
       </div>
     </div>
   );

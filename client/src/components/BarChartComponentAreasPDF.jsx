@@ -73,7 +73,7 @@ const BarChartComponentAreasPDF = ({ students, selectedGroup, error }) => {
   }
 
   return (
-    <ResponsiveContainer className="barChartDocument" width="100%" height={300}>
+    <ResponsiveContainer className="barChartDocument" width="100%" height={200}>
        
       <BarChart data={groupAverageData} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}>
         <XAxis dataKey="alias" tick={<CustomTick />} interval={0} /> {/* Usar el alias en el eje X con tick personalizado */}
