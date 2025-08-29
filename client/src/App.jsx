@@ -6,6 +6,8 @@ import { ProductStatisticsProvider } from "./contexts/InformesContext";
 import { UserProvider } from "./contexts/UserContext";
 import { RecaudoProvider } from "./contexts/RecaudoContext";
 import { EscuelaPadresProvider } from "./contexts/EscuelaPadresContext";
+import { EvaluacionesProvider } from "./contexts/EvaluacionesContext";
+
 import { TareasProvider } from "./contexts/TareaContext";
 import { Auth, Blog } from "./pages/admin";
 import "./App.css";
@@ -181,7 +183,10 @@ const App = () => {
               <TareasProvider>
                 <EscuelaPadresProvider>
                   <ActasDeGradoProvider>
+                    <EvaluacionesProvider>
                     <AppContent />
+
+                    </EvaluacionesProvider>
                   </ActasDeGradoProvider>
                 </EscuelaPadresProvider>
               </TareasProvider>

@@ -1,27 +1,13 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useContext } from "react";
 import RubricasForm from "./RubricasForm";
-import RubricasTable from "./RubricasTable";
+import { EvaluacionesContext } from "../../../contexts/EvaluacionesContext";
 
 const Rubricas = () => {
-  const [evaluaciones, setEvaluaciones] = useState([]);
-
-  useEffect(() => {
-    obtenerEvaluaciones();
-  }, []);
-
-  const obtenerEvaluaciones = async () => {
-    try {
-      const res = await axios.get("http://localhost:3000/api/evaluacionRubricas");
-      setEvaluaciones(res.data);
-    } catch (err) {
-      console.error("Error al obtener evaluaciones:", err);
-    }
-  };
+  const { evaluaciones } = useContext(EvaluacionesContext);
 
   return (
     <div className="rubricas-container">
-      <RubricasForm onSuccess={obtenerEvaluaciones} />
+      <RubricasForm />
       {/* <RubricasTable evaluaciones={evaluaciones} /> */}
     </div>
   );

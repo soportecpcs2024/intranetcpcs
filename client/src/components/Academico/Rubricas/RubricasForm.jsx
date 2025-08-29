@@ -1,22 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
-import { criteriosActividad1 } from "./criterios"; // 👈 exportaste los arrays a un archivo aparte
+import { criteriosActividad1 } from "./criterios";
+import { EvaluacionesContext } from "../../../contexts/EvaluacionesContext"; // ajusta la ruta
 import "./Rubricas.css";
 
-const RubricasForm = ({ onSuccess }) => {
-  const [nombre, setNombre] = useState(""); 
-  const [cargo, setCargo] = useState(""); 
+const RubricasForm = () => {
+  const [nombre, setNombre] = useState("");
+  const [cargo, setCargo] = useState("");
   const [respuestas, setRespuestas] = useState({});
   const [observaciones, setObservaciones] = useState("");
+
+  // 🔹 Usar el contexto
+  const { obtenerEvaluaciones } = useContext(EvaluacionesContext);
 
   const handleChange = (criterio, valor) => {
     setRespuestas({ ...respuestas, [criterio]: valor });
   };
 
   const validarFormulario = () => {
-    const todasActividades = [...criteriosActividad1];
-
-    for (let criterio of todasActividades) {
+    for (let criterio of criteriosActividad1) {
       if (!respuestas[criterio.nombre]) {
         alert(`⚠️ Falta responder el criterio: "${criterio.nombre}"`);
         return false;
@@ -27,7 +29,6 @@ const RubricasForm = ({ onSuccess }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!validarFormulario()) return;
 
     const payload = {
@@ -38,28 +39,29 @@ const RubricasForm = ({ onSuccess }) => {
           criterio,
           valor,
         })),
-        coevaluacion: [], 
-        heteroevaluacion: [], 
+        coevaluacion: [],
+        heteroevaluacion: [],
       },
       observaciones,
     };
 
     try {
       await axios.post(
-        "http://localhost:3000/api/evaluacionRubricas",
+        `${import.meta.env.VITE_BACKEND_URL}/api/evaluacionRubricas`,
         payload,
         { headers: { "Content-Type": "application/json" } }
       );
 
       alert("✅ Evaluación guardada con éxito");
 
-      // limpiar formulario después de guardar
+      // Limpiar formulario
       setNombre("");
       setCargo("");
       setRespuestas({});
       setObservaciones("");
 
-      onSuccess(); // refrescar lista
+      // 🔹 Refrescar la lista desde el contexto
+      obtenerEvaluaciones();
     } catch (err) {
       console.error(err);
       alert("❌ Error al guardar la evaluación");
@@ -111,7 +113,6 @@ const RubricasForm = ({ onSuccess }) => {
           <h5 className="aviso">Todos los campos son obligatorios</h5>
         </div>
 
-        {/* 🔹 Nuevos campos */}
         <h3>
           <input
             className="usuario"
