@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
 import { criteriosActividad1 } from "./criterios";
 import { EvaluacionesContext } from "../../../contexts/EvaluacionesContext"; // ajusta la ruta

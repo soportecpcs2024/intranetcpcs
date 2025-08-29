@@ -237,6 +237,11 @@ const AdminHeader = () => {
                               Extra curricular
                             </Link>
                           </li>
+                           <li>
+                            <Link to="/admin/rubricas_misiones">
+                              Rúbrica de Evaluación – Programa de Misiones
+                            </Link>
+                          </li>
                         </ul>
                       )}
                     </div>
