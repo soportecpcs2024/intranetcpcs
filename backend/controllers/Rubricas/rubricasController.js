@@ -1,15 +1,15 @@
 // controllers/evaluacionController.js
-import Evaluacion from "../../models/Rubricas/rubricasModel.js"
+const Evaluacion = require("../../models/Rubricas/rubricasModel.js");
 
 // Crear nueva evaluación
-export const crearEvaluacion = async (req, res) => {
+const crearEvaluacion = async (req, res) => {
   try {
-      const { nombre, cargo, respuestas = {}, observaciones = "" } = req.body;
+    const { nombre, cargo, respuestas = {}, observaciones = "" } = req.body;
 
     const nuevaEvaluacion = new Evaluacion({
-    nombre,
+      nombre,
       cargo,
-      respuestas: respuestas.autoevaluacion || [], // ⬅️ solo el array de autoevaluación
+      respuestas: respuestas.autoevaluacion || [], // solo el array de autoevaluación
       observaciones,
     });
 
@@ -21,7 +21,7 @@ export const crearEvaluacion = async (req, res) => {
 };
 
 // Obtener todas las evaluaciones
-export const obtenerEvaluaciones = async (req, res) => {
+const obtenerEvaluaciones = async (req, res) => {
   try {
     const evaluaciones = await Evaluacion.find();
     res.json(evaluaciones);
@@ -30,5 +30,8 @@ export const obtenerEvaluaciones = async (req, res) => {
   }
 };
 
- 
- 
+// Exportar las funciones para las rutas
+module.exports = {
+  crearEvaluacion,
+  obtenerEvaluaciones,
+};
