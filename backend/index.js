@@ -157,7 +157,12 @@ app.use('/api/asistenciasextra', asistenciasExtraCurricular);
 // ---------------- preinscripcion estudiantes ----------------
 
 const preinscripcionEstudiante = require('./routes/recaudo/formularioCompraRoutes');
+
 app. use('/api/preinscripciones', preinscripcionEstudiante);
+// ---------------- rubricas  ----------------
+
+const evaluacionrubricas = require('./routes/rubricas/rubricasRoutes');
+app. use('/api/evaluacionRubricas', evaluacionrubricas);
  
 
 

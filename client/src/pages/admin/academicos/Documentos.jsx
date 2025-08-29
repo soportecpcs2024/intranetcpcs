@@ -133,7 +133,7 @@ const Documentos = () => {
               Grupo : <span className="doc-span">{selectedGroup}</span>
             </h2>
           </div>
-          <div>est
+          <div>
             <h2>
               <span className="doc-span">{selectedPeriodo}</span>
             </h2>

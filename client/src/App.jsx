@@ -89,6 +89,7 @@ import ListarFactEP from "./components/tesoreria/EPpadres/ListarFactEP";
 import ListarAntologias from "./components/tesoreria/Antologias/ListarAntologias";
 import InformeAntologia from "./components/tesoreria/DashboardTesoreria/Recaudo/antologia/InformeAntologia";
 import DescargaInformeEPPagasExcel from "./components/EscPadres/DescargarInformeEPPagas/DescargaInformeEPPagas";
+import Rubricas from "./components/Academico/Rubricas/Rubricas";
  
 
 
@@ -231,6 +232,7 @@ const AppContent = () => {
               <Route path="llegadastarde" element={<LlegadasTarde />} />
               <Route path="descargarpdf" element={<DescargarPdf />} />
               <Route path="soporte" element={<AgregarLlegadasTarde />} />
+              <Route path="rubricas_misiones" element={<Rubricas />} />
 
               <Route path="extraclases" element={<DashboardExtraCurricular />}>
                 <Route path="ingles" element={<ExtraIngles />} />
