@@ -442,6 +442,7 @@ input::placeholder {
 .admin-layout-header-links-pre{
   display: flex;
   width: 100%;
+   
 }
 
  
@@ -504,7 +505,7 @@ input::placeholder {
   margin-top: -50px;
   margin-left: 20px;
   border-radius: 8px;
-  background-color:rgba(255, 255, 255, 0.893);
+  background-color:rgb(255, 255, 255);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 1;
   display: none; 
@@ -513,7 +514,8 @@ input::placeholder {
 }
 .admin-header .dropdown-menu a {
   color: black; 
-  font-weight: 300;
+  font-weight: 400;
+  font-size: 16px;
   
 }
 
