@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useRecaudo } from '../../../contexts/RecaudoContext';
 import ReactPaginate from 'react-paginate';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
 import './ListaEPPagas.css';
 
 const ITEMS_PER_PAGE = 10;
 
 const ListaEPPagas = () => {
-  const { facturas, fetchFacturas } = useRecaudo(); // Asegúrate de tener esta función en tu context
+  const { facturas, fetchFacturas } = useRecaudo();
   const [filteredData, setFilteredData] = useState([]);
   const [conteoClases, setConteoClases] = useState({});
   const [currentItems, setCurrentItems] = useState([]);
@@ -24,48 +26,46 @@ const ListaEPPagas = () => {
     });
   };
 
-  // ✅ Recargar datos al montar el componente
   useEffect(() => {
-    fetchFacturas?.(); // Llamar solo si existe
+    fetchFacturas?.();
   }, [fetchFacturas]);
 
-useEffect(() => {
-  const codigosPermitidos = [1400, 1600, 1700];
-  const conteo = { 1400: 0, 1600: 0, 1700: 0 };
-  const result = [];
+  useEffect(() => {
+    const codigosPermitidos = [1400, 1600, 1700];
+    const conteo = { 1400: 0, 1600: 0, 1700: 0 };
+    const result = [];
 
-  facturas.forEach((factura) => {
-    factura.clases.forEach((clase) => {
-      if (codigosPermitidos.includes(clase.cod)) {
-        conteo[clase.cod] += 1;
+    facturas.forEach((factura) => {
+      factura.clases.forEach((clase) => {
+        if (codigosPermitidos.includes(clase.cod)) {
+          conteo[clase.cod] += 1;
 
-        result.push({
-          idFactura: factura._id,
-          nombreEstudiante: factura.estudianteId?.nombre || 'N/A',
-          documento: factura.estudianteId?.documentoIdentidad || 'N/A',
-          grado: factura.estudianteId?.grado || 'N/A',
-          nombreClase: clase.nombreClase,
-          cod: clase.cod,
-          dia: clase.dia,
-          hora: clase.hora,
-          total: factura.total,
-          tipoPago: factura.tipoPago,
-          mesAplicado: factura.mes_aplicado,
-          fechaCompra: formatFechaColombia(factura.fechaCompra),
-        });
-      }
+          result.push({
+            idFactura: factura._id,
+            nombreEstudiante: factura.estudianteId?.nombre || 'N/A',
+            documento: factura.estudianteId?.documentoIdentidad || 'N/A',
+            grado: factura.estudianteId?.grado || 'N/A',
+            nombreClase: clase.nombreClase,
+            escuela: getNombreEscuela(clase.cod),
+            cod: clase.cod,
+            dia: clase.dia,
+            hora: clase.hora,
+            total: factura.total,
+            tipoPago: factura.tipoPago,
+            mesAplicado: factura.mes_aplicado,
+            fechaCompra: formatFechaColombia(factura.fechaCompra),
+          });
+        }
+      });
     });
-  });
 
-  // 🔹 Ordenar por nombre de escuela (usando getNombreEscuela)
-  result.sort((a, b) =>
-    getNombreEscuela(a.cod).localeCompare(getNombreEscuela(b.cod))
-  );
+    result.sort((a, b) =>
+      getNombreEscuela(a.cod).localeCompare(getNombreEscuela(b.cod))
+    );
 
-  setFilteredData(result);
-  setConteoClases(conteo);
-}, [facturas]);
-
+    setFilteredData(result);
+    setConteoClases(conteo);
+  }, [facturas]);
 
   useEffect(() => {
     const endOffset = (currentPage + 1) * ITEMS_PER_PAGE;
@@ -90,6 +90,16 @@ useEffect(() => {
     }
   };
 
+  // ✅ Función para exportar a Excel
+  const exportToExcel = () => {
+    const ws = XLSX.utils.json_to_sheet(filteredData);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "EscuelasPagas");
+    const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+    const data = new Blob([excelBuffer], { type: "application/octet-stream" });
+    saveAs(data, "EscuelasPagas.xlsx");
+  };
+
   return (
     <div className='container_lista_ep'>
       <h3>Familias con Escuelas Pagas</h3>
@@ -101,6 +111,10 @@ useEffect(() => {
         <div>
           Total estudiantes pagos del mes: <span>{filteredData.length}</span>
         </div>
+        {/* 🔽 Botón para descargar Excel */}
+        <button onClick={exportToExcel} className="btn-export">
+          📥 Descargar Excel
+        </button>
       </div>
 
       <ul>
@@ -109,8 +123,7 @@ useEffect(() => {
             <div className="lista_ep_pagas">
               <p>{item.nombreEstudiante}</p>
               <p>{item.grado}</p>
-              <p style={{ color: "red" }}>Escuela:   {getNombreEscuela(item.cod)}</p>
-             
+              <p style={{ color: "red" }}>Escuela: {item.escuela}</p>
             </div>
           </li>
         ))}
