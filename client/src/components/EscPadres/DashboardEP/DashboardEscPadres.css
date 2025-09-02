@@ -187,6 +187,7 @@
   font-weight: bold;
   cursor: pointer;
   transition: background 0.3s;
+  margin-bottom: 50px;
 }
 
 .btn-guardar:hover {
