@@ -90,6 +90,11 @@ const ListaEPPagas = () => {
     }
   };
 
+  // ✅ Calcular estudiantes únicos por documento
+  const totalEstudiantesUnicos = new Set(
+    filteredData.map((item) => item.documento)
+  ).size;
+
   // ✅ Función para exportar a Excel
   const exportToExcel = () => {
     const ws = XLSX.utils.json_to_sheet(filteredData);
@@ -109,7 +114,8 @@ const ListaEPPagas = () => {
         <p>👨‍👧‍👦 Guiando a sus adolescentes: {conteoClases[1600] || 0}</p>
         <p>💰 Mayordomía financiera: {conteoClases[1700] || 0}</p>
         <div>
-          Total estudiantes pagos del mes: <span>{filteredData.length}</span>
+          Total estudiantes pagos del mes:{" "}
+          <span>{totalEstudiantesUnicos}</span>
         </div>
         {/* 🔽 Botón para descargar Excel */}
         <button onClick={exportToExcel} className="btn-export">

@@ -177,6 +177,7 @@ const InformeAntologia = () => {
     let totalNominaGlobal = 0;
     let totalDatafonoGlobal = 0;
     let totalEfectivoGlobal = 0;
+    let totalBancoGlobal = 0;
     let totalGlobal = 0;
 
     Object.entries(agrupado).forEach(([cod, items]) => {
@@ -237,6 +238,8 @@ const InformeAntologia = () => {
               ? "FFEB9C"
               : item.tipoPago === "Datáfono"
               ? "D9E1F2"
+              : item.tipoPago === "Banco"
+              ? "D9E1F2"
               : "FFFFFF",
         },
       }),
@@ -254,19 +257,22 @@ const InformeAntologia = () => {
       let subtotalNomina = 0;
       let subtotalDatafono = 0;
       let subtotalEfectivo = 0;
+      let subtotalBanco = 0;
 
       items.forEach((item) => {
         if (item.tipoPago === "Nómina") subtotalNomina += item.total;
         else if (item.tipoPago === "Datáfono") subtotalDatafono += item.total;
         else if (item.tipoPago === "Efectivo") subtotalEfectivo += item.total;
+        else if (item.tipoPago === "Banco") subtotalBanco += item.total;
       });
 
-      const totalGeneral = subtotalNomina + subtotalDatafono + subtotalEfectivo;
+      const totalGeneral = subtotalNomina + subtotalDatafono + subtotalEfectivo + subtotalBanco;
 
       // Acumuladores globales
       totalNominaGlobal += subtotalNomina;
       totalDatafonoGlobal += subtotalDatafono;
       totalEfectivoGlobal += subtotalEfectivo;
+      totalBancoGlobal += subtotalBanco;
       totalGlobal += totalGeneral;
 
       const resumen = new Table({
@@ -299,6 +305,18 @@ const InformeAntologia = () => {
               new TableCell({
                 children: [
                   new Paragraph(`$ ${subtotalDatafono.toLocaleString()}`),
+                ],
+              }),
+            ],
+          }),
+          new TableRow({
+            children: [
+              new TableCell({
+                children: [new Paragraph("Subtotal Banco:")],
+              }),
+              new TableCell({
+                children: [
+                  new Paragraph(`$ ${subtotalBanco.toLocaleString()}`),
                 ],
               }),
             ],
@@ -379,6 +397,16 @@ const InformeAntologia = () => {
           }),
           new TableRow({
             children: [
+              new TableCell({ children: [new Paragraph("Total Banco:")] }),
+              new TableCell({
+                children: [
+                  new Paragraph(`$ ${totalBancoGlobal.toLocaleString()}`),
+                ],
+              }),
+            ],
+          }),
+          new TableRow({
+            children: [
               new TableCell({ children: [new Paragraph("Total Efectivo:")] }),
               new TableCell({
                 children: [
@@ -413,7 +441,7 @@ const InformeAntologia = () => {
     });
 
     Packer.toBlob(doc).then((blob) => {
-      saveAs(blob, `Informe_extra_clase_Esc_padres_${mesSeleccionado}.docx`);
+      saveAs(blob, `Informe_antologias_${mesSeleccionado}.docx`);
     });
   };
 

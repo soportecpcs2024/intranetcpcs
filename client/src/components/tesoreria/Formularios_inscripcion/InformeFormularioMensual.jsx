@@ -89,9 +89,10 @@ const InformeFormularioMensual = () => {
     let totalNominaGlobal = 0;
     let totalEfectivoGlobal = 0;
     let totalDatafonoGlobal = 0;
+    let totalBancoGlobal = 0;
 
     for (const [tipoFormulario, registros] of Object.entries(agrupado)) {
-      let subtotalNomina = 0, subtotalEfectivo = 0, subtotalDatafono = 0;
+      let subtotalNomina = 0, subtotalEfectivo = 0, subtotalDatafono = 0, subtotalBanco = 0;
 
       children.push(
         new Paragraph({
@@ -117,6 +118,7 @@ const InformeFormularioMensual = () => {
         if (item.tipoPago === "Nómina") subtotalNomina += item.costo;
         if (item.tipoPago === "Efectivo") subtotalEfectivo += item.costo;
         if (item.tipoPago === "Datáfono") subtotalDatafono += item.costo;
+        if (item.tipoPago === "Banco") subtotalBanco += item.costo;
 
         totalGeneral += item.costo;
 
@@ -150,12 +152,14 @@ const InformeFormularioMensual = () => {
         new Paragraph({ text: `Subtotal Nómina: ${subtotalNomina.toLocaleString("es-CO")}`, spacing: { before: 200 } }),
         new Paragraph({ text: `Subtotal Efectivo: ${subtotalEfectivo.toLocaleString("es-CO")}` }),
         new Paragraph({ text: `Subtotal Datáfono: ${subtotalDatafono.toLocaleString("es-CO")}` }),
+        new Paragraph({ text: `Subtotal Banco: ${subtotalBanco.toLocaleString("es-CO")}` }),
         new Paragraph({ text: "" })
       );
 
       totalNominaGlobal += subtotalNomina;
       totalEfectivoGlobal += subtotalEfectivo;
       totalDatafonoGlobal += subtotalDatafono;
+      totalBancoGlobal += subtotalBanco;
     }
 
     // Resumen global final
@@ -189,6 +193,14 @@ const InformeFormularioMensual = () => {
               new TableCell({ children: [new Paragraph("Total Efectivo:")] }),
               new TableCell({
                 children: [new Paragraph(`$ ${totalEfectivoGlobal.toLocaleString("es-CO")}`)],
+              }),
+            ],
+          }),
+          new TableRow({
+            children: [
+              new TableCell({ children: [new Paragraph("Total Banco:")] }),
+              new TableCell({
+                children: [new Paragraph(`$ ${totalBancoGlobal.toLocaleString("es-CO")}`)],
               }),
             ],
           }),
