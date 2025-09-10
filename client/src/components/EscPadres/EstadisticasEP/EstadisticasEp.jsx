@@ -20,12 +20,17 @@ const EstadisticasEp = () => {
     cargarDatos();
   }, []);
  
-// 📌 Formatear fecha exactamente como en la BD (UTC sin modificar día)
+// 📌 Formatear fecha exactamente como en la BD (UTC sin modificar día) con mes abreviado en español
 const formatFechaColombia = (fechaStr) => {
   if (!fechaStr) return "N/A";
-  // Cortar solo la parte de fecha (ignorar la hora)
+
+  // Ejemplo de fechaStr: "2025-09-02T00:00:00.000+00:00"
   const [year, month, day] = fechaStr.split("T")[0].split("-");
-  return `${day}/${month}/${year}`;
+
+  // Meses abreviados en español
+  const meses = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+
+  return `| ${day} de ${meses[parseInt(month, 10) - 1]} |`;
 };
 
 

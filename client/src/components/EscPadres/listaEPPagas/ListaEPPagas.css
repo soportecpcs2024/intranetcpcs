@@ -16,22 +16,63 @@
 }
 
 .conteo-clases {
-   
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 10px;
-    justify-content: space-around;
-    background-color: rgb(238, 237, 237);
-    box-shadow: rgba(50, 54, 93, 0.59) 0px 6px 12px -2px,
-                rgba(0, 0, 0, 0.547) 0px 3px 7px -3px;
-    border-radius: 4px;
-    margin: 10px auto;
-   
+  display: flex;
+  justify-content: space-between; /* distribuye en todo el ancho */
+  align-items: center;
+  gap: 10px;
+  padding: 15px;
+  background-color: rgb(238, 237, 237);
+  box-shadow: rgba(50, 54, 93, 0.59) 0px 6px 12px -2px,
+              rgba(0, 0, 0, 0.547) 0px 3px 7px -3px;
+  border-radius: 4px;
+  margin: 10px auto;
+  width: 100%;
 }
-.conteo-clases p{
-   font-size: 16px;
+
+.conteo-clases > * {
+  flex: 1;              /* cada hijo ocupa el mismo espacio */
+  text-align: center;   /* centra el texto dentro de cada bloque */
 }
+
+.conteo-clases p {
+  font-size: 18px;
+  margin: 0;
+}
+
+.tabla-ep {
+  width: 50%;
+  border-collapse: collapse;
+  margin: 15px 0;
+  font-size: 18px;
+  text-align: left;
+  background: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: rgba(50, 54, 93, 0.2) 0px 6px 12px -2px,
+              rgba(0, 0, 0, 0.15) 0px 3px 7px -3px;
+}
+
+.tabla-ep thead {
+  background: #e6e6e6;
+  color: white;
+  font-weight: bold;
+}
+
+.tabla-ep th,
+.tabla-ep td {
+  padding: 5px 6px;
+  font-size: 16px;
+  border-bottom: 1px solid #ddd;
+}
+
+.tabla-ep tbody tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+.tabla-ep tbody tr:hover {
+  background: #f1f1f1;
+}
+
 .conteo-clases span{
    font-size: 1px;
    font-weight: 900;
