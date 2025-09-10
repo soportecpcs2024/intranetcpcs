@@ -5,6 +5,7 @@ const {
   crearAsistencia,
   actualizarAsistencia,
   obtenerAsistenciaPorEstudiante,
+  asistenciasUnificadas
 } = require("../../controllers/EPadres/asistenciaController");
 
 // Crear un nuevo registro de asistencia
@@ -18,5 +19,13 @@ router.get(
   "/obtener/:escuelaPadresId/:estudianteId",
   obtenerAsistenciaPorEstudiante
 );
+
+// Obtener asistencia unificada 
+router.get(
+  "/unificada",
+  asistenciasUnificadas
+);
+
+
 
 module.exports = router;

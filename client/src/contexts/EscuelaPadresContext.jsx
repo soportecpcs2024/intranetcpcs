@@ -8,8 +8,10 @@ export const useEscuelaPadres = () => useContext(EscuelaPadresContext);
 export const EscuelaPadresProvider = ({ children }) => {
   const [escuelas, setEscuelas] = useState([]);
   const [estudiantes, setEstudiantes] = useState([]);
+  const [asistUnificadas, setAsistUnificadas] = useState([])
   const [asistenciaActual, setAsistenciaActual] = useState(null);
   const [loading, setLoading] = useState(false);
+   
 
   const API_BASE = import.meta.env.VITE_BACKEND_URL;
 
@@ -120,6 +122,20 @@ export const EscuelaPadresProvider = ({ children }) => {
     }
   };
 
+  // Contexto
+const asistenciasUnificadas = async () => {
+  try {
+    const res = await axios.get(`${API_BASE}/api/epAsistencias/unificada`);
+       setAsistUnificadas(res.data); // ✅ Guardar en el estado global
+      return res.data;              // ✅ También devolver para uso directo
+  } catch (error) {
+    console.error("Error al obtener asistencias unificadas:", error);
+   setAsistUnificadas([]);
+      return [];
+  }
+};
+
+
   // 🔁 Actualizar asistencia
   const actualizarAsistencia = async (id, datos) => {
     try {
@@ -154,6 +170,8 @@ export const EscuelaPadresProvider = ({ children }) => {
         eliminarEscuela,
         cargarEscuelas,
         loading,
+        asistenciasUnificadas, 
+         
       }}
     >
       {children}

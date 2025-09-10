@@ -94,8 +94,44 @@ const obtenerAsistenciaPorEstudiante = async (req, res) => {
   }
 };
 
+
+const asistenciasUnificadas = async(req,res) =>{
+  try {
+      const asistencias = await AsistenciaPadres.find()
+      .populate('estudianteId', 'nombre documento grupo grado hermanos')
+      .populate('escuelaPadresId', 'nombre direccion contacto');
+
+    const dataUnificada = asistencias.map(a => {
+      const estudiante = a.estudianteId || {};
+      return {
+        asistenciaId: a._id,
+        escuela: a.escuelaPadresId,
+        estudiante: {
+          _id: estudiante._id,
+          nombre: estudiante.nombre || '',
+          documento: estudiante.documento || '',
+          grupo: estudiante.grupo || '',
+          grado: estudiante.grado || '',
+          hermanos: estudiante.hermanos || false,
+        },
+        asistencias: a.asistencias,
+        entregaMaterial: a.entregaMaterial,
+        tieneHermano: a.tieneHermano,
+        certificadoOtorgado: a.certificadoOtorgado,
+        createdAt: a.createdAt,
+        updatedAt: a.updatedAt,
+      };
+    });
+      res.status(200).json(dataUnificada);
+    
+  } catch (error) {
+     console.error('Error al obtener asistencias unificadas:', error);
+    res.status(500).json({ message: 'Error interno al obtener las asistencias' });
+  }
+
+};
  
 
-module.exports = { crearAsistencia, actualizarAsistencia, obtenerAsistenciaPorEstudiante };
+module.exports = { crearAsistencia, actualizarAsistencia, obtenerAsistenciaPorEstudiante, asistenciasUnificadas };
 
  
