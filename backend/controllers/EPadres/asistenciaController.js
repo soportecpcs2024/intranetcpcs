@@ -59,7 +59,7 @@ const actualizarAsistencia = async (req, res) => {
     // Calcula si el estudiante debe recibir certificado (más del 50% de asistencias)
     const totalFechas = asistencia.asistencias.length;
     const totalAsistencias = asistencia.asistencias.filter(a => a.asistio).length;
-    asistencia.certificadoOtorgado = totalAsistencias / totalFechas >= 0.5;
+    asistencia.certificadoOtorgado = totalAsistencias / totalFechas >= 0.4;
 
     // Guarda la actualización
     await asistencia.save();

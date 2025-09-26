@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useEscuelaPadres } from "../../../contexts/EscuelaPadresContext";
+import { useLocation } from "react-router-dom"; // 👈 agregado
 import * as XLSX from "xlsx";
 import "./EstadisticasEp.css";
 
@@ -7,20 +8,24 @@ const EstadisticasEp = () => {
   const { asistenciasUnificadas } = useEscuelaPadres();
   const [dataUnificada, setDataUnificada] = useState([]);
   const [grupoSeleccionado, setGrupoSeleccionado] = useState("Todos");
+  const location = useLocation(); // 👈 detectar cambios de ruta
+
   console.log(dataUnificada);
 
-  useEffect(() => {
-    const cargarDatos = async () => {
-      try {
-        const data = await asistenciasUnificadas();
-        setDataUnificada(data);
-      } catch (error) {
-        console.error("❌ Error cargando asistencias unificadas:", error);
-      }
-    };
+  // 📌 Función para cargar datos
+  const cargarDatos = async () => {
+    try {
+      const data = await asistenciasUnificadas();
+      setDataUnificada(data);
+    } catch (error) {
+      console.error("❌ Error cargando asistencias unificadas:", error);
+    }
+  };
 
+  // 📌 Cargar cada vez que entres a esta ruta
+  useEffect(() => {
     cargarDatos();
-  }, []);
+  }, [location.pathname]);
 
   // 📌 Formatear fecha exactamente como en la BD (UTC sin modificar día) con mes abreviado en español
   const formatFechaColombia = (fechaStr) => {
