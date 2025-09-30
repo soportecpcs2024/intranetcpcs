@@ -164,6 +164,11 @@ app. use('/api/preinscripciones', preinscripcionEstudiante);
 const evaluacionrubricas = require('./routes/rubricas/rubricasRoutes');
 app. use('/api/evaluacionRubricas', evaluacionrubricas);
  
+// ---------------- admisiones   ----------------
+
+// const procesoAdmisiones = require('./routes/admisiones/admisionesEstudianteRoutes');
+// app. use('/api/admisiones', procesoAdmisiones);
+ 
 
 
 

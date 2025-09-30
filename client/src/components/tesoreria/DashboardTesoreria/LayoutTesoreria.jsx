@@ -4,6 +4,7 @@ import { SiGoogleclassroom } from "react-icons/si";
 import { SiMdbook } from "react-icons/si";
 import { LiaWpforms } from "react-icons/lia";
 import { GiLovers } from "react-icons/gi";
+import { LiaUserGraduateSolid } from "react-icons/lia";
  
 import * as XLSX from "xlsx";
 import { useRecaudo } from "../../../contexts/RecaudoContext"; // Asegúrate de importar el contexto correcto
@@ -72,6 +73,8 @@ const LayoutTesoreria = () => {
     <div className="layout-academico-container">
       <header className="layout-academico-container-division">
         <div className="layout-academico-container-header">
+
+
           <div className="link-academico">
             <NavLink
               to="recaudo"
@@ -148,6 +151,22 @@ const LayoutTesoreria = () => {
               <div className="link-recaudo">
                 <GiMeal className="icon-academico" />
                 <span>Almuerzos</span>
+              </div>
+            </NavLink>
+          </div>
+
+           <div className="link-academico">
+            <NavLink
+              to="prom"
+              className={({ isActive }) =>
+                isActive
+                  ? "sidebar-link-academico active"
+                  : "sidebar-link-academico"
+              }
+            >
+              <div className="link-recaudo">
+                <LiaUserGraduateSolid className="icon-academico" />
+                <span>Prom 11</span>
               </div>
             </NavLink>
           </div>

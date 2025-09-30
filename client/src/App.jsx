@@ -94,6 +94,8 @@ import DescargaInformeEPPagasExcel from "./components/EscPadres/DescargarInforme
 import Rubricas from "./components/Academico/Rubricas/Rubricas";
  
 
+const Prom_11 = React.lazy(() => import("./components/tesoreria/DashboardTesoreria/Recaudo/Prom_11/Prom_11"));
+
 
 
 
@@ -250,6 +252,7 @@ const AppContent = () => {
                 <Route path="voleibol" element={<Voleibol />} />
                 <Route path="microfutbol" element={<Microfutbol />} />
                 <Route path="arte" element={<Artes />} />
+              
                 <Route
                   path="exploracionmotriz"
                   element={<ExploracionMotris />}
@@ -305,6 +308,7 @@ const AppContent = () => {
               <Route path="tesoreria" element={<LayoutTesoreria />}>
                 <Route path="recaudo" element={<Recaudo />} />
                 <Route path="antologia" element={<RecaudoAntologia />} />
+                  <Route path="prom" element={<Prom_11 />} />
                 <Route path="escuela_padres" element={<Recaudoep />} />
                 <Route path="almuerzos" element={<Almuerzos />} />
                 <Route path="lista_facturas" element={<ListarFacturas />} />
