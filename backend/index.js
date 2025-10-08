@@ -163,6 +163,10 @@ app. use('/api/preinscripciones', preinscripcionEstudiante);
 
 const evaluacionrubricas = require('./routes/rubricas/rubricasRoutes');
 app. use('/api/evaluacionRubricas', evaluacionrubricas);
+
+// ---------------- Papeleria  ----------------
+const papeleria = require('./routes/productosPapeleria/productosPapeleriarouter.js')
+app.use('/api/papeleria',papeleria);
  
 // ---------------- admisiones   ----------------
 
