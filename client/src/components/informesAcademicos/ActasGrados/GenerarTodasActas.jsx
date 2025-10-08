@@ -35,6 +35,16 @@ const GenerarTodasActas = () => {
   }, []);
 
   const generarActaParaEstudiante = async (estudiante, imageBuffer) => {
+    // 🔹 Función para abreviar el tipo de documento
+  const getAbreviaturaDocumento = (tipo) => {
+    if (!tipo) return "";
+    const normalizado = tipo.toLowerCase().trim();
+    if (normalizado.includes("tarjeta")) return "T.I.";
+    if (normalizado.includes("cedula") || normalizado.includes("cédula")) return "C.C.";
+    return tipo; // Si no coincide, se deja el valor original
+  };
+
+  const tipoDocumento = getAbreviaturaDocumento(estudiante.identificacion);
     const doc = new Document({
       sections: [
         {
@@ -96,7 +106,7 @@ const GenerarTodasActas = () => {
             new Paragraph({
               children: [
                 new TextRun({
-                  text: `Identificado con T.I. ${estudiante.num_identificacion} expedida en ${estudiante.expedicion_docum}, quien cursó y aprobó los estudios correspondientes al nivel de educación media académica.`,
+                  text: `Identificado con ${tipoDocumento} ${estudiante.num_identificacion} expedida en ${estudiante.expedicion_docum}, quien cursó y aprobó los estudios correspondientes al nivel de educación media académica.`,
                   size: 26,
                 }),
               ],

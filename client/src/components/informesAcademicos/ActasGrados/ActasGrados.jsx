@@ -23,6 +23,16 @@ const getImageBufferFromPublic = async (url) => {
 const ActasGrados = () => {
   const { estudiantes, listarEstudiantes, buscarPorIdentificacion, error } =
     useActasDeGrado();
+     // 🔹 Función para abreviar el tipo de documento
+  const getAbreviaturaDocumento = (tipo) => {
+    if (!tipo) return "";
+    const normalizado = tipo.toLowerCase().trim();
+    if (normalizado.includes("tarjeta")) return "T.I.";
+    if (normalizado.includes("cedula") || normalizado.includes("cédula")) return "C.C.";
+    return tipo; // Si no coincide, se deja el valor original
+  };
+
+   
 
   const [busquedaNombre, setBusquedaNombre] = useState("");
   const [numDocumento, setNumDocumento] = useState("");
@@ -67,6 +77,9 @@ const ActasGrados = () => {
 
  
   const generarActaWord = async () => {
+    // ✅ Abreviatura dinámica según el estudiante seleccionado
+  const tipoDocumento = getAbreviaturaDocumento(seleccionado.identificacion);
+
     if (!seleccionado) return;
     const imageBuffer = await getImageBufferFromPublic("/LOGOED.jpg");
 
@@ -135,7 +148,7 @@ const ActasGrados = () => {
             new Paragraph({
               children: [
                 new TextRun({
-                  text: `Identificado con T.I. ${seleccionado.num_identificacion} expedida en ${seleccionado.expedicion_docum}, quien cursó y aprobó los estudios correspondientes al nivel de educación media académica.`,
+                  text: `Identificado con ${tipoDocumento} ${seleccionado.num_identificacion} expedida en ${seleccionado.expedicion_docum}, quien cursó y aprobó los estudios correspondientes al nivel de educación media académica.`,
                   size: 26,
                 }),
               ],
