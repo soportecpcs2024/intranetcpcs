@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useRecaudo } from "../../../../../contexts/RecaudoContext";
 import { FaTrashAlt } from "react-icons/fa";
 import { format } from "date-fns";
@@ -22,14 +22,14 @@ const ListarProm = () => {
   const itemsPerPage = 10;
  
 
-  const handleReload = async () => {
+  const handleReload = useCallback(async () => {
     await fetchEstudiantes();
     await fetchFacturas();
-  };
+  }, [fetchEstudiantes, fetchFacturas]);
 
   useEffect(() => {
     handleReload();
-  }, []);
+  }, [handleReload]);
 
   useEffect(() => {
     if (estudiantes.length > 0) {
