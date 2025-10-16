@@ -3,7 +3,7 @@ import { useRecaudo } from "../../../../../contexts/RecaudoContext";
 import { FaTrashAlt } from "react-icons/fa";
 import { format } from "date-fns";
 import ReactPaginate from "react-paginate";
-import "./ListarProm.css";
+import "./listarProm.css";
 
 const ListarProm = () => {
   const {
