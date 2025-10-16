@@ -183,13 +183,16 @@ const LayoutTesoreria = () => {
                 <NavLink  className="informe-item" to="lista_facturas">Extra clases</NavLink>
               </li>
               <li>
-                <NavLink  className="informe-item" to="listar_antologias">Listar Antologías</NavLink>
+                <NavLink  className="informe-item" to="listar_antologias">Antologías</NavLink>
               </li>
               <li>
                 <NavLink className="informe-item" to="lista_escuela_padres">Esc. Padres</NavLink>
               </li>
               <li>
                 <NavLink className="informe-item" to="lista_formularios">Formularios</NavLink>
+              </li>
+              <li>
+                <NavLink className="informe-item" to="listar_prom">Prom</NavLink>
               </li>
             </ul>
           </div>
@@ -217,6 +220,9 @@ const LayoutTesoreria = () => {
               </li>
                 <li>
                 <NavLink className="informe-item" to="informe_escuela_padres">Esc. Padres</NavLink>
+              </li>
+                <li>
+                <NavLink className="informe-item" to="informe_prom">Prom</NavLink>
               </li>
               
 

@@ -1,0 +1,54 @@
+.facturas-container {
+    width: 80%;
+    padding:  10px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.416);
+    
+  }
+  
+  .facturas-table {
+    width: 100%;
+    border-collapse: collapse;
+    
+  }
+  
+  .facturas-table th{
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  .facturas-table td {
+    padding: 0px 6px; /* Más compacto */
+    
+  }
+  
+  .facturas-table th {
+    background: #007bff;
+    color: white;
+  }
+  
+  .facturas-table tr:hover {
+    background: #f1f1f1;
+  }
+  
+  .delete-btn {
+    width: 30%;
+    background-color: yellow;
+    color: rgb(252, 1, 1);
+     
+    padding: 4px 6px;
+    margin: 3px;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 25px;
+    transition: 0.3s;
+  }
+  
+  .delete-btn:hover {
+    background: none;
+    padding: 6px 6px;
+    border: 1px solid red;
+     
+  }
+  

@@ -18,3 +18,6 @@ https://www.youtube.com/watch?v=_5HMNZsm6xE&list=PLP7LlHfxfuM843Lg9F3iUSU7ZJCEh8
 pdf modejs  
 https://www.youtube.com/watch?v=otajcFDAd04
 
+
+
+Siempre antes de subir cambios: git pull origin main --rebase

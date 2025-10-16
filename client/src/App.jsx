@@ -92,9 +92,12 @@ import ListarAntologias from "./components/tesoreria/Antologias/ListarAntologias
 import InformeAntologia from "./components/tesoreria/DashboardTesoreria/Recaudo/antologia/InformeAntologia";
 import DescargaInformeEPPagasExcel from "./components/EscPadres/DescargarInformeEPPagas/DescargaInformeEPPagas";
 import Rubricas from "./components/Academico/Rubricas/Rubricas";
+import InformeProm from "./components/tesoreria/DashboardTesoreria/Recaudo/Prom_11/InformeProm";
+
  
 
 const Prom_11 = React.lazy(() => import("./components/tesoreria/DashboardTesoreria/Recaudo/Prom_11/Prom_11"));
+const ListarProm = React.lazy(() => import("./components/tesoreria/DashboardTesoreria/Recaudo/Prom_11/ListarProm"));
 
 
 
@@ -309,6 +312,8 @@ const AppContent = () => {
                 <Route path="recaudo" element={<Recaudo />} />
                 <Route path="antologia" element={<RecaudoAntologia />} />
                   <Route path="prom" element={<Prom_11 />} />
+                  <Route path="listar_prom" element={<ListarProm />} />
+                  <Route path="informe_prom" element={<InformeProm />} />
                 <Route path="escuela_padres" element={<Recaudoep />} />
                 <Route path="almuerzos" element={<Almuerzos />} />
                 <Route path="lista_facturas" element={<ListarFacturas />} />
