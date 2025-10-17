@@ -1,0 +1,198 @@
+/* === CONTENEDOR GENERAL === */
+.productos-container_tabla {
+  display: flex;
+  flex-direction: column;
+  background-color: #f9fafc;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+   
+}
+
+/* === TÍTULO === */
+.titulo-papeleria {
+  text-align: center;
+  color: #000000;
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+/* === FILTRO DE CATEGORÍAS === */
+.filtro-categorias {
+   display: flex;
+  justify-content: center;   /* Centra horizontalmente */
+  align-items: center;       /* Centra verticalmente */
+  flex-wrap: wrap;           /* Permite que los botones bajen de línea si son muchos */
+  
+  gap: 2px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgba(90, 90, 90, 0.486);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.categoria-btn {
+  background: #e8e8e8;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+}
+
+.categoria-btn.activo {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+.categoria-btn:hover {
+  background-color: #d0d0d0;
+}
+
+/* === TABLA === */
+.tabla-container {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start; /* 👈 Alinea la tabla a la izquierda */
+  overflow-x: auto;
+  padding-left: 1rem;
+}
+
+.tabla-productos {
+  width: 90%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 4px 10px;
+}
+
+.tabla-productos th,
+.tabla-productos td {
+
+  text-align: left;
+  border-bottom: 1px solid #8b8b8b;
+  font-size: 16px;
+  color: #030303;
+}
+
+.tabla-productos th {
+  background-color: #007bff;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+}
+
+.tabla-productos tr:hover {
+  background-color: #f1f5ff;
+}
+
+.icono-columna {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #007bff;
+}
+
+/* === CELDA DE ACCIONES === */
+.acciones-inline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.input-cantidad {
+  width: 60px;
+  padding: 5px;
+  text-align: center;
+  border-radius: 6px;
+  border: 1px solid #bbb;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.input-cantidad:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
+}
+
+/* === BOTONES DE ACCIÓN === */
+.btn-seleccionar,
+.btn-aceptar,
+.btn-cancelar,
+.btn-eliminar {
+  
+  border: none;
+  border-radius: 8px;
+  padding: 6px 7px;
+  margin-bottom: 5px;
+   
+  cursor: pointer;
+  font-weight: 300;
+  color: white;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+/* Colores por tipo */
+.btn-seleccionar {
+  background-color: #3f72af;
+}
+
+.btn-seleccionar:hover {
+  background-color: #2b579e;
+}
+
+.btn-aceptar {
+  background-color: #4caf50;
+}
+
+.btn-aceptar:hover {
+  background-color: #3b8d3b;
+}
+
+.btn-cancelar {
+  background-color: #f44336;
+}
+
+.btn-cancelar:hover {
+  background-color: #d32f2f;
+}
+
+.btn-eliminar {
+  background-color: #dd1c1c;
+}
+
+.btn-eliminar:hover {
+  background-color: #e60000;
+}
+
+/* === RESPONSIVO === */
+@media (max-width: 768px) {
+  .tabla-productos th,
+  .tabla-productos td {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+
+  .btn-seleccionar,
+  .btn-aceptar,
+  .btn-cancelar,
+  .btn-eliminar {
+    padding: 4px 8px;
+    font-size: 0.85rem;
+  }
+
+  .input-cantidad {
+    width: 50px;
+  }
+}

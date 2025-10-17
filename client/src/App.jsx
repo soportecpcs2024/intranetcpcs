@@ -93,11 +93,20 @@ import InformeAntologia from "./components/tesoreria/DashboardTesoreria/Recaudo/
 import DescargaInformeEPPagasExcel from "./components/EscPadres/DescargarInformeEPPagas/DescargaInformeEPPagas";
 import Rubricas from "./components/Academico/Rubricas/Rubricas";
 import InformeProm from "./components/tesoreria/DashboardTesoreria/Recaudo/Prom_11/InformeProm";
-
  
+ 
+ 
+
+
+
+
 
 const Prom_11 = React.lazy(() => import("./components/tesoreria/DashboardTesoreria/Recaudo/Prom_11/Prom_11"));
 const ListarProm = React.lazy(() => import("./components/tesoreria/DashboardTesoreria/Recaudo/Prom_11/ListarProm"));
+const DashboardPapeleria = React.lazy(() => import("./pages/papeleria/DashboardPapeleria"));
+const RegistrarProductos = React.lazy(() => import("./components/papeleriaComponents/RegistrarProductos/RegistrarProductos"));
+const SolicitudProductos = React.lazy(() => import("./components/papeleriaComponents/solicitudProductos/SolicitudProductos"));
+const ListarProductosPapeleria = React.lazy(() => import("./components/papeleriaComponents/listarProductos/ListarProductosPapeleria"));
 
 
 
@@ -189,7 +198,7 @@ const App = () => {
                 <EscuelaPadresProvider>
                   <ActasDeGradoProvider>
                     <EvaluacionesProvider>
-                    <AppContent />
+                      <AppContent />
 
                     </EvaluacionesProvider>
                   </ActasDeGradoProvider>
@@ -255,7 +264,7 @@ const AppContent = () => {
                 <Route path="voleibol" element={<Voleibol />} />
                 <Route path="microfutbol" element={<Microfutbol />} />
                 <Route path="arte" element={<Artes />} />
-              
+
                 <Route
                   path="exploracionmotriz"
                   element={<ExploracionMotris />}
@@ -281,6 +290,13 @@ const AppContent = () => {
               <Route path="informesgenerales" element={<LayoutInformesAdm />} />
               <Route path="informesExtraClasesDec" element={<InformeExtraClasesDec />} />
 
+
+              <Route path="papeleria" element={<DashboardPapeleria />}>
+                <Route path="registrarProductos" element={<RegistrarProductos />}/> 
+                <Route path="solicitarProductos" element={<SolicitudProductos />}/> 
+                <Route path="listarProductos" element={<ListarProductosPapeleria />}/> 
+               
+              </Route>
               <Route
                 path="inventario_estadisticas"
                 element={<DashboardStatistics />}
@@ -311,9 +327,9 @@ const AppContent = () => {
               <Route path="tesoreria" element={<LayoutTesoreria />}>
                 <Route path="recaudo" element={<Recaudo />} />
                 <Route path="antologia" element={<RecaudoAntologia />} />
-                  <Route path="prom" element={<Prom_11 />} />
-                  <Route path="listar_prom" element={<ListarProm />} />
-                  <Route path="informe_prom" element={<InformeProm />} />
+                <Route path="prom" element={<Prom_11 />} />
+                <Route path="listar_prom" element={<ListarProm />} />
+                <Route path="informe_prom" element={<InformeProm />} />
                 <Route path="escuela_padres" element={<Recaudoep />} />
                 <Route path="almuerzos" element={<Almuerzos />} />
                 <Route path="lista_facturas" element={<ListarFacturas />} />
@@ -359,10 +375,10 @@ const AppContent = () => {
               <Route path="crear_ep" element={<CrearEscuelaPadres />} />
               <Route path="estadisticas_ep" element={<EstadisticasEp />} />
               <Route path="eppagas" element={<ListaEPPagas />} />
-               <Route
-                  path="informe_escuela_padres"
-                  element={<DescargaInformeEPPagasExcel />}
-                />
+              <Route
+                path="informe_escuela_padres"
+                element={<DescargaInformeEPPagasExcel />}
+              />
 
               <Route
                 path="programadorTareas"

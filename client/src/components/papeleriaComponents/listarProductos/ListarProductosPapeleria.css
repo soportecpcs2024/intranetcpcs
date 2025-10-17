@@ -1,0 +1,117 @@
+/* 🔹 Contenedor general */
+.productos-container {
+   
+  text-align: center;
+  background-color: #e9e9e8;
+  min-height: 100vh;
+}
+
+/* 🔹 Título principal */
+.titulo-papeleria {
+  font-size: 1.6rem;
+  margin-bottom: 5px;
+  color: #020202;
+  font-weight: 600;
+}
+
+/* 🔹 Filtro de categorías */
+.filtro-categorias {
+  display: flex;
+  justify-content: center;   /* Centra horizontalmente */
+  align-items: center;       /* Centra verticalmente */
+  flex-wrap: wrap;           /* Permite que los botones bajen de línea si son muchos */
+  
+  gap: 2px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgba(90, 90, 90, 0.486);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.categoria-btn {
+  background-color: #f9fd02;
+  width: 120px;
+
+  color: #030303;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  padding: 10px 4px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: rgba(14, 30, 37, 0.534) 0px 2px 4px,
+              rgba(14, 30, 37, 0.726) 0px 2px 8px;
+               
+}
+
+.categoria-btn:hover {
+  border-color: 5px solid rgba(90, 90, 90, 0.137);
+  background-color: #f0f4ff;
+  color: black;
+}
+
+.categoria-btn.activo {
+  background-color: #21e407;
+  color: #0a0a0a;
+  border-color: 5px solid rgba(90, 90, 90, 0.137);
+  box-shadow: 0 0 10px rgba(63, 113, 175, 0.788);
+}
+
+/* 🔹 Grid de productos */
+.productos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 10px;
+  justify-items: center;
+   
+}
+
+/* 🔹 Tarjeta de producto */
+.producto-card {
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: rgba(14, 30, 37, 0.507) 0px 2px 4px,
+              rgba(14, 30, 37, 0.37) 0px 2px 16px;
+  padding: 10px;
+  width: 110px;
+  
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.producto-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(63, 114, 175, 0.3);
+}
+
+/* 🔹 Icono dentro de la tarjeta */
+.icono-producto {
+  font-size: 1.5rem;
+  color: #025da1;
+  
+}
+
+/* 🔹 Texto del producto */
+.producto-card h3 {
+  font-size: 1rem;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.producto-card p {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.icono-categoria{
+  font-size: 18px;
+  
+}
+
+.nombre-categoria{
+  font-size: 14px;
+}

@@ -1,0 +1,22 @@
+.container_procesos{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  
+}
+
+.titulo_procesos h2{
+    background-color: #004e92;
+    align-items: center;
+    margin: 2px;
+    padding: 4px;
+    border-radius: 4px;
+    color: white;
+     
+}
+
+.contenido_procesos{
+  margin: 15px;
+}

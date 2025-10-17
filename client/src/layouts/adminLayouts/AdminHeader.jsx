@@ -32,6 +32,7 @@ const AdminHeader = () => {
   const escuelaPadres = user && user.role === "escuelaPadres"; // Verificar si el usuario tiene el rol de teacher
   const mantenimiento = user && user.role === "mantenimiento"; // Verificar si el usuario tiene el rol de teacher
   const admisiones = user && user.role === "admisiones"; // Verificar si el usuario tiene el rol de teacher
+  const papeleria = user && user.role === "papeleria"; // Verificar si el usuario tiene el rol de teacher
 
   return (
     <div className="admin-header">
@@ -205,6 +206,14 @@ const AdminHeader = () => {
                       <Link to="admisiones">Admisiones</Link>
                     </div>
                   </li>
+
+                  
+                  <li>
+                    <div className="dropdown">
+                      <Link to="papeleria">Papeleria</Link>
+                    </div>
+                  </li>
+                
                 </ul>
               )}
 
@@ -446,6 +455,19 @@ const AdminHeader = () => {
                   </li>
                 </ul>
               )}
+
+
+              {papeleria && (
+                <ul>
+                  <li>
+                    <div className="dropdown">
+                      <Link to="papeleria">Papeleria</Link>
+                    </div>
+                  </li>
+                </ul>
+              )}
+
+
             </nav>
           </div>
         </div>
