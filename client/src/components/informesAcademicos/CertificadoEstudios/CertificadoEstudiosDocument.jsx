@@ -1,4 +1,4 @@
-import React from "react";
+
 import "./CertificadoEstudios.css";
 import {
   Document,
@@ -9,9 +9,9 @@ import {
   StyleSheet,
 } from "@react-pdf/renderer";
 
+import PropTypes from "prop-types";// validación de props
 import ImageLogo from "/logo2025.png";
  
-
 // Define styles for the PDF
 const styles = StyleSheet.create({
   page: {
@@ -167,7 +167,7 @@ const CertificadoEstudiosDocument = ({ estudiante, generados }) => (
       <View>
         <Text style={styles.title}>COLEGIO PANAMERICANO COLOMBO SUECO</Text>
         <Text style={{ ...styles.subtitle, fontSize: 8 }}>
-          DANE: 30500119827 - RESOLUCION: 009070
+          DANE: 305001019827 - RESOLUCION: 009070
         </Text>
         <Text style={{ ...styles.subtitle, fontSize: 12 }}>CERTIFICADO DESEMPEÑO</Text>
       </View>
@@ -187,7 +187,7 @@ const CertificadoEstudiosDocument = ({ estudiante, generados }) => (
                   fontWeight: "bold",
                 }}
               >
-                DANE 30500119827
+                DANE 305001019827
               </Text>
               <Text  style={{
                   color: "#000000",
@@ -1461,5 +1461,49 @@ const CertificadoEstudiosDocument = ({ estudiante, generados }) => (
     </Page>
   </Document>
 );
+// validación de props
+CertificadoEstudiosDocument.propTypes = {
+  estudiante: PropTypes.shape({
+    nombre: PropTypes.string,
+    tipoDocumento: PropTypes.string,  
+    numDocumento: PropTypes.string,  
+    añoLectivo: PropTypes.string,  
+    codigoMatricula: PropTypes.string,  
+    folio: PropTypes.string,  
+    naturalesYEducacionAmbiental: PropTypes.string,  
+    Fisica: PropTypes.string,  
+    Quimica: PropTypes.string,  
+    cienciasSociales: PropTypes.string,
+    cienciasPoliticasYEconomicas: PropTypes.string,
+    educacionFisicaYRecreacionYDeportes: PropTypes.string,
+    educacionArtisticaYCulturals: PropTypes.string,
+    educacionCristiana: PropTypes.string,
+    humanidadesLenguaCastellanaEIdiomaExtranjero: PropTypes.string,
+    lenguaCastellana: PropTypes.string,
+    idiomaExtranjeroIngles: PropTypes.string,
+    matematicas: PropTypes.string,
+    filosofia: PropTypes.string,
+    tecnologiaEInformatica: PropTypes.string,
+    educacionEticaYValores: PropTypes.string,
+    civicaYConstitucion: PropTypes.string,
+    educacionArtisticaYCultural: PropTypes.string,
+    rector: PropTypes.string,
+    ccRector: PropTypes.string,
+    ccSecretaria: PropTypes.string,
+    ciudadExpedicionRector: PropTypes.string,
+    secretaria: PropTypes.string,
+    ciudadExpedicionSecretaria: PropTypes.string,
+    grupo: PropTypes.string,
+    grado: PropTypes.string,
+    // agrega aquí los demás campos que uses
+  }).isRequired,
+  generados: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      fecha: PropTypes.string,
+      // los campos que utilices de “generados”
+    })
+  ),
+};
 
 export default CertificadoEstudiosDocument;

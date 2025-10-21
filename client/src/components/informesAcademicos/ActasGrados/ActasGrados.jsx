@@ -228,7 +228,7 @@ const ActasGrados = () => {
                         new Paragraph({
                           children: [
                             new TextRun({
-                              text: "LUZ MIRIAM BOTERO ZAVALA",
+                              text: "LUZ MIRIYAM BOTERO ZABALA",
                               bold: true,
                               size: 24,
                             }),

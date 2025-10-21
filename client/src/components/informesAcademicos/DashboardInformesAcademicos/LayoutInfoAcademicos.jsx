@@ -1,9 +1,9 @@
-import React from "react";
+ 
 import { Outlet, NavLink } from "react-router-dom";
 import Footer from "../../../pages/admin/User/footer/Footer";
 import { PiCertificateDuotone } from "react-icons/pi";
 import { GrNotes } from "react-icons/gr";
-import { CiDiscount1 } from "react-icons/ci";
+ 
 import { GrCertificate } from "react-icons/gr";
 import "./LayoutInfoAcademicos.css";
 

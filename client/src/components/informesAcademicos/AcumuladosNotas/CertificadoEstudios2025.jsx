@@ -217,7 +217,7 @@ const CertificadoEstudios2025 = ({ estudiante }) => (
 
         <View style={styles.footer}>
           <View style={styles.footer_in}>
-            <Text style={styles.p}>Luz Miriyam Botero</Text>
+            <Text style={styles.p}>Luz Miriyam Botero Zabala</Text>
             <Text style={styles.p}>Secretaría Académica</Text>
           </View>
         </View>
