@@ -97,16 +97,13 @@ import InformeProm from "./components/tesoreria/DashboardTesoreria/Recaudo/Prom_
  
  
 
-
-
-
-
 const Prom_11 = React.lazy(() => import("./components/tesoreria/DashboardTesoreria/Recaudo/Prom_11/Prom_11"));
 const ListarProm = React.lazy(() => import("./components/tesoreria/DashboardTesoreria/Recaudo/Prom_11/ListarProm"));
 const DashboardPapeleria = React.lazy(() => import("./pages/papeleria/DashboardPapeleria"));
 const RegistrarProductos = React.lazy(() => import("./components/papeleriaComponents/RegistrarProductos/RegistrarProductos"));
 const SolicitudProductos = React.lazy(() => import("./components/papeleriaComponents/solicitudProductos/SolicitudProductos"));
 const ListarProductosPapeleria = React.lazy(() => import("./components/papeleriaComponents/listarProductos/ListarProductosPapeleria"));
+// const RegistroPei = React.lazy(() => import("./components/informesAcademicos/PEI/Registro_PEI/RegistroPei"));
 
 
 
@@ -309,20 +306,12 @@ const AppContent = () => {
               </Route>
 
               <Route path="infoacademico" element={<LayoutInfoAcademicos />}>
-                <Route
-                  path="certificado-estudios"
-                  element={<CertificadoEstudios />}
-                />
+                <Route path="certificado-estudios" element={<CertificadoEstudios />}/>
                 <Route path="acumulados-notas" element={<AcumuladosNotas />} />
-                <Route
-                  path="actas_grados_individual"
-                  element={<ActasGrados />}
-                />
-                <Route
-                  path="actas_grados_grupal"
-                  element={<GenerarTodasActas />}
-                />
+                <Route path="actas_grados_individual" element={<ActasGrados />}/>
+                <Route path="actas_grados_grupal" element={<GenerarTodasActas />}/>
               </Route>
+                {/* <Route path="registropei" element={<RegistroPei />}/> */}
 
               <Route path="tesoreria" element={<LayoutTesoreria />}>
                 <Route path="recaudo" element={<Recaudo />} />
@@ -333,6 +322,7 @@ const AppContent = () => {
                 <Route path="escuela_padres" element={<Recaudoep />} />
                 <Route path="almuerzos" element={<Almuerzos />} />
                 <Route path="lista_facturas" element={<ListarFacturas />} />
+                
                 <Route
                   path="lista_formularios"
                   element={<ListarFormularioCompras />}
@@ -363,6 +353,8 @@ const AppContent = () => {
                   element={<InformeAntologia />}
                 />
               </Route>
+
+              
 
               <Route path="admisiones" element={<LayoutAdmisiones />}>
                 <Route

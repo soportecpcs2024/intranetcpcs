@@ -11,7 +11,7 @@ const BuscadorEstudiante = ({
     <div className="buscador-estudiante">
       <input
         type="text"
-        placeholder="Buscar estudiante por nombre"
+        placeholder="Buscar estudiante por apellidos"
         value={busqueda}
         onChange={(e) => {
           const value = e.target.value;

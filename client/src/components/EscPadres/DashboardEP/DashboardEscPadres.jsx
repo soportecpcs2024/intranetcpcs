@@ -134,7 +134,7 @@ const DashboardEscPadres = () => {
       tieneHermano,
     };
 
-    console.log("📤 Datos enviados:", data);
+
 
     try {
       let response;

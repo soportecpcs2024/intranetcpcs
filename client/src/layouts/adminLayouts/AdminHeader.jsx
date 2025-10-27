@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Logo from "/logo2025.png";
 import { useAuth } from "../../contexts/AuthContext";
-import { NavLink } from "react-router-dom";
+ 
 
 const AdminHeader = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -129,7 +129,21 @@ const AdminHeader = () => {
 
                   <li>
                     <div className="dropdown">
-                      <Link to="tesoreria">Recaudo</Link>
+                      <Link onClick={toggleDropdown}>Tesorería</Link>
+                      
+
+                      {isDropdownOpen && (
+                        <ul className="dropdown-menu">
+                          <li>
+                              <Link to="tesoreria">Recaudo</Link>
+                          </li>
+                          {/* <li>
+                            <Link to="morosos_penciones">Morosos Penciones</Link>
+                          </li> */}
+                           
+                          
+                        </ul> 
+                      )}
                     </div>
                   </li>
 
@@ -184,7 +198,7 @@ const AdminHeader = () => {
 
                   <li>
                     <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Académico</Link>
+                      <Link onClick={toggleDropdown}>Sec.Académica</Link>
                       {isDropdownOpen && (
                         <ul className="dropdown-menu">
                           <li>
@@ -194,6 +208,11 @@ const AdminHeader = () => {
                           <li>
                             <Link to="/admin/infoacademico">
                               Informes Académicos
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to="registropei">
+                              Registro PEI
                             </Link>
                           </li>
                         </ul>
@@ -208,11 +227,11 @@ const AdminHeader = () => {
                   </li>
 
                   
-                  <li>
+                  {/* <li>
                     <div className="dropdown">
                       <Link to="papeleria">Papeleria</Link>
                     </div>
-                  </li>
+                  </li> */}
                 
                 </ul>
               )}

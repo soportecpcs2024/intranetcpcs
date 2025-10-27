@@ -1,7 +1,7 @@
-import React from 'react';
+ 
 import { Outlet } from "react-router-dom";
 import AdminHeader from "./AdminHeader";
-import Footer from "../../pages/admin/User/footer/Footer";
+ 
  
 
 

@@ -19,14 +19,10 @@ const InformeProm = () => {
   const [mesSeleccionado, setMesSeleccionado] = useState("");
   const { facturas } = useRecaudo();
   const [facturasFiltradas, setFacturasFiltradas] = useState([]);
- 
 
   useEffect(() => {
     if (facturas.length > 0) {
-      const codValidos = [
-        
-        "2100",
-      ];
+      const codValidos = ["2100"];
 
       const nuevasFacturas = facturas
         .filter((factura) =>
@@ -61,10 +57,8 @@ const InformeProm = () => {
 
   const getNombreCodigo = (cod) => {
     switch (cod) {
-      
       case "2100":
         return "Prom 11";
-
       default:
         return `Código: ${cod}`;
     }
@@ -81,7 +75,8 @@ const InformeProm = () => {
       return;
     }
 
-    const agrupado = {};
+    // Agrupación principal: grado -> cod -> facturas
+    const agrupadoPorGrado = {};
 
     facturasFiltradas.forEach((factura) => {
       const fecha = new Date(factura.fechaCompra);
@@ -89,14 +84,19 @@ const InformeProm = () => {
 
       if (mesFactura.toLowerCase() !== mesSeleccionado.toLowerCase()) return;
 
+      const grado =
+        factura.estudianteId?.grado?.trim().toUpperCase() || "SIN GRADO";
+
+      if (!agrupadoPorGrado[grado]) agrupadoPorGrado[grado] = {};
+
       factura.clases.forEach((clase) => {
         const cod = clase.cod;
-        if (!agrupado[cod]) agrupado[cod] = [];
+        if (!agrupadoPorGrado[grado][cod]) agrupadoPorGrado[grado][cod] = [];
 
-        agrupado[cod].push({
+        agrupadoPorGrado[grado][cod].push({
           estudiante: factura.estudianteId?.nombre || "N/A",
-          nombreClase: clase.nombreClase || getNombreCodigo(clase.cod), // fallback por si falta
-          grado: factura.estudianteId?.grado || "N/A",
+          nombreClase: clase.nombreClase || getNombreCodigo(clase.cod),
+          grado,
           total: factura.total,
           tipoPago: factura.tipoPago,
           mes: mesFactura,
@@ -104,13 +104,14 @@ const InformeProm = () => {
       });
     });
 
-    if (Object.keys(agrupado).length === 0) {
+    if (Object.keys(agrupadoPorGrado).length === 0) {
       alert("No hay datos para el mes seleccionado.");
       return;
     }
 
     const content = [];
 
+    // Encabezado principal
     content.push(
       new Paragraph({
         alignment: AlignmentType.CENTER,
@@ -125,30 +126,17 @@ const InformeProm = () => {
       }),
       new Paragraph({
         alignment: AlignmentType.CENTER,
-        children: [
-          new TextRun({
-            text: "Informe general de venta PROM",
-            size: 26,
-          }),
-        ],
+        children: [new TextRun({ text: "Informe general de venta PROM", size: 26 })],
         spacing: { after: 200 },
       }),
       new Paragraph({
         alignment: AlignmentType.LEFT,
-        children: [
-          new TextRun({
-            text: `Mes: ${mesSeleccionado}`,
-            bold: true,
-            size: 24,
-          }),
-        ],
+        children: [new TextRun({ text: `Mes: ${mesSeleccionado}`, bold: true, size: 24 })],
         spacing: { after: 200 },
       }),
       new Paragraph({
         alignment: AlignmentType.LEFT,
-        children: [
-          new TextRun({ text: "Elaborado por: LINA MARIA HOYOS", size: 22 }),
-        ],
+        children: [new TextRun({ text: "Elaborado por: LINA MARIA HOYOS", size: 22 })],
         spacing: { after: 300 },
       })
     );
@@ -158,164 +146,153 @@ const InformeProm = () => {
     let totalEfectivoGlobal = 0;
     let totalGlobal = 0;
 
-    Object.entries(agrupado).forEach(([cod, items]) => {
-      // Ordenar por tipo de pago
-      items.sort((a, b) =>
-        a.tipoPago
-          .trim()
-          .toLowerCase()
-          .localeCompare(b.tipoPago.trim().toLowerCase())
-      );
+    // Orden predefinido de grados
+    const ordenGrados = ["ONCE A", "ONCE B", "DECIMO A", "DECIMO B"];
+
+    ordenGrados.forEach((grado) => {
+      const clasesPorGrado = agrupadoPorGrado[grado];
+      if (!clasesPorGrado) return;
 
       content.push(
         new Paragraph({
-          text: getNombreCodigo(cod),
-          heading: HeadingLevel.HEADING_2,
-          spacing: { before: 400, after: 200 },
+          text: `Grado ${grado}`,
+          heading: HeadingLevel.HEADING_1,
+          spacing: { before: 600, after: 300 },
         })
       );
 
-      const tablaDatos = new Table({
-        width: {
-          size: 100,
-          type: WidthType.PERCENTAGE,
-        },
-        rows: [
-          new TableRow({
-            tableHeader: true,
-            children: [
-              "Estudiante",
-              "Clase",
-              "Grado",
-              "Total",
-              "Tipo de pago",
-            ].map(
-              (text) =>
-                new TableCell({
-                  children: [new Paragraph({ text })],
-                  shading: { fill: "#f4f2f2" },
+      Object.entries(clasesPorGrado).forEach(([cod, items]) => {
+        items.sort((a, b) =>
+          a.tipoPago.trim().toLowerCase().localeCompare(b.tipoPago.trim().toLowerCase())
+        );
+
+        content.push(
+          new Paragraph({
+            text: getNombreCodigo(cod),
+            heading: HeadingLevel.HEADING_2,
+            spacing: { before: 400, after: 200 },
+          })
+        );
+
+        const tablaDatos = new Table({
+          width: { size: 100, type: WidthType.PERCENTAGE },
+          rows: [
+            new TableRow({
+              tableHeader: true,
+              children: ["Estudiante", "Clase", "Grado", "Total", "Tipo de pago"].map(
+                (text) =>
+                  new TableCell({
+                    children: [new Paragraph({ text })],
+                    shading: { fill: "#f4f2f2" },
+                  })
+              ),
+            }),
+            ...items.map(
+              (item) =>
+                new TableRow({
+                  children: [
+                    new TableCell({ children: [new Paragraph(item.estudiante)] }),
+                    new TableCell({ children: [new Paragraph(item.nombreClase)] }),
+                    new TableCell({ children: [new Paragraph(item.grado)] }),
+                    new TableCell({
+                      children: [new Paragraph(`$ ${item.total.toLocaleString()}`)],
+                    }),
+                    new TableCell({
+                      children: [new Paragraph(item.tipoPago)],
+                      shading: {
+                        fill:
+                          item.tipoPago === "Nómina"
+                            ? "C6EFCE"
+                            : item.tipoPago === "Efectivo"
+                            ? "FFEB9C"
+                            : item.tipoPago === "Datáfono"
+                            ? "D9E1F2"
+                            : "FFFFFF",
+                      },
+                    }),
+                  ],
                 })
             ),
-          }),
-          ...items.map((item) =>
-  new TableRow({
-    children: [
-      new TableCell({ children: [new Paragraph(item.estudiante)] }),
-      new TableCell({ children: [new Paragraph(item.nombreClase)] }),
-      new TableCell({ children: [new Paragraph(item.grado)] }),
-      new TableCell({
-        children: [new Paragraph(`$ ${item.total.toLocaleString()}`)],
-      }),
-      new TableCell({
-        children: [new Paragraph(item.tipoPago)],
-        shading: {
-          fill:
-            item.tipoPago === "Nómina"
-              ? "C6EFCE"
-              : item.tipoPago === "Efectivo"
-              ? "FFEB9C"
-              : item.tipoPago === "Datáfono"
-              ? "D9E1F2"
-              : "FFFFFF",
-        },
-      }),
-    ],
-  })
-),
+          ],
+        });
 
-        ],
+        content.push(tablaDatos);
+
+        // Subtotales
+        let subtotalNomina = 0;
+        let subtotalDatafono = 0;
+        let subtotalEfectivo = 0;
+
+        items.forEach((item) => {
+          if (item.tipoPago === "Nómina") subtotalNomina += item.total;
+          else if (item.tipoPago === "Datáfono") subtotalDatafono += item.total;
+          else if (item.tipoPago === "Efectivo") subtotalEfectivo += item.total;
+        });
+
+        const totalGeneral = subtotalNomina + subtotalDatafono + subtotalEfectivo;
+
+        totalNominaGlobal += subtotalNomina;
+        totalDatafonoGlobal += subtotalDatafono;
+        totalEfectivoGlobal += subtotalEfectivo;
+        totalGlobal += totalGeneral;
+
+        const resumen = new Table({
+          borders: {
+            top: { style: BorderStyle.NONE },
+            bottom: { style: BorderStyle.NONE },
+            left: { style: BorderStyle.NONE },
+            right: { style: BorderStyle.NONE },
+            insideVertical: { style: BorderStyle.NONE },
+          },
+          width: { size: 30, type: WidthType.PERCENTAGE },
+          rows: [
+            new TableRow({
+              children: [
+                new TableCell({ children: [new Paragraph("Subtotal Nómina:")] }),
+                new TableCell({
+                  children: [new Paragraph(`$ ${subtotalNomina.toLocaleString()}`)],
+                }),
+              ],
+            }),
+            new TableRow({
+              children: [
+                new TableCell({ children: [new Paragraph("Subtotal Datáfono:")] }),
+                new TableCell({
+                  children: [new Paragraph(`$ ${subtotalDatafono.toLocaleString()}`)],
+                }),
+              ],
+            }),
+            new TableRow({
+              children: [
+                new TableCell({ children: [new Paragraph("Subtotal Efectivo:")] }),
+                new TableCell({
+                  children: [new Paragraph(`$ ${subtotalEfectivo.toLocaleString()}`)],
+                }),
+              ],
+            }),
+            new TableRow({
+              children: [
+                new TableCell({
+                  children: [new Paragraph({ text: "TOTAL:", bold: true })],
+                }),
+                new TableCell({
+                  children: [
+                    new Paragraph({
+                      text: `$ ${totalGeneral.toLocaleString()}`,
+                      bold: true,
+                    }),
+                  ],
+                }),
+              ],
+            }),
+          ],
+        });
+
+        content.push(new Paragraph({ text: "" }), resumen);
       });
-
-      content.push(tablaDatos);
-
-     
-      // Subtotales por clase
-      let subtotalNomina = 0;
-      let subtotalDatafono = 0;
-      let subtotalEfectivo = 0;
-
-      items.forEach((item) => {
-        if (item.tipoPago === "Nómina") subtotalNomina += item.total;
-        else if (item.tipoPago === "Datáfono") subtotalDatafono += item.total;
-        else if (item.tipoPago === "Efectivo") subtotalEfectivo += item.total;
-      });
-
-      const totalGeneral = subtotalNomina + subtotalDatafono + subtotalEfectivo;
-
-      // Acumuladores globales
-      totalNominaGlobal += subtotalNomina;
-      totalDatafonoGlobal += subtotalDatafono;
-      totalEfectivoGlobal += subtotalEfectivo;
-      totalGlobal += totalGeneral;
-
-      const resumen = new Table({
-        borders: {
-          top: { style: BorderStyle.NONE },
-          bottom: { style: BorderStyle.NONE },
-          left: { style: BorderStyle.NONE },
-          right: { style: BorderStyle.NONE },
-          insideVertical: { style: BorderStyle.NONE },
-        },
-        width: { size: 30, type: WidthType.PERCENTAGE },
-        rows: [
-          new TableRow({
-            children: [
-              new TableCell({
-                children: [new Paragraph("Subtotal Nómina:")],
-              }),
-              new TableCell({
-                children: [
-                  new Paragraph(`$ ${subtotalNomina.toLocaleString()}`),
-                ],
-              }),
-            ],
-          }),
-          new TableRow({
-            children: [
-              new TableCell({
-                children: [new Paragraph("Subtotal Datáfono:")],
-              }),
-              new TableCell({
-                children: [
-                  new Paragraph(`$ ${subtotalDatafono.toLocaleString()}`),
-                ],
-              }),
-            ],
-          }),
-          new TableRow({
-            children: [
-              new TableCell({
-                children: [new Paragraph("Subtotal Efectivo:")],
-              }),
-              new TableCell({
-                children: [
-                  new Paragraph(`$ ${subtotalEfectivo.toLocaleString()}`),
-                ],
-              }),
-            ],
-          }),
-          new TableRow({
-            children: [
-              new TableCell({
-                children: [new Paragraph({ text: "TOTAL:", bold: true })],
-              }),
-              new TableCell({
-                children: [
-                  new Paragraph({
-                    text: `$ ${totalGeneral.toLocaleString()}`,
-                    bold: true,
-                  }),
-                ],
-              }),
-            ],
-          }),
-        ],
-      });
-
-      content.push(new Paragraph({ text: "" }), resumen);
     });
 
-    // Resumen final global
+    // Resumen Final Global
     content.push(
       new Paragraph({
         text: "",
@@ -340,9 +317,7 @@ const InformeProm = () => {
             children: [
               new TableCell({ children: [new Paragraph("Total Nómina:")] }),
               new TableCell({
-                children: [
-                  new Paragraph(`$ ${totalNominaGlobal.toLocaleString()}`),
-                ],
+                children: [new Paragraph(`$ ${totalNominaGlobal.toLocaleString()}`)],
               }),
             ],
           }),
@@ -350,9 +325,7 @@ const InformeProm = () => {
             children: [
               new TableCell({ children: [new Paragraph("Total Datáfono:")] }),
               new TableCell({
-                children: [
-                  new Paragraph(`$ ${totalDatafonoGlobal.toLocaleString()}`),
-                ],
+                children: [new Paragraph(`$ ${totalDatafonoGlobal.toLocaleString()}`)],
               }),
             ],
           }),
@@ -360,18 +333,14 @@ const InformeProm = () => {
             children: [
               new TableCell({ children: [new Paragraph("Total Efectivo:")] }),
               new TableCell({
-                children: [
-                  new Paragraph(`$ ${totalEfectivoGlobal.toLocaleString()}`),
-                ],
+                children: [new Paragraph(`$ ${totalEfectivoGlobal.toLocaleString()}`)],
               }),
             ],
           }),
           new TableRow({
             children: [
               new TableCell({
-                children: [
-                  new Paragraph({ text: "TOTAL GENERAL:", bold: true }),
-                ],
+                children: [new Paragraph({ text: "TOTAL GENERAL:", bold: true })],
               }),
               new TableCell({
                 children: [
@@ -432,6 +401,5 @@ const InformeProm = () => {
     </div>
   );
 };
-
 
 export default InformeProm;

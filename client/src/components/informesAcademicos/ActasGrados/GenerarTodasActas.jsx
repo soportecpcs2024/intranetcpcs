@@ -161,7 +161,7 @@ const GenerarTodasActas = () => {
                     }),
                     new TableCell({
                       borders: { top: { color: "FFFFFF" }, bottom: { color: "FFFFFF" }, left: { color: "FFFFFF" }, right: { color: "FFFFFF" } },
-                      children: [new Paragraph({ children: [new TextRun({ text: "LUZ MIRIAM BOTERO ZAVALA", bold: true, size: 24 })], alignment: AlignmentType.CENTER })],
+                      children: [new Paragraph({ children: [new TextRun({ text: "LUZ MIRIAM BOTERO ZABALA", bold: true, size: 24 })], alignment: AlignmentType.CENTER })],
                     }),
                   ],
                 }),
