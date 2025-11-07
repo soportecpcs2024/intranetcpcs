@@ -1,25 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useProducts } from "../../../../contexts/ProductContext";
-import "./EstadisUnidades.css"; // Asegúrate de tener el archivo CSS para los estilos
-import imgTecnologia from "../../../../assets/png/1.png";
+import "./EstadisUnidades.css";
 import imgInmueble from "../../../../assets/png/2.png";
-import imgElectrodomestico from "../../../../assets/png/3.png";
+ 
+import { FaKitchenSet } from "react-icons/fa6";
+import { GrTechnology } from "react-icons/gr";
+import { SiLibreofficewriter } from "react-icons/si";
+
 const EstadisUnidades = () => {
   const { units } = useProducts();
   const [unitCounts, setUnitCounts] = useState([]);
 
   useEffect(() => {
     if (units && units.length > 0) {
-      // Agrupar las unidades por la categoría del producto y contar la cantidad de cada una
       const groupedUnits = units.reduce((acc, unit) => {
-        const product = unit.id_producto; // Asegúrate de que 'id_producto' existe
-        const productCategory = product?.category; // Verifica si la categoría está definida
+        const product = unit.id_producto;
+        const productCategory = product?.category;
 
         if (productCategory && product) {
           if (!acc[productCategory]) {
             acc[productCategory] = {
               count: 0,
-              product: product, // Guardamos el producto
+              product: product,
             };
           }
           acc[productCategory].count += 1;
@@ -27,22 +29,27 @@ const EstadisUnidades = () => {
         return acc;
       }, {});
 
-      // Convertir el objeto agrupado en un array para poder mapearlo
       setUnitCounts(Object.values(groupedUnits));
     }
   }, [units]);
 
-  // Función para obtener la imagen basada en la categoría
-  const getCategoryImage = (category) => {
+  // 🔹 Retornamos un componente o una imagen según la categoría
+  const getCategoryVisual = (category) => {
     switch (category) {
       case "Tecnología":
-        return imgTecnologia; // Imagen 1 para Tecnología
+        return <GrTechnology className="unit-icon" size={50} color="#007bff" />;
       case "Electrodoméstico":
-        return imgElectrodomestico; // Imagen 2 para Electrodoméstico
+        return  <FaKitchenSet className="unit-icon" size={50} />;
       case "Inmueble":
-        return imgInmueble; // Imagen 3 para Inmueble
+        return <SiLibreofficewriter className="unit-icon" size={50} />
       default:
-        return "/path/to/default-image.jpg"; // Imagen por defecto
+        return (
+          <img
+            src="/path/to/default-image.jpg"
+            alt="Imagen no disponible"
+            className="unit-image"
+          />
+        );
     }
   };
 
@@ -53,19 +60,9 @@ const EstadisUnidades = () => {
       ) : (
         unitCounts.map((unitGroup, index) => (
           <div key={index} className="unit-card">
-            {unitGroup.product ? (
-              <img
-                src={getCategoryImage(unitGroup.product.category)} // Llamamos a la función para obtener la imagen correcta
-                alt={unitGroup.product.name}
-                className="unit-image"
-              />
-            ) : (
-              <img
-                src="/path/to/default-image.jpg" // Reemplaza con la ruta de una imagen por defecto si no hay producto
-                alt="Imagen no disponible"
-                className="unit-image"
-              />
-            )}
+            <div className="unit-visual">
+              {getCategoryVisual(unitGroup.product?.category)}
+            </div>
             <div className="unit-info">
               <h4>{unitGroup.product.category}</h4>
               <p>Cantidad: {unitGroup.count}</p>

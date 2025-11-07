@@ -96,6 +96,7 @@ import InformeProm from "./components/tesoreria/DashboardTesoreria/Recaudo/Prom_
  
  
  
+ 
 
 const Prom_11 = React.lazy(() => import("./components/tesoreria/DashboardTesoreria/Recaudo/Prom_11/Prom_11"));
 const ListarProm = React.lazy(() => import("./components/tesoreria/DashboardTesoreria/Recaudo/Prom_11/ListarProm"));
@@ -103,7 +104,7 @@ const DashboardPapeleria = React.lazy(() => import("./pages/papeleria/DashboardP
 const RegistrarProductos = React.lazy(() => import("./components/papeleriaComponents/RegistrarProductos/RegistrarProductos"));
 const SolicitudProductos = React.lazy(() => import("./components/papeleriaComponents/solicitudProductos/SolicitudProductos"));
 const ListarProductosPapeleria = React.lazy(() => import("./components/papeleriaComponents/listarProductos/ListarProductosPapeleria"));
-// const RegistroPei = React.lazy(() => import("./components/informesAcademicos/PEI/Registro_PEI/RegistroPei"));
+const AsistenciaDiaria = React.lazy(() => import("./components/Academico/Asistencia_Diaria/AsistenciaDiaria"));
 
 
 
@@ -284,6 +285,7 @@ const AppContent = () => {
                 <Route path="locationdetails" element={<LocationDetails />} />
                 <Route path="editlocation/:id" element={<EditLocation />} />
               </Route>
+                <Route path="registroAsistencia" element={<AsistenciaDiaria />} />
               <Route path="informesgenerales" element={<LayoutInformesAdm />} />
               <Route path="informesExtraClasesDec" element={<InformeExtraClasesDec />} />
 

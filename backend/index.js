@@ -52,11 +52,15 @@ app.use('/api/docentes', docenteRoutes);
 const metasRoutes = require('./routes/metasGrupoRoutes');
 app.use('/api/metas', metasRoutes);
 
-// Rutas para las llegadas tardías
+// ----------- Rutas para las llegadas tardías -----------
 const llegadasTardeRoutes = require('./routes/llegadasTardesRoutes');
 app.use('/api/llegadastarde', llegadasTardeRoutes);
 
-// Rutas para los datos globales
+const controlAsisencia = require('./routes/asistenciaDiariaRoutes/asistenciaDiariaRoutes.js'); 
+app.use('/api/controlAsistencia', controlAsisencia);
+
+
+// ------------ Rutas para los datos globales ---------------
 const studentsGlobalRoutes = require('./routes/student_datos_globales_Routes');
 app.use('/api/studentGlobal', studentsGlobalRoutes);
 

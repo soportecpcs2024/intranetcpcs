@@ -122,6 +122,11 @@ const AdminHeader = () => {
                               Informe Extraclases
                             </Link>
                           </li>
+                          <li>
+                            <Link to="registroAsistencia">
+                               Asistencia diaria
+                            </Link>
+                          </li>
                         </ul>
                       )}
                     </div>
