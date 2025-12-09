@@ -6,6 +6,10 @@ import imgInmueble from "../../../../assets/png/2.png";
 import { FaKitchenSet } from "react-icons/fa6";
 import { GrTechnology } from "react-icons/gr";
 import { SiLibreofficewriter } from "react-icons/si";
+import { GiMusicalNotes } from "react-icons/gi";
+import { HiAcademicCap } from "react-icons/hi2";
+import { FaBookOpen } from "react-icons/fa6";
+import { AiFillSound } from "react-icons/ai";
 
 const EstadisUnidades = () => {
   const { units } = useProducts();
@@ -37,11 +41,19 @@ const EstadisUnidades = () => {
   const getCategoryVisual = (category) => {
     switch (category) {
       case "Tecnología":
-        return <GrTechnology className="unit-icon" size={50} color="#007bff" />;
+        return <GrTechnology className="unit-icon"  />;
       case "Electrodoméstico":
-        return  <FaKitchenSet className="unit-icon" size={50} />;
+        return  <FaKitchenSet className="unit-icon"    />;
       case "Inmueble":
-        return <SiLibreofficewriter className="unit-icon" size={50} />
+        return <SiLibreofficewriter className="unit-icon"   />
+      case "Material académco":
+        return <HiAcademicCap className="unit-icon"   />
+      case "Material académico":
+        return <FaBookOpen className="unit-icon"   />
+      case "Sonido":
+        return <AiFillSound className="unit-icon"   />
+      case "Música":
+        return <GiMusicalNotes className="unit-icon"   />
       default:
         return (
           <img
