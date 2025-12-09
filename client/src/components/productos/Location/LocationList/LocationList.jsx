@@ -105,9 +105,9 @@ const LocationList = () => {
           <tr>
             <th>Nombre</th>
             <th>Dirección</th>
-            <th>Detalles</th>
+            
             <th>Recibido Por</th>
-            <th>Estado</th>
+          
             <th>Acciones</th>
           </tr>
         </thead>
@@ -116,9 +116,9 @@ const LocationList = () => {
             <tr key={location._id}>
               <td>{location.nombre}</td>
               <td>{location.direccion}</td>
-              <td>{location.otros_detalles}</td>
+              
               <td>{location.recibido_por}</td>
-              <td>{location.estado}</td>
+            
               <td>
                 <div className="icon-container">
                   <Link

@@ -103,6 +103,7 @@ const SeguimientoMantenimiento = () => {
         <thead>
           <tr>
             <th>Título</th>
+            <th>Id</th>
             <th>Descripción</th>
             <th>Responsable</th>
             <th>Área</th>
@@ -115,6 +116,7 @@ const SeguimientoMantenimiento = () => {
         <tbody>
           {currentItems.map((m) => (
             <tr key={m._id}>
+              <td>{m._id}</td>
               <td>{m.titulo}</td>
               <td>{m.descripcion}</td>
               <td>{m.responsable}</td>

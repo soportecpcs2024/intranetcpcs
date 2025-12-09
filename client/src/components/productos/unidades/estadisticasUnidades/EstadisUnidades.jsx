@@ -77,7 +77,7 @@ const EstadisUnidades = () => {
             </div>
             <div className="unit-info">
               <h4>{unitGroup.product.category}</h4>
-              <p>Cantidad: {unitGroup.count}</p>
+              <p>Cant: {unitGroup.count}</p>
             </div>
           </div>
         ))

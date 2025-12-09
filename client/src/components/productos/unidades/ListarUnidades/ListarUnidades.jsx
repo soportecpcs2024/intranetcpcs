@@ -133,10 +133,10 @@ const ListarUnidades = () => {
           <tr>
             <th>Id</th>
             <th>Producto</th>
-            <th>Marca</th>
+            
             <th>Encargado</th>
             <th>Ubicación</th>
-            <th>Estado</th>
+            
             <th>Acciones</th>
           </tr>
         </thead>
@@ -145,10 +145,10 @@ const ListarUnidades = () => {
             <tr key={unit._id}>
               <td>{unit._id || "N/A"}</td>
               <td>{unit.id_producto?.subcategory || "N/A"}</td>
-              <td>{unit.id_producto?.brand || "N/A"}</td>
+              
               <td>{unit.location?.recibido_por || "N/A"}</td>
               <td>{unit.location?.direccion || "N/A"}</td>
-              <td>{unit.estado || "N/A"}</td>
+             
               <td>
                 <div className="icon-container">
                   <Link
