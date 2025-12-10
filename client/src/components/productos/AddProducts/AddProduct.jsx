@@ -190,6 +190,7 @@ const AddProduct = () => {
               <option value="Instrumento_musical">Instrumento musical</option>
               <option value="Amplificador Inst.">Amplificador Instrumento</option>
               <option value="Scanner">Scanner</option>
+              <option value="Otros">Otros</option>
 
                
                
