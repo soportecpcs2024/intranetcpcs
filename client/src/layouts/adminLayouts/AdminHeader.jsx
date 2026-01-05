@@ -83,11 +83,11 @@ const AdminHeader = () => {
                               Extra curricular
                             </Link>
                           </li>
-                          <li>
+                          {/* <li>
                             <Link to="/admin/rubricas_misiones">
                               Rúbrica de Evaluación – Programa de Misiones
                             </Link>
-                          </li>
+                          </li> */}
                         </ul>
                       )}
                     </div>
@@ -124,7 +124,7 @@ const AdminHeader = () => {
                           </li>
                           <li>
                             <Link to="registroAsistencia">
-                               Asistencia diaria
+                               Asistencia Extraclases
                             </Link>
                           </li>
                         </ul>
@@ -270,11 +270,11 @@ const AdminHeader = () => {
                               Extra curricular
                             </Link>
                           </li>
-                           <li>
+                           {/* <li>
                             <Link to="/admin/rubricas_misiones">
                               Rúbrica de Evaluación – Programa de Misiones
                             </Link>
-                          </li>
+                          </li> */}
                         </ul>
                       )}
                     </div>
