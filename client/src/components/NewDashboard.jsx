@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import BarChartComponent from "./BarChartComponentGrupos";
 import { Students } from "../api/DataApi";
-import PieChartComponent from "./PieChartComponent";
+
 import NewDatatable from "./NewDatatable";
 import MetasGrupo from "./MetasGrupo";
 import PromedioGrupos from "./PromedioGrupos";
