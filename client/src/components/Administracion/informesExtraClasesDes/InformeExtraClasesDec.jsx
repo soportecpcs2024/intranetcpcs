@@ -40,6 +40,8 @@ const InformeExtraClasesDec = () => {
         "900",
         
         "1100",
+        "2200",
+        "2300",
       ];
 
       const nuevasFacturas = facturas
@@ -96,6 +98,12 @@ const InformeExtraClasesDec = () => {
        
       case "1100":
         return "Exploración Motriz y Predeportiva Pre";
+      
+      case "2200":
+        return "Robótica";
+
+      case "2300":
+        return "Iniciación al Arte"  
 
       default:
         return `Código: ${cod}`;
@@ -236,6 +244,7 @@ const InformeExtraClasesDec = () => {
                   new TableCell({ children: [new Paragraph(item.grado)] }),
                   new TableCell({ children: [new Paragraph(item.dia)] }),
                   new TableCell({ children: [new Paragraph(item.hora)] }),
+                  new TableCell({ children: [new Paragraph(item.grado)] }),
                 ],
               })
           ),

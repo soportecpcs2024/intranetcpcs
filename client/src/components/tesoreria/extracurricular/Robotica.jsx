@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRecaudo } from "../../../contexts/RecaudoContext";
 
-const GuitarraBajo = () => {
+const Robotica = () => {
   const {
     facturasConAsistencias,
     fetchFacturasConAsistencias,
@@ -53,7 +53,7 @@ const GuitarraBajo = () => {
   const facturasFiltradas = facturasConAsistencias.filter(
     (factura) =>
       factura.mes_aplicado?.toLowerCase() === mesSeleccionado.toLowerCase() &&
-      factura.clases?.[0]?.nombreClase?.toLowerCase() === "guitarra y bajo"
+      factura.clases?.[0]?.nombreClase?.toLowerCase() === "Robotica"
   );
 
   return (
@@ -99,4 +99,5 @@ const GuitarraBajo = () => {
   );
 };
 
-export default GuitarraBajo;
+
+export default Robotica;

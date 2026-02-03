@@ -49,6 +49,8 @@ const Recaudo = () => {
     }
   }, [clases]);
 
+   
+
   const clasesFiltradas = clases.filter(
     (clase) =>
       clase.nombre !== "Antología" &&
@@ -86,6 +88,7 @@ const Recaudo = () => {
       return;
     }
 
+     
     const nuevaFactura = {
       estudianteId: estudiante,
       clases: selectedClases.map((clase) => ({
@@ -133,6 +136,7 @@ const Recaudo = () => {
         throw new Error("Error al guardar la factura");
       }
 
+      
       const nuevaFacturaGuardada = await response.json();
       setFacturaGuardada(nuevaFacturaGuardada);
 
@@ -151,7 +155,7 @@ const Recaudo = () => {
     }
   };
 
-  
+ 
 
   return (
     <div className="container-recaudo">

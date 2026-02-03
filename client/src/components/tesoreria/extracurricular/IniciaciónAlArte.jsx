@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRecaudo } from "../../../contexts/RecaudoContext";
 
-const GuitarraBajo = () => {
+const IniciacionAlArte = () => {
   const {
     facturasConAsistencias,
     fetchFacturasConAsistencias,
@@ -9,7 +9,7 @@ const GuitarraBajo = () => {
   } = useRecaudo();
 
   const [asistenciasLocal, setAsistenciasLocal] = useState({});
-  const [mesSeleccionado, setMesSeleccionado] = useState("Enero");
+  const [mesSeleccionado, setMesSeleccionado] = useState("Julio");
 
   const mesesDelAno = [
     "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
@@ -30,7 +30,6 @@ const GuitarraBajo = () => {
 
   const handleCheckboxChange = async (facturaId, key) => {
     const nuevoEstado = !asistenciasLocal?.[facturaId]?.[key];
-
     const nuevasAsistencias = {
       ...asistenciasLocal[facturaId],
       [key]: nuevoEstado,
@@ -53,7 +52,7 @@ const GuitarraBajo = () => {
   const facturasFiltradas = facturasConAsistencias.filter(
     (factura) =>
       factura.mes_aplicado?.toLowerCase() === mesSeleccionado.toLowerCase() &&
-      factura.clases?.[0]?.nombreClase?.toLowerCase() === "guitarra y bajo"
+      factura.clases?.[0]?.nombreClase?.toLowerCase() === "Iniciación al Arte"
   );
 
   return (
@@ -76,9 +75,12 @@ const GuitarraBajo = () => {
       </div>
 
       {facturasFiltradas.map((factura) => (
-        <ul key={factura._id} className="lista_extracurricular_pagados">
+        <ul
+          key={factura._id}
+          className="lista_extracurricular_pagados"
+        >
           <li><strong>Estudiante :</strong> {factura.estudianteId?.nombre || "Desconocido"}</li>
-          <li><strong>Grupo :</strong> {factura.estudianteId?.grado || "Desconocido"}</li>
+           <i><strong>Grupo :</strong> {factura.estudianteId?.grado || "Desconocido"}</i>
           <li><strong>Clase :</strong> {factura.clases?.[0]?.nombreClase || "-"}</li>
           <li><strong>Mes :</strong> {factura.mes_aplicado}</li>
           <li>
@@ -99,4 +101,5 @@ const GuitarraBajo = () => {
   );
 };
 
-export default GuitarraBajo;
+
+export default IniciacionAlArte;

@@ -9,7 +9,7 @@ const Artes = () => {
   } = useRecaudo();
 
   const [asistenciasLocal, setAsistenciasLocal] = useState({});
-  const [mesSeleccionado, setMesSeleccionado] = useState("Julio");
+  const [mesSeleccionado, setMesSeleccionado] = useState("Enero");
 
   const mesesDelAno = [
     "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
@@ -30,6 +30,7 @@ const Artes = () => {
 
   const handleCheckboxChange = async (facturaId, key) => {
     const nuevoEstado = !asistenciasLocal?.[facturaId]?.[key];
+
     const nuevasAsistencias = {
       ...asistenciasLocal[facturaId],
       [key]: nuevoEstado,
@@ -52,7 +53,7 @@ const Artes = () => {
   const facturasFiltradas = facturasConAsistencias.filter(
     (factura) =>
       factura.mes_aplicado?.toLowerCase() === mesSeleccionado.toLowerCase() &&
-      factura.clases?.[0]?.nombreClase?.toLowerCase() === "arte"
+      factura.clases?.[0]?.nombreClase?.toLowerCase() === "Arte"
   );
 
   return (
@@ -75,13 +76,11 @@ const Artes = () => {
       </div>
 
       {facturasFiltradas.map((factura) => (
-        <ul
-          key={factura._id}
-          className="lista_extracurricular_pagados"
-        >
-          <li><strong>Estudiante:</strong> {factura.estudianteId?.nombre || "Desconocido"}</li>
-          <li><strong>Clase:</strong> {factura.clases?.[0]?.nombreClase || "-"}</li>
-          <li><strong>Mes:</strong> {factura.mes_aplicado}</li>
+        <ul key={factura._id} className="lista_extracurricular_pagados">
+          <li><strong>Estudiante :</strong> {factura.estudianteId?.nombre || "Desconocido"}</li>
+          <li><strong>Grupo :</strong> {factura.estudianteId?.grado || "Desconocido"}</li>
+          <li><strong>Clase :</strong> {factura.clases?.[0]?.nombreClase || "-"}</li>
+          <li><strong>Mes :</strong> {factura.mes_aplicado}</li>
           <li>
             {["asistencia1", "asistencia2", "asistencia3", "asistencia4"].map((key) => (
               <label key={key} className="ckeck_asistencias">
@@ -99,5 +98,6 @@ const Artes = () => {
     </div>
   );
 };
+
 
 export default Artes;

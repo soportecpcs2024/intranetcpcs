@@ -13,6 +13,9 @@ export const RecaudoProvider = ({ children }) => {
   const [facturasConAsistencias, setFacturasConAsistencias] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // ✅ NUEVO: facturas completas (endpoint nuevo)
+  const [facturasCompletas, setFacturasCompletas] = useState([]);
+
   const apiBaseUrl = import.meta.env.VITE_BACKEND_URL;
 
   const fetchEstudiantes = useCallback(async () => {
@@ -43,6 +46,7 @@ export const RecaudoProvider = ({ children }) => {
     }
   }, [apiBaseUrl]);
 
+  // ✅ EXISTENTE: facturas "clásicas"
   const fetchFacturas = useCallback(async () => {
     try {
       const response = await axios.get(`${apiBaseUrl}/api/recaudo/facturas`);
@@ -52,10 +56,26 @@ export const RecaudoProvider = ({ children }) => {
     }
   }, [apiBaseUrl]);
 
+  // ✅ NUEVO: facturas "completas"
+  const fetchFacturasCompletas = useCallback(async () => {
+    try {
+      const response = await axios.get(`${apiBaseUrl}/api/recaudo/facturas-completas`);
+      setFacturasCompletas(response.data);
+    } catch (error) {
+      console.error("Error fetching facturas completas:", error);
+    }
+  }, [apiBaseUrl]);
+
   const crearFactura = async (facturaData) => {
     try {
       const response = await axios.post(`${apiBaseUrl}/api/recaudo/facturas`, facturaData);
+
+      // ✅ Mantienes compatibilidad: actualizas "facturas" como antes
       setFacturas((prevFacturas) => [...prevFacturas, response.data]);
+
+      // ✅ Opcional: si quieres mantener el estado de completas actualizado sin esperar refresh:
+      // await fetchFacturasCompletas();
+
     } catch (error) {
       console.error("Error creando factura:", error);
     }
@@ -71,6 +91,10 @@ export const RecaudoProvider = ({ children }) => {
     try {
       await axios.delete(`${apiBaseUrl}/api/recaudo/facturas/${facturaId}`);
       alert("Factura eliminada correctamente");
+
+      // ✅ Opcional: mantener completas sincronizadas
+      // setFacturasCompletas((prev) => prev.filter((f) => f._id !== facturaId));
+
     } catch (error) {
       console.error("Error eliminando factura:", error);
       alert("No se pudo eliminar la factura");
@@ -125,7 +149,7 @@ export const RecaudoProvider = ({ children }) => {
     }
   };
 
-  // ✅ NUEVO: Obtener facturas con asistencias
+  // ✅ EXISTENTE: Obtener facturas con asistencias
   const fetchFacturasConAsistencias = useCallback(async () => {
     try {
       const response = await axios.get(`${apiBaseUrl}/api/asistenciasextra`);
@@ -135,19 +159,18 @@ export const RecaudoProvider = ({ children }) => {
     }
   }, [apiBaseUrl]);
 
-  // ✅ NUEVO: Actualizar asistencias por ID de factura
-const actualizarAsistenciasFactura = async (asistenciaId, data) => {
-  try {
-    const response = await axios.put(
-      `${apiBaseUrl}/api/asistenciasextra/${asistenciaId}/asistencias`,
-      data
-    );
-    return response.data;
-  } catch (error) {
-    console.error("Error actualizando asistencias:", error);
-  }
-};
-
+  // ✅ EXISTENTE: Actualizar asistencias por ID de factura
+  const actualizarAsistenciasFactura = async (asistenciaId, data) => {
+    try {
+      const response = await axios.put(
+        `${apiBaseUrl}/api/asistenciasextra/${asistenciaId}/asistencias`,
+        data
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error actualizando asistencias:", error);
+    }
+  };
 
   // Carga inicial
   useEffect(() => {
@@ -157,7 +180,9 @@ const actualizarAsistenciasFactura = async (asistenciaId, data) => {
       fetchFacturas(),
       fetchAlmuerzos(),
       fetchAlmuerzoFactura(),
-      fetchFacturasConAsistencias()
+      fetchFacturasConAsistencias(),
+      // ✅ NUEVO: cargar completas (si lo quieres desde el inicio)
+      fetchFacturasCompletas(),
     ]).finally(() => setLoading(false));
   }, [
     fetchEstudiantes,
@@ -165,7 +190,8 @@ const actualizarAsistenciasFactura = async (asistenciaId, data) => {
     fetchFacturas,
     fetchAlmuerzos,
     fetchAlmuerzoFactura,
-    fetchFacturasConAsistencias
+    fetchFacturasConAsistencias,
+    fetchFacturasCompletas,
   ]);
 
   return (
@@ -191,7 +217,11 @@ const actualizarAsistenciasFactura = async (asistenciaId, data) => {
         factura_id,
         facturasConAsistencias,
         fetchFacturasConAsistencias,
-        actualizarAsistenciasFactura // ✅ Nuevo
+        actualizarAsistenciasFactura,
+
+        // ✅ NUEVO: exponer completas
+        facturasCompletas,
+        fetchFacturasCompletas,
       }}
     >
       {children}

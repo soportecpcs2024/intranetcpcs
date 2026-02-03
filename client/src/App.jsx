@@ -93,6 +93,8 @@ import InformeAntologia from "./components/tesoreria/DashboardTesoreria/Recaudo/
 import DescargaInformeEPPagasExcel from "./components/EscPadres/DescargarInformeEPPagas/DescargaInformeEPPagas";
 import Rubricas from "./components/Academico/Rubricas/Rubricas";
 import InformeProm from "./components/tesoreria/DashboardTesoreria/Recaudo/Prom_11/InformeProm";
+import IniciacionAlArte from "./components/tesoreria/extracurricular/IniciaciónAlArte";
+import Robotica from "./components/tesoreria/extracurricular/Robotica";
  
  
  
@@ -262,6 +264,8 @@ const AppContent = () => {
                 <Route path="voleibol" element={<Voleibol />} />
                 <Route path="microfutbol" element={<Microfutbol />} />
                 <Route path="arte" element={<Artes />} />
+                <Route path="iniciacionAlArte" element={<IniciacionAlArte />} />
+                <Route path="robotica" element={<Robotica />} />
 
                 <Route
                   path="exploracionmotriz"
