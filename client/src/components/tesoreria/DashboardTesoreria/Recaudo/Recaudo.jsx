@@ -55,7 +55,11 @@ const Recaudo = () => {
       clase.nombre !== "El arte de ser padres" &&
       clase.nombre !== "Ciberfamilias" &&
       clase.nombre !== "Mayordomía financiera" &&
-      clase.nombre !== "Guiando a sus adolescentes" 
+      clase.nombre !== "Guiando a sus adolescentes" &&
+      clase.nombre !== "Formulario 2025" &&
+      clase.nombre !== "Formulario 2026" &&
+      clase.nombre !== "Open House" &&
+      clase.nombre !== "Prom 11" 
 
   );
 

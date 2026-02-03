@@ -178,9 +178,9 @@ app.use('/api/papeleria',papeleria);
 // app. use('/api/admisiones', procesoAdmisiones);
  
 
-// ------------ Import Excel (Preview) -------------
-const importExcelRoutes = require("./routes/dataExcel/importExcelRoutes.js");
-app.use("/api/import-excel", importExcelRoutes);
+// // ------------ Import Excel (Preview) -------------
+// const importExcelRoutes = require("./routes/dataExcel/importExcelRoutes.js");
+// app.use("/api/import-excel", importExcelRoutes);
 
 
 
