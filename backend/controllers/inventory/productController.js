@@ -23,11 +23,14 @@ const createProduct = asyncHandler(async (req, res) => {
 
   // Verificar si el producto con el mismo nombre o modelo ya existe
   const existingProduct = await Product.findOne({ name });
-  const existingProductModel = await Product.findOne({ model });
+
+  let existingProductModel = null;
+  if (model && model.trim() !== "") {
+    existingProductModel = await Product.findOne({ model });
+  }
 
   if (existingProduct || existingProductModel) {
-    res.status(400).send({ msg: "No puedes registrar un producto ya existente" });
-    return;
+    return res.status(400).json({ msg: "No puedes registrar un producto ya existente" });
   }
 
   // Manejar la carga de la imagen si se proporciona
