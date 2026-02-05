@@ -132,6 +132,7 @@ const ListarUnidades = () => {
         <thead>
           <tr>
             <th>Id</th>
+            <th>Nombre</th>
             <th>Producto</th>
             
             <th>Encargado</th>
@@ -144,6 +145,7 @@ const ListarUnidades = () => {
           {currentItems.map((unit) => (
             <tr key={unit._id}>
               <td>{unit._id || "N/A"}</td>
+              <td>{unit.id_producto?.name || "N/A"}</td>
               <td>{unit.id_producto?.subcategory || "N/A"}</td>
               
               <td>{unit.location?.recibido_por || "N/A"}</td>
