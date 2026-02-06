@@ -50,7 +50,7 @@ const ListarFacturas = () => {
   
 useEffect(() => {
   if (facturas.length > 0 && Object.keys(estudiantesMap).length > 0) {
-    const codValidos = ["100","200","300","400","500","600","700","800","900","1000","1100"];
+    const codValidos = ["100","200","300","400","500","600","700","800","900","1000","1100","2200","2300"];
 
     const nuevasFacturas = facturas
       .filter((factura) =>

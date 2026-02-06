@@ -35,6 +35,8 @@ const InformeClasesExtracurriculares = () => {
         "900",
         "1000",
         "1100",
+        "2200",
+        "2300",
       ];
 
       const nuevasFacturas = facturas
@@ -92,6 +94,10 @@ const InformeClasesExtracurriculares = () => {
         return "Arte";
       case "1100":
         return "Exploración Motriz y Predeportiva Pre";
+      case "2200":
+        return "Robótica";
+      case "2300":
+        return "Iniciación al Arte";
 
       default:
         return `Código: ${cod}`;

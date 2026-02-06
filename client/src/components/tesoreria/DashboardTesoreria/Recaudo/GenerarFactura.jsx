@@ -290,12 +290,12 @@ const GenerarFactura = ({ factura, estudiante, setEstudiantedata }) => {
                                     size: 20,
                                   }),
                                   new TextRun({
-                                    text: clase.dia.toLowerCase(), // Convertir a minúsculas
+                                    text: "", //clase.dia.toLowerCase(), // Convertir a minúsculas
                                     color: "FF0000", // Rojo
                                     size: 20,
                                   }),
                                   new TextRun({
-                                    text: ` ${clase.hora}`, // Mantener el espacio antes de la hora
+                                    text:"",//${clase.hora}`, // Mantener el espacio antes de la hora
                                     color: "FF0000", // Rojo
                                     size: 20,
                                   }),
