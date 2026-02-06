@@ -225,9 +225,25 @@ const AdminHeader = () => {
                     </div>
                   </li>
 
-                  <li>
+                   <li>
                     <div className="dropdown">
-                      <Link to="admisiones">Admisiones</Link>
+                      <Link onClick={toggleDropdown}>Contabilidad</Link>
+
+                      {isDropdownOpen && (
+                        <ul className="dropdown-menu">
+                          <li>
+                            <Link to="cargar_archivo">Cargar Archivo</Link>
+                          </li>
+                          <li>
+                            <Link to="descargar_colilla">
+                              Descargar colilla
+                            </Link>
+                          </li>
+                          
+                         
+                          
+                        </ul>
+                      )}
                     </div>
                   </li>
 

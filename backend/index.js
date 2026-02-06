@@ -179,10 +179,8 @@ app.use('/api/papeleria',papeleria);
  
 
 // // ------------ Import Excel (Preview) -------------
-// const importExcelRoutes = require("./routes/dataExcel/importExcelRoutes.js");
-// app.use("/api/import-excel", importExcelRoutes);
-
-
+const importExcelRoutes = require("./routes/contabilidad/nominaRoutes");
+app.use("/api/nomina",importExcelRoutes);
 
 // Configuración y arranque del servidor
 const PORT = process.env.SERVER_PORT || 3000;

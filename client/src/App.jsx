@@ -99,6 +99,7 @@ import Robotica from "./components/tesoreria/extracurricular/Robotica";
  
  
  
+ 
 
 const Prom_11 = React.lazy(() => import("./components/tesoreria/DashboardTesoreria/Recaudo/Prom_11/Prom_11"));
 const ListarProm = React.lazy(() => import("./components/tesoreria/DashboardTesoreria/Recaudo/Prom_11/ListarProm"));
@@ -107,6 +108,8 @@ const RegistrarProductos = React.lazy(() => import("./components/papeleriaCompon
 const SolicitudProductos = React.lazy(() => import("./components/papeleriaComponents/solicitudProductos/SolicitudProductos"));
 const ListarProductosPapeleria = React.lazy(() => import("./components/papeleriaComponents/listarProductos/ListarProductosPapeleria"));
 const AsistenciaDiaria = React.lazy(() => import("./components/Academico/Asistencia_Diaria/AsistenciaDiaria"));
+const CargarArchivoExcel = React.lazy(() => import("./components/contabilidad/cargarArchivoExcel/CargarArchivoExcel"));
+const Generar_colilla = React.lazy(() => import("./components/contabilidad/solicitarColilla/Generar_colilla"));
 
 
 
@@ -362,12 +365,8 @@ const AppContent = () => {
 
               
 
-              <Route path="admisiones" element={<LayoutAdmisiones />}>
-                <Route
-                  path="formulario_inscripcion"
-                  element={<GenerarPreInscripcion />}
-                />
-              </Route>
+              <Route path="cargar_archivo" element={<CargarArchivoExcel />}></Route>
+              <Route path="descargar_colilla" element={<Generar_colilla/>}></Route>
 
               <Route path="esc_padres" element={<DashboardEscPadres />} />
               <Route path="crear_ep" element={<CrearEscuelaPadres />} />
