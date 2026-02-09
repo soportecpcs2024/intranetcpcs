@@ -1,24 +1,21 @@
 import { Document, Page, Text, View, StyleSheet, Image } from "@react-pdf/renderer";
 import { useEffect, useState } from "react";
 
+const LOGO_URL =
+  "https://res.cloudinary.com/dvugfmopj/image/upload/v1770665378/logo2025_h8wlte.png";
+
 const styles = StyleSheet.create({
   page: { padding: 18, fontSize: 10, fontFamily: "Helvetica" },
   card: { border: "1pt solid #111", padding: 10 },
   topRow: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
   title: { fontSize: 14, fontWeight: "bold", textAlign: "center", flex: 1 },
   small: { fontSize: 9 },
-
   line: { height: 1, backgroundColor: "#111", marginVertical: 8 },
   row: { flexDirection: "row", gap: 8 },
   col: { flexGrow: 1 },
   label: { fontSize: 12, fontWeight: "bold" },
   value: { fontSize: 9, marginTop: 2 },
-
-  logo: {
-    width: 50,
-    height: 50,
-  },
-
+  logo: { width: 50, height: 50 },
   sectionHeader: {
     flexDirection: "row",
     borderTop: "1pt solid #111",
@@ -38,60 +35,64 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
-
   bodyRow: { flexDirection: "row" },
   half: { width: "50%", padding: 8, borderRight: "1pt solid #111" },
   halfRight: { width: "50%", padding: 8 },
-
-  itemRow: { flexDirection: "row", justifyContent: "space-between", marginBottom: 5 },
   totalRow: { marginTop: 8, paddingTop: 6, borderTop: "1pt solid #111" },
-
   bigTotal: { marginTop: 6, paddingTop: 8, borderTop: "1pt solid #111" },
   bigTotalText: { fontSize: 12, fontWeight: "bold", textAlign: "right" },
-
   firma: { marginTop: 18, paddingTop: 14, borderTop: "1pt solid #111", fontSize: 10 },
 });
 
 export default function ColillaPDF({ data, cedula }) {
   const [logo, setLogo] = useState(null);
+  const [logoError, setLogoError] = useState(null);
 
-  // Cargar imagen antes de generar el PDF
   useEffect(() => {
+    let alive = true;
+
     const loadLogo = async () => {
       try {
-        const response = await fetch("/logo2025.png");
+        setLogoError(null);
+
+        const response = await fetch(LOGO_URL, { cache: "no-store" });
+        if (!response.ok) throw new Error(`HTTP ${response.status} cargando logo`);
+
         const blob = await response.blob();
 
         const reader = new FileReader();
         reader.onloadend = () => {
-          setLogo(reader.result);
+          if (alive) setLogo(reader.result); // base64
+        };
+        reader.onerror = () => {
+          if (alive) setLogoError("No se pudo leer el logo (FileReader).");
         };
         reader.readAsDataURL(blob);
-      } catch (error) {
-        console.error("Error cargando logo:", error);
+      } catch (err) {
+        console.error("Error cargando logo:", err);
+        if (alive) setLogoError(String(err?.message || err));
       }
     };
 
     loadLogo();
+    return () => {
+      alive = false;
+    };
   }, []);
 
-  // ⛔ No generar PDF hasta tener logo
-  if (!logo) {
-    return null;
-  }
+  // ⛔ No generar PDF hasta tener logo (o decide un fallback)
+  if (!logo) return null;
 
   const fecha = String(data?.fechaColilla || data?.fecha || "").slice(0, 10) || "N/A";
   const empleado = data?.nombresYApellidos || "N/A";
   const cargo = data?.cargo || data?.dependencia || "N/A";
 
-  // INGRESOS
   const salario = data?.salarioOrdinario ?? data?.salario ?? 0;
   const auxTransporte = data?.auxTte ?? 0;
   const horasExt = data?.horasExtra ?? 0;
   const vacaciones = data?.vacaciones ?? 0;
   const otrosIng = data?.otrosIngresos ?? data?.otrosPagos ?? 0;
 
-  // EGRESOS
   const epsAfp = data?.epsAfp ?? data?.eps ?? 0;
   const cxp = data?.cxpColegio ?? data?.cxp ?? 0;
   const funeraria = data?.funeraria ?? 0;
@@ -195,12 +196,12 @@ function Item({ label, value, bold }) {
 
 function toNum(v) {
   const n = Number(v);
-  return isFinite(n) ? n : 0;
+  return Number.isFinite(n) ? n : 0;
 }
 
 function formatCOP(value) {
   const n = Number(value);
-  if (!isFinite(n)) return "$ 0";
+  if (!Number.isFinite(n)) return "$ 0";
   try {
     return n.toLocaleString("es-CO", { style: "currency", currency: "COP" });
   } catch {
