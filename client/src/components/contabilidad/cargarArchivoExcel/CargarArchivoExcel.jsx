@@ -81,6 +81,7 @@ const CargarArchivoExcel = () => {
               onChange={onPickFile}
               className="fileInput"
               disabled={loading}
+              
             />
 
             <div className="dropContent">
