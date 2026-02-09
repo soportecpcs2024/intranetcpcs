@@ -1,5 +1,5 @@
 import { Document, Page, Text, View, StyleSheet, Image } from "@react-pdf/renderer";
-
+import { useEffect, useState } from "react";
 
 const styles = StyleSheet.create({
   page: { padding: 18, fontSize: 10, fontFamily: "Helvetica" },
@@ -7,18 +7,17 @@ const styles = StyleSheet.create({
   topRow: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
   title: { fontSize: 14, fontWeight: "bold", textAlign: "center", flex: 1 },
   small: { fontSize: 9 },
-  
+
   line: { height: 1, backgroundColor: "#111", marginVertical: 8 },
   row: { flexDirection: "row", gap: 8 },
   col: { flexGrow: 1 },
   label: { fontSize: 12, fontWeight: "bold" },
   value: { fontSize: 9, marginTop: 2 },
- 
-  logo: {
-  width: 50,
-  height: 50,
-},
 
+  logo: {
+    width: 50,
+    height: 50,
+  },
 
   sectionHeader: {
     flexDirection: "row",
@@ -51,23 +50,48 @@ const styles = StyleSheet.create({
   bigTotalText: { fontSize: 12, fontWeight: "bold", textAlign: "right" },
 
   firma: { marginTop: 18, paddingTop: 14, borderTop: "1pt solid #111", fontSize: 10 },
-  
 });
 
 export default function ColillaPDF({ data, cedula }) {
-  // ✅ Ajusta estos nombres si tu backend usa otros
+  const [logo, setLogo] = useState(null);
+
+  // Cargar imagen antes de generar el PDF
+  useEffect(() => {
+    const loadLogo = async () => {
+      try {
+        const response = await fetch("/logo2025.png");
+        const blob = await response.blob();
+
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setLogo(reader.result);
+        };
+        reader.readAsDataURL(blob);
+      } catch (error) {
+        console.error("Error cargando logo:", error);
+      }
+    };
+
+    loadLogo();
+  }, []);
+
+  // ⛔ No generar PDF hasta tener logo
+  if (!logo) {
+    return null;
+  }
+
   const fecha = String(data?.fechaColilla || data?.fecha || "").slice(0, 10) || "N/A";
   const empleado = data?.nombresYApellidos || "N/A";
   const cargo = data?.cargo || data?.dependencia || "N/A";
 
-  // INGRESOS (ejemplos)
+  // INGRESOS
   const salario = data?.salarioOrdinario ?? data?.salario ?? 0;
   const auxTransporte = data?.auxTte ?? 0;
   const horasExt = data?.horasExtra ?? 0;
   const vacaciones = data?.vacaciones ?? 0;
   const otrosIng = data?.otrosIngresos ?? data?.otrosPagos ?? 0;
 
-  // EGRESOS (ejemplos)
+  // EGRESOS
   const epsAfp = data?.epsAfp ?? data?.eps ?? 0;
   const cxp = data?.cxpColegio ?? data?.cxp ?? 0;
   const funeraria = data?.funeraria ?? 0;
@@ -89,8 +113,7 @@ export default function ColillaPDF({ data, cedula }) {
       <Page size="A4" style={styles.page}>
         <View style={styles.card}>
           <View style={styles.topRow}>
-            <Image style={styles.logo} src="/logo2025.png" />
-
+            <Image style={styles.logo} src={logo} />
             <Text style={styles.title}>COMPROBANTE DE PAGO</Text>
             <Text style={styles.small}>Fecha: {fecha}</Text>
           </View>
@@ -131,7 +154,6 @@ export default function ColillaPDF({ data, cedula }) {
               <Item label="Horas ext / Bonif" value={horasExt} />
               <Item label="Vacaciones" value={vacaciones} />
               <Item label="Otros pagos" value={otrosIng} />
-
               <View style={styles.totalRow}>
                 <Item label="TOTAL" value={totalIngresos} bold />
               </View>
@@ -144,7 +166,6 @@ export default function ColillaPDF({ data, cedula }) {
               <Item label="Libr. Comfama" value={comfama} />
               <Item label="Pensión" value={pension} />
               <Item label="Otros" value={otrosEgr} />
-
               <View style={styles.totalRow}>
                 <Item label="TOTAL" value={totalEgresos} bold />
               </View>
@@ -180,7 +201,6 @@ function toNum(v) {
 function formatCOP(value) {
   const n = Number(value);
   if (!isFinite(n)) return "$ 0";
-  // React-PDF no soporta Intl en algunos entornos antiguos; pero normalmente funciona.
   try {
     return n.toLocaleString("es-CO", { style: "currency", currency: "COP" });
   } catch {
