@@ -289,3 +289,32 @@ exports.getByCedulaFecha = async (req, res) => {
     });
   }
 };
+
+
+// ✅ Buscar todos los registros por cédula
+exports.getByCedula = async (req, res) => {
+  try {
+    const { cedula } = req.params;
+
+    const data = await NominaPago.find({ cedula })
+      .sort({ fechaColilla: -1 }); // opcional: ordena por fecha (más reciente primero)
+
+    if (!data || data.length === 0) {
+      return res.status(404).json({
+        message: "No se encontraron registros para esa cédula",
+      });
+    }
+
+    res.json({
+      cedula,
+      totalRegistros: data.length,
+      registros: data,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "Error buscando nómina por cédula",
+      error: err.message,
+    });
+  }
+};
+

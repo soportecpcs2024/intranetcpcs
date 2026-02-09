@@ -10,5 +10,7 @@ router.post("/upload", upload.single("file"), nominaController.uploadNomina);
 // GET: buscar por cédula + fecha
 // Ej: /api/nomina/by-cedula-fecha/1034929374?fecha=2026-01-30
 router.get("/by-cedula-fecha/:cedula", nominaController.getByCedulaFecha);
+router.get("/by-cedula/:cedula", nominaController.getByCedula);
+
 
 module.exports = router;

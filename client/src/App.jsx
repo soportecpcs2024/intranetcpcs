@@ -7,6 +7,7 @@ import { UserProvider } from "./contexts/UserContext";
 import { RecaudoProvider } from "./contexts/RecaudoContext";
 import { EscuelaPadresProvider } from "./contexts/EscuelaPadresContext";
 import { EvaluacionesProvider } from "./contexts/EvaluacionesContext";
+import { NominaProvider } from "./contexts/NominaContext";
 
 import { TareasProvider } from "./contexts/TareaContext";
 import { Auth, Blog } from "./pages/admin";
@@ -95,6 +96,7 @@ import Rubricas from "./components/Academico/Rubricas/Rubricas";
 import InformeProm from "./components/tesoreria/DashboardTesoreria/Recaudo/Prom_11/InformeProm";
 import IniciacionAlArte from "./components/tesoreria/extracurricular/IniciaciónAlArte";
 import Robotica from "./components/tesoreria/extracurricular/Robotica";
+
  
  
  
@@ -127,9 +129,7 @@ const SeguimientoMantenimiento = React.lazy(() =>
     "./components/programadorTareas/paginasTareas/SeguimientoMantenimiento"
   )
 );
-const LayoutAdmisiones = React.lazy(() =>
-  import("./components/Admisiones/LayoutAdmisiones")
-);
+ 
 const LayoutInformesAdm = React.lazy(() =>
   import("./components/Administracion/informeTareas/LayoutInformesAdm")
 );
@@ -201,7 +201,10 @@ const App = () => {
                 <EscuelaPadresProvider>
                   <ActasDeGradoProvider>
                     <EvaluacionesProvider>
+                      <NominaProvider>
                       <AppContent />
+
+                      </NominaProvider>
 
                     </EvaluacionesProvider>
                   </ActasDeGradoProvider>

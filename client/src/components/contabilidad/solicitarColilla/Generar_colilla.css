@@ -1,0 +1,270 @@
+:root{
+  --blueMain: #1e3a8a;
+  --blueLight: #2563eb;
+  --yellow: #facc15;
+  --borderLight: #d1d5db;
+  --textDark: #111827;
+  --textMuted: #6b7280;
+}
+
+/* CONTENEDOR GENERAL */
+.colWrap{
+  min-height: calc(100vh - 80px);
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: #ffffff;
+}
+
+/* TARJETA PRINCIPAL */
+.colCard{
+  width: min(800px, 100%);
+  border: 1px solid var(--borderLight);
+  background:
+    radial-gradient(1200px 600px at 20% 0%, rgba(232, 231, 240, 0.25), transparent 60%),
+    radial-gradient(1000px 600px at 90% 10%, rgba(53,201,255,.18), transparent 55%),
+    linear-gradient(180deg, #192b55, #0b1220);
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px;
+  border-radius: 18px;
+  padding: 14px;
+}
+
+/* HEADER */
+.colHeader{
+  display:flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items:flex-start;
+  padding: 8px 6px 18px;
+  border-bottom: 3px solid var(--yellow);
+}
+
+.colTitle{
+  margin:0;
+  color: white;
+  font-size: 28px;
+}
+
+.colSub{
+  margin: 6px 0 0;
+  color: white;
+  font-size: 14px;
+}
+
+.badge{
+  color: white;
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--blueLight);
+  font-weight: 600;
+}
+
+/* BUSCADOR */
+.searchRow{
+  display:flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: end;
+  padding: 10px 6px;
+}
+
+.inputGroup{
+  flex: 1;
+  min-width: 240px;
+}
+
+.label{
+  display:block;
+  color: white;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.input {
+  width: 100%;
+  border: 1px solid var(--borderLight);
+  background: white;
+  color: var(--textDark);
+  border-radius: 12px;
+  padding: 12px;
+  outline: none;
+}
+
+.input::placeholder {
+  color: #9ca3af;
+}
+
+.input:focus{
+  border-color: var(--blueLight);
+  box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
+}
+
+/* BOTONES */
+.btn{
+  border-radius: 12px;
+  padding: 11px 14px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  color: black;
+}
+
+.btnPrimary{
+  background: var(--blueLight);
+  color: white;
+}
+
+.btnPrimary:hover{
+  background: var(--blueMain);
+}
+
+.btnGhost{
+  background: #f3f4f6;
+  color: var(--textDark);
+}
+
+.btnSmall{
+  padding: 7px 10px;
+  font-size: 13px;
+}
+
+.btnSoft{
+  background: var(--yellow);
+  color: #111;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 700;
+}
+
+/* ALERTAS */
+.alert{
+  margin: 10px 6px 0;
+  border-radius: 14px;
+  padding: 10px 12px;
+  font-size: 13px;
+}
+
+.alertError{
+  background: #fee2e2;
+  border: 1px solid #fca5a5;
+  color: #991b1b;
+}
+
+/* TABLA */
+.tableCard{
+  margin-top: 14px;
+  border: 1px solid var(--borderLight);
+  border-radius: 16px;
+  background: #e0e0e0;
+  padding: 14px;
+}
+
+.tableHeader{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.tableHeader h3{
+  margin:0;
+  color: black;
+  font-size: 15px;
+}
+
+.muted{ color:black; }
+
+.tableScroll{
+  overflow: hidden; /* sin scroll horizontal */
+}
+
+.table{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th, .table td{
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--borderLight);
+  color: var(--textDark);
+  font-size: 15px;
+}
+
+.table th{
+  background: rgb(73, 73, 73);
+  color: white;
+  text-align: left;
+}
+
+.right{ text-align:right; }
+.strong{ font-weight: 700; }
+
+/* ESTADO VACÍO */
+.empty{
+  padding: 22px 10px;
+  text-align:center;
+}
+
+.emptyTitle{
+  margin: 0;
+  color: var(--blueMain);
+  font-weight: 800;
+}
+
+.emptyText{
+  margin: 6px 0 0;
+  color: var(--textMuted);
+}
+
+/* FOOTER */
+.footerNote{
+  margin-top: 12px;
+  padding: 10px 6px 0;
+  border-top: 2px solid var(--yellow);
+  color: var(--textMuted);
+  font-size: 12px;
+  text-align: center;
+}
+
+/* =========================
+   RESPONSIVE MÓVIL
+   ========================= */
+@media (max-width: 600px){
+
+  .table th,
+  .table td{
+    padding: 8px 6px;
+    font-size: 12px;
+  }
+
+  .btnSmall{
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+
+  .colTitle{
+    font-size: 22px;
+  }
+
+  .searchRow{
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn{
+    width: 100%;
+  }
+
+}
+
+/* Móviles muy pequeños: ocultar columna cargo */
+@media (max-width: 480px){
+  .table th:nth-child(3),
+  .table td:nth-child(3){
+    display: none;
+  }
+}
