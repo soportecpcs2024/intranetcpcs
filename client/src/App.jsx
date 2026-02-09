@@ -96,6 +96,7 @@ import Rubricas from "./components/Academico/Rubricas/Rubricas";
 import InformeProm from "./components/tesoreria/DashboardTesoreria/Recaudo/Prom_11/InformeProm";
 import IniciacionAlArte from "./components/tesoreria/extracurricular/IniciaciónAlArte";
 import Robotica from "./components/tesoreria/extracurricular/Robotica";
+import EliminarPorFecha from "./components/contabilidad/EliminarArchivo/EliminarPorFecha";
 
  
  
@@ -370,6 +371,7 @@ const AppContent = () => {
 
               <Route path="cargar_archivo" element={<CargarArchivoExcel />}></Route>
               <Route path="descargar_colilla" element={<Generar_colilla/>}></Route>
+              <Route path="eliminar_colillas" element={<EliminarPorFecha/>}></Route>
 
               <Route path="esc_padres" element={<DashboardEscPadres />} />
               <Route path="crear_ep" element={<CrearEscuelaPadres />} />

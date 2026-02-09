@@ -318,3 +318,46 @@ exports.getByCedula = async (req, res) => {
   }
 };
 
+exports.deleteByFecha = async (req, res) => {
+  try {
+    const { fecha } = req.query;
+
+    if (!fecha) {
+      return res.status(400).json({
+        message: "Falta el parámetro fecha. Usa ?fecha=YYYY-MM-DD",
+      });
+    }
+
+    const d = parseFechaQueryYYYYMMDD(fecha);
+    if (!d) {
+      return res.status(400).json({
+        message: "Formato inválido. Usa fecha=YYYY-MM-DD (ej: 2026-01-30)",
+      });
+    }
+
+    // rango del día en UTC
+    const start = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), 0, 0, 0, 0));
+    const end = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + 1, 0, 0, 0, 0));
+
+    const result = await NominaPago.deleteMany({
+      fechaColilla: { $gte: start, $lt: end },
+    });
+
+    if (result.deletedCount === 0) {
+      return res.status(404).json({
+        message: "No se encontraron registros para esa fecha",
+      });
+    }
+
+    return res.json({
+      message: "Registros eliminados correctamente",
+      fecha,
+      eliminados: result.deletedCount,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      message: "Error eliminando por fecha",
+      error: err.message,
+    });
+  }
+};

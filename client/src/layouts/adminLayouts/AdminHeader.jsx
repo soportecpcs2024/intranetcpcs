@@ -31,7 +31,7 @@ const AdminHeader = () => {
   const tesoreria = user && user.role === "tesoreria"; // Verificar si el usuario tiene el rol de teacher
   const escuelaPadres = user && user.role === "escuelaPadres"; // Verificar si el usuario tiene el rol de teacher
   const mantenimiento = user && user.role === "mantenimiento"; // Verificar si el usuario tiene el rol de teacher
-  const admisiones = user && user.role === "admisiones"; // Verificar si el usuario tiene el rol de teacher
+  //const admisiones = user && user.role === "admisiones"; // Verificar si el usuario tiene el rol de teacher
   const papeleria = user && user.role === "papeleria"; // Verificar si el usuario tiene el rol de teacher
   const contabilidad = user && user.role === "contabilidad"; // Verificar si el usuario tiene el rol de teacher
 
@@ -238,6 +238,11 @@ const AdminHeader = () => {
                           <li>
                             <Link to="descargar_colilla">
                               Descargar colilla
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to="eliminar_colillas">
+                              Eliminar colillas
                             </Link>
                           </li>
                           
@@ -500,6 +505,11 @@ const AdminHeader = () => {
                           <li>
                             <Link to="descargar_colilla">
                               Descargar colilla
+                            </Link>
+                          </li>
+                            <li>
+                            <Link to="eliminar_colillas">
+                              Eliminar colillas
                             </Link>
                           </li>
                           
