@@ -9,12 +9,12 @@ const styles = StyleSheet.create({
   card: { border: "1pt solid #111", padding: 10 },
   topRow: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
   title: { fontSize: 14, fontWeight: "bold", textAlign: "center", flex: 1 },
-  small: { fontSize: 9 },
+  small: { fontSize: 12 },
   line: { height: 1, backgroundColor: "#111", marginVertical: 8 },
   row: { flexDirection: "row", gap: 8 },
   col: { flexGrow: 1 },
   label: { fontSize: 12, fontWeight: "bold" },
-  value: { fontSize: 9, marginTop: 2 },
+  value: { fontSize: 13, marginTop: 2 },
   logo: { width: 50, height: 50 },
   sectionHeader: {
     flexDirection: "row",
@@ -89,16 +89,16 @@ export default function ColillaPDF({ data, cedula }) {
 
   const salario = data?.salarioOrdinario ?? data?.salario ?? 0;
   const auxTransporte = data?.auxTte ?? 0;
-  const horasExt = data?.horasExtra ?? 0;
+  const horasExt = data?.bonifExtras ?? 0;
   const vacaciones = data?.vacaciones ?? 0;
-  const otrosIng = data?.otrosIngresos ?? data?.otrosPagos ?? 0;
+  const otrosIng = data?.otrosPagos ?? data?.otrosPagos ?? 0;
 
   const epsAfp = data?.epsAfp ?? data?.eps ?? 0;
-  const cxp = data?.cxpColegio ?? data?.cxp ?? 0;
+  const cxp = data?.cxcColeg ?? data?.cxp ?? 0;
   const funeraria = data?.funeraria ?? 0;
-  const comfama = data?.libranzaComfama ?? data?.comfama ?? 0;
-  const pension = data?.pension ?? 0;
-  const otrosEgr = data?.otrosEgresos ?? 0;
+  const comfama = data?.librComfama ?? data?.comfama ?? 0;
+  const pension = data?.pensHijos ?? 0;
+  const otrosEgr = data?.otros ?? 0;
 
   const totalIngresos =
     toNum(salario) + toNum(auxTransporte) + toNum(horasExt) + toNum(vacaciones) + toNum(otrosIng);
@@ -138,8 +138,8 @@ export default function ColillaPDF({ data, cedula }) {
               <Text style={styles.value}>{cargo}</Text>
             </View>
             <View style={styles.col}>
-              <Text style={styles.label}>PERIODO:</Text>
-              <Text style={styles.value}>{data?.periodo || data?.mes || "N/A"}</Text>
+              
+              
             </View>
           </View>
 
@@ -162,10 +162,10 @@ export default function ColillaPDF({ data, cedula }) {
 
             <View style={styles.halfRight}>
               <Item label="EPS/AFP" value={epsAfp} />
-              <Item label="CxP Colegio" value={cxp} />
+              <Item label="CxC Colegio" value={cxp} />
               <Item label="Funeraria" value={funeraria} />
               <Item label="Libr. Comfama" value={comfama} />
-              <Item label="Pensión" value={pension} />
+              <Item label="Pensión Hijos" value={pension} />
               <Item label="Otros" value={otrosEgr} />
               <View style={styles.totalRow}>
                 <Item label="TOTAL" value={totalEgresos} bold />
