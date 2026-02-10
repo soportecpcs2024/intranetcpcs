@@ -78,6 +78,7 @@ const Tecnicavocal = () => {
       {facturasFiltradas.map((factura) => (
         <ul key={factura._id} className="lista_extracurricular_pagados">
           <li><strong>Estudiante:</strong> {factura.estudianteId?.nombre || "Desconocido"}</li>
+          <li><strong>Grupo :</strong> {factura.estudianteId?.grado || "Desconocido"}</li>
           <li><strong>Clase:</strong> {factura.clases?.[0]?.nombreClase || "-"}</li>
           <li><strong>Mes:</strong> {factura.mes_aplicado}</li>
           <li>
