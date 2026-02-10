@@ -9,7 +9,7 @@ const Voleibol = () => {
   } = useRecaudo();
 
   const [asistenciasLocal, setAsistenciasLocal] = useState({});
-  const [mesSeleccionado, setMesSeleccionado] = useState("Julio");
+  const [mesSeleccionado, setMesSeleccionado] = useState("Enero");
 
   const mesesDelAno = [
     "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",

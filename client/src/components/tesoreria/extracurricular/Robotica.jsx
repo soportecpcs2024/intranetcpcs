@@ -53,7 +53,7 @@ const Robotica = () => {
   const facturasFiltradas = facturasConAsistencias.filter(
     (factura) =>
       factura.mes_aplicado?.toLowerCase() === mesSeleccionado.toLowerCase() &&
-      factura.clases?.[0]?.nombreClase?.toLowerCase() === "Robotica"
+      factura.clases?.[0]?.nombreClase?.toLowerCase() === "robótica"
   );
 
   return (

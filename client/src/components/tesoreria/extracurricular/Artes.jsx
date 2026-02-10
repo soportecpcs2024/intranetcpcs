@@ -53,7 +53,7 @@ const Artes = () => {
   const facturasFiltradas = facturasConAsistencias.filter(
     (factura) =>
       factura.mes_aplicado?.toLowerCase() === mesSeleccionado.toLowerCase() &&
-      factura.clases?.[0]?.nombreClase?.toLowerCase() === "Arte"
+      factura.clases?.[0]?.nombreClase?.toLowerCase() === "arte"
   );
 
   return (

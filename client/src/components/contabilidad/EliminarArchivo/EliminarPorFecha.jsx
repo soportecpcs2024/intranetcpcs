@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { useNomina } from "../../../contexts/NominaContext";
 import "./EliminarPorFecha.css";
 
