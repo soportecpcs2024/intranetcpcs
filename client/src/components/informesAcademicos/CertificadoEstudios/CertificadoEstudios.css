@@ -7,31 +7,45 @@
     text-align: center;
     margin: 20px;
    font-family: Arial, Helvetica, sans-serif;
-}
+  }
 
-.container-certificado-h3{
+  .contenedor_certificado-main{
+    
+    display: flex;
+    gap: 10px;
+   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    
+  }
+
+  .contenedor_certificado-main .box-certificado:nth-child(1){
+     flex-basis: calc(50% - 5px);
+     box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+  }
+  .contenedor_certificado-main .box-certificado:nth-child(2){
+     flex-basis: calc(50% - 5px);
+     box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+    
+  }
+  
+  .container-certificado-h3{
     color: black;
     font-size: 15px;
     font-weight: 800;
  }
-.container-certificado-p{
-    color: black;
-    font-size: 10px;
-    
- }
-
- .main-container-p{
+ .container-certificado-p{
+   color: black;
+   font-size: 10px;
+   
+  }
+  
+  .main-container-p{
     text-align: justify;
     font-size: 12px;
     font-weight: 600;
     margin: 3px;
- }
-
- .main-container-certifica{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
- }
+  }
+  
+ 
 
  .mas{
     font-size: 20px;
@@ -43,47 +57,65 @@
    padding: 10px;
     
    display: flex;
-   align-items: center;
+   flex-direction: column;
   
-   justify-content: center;
+  
+   
+  
     
  }
+
+ 
 
  .certificado-content-input{
    font-size: 12px;
  }
+ 
+ .btn-certifica{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+ }
  .certificado-content-btn{
-   width: 100px;
+  display: flex;
+   width: 80px;
    height: 60px;
-   padding: 16px;
-   margin: 16px;
+   padding: 14px;
+   
    align-items: center;
    justify-content: center;
-   display: flex;
+  
     
  }
 
  .certificado-content-resultados{
    display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
    font-size: 10px;
-   padding: 10px;
-   margin-bottom: 5px;
-   line-height: 1.2;
-   border: 1px solid rgb(226, 226, 226);
+   padding: 2px 10px;
+   margin-bottom: 2px;
+   
+   border: 1px solid rgba(148, 147, 147, 0.678);
    border-radius: 8px;
+   
    
    
  }
 
  .certificado-content-resultados-btn{
-   width: 150px;
+   width: 100px;
    height: 40px;
-   padding: 12px;
-   margin: 16px;
+   padding: 8px;
+   margin: 4px;
    align-items: center;
    justify-content: center;
    display: flex;
    font-size: 12px;
+   color: black;
  }
 
  .datos-cargados-p{

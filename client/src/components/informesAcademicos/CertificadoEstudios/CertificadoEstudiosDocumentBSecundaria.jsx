@@ -9,7 +9,8 @@ import {
   StyleSheet,
 } from "@react-pdf/renderer";
 
-import ImageLogo from "/logo2025.png";
+const LOGO_URL =
+  "https://res.cloudinary.com/dvugfmopj/image/upload/v1770665378/logo2025_h8wlte.png";
 import PropTypes from "prop-types";
 
 // Define styles for the PDF
@@ -148,7 +149,7 @@ const CertificadoEstudiosDocumentBSecundaria = ({ estudiante }) => (
           marginBottom: 2,
         }}
       >
-        <Image style={styles.image} src={ImageLogo}  />
+        <Image style={styles.image} src={LOGO_URL}  />
         <View style={styles.membrete_header}>
           <View>
             <Text>Carrera 83 N° 78-30 Medellín -Colombia</Text>

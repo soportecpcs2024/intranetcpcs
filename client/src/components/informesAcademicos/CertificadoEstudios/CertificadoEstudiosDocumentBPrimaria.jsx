@@ -11,6 +11,9 @@ import {
  import PropTypes from "prop-types";
 
 // Define styles for the PDF
+
+const LOGO_URL =
+  "https://res.cloudinary.com/dvugfmopj/image/upload/v1770665378/logo2025_h8wlte.png";
 const styles = StyleSheet.create({
   page: {
     flexDirection: "column",
@@ -146,7 +149,7 @@ const CertificadoEstudiosDocumentBPrimaria = ({ estudiante }) => (
           marginBottom: 2,
         }}
       >
-        <Image style={styles.image} src="/logo2025.png" />
+        <Image style={styles.image} src={LOGO_URL} />
         <View style={styles.membrete_header}>
           <View>
             <Text>Carrera 83 N° 78-30 Medellín -Colombia</Text>
@@ -211,7 +214,7 @@ const CertificadoEstudiosDocumentBPrimaria = ({ estudiante }) => (
                fontWeight: "bold",
              }}
            >
-             Que {estudiante?.nombre}, identificado con {estudiante?.numDocumento} Nº.{" "} {estudiante?.numDocumento}, cursó y aprobó en este establecimiento educativo, los estudios correspondientes al grado {" "}
+             Que {estudiante?.nombre}, identificado con {estudiante?.tipoDocumento} Nº.{" "} {estudiante?.numDocumento}, cursó y aprobó en este establecimiento educativo, los estudios correspondientes al grado {" "}
              {estudiante.grupo} de Básica primaria. Para el año lectivo {estudiante.añoLectivo}. Matrícula Nº. {estudiante.codigoMatricula} y
              folio del libro de calificaciones Nº. {estudiante.folio}
            </Text>
