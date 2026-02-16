@@ -402,6 +402,32 @@ const AdminHeader = () => {
                           <li>
                             <Link to="informerecaudo">Informe de cartera</Link>
                           </li>
+                             <li>
+                    <div className="dropdown">
+                      <Link onClick={toggleDropdown}>Contabilidad</Link>
+
+                      {isDropdownOpen && (
+                        <ul className="dropdown-menu">
+                          {/* <li>
+                            <Link to="cargar_archivo">Cargar Archivo</Link>
+                          </li> */}
+                          <li>
+                            <Link to="descargar_colilla">
+                              Descargar colilla de pago
+                            </Link>
+                          </li>
+                          {/* <li>
+                            <Link to="eliminar_colillas">
+                              Eliminar colillas
+                            </Link>
+                          </li> */}
+
+
+
+                        </ul>
+                      )}
+                    </div>
+                  </li>
                         </ul>
                       )}
                     </div>
