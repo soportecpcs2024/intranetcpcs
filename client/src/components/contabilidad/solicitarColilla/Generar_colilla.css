@@ -126,6 +126,7 @@
 }
 
 .btnGhost{
+  
   background: #f3f4f6;
   color: var(--textDark);
 }
@@ -142,7 +143,7 @@
   display: inline-block;
   font-weight: 700;
   
-  margin: 25px;
+  margin: 15px 0px;
 }
 
 /* ALERTAS */
@@ -207,7 +208,9 @@
 }
 
 .right{ 
-  text-align:right;
+  
+  text-align:center;
+  
   
 }
 .strong{ font-weight: 700;
