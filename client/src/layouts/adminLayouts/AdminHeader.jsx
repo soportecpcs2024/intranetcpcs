@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Logo from "/logo2025.png";
 import { useAuth } from "../../contexts/AuthContext";
- 
+
 
 const AdminHeader = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -125,7 +125,7 @@ const AdminHeader = () => {
                           </li>
                           <li>
                             <Link to="registroAsistencia">
-                               Asistencia Extraclases
+                              Asistencia Extraclases
                             </Link>
                           </li>
                         </ul>
@@ -136,19 +136,19 @@ const AdminHeader = () => {
                   <li>
                     <div className="dropdown">
                       <Link onClick={toggleDropdown}>Tesorería</Link>
-                      
+
 
                       {isDropdownOpen && (
                         <ul className="dropdown-menu">
                           <li>
-                              <Link to="tesoreria">Recaudo</Link>
+                            <Link to="tesoreria">Recaudo</Link>
                           </li>
                           {/* <li>
                             <Link to="morosos_penciones">Morosos Penciones</Link>
                           </li> */}
-                           
-                          
-                        </ul> 
+
+
+                        </ul>
                       )}
                     </div>
                   </li>
@@ -226,7 +226,7 @@ const AdminHeader = () => {
                     </div>
                   </li>
 
-                   <li>
+                  <li>
                     <div className="dropdown">
                       <Link onClick={toggleDropdown}>Contabilidad</Link>
 
@@ -245,21 +245,21 @@ const AdminHeader = () => {
                               Eliminar colillas
                             </Link>
                           </li>
-                          
-                         
-                          
+
+
+
                         </ul>
                       )}
                     </div>
                   </li>
 
-                  
+
                   {/* <li>
                     <div className="dropdown">
                       <Link to="papeleria">Papeleria</Link>
                     </div>
                   </li> */}
-                
+
                 </ul>
               )}
 
@@ -292,7 +292,7 @@ const AdminHeader = () => {
                               Extra curricular
                             </Link>
                           </li>
-                           {/* <li>
+                          {/* <li>
                             <Link to="/admin/rubricas_misiones">
                               Rúbrica de Evaluación – Programa de Misiones
                             </Link>
@@ -309,6 +309,32 @@ const AdminHeader = () => {
                     >
                       Q 10
                     </Link>
+                  </li>
+                  <li>
+                    <div className="dropdown">
+                      <Link onClick={toggleDropdown}>Contabilidad</Link>
+
+                      {isDropdownOpen && (
+                        <ul className="dropdown-menu">
+                          {/* <li>
+                            <Link to="cargar_archivo">Cargar Archivo</Link>
+                          </li> */}
+                          <li>
+                            <Link to="descargar_colilla">
+                              Descargar colilla de pago
+                            </Link>
+                          </li>
+                          {/* <li>
+                            <Link to="eliminar_colillas">
+                              Eliminar colillas
+                            </Link>
+                          </li> */}
+
+
+
+                        </ul>
+                      )}
+                    </div>
                   </li>
                 </ul>
               )}
@@ -411,11 +437,11 @@ const AdminHeader = () => {
                       <li>
                         <Link to="eppagas">Pagos escuelas</Link>
                       </li>
-                       <li>
-                            <Link to="informe_escuela_padres">
-                              Informe pagos EP
-                            </Link>
-                          </li>
+                      <li>
+                        <Link to="informe_escuela_padres">
+                          Informe pagos EP
+                        </Link>
+                      </li>
                     </ul>
                   )}
                 </div>
@@ -493,32 +519,32 @@ const AdminHeader = () => {
               )}
 
               {contabilidad && (
-                 <li>
-                    <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Contabilidad</Link>
+                <li>
+                  <div className="dropdown">
+                    <Link onClick={toggleDropdown}>Contabilidad</Link>
 
-                      {isDropdownOpen && (
-                        <ul className="dropdown-menu">
-                          <li>
-                            <Link to="cargar_archivo">Cargar Archivo</Link>
-                          </li>
-                          <li>
-                            <Link to="descargar_colilla">
-                              Descargar colilla
-                            </Link>
-                          </li>
-                            <li>
-                            <Link to="eliminar_colillas">
-                              Eliminar colillas
-                            </Link>
-                          </li>
-                          
-                         
-                          
-                        </ul>
-                      )}
-                    </div>
-                  </li>
+                    {isDropdownOpen && (
+                      <ul className="dropdown-menu">
+                        <li>
+                          <Link to="cargar_archivo">Cargar Archivo</Link>
+                        </li>
+                        <li>
+                          <Link to="descargar_colilla">
+                            Descargar colilla
+                          </Link>
+                        </li>
+                        <li>
+                          <Link to="eliminar_colillas">
+                            Eliminar colillas
+                          </Link>
+                        </li>
+
+
+
+                      </ul>
+                    )}
+                  </div>
+                </li>
               )}
 
 
