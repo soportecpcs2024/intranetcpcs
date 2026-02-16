@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 const LOGO_URL =
   "https://res.cloudinary.com/dvugfmopj/image/upload/v1770665378/logo2025_h8wlte.png";
 
+const FIRMA_URL = "https://res.cloudinary.com/dvugfmopj/image/upload/v1771268661/FIRMA_ADM_hiubd3.jpg";
+
 const styles = StyleSheet.create({
   page: { padding: 18, fontSize: 10, fontFamily: "Helvetica" },
   card: { border: "1pt solid #111", padding: 10 },
@@ -29,6 +31,18 @@ const styles = StyleSheet.create({
     textAlign: "center",
     borderRight: "1pt solid #111",
   },
+  firma: {
+    marginTop: 10,
+    paddingTop: 14,
+    borderTop: "1pt solid #111",
+    alignItems: "center",
+  },
+  firmaImg: {
+    width: 140,
+    height: 60,
+    marginTop: 3,
+  },
+
   sectionCellRight: {
     width: "50%",
     paddingVertical: 6,
@@ -41,7 +55,7 @@ const styles = StyleSheet.create({
   totalRow: { marginTop: 8, paddingTop: 6, borderTop: "1pt solid #111" },
   bigTotal: { marginTop: 6, paddingTop: 8, borderTop: "1pt solid #111" },
   bigTotalText: { fontSize: 12, fontWeight: "bold", textAlign: "right" },
-  firma: { marginTop: 18, paddingTop: 14, borderTop: "1pt solid #111", fontSize: 10 },
+
 });
 
 export default function ColillaPDF({ data, cedula }) {
@@ -138,8 +152,8 @@ export default function ColillaPDF({ data, cedula }) {
               <Text style={styles.value}>{cargo}</Text>
             </View>
             <View style={styles.col}>
-              
-              
+
+
             </View>
           </View>
 
@@ -178,7 +192,11 @@ export default function ColillaPDF({ data, cedula }) {
             <Text style={styles.bigTotalText}>{formatCOP(totalConsignado)}</Text>
           </View>
 
-          <Text style={styles.firma}>FIRMA</Text>
+          <View style={styles.firma}>
+            <Text>Firma autorizada</Text>
+            <Image style={styles.firmaImg} src={FIRMA_URL} />
+          </View>
+
         </View>
       </Page>
     </Document>
