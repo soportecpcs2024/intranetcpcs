@@ -99,6 +99,9 @@ import Robotica from "./components/tesoreria/extracurricular/Robotica";
 import EliminarPorFecha from "./components/contabilidad/EliminarArchivo/EliminarPorFecha";
 import LayoutTesoreriaAdm from "./components/tesoreria/DashboardTesoreria/LayoutTesoreriaAdm";
 import InformeClasesExtracurricularesadm from "./components/tesoreria/extracurricular/InformeClasesExtracurricularesadm";
+import InformeFormularioMensualAdm from "./components/tesoreria/Formularios_inscripcion/InformeFormularioMensualAdm";
+import GenerarWordAdm from "./components/tesoreria/InformeEscuelasPadres/InformeEScuelasPadresAdm";
+import InformePromAdm from "./components/tesoreria/DashboardTesoreria/Recaudo/Prom_11/InformePromAdm";
 
  
  
@@ -373,24 +376,24 @@ const AppContent = () => {
               <Route path="tesoreria_adm" element={<LayoutTesoreriaAdm />}>
               
                   <Route
-                  path="informe-extracurriculares"
+                  path="informe-extracurriculares-adm"
                   element={<InformeClasesExtracurricularesadm />}
                 />
                  <Route
-                  path="informe_antologias"
+                  path="informe_antologias-adm"
                   element={<InformeAntologia />}
                 />
                   <Route
-                  path="informe_escuela_padres"
-                  element={<GenerarWord />}
+                  path="informe_escuela_padres-adm"
+                  element={<GenerarWordAdm />}
                 />
 
                   <Route
-                  path="informe-formularios"
-                  element={<InformeFormularioMensual />}
+                  path="informe-formularios-adm"
+                  element={<InformeFormularioMensualAdm />}
                 />
 
-                <Route path="informe_prom" element={<InformeProm />} />
+                <Route path="informe_prom-adm" element={<InformePromAdm />} />
               
               </Route>
 

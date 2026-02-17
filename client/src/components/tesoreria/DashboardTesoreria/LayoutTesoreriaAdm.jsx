@@ -204,25 +204,25 @@ const LayoutTesoreriaAdm = () => {
 
             <ul className="informes-lista">
               <li>
-                <NavLink className="informe-item" to="informe-extracurriculares">
+                <NavLink className="informe-item" to="informe-extracurriculares-adm">
                   Extra clases
                 </NavLink>
               </li>
               <li>
-                <NavLink className="informe-item" to="informe_antologias">
+                <NavLink className="informe-item" to="informe_antologias-adm">
                   Antologías
                 </NavLink>
               </li>
               <li>
-                <NavLink className="informe-item" to="informe-formularios">
+                <NavLink className="informe-item" to="informe-formularios-adm">
                   Formularios
                 </NavLink>
               </li>
                 <li>
-                <NavLink className="informe-item" to="informe_escuela_padres">Esc. Padres</NavLink>
+                <NavLink className="informe-item" to="informe_escuela_padres-adm">Esc. Padres</NavLink>
               </li>
                 <li>
-                <NavLink className="informe-item" to="informe_prom">Prom</NavLink>
+                <NavLink className="informe-item" to="informe_prom-adm">Prom</NavLink>
               </li>
               
 

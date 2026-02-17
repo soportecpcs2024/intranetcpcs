@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useRecaudo } from "../../../contexts/RecaudoContext";
+import { useRecaudo } from "../../../../../contexts/RecaudoContext";
 import {
   Document,
   Packer,
@@ -15,28 +15,14 @@ import {
 } from "docx";
 import { saveAs } from "file-saver";
 
-const InformeClasesExtracurricularesadm = () => {
+const InformeAntologia = () => {
   const [mesSeleccionado, setMesSeleccionado] = useState("");
   const { facturas } = useRecaudo();
   const [facturasFiltradas, setFacturasFiltradas] = useState([]);
 
   useEffect(() => {
     if (facturas.length > 0) {
-      const codValidos = [
-        "100",
-        "200",
-        "300",
-        "400",
-        "500",
-        "600",
-        "700",
-        "800",
-        "900",
-        "1000",
-        "1100",
-        "2200",
-        "2300",
-      ];
+      const codValidos = ["1200"];
 
       const nuevasFacturas = facturas
         .filter((factura) =>
@@ -93,10 +79,8 @@ const InformeClasesExtracurricularesadm = () => {
         return "Arte";
       case "1100":
         return "Exploración Motriz y Predeportiva Pre";
-      case "2200":
-        return "Robótica";
-      case "2300":
-        return "Iniciación al Arte";
+      case "1200":
+        return "Antologías";
       default:
         return `Código: ${cod}`;
     }
@@ -127,12 +111,12 @@ const InformeClasesExtracurricularesadm = () => {
 
         if (!agrupado[cod]) agrupado[cod] = [];
 
-        // ✅ Ya NO guardamos totales/subtotales en dinero
+        // ✅ Ya NO guardamos valores de dinero
         agrupado[cod].push({
           estudiante: factura.estudianteId?.nombre || "N/A",
           nombreClase: clase.nombreClase || getNombreCodigo(cod),
           grado: factura.estudianteId?.grado || "N/A",
-          tipoPago: (factura.tipoPago || "").trim(),
+          // tipoPago y total eliminados (ya no se usan)
           mes: mesFactura,
         });
       });
@@ -162,7 +146,7 @@ const InformeClasesExtracurricularesadm = () => {
         alignment: AlignmentType.CENTER,
         children: [
           new TextRun({
-            text: "Informe general de venta Clases Extracurriculares",
+            text: "Informe general de venta Antologías",
             size: 26,
           }),
         ],
@@ -188,18 +172,10 @@ const InformeClasesExtracurricularesadm = () => {
       })
     );
 
-    // ✅ Conteo global final (solo cantidad de registros)
+    // ✅ Total global de registros (conteo)
     let totalGlobalClases = 0;
 
     Object.entries(agrupado).forEach(([cod, items]) => {
-      // (Opcional) Ordenar por tipo de pago
-      items.sort((a, b) =>
-        (a.tipoPago || "")
-          .trim()
-          .toLowerCase()
-          .localeCompare((b.tipoPago || "").trim().toLowerCase())
-      );
-
       content.push(
         new Paragraph({
           text: getNombreCodigo(cod),
@@ -208,7 +184,7 @@ const InformeClasesExtracurricularesadm = () => {
         })
       );
 
-      // ✅ Tabla: agrego columna "#" para que sea más claro el conteo
+      // ✅ Tabla con columna # (conteo visible)
       const tablaDatos = new Table({
         width: {
           size: 100,
@@ -225,7 +201,7 @@ const InformeClasesExtracurricularesadm = () => {
                 })
             ),
           }),
-          ...items.map((item, idx) =>
+          ...items.map((item, idx) => (
             new TableRow({
               children: [
                 new TableCell({ children: [new Paragraph(String(idx + 1))] }),
@@ -234,13 +210,13 @@ const InformeClasesExtracurricularesadm = () => {
                 new TableCell({ children: [new Paragraph(item.grado)] }),
               ],
             })
-          ),
+          )),
         ],
       });
 
       content.push(tablaDatos);
 
-      // ✅ Resumen por ítem/código: número de clases (registros)
+      // ✅ Resumen por ítem/código: número de registros
       const totalClasesItem = items.length;
       totalGlobalClases += totalClasesItem;
 
@@ -261,7 +237,7 @@ const InformeClasesExtracurricularesadm = () => {
                   new Paragraph({
                     children: [
                       new TextRun({
-                        text: "Total de clases (registros) en este ítem:",
+                        text: "Total de registros en este ítem:",
                         bold: true,
                       }),
                     ],
@@ -272,7 +248,10 @@ const InformeClasesExtracurricularesadm = () => {
                 children: [
                   new Paragraph({
                     children: [
-                      new TextRun({ text: String(totalClasesItem), bold: true }),
+                      new TextRun({
+                        text: String(totalClasesItem),
+                        bold: true,
+                      }),
                     ],
                   }),
                 ],
@@ -313,7 +292,7 @@ const InformeClasesExtracurricularesadm = () => {
                   new Paragraph({
                     children: [
                       new TextRun({
-                        text: "Total general de clases (registros) en el mes:",
+                        text: "Total general de registros en el mes:",
                         bold: true,
                       }),
                     ],
@@ -343,7 +322,7 @@ const InformeClasesExtracurricularesadm = () => {
     });
 
     Packer.toBlob(doc).then((blob) => {
-      saveAs(blob, `Informe_extra_clase_Esc_padres_${mesSeleccionado}.docx`);
+      saveAs(blob, `Informe_Antologias_${mesSeleccionado}.docx`);
     });
   };
 
@@ -384,4 +363,4 @@ const InformeClasesExtracurricularesadm = () => {
   );
 };
 
-export default InformeClasesExtracurricularesadm;
+export default InformeAntologia;
