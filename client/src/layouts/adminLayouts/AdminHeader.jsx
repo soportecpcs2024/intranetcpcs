@@ -265,12 +265,7 @@ const AdminHeader = () => {
 
               {isAcademic && (
                 <ul>
-                  {/* <li>
-                    <Link to="/admin/users">Inicio</Link>
-                  </li> */}
-                  {/* <li>
-              <Link to="/admin/blog">Blog</Link>
-              </li> */}
+               
                   <li>
                     <div className="dropdown">
                       <Link onClick={toggleDropdown}>Académico</Link>
@@ -292,6 +287,7 @@ const AdminHeader = () => {
                               Extra curricular
                             </Link>
                           </li>
+                          
                           {/* <li>
                             <Link to="/admin/rubricas_misiones">
                               Rúbrica de Evaluación – Programa de Misiones
@@ -361,6 +357,11 @@ const AdminHeader = () => {
                               Informes Académicos
                             </Link>
                           </li>
+                           <li>
+                            <Link to="descargar_colilla">
+                              Descargar colilla de pago
+                            </Link>
+                          </li>
                         </ul>
                       )}
                     </div>
@@ -379,12 +380,7 @@ const AdminHeader = () => {
 
               {tesoreria && (
                 <ul>
-                  {/* <li>
-                    <Link to="/admin/users">Inicio</Link>
-                  </li> */}
-                  {/* <li>
-              <Link to="/admin/blog">Blog</Link>
-              </li> */}
+
                   <li>
                     <div className="dropdown">
                       <Link onClick={toggleDropdown}>Tesoreria</Link>
@@ -402,32 +398,12 @@ const AdminHeader = () => {
                           <li>
                             <Link to="informerecaudo">Informe de cartera</Link>
                           </li>
-                             <li>
-                    <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Contabilidad</Link>
-
-                      {isDropdownOpen && (
-                        <ul className="dropdown-menu">
-                          {/* <li>
-                            <Link to="cargar_archivo">Cargar Archivo</Link>
-                          </li> */}
                           <li>
                             <Link to="descargar_colilla">
                               Descargar colilla de pago
                             </Link>
                           </li>
-                          {/* <li>
-                            <Link to="eliminar_colillas">
-                              Eliminar colillas
-                            </Link>
-                          </li> */}
 
-
-
-                        </ul>
-                      )}
-                    </div>
-                  </li>
                         </ul>
                       )}
                     </div>
@@ -468,21 +444,21 @@ const AdminHeader = () => {
                           Informe pagos EP
                         </Link>
                       </li>
-                           <li>
-                    <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Contabilidad</Link>
+                      <li>
+                        <div className="dropdown">
+                          <Link onClick={toggleDropdown}>Contabilidad</Link>
 
-                      {isDropdownOpen && (
-                        <ul className="dropdown-menu">
-                          {/* <li>
+                          {isDropdownOpen && (
+                            <ul className="dropdown-menu">
+                              {/* <li>
                             <Link to="cargar_archivo">Cargar Archivo</Link>
                           </li> */}
-                          <li>
-                            <Link to="descargar_colilla">
-                              Descargar colilla de pago
-                            </Link>
-                          </li>
-                          {/* <li>
+                              <li>
+                                <Link to="descargar_colilla">
+                                  Descargar colilla de pago
+                                </Link>
+                              </li>
+                              {/* <li>
                             <Link to="eliminar_colillas">
                               Eliminar colillas
                             </Link>
@@ -490,10 +466,10 @@ const AdminHeader = () => {
 
 
 
-                        </ul>
-                      )}
-                    </div>
-                  </li>
+                            </ul>
+                          )}
+                        </div>
+                      </li>
                     </ul>
                   )}
                 </div>
