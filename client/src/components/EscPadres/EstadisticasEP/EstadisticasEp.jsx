@@ -10,7 +10,7 @@ const EstadisticasEp = () => {
   const [grupoSeleccionado, setGrupoSeleccionado] = useState("Todos");
   const location = useLocation(); // 👈 detectar cambios de ruta
 
-  console.log(dataUnificada);
+   
 
   // 📌 Función para cargar datos
   const cargarDatos = async () => {

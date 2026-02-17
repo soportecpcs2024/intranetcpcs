@@ -97,6 +97,8 @@ import InformeProm from "./components/tesoreria/DashboardTesoreria/Recaudo/Prom_
 import IniciacionAlArte from "./components/tesoreria/extracurricular/IniciaciónAlArte";
 import Robotica from "./components/tesoreria/extracurricular/Robotica";
 import EliminarPorFecha from "./components/contabilidad/EliminarArchivo/EliminarPorFecha";
+import LayoutTesoreriaAdm from "./components/tesoreria/DashboardTesoreria/LayoutTesoreriaAdm";
+import InformeClasesExtracurricularesadm from "./components/tesoreria/extracurricular/InformeClasesExtracurricularesadm";
 
  
  
@@ -366,6 +368,33 @@ const AppContent = () => {
                   element={<InformeAntologia />}
                 />
               </Route>
+              
+
+              <Route path="tesoreria_adm" element={<LayoutTesoreriaAdm />}>
+              
+                  <Route
+                  path="informe-extracurriculares"
+                  element={<InformeClasesExtracurricularesadm />}
+                />
+                 <Route
+                  path="informe_antologias"
+                  element={<InformeAntologia />}
+                />
+                  <Route
+                  path="informe_escuela_padres"
+                  element={<GenerarWord />}
+                />
+
+                  <Route
+                  path="informe-formularios"
+                  element={<InformeFormularioMensual />}
+                />
+
+                <Route path="informe_prom" element={<InformeProm />} />
+              
+              </Route>
+
+
 
               
 

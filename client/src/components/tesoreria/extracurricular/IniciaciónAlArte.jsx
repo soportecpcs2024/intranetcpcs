@@ -52,7 +52,8 @@ const IniciacionAlArte = () => {
   const facturasFiltradas = facturasConAsistencias.filter(
     (factura) =>
       factura.mes_aplicado?.toLowerCase() === mesSeleccionado.toLowerCase() &&
-      factura.clases?.[0]?.nombreClase?.toLowerCase() === "Iniciación al Arte"
+      factura.clases?.[0]?.nombreClase?.toLowerCase() === "iniciación al arte"
+
   );
 
   return (

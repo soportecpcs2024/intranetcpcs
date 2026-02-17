@@ -1,10 +1,10 @@
 import { Document, Page, Text, View, StyleSheet, Image } from "@react-pdf/renderer";
-import { useEffect, useState } from "react";
 
 const LOGO_URL =
   "https://res.cloudinary.com/dvugfmopj/image/upload/v1770665378/logo2025_h8wlte.png";
 
-const FIRMA_URL = "https://res.cloudinary.com/dvugfmopj/image/upload/v1771268661/FIRMA_ADM_hiubd3.jpg";
+const FIRMA_URL =
+  "https://res.cloudinary.com/dvugfmopj/image/upload/v1771268661/FIRMA_ADM_hiubd3.jpg";
 
 const styles = StyleSheet.create({
   page: { padding: 18, fontSize: 10, fontFamily: "Helvetica" },
@@ -42,7 +42,6 @@ const styles = StyleSheet.create({
     height: 60,
     marginTop: 3,
   },
-
   sectionCellRight: {
     width: "50%",
     paddingVertical: 6,
@@ -55,48 +54,9 @@ const styles = StyleSheet.create({
   totalRow: { marginTop: 8, paddingTop: 6, borderTop: "1pt solid #111" },
   bigTotal: { marginTop: 6, paddingTop: 8, borderTop: "1pt solid #111" },
   bigTotalText: { fontSize: 12, fontWeight: "bold", textAlign: "right" },
-
 });
 
 export default function ColillaPDF({ data, cedula }) {
-  const [logo, setLogo] = useState(null);
-  const [logoError, setLogoError] = useState(null);
-
-  useEffect(() => {
-    let alive = true;
-
-    const loadLogo = async () => {
-      try {
-        setLogoError(null);
-
-        const response = await fetch(LOGO_URL, { cache: "no-store" });
-        if (!response.ok) throw new Error(`HTTP ${response.status} cargando logo`);
-
-        const blob = await response.blob();
-
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          if (alive) setLogo(reader.result); // base64
-        };
-        reader.onerror = () => {
-          if (alive) setLogoError("No se pudo leer el logo (FileReader).");
-        };
-        reader.readAsDataURL(blob);
-      } catch (err) {
-        console.error("Error cargando logo:", err);
-        if (alive) setLogoError(String(err?.message || err));
-      }
-    };
-
-    loadLogo();
-    return () => {
-      alive = false;
-    };
-  }, []);
-
-  // ⛔ No generar PDF hasta tener logo (o decide un fallback)
-  if (!logo) return null;
-
   const fecha = String(data?.fechaColilla || data?.fecha || "").slice(0, 10) || "N/A";
   const empleado = data?.nombresYApellidos || "N/A";
   const cargo = data?.cargo || data?.dependencia || "N/A";
@@ -105,7 +65,7 @@ export default function ColillaPDF({ data, cedula }) {
   const auxTransporte = data?.auxTte ?? 0;
   const horasExt = data?.bonifExtras ?? 0;
   const vacaciones = data?.vacaciones ?? 0;
-  const otrosIng = data?.otrosPagos ?? data?.otrosPagos ?? 0;
+  const otrosIng = data?.otrosPagos ?? 0;
 
   const epsAfp = data?.epsAfp ?? data?.eps ?? 0;
   const cxp = data?.cxcColeg ?? data?.cxp ?? 0;
@@ -115,20 +75,32 @@ export default function ColillaPDF({ data, cedula }) {
   const otrosEgr = data?.otros ?? 0;
 
   const totalIngresos =
-    toNum(salario) + toNum(auxTransporte) + toNum(horasExt) + toNum(vacaciones) + toNum(otrosIng);
+    toNum(salario) +
+    toNum(auxTransporte) +
+    toNum(horasExt) +
+    toNum(vacaciones) +
+    toNum(otrosIng);
 
   const totalEgresos =
-    toNum(epsAfp) + toNum(cxp) + toNum(funeraria) + toNum(comfama) + toNum(pension) + toNum(otrosEgr);
+    toNum(epsAfp) +
+    toNum(cxp) +
+    toNum(funeraria) +
+    toNum(comfama) +
+    toNum(pension) +
+    toNum(otrosEgr);
 
-  const totalConsignado =
-    toNum(data?.totalConsignado ?? data?.netoPagar ?? (totalIngresos - totalEgresos));
+  const totalConsignado = toNum(
+    data?.totalConsignado ?? data?.netoPagar ?? (totalIngresos - totalEgresos)
+  );
 
   return (
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.card}>
           <View style={styles.topRow}>
-            <Image style={styles.logo} src={logo} />
+            {/* ✅ sin hooks: imagen remota directa */}
+            {LOGO_URL ? <Image style={styles.logo} src={LOGO_URL} /> : <View style={styles.logo} />}
+
             <Text style={styles.title}>COMPROBANTE DE PAGO</Text>
             <Text style={styles.small}>Fecha: {fecha}</Text>
           </View>
@@ -151,10 +123,7 @@ export default function ColillaPDF({ data, cedula }) {
               <Text style={styles.label}>CARGO:</Text>
               <Text style={styles.value}>{cargo}</Text>
             </View>
-            <View style={styles.col}>
-
-
-            </View>
+            <View style={styles.col}></View>
           </View>
 
           <View style={styles.sectionHeader}>
@@ -194,9 +163,8 @@ export default function ColillaPDF({ data, cedula }) {
 
           <View style={styles.firma}>
             <Text>Firma autorizada</Text>
-            <Image style={styles.firmaImg} src={FIRMA_URL} />
+            {FIRMA_URL ? <Image style={styles.firmaImg} src={FIRMA_URL} /> : null}
           </View>
-
         </View>
       </Page>
     </Document>

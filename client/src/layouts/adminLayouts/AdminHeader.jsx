@@ -26,14 +26,15 @@ const AdminHeader = () => {
 
   const isAdmin = user && user.role === "admin"; // Verificar si el usuario tiene el rol de admin
   const isAcademic = user && user.role === "usuario"; // Verificar si el usuario tiene el rol de admin
-  const isAdministrator = user && user.role === "administrador"; // Verificar si el usuario tiene el rol de teacher
-  const secretaria = user && user.role === "secretaria"; // Verificar si el usuario tiene el rol de teacher
-  const tesoreria = user && user.role === "tesoreria"; // Verificar si el usuario tiene el rol de teacher
-  const escuelaPadres = user && user.role === "escuelaPadres"; // Verificar si el usuario tiene el rol de teacher
-  const mantenimiento = user && user.role === "mantenimiento"; // Verificar si el usuario tiene el rol de teacher
-  //const admisiones = user && user.role === "admisiones"; // Verificar si el usuario tiene el rol de teacher
-  const papeleria = user && user.role === "papeleria"; // Verificar si el usuario tiene el rol de teacher
-  const contabilidad = user && user.role === "contabilidad"; // Verificar si el usuario tiene el rol de teacher
+  const isAdministrator = user && user.role === "administrador"; 
+  const secretaria = user && user.role === "secretaria"; 
+  const tesoreria = user && user.role === "tesoreria"; 
+  const escuelaPadres = user && user.role === "escuelaPadres"; 
+  const mantenimiento = user && user.role === "mantenimiento"; 
+  //const admisiones = user && user.role === "admisiones"; 
+  const papeleria = user && user.role === "papeleria"; 
+  const contabilidad = user && user.role === "contabilidad"; 
+  const administrativos = user && user.role === "administrativos"; 
 
   return (
     <div className="admin-header">
@@ -575,17 +576,188 @@ const AdminHeader = () => {
                 </li>
               )}
 
-
-              {papeleria && (
+              {administrativos && (
                 <ul>
                   <li>
                     <div className="dropdown">
-                      <Link to="papeleria">Papeleria</Link>
+                      <Link onClick={toggleDropdown}>Académico</Link>
+                      {isDropdownOpen && (
+                        <ul className="dropdown-menu">
+                          <li>
+                            <Link to="/admin/academico">Reporte académico</Link>
+                          </li>
+                          <li>
+                            <Link to="/admin/documentos">Documentos</Link>
+                          </li>
+                          <li>
+                            <Link to="/admin/llegadastarde">
+                              Llegadas tarde
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to="/admin/extraclases">
+                              Extra curricular
+                            </Link>
+                          </li>
+                          {/* <li>
+                            <Link to="/admin/rubricas_misiones">
+                              Rúbrica de Evaluación – Programa de Misiones
+                            </Link>
+                          </li> */}
+                        </ul>
+                      )}
                     </div>
                   </li>
+
+                  <li>
+                    <div className="dropdown">
+                      <Link onClick={toggleDropdown}>Adm</Link>
+
+                      {isDropdownOpen && (
+                        <ul className="dropdown-menu">
+                          <li>
+                            <Link to="/admin/administracion">Stock</Link>
+                          </li>
+                          <li>
+                            <Link to="/admin/inventario_estadisticas">
+                              Estadisticas Inventario
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to="/admin/informesgenerales">
+                              Informes de Tareas
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to="seguimientoMantenimiento">
+                              Seguimiento mantenimientos
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to="informesExtraClasesDec">
+                              Informe Extraclases
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to="registroAsistencia">
+                              Asistencia Extraclases
+                            </Link>
+                          </li>
+                        </ul>
+                      )}
+                    </div>
+                  </li>
+
+                  <li>
+                    <div className="dropdown">
+                      <Link onClick={toggleDropdown}>Tesorería</Link>
+
+
+                      {isDropdownOpen && (
+                        <ul className="dropdown-menu">
+                          <li>
+                            <Link to="tesoreria_adm">Recaudo</Link>
+                          </li>
+                          {/* <li>
+                            <Link to="morosos_penciones">Morosos Penciones</Link>
+                          </li> */}
+
+
+                        </ul>
+                      )}
+                    </div>
+                  </li>
+
+                  <li>
+                    <div className="dropdown">
+                      <Link onClick={toggleDropdown}>E. Padres</Link>
+
+                      {isDropdownOpen && (
+                        <ul className="dropdown-menu">
+                          <li>
+                            <Link to="esc_padres">Registro Asistencia</Link>
+                          </li>
+                          <li>
+                            <Link to="estadisticas_ep">Estadisticas EP</Link>
+                          </li>
+                          <li>
+                            <Link to="crear_ep">Crear Escuela</Link>
+                          </li>
+                          <li>
+                            <Link to="eppagas">Pagos escuelas</Link>
+                          </li>
+                          <li>
+                            <Link to="informe_escuela_padres">
+                              Informe pagos EP
+                            </Link>
+                          </li>
+                        </ul>
+                      )}
+                    </div>
+                  </li>
+
+                  <li>
+                    <div className="dropdown">
+                      <Link onClick={toggleDropdown}>
+                        Tareas y mantenimientos
+                      </Link>
+                      {isDropdownOpen && (
+                        <ul className="dropdown-menu">
+                          <li>
+                            <Link to="programadorTareas">Tareas</Link>
+                          </li>
+
+                          <li>
+                            <Link to="crearMantenimiento">
+                              Crear mantenimiento
+                            </Link>
+                          </li>
+                        </ul>
+                      )}
+                    </div>
+                  </li>
+
+                   
+
+                  <li>
+                    <div className="dropdown">
+                      <Link onClick={toggleDropdown}>Contabilidad</Link>
+
+                      {isDropdownOpen && (
+                        <ul className="dropdown-menu">
+                          {/* <li>
+                            <Link to="cargar_archivo">Cargar Archivo</Link>
+                          </li> */}
+                          <li>
+                            <Link to="descargar_colilla">
+                              Descargar colilla
+                            </Link>
+                          </li>
+                          {/* <li>
+                            <Link to="eliminar_colillas">
+                              Eliminar colillas
+                            </Link>
+                          </li> */}
+
+
+
+                        </ul>
+                      )}
+                    </div>
+                  </li>
+
+
+                  {/* <li>
+                    <div className="dropdown">
+                      <Link to="papeleria">Papeleria</Link>
+                    </div>
+                  </li> */}
+
                 </ul>
               )}
 
+
+              
 
             </nav>
           </div>
