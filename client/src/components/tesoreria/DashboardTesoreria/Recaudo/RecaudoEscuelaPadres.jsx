@@ -23,8 +23,9 @@ const Recaudoep = () => {
       
       clase.nombre === "El arte de ser padres" || 
       clase.nombre === "Ciberfamilias"  ||
-      clase.nombre === "Guiando a sus adolescentes" ||
-      clase.nombre ==="Mayordomía financiera"
+      // clase.nombre === "Guiando a sus adolescentes" ||
+      // clase.nombre ==="Mayordomía financiera" ||
+      clase.nombre ==="Hablando de sexualidad en casa" 
   );
 
   return (
