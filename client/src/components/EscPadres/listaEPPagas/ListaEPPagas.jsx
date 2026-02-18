@@ -7,7 +7,7 @@ import "./ListaEPPagas.css";
 const ITEMS_PER_PAGE = 10;
 
 const ListaEPPagas = () => {
-  const { facturas, fetchFacturas } = useRecaudo(); // Asegúrate de tener esta función en tu context
+  const { facturas, fetchFacturas } = useRecaudo(); 
   const [filteredData, setFilteredData] = useState([]);
   const [conteoClases, setConteoClases] = useState({});
   const [currentItems, setCurrentItems] = useState([]);
@@ -30,42 +30,43 @@ const ListaEPPagas = () => {
     fetchFacturas?.(); // Llamar solo si existe
   }, [fetchFacturas]);
 
-  useEffect(() => {
-    const codigosPermitidos = [1400, 1600, 1700];
-    const conteo = { 1400: 0, 1600: 0, 1700: 0 };
-    const result = [];
+useEffect(() => {
+  const codigosPermitidos = [1400, 1600, 1700, 2400];
+  const conteo = { 1400: 0, 1600: 0, 1700: 0, 2400: 0 };
+  const result = [];
 
-    facturas.forEach((factura) => {
-      factura.clases.forEach((clase) => {
-        if (codigosPermitidos.includes(clase.cod)) {
-          conteo[clase.cod] += 1;
+  (facturas || []).forEach((factura) => {
+    (factura.clases || []).forEach((clase) => {
+      const codNum = Number(clase.cod); // ✅ clave
 
-          result.push({
-            idFactura: factura._id,
-            nombreEstudiante: factura.estudianteId?.nombre || "N/A",
-            documento: factura.estudianteId?.documentoIdentidad || "N/A",
-            grado: factura.estudianteId?.grado || "N/A",
-            nombreClase: clase.nombreClase,
-            cod: clase.cod,
-            dia: clase.dia,
-            hora: clase.hora,
-            total: factura.total,
-            tipoPago: factura.tipoPago,
-            mesAplicado: factura.mes_aplicado,
-            fechaCompra: formatFechaColombia(factura.fechaCompra),
-          });
-        }
-      });
+      if (codigosPermitidos.includes(codNum)) {
+        conteo[codNum] += 1;
+
+        result.push({
+          idFactura: factura._id,
+          nombreEstudiante: factura.estudianteId?.nombre || "N/A",
+          documento: factura.estudianteId?.documentoIdentidad || "N/A",
+          grado: factura.estudianteId?.grado || "N/A",
+          nombreClase: clase.nombreClase,
+          cod: codNum, // ✅ guardar como número
+          dia: clase.dia,
+          hora: clase.hora,
+          total: factura.total,
+          tipoPago: factura.tipoPago,
+          mesAplicado: factura.mes_aplicado,
+          fechaCompra: formatFechaColombia(factura.fechaCompra),
+        });
+      }
     });
+  });
 
-    // 🔹 Ordenar por nombre de escuela (usando getNombreEscuela)
-    result.sort((a, b) =>
-      getNombreEscuela(a.cod).localeCompare(getNombreEscuela(b.cod))
-    );
+  // Ordenar por escuela
+  result.sort((a, b) => getNombreEscuela(a.cod).localeCompare(getNombreEscuela(b.cod)));
 
-    setFilteredData(result);
-    setConteoClases(conteo);
-  }, [facturas]);
+  setFilteredData(result);
+  setConteoClases(conteo);
+}, [facturas]);
+
 
   useEffect(() => {
     const endOffset = (currentPage + 1) * ITEMS_PER_PAGE;
@@ -87,6 +88,8 @@ const ListaEPPagas = () => {
         return "Guiando a sus adolescentes";
       case 1700:
         return "Mayordomía financiera";
+      case 2400:
+        return "Hablando de sexualidad en casa";
       default:
         return "Escuela Desconocida";
     }
@@ -136,6 +139,7 @@ const ListaEPPagas = () => {
         <p>🧩 El arte de ser Padres: {conteoClases[1400] || 0}</p>
         <p>👨‍👧‍👦 Guiando a sus adolescentes: {conteoClases[1600] || 0}</p>
         <p>💰 Mayordomía financiera: {conteoClases[1700] || 0}</p>
+        <p>💰 Hablando de sexualidad en casa: {conteoClases[2400] || 0}</p>
         <div>
           <p>
             Total familias activas : <p>{filteredData.length}</p>{" "}

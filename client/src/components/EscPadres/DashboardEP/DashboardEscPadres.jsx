@@ -166,9 +166,9 @@ const DashboardEscPadres = () => {
 
   return (
     <div className="escuelas-dashboard">
-      <h2 className="titulo">Escuela de Padres CPCS 2025</h2>
+      <h2 className="titulo">Escuela de Padres CPCS 2026</h2>
 
-      <h5>Escuelas disponibles 2025:</h5>
+      <h5>Escuelas disponibles 2026:</h5>
       <div className="escuelas-tabs">
         {escuelas.map((escuela) => (
           <button
