@@ -22,7 +22,7 @@ const GenerarWordAdm = () => {
 
   useEffect(() => {
     if (facturas.length > 0) {
-      const codValidos = ["1300", "1400", "1600", "1700"];
+      const codValidos = ["1300", "1400", "1600", "1700", "2400"];
 
       const nuevasFacturas = facturas
         .filter((factura) =>
@@ -62,6 +62,8 @@ const GenerarWordAdm = () => {
         return "Guiando a sus adolescentes";
       case "1700":
         return "Mayordomía financiera";
+      case "2024":
+        return "Hablando de sexualidad en casa";
       default:
         return `Código: ${cod}`;
     }
