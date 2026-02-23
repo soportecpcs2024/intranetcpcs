@@ -62,7 +62,7 @@ const GenerarWordAdm = () => {
         return "Guiando a sus adolescentes";
       case "1700":
         return "Mayordomía financiera";
-      case "2024":
+      case "2400":
         return "Hablando de sexualidad en casa";
       default:
         return `Código: ${cod}`;

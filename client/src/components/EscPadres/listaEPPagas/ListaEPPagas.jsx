@@ -31,8 +31,8 @@ const ListaEPPagas = () => {
   }, [fetchFacturas]);
 
 useEffect(() => {
-  const codigosPermitidos = [1400, 1600, 1700, 2400];
-  const conteo = { 1400: 0, 1600: 0, 1700: 0, 2400: 0 };
+  const codigosPermitidos = [1300, 1400, 1600, 1700, 2400];
+  const conteo = {1300: 0, 1400: 0, 1600: 0, 1700: 0, 2400: 0 };
   const result = [];
 
   (facturas || []).forEach((factura) => {
@@ -82,6 +82,8 @@ useEffect(() => {
 
   const getNombreEscuela = (cod) => {
     switch (cod) {
+      case 1300:
+        return "Ciberfamilias";
       case 1400:
         return "El arte de ser Padres";
       case 1600:
@@ -136,6 +138,7 @@ useEffect(() => {
       <h3>Familias con Escuelas Pagas</h3>
 
       <div className="conteo-clases">
+        <p>🧩 Ciber Familias: {conteoClases[1300] || 0}</p>
         <p>🧩 El arte de ser Padres: {conteoClases[1400] || 0}</p>
         <p>👨‍👧‍👦 Guiando a sus adolescentes: {conteoClases[1600] || 0}</p>
         <p>💰 Mayordomía financiera: {conteoClases[1700] || 0}</p>
