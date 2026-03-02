@@ -182,6 +182,10 @@ app.use('/api/papeleria',papeleria);
 const importExcelRoutes = require("./routes/contabilidad/nominaRoutes");
 app.use("/api/nomina",importExcelRoutes);
 
+const checkupRoutes = require('./routes/planMejoramientoSeccion/PlanRoutes/checkupRoutes');
+
+app.use('/api', checkupRoutes);
+
 // Configuración y arranque del servidor
 const PORT = process.env.SERVER_PORT || 3000;
 app.listen(PORT, () => {

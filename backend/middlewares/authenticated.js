@@ -20,6 +20,7 @@ function asureAuth(req, res, next) {
     }
 
     req.user = payload;
+    req.user._id = payload.user_id;
     next();
   } catch (error) {
     return res.status(400).send({ msg: "Token invalido" });
