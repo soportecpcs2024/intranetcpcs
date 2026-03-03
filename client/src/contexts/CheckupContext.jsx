@@ -168,6 +168,32 @@ export const CheckupProvider = ({ children }) => {
     }
   }, [baseURL]);
 
+
+  // ✅ GET /api/checkups/semanal?area=...&periodo=...&weekStart=...
+// Devuelve el chequeo de esa semana (si existe)
+const obtenerWeeklyCheckup = useCallback(
+  async ({ area, periodo, weekStart, grupo }) => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const res = await axios.get(`${baseURL}/api/checkups/semanal`, {
+        ...getAuthHeaders(),
+        params: { area, periodo, weekStart, grupo },
+      });
+
+      return res.data;
+    } catch (err) {
+      if (err?.response?.status === 404) return null;
+      console.error("Error obteniendo chequeo semanal:", err);
+      setError(err);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  },
+  [baseURL]
+);
   /*
   =========================
   DASHBOARD
@@ -220,6 +246,7 @@ export const CheckupProvider = ({ children }) => {
       dashboard,
       loading,
       error,
+      obtenerWeeklyCheckup,
 
       // actions
       clearError,
@@ -229,6 +256,7 @@ export const CheckupProvider = ({ children }) => {
       upsertWeeklyCheckup,
       listarWeeklyCheckups,
       obtenerDashboardStats,
+      
     }),
     [
       planActivo,
@@ -243,6 +271,7 @@ export const CheckupProvider = ({ children }) => {
       upsertWeeklyCheckup,
       listarWeeklyCheckups,
       obtenerDashboardStats,
+      obtenerWeeklyCheckup,
     ]
   );
 
