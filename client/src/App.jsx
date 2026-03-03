@@ -102,12 +102,18 @@ import InformeClasesExtracurricularesadm from "./components/tesoreria/extracurri
 import InformeFormularioMensualAdm from "./components/tesoreria/Formularios_inscripcion/InformeFormularioMensualAdm";
 import GenerarWordAdm from "./components/tesoreria/InformeEscuelasPadres/InformeEScuelasPadresAdm";
 import InformePromAdm from "./components/tesoreria/DashboardTesoreria/Recaudo/Prom_11/InformePromAdm";
+import { CheckupProvider } from "./contexts/CheckupContext";
+ 
 
- 
- 
- 
- 
- 
+
+
+
+
+
+
+
+
+const ChequeoSemanal = React.lazy(() => import("./pages/planMejoramientoAca/ChequeoSemanal"));
 
 const Prom_11 = React.lazy(() => import("./components/tesoreria/DashboardTesoreria/Recaudo/Prom_11/Prom_11"));
 const ListarProm = React.lazy(() => import("./components/tesoreria/DashboardTesoreria/Recaudo/Prom_11/ListarProm"));
@@ -135,7 +141,7 @@ const SeguimientoMantenimiento = React.lazy(() =>
     "./components/programadorTareas/paginasTareas/SeguimientoMantenimiento"
   )
 );
- 
+
 const LayoutInformesAdm = React.lazy(() =>
   import("./components/Administracion/informeTareas/LayoutInformesAdm")
 );
@@ -208,7 +214,10 @@ const App = () => {
                   <ActasDeGradoProvider>
                     <EvaluacionesProvider>
                       <NominaProvider>
-                      <AppContent />
+                        <CheckupProvider>
+
+                          <AppContent />
+                        </CheckupProvider>
 
                       </NominaProvider>
 
@@ -301,16 +310,16 @@ const AppContent = () => {
                 <Route path="locationdetails" element={<LocationDetails />} />
                 <Route path="editlocation/:id" element={<EditLocation />} />
               </Route>
-                <Route path="registroAsistencia" element={<AsistenciaDiaria />} />
+              <Route path="registroAsistencia" element={<AsistenciaDiaria />} />
               <Route path="informesgenerales" element={<LayoutInformesAdm />} />
               <Route path="informesExtraClasesDec" element={<InformeExtraClasesDec />} />
 
 
               <Route path="papeleria" element={<DashboardPapeleria />}>
-                <Route path="registrarProductos" element={<RegistrarProductos />}/> 
-                <Route path="solicitarProductos" element={<SolicitudProductos />}/> 
-                <Route path="listarProductos" element={<ListarProductosPapeleria />}/> 
-               
+                <Route path="registrarProductos" element={<RegistrarProductos />} />
+                <Route path="solicitarProductos" element={<SolicitudProductos />} />
+                <Route path="listarProductos" element={<ListarProductosPapeleria />} />
+
               </Route>
               <Route
                 path="inventario_estadisticas"
@@ -324,12 +333,12 @@ const AppContent = () => {
               </Route>
 
               <Route path="infoacademico" element={<LayoutInfoAcademicos />}>
-                <Route path="certificado-estudios" element={<CertificadoEstudios />}/>
+                <Route path="certificado-estudios" element={<CertificadoEstudios />} />
                 <Route path="acumulados-notas" element={<AcumuladosNotas />} />
-                <Route path="actas_grados_individual" element={<ActasGrados />}/>
-                <Route path="actas_grados_grupal" element={<GenerarTodasActas />}/>
+                <Route path="actas_grados_individual" element={<ActasGrados />} />
+                <Route path="actas_grados_grupal" element={<GenerarTodasActas />} />
               </Route>
-                {/* <Route path="registropei" element={<RegistroPei />}/> */}
+              {/* <Route path="registropei" element={<RegistroPei />}/> */}
 
               <Route path="tesoreria" element={<LayoutTesoreria />}>
                 <Route path="recaudo" element={<Recaudo />} />
@@ -340,7 +349,7 @@ const AppContent = () => {
                 <Route path="escuela_padres" element={<Recaudoep />} />
                 <Route path="almuerzos" element={<Almuerzos />} />
                 <Route path="lista_facturas" element={<ListarFacturas />} />
-                
+
                 <Route
                   path="lista_formularios"
                   element={<ListarFormularioCompras />}
@@ -371,39 +380,42 @@ const AppContent = () => {
                   element={<InformeAntologia />}
                 />
               </Route>
-              
+
 
               <Route path="tesoreria_adm" element={<LayoutTesoreriaAdm />}>
-              
-                  <Route
+
+                <Route
                   path="informe-extracurriculares-adm"
                   element={<InformeClasesExtracurricularesadm />}
                 />
-                 <Route
+                <Route
                   path="informe_antologias-adm"
                   element={<InformeAntologia />}
                 />
-                  <Route
+                <Route
                   path="informe_escuela_padres-adm"
                   element={<GenerarWordAdm />}
                 />
 
-                  <Route
+                <Route
                   path="informe-formularios-adm"
                   element={<InformeFormularioMensualAdm />}
                 />
 
                 <Route path="informe_prom-adm" element={<InformePromAdm />} />
-              
+
               </Route>
 
 
 
-              
+
 
               <Route path="cargar_archivo" element={<CargarArchivoExcel />}></Route>
-              <Route path="descargar_colilla" element={<Generar_colilla/>}></Route>
-              <Route path="eliminar_colillas" element={<EliminarPorFecha/>}></Route>
+
+              <Route path="control_semanal" element={<ChequeoSemanal />}></Route>
+
+              <Route path="descargar_colilla" element={<Generar_colilla />}></Route>
+              <Route path="eliminar_colillas" element={<EliminarPorFecha />}></Route>
 
               <Route path="esc_padres" element={<DashboardEscPadres />} />
               <Route path="crear_ep" element={<CrearEscuelaPadres />} />
@@ -432,6 +444,7 @@ const AppContent = () => {
                 element={<SeguimientoMantenimiento />}
               />
             </Route>
+            
           )}
         </Routes>
       </Suspense>
