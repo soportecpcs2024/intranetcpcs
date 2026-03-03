@@ -283,13 +283,7 @@ const ChequeoSemanal = () => {
             />
           </div>
 
-          <button
-            className="cs-btn cs-btn-secondary"
-            onClick={() => {}}
-            disabled
-          >
-            {loading ? "Cargando..." : "Auto-carga activa"}
-          </button>
+         
         </div>
 
         {/* Alerts */}
