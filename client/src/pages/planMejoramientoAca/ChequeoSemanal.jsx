@@ -23,6 +23,8 @@ const ChequeoSemanal = () => {
     upsertWeeklyCheckup,
     obtenerWeeklyCheckup,
     preguntas,
+    grupos,
+    listarGrupos,
     loading,
     error,
   } = useCheckup();
@@ -97,6 +99,8 @@ const ChequeoSemanal = () => {
       setMensaje("");
       setRespuestas({});
       setObservaciones("");
+      listarGrupos();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
 
       await obtenerPreguntas({ area, periodo: Number(periodo) });
 
@@ -238,15 +242,19 @@ const ChequeoSemanal = () => {
               ))}
             </select>
           </div>
+
           <select
             className="cs-control"
             value={grupo}
             onChange={(e) => setGrupo(e.target.value)}
           >
             <option value="">Seleccionar grupo</option>
-            <option value="6 A">6 A</option>
-            <option value="6 B">6 B</option>
-            <option value="7 A">7 A</option>
+
+            {grupos.map((g) => (
+              <option key={g.nombre} value={g.nombre}>
+                {g.nombre}
+              </option>
+            ))}
           </select>
 
           <div className="cs-field">
