@@ -1,6 +1,6 @@
 // components/KPIsExtraClases.jsx
 
- 
+
 import "./informesExtraclases.css";
 
 const KPIsExtraClases = ({ data }) => {
@@ -10,7 +10,7 @@ const KPIsExtraClases = ({ data }) => {
 
   // KPI básicos
   const clasesVendidas = data.length;
-  
+
 
   let totalRecaudado = 0;
   let totalNomina = 0;
@@ -62,6 +62,11 @@ const KPIsExtraClases = ({ data }) => {
         return "Microfútbol";
       case "1100":
         return "Exploración Motriz y Predeportiva Pre";
+      case "2200":
+        return "Piano lunes";
+
+      case "2300":
+        return "Iniciación al Arte"
       default:
         return `Código: ${cod}`;
     }
@@ -69,14 +74,14 @@ const KPIsExtraClases = ({ data }) => {
 
   return (
     <div className="kpi-container">
-        
+
       <div className="cardestaditicas">
         <h4>📊 Estadísticas Generales</h4>
         <ul>
           <li>
             📅 Clases vendidas: <strong>{clasesVendidas}</strong>
           </li>
-         
+
           <li>
             💰 Total recaudado:{" "}
             <strong>${totalRecaudado.toLocaleString()}</strong>
@@ -117,24 +122,24 @@ const KPIsExtraClases = ({ data }) => {
       <div >
         <div className="cardestaditicas">
 
-      
-        <h4>🏆 Ventas:</h4>
-        <h3>📉 Mas vendida:</h3>
-        {claseMasVendida && (
-          <p>
-            {getNombreCodigo(claseMasVendida[0])} ({claseMasVendida[1]} ventas)
-          </p>
-        )}
 
-        <h3>📉 Menos vendida:</h3>
-        {claseMenosVendida && (
-          <p>
-            {getNombreCodigo(claseMenosVendida[0])} ({claseMenosVendida[1]}{" "}
-            ventas)
-          </p>
-        )}
-      </div>
+          <h4>🏆 Ventas:</h4>
+          <h3>📉 Mas vendida:</h3>
+          {claseMasVendida && (
+            <p>
+              {getNombreCodigo(claseMasVendida[0])} ({claseMasVendida[1]} ventas)
+            </p>
+          )}
+
+          <h3>📉 Menos vendida:</h3>
+          {claseMenosVendida && (
+            <p>
+              {getNombreCodigo(claseMenosVendida[0])} ({claseMenosVendida[1]}{" "}
+              ventas)
+            </p>
+          )}
         </div>
+      </div>
     </div>
   );
 };

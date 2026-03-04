@@ -286,7 +286,7 @@ const AppContent = () => {
                 <Route path="microfutbol" element={<Microfutbol />} />
                 <Route path="arte" element={<Artes />} />
                 <Route path="iniciacionAlArte" element={<IniciacionAlArte />} />
-                <Route path="robotica" element={<Robotica />} />
+                <Route path="piano_lunes" element={<Robotica />} />
 
                 <Route
                   path="exploracionmotriz"
