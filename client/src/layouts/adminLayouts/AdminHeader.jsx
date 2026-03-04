@@ -831,79 +831,9 @@ const AdminHeader = () => {
 
              
 
-                  <li>
-                    <div className="dropdown">
-                      <Link onClick={toggleDropdown}>E. Padres</Link>
+                
 
-                      {isDropdownOpen && (
-                        <ul className="dropdown-menu">
-                          <li>
-                            <Link to="esc_padres">Registro Asistencia</Link>
-                          </li>
-                          <li>
-                            <Link to="estadisticas_ep">Estadisticas EP</Link>
-                          </li>
-                          <li>
-                            <Link to="crear_ep">Crear Escuela</Link>
-                          </li>
-                          <li>
-                            <Link to="eppagas">Pagos escuelas</Link>
-                          </li>
-                          <li>
-                            <Link to="informe_escuela_padres">
-                              Informe pagos EP
-                            </Link>
-                          </li>
-                        </ul>
-                      )}
-                    </div>
-                  </li>
-
-                  <li>
-                    <div className="dropdown">
-                      <Link onClick={toggleDropdown}>
-                        Tareas y mantenimientos
-                      </Link>
-                      {isDropdownOpen && (
-                        <ul className="dropdown-menu">
-                          <li>
-                            <Link to="programadorTareas">Tareas</Link>
-                          </li>
-
-                          <li>
-                            <Link to="crearMantenimiento">
-                              Crear mantenimiento
-                            </Link>
-                          </li>
-                        </ul>
-                      )}
-                    </div>
-                  </li>
-
-                  <li>
-                    <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Sec.Académica</Link>
-                      {isDropdownOpen && (
-                        <ul className="dropdown-menu">
-                          <li>
-                            <Link to="/admin/documentos">Documentos</Link>
-                          </li>
-
-                          <li>
-                            <Link to="/admin/infoacademico">
-                              Informes Académicos
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="registropei">
-                              Registro PEI
-                            </Link>
-                          </li>
-                        </ul>
-                      )}
-                    </div>
-                  </li>
-
+               
                  
                   <li>
                     <div className="dropdown">
@@ -914,12 +844,8 @@ const AdminHeader = () => {
                           <li>
                             <Link to="control_semanal">Control semanal</Link>
                           </li>
-                          <li>
-                            <Link to="control_semanal">Control semanal</Link>
-                          </li>
-                          <li>
-                            <Link to="control_semanal">Control semanal</Link>
-                          </li>
+                           
+                           
                           
 
 

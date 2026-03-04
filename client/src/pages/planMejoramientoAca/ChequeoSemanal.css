@@ -1,7 +1,7 @@
 :root{
-  --cs-blue: #0B3A6E;
-  --cs-blue-2: #0E5AA7;
-  --cs-yellow: #F7C948;
+  --cs-blue: #0977f4;
+  --cs-blue-2: #3083d6;
+  --cs-yellow: #f6fa03;
   --cs-bg: #F4F7FB;
   --cs-card: #FFFFFF;
   --cs-text: #0B1220;
@@ -42,13 +42,22 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(247, 201, 72, 0.22);
-  border: 1px solid rgba(247, 201, 72, 0.35);
+  background: yellow;
+  border: 1px solid rgba(62, 62, 62, 0.35);
   padding: 8px 12px;
   border-radius: 999px;
   font-weight: 700;
   color: var(--cs-blue);
   width: fit-content;
+  font-size: 24px;
+}
+
+.cs-chequeo-estadistica{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .cs-title{
@@ -62,6 +71,7 @@
   margin: 0;
   color: var(--cs-muted);
   line-height: 1.5;
+  font-size: 16px;
 }
 
 .cs-progress-card{
@@ -83,11 +93,15 @@
 .cs-progress-label{
   color: var(--cs-muted);
   font-weight: 700;
+   
 }
 
 .cs-progress-value{
   font-weight: 800;
   color: var(--cs-blue);
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.36) 0px 6px 14px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
 
 .cs-progress-bar{
@@ -99,14 +113,20 @@
 
 .cs-progress-fill{
   height: 100%;
-  background: linear-gradient(90deg, var(--cs-blue-2), var(--cs-yellow));
+  background: linear-gradient(
+    90deg,
+    #3083d6 0%,
+    #0977f4 40%,
+    #f6fa03 100%
+  );
   border-radius: 999px;
-  transition: width .25s ease;
+  transition: width .35s cubic-bezier(.4,0,.2,1);
+  box-shadow: 0 4px 14px rgba(9, 119, 244, 0.35);
 }
 
 .cs-progress-hint{
   margin-top: 10px;
-  font-size: 13px;
+  font-size: 15px;
   color: var(--cs-muted);
 }
 
@@ -136,8 +156,12 @@
   gap: 6px;
 }
 
+.cs-field textarea {
+  resize: none;
+}
+
 .cs-label{
-  font-size: 13px;
+  font-size: 16px;
   color: var(--cs-muted);
   font-weight: 700;
 }
@@ -145,6 +169,7 @@
 .cs-control{
   border: 1px solid rgba(11, 58, 110, 0.18);
   background: #fff;
+  
   border-radius: 14px;
   padding: 12px 12px;
   outline: none;
@@ -235,49 +260,59 @@
 
 .cs-actions{
   display: flex;
+  flex-direction: row;
   align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
+  gap: 5px;
+   
+   
 }
+
 
 .cs-chip{
   border: 1px solid rgba(11, 58, 110, 0.18);
-  background: #fff;
+  background: #fff !important;
   color: var(--cs-blue);
   font-weight: 900;
-  padding: 10px 14px;
-  border-radius: 999px;
+  padding: 5px;
+  border-radius: 9px;
   cursor: pointer;
   transition: all .18s ease;
 }
 
 .cs-chip:hover{
   transform: translateY(-1px);
-  border-color: rgba(14, 90, 167, 0.55);
+  border-color: rgba(14, 208, 4, 0.81);
   box-shadow: 0 10px 22px rgba(11, 58, 110, 0.12);
+  color: black;
 }
 
 .cs-chip.active{
   border-color: transparent;
   color: #0B1D38;
 }
+.cs-chip.active.score {
+  background: linear-gradient(90deg, var(--cs-blue-2), var(--cs-yellow));
+  color: white;
+  border-color: transparent;
+}
 
-.cs-chip.active.yes{
-  background: rgba(247, 201, 72, 0.92);
+.cs-chip.active.score{
+  background: rgba(247, 201, 72, 0.92) !important;
 }
 
 .cs-chip.active.no{
-  background: rgba(14, 90, 167, 0.14);
+  background: rgba(14, 90, 167, 0.14) !important;
 }
 
 .cs-status{
   margin-left: auto;
-  font-weight: 800;
-  font-size: 13px;
+  font-weight: 500;
+  font-size: 12px;
   color: var(--cs-muted);
-  padding: 8px 10px;
-  border-radius: 999px;
+  padding: 6px;
+  border-radius: 50px;
   background: rgba(11, 58, 110, 0.06);
+  text-align: center;
 }
 
 .cs-status.done{
@@ -289,7 +324,7 @@
 /* Buttons */
 .cs-btn{
   border: none;
-  border-radius: 14px;
+  border-radius: 8px;
   padding: 12px 14px;
   cursor: pointer;
   font-weight: 900;
@@ -304,8 +339,8 @@
 }
 
 .cs-btn-secondary{
-  background: rgba(14, 90, 167, 0.10);
-  color: var(--cs-blue);
+  background: rgba(14, 91, 167, 0.668);
+  color: white;
   border: 1px solid rgba(14, 90, 167, 0.20);
 }
 
