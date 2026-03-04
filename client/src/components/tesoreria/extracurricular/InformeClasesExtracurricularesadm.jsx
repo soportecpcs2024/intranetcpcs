@@ -94,7 +94,7 @@ const InformeClasesExtracurricularesadm = () => {
       case "1100":
         return "Exploración Motriz y Predeportiva Pre";
       case "2200":
-        return "Robótica";
+        return "Piano lunes";
       case "2300":
         return "Iniciación al Arte";
       default:

@@ -95,7 +95,7 @@ const InformeClasesExtracurriculares = () => {
       case "1100":
         return "Exploración Motriz y Predeportiva Pre";
       case "2200":
-        return "Robótica";
+        return "Paino lunes";
       case "2300":
         return "Iniciación al Arte";
 
