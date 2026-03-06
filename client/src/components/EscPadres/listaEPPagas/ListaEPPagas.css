@@ -35,7 +35,7 @@
 }
 
 .conteo-clases p {
-  font-size: 14px;
+  font-size: 17px;
   margin: 0;
 }
 .conteo-class{
@@ -45,9 +45,12 @@
 }
 .total-conteo{
   padding: 10px;
-  background-color: red;
+  background-color: rgb(16, 240, 8);
   border-left: 3px solid black;
   border-radius: 8px;
+  
+  font-size: 20px !important;
+  
 }
 
 .tabla-ep {
