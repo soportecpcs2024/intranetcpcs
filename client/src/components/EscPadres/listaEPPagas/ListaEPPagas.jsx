@@ -61,7 +61,12 @@ useEffect(() => {
   });
 
   // Ordenar por escuela
-  result.sort((a, b) => getNombreEscuela(a.cod).localeCompare(getNombreEscuela(b.cod)));
+ result.sort((a, b) => {
+  const escuelaDiff = getNombreEscuela(a.cod).localeCompare(getNombreEscuela(b.cod));
+  if (escuelaDiff !== 0) return escuelaDiff;
+
+  return new Date(a.fechaCompra) - new Date(b.fechaCompra);
+});
 
   setFilteredData(result);
   setConteoClases(conteo);
@@ -106,10 +111,11 @@ useEffect(() => {
     // 🔹 Convertir los datos en un formato plano para Excel
     const worksheet = XLSX.utils.json_to_sheet(
       filteredData.map((item) => ({
+        Escuela: getNombreEscuela(item.cod),
         "Nombre Estudiante": item.nombreEstudiante,
         Documento: item.documento,
         Grado: item.grado,
-        Escuela: getNombreEscuela(item.cod),
+        FechaCompra:item.fechaCompra
       }))
     );
 
@@ -138,14 +144,14 @@ useEffect(() => {
       <h3>Familias con Escuelas Pagas</h3>
 
       <div className="conteo-clases">
-        <p>🧩 Ciber Familias: {conteoClases[1300] || 0}</p>
-        <p>🧩 El arte de ser Padres: {conteoClases[1400] || 0}</p>
-        <p>👨‍👧‍👦 Guiando a sus adolescentes: {conteoClases[1600] || 0}</p>
-        <p>💰 Mayordomía financiera: {conteoClases[1700] || 0}</p>
-        <p>💰 Hablando de sexualidad en casa: {conteoClases[2400] || 0}</p>
+        <p >🧩 Ciber Familias:<span className="conteo-class">{conteoClases[1300] || 0}</span> </p>
+        <p className="conteo-class">🧩 El arte de ser Padres: {conteoClases[1400] || 0}</p>
+        <p className="conteo-class">👨‍👧‍👦 Guiando a sus adolescentes: {conteoClases[1600] || 0}</p>
+        <p className="conteo-class">💰 Mayordomía financiera: {conteoClases[1700] || 0}</p>
+        <p className="conteo-class">💰 Hablando de sexualidad en casa: {conteoClases[2400] || 0}</p>
         <div>
           <p>
-            Total familias activas : <p>{filteredData.length}</p>{" "}
+            Total familias activas : <p className="total-conteo">{filteredData.length}</p>{" "}
           </p>
         </div>
 
@@ -157,18 +163,20 @@ useEffect(() => {
         <thead>
           <tr>
             <th>#</th>
+            <th>Escuela</th>
             <th>Nombre Estudiante</th>
             <th>Grado</th>
-            <th>Escuela</th>
+            <th>Fecha de compra</th>
           </tr>
         </thead>
         <tbody>
           {currentItems.map((item, index) => (
             <tr key={index}>
               <td>{currentPage * ITEMS_PER_PAGE + index + 1}</td>
+              <td >{getNombreEscuela(item.cod)}</td>
               <td>{item.nombreEstudiante}</td>
               <td>{item.grado}</td>
-              <td >{getNombreEscuela(item.cod)}</td>
+              <td >{item.fechaCompra}</td>
             </tr>
           ))}
         </tbody>

@@ -1,6 +1,6 @@
 /* Estilo base para escritorio */
 .lista_ep_pagas {
-    width: 60%;
+    width: 80%;
     display: flex;
      
     padding: 5px;
@@ -35,15 +35,26 @@
 }
 
 .conteo-clases p {
-  font-size: 18px;
+  font-size: 14px;
   margin: 0;
+}
+.conteo-class{
+  
+  border-left: 3px solid black;
+  
+}
+.total-conteo{
+  padding: 10px;
+  background-color: red;
+  border-left: 3px solid black;
+  border-radius: 8px;
 }
 
 .tabla-ep {
-  width: 50%;
+  width: 80%;
   border-collapse: collapse;
   margin: 15px 0;
-  font-size: 18px;
+  font-size: 14px;
   text-align: left;
   background: #fff;
   border-radius: 6px;
@@ -61,7 +72,7 @@
 .tabla-ep th,
 .tabla-ep td {
   padding: 5px 6px;
-  font-size: 16px;
+  font-size: 13px;
   border-bottom: 1px solid #ddd;
 }
 
