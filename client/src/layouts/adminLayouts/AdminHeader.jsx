@@ -405,6 +405,16 @@ const AdminHeader = () => {
                               Descargar colilla de pago
                             </Link>
                           </li>
+                          <li>
+                            <Link to="/admin/extraclases">
+                              Extra curricular
+                            </Link>
+                          </li>
+                           <li>
+                            <Link to="informesExtraClasesDec">
+                              Informe Extraclases
+                            </Link>
+                          </li>
 
                         </ul>
                       )}
@@ -542,6 +552,11 @@ const AdminHeader = () => {
                             Seguimiento mantenimientos
                           </Link>
                         </li>
+                         <li>
+                            <Link to="descargar_colilla">
+                              Descargar colilla de pago
+                            </Link>
+                          </li>
                       </ul>
                     )}
                   </div>
