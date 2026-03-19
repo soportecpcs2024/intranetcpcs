@@ -15,7 +15,7 @@ import {
   Legend,
 } from "recharts";
 import { CheckupContext } from "../../../contexts/CheckupContext";
-import "./checkupDashboardInstitucional.css";
+import "./CheckupDashboardInstitucional.css";
 
 const AREAS = [
   { value: "", label: "Todas las áreas" },
@@ -89,6 +89,7 @@ const CheckupDashboardInstitucional = () => {
     dashboardInstitucional,
     obtenerDashboardInstitucional,
   } = useContext(CheckupContext);
+
 
   const [area, setArea] = useState("");
   const [periodo, setPeriodo] = useState(1);
