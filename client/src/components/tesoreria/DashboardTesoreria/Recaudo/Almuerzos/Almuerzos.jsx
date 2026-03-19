@@ -10,18 +10,12 @@ import {
   Packer,
   Paragraph,
   TextRun,
-  Table,
-  TableRow,
-  TableCell,
-  WidthType,
-  PageSize,
-  BorderStyle,
+   
   AlignmentType,
   VerticalAlign,
 } from "docx";
 import { saveAs } from "file-saver";
-import { ImageRun } from "docx";
-import ListaAlmuerzosVendidos from "./ListaAlmuerzosVendidos";
+ 
 import EstadisticasAlmuerzo from "./EstadisticasAlmuerzo";
 
 const Almuerzos = () => {
@@ -331,6 +325,7 @@ const Almuerzos = () => {
       .map(([id, cantidad]) => ({
         almuerzoId: id,
         cantidad: cantidad,
+         
       }));
 
     if (factura.length === 0) {
@@ -344,6 +339,7 @@ const Almuerzos = () => {
         estudianteId: estudiante._id,
         almuerzos: factura,
         tipoPago, // Se incluye el tipo de pago
+        vendido: user?.name || "USUARIO DEL SISTEMA",
       });
 
       alert("Factura guardada correctamente");
@@ -396,7 +392,7 @@ const Almuerzos = () => {
           </div>
         </div>
 
-        {/* Lista de Almuerzos */}
+       
         {/* Lista de Almuerzos */}
         <div className="lista-almuerzos">
           {almuerzo.length > 0 ? (

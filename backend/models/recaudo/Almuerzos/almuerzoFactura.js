@@ -18,7 +18,8 @@ const facturaAlmuerzoSchema = new mongoose.Schema({
         enum: ['Efectivo', 'Datáfono', 'Nómina', 'Banco'], 
         required: true, 
         trim: true
-      }
+      },
+      vendido: { type: String, required: true },
 });
 
 module.exports = mongoose.model('FacturaAlmuerzo', facturaAlmuerzoSchema);

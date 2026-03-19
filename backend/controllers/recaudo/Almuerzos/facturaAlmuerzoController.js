@@ -19,18 +19,18 @@ const generarNumeroFactura = async () => {
 
 // Función para validar el tipo de pago
 const validarTipoPago = (tipoPago) => {
-  return ["Efectivo", "Datáfono", "Nómina"].includes(tipoPago);
+  return ["Efectivo", "Datáfono", "Nómina", "Banco"].includes(tipoPago);
 };
 
 // Crear factura de almuerzos
 exports.crearFactura = async (req, res) => {
   try {
-    const { almuerzos, estudianteId, tipoPago } = req.body;
+    const { almuerzos, estudianteId, tipoPago, vendido } = req.body;
     
     // Validar tipo de pago
     if (!validarTipoPago(tipoPago)) {
       return res.status(400).json({
-        message: "El tipo de pago debe ser 'Efectivo', 'Datáfono' o 'Nómina'.",
+        message: "El tipo de pago debe ser 'Efectivo', 'Datáfono', 'Banco' o 'Nómina'.",
       });
     }
 
@@ -59,7 +59,8 @@ exports.crearFactura = async (req, res) => {
       estudianteId, 
       almuerzos, 
       total, 
-      tipoPago 
+      tipoPago,
+      vendido
     });
 
     await factura.save();

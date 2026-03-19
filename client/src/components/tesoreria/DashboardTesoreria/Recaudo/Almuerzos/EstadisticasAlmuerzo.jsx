@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useRecaudo } from "../../../../../contexts/RecaudoContext";
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
+import { useAuth } from "../../../../../contexts/AuthContext";
  
  
 import './Almuerzos.css';
@@ -11,7 +12,7 @@ const EstadisticasAlmuerzo = () => {
   const [totalSum, setTotalSum] = useState(0);
   const [numeroFacturas, setNumeroFacturas] = useState(0);
   const [almuerzoContador, setAlmuerzoContador] = useState({});
- 
+   const { user } = useAuth();
 
   useEffect(() => {
     if (almuerzoFactura.length > 0) {
@@ -61,6 +62,7 @@ const EstadisticasAlmuerzo = () => {
         Total: item.total,
         "Tipo de pago": item.tipoPago,
         Fecha: new Date(item.fechaCompra).toLocaleDateString(),
+        "Vendido por":`${user?.name}`
       };
     });
   
