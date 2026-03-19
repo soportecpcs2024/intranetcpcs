@@ -62,7 +62,7 @@ const EstadisticasAlmuerzo = () => {
         Total: item.total,
         "Tipo de pago": item.tipoPago,
         Fecha: new Date(item.fechaCompra).toLocaleDateString(),
-        "Vendido por":`${user?.name}`
+        "Vendido por":`${item.vendido}`
       };
     });
   
