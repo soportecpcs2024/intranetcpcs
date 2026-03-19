@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, useCallback } from "react";
-import { useCheckup } from "../../hooks/useCheckup";
+import { useCheckup } from "../../../hooks/useCheckup";
 import "./ChequeoSemanal.css";
 
 const AREAS = [

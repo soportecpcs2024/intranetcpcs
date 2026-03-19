@@ -104,6 +104,7 @@ import GenerarWordAdm from "./components/tesoreria/InformeEscuelasPadres/Informe
 import InformePromAdm from "./components/tesoreria/DashboardTesoreria/Recaudo/Prom_11/InformePromAdm";
 import { CheckupProvider } from "./contexts/CheckupContext";
  
+ 
 
 
 
@@ -113,7 +114,9 @@ import { CheckupProvider } from "./contexts/CheckupContext";
 
 
 
-const ChequeoSemanal = React.lazy(() => import("./pages/planMejoramientoAca/ChequeoSemanal"));
+const ChequeoSemanal = React.lazy(() => import("./pages/planMejoramientoAca/chequeoSemanal/ChequeoSemanal"));
+const CheckupDashboard = React.lazy(() => import("./pages/planMejoramientoAca/CheckupDashboard/CheckupDashboardInstitucional"));
+
 
 const Prom_11 = React.lazy(() => import("./components/tesoreria/DashboardTesoreria/Recaudo/Prom_11/Prom_11"));
 const ListarProm = React.lazy(() => import("./components/tesoreria/DashboardTesoreria/Recaudo/Prom_11/ListarProm"));
@@ -413,6 +416,7 @@ const AppContent = () => {
               <Route path="cargar_archivo" element={<CargarArchivoExcel />}></Route>
 
               <Route path="control_semanal" element={<ChequeoSemanal />}></Route>
+              <Route path="checkupDashboard" element={<CheckupDashboard />}></Route>
 
               <Route path="descargar_colilla" element={<Generar_colilla />}></Route>
               <Route path="eliminar_colillas" element={<EliminarPorFecha />}></Route>

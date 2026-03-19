@@ -130,6 +130,10 @@ const asistenciasUnificadas = async(req,res) =>{
   }
 
 };
+
+const estadisticasAsistencias = async(req,res) =>{
+  
+}
  
 
 module.exports = { crearAsistencia, actualizarAsistencia, obtenerAsistenciaPorEstudiante, asistenciasUnificadas };

@@ -21,10 +21,7 @@ router.get(
 );
 
 // Obtener asistencia unificada 
-router.get(
-  "/unificada",
-  asistenciasUnificadas
-);
+router.get("/unificada",asistenciasUnificadas);
 
 
 

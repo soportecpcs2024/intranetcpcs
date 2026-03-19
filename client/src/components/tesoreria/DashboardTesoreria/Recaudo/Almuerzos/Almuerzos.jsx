@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRecaudo } from "../../../../../contexts/RecaudoContext";
 import { MdNoFood } from "react-icons/md";
 import BuscadorEstudiante from "../buscador/BuscadorEstudiante";
+import { useAuth } from "../../../../../contexts/AuthContext";
 
 import "./Almuerzos.css";
 import {
@@ -33,6 +34,8 @@ const Almuerzos = () => {
     fetchEstudianteById,
     fetchAlmuerzoFactura,
   } = useRecaudo();
+  const { user } = useAuth();
+ 
 
   const [seleccionados, setSeleccionados] = useState({});
   const [estudiante, setEstudiante] = useState(null);
@@ -89,7 +92,7 @@ const Almuerzos = () => {
               alignment: AlignmentType.CENTER,
               children: [
                 new TextRun({
-                  text: "BAZAR 2025",
+                  text: "BAZAR 2026",
                   bold: true,
                   size: 20,
                   font: "Arial",
@@ -198,7 +201,7 @@ const Almuerzos = () => {
                   size: 20,
                 }),
                 new TextRun({
-                  text: `LINA MARIA HOYOS RESTREPO`,
+                   text: `${user?.name || "USUARIO DEL SISTEMA"}`,
                   size: 20,
                   bold: true,
                 }),
@@ -367,7 +370,7 @@ const Almuerzos = () => {
   return (
     <div className="almuerzos">
       <div className="container-almuerzo box1Almuerzos">
-        <h2 className="title-almuerzo">RECAUDO ALMUERZOS BAZAR 2025 CPCS</h2>
+        <h2 className="title-almuerzo">RECAUDO ALMUERZOS BAZAR 2026 CPCS</h2>
 
         <div className="header-almuerzos">
           <div>

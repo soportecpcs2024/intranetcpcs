@@ -14,6 +14,7 @@ export const CheckupProvider = ({ children }) => {
   const [preguntas, setPreguntas] = useState([]);
   const [weeklyCheckups, setWeeklyCheckups] = useState([]);
   const [dashboard, setDashboard] = useState(null);
+  const [dashboardInstitucional, setDashboardInstitucional] = useState(null);
   const [grupos, setGrupos] = useState([]);
 
   const [loading, setLoading] = useState(false);
@@ -21,7 +22,7 @@ export const CheckupProvider = ({ children }) => {
 
   const baseURL = import.meta.env.VITE_BACKEND_URL;
 
-  // ✅ Header de auth para rutas protegidas (asureAuth)
+  // Header auth para rutas protegidas
   const getAuthHeaders = () => {
     const token = localStorage.getItem("token");
     return {
@@ -72,7 +73,6 @@ export const CheckupProvider = ({ children }) => {
           getAuthHeaders(),
         );
 
-        // si el backend devuelve el plan creado, lo guardamos
         setPlanActivo(res.data);
         return res.data;
       } catch (err) {
@@ -92,16 +92,15 @@ export const CheckupProvider = ({ children }) => {
   =========================
   */
 
-  // GET /api/checkups/preguntas?area=...&periodo=...
   const obtenerPreguntas = useCallback(
-    async ({ area, periodo }) => {
+    async ({ area, periodo, planId } = {}) => {
       try {
         setLoading(true);
         setError(null);
 
         const res = await axios.get(`${baseURL}/api/checkups/preguntas`, {
           ...getAuthHeaders(),
-          params: { area, periodo },
+          params: { area, periodo, planId },
         });
 
         setPreguntas(res.data);
@@ -109,6 +108,7 @@ export const CheckupProvider = ({ children }) => {
       } catch (err) {
         console.error("Error obteniendo preguntas:", err);
         setError(err);
+        setPreguntas([]);
         return [];
       } finally {
         setLoading(false);
@@ -123,7 +123,6 @@ export const CheckupProvider = ({ children }) => {
   =========================
   */
 
-  // POST /api/checkups/semanal (crea o actualiza)
   const upsertWeeklyCheckup = useCallback(
     async (payload) => {
       try {
@@ -136,8 +135,6 @@ export const CheckupProvider = ({ children }) => {
           getAuthHeaders(),
         );
 
-        // opcional: refrescar historial luego de guardar
-        // await listarWeeklyCheckups();
         return res.data;
       } catch (err) {
         console.error("Error guardando chequeo semanal:", err);
@@ -150,39 +147,41 @@ export const CheckupProvider = ({ children }) => {
     [baseURL],
   );
 
-  // GET /api/checkups/semanal (historial)
-  const listarWeeklyCheckups = useCallback(async () => {
-    try {
-      setLoading(true);
-      setError(null);
-
-      const res = await axios.get(
-        `${baseURL}/api/checkups/semanal`,
-        getAuthHeaders(),
-      );
-
-      setWeeklyCheckups(res.data);
-      return res.data;
-    } catch (err) {
-      console.error("Error listando chequeos:", err);
-      setError(err);
-      return [];
-    } finally {
-      setLoading(false);
-    }
-  }, [baseURL]);
-
-  // ✅ GET /api/checkups/semanal?area=...&periodo=...&weekStart=...
-  // Devuelve el chequeo de esa semana (si existe)
-  const obtenerWeeklyCheckup = useCallback(
-    async ({ area, periodo, weekStart, grupo }) => {
+  const listarWeeklyCheckups = useCallback(
+    async ({ area, periodo, grupo, from, to, planId } = {}) => {
       try {
         setLoading(true);
         setError(null);
 
         const res = await axios.get(`${baseURL}/api/checkups/semanal`, {
           ...getAuthHeaders(),
-          params: { area, periodo, weekStart, grupo },
+          params: { area, periodo, grupo, from, to, planId },
+        });
+
+        setWeeklyCheckups(res.data || []);
+        return res.data || [];
+      } catch (err) {
+        console.error("Error listando chequeos:", err);
+        setError(err);
+        setWeeklyCheckups([]);
+        return [];
+      } finally {
+        setLoading(false);
+      }
+    },
+    [baseURL],
+  );
+
+  // Devuelve el chequeo puntual de esa semana si existe
+  const obtenerWeeklyCheckup = useCallback(
+    async ({ area, periodo, weekStart, grupo, planId } = {}) => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const res = await axios.get(`${baseURL}/api/checkups/semanal/uno`, {
+          ...getAuthHeaders(),
+          params: { area, periodo, weekStart, grupo, planId },
         });
 
         return res.data;
@@ -197,33 +196,91 @@ export const CheckupProvider = ({ children }) => {
     },
     [baseURL],
   );
+
   /*
   =========================
-  DASHBOARD
+  DASHBOARD PERSONAL
   =========================
   */
 
-  // GET /api/checkups/dashboard
-  const obtenerDashboardStats = useCallback(async () => {
-    try {
-      setLoading(true);
-      setError(null);
+  const obtenerDashboardStats = useCallback(
+    async ({ area, periodo, grupo, from, to, planId } = {}) => {
+      try {
+        setLoading(true);
+        setError(null);
 
-      const res = await axios.get(
-        `${baseURL}/api/checkups/dashboard`,
-        getAuthHeaders(),
-      );
+        const res = await axios.get(`${baseURL}/api/checkups/dashboard`, {
+          ...getAuthHeaders(),
+          params: {
+            area,
+            periodo,
+            grupo: grupo?.trim?.() || "",
+            from,
+            to,
+            planId,
+          },
+        });
 
-      setDashboard(res.data);
-      return res.data;
-    } catch (err) {
-      console.error("Error obteniendo dashboard stats:", err);
-      setError(err);
-      return null;
-    } finally {
-      setLoading(false);
-    }
-  }, [baseURL]);
+        setDashboard(res.data);
+        return res.data;
+      } catch (err) {
+        console.error("Error obteniendo dashboard stats:", err);
+        setError(err);
+        setDashboard(null);
+        return null;
+      } finally {
+        setLoading(false);
+      }
+    },
+    [baseURL],
+  );
+
+  /*
+  =========================
+  DASHBOARD INSTITUCIONAL
+  =========================
+  */
+
+  const obtenerDashboardInstitucional = useCallback(
+    async ({ area, periodo, grupo, from, to, planId } = {}) => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const res = await axios.get(
+          `${baseURL}/api/checkups/dashboard/institucional`,
+          {
+            ...getAuthHeaders(),
+            params: {
+              area,
+              periodo,
+              grupo: grupo?.trim?.() || "",
+              from,
+              to,
+              planId,
+            },
+          },
+        );
+
+        setDashboardInstitucional(res.data);
+        return res.data;
+      } catch (err) {
+        console.error("Error obteniendo dashboard institucional:", err);
+        setError(err);
+        setDashboardInstitucional(null);
+        return null;
+      } finally {
+        setLoading(false);
+      }
+    },
+    [baseURL],
+  );
+
+  /*
+  =========================
+  GRUPOS
+  =========================
+  */
 
   const listarGrupos = useCallback(async () => {
     try {
@@ -231,6 +288,7 @@ export const CheckupProvider = ({ children }) => {
       setError(null);
 
       const res = await axios.get(`${baseURL}/api/grupos`, getAuthHeaders());
+
       setGrupos(res.data || []);
       return res.data || [];
     } catch (err) {
@@ -249,7 +307,6 @@ export const CheckupProvider = ({ children }) => {
   =========================
   */
   useEffect(() => {
-    // si no hay token, no intentamos llamar rutas protegidas
     const token = localStorage.getItem("token");
     if (!token) {
       setLoading(false);
@@ -265,11 +322,10 @@ export const CheckupProvider = ({ children }) => {
       preguntas,
       weeklyCheckups,
       dashboard,
+      dashboardInstitucional,
+      grupos,
       loading,
       error,
-      obtenerWeeklyCheckup,
-      grupos,
-      listarGrupos,
 
       // actions
       clearError,
@@ -278,13 +334,18 @@ export const CheckupProvider = ({ children }) => {
       obtenerPreguntas,
       upsertWeeklyCheckup,
       listarWeeklyCheckups,
+      obtenerWeeklyCheckup,
       obtenerDashboardStats,
+      obtenerDashboardInstitucional,
+      listarGrupos,
     }),
     [
       planActivo,
       preguntas,
       weeklyCheckups,
       dashboard,
+      dashboardInstitucional,
+      grupos,
       loading,
       error,
       crearPlan,
@@ -292,14 +353,16 @@ export const CheckupProvider = ({ children }) => {
       obtenerPreguntas,
       upsertWeeklyCheckup,
       listarWeeklyCheckups,
-      obtenerDashboardStats,
       obtenerWeeklyCheckup,
-      grupos,
+      obtenerDashboardStats,
+      obtenerDashboardInstitucional,
       listarGrupos,
     ],
   );
 
   return (
-    <CheckupContext.Provider value={value}>{children}</CheckupContext.Provider>
+    <CheckupContext.Provider value={value}>
+      {children}
+    </CheckupContext.Provider>
   );
 };
