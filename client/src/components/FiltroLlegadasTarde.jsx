@@ -20,17 +20,18 @@ const FiltroLlegadasTarde = ({
 
         <option value="SEGUNDO A">2. A</option>
         <option value="SEGUNDO B">2. B</option>
-        <option value="SEGUNDO C">2. C</option>
+        
 
         <option value="TERCERO A">3. A</option>
         <option value="TERCERO B">3. B</option>
         
         <option value="CUARTO A">4. A</option>
         <option value="CUARTO B">4. B</option>
-        <option value="CUARTO C">4. C</option>
+        
 
         <option value="QUINTO A">5. A</option>
         <option value="QUINTO B">5. B</option>
+        <option value="QUINTO C">5. C</option>
 
         <option value="SEXTO A">6. A</option>
         <option value="SEXTO B">6. B</option>
@@ -46,11 +47,11 @@ const FiltroLlegadasTarde = ({
         
         <option value="NOVENO A">9. A</option>
         <option value="NOVENO B">9. B</option>
-        <option value="NOVENO C">9. C</option>
-        <option value="NOVENO B1">9. B1</option>
+         
 
         <option value="DECIMO A">10. A</option>
         <option value="DECIMO B">10. B</option>
+        <option value="DECIMO B1">10. B1</option>
 
         
         <option value="ONCE A">11. A</option>
