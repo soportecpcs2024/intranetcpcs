@@ -5,7 +5,7 @@ import * as XLSX from "xlsx";
 import "./EstadisticasEp.css";
 
 const EstadisticasEp = () => {
-  const { asistenciasUnificadas, estudiantes } = useEscuelaPadres();
+  const { asistenciasUnificadas, estudiantes, cargarTodosLosEstudiantes } = useEscuelaPadres();
 
   const [dataUnificada, setDataUnificada] = useState([]);
   const [grupoSeleccionado, setGrupoSeleccionado] = useState("Todos");
@@ -17,6 +17,7 @@ const EstadisticasEp = () => {
     try {
       const data = await asistenciasUnificadas();
       setDataUnificada(data);
+       await cargarTodosLosEstudiantes();
     } catch (error) {
       console.error("❌ Error cargando asistencias unificadas:", error);
     }
@@ -31,7 +32,7 @@ const EstadisticasEp = () => {
   const formatFechaColombia = (fechaStr) => {
     if (!fechaStr) return "N/A";
 
-    const [month, day] = fechaStr.split("T")[0].split("-");
+    const [year, month, day] = fechaStr.split("T")[0].split("-");
     const meses = [
       "Ene",
       "Feb",
