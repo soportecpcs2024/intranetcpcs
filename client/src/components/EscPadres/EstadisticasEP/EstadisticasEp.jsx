@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { useEscuelaPadres } from "../../../contexts/EscuelaPadresContext";
-import { useLocation } from "react-router-dom"; // 👈 agregado
+import { useLocation } from "react-router-dom";
 import * as XLSX from "xlsx";
 import "./EstadisticasEp.css";
 
 const EstadisticasEp = () => {
-  const { asistenciasUnificadas } = useEscuelaPadres();
+  const { asistenciasUnificadas, estudiantes } = useEscuelaPadres();
+
   const [dataUnificada, setDataUnificada] = useState([]);
   const [grupoSeleccionado, setGrupoSeleccionado] = useState("Todos");
-  const location = useLocation(); // 👈 detectar cambios de ruta
 
-   
+  const location = useLocation();
 
   // 📌 Función para cargar datos
   const cargarDatos = async () => {
@@ -27,11 +27,11 @@ const EstadisticasEp = () => {
     cargarDatos();
   }, [location.pathname]);
 
-  // 📌 Formatear fecha exactamente como en la BD (UTC sin modificar día) con mes abreviado en español
+  // 📌 Formatear fecha exactamente como en la BD (UTC sin modificar día)
   const formatFechaColombia = (fechaStr) => {
     if (!fechaStr) return "N/A";
 
-    const [year, month, day] = fechaStr.split("T")[0].split("-");
+    const [month, day] = fechaStr.split("T")[0].split("-");
     const meses = [
       "Ene",
       "Feb",
@@ -49,20 +49,22 @@ const EstadisticasEp = () => {
 
     return `| ${day} de ${meses[parseInt(month, 10) - 1]} |`;
   };
+ 
+  const gruposBase =
+    estudiantes && estudiantes.length > 0
+      ? estudiantes.map((item) => item.grupo || "N/A")
+      : dataUnificada.map((item) => item.estudiante?.grupo || "N/A");
 
-  // 📌 Extraer lista de grupos únicos
   const grupos = [
     "Todos",
-    ...[...new Set(dataUnificada.map((item) => item.estudiante?.grupo || "N/A"))].sort(
-      (a, b) => {
-        if (a === "N/A") return 1;
-        if (b === "N/A") return -1;
-        return a.localeCompare(b, "es", { numeric: true });
-      }
-    ),
+    ...[...new Set(gruposBase)].sort((a, b) => {
+      if (a === "N/A") return 1;
+      if (b === "N/A") return -1;
+      return a.localeCompare(b, "es", { numeric: true });
+    }),
   ];
 
-  // 📌 Filtrar por grupo
+  // 📌 Filtrar por grupo en la tabla principal
   const dataFiltrada =
     grupoSeleccionado === "Todos"
       ? dataUnificada
@@ -70,11 +72,73 @@ const EstadisticasEp = () => {
           (item) => item.estudiante?.grupo === grupoSeleccionado
         );
 
+  // 📌 Estudiantes únicos que compraron escuela
+  const estudiantesEscuelaUnicos = Object.values(
+    dataUnificada.reduce((acc, item) => {
+      const doc =
+        item.estudiante?.documento ||
+        item.estudiante?.num_identificacion ||
+        item.estudiante?._id;
+
+      if (doc) {
+        acc[doc] = item.estudiante;
+      }
+
+      return acc;
+    }, {})
+  );
+
+  // 📌 Total de estudiantes del colegio por grupo
+  const todosEstudiantesPorGrupo =
+    estudiantes && estudiantes.length > 0
+      ? estudiantes.reduce((acc, item) => {
+          const grupo = item.grupo || "N/A";
+          acc[grupo] = (acc[grupo] || 0) + 1;
+          return acc;
+        }, {})
+      : {};
+
+  // 📌 Total de estudiantes que compraron escuela por grupo
+  const compraronPorGrupo = estudiantesEscuelaUnicos.reduce((acc, item) => {
+    const grupo = item.grupo || "N/A";
+    acc[grupo] = (acc[grupo] || 0) + 1;
+    return acc;
+  }, {});
+
+  // 📌 Resumen por grupo
+  const resumenPorGrupo =
+    estudiantes && estudiantes.length > 0
+      ? Object.keys(todosEstudiantesPorGrupo)
+          .map((grupo) => {
+            const total = todosEstudiantesPorGrupo[grupo] || 0;
+            const compraron = compraronPorGrupo[grupo] || 0;
+            const pendientes = total - compraron;
+            const porcentaje =
+              total > 0 ? ((compraron / total) * 100).toFixed(1) : "0.0";
+
+            return {
+              grupo,
+              total,
+              compraron,
+              pendientes,
+              porcentaje,
+            };
+          })
+          .sort((a, b) =>
+            a.grupo.localeCompare(b.grupo, "es", { numeric: true })
+          )
+      : [];
+
+  // 📌 Aplicar también el filtro al resumen
+  const resumenFiltrado =
+    grupoSeleccionado === "Todos"
+      ? resumenPorGrupo
+      : resumenPorGrupo.filter((item) => item.grupo === grupoSeleccionado);
+
   // 📌 Descargar Excel SOLO con los que tienen certificadoOtorgado = true
   const descargarExcel = () => {
     const filtrados = dataFiltrada.filter((item) => item.certificadoOtorgado);
 
-    // Mapear la data para dejarla más limpia en Excel
     const dataExcel = filtrados.map((item) => ({
       Documento: item.estudiante?.documento || "N/A",
       Nombre: item.estudiante?.nombre || "N/A",
@@ -82,22 +146,21 @@ const EstadisticasEp = () => {
       Grado: item.estudiante?.grado || "N/A",
       Escuela: item.escuela?.nombre || "N/A",
       "Certificado Otorgado": item.certificadoOtorgado ? "Sí" : "No",
-      "Total Asistencias": item.asistencias?.filter((a) => a.asistio).length || 0,
+      "Total Asistencias":
+        item.asistencias?.filter((a) => a.asistio).length || 0,
     }));
 
-    // Crear hoja de Excel
     const ws = XLSX.utils.json_to_sheet(dataExcel);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Certificados");
-
-    // Descargar archivo
     XLSX.writeFile(wb, "EstudiantesCertificados.xlsx");
   };
 
   return (
     <div className="estadisticas-container">
-      <h2>📊 Estadísticas Escuela de Padres</h2>
-      <h4>Total estudiantes con registro: {dataFiltrada.length}</h4>
+      <h1>Estadísticas Escuela de Padres</h1>
+      <h4>Total estudiantes del colegio: {estudiantes?.length || 0}</h4>
+      <h4>Total estudiantes con registro en escuela: {dataFiltrada.length}</h4>
 
       {/* 📌 Botón para descargar Excel */}
       <button className="btn-excel" onClick={descargarExcel}>
@@ -120,15 +183,45 @@ const EstadisticasEp = () => {
         </select>
       </div>
 
-      {/* 📌 Tabla */}
+      {/* 📌 Resumen por grupo */}
+      {resumenFiltrado.length > 0 && (
+        <div className="resumen-grupos">
+          <h4>Resumen por grupo:</h4>
+          <table className="estadisticas-table">
+            <thead>
+              <tr >
+                <th className="color-head">Grupo</th>
+                <th className="color-head">Total estudiantes</th>
+                <th className="color-head">Compraron escuela</th>
+                <th className="color-head">Pendientes</th>
+                <th className="color-head">% Cobertura</th>
+              </tr>
+            </thead>
+            <tbody>
+              {resumenFiltrado.map((item) => (
+                <tr key={item.grupo}>
+                  <td>{item.grupo}</td>
+                  <td>{item.total}</td>
+                  <td>{item.compraron}</td>
+                  <td>{item.pendientes}</td>
+                  <td>{item.porcentaje}%</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {/* 📌 Tabla principal */}
+         <h4>Asistencias individual:</h4>
       <table className="estadisticas-table">
         <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Grupo</th>
-            <th>Escuela</th>
-            <th>Asistencias</th>
-            <th>Certificado</th>
+          <tr >
+            <th className="color-head">Nombre</th>
+            <th className="color-head col-grupo">Grupo</th>
+            <th className="color-head">Escuela</th>
+            <th className="color-head">Asistencias</th>
+            <th className="color-head">Certificado</th>
           </tr>
         </thead>
         <tbody>
@@ -138,8 +231,8 @@ const EstadisticasEp = () => {
 
             return (
               <tr key={item.asistenciaId}>
-                <td>{estudiante.nombre}</td>
-                <td>{estudiante.grupo || "N/A"}</td>
+                <td>{estudiante.nombre || "N/A"}</td>
+                <td className="col-grupo">{estudiante.grupo || "N/A"}</td>
                 <td>{escuela.nombre || "N/A"}</td>
                 <td>
                   <div className="asistencias-lista">

@@ -149,6 +149,18 @@ const asistenciasUnificadas = async () => {
     }
   };
 
+  const cargarTodosLosEstudiantes = async () => {
+  try {
+    const res = await axios.get(`${API_BASE}/api/epEstudiantes`);
+    setEstudiantes(res.data);
+    return res.data;
+  } catch (err) {
+    console.error("❌ Error al cargar todos los estudiantes:", err);
+    setEstudiantes([]);
+    return [];
+  }
+};
+
   useEffect(() => {
     cargarEscuelas();
   }, []);
@@ -170,7 +182,8 @@ const asistenciasUnificadas = async () => {
         eliminarEscuela,
         cargarEscuelas,
         loading,
-        asistenciasUnificadas, 
+        asistenciasUnificadas,
+        cargarTodosLosEstudiantes, 
          
       }}
     >
