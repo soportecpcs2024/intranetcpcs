@@ -78,10 +78,10 @@ const getAllNotesSection = async (req, res) => {
 
     // Define los grupos según el nivel
     const niveles = {
-      preescolar: ["1. A ","1. B "],
-      primaria: ["2. A", "2. B ", "2. C", "3. A ","3. B ", "4. A ", "4. B ","4. C","5. A ","5. B "],
+      preescolar: ["1. A","1. B"],
+      primaria: ["2. A", "2. B", "3. A","3. B", "4. A", "4. B","5. A","5. B", "5 C"],
       secundaria: ["6. A","6. B", "7. A", "7. B", "8. A","8. B", ],
-      media: ["9. A", "9. B", "9. B1", "10. A","10. B", "11. A ", "11. B"],
+      media: ["9. A", "9. B", "10. A","10. B","10 B1", "11. A", "11. B"],
       
     };
 
@@ -110,10 +110,10 @@ const getPromedioPorMateriaYGrupo = async (req, res) => {
 
     // Definir los grupos por nivel
     const niveles = {
-      preescolar: ["1. A ", "1. B "],
-      primaria: ["2. A", "2. B ", "2. C", "3. A ", "3. B ", "4. A ", "4. B ", "4. C", "5. A ", "5. B "],
-      secundaria: ["6. A", "6. B", "7. A", "7. B", "8. A", "8. B"],
-      media: ["9. A", "9. B", "9. B1", "10. A", "10. B", "11. A ", "11. B"]
+      preescolar: ["1. A","1. B"],
+      primaria: ["2. A", "2. B", "3. A","3. B", "4. A", "4. B","5. A","5. B", "5 C"],
+      secundaria: ["6. A","6. B", "7. A", "7. B", "8. A","8. B", ],
+      media: ["9. A", "9. B", "10. A","10. B","10 B1", "11. A", "11. B"],
     };
 
     let filtro = {};
