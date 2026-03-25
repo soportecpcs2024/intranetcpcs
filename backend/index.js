@@ -188,6 +188,9 @@ app.use('/api', checkupRoutes);
 const obtenerListaGrupos = require('./routes/DatosDinamicos/gruposRoutes');
 app.use("/api/grupos", obtenerListaGrupos);
 
+const historico_2009_2017 = require('./routes/Certificados/data_2009_2017-routes/data_2009_2017_routes');
+app.use("/api/historico", historico_2009_2017);
+
 // Configuración y arranque del servidor
 const PORT = process.env.SERVER_PORT || 3000;
 app.listen(PORT, () => {

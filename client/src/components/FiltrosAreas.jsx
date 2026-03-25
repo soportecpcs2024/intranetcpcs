@@ -1,4 +1,4 @@
-import React from "react";
+ 
 import Docente from "./Docente";
 
 const FiltrosAreas = ({
@@ -18,7 +18,7 @@ const FiltrosAreas = ({
         onChange={(e) => setSelectedPeriodo(e.target.value)}
       >
         <option value="">Periodo</option>
-        <option value="PERIODO 1">Periodo 1</option>
+        <option value="PRIMER PERIODO">Periodo 1</option>
         <option value="PERIODO 2">Periodo 2</option>
         <option value="PERIODO 3">Periodo 3</option>
         <option value="PERIODO 4">Periodo 4</option>
