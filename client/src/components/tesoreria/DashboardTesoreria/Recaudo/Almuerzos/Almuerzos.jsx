@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import { useRecaudo } from "../../../../../contexts/RecaudoContext";
 import { MdNoFood } from "react-icons/md";
 import BuscadorEstudiante from "../buscador/BuscadorEstudiante";

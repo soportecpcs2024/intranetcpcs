@@ -351,6 +351,7 @@ const AppContent = () => {
                 <Route path="informe_prom" element={<InformeProm />} />
                 <Route path="escuela_padres" element={<Recaudoep />} />
                 <Route path="almuerzos" element={<Almuerzos />} />
+               
                 <Route path="lista_facturas" element={<ListarFacturas />} />
 
                 <Route
@@ -408,6 +409,8 @@ const AppContent = () => {
                 <Route path="informe_prom-adm" element={<InformePromAdm />} />
 
               </Route>
+
+               <Route path="almuerzos_adm" element={<Almuerzos />} />
 
 
 

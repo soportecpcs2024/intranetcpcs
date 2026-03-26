@@ -674,6 +674,9 @@ const AdminHeader = () => {
                           <li>
                             <Link to="tesoreria_adm">Recaudo</Link>
                           </li>
+                          <li>
+                            <Link to="almuerzos_adm">Almuerzos</Link>
+                          </li>
                           {/* <li>
                             <Link to="morosos_penciones">Morosos Penciones</Link>
                           </li> */}
