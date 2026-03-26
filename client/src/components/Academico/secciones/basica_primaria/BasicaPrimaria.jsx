@@ -17,7 +17,7 @@ const BasicaPrimaria = () => {
   const [dataMaterias, setDataMaterias] = useState({});
   const [planMejora, setPlanMejora] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [selectedPeriodo, setSelectedPeriodo] = useState("PERIODO 1");
+  const [selectedPeriodo, setSelectedPeriodo] = useState("PRIMER PERIODO");
   const [isEditing, setIsEditing] = useState(false);
   const [editedPlan, setEditedPlan] = useState({});
 
@@ -101,6 +101,12 @@ const BasicaPrimaria = () => {
     }
   };
 
+    const mapaPeriodos = {
+  "PRIMER PERIODO": "1",
+  "SEGUNDO PERIODO": "2",
+  "TERCER PERIODO": "3",
+  "CUARTO PERIODO": "4"
+};
   return (
     <div>
       {loading ? (
@@ -113,13 +119,18 @@ const BasicaPrimaria = () => {
           <div className="periodos">
             <div>Periodo</div>
             <div className="periodo-buttons-container">
-              {["PERIODO 1", "PERIODO 2", "PERIODO 3", "PERIODO 4"].map((periodo) => (
+              {[
+                "PRIMER PERIODO",
+                "SEGUNDO PERIODO",
+                "TERCER PERIODO",
+                "CUARTO PERIODO",
+              ].map((periodo) => (
                 <button
                   key={periodo}
                   className={`periodo-button ${selectedPeriodo === periodo ? "selected" : ""}`}
                   onClick={() => handlePeriodoClick(periodo)}
                 >
-                  {periodo.split(" ")[1]}
+                  {mapaPeriodos[periodo]}
                 </button>
               ))}
             </div>

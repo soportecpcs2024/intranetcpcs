@@ -17,7 +17,7 @@ const PreEscolar = () => {
   const [dataMaterias, setDataMaterias] = useState({});
   const [planMejora, setPlanMejora] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [selectedPeriodo, setSelectedPeriodo] = useState("PERIODO 1");
+  const [selectedPeriodo, setSelectedPeriodo] = useState("PRIMER PERIODO");
   const [isEditing, setIsEditing] = useState(false);
   const [editedPlan, setEditedPlan] = useState({});
 
@@ -52,7 +52,10 @@ const PreEscolar = () => {
   useEffect(() => {
     const fetchDataMateria = async () => {
       try {
-        const data = await StudentsSectionPromedioMaterias("preescolar", selectedPeriodo);
+        const data = await StudentsSectionPromedioMaterias(
+          "preescolar",
+          selectedPeriodo,
+        );
         setDataMaterias(data && Object.keys(data).length > 0 ? data : null);
       } catch (error) {
         console.error("Error al obtener los promedios por materia", error);
@@ -66,10 +69,14 @@ const PreEscolar = () => {
   useEffect(() => {
     const fetchDataPlanMejora = async () => {
       try {
-        const response = await VerPlanMejoramiento("preescolar", selectedPeriodo);
+        const response = await VerPlanMejoramiento(
+          "preescolar",
+          selectedPeriodo,
+        );
         const dataArray = response.data || [];
         const filtro = dataArray.find(
-          (item) => item.seccion === "preescolar" && item.periodo === selectedPeriodo
+          (item) =>
+            item.seccion === "preescolar" && item.periodo === selectedPeriodo,
         );
         if (filtro) {
           setPlanMejora(filtro);
@@ -101,6 +108,13 @@ const PreEscolar = () => {
     }
   };
 
+  const mapaPeriodos = {
+  "PRIMER PERIODO": "1",
+  "SEGUNDO PERIODO": "2",
+  "TERCER PERIODO": "3",
+  "CUARTO PERIODO": "4"
+};
+
   return (
     <div>
       {loading ? (
@@ -113,13 +127,18 @@ const PreEscolar = () => {
           <div className="periodos">
             <div>Periodo</div>
             <div className="periodo-buttons-container">
-              {["PERIODO 1", "PERIODO 2", "PERIODO 3", "PERIODO 4"].map((periodo) => (
+              {[
+                "PRIMER PERIODO",
+                "SEGUNDO PERIODO",
+                "TERCER PERIODO",
+                "CUARTO PERIODO",
+              ].map((periodo) => (
                 <button
                   key={periodo}
                   className={`periodo-button ${selectedPeriodo === periodo ? "selected" : ""}`}
                   onClick={() => handlePeriodoClick(periodo)}
                 >
-                  {periodo.split(" ")[1]}
+                  {mapaPeriodos[periodo]}
                 </button>
               ))}
             </div>
@@ -127,7 +146,9 @@ const PreEscolar = () => {
 
           <h3>Pre escolar</h3>
           <p className="nombre-lider">{capitalizar(Lideres[0])}</p>
-          <p className="num_estudiantes_seccion">Estudiantes por sección: {dataPrimaria.length}</p>
+          <p className="num_estudiantes_seccion">
+            Estudiantes por sección: {dataPrimaria.length}
+          </p>
 
           <div className="seccion-metas-lideres">
             <div className="seccion-metas-box">
@@ -139,13 +160,14 @@ const PreEscolar = () => {
                     <>
                       <h4 className="subtitulometas">Metas académicas:</h4>
                       <textarea
-                        
                         name="metasAcademicas"
                         value={editedPlan.metasAcademicas}
                         onChange={handleInputChange}
                       />
 
-                      <h4 className="subtitulometas">Estrategias a implementar:</h4>
+                      <h4 className="subtitulometas">
+                        Estrategias a implementar:
+                      </h4>
                       <textarea
                         name="estrategiasElevarNivel"
                         value={editedPlan.estrategiasElevarNivel}
@@ -155,17 +177,31 @@ const PreEscolar = () => {
                   ) : (
                     <>
                       <h4 className="subtitulometas">Metas académicas:</h4>
-                      <p className="text-metas-final">{planMejora.metasAcademicas}</p>
-                      <h4 className="subtitulometas">Estrategias a implementar:</h4>
-                      <p className="text-metas-final">{planMejora.estrategiasElevarNivel}</p>
+                      <p className="text-metas-final">
+                        {planMejora.metasAcademicas}
+                      </p>
+                      <h4 className="subtitulometas">
+                        Estrategias a implementar:
+                      </h4>
+                      <p className="text-metas-final">
+                        {planMejora.estrategiasElevarNivel}
+                      </p>
                     </>
                   )}
 
                   <h3>Plan de mejoramiento comportamental</h3>
 
-                  {["estudiantesDificultadDisciplinarias", "estudiantesPendientesDisciplinarios", "estudiantesSancionComite", "faltasRepetidasGrupo", "estrategiasTrabajar"].map((campo, index) => (
+                  {[
+                    "estudiantesDificultadDisciplinarias",
+                    "estudiantesPendientesDisciplinarios",
+                    "estudiantesSancionComite",
+                    "faltasRepetidasGrupo",
+                    "estrategiasTrabajar",
+                  ].map((campo, index) => (
                     <div key={index}>
-                      <h4 className="subtitulometas">{campo.replace(/([A-Z])/g, " $1")}</h4>
+                      <h4 className="subtitulometas">
+                        {campo.replace(/([A-Z])/g, " $1")}
+                      </h4>
                       {isEditing ? (
                         <textarea
                           name={campo}
@@ -180,11 +216,17 @@ const PreEscolar = () => {
 
                   <div style={{ marginTop: "1rem" }}>
                     {isEditing ? (
-                      <button className="boton-guardar" onClick={handleGuardarCambios}>
+                      <button
+                        className="boton-guardar"
+                        onClick={handleGuardarCambios}
+                      >
                         Guardar cambios
                       </button>
                     ) : (
-                      <button className="boton-editar" onClick={() => setIsEditing(true)}>
+                      <button
+                        className="boton-editar"
+                        onClick={() => setIsEditing(true)}
+                      >
                         Editar plan
                       </button>
                     )}
@@ -218,7 +260,8 @@ const PreEscolar = () => {
                       color: "#b00",
                     }}
                   >
-                    No hay datos de promedios por materia para {selectedPeriodo}.
+                    No hay datos de promedios por materia para {selectedPeriodo}
+                    .
                   </p>
                 )}
               </div>
@@ -229,6 +272,5 @@ const PreEscolar = () => {
     </div>
   );
 };
- 
 
 export default PreEscolar;
