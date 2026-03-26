@@ -7,7 +7,7 @@ ChartJS.register(Title, Tooltip, Legend, CategoryScale, LinearScale, LineElement
 
 const LineChartComponentQuinto = ({ students, selectedArea }) => {
   // Calcular promedios por período
-  const periodos = ["PERIODO 1", "PERIODO 2", "PERIODO 3", "PERIODO 4"];
+  const periodos = ["PERIODO PERIODO", "PERIODO 2", "PERIODO 3", "PERIODO 4"];
   const labels = periodos;
 
   const data = periodos.map((periodo) => {

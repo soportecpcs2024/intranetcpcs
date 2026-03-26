@@ -21,7 +21,7 @@ const BasicaPrimaria = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedPlan, setEditedPlan] = useState({});
 
-  const Lideres = ["TORO TAMAYO LUZ ARNELLY"];
+  const Lideres = ["LAURA MARCELA PERDOMO FRANCO"];
 
   const capitalizar = (str) =>
     str

@@ -89,7 +89,7 @@ const Dashboardquinto = () => {
   // Filtrar datos para las gráficas, memoizando el cálculo
   const graphStudents = useMemo(() => {
     const periodosGraficas = [
-      "PERIODO 1",
+      "PRIMER PERIODO",
       "PERIODO 2",
       "PERIODO 3",
       "PERIODO 4",
@@ -119,7 +119,7 @@ const Dashboardquinto = () => {
 
   const calculateOverallAverage = useMemo(() => {
     const periodosGraficas = [
-      "PERIODO 1",
+      "PRIMER PERIODO",
       "PERIODO 2",
       "PERIODO 3",
       "PERIODO 4",

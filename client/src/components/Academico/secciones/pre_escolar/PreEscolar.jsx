@@ -21,7 +21,7 @@ const PreEscolar = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedPlan, setEditedPlan] = useState({});
 
-  const Lideres = ["CASTRILLON VILLA ANA CATALINA"];
+  const Lideres = ["LUZ YADIRA RENGIFO PARDO"];
 
   const capitalizar = (str) =>
     str

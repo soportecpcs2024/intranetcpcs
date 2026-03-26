@@ -14,7 +14,7 @@ const DashboardAreas = () => {
   const [filteredStudents, setFilteredStudents] = useState([]);
   const [error, setError] = useState(null);
   const [selectedGroup, setSelectedGroup] = useState("1. A");
-  const [selectedPeriodo, setSelectedPeriodo] = useState("PERIODO 1");
+  const [selectedPeriodo, setSelectedPeriodo] = useState("PRIMER PERIODO");
   const [selectedScale, setSelectedScale] = useState("");
   const [selectedArea, setSelectedArea] = useState("ciencias_naturales");
   const [loading, setLoading] = useState(true);

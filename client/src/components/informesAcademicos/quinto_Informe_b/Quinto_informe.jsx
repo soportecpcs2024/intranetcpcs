@@ -46,7 +46,7 @@ const Quinto_informe = () => {
   }
 
   // Calcular promedio general de los 4 períodos
-  const periodos = ["PERIODO 1", "PERIODO 2", "PERIODO 3", "PERIODO 4"];
+  const periodos = ["PRIMER PERIODO", "PERIODO 2", "PERIODO 3", "PERIODO 4"];
   const averages = periodos.map((periodo) => {
     const studentsInPeriod = filteredStudents.filter(
       (student) => student.periodo === periodo
