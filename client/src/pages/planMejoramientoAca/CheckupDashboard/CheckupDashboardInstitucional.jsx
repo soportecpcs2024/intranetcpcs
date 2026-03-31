@@ -15,7 +15,7 @@ import {
   Legend,
 } from "recharts";
 import { CheckupContext } from "../../../contexts/CheckupContext";
-import "./CheckupDashboardInstitucional.css";
+import "../stylePlan.css";
 
 const AREAS = [
   { value: "", label: "Todas las áreas" },

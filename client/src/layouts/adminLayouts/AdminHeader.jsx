@@ -26,14 +26,14 @@ const AdminHeader = () => {
 
   const isAdmin = user && user.role === "admin"; // Verificar si el usuario tiene el rol de admin
   const isAcademic = user && user.role === "usuario"; // Verificar si el usuario tiene el rol de admin
-  const isAdministrator = user && user.role === "administrador"; 
-  const secretaria = user && user.role === "secretaria"; 
-  const tesoreria = user && user.role === "tesoreria"; 
-  const escuelaPadres = user && user.role === "escuelaPadres"; 
-  const mantenimiento = user && user.role === "mantenimiento"; 
+  const isAdministrator = user && user.role === "administrador";
+  const secretaria = user && user.role === "secretaria";
+  const tesoreria = user && user.role === "tesoreria";
+  const escuelaPadres = user && user.role === "escuelaPadres";
+  const mantenimiento = user && user.role === "mantenimiento";
   //const admisiones = user && user.role === "admisiones"; 
-  const papeleria = user && user.role === "papeleria"; 
-  const contabilidad = user && user.role === "contabilidad"; 
+  const papeleria = user && user.role === "papeleria";
+  const contabilidad = user && user.role === "contabilidad";
   const administrativos = user && user.role === "administrativos";
   const directivas = user && user.role === "directivas";
 
@@ -86,11 +86,13 @@ const AdminHeader = () => {
                               Extra curricular
                             </Link>
                           </li>
-                          {/* <li>
-                            <Link to="/admin/rubricas_misiones">
-                              Rúbrica de Evaluación – Programa de Misiones
-                            </Link>
-                          </li> */}
+                          <h5><em>Plan de mejoramiento:</em></h5>
+                           <li>
+                            <Link to="control_semanal">Control semanal</Link>
+                          </li>
+                          <li>
+                            <Link to="checkupDashboard">Dashboard</Link>
+                          </li>
                         </ul>
                       )}
                     </div>
@@ -256,18 +258,14 @@ const AdminHeader = () => {
                   </li>
 
 
-                  {/* <li>
-                    <div className="dropdown">
-                      <Link to="papeleria">Papeleria</Link>
-                    </div>
-                  </li> */}
+                  
 
                 </ul>
               )}
 
               {isAcademic && (
                 <ul>
-               
+
                   <li>
                     <div className="dropdown">
                       <Link onClick={toggleDropdown}>Académico</Link>
@@ -289,7 +287,7 @@ const AdminHeader = () => {
                               Extra curricular
                             </Link>
                           </li>
-                          
+
                           {/* <li>
                             <Link to="/admin/rubricas_misiones">
                               Rúbrica de Evaluación – Programa de Misiones
@@ -359,7 +357,7 @@ const AdminHeader = () => {
                               Informes Académicos
                             </Link>
                           </li>
-                           <li>
+                          <li>
                             <Link to="descargar_colilla">
                               Descargar colilla de pago
                             </Link>
@@ -410,7 +408,7 @@ const AdminHeader = () => {
                               Extra curricular
                             </Link>
                           </li>
-                           <li>
+                          <li>
                             <Link to="informesExtraClasesDec">
                               Informe Extraclases
                             </Link>
@@ -552,11 +550,11 @@ const AdminHeader = () => {
                             Seguimiento mantenimientos
                           </Link>
                         </li>
-                         <li>
-                            <Link to="descargar_colilla">
-                              Descargar colilla de pago
-                            </Link>
-                          </li>
+                        <li>
+                          <Link to="descargar_colilla">
+                            Descargar colilla de pago
+                          </Link>
+                        </li>
                       </ul>
                     )}
                   </div>
@@ -736,7 +734,7 @@ const AdminHeader = () => {
                     </div>
                   </li>
 
-                   
+
 
                   <li>
                     <div className="dropdown">
@@ -775,7 +773,7 @@ const AdminHeader = () => {
                 </ul>
               )}
 
-                {directivas && (
+              {directivas && (
                 <ul>
                   <li>
                     <div className="dropdown">
@@ -808,7 +806,7 @@ const AdminHeader = () => {
                     </div>
                   </li>
 
-                  <li>
+                  {/* <li>
                     <div className="dropdown">
                       <Link onClick={toggleDropdown}>Adm</Link>
 
@@ -845,14 +843,14 @@ const AdminHeader = () => {
                         </ul>
                       )}
                     </div>
-                  </li>
+                  </li> */}
 
-             
 
-                
 
-               
-                 
+
+
+
+
                   <li>
                     <div className="dropdown">
                       <Link onClick={toggleDropdown}>Plan de Mejoramiento</Link>
@@ -865,9 +863,9 @@ const AdminHeader = () => {
                           <li>
                             <Link to="checkupDashboard">Dashboard</Link>
                           </li>
-                           
-                           
-                          
+
+
+
 
 
 
@@ -887,7 +885,7 @@ const AdminHeader = () => {
               )}
 
 
-              
+
 
             </nav>
           </div>

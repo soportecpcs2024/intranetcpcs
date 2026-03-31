@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, useCallback } from "react";
 import { useCheckup } from "../../../hooks/useCheckup";
-import "./ChequeoSemanal.css";
+import "../stylePlan.css";
 
 const AREAS = [
   { label: "Ciencias Naturales", value: "CIENCIAS_NATURALES" },
