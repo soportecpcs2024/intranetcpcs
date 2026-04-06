@@ -13,7 +13,7 @@ import ListarMaterias from "../../ListarMaterias/ListarMaterias";
 import "../../Coordinadores.css";
 
 const MediaAcademica = () => {
-  const [dataPrimaria, setDataPrimaria] = useState([]);
+  const [dataMedia, setdataMedia] = useState([]);
   const [dataMaterias, setDataMaterias] = useState({});
   const [planMejora, setPlanMejora] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -38,7 +38,7 @@ const MediaAcademica = () => {
     const fetchData = async () => {
       try {
         const data = await StudentsSection("media", selectedPeriodo);
-        setDataPrimaria(data);
+        setdataMedia(data);
       } catch (error) {
         console.error("Error al obtener las notas de media", error);
       } finally {
@@ -108,6 +108,40 @@ const MediaAcademica = () => {
   "CUARTO PERIODO": "4"
 };
 
+  const nombreMateriasPerdidasArray = [
+  'ciencias_naturales',
+  'ciencias_politicas_economicas',
+  'ciencias_sociales',
+  'civica_y_constitucion',
+  'educacion_artistica',
+  'educacion_cristiana',
+  'educacion_etica',
+  'educacion_fisica',
+  'filosofia',
+  'fisica',
+  'idioma_extranjero',
+  'lengua_castellana',
+  'matematicas',
+  'quimica',
+  'tecnologia',
+  ];
+  const resultado = dataMedia
+    .map((item) => {
+      const nombreMateriasPerdidas = nombreMateriasPerdidasArray
+        .filter((materia) => item[materia] !== undefined && item[materia] < 3)
+        .map((materia) => ({
+          materia,
+          valor: item[materia],
+        }));
+
+      return {
+        nombre: item.nombre,
+        grupo: item.grupo,
+        nombreMateriasPerdidas,
+      };
+    })
+    .filter((item) => item.nombreMateriasPerdidas.length > 0);
+
   return (
     <div>
       {loading ? (
@@ -139,7 +173,33 @@ const MediaAcademica = () => {
 
           <h3>Media Académica</h3>
           <p className="nombre-lider">{capitalizar(Lideres[0])}</p>
-          <p className="num_estudiantes_seccion">Estudiantes por sección: {dataPrimaria.length}</p>
+          <p className="num_estudiantes_seccion">Estudiantes por sección: {dataMedia.length}</p>
+
+          
+          <table className="tabla-perdidas">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Grupo</th>
+                <th>Materias perdidas</th>
+              </tr>
+            </thead>
+            <tbody>
+              {resultado.map((estudiante, index) => (
+                <tr key={index}>
+                  <td>{estudiante.nombre}</td>
+                  <td>{estudiante.grupo}</td>
+                  <td>
+                    {estudiante.nombreMateriasPerdidas.map((m, i) => (
+                      <span key={i} className="chip-materia">
+                        {m.materia}:{" "} {m.valor} {" /  "}
+                      </span>
+                    ))}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
 
           <div className="seccion-metas-lideres">
             <div className="seccion-metas-box">
@@ -211,10 +271,10 @@ const MediaAcademica = () => {
               <div className="container-graficas-seccion-titulo"></div>
               <div className="container-graficas-seccion">
                 <div className="graficas-seccion-box">
-                  <BarChartPromediosGruposPrimaria data={dataPrimaria} />
+                  <BarChartPromediosGruposPrimaria data={dataMedia} />
                 </div>
                 <div className="graficas-seccion-box">
-                  <PieChartComponentGruposPrimaria data={dataPrimaria} />
+                  <PieChartComponentGruposPrimaria data={dataMedia} />
                 </div>
               </div>
 

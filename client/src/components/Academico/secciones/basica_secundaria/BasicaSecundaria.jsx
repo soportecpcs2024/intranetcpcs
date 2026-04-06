@@ -13,7 +13,7 @@ import ListarMaterias from "../../ListarMaterias/ListarMaterias";
 import "../../Coordinadores.css";
 
 const BasicaSecundaria = () => {
-  const [dataPrimaria, setDataPrimaria] = useState([]);
+  const [dataSecundaria, setdataSecundaria] = useState([]);
   const [dataMaterias, setDataMaterias] = useState({});
   const [planMejora, setPlanMejora] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -38,7 +38,7 @@ const BasicaSecundaria = () => {
     const fetchData = async () => {
       try {
         const data = await StudentsSection("secundaria", selectedPeriodo);
-        setDataPrimaria(data);
+        setdataSecundaria(data);
       } catch (error) {
         console.error("Error al obtener las notas de media", error);
       } finally {
@@ -52,7 +52,10 @@ const BasicaSecundaria = () => {
   useEffect(() => {
     const fetchDataMateria = async () => {
       try {
-        const data = await StudentsSectionPromedioMaterias("secundaria", selectedPeriodo);
+        const data = await StudentsSectionPromedioMaterias(
+          "secundaria",
+          selectedPeriodo,
+        );
         setDataMaterias(data && Object.keys(data).length > 0 ? data : null);
       } catch (error) {
         console.error("Error al obtener los promedios por materia", error);
@@ -66,10 +69,14 @@ const BasicaSecundaria = () => {
   useEffect(() => {
     const fetchDataPlanMejora = async () => {
       try {
-        const response = await VerPlanMejoramiento("secundaria", selectedPeriodo);
+        const response = await VerPlanMejoramiento(
+          "secundaria",
+          selectedPeriodo,
+        );
         const dataArray = response.data || [];
         const filtro = dataArray.find(
-          (item) => item.seccion === "secundaria" && item.periodo === selectedPeriodo
+          (item) =>
+            item.seccion === "secundaria" && item.periodo === selectedPeriodo,
         );
         if (filtro) {
           setPlanMejora(filtro);
@@ -101,12 +108,45 @@ const BasicaSecundaria = () => {
     }
   };
 
-    const mapaPeriodos = {
-  "PRIMER PERIODO": "1",
-  "SEGUNDO PERIODO": "2",
-  "TERCER PERIODO": "3",
-  "CUARTO PERIODO": "4"
-};
+  const mapaPeriodos = {
+    "PRIMER PERIODO": "1",
+    "SEGUNDO PERIODO": "2",
+    "TERCER PERIODO": "3",
+    "CUARTO PERIODO": "4",
+  };
+
+
+  const nombreMateriasPerdidasArray = [
+    "ciencias_naturales",
+    "ciencias_sociales",
+    "civica_y_constitucion",
+    "educacion_artistica",
+    "educacion_cristiana",
+    "educacion_etica",
+    "educacion_fisica",
+    "idioma_extranjero",
+    "lengua_castellana",
+    "matematicas",
+    "tecnologia",
+  ];
+
+  const resultado = dataSecundaria
+    .map((item) => {
+      const nombreMateriasPerdidas = nombreMateriasPerdidasArray
+        .filter((materia) => item[materia] !== undefined && item[materia] < 3)
+        .map((materia) => ({
+          materia,
+          valor: item[materia],
+        }));
+
+      return {
+        nombre: item.nombre,
+        grupo: item.grupo,
+        nombreMateriasPerdidas,
+      };
+    })
+    .filter((item) => item.nombreMateriasPerdidas.length > 0);
+
   return (
     <div>
       {loading ? (
@@ -138,7 +178,34 @@ const BasicaSecundaria = () => {
 
           <h3>Básica Secundaria</h3>
           <p className="nombre-lider">{capitalizar(Lideres[0])}</p>
-          <p className="num_estudiantes_seccion">Estudiantes por sección: {dataPrimaria.length}</p>
+          <p className="num_estudiantes_seccion">
+            Estudiantes por sección: {dataSecundaria.length}
+          </p>
+
+          <table className="tabla-perdidas">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Grupo</th>
+                <th>Materias perdidas</th>
+              </tr>
+            </thead>
+            <tbody>
+              {resultado.map((estudiante, index) => (
+                <tr key={index}>
+                  <td>{estudiante.nombre}</td>
+                  <td>{estudiante.grupo}</td>
+                  <td>
+                    {estudiante.nombreMateriasPerdidas.map((m, i) => (
+                      <span key={i} className="chip-materia">
+                        {m.materia}:{" "} {m.valor} {" /  "}
+                      </span>
+                    ))}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
 
           <div className="seccion-metas-lideres">
             <div className="seccion-metas-box">
@@ -150,13 +217,14 @@ const BasicaSecundaria = () => {
                     <>
                       <h4 className="subtitulometas">Metas académicas:</h4>
                       <textarea
-                        
                         name="metasAcademicas"
                         value={editedPlan.metasAcademicas}
                         onChange={handleInputChange}
                       />
 
-                      <h4 className="subtitulometas">Estrategias a implementar:</h4>
+                      <h4 className="subtitulometas">
+                        Estrategias a implementar:
+                      </h4>
                       <textarea
                         name="estrategiasElevarNivel"
                         value={editedPlan.estrategiasElevarNivel}
@@ -166,17 +234,31 @@ const BasicaSecundaria = () => {
                   ) : (
                     <>
                       <h4 className="subtitulometas">Metas académicas:</h4>
-                      <p className="text-metas-final">{planMejora.metasAcademicas}</p>
-                      <h4 className="subtitulometas">Estrategias a implementar:</h4>
-                      <p className="text-metas-final">{planMejora.estrategiasElevarNivel}</p>
+                      <p className="text-metas-final">
+                        {planMejora.metasAcademicas}
+                      </p>
+                      <h4 className="subtitulometas">
+                        Estrategias a implementar:
+                      </h4>
+                      <p className="text-metas-final">
+                        {planMejora.estrategiasElevarNivel}
+                      </p>
                     </>
                   )}
 
                   <h3>Plan de mejoramiento comportamental</h3>
 
-                  {["estudiantesDificultadDisciplinarias", "estudiantesPendientesDisciplinarios", "estudiantesSancionComite", "faltasRepetidasGrupo", "estrategiasTrabajar"].map((campo, index) => (
+                  {[
+                    "estudiantesDificultadDisciplinarias",
+                    "estudiantesPendientesDisciplinarios",
+                    "estudiantesSancionComite",
+                    "faltasRepetidasGrupo",
+                    "estrategiasTrabajar",
+                  ].map((campo, index) => (
                     <div key={index}>
-                      <h4 className="subtitulometas">{campo.replace(/([A-Z])/g, " $1")}</h4>
+                      <h4 className="subtitulometas">
+                        {campo.replace(/([A-Z])/g, " $1")}
+                      </h4>
                       {isEditing ? (
                         <textarea
                           name={campo}
@@ -191,11 +273,17 @@ const BasicaSecundaria = () => {
 
                   <div style={{ marginTop: "1rem" }}>
                     {isEditing ? (
-                      <button className="boton-guardar" onClick={handleGuardarCambios}>
+                      <button
+                        className="boton-guardar"
+                        onClick={handleGuardarCambios}
+                      >
                         Guardar cambios
                       </button>
                     ) : (
-                      <button className="boton-editar" onClick={() => setIsEditing(true)}>
+                      <button
+                        className="boton-editar"
+                        onClick={() => setIsEditing(true)}
+                      >
                         Editar plan
                       </button>
                     )}
@@ -210,10 +298,10 @@ const BasicaSecundaria = () => {
               <div className="container-graficas-seccion-titulo"></div>
               <div className="container-graficas-seccion">
                 <div className="graficas-seccion-box">
-                  <BarChartPromediosGruposPrimaria data={dataPrimaria} />
+                  <BarChartPromediosGruposPrimaria data={dataSecundaria} />
                 </div>
                 <div className="graficas-seccion-box">
-                  <PieChartComponentGruposPrimaria data={dataPrimaria} />
+                  <PieChartComponentGruposPrimaria data={dataSecundaria} />
                 </div>
               </div>
 
@@ -229,7 +317,8 @@ const BasicaSecundaria = () => {
                       color: "#b00",
                     }}
                   >
-                    No hay datos de promedios por materia para {selectedPeriodo}.
+                    No hay datos de promedios por materia para {selectedPeriodo}
+                    .
                   </p>
                 )}
               </div>
@@ -240,6 +329,5 @@ const BasicaSecundaria = () => {
     </div>
   );
 };
- 
 
 export default BasicaSecundaria;
