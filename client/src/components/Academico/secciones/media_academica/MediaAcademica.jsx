@@ -101,29 +101,29 @@ const MediaAcademica = () => {
     }
   };
 
-    const mapaPeriodos = {
-  "PRIMER PERIODO": "1",
-  "SEGUNDO PERIODO": "2",
-  "TERCER PERIODO": "3",
-  "CUARTO PERIODO": "4"
-};
+  const mapaPeriodos = {
+    "PRIMER PERIODO": "1",
+    "SEGUNDO PERIODO": "2",
+    "TERCER PERIODO": "3",
+    "CUARTO PERIODO": "4"
+  };
 
   const nombreMateriasPerdidasArray = [
-  'ciencias_naturales',
-  'ciencias_politicas_economicas',
-  'ciencias_sociales',
-  'civica_y_constitucion',
-  'educacion_artistica',
-  'educacion_cristiana',
-  'educacion_etica',
-  'educacion_fisica',
-  'filosofia',
-  'fisica',
-  'idioma_extranjero',
-  'lengua_castellana',
-  'matematicas',
-  'quimica',
-  'tecnologia',
+    'ciencias_naturales',
+    'ciencias_politicas_economicas',
+    'ciencias_sociales',
+    'civica_y_constitucion',
+    'educacion_artistica',
+    'educacion_cristiana',
+    'educacion_etica',
+    'educacion_fisica',
+    'filosofia',
+    'fisica',
+    'idioma_extranjero',
+    'lengua_castellana',
+    'matematicas',
+    'quimica',
+    'tecnologia',
   ];
   const resultado = dataMedia
     .map((item) => {
@@ -175,31 +175,35 @@ const MediaAcademica = () => {
           <p className="nombre-lider">{capitalizar(Lideres[0])}</p>
           <p className="num_estudiantes_seccion">Estudiantes por sección: {dataMedia.length}</p>
 
-          
-          <table className="tabla-perdidas">
-            <thead>
-              <tr>
-                <th>Nombre</th>
-                <th>Grupo</th>
-                <th>Materias perdidas</th>
-              </tr>
-            </thead>
-            <tbody>
-              {resultado.map((estudiante, index) => (
-                <tr key={index}>
-                  <td>{estudiante.nombre}</td>
-                  <td>{estudiante.grupo}</td>
-                  <td>
-                    {estudiante.nombreMateriasPerdidas.map((m, i) => (
-                      <span key={i} className="chip-materia">
-                        {m.materia}:{" "} {m.valor} {" /  "}
-                      </span>
-                    ))}
-                  </td>
+          <h5>Estudiantes que perdieron materias:</h5>
+          {resultado.length > 0 ? (
+            <table className="tabla-perdidas">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Grupo</th>
+                  <th>Materias perdidas</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {resultado.map((estudiante, index) => (
+                  <tr key={index}>
+                    <td>{estudiante.nombre}</td>
+                    <td>{estudiante.grupo}</td>
+                    <td>
+                      {estudiante.nombreMateriasPerdidas.map((m, i) => (
+                        <span key={i} className="chip-materia">
+                          {m.materia}: {m.valor}{" / "}
+                        </span>
+                      ))}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <p>No hay datos</p>
+          )}
 
           <div className="seccion-metas-lideres">
             <div className="seccion-metas-box">
@@ -211,7 +215,7 @@ const MediaAcademica = () => {
                     <>
                       <h4 className="subtitulometas">Metas académicas:</h4>
                       <textarea
-                        
+
                         name="metasAcademicas"
                         value={editedPlan.metasAcademicas}
                         onChange={handleInputChange}

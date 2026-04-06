@@ -181,31 +181,35 @@ const BasicaSecundaria = () => {
           <p className="num_estudiantes_seccion">
             Estudiantes por sección: {dataSecundaria.length}
           </p>
-
-          <table className="tabla-perdidas">
-            <thead>
-              <tr>
-                <th>Nombre</th>
-                <th>Grupo</th>
-                <th>Materias perdidas</th>
-              </tr>
-            </thead>
-            <tbody>
-              {resultado.map((estudiante, index) => (
-                <tr key={index}>
-                  <td>{estudiante.nombre}</td>
-                  <td>{estudiante.grupo}</td>
-                  <td>
-                    {estudiante.nombreMateriasPerdidas.map((m, i) => (
-                      <span key={i} className="chip-materia">
-                        {m.materia}:{" "} {m.valor} {" /  "}
-                      </span>
-                    ))}
-                  </td>
+          <h5>Estudiantes que perdieron materias:</h5>
+          {resultado.length > 0 ? (
+            <table className="tabla-perdidas">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Grupo</th>
+                  <th>Materias perdidas</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {resultado.map((estudiante, index) => (
+                  <tr key={index}>
+                    <td>{estudiante.nombre}</td>
+                    <td>{estudiante.grupo}</td>
+                    <td>
+                      {estudiante.nombreMateriasPerdidas.map((m, i) => (
+                        <span key={i} className="chip-materia">
+                          {m.materia}: {m.valor}{" / "}
+                        </span>
+                      ))}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <p>No hay datos</p>
+          )}
 
           <div className="seccion-metas-lideres">
             <div className="seccion-metas-box">
