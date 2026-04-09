@@ -20,6 +20,7 @@ import CertificadoEstudiosDocumentPreescolar from "./CertificadoEstudiosDocument
 // Componente Principal
 const CertificadoEstudios = () => {
   const [numDocumento, setNumDocumento] = useState("");
+  const [nombre, setNombre] = useState("");
   const [resultados, setResultados] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -28,7 +29,7 @@ const CertificadoEstudios = () => {
 
   // Función para buscar estudiantes por número de documento
   const buscarEstudiantes = async () => {
-    if (!numDocumento) {
+    if (!nombre) {
       setError("Por favor, ingresa un número de documento.");
       return;
     }
@@ -38,7 +39,7 @@ const CertificadoEstudios = () => {
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_BACKEND_URL
-        }/api/actasGrados/studentsGraduate/search?numDocumento=${numDocumento}`
+        }/api/actasGrados/studentsGraduate/search?nombre=${nombre}`
       );
       setResultados(response.data); // Suponiendo que la respuesta es un array de resultados
       setNumDocumento(""); // Limpiar el campo de búsqueda
@@ -66,28 +67,36 @@ const CertificadoEstudios = () => {
     return String(num).padStart(4, "0"); // Formatea el contador con 4 dígitos
   };
 
+  const limpiarTodo = () => {
+    setNombre("");
+    setResultados([]);
+    setError("");
+    setEstudianteSeleccionado(null);
+    setGenerados(0);
+  };
+
   return (
     <>
       <div className="contenedor_certificado-main">
         <div className="box-certificado">
           <div className="certificado-content">
             <div>
-              <h5>Buscar por documento de identidad:</h5>
+              <h5>Buscar por apellidos y nombres:</h5>
               <div className="btn-certifica">
-
                 <input
                   className="certificado-content-input"
                   type="text"
-                  value={numDocumento}
-                  onChange={(e) => setNumDocumento(e.target.value)}
-                  placeholder="Ingresa el número de documento"
+                  value={nombre}
+                  onChange={(e) => setNombre(e.target.value)}
+                  placeholder="Ingresa el nombre del estudiante"
                 />
-                <button
 
-                  onClick={buscarEstudiantes}
-                  disabled={loading}
-                >
+                <button onClick={buscarEstudiantes} disabled={loading}>
                   {loading ? "Buscando..." : "Buscar"}
+                </button>
+
+                <button onClick={limpiarTodo} className="btn-limpiar">
+                  Limpiar
                 </button>
               </div>
             </div>
@@ -101,9 +110,9 @@ const CertificadoEstudios = () => {
                     <li key={estudiante.numDocumento}>
                       <div className="certificado-content-resultados">
                         <div>
-                          <p>{estudiante.nombre} - Grupo: {estudiante.grupo} </p>
+                          <p>{estudiante.nombre}: - Grupo: {estudiante.grupo} /Año: {estudiante.añoLectivo} </p>
                           <p></p>
-                          <p>Año: {estudiante.añoLectivo}</p>
+                          <p></p>
                         </div>
                         <div>
                           <button
