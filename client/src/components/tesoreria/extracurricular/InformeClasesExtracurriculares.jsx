@@ -19,7 +19,7 @@ const InformeClasesExtracurriculares = () => {
   const [mesSeleccionado, setMesSeleccionado] = useState("");
   const { facturas } = useRecaudo();
   const [facturasFiltradas, setFacturasFiltradas] = useState([]);
- 
+
 
   useEffect(() => {
     if (facturas.length > 0) {
@@ -129,15 +129,16 @@ const InformeClasesExtracurriculares = () => {
 
         agrupado[cod].push({
           estudiante: factura.estudianteId?.nombre || "N/A",
-          nombreClase: clase.nombreClase || getNombreCodigo(clase.cod), // fallback por si falta
+          nombreClase: clase.nombreClase || getNombreCodigo(clase.cod),
           grado: factura.estudianteId?.grado || "N/A",
           total: factura.total,
           tipoPago: factura.tipoPago,
+          aplicado: factura.mes_aplicado,
+          compra: factura.fechaCompra,
           mes: mesFactura,
         });
       });
     });
-
     if (Object.keys(agrupado).length === 0) {
       alert("No hay datos para el mes seleccionado.");
       return;
@@ -223,6 +224,8 @@ const InformeClasesExtracurriculares = () => {
               "Grado",
               "Total",
               "Tipo de pago",
+              "Mes aplicado",
+              "Compra",
             ].map(
               (text) =>
                 new TableCell({
@@ -232,37 +235,51 @@ const InformeClasesExtracurriculares = () => {
             ),
           }),
           ...items.map((item) =>
-  new TableRow({
-    children: [
-      new TableCell({ children: [new Paragraph(item.estudiante)] }),
-      new TableCell({ children: [new Paragraph(item.nombreClase)] }),
-      new TableCell({ children: [new Paragraph(item.grado)] }),
-      new TableCell({
-        children: [new Paragraph(`$ ${item.total.toLocaleString()}`)],
-      }),
-      new TableCell({
-        children: [new Paragraph(item.tipoPago)],
-        shading: {
-          fill:
-            item.tipoPago === "Nómina"
-              ? "C6EFCE"
-              : item.tipoPago === "Efectivo"
-              ? "FFEB9C"
-              : item.tipoPago === "Datáfono"
-              ? "D9E1F2"
-              : "FFFFFF",
-        },
-      }),
-    ],
-  })
-),
+            new TableRow({
+              children: [
+                new TableCell({
+                  children: [
+                    new Paragraph({
+                      children: [new TextRun({ text: item.estudiante, size: 16 })],
+                    }),
+                  ],
+                }),
+                new TableCell({ children: [new Paragraph({text:item.nombreClase, size:16})] }),
+                new TableCell({ children: [new Paragraph({text:item.grado, size:16})] }),
+                new TableCell({
+                  children: [new Paragraph({text:`$ ${item.total.toLocaleString()}`, size:16})],
+                }),
+                new TableCell({
+                  children: [new Paragraph({text:item.tipoPago, size:16})],
+                  shading: {
+                    fill:
+                      item.tipoPago === "Nómina"
+                        ? "C6EFCE"
+                        : item.tipoPago === "Efectivo"
+                          ? "FFEB9C"
+                          : item.tipoPago === "Datáfono"
+                            ? "D9E1F2"
+                            : "FFFFFF",
+                  },
+                }),
+                new TableCell({
+                  children: [new Paragraph({text:`${item.aplicado.toLocaleString()}`, size:16})],
+                }),
+                new TableCell({
+                  children: [new Paragraph(
+                   {text: new Date(item.compra).toLocaleDateString("es-CO"), size:16}
+                  ),],
+                }),
+              ],
+            })
+          ),
 
         ],
       });
 
       content.push(tablaDatos);
 
-     
+
       // Subtotales por clase
       let subtotalNomina = 0;
       let subtotalDatafono = 0;

@@ -25,7 +25,7 @@ const InformeExtraClasesDec = () => {
   const { facturas } = useRecaudo();
   const [facturasFiltradas, setFacturasFiltradas] = useState([]);
 
-   
+
   useEffect(() => {
     if (facturas.length > 0) {
       const codValidos = [
@@ -38,7 +38,7 @@ const InformeExtraClasesDec = () => {
         "700",
         "800",
         "900",
-        
+
         "1100",
         "2200",
         "2300",
@@ -95,15 +95,15 @@ const InformeExtraClasesDec = () => {
         return "Voleibol";
       case "900":
         return "Microfútbol";
-       
+
       case "1100":
         return "Exploración Motriz y Predeportiva Pre";
-      
+
       case "2200":
         return "Piano lunes";
 
       case "2300":
-        return "Iniciación al Arte"  
+        return "Iniciación al Arte"
 
       default:
         return `Código: ${cod}`;
@@ -139,6 +139,7 @@ const InformeExtraClasesDec = () => {
           grado: factura.estudianteId?.grado || "N/A",
           total: factura.total,
           tipoPago: factura.tipoPago,
+          aplicado: factura.mes_aplicado,
           mes: mesFactura,
           dia: clase.dia,
           hora: clase.hora,
@@ -216,6 +217,20 @@ const InformeExtraClasesDec = () => {
           spacing: { before: 400, after: 200 },
         })
       );
+      content.push(
+        new Paragraph({
+          children: [
+            new TextRun({
+              text: "Total de registros: ",
+              bold: true,
+            }),
+            new TextRun({
+              text: items.length.toString(),
+            }),
+          ],
+          spacing: { before: 100, after: 200 },
+        })
+      );
 
       const tablaDatos = new Table({
         width: {
@@ -225,7 +240,7 @@ const InformeExtraClasesDec = () => {
         rows: [
           new TableRow({
             tableHeader: true,
-            children: ["Estudiante", "Clase", "Grado", "Día", "Hora"].map(
+            children: ["Estudiante", "Clase", "Grado", "Día", "Hora", "aplicado"].map(
               (text) =>
                 new TableCell({
                   children: [new Paragraph({ text })],
@@ -244,10 +259,12 @@ const InformeExtraClasesDec = () => {
                   new TableCell({ children: [new Paragraph(item.grado)] }),
                   new TableCell({ children: [new Paragraph(item.dia)] }),
                   new TableCell({ children: [new Paragraph(item.hora)] }),
-                  new TableCell({ children: [new Paragraph(item.grado)] }),
+                  new TableCell({ children: [new Paragraph(item.aplicado)] }),
+
                 ],
               })
           ),
+
         ],
       });
 
@@ -315,7 +332,7 @@ const InformeExtraClasesDec = () => {
           </ul>
         </div>
         <div className="header-extraclases-informes">
-         
+
         </div>
       </header>
 
@@ -329,13 +346,13 @@ const InformeExtraClasesDec = () => {
         })}
       />
 
-      <ReporteAsistencias  data={facturasFiltradas.filter((factura) => {
-          const mesFactura = new Date(factura.fechaCompra).toLocaleString(
-            "es-ES",
-            { month: "long" }
-          );
-          return mesFactura.toLowerCase() === mesSeleccionado.toLowerCase();
-        })}
+      <ReporteAsistencias data={facturasFiltradas.filter((factura) => {
+        const mesFactura = new Date(factura.fechaCompra).toLocaleString(
+          "es-ES",
+          { month: "long" }
+        );
+        return mesFactura.toLowerCase() === mesSeleccionado.toLowerCase();
+      })}
       />
     </div>
   );
