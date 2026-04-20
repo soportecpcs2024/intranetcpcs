@@ -131,11 +131,59 @@ const asistenciasUnificadas = async(req,res) =>{
 
 };
 
-const estadisticasAsistencias = async(req,res) =>{
-  
-}
- 
+const asistenciasUnificadasJSON = async (req, res) => {
+  try {
+    const asistencias = await AsistenciaPadres.find()
+      .populate('estudianteId', 'nombre documento grupo grado hermanos')
+      .populate('escuelaPadresId', 'nombre direccion contacto');
 
-module.exports = { crearAsistencia, actualizarAsistencia, obtenerAsistenciaPorEstudiante, asistenciasUnificadas };
+    const dataUnificada = asistencias.map(a => {
+      const estudiante = a.estudianteId || {};
+
+      return {
+        asistenciaId: a._id,
+        escuela: a.escuelaPadresId, // 👈 EXACTAMENTE IGUAL
+        estudiante: {
+          _id: estudiante._id,
+          nombre: estudiante.nombre || '',
+          documento: estudiante.documento || '',
+          grupo: estudiante.grupo || '',
+          grado: estudiante.grado || '',
+          hermanos: estudiante.hermanos || false,
+        },
+        asistencias: a.asistencias,
+        entregaMaterial: a.entregaMaterial,
+        tieneHermano: a.tieneHermano,
+        certificadoOtorgado: a.certificadoOtorgado,
+        createdAt: a.createdAt,
+        updatedAt: a.updatedAt,
+      };
+    });
+
+    // 👇 SOLO cambia la salida
+    res.setHeader("Content-Type", "application/json");
+    res.setHeader(
+      "Content-Disposition",
+      'attachment; filename="asistencias-unificadas.json"'
+    );
+
+    res.status(200).send(JSON.stringify(dataUnificada, null, 2));
+
+  } catch (error) {
+    console.error('Error al obtener asistencias unificadas:', error);
+    res.status(500).json({
+      message: 'Error interno al obtener las asistencias',
+      error: error.message
+    });
+  }
+};
+
+module.exports = { 
+  crearAsistencia,
+  actualizarAsistencia,
+  obtenerAsistenciaPorEstudiante,
+  asistenciasUnificadas,
+  asistenciasUnificadasJSON
+};
 
  

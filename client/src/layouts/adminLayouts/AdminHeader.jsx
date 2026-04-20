@@ -2,15 +2,18 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Logo from "/logo2025.png";
 import { useAuth } from "../../contexts/AuthContext";
+import { useRecaudo } from "../../contexts/RecaudoContext"
+import { useEscuelaPadres } from "../../contexts/EscuelaPadresContext";
 
 
 const AdminHeader = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const [activo, setActivo] = useState(false);
+ 
+  const { descargarVentasMensualesJSON } = useRecaudo();
+  const { descargarAsistenciasJSON } = useEscuelaPadres();
 
-  const handleClick = () => {
-    setActivo(true);
-  };
+
+ ;
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
@@ -87,7 +90,7 @@ const AdminHeader = () => {
                             </Link>
                           </li>
                           <h5><em>Plan de mejoramiento:</em></h5>
-                           <li>
+                          <li>
                             <Link to="control_semanal">Control semanal</Link>
                           </li>
                           <li>
@@ -256,9 +259,51 @@ const AdminHeader = () => {
                       )}
                     </div>
                   </li>
+                  <li>
+                    <div className="dropdown">
+                      <Link onClick={toggleDropdown}>Backup</Link>
 
+                      {isDropdownOpen && (
+                        <ul className="dropdown-menu">
+                          
+                          <li>
+                            <button
+                              type="button"
+                              onClick={descargarVentasMensualesJSON}
+                              style={{
+                                background: "none",
+                                border: "none",
+                                padding: 0,
+                                cursor: "pointer",
+                                color: "inherit",
+                                font: "inherit",
+                              }}
+                            >
+                              Descargar ventas JSON
+                            </button>
+                          </li>
+                           
+                          <li>
+                            <button
+                              type="button"
+                              onClick={descargarAsistenciasJSON}
+                              style={{
+                                background: "none",
+                                border: "none",
+                                padding: 0,
+                                cursor: "pointer",
+                                color: "inherit",
+                                font: "inherit",
+                              }}
+                            >
+                              Descargar asistencias JSON
+                            </button>
+                          </li>
+                        </ul>
+                      )}
+                    </div>
+                  </li>
 
-                  
 
                 </ul>
               )}
@@ -288,11 +333,7 @@ const AdminHeader = () => {
                             </Link>
                           </li>
 
-                          {/* <li>
-                            <Link to="/admin/rubricas_misiones">
-                              Rúbrica de Evaluación – Programa de Misiones
-                            </Link>
-                          </li> */}
+                       
                         </ul>
                       )}
                     </div>
@@ -312,20 +353,13 @@ const AdminHeader = () => {
 
                       {isDropdownOpen && (
                         <ul className="dropdown-menu">
-                          {/* <li>
-                            <Link to="cargar_archivo">Cargar Archivo</Link>
-                          </li> */}
+                         
                           <li>
                             <Link to="descargar_colilla">
                               Descargar colilla de pago
                             </Link>
                           </li>
-                          {/* <li>
-                            <Link to="eliminar_colillas">
-                              Eliminar colillas
-                            </Link>
-                          </li> */}
-
+                        
 
 
                         </ul>
@@ -337,12 +371,7 @@ const AdminHeader = () => {
 
               {secretaria && (
                 <ul>
-                  {/* <li>
-                    <Link to="/admin/users">Inicio</Link>
-                  </li> */}
-                  {/* <li>
-              <Link to="/admin/blog">Blog</Link>
-              </li> */}
+                
                   <li>
                     <div className="dropdown">
                       <Link onClick={toggleDropdown}>Académico</Link>
@@ -460,19 +489,13 @@ const AdminHeader = () => {
 
                           {isDropdownOpen && (
                             <ul className="dropdown-menu">
-                              {/* <li>
-                            <Link to="cargar_archivo">Cargar Archivo</Link>
-                          </li> */}
+                          
                               <li>
                                 <Link to="descargar_colilla">
                                   Descargar colilla de pago
                                 </Link>
                               </li>
-                              {/* <li>
-                            <Link to="eliminar_colillas">
-                              Eliminar colillas
-                            </Link>
-                          </li> */}
+                          
 
 
 
@@ -487,12 +510,7 @@ const AdminHeader = () => {
 
               {isAdministrator && (
                 <ul>
-                  {/* <li>
-                    <Link to="/admin/users">Inicio</Link>
-                  </li> */}
-                  {/* <li>
-              <Link to="/admin/blog">Blog</Link>
-              </li> */}
+                
 
                   <div className="admin-layout-header-links-a">
                     <li>
@@ -613,11 +631,7 @@ const AdminHeader = () => {
                               Extra curricular
                             </Link>
                           </li>
-                          {/* <li>
-                            <Link to="/admin/rubricas_misiones">
-                              Rúbrica de Evaluación – Programa de Misiones
-                            </Link>
-                          </li> */}
+                        
                         </ul>
                       )}
                     </div>
@@ -675,11 +689,7 @@ const AdminHeader = () => {
                           <li>
                             <Link to="almuerzos_adm">Almuerzos</Link>
                           </li>
-                          {/* <li>
-                            <Link to="morosos_penciones">Morosos Penciones</Link>
-                          </li> */}
-
-
+                        
                         </ul>
                       )}
                     </div>
@@ -750,25 +760,14 @@ const AdminHeader = () => {
                               Descargar colilla
                             </Link>
                           </li>
-                          {/* <li>
-                            <Link to="eliminar_colillas">
-                              Eliminar colillas
-                            </Link>
-                          </li> */}
-
-
-
+                         
+ 
                         </ul>
                       )}
                     </div>
                   </li>
 
-
-                  {/* <li>
-                    <div className="dropdown">
-                      <Link to="papeleria">Papeleria</Link>
-                    </div>
-                  </li> */}
+ 
 
                 </ul>
               )}
@@ -796,61 +795,12 @@ const AdminHeader = () => {
                               Extra curricular
                             </Link>
                           </li>
-                          {/* <li>
-                            <Link to="/admin/rubricas_misiones">
-                              Rúbrica de Evaluación – Programa de Misiones
-                            </Link>
-                          </li> */}
+                         
                         </ul>
                       )}
                     </div>
                   </li>
-
-                  {/* <li>
-                    <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Adm</Link>
-
-                      {isDropdownOpen && (
-                        <ul className="dropdown-menu">
-                          <li>
-                            <Link to="/admin/administracion">Stock</Link>
-                          </li>
-                          <li>
-                            <Link to="/admin/inventario_estadisticas">
-                              Estadisticas Inventario
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="/admin/informesgenerales">
-                              Informes de Tareas
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="seguimientoMantenimiento">
-                              Seguimiento mantenimientos
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="informesExtraClasesDec">
-                              Informe Extraclases
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="registroAsistencia">
-                              Asistencia Extraclases
-                            </Link>
-                          </li>
-                        </ul>
-                      )}
-                    </div>
-                  </li> */}
-
-
-
-
-
-
-
+ 
                   <li>
                     <div className="dropdown">
                       <Link onClick={toggleDropdown}>Plan de Mejoramiento</Link>
@@ -875,11 +825,7 @@ const AdminHeader = () => {
                   </li>
 
 
-                  {/* <li>
-                    <div className="dropdown">
-                      <Link to="papeleria">Papeleria</Link>
-                    </div>
-                  </li> */}
+                
 
                 </ul>
               )}

@@ -161,6 +161,33 @@ const asistenciasUnificadas = async () => {
   }
 };
 
+
+  const descargarAsistenciasJSON = async () => {
+  try {
+    const response = await axios.get(
+      `${API_BASE}/api/epAsistencias/asistencias-unificadas-json`,
+      {
+        responseType: "blob",
+      }
+    );
+
+    const blob = new Blob([response.data], { type: "application/json" });
+    const url = window.URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", "asistencias_ep_.json");
+    document.body.appendChild(link);
+    link.click();
+
+    link.remove();
+    window.URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error("Error descargando asistencias EP JSON:", error);
+    alert("No se pudo descargar el archivo JSON");
+  }
+};
+
   useEffect(() => {
     cargarEscuelas();
   }, []);
@@ -183,7 +210,8 @@ const asistenciasUnificadas = async () => {
         cargarEscuelas,
         loading,
         asistenciasUnificadas,
-        cargarTodosLosEstudiantes, 
+        cargarTodosLosEstudiantes,
+        descargarAsistenciasJSON 
          
       }}
     >

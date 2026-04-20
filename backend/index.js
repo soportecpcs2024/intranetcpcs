@@ -151,6 +151,9 @@ app.use('/api/epEscuelas', epEscuelas);
 const epEstudiantes= require('./routes/EPadres/estudiantesRoutes.js');
 app.use('/api/epEstudiantes', epEstudiantes);
 
+const epasistenciasjson= require('./routes/EPadres/estudiantesRoutes.js');
+app.use('/api/epasistenciasjson', epasistenciasjson);
+
 
 // ---------------- asistencias ----------------
 

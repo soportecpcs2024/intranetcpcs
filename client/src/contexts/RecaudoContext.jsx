@@ -172,6 +172,32 @@ export const RecaudoProvider = ({ children }) => {
     }
   };
 
+  const descargarVentasMensualesJSON = async () => {
+  try {
+    const response = await axios.get(
+      `${apiBaseUrl}/api/recaudo/reportes/reportes/ventas-mensuales-json`,
+      {
+        responseType: "blob",
+      }
+    );
+
+    const blob = new Blob([response.data], { type: "application/json" });
+    const url = window.URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", "ventas-mensuales.json");
+    document.body.appendChild(link);
+    link.click();
+
+    link.remove();
+    window.URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error("Error descargando ventas mensuales JSON:", error);
+    alert("No se pudo descargar el archivo JSON");
+  }
+};
+
   // Carga inicial
   useEffect(() => {
     Promise.allSettled([
@@ -222,6 +248,7 @@ export const RecaudoProvider = ({ children }) => {
         // ✅ NUEVO: exponer completas
         facturasCompletas,
         fetchFacturasCompletas,
+        descargarVentasMensualesJSON,
       }}
     >
       {children}

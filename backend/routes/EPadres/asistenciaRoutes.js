@@ -1,28 +1,22 @@
-// routes/asistenciaRoutes.js
 const express = require("express");
 const router = express.Router();
 const {
   crearAsistencia,
   actualizarAsistencia,
   obtenerAsistenciaPorEstudiante,
-  asistenciasUnificadas
+  asistenciasUnificadas,
+  asistenciasUnificadasJSON
 } = require("../../controllers/EPadres/asistenciaController");
 
-// Crear un nuevo registro de asistencia
 router.post("/", crearAsistencia);
-
-// Actualizar un registro de asistencia
 router.put("/actualizar/:id", actualizarAsistencia);
 
-// Obtener la asistencia de un estudiante en una escuela específica
 router.get(
   "/obtener/:escuelaPadresId/:estudianteId",
   obtenerAsistenciaPorEstudiante
 );
 
-// Obtener asistencia unificada 
-router.get("/unificada",asistenciasUnificadas);
-
-
+router.get("/unificada", asistenciasUnificadas);
+router.get("/asistencias-unificadas-json", asistenciasUnificadasJSON);
 
 module.exports = router;

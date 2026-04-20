@@ -9,5 +9,6 @@ const reporteController = require('../../controllers/recaudo/reporteController')
 
 // Ruta para exportar el reporte de ventas mensuales a Excel
 router.get('/reportes/ventas-mensuales', reporteController.exportarVentasMensuales);
+router.get('/reportes/ventas-mensuales-json', reporteController.exportarVentasMensualesJSON);
 
 module.exports = router;
