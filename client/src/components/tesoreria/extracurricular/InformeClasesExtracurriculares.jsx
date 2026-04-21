@@ -153,7 +153,7 @@ const InformeClasesExtracurriculares = () => {
           new TextRun({
             text: "COLEGIO PANAMERICANO COLOMBOSUECO",
             bold: true,
-            size: 30,
+            size: 40,
           }),
         ],
         spacing: { after: 300 },
@@ -163,7 +163,7 @@ const InformeClasesExtracurriculares = () => {
         children: [
           new TextRun({
             text: "Informe general de venta Clases Extracurriculares",
-            size: 26,
+            size: 30,
           }),
         ],
         spacing: { after: 200 },
@@ -172,7 +172,7 @@ const InformeClasesExtracurriculares = () => {
         alignment: AlignmentType.LEFT,
         children: [
           new TextRun({
-            text: `Mes: ${mesSeleccionado}`,
+            text: `Mes: ${mesSeleccionado.toUpperCase()}`,
             bold: true,
             size: 24,
           }),
