@@ -536,40 +536,57 @@ const InformeExtraClasesDec = () => {
   };
 
   return (
-    <div className="layout-academico-container">
-      <header className="header-extraclases">
-        <div className="header-extraclases-informes">
-          <div className="informes-lista-titulo">
-            <h5>Generar Informe por Mes</h5>
-          </div>
-          <ul className="informes-lista">
-            <li>
-              <select
-                className="select-mes"
-                value={mesSeleccionado}
-                onChange={(e) => setMesSeleccionado(e.target.value)}
-              >
-                <option value="">-- Seleccionar Mes --</option>
-                {meses.map((mes, index) => (
-                  <option key={index} value={mes}>
-                    {mes.charAt(0).toUpperCase() + mes.slice(1)}
-                  </option>
-                ))}
-              </select>
-            </li>
-            <li>
-              <button
-                className="informe-item btn-excel"
-                onClick={generarInformeWord}
-              >
-                Generar Informe
-              </button>
-            </li>
-          </ul>
+  <div className="layout-academico-container">
+    <header className="header-extraclases">
+      <div className="header-extraclases-informes panel-principal">
+        <div className="informes-lista-titulo">
+          <h2>Informe de Clases Extracurriculares</h2>
+          <p>Consulta indicadores, asistencias y genera el informe mensual.</p>
         </div>
-        <div className="header-extraclases-informes"></div>
-      </header>
 
+        <div className="informes-lista controles-informe">
+          <div className="campo-control">
+            <label htmlFor="mes" className="label-control">
+              Seleccionar mes
+            </label>
+            <select
+              id="mes"
+              className="select-mes"
+              value={mesSeleccionado}
+              onChange={(e) => setMesSeleccionado(e.target.value)}
+            >
+              <option value="">-- Seleccionar Mes --</option>
+              {meses.map((mes, index) => (
+                <option key={index} value={mes}>
+                  {mes.charAt(0).toUpperCase() + mes.slice(1)}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="campo-boton">
+            <button
+              className="informe-item btn-excel"
+              onClick={generarInformeWord}
+            >
+              Generar Informe
+            </button>
+          </div>
+        </div>
+
+        <div className="resumen-mes-seleccionado">
+          {mesSeleccionado ? (
+            <span>
+              Mes seleccionado: <strong>{mesSeleccionado.toUpperCase()}</strong>
+            </span>
+          ) : (
+            <span>Selecciona un mes para visualizar la información.</span>
+          )}
+        </div>
+      </div>
+    </header>
+
+    <section className="bloque-dashboard">
       <KPIsExtraClases
         data={facturasFiltradas.filter((factura) => {
           const mesFactura = new Date(factura.fechaCompra).toLocaleString(
@@ -579,7 +596,9 @@ const InformeExtraClasesDec = () => {
           return mesFactura.toLowerCase() === mesSeleccionado.toLowerCase();
         })}
       />
+    </section>
 
+    <section className="bloque-dashboard">
       <ReporteAsistencias
         data={facturasFiltradas.filter((factura) => {
           const mesFactura = new Date(factura.fechaCompra).toLocaleString(
@@ -589,8 +608,9 @@ const InformeExtraClasesDec = () => {
           return mesFactura.toLowerCase() === mesSeleccionado.toLowerCase();
         })}
       />
-    </div>
-  );
+    </section>
+  </div>
+);
 };
 
 export default InformeExtraClasesDec;

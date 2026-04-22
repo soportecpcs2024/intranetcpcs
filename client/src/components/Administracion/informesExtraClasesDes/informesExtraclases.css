@@ -1,104 +1,208 @@
+/* CONTENEDOR PRINCIPAL */
+.layout-academico-container {
+  background: #f5f7fb;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* HEADER */
+.header-extraclases {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* CARD HEADER */
+.header-extraclases-informes {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 14px;
+  border-top: 6px solid #f1c40f; /* amarillo */
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* TITULO */
+.informes-lista-titulo h5 {
+  color: #1e3a8a; /* azul fuerte */
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+/* SELECT */
+.select-mes {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #dcdcdc;
+  background: #f9fafc;
+  font-weight: 500;
+}
+
+/* BOTÓN PRINCIPAL */
+.btn-excel {
+  background: linear-gradient(135deg, #f1c40f, #f39c12);
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-excel:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(241, 196, 15, 0.4);
+}
+
+/* KPIs CONTENEDOR */
 .kpi-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
-  padding: 2rem;
-  margin: 2rem auto;
+  gap: 1.5rem;
+  padding: 1.5rem;
   justify-content: center;
-  background-color: #fdfdfd;
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  background: #ffffff;
   border-radius: 16px;
   max-width: 1200px;
-  font-family: "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-  color: #2c3e50;
-}
-.header-extraclases{
- 
-  
-  display: flex;
-  gap: 10px;
+  margin: auto;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
-.header-extraclases-informes{
-  margin: 5px;
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-}
-
+/* CARDS KPI */
 .cardestaditicas {
-  flex: 1 1 300px;
+  flex: 1 1 280px;
   background: #ffffff;
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 1.5rem;
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-  transition: transform 0.3s ease;
+  border-left: 6px solid #1e3a8a; /* azul */
+  transition: all 0.3s ease;
+  position: relative;
 }
 
- 
+/* EFECTO HOVER */
+.cardestaditicas:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+}
 
+/* TITULO CARD */
 .cardestaditicas h4 {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   margin-bottom: 1rem;
-  color: #34495e;
-  border-bottom: 2px solid #dfe6e9;
-  padding-bottom: 0.4rem;
+  color: #1e3a8a;
 }
 
+/* SUBTITULOS */
 .kpi-container h3 {
-  font-size: 1.2rem;
-  margin-top: 2rem;
-  color: #2980b9;
-  border-left: 4px solid #3498db;
-  padding-left: 0.6rem;
+  font-size: 1.1rem;
+  margin-top: 1.5rem;
+  color: #f39c12;
+  border-left: 4px solid #f1c40f;
+  padding-left: 8px;
 }
 
-.cardestaditicas ul {
-  list-style: none;
-  padding: 0;
-  margin: 1rem 0;
-}
-
+/* LISTA */
 .cardestaditicas li {
-  font-size: 1rem;
-  padding: 0.5rem 0;
+  font-size: 0.95rem;
+  padding: 6px 0;
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid #f0f0f0;
-  line-height: 1.5;
+  border-bottom: 1px solid #eee;
 }
 
-.cardestaditicas li strong {
-  color: #2c3e50;
-  font-weight: 600;
-}
-
+/* TEXTO KPI */
 .kpi-container p {
-  font-size: 1rem;
-  padding: 0.75rem 1rem;
-  margin: 0.5rem 0 1rem;
-  background-color: #f1f6fb;
-  border-left: 4px solid #3498db;
+  font-size: 0.95rem;
+  padding: 10px;
+  background-color: #eef4ff;
+  border-left: 4px solid #1e3a8a;
   border-radius: 6px;
-  color: #2c3e50;
 }
 
+/* RESPONSIVE */
 @media (max-width: 768px) {
   .kpi-container {
-    padding: 1rem;
-    margin: 1rem;
     flex-direction: column;
+  }
+}
+
+/* ================= RESPONSIVE PRO ================= */
+
+/* TABLETS */
+@media (max-width: 992px) {
+  .controles-informe {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .campo-boton {
+    width: 100%;
+  }
+
+  .btn-excel {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* CELULARES */
+@media (max-width: 768px) {
+  .layout-academico-container {
+    padding: 10px;
+  }
+
+  .header-extraclases {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .header-extraclases-informes {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .informes-lista-titulo h2 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .informes-lista-titulo p {
+    text-align: center;
+    font-size: 0.9rem;
+  }
+
+  .select-mes {
+    width: 100%;
+  }
+
+  .btn-excel {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+  }
+
+  .kpi-container {
+    padding: 10px;
   }
 
   .cardestaditicas {
     width: 100%;
   }
+}
 
-  .cardestaditicas li {
-    flex-direction: column;
-    align-items: flex-start;
-    font-size: 0.95rem;
+/* CELULARES PEQUEÑOS */
+@media (max-width: 480px) {
+  .informes-lista-titulo h2 {
+    font-size: 1.3rem;
   }
 
-  .kpi-container p {
-    font-size: 0.95rem;
+  .informes-lista-titulo p {
+    font-size: 0.8rem;
+  }
+
+  .resumen-mes-seleccionado {
+    font-size: 0.85rem;
+    padding: 10px;
   }
 }

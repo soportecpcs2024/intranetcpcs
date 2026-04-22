@@ -175,7 +175,7 @@ const LayoutTesoreria = () => {
         <div className="layout-academico-container-header">
           <div className="informes-container">
             <div className="informes-lista-titulo">
-              <h5>Listar comprar</h5>
+              <h5>Listado de compras</h5>
             </div>
 
             <ul className="informes-lista">
@@ -235,7 +235,7 @@ const LayoutTesoreria = () => {
             </ul>
           </div>
 
-          <div className="link-academico"></div>
+          
         </div>
       </header>
 
