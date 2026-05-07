@@ -311,3 +311,37 @@ exports.eliminarFactura = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+
+const codigosPermitidos = [
+  "100",
+  "200",
+  "300",
+  "400",
+  "500",
+  "600",
+  "700",
+  "800",
+  "900",
+  "1100",
+  "2200",
+  "2300"
+];
+
+exports.recaudoEstadisticas = async (req, res) => {
+  try {
+    const facturas = await Factura.find()
+      .populate("estudianteId", "nombre documentoIdentidad grado")
+      .populate("clases.claseId");
+
+    const facturasFiltradas = facturas.filter((factura) =>
+      factura.clases.some((clase) =>
+        codigosPermitidos.includes(String(clase.claseId?.codigo))
+      )
+    );
+
+    res.json(facturasFiltradas);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};

@@ -12,5 +12,8 @@ router.delete('/facturas/:id', facturaController.eliminarFactura); // <-- Agrega
 router.get("/facturas-completas", facturaController.obtenerFacturasCompletas);
 router.get("/facturas/:id/completa", facturaController.obtenerFacturaCompletaPorId);
 
-
+router.get(
+  "/recaudo-estadisticas",
+  facturaController.recaudoEstadisticas
+);
 module.exports = router;
