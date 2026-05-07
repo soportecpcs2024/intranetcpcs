@@ -8,12 +8,12 @@ import { useEscuelaPadres } from "../../contexts/EscuelaPadresContext";
 
 const AdminHeader = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
- 
+
   const { descargarVentasMensualesJSON } = useRecaudo();
   const { descargarAsistenciasJSON } = useEscuelaPadres();
 
 
- ;
+  ;
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
@@ -265,7 +265,7 @@ const AdminHeader = () => {
 
                       {isDropdownOpen && (
                         <ul className="dropdown-menu">
-                          
+
                           <li>
                             <button
                               type="button"
@@ -282,7 +282,7 @@ const AdminHeader = () => {
                               Descargar ventas JSON
                             </button>
                           </li>
-                           
+
                           <li>
                             <button
                               type="button"
@@ -333,7 +333,7 @@ const AdminHeader = () => {
                             </Link>
                           </li>
 
-                       
+
                         </ul>
                       )}
                     </div>
@@ -353,13 +353,13 @@ const AdminHeader = () => {
 
                       {isDropdownOpen && (
                         <ul className="dropdown-menu">
-                         
+
                           <li>
                             <Link to="descargar_colilla">
                               Descargar colilla de pago
                             </Link>
                           </li>
-                        
+
 
 
                         </ul>
@@ -371,7 +371,7 @@ const AdminHeader = () => {
 
               {secretaria && (
                 <ul>
-                
+
                   <li>
                     <div className="dropdown">
                       <Link onClick={toggleDropdown}>Académico</Link>
@@ -489,13 +489,13 @@ const AdminHeader = () => {
 
                           {isDropdownOpen && (
                             <ul className="dropdown-menu">
-                          
+
                               <li>
                                 <Link to="descargar_colilla">
                                   Descargar colilla de pago
                                 </Link>
                               </li>
-                          
+
 
 
 
@@ -510,7 +510,7 @@ const AdminHeader = () => {
 
               {isAdministrator && (
                 <ul>
-                
+
 
                   <div className="admin-layout-header-links-a">
                     <li>
@@ -631,7 +631,7 @@ const AdminHeader = () => {
                               Extra curricular
                             </Link>
                           </li>
-                        
+
                         </ul>
                       )}
                     </div>
@@ -689,7 +689,7 @@ const AdminHeader = () => {
                           <li>
                             <Link to="almuerzos_adm">Almuerzos</Link>
                           </li>
-                        
+
                         </ul>
                       )}
                     </div>
@@ -760,14 +760,14 @@ const AdminHeader = () => {
                               Descargar colilla
                             </Link>
                           </li>
-                         
- 
+
+
                         </ul>
                       )}
                     </div>
                   </li>
 
- 
+
 
                 </ul>
               )}
@@ -795,12 +795,12 @@ const AdminHeader = () => {
                               Extra curricular
                             </Link>
                           </li>
-                         
+
                         </ul>
                       )}
                     </div>
                   </li>
- 
+
                   <li>
                     <div className="dropdown">
                       <Link onClick={toggleDropdown}>Plan de Mejoramiento</Link>
@@ -824,20 +824,20 @@ const AdminHeader = () => {
                     </div>
                   </li>
 
-                   <li>
+                  <li>
                     <div className="dropdown">
                       <Link onClick={toggleDropdown}>Adm</Link>
 
                       {isDropdownOpen && (
                         <ul className="dropdown-menu">
-                          <li>
+                          {/* <li>
                             <Link to="/admin/administracion">Stock</Link>
                           </li>
                           <li>
                             <Link to="/admin/inventario_estadisticas">
                               Estadisticas Inventario
                             </Link>
-                          </li>
+                          </li> */}
                           <li>
                             <Link to="/admin/informesgenerales">
                               Informes de Tareas
@@ -853,9 +853,14 @@ const AdminHeader = () => {
                               Informe Extraclases
                             </Link>
                           </li>
-                          <li>
+                          {/* <li>
                             <Link to="registroAsistencia">
                               Asistencia Extraclases
+                            </Link>
+                          </li> */}
+                          <li>
+                            <Link to="informe_escuela_padres">
+                              Informe pagos EP
                             </Link>
                           </li>
                         </ul>
@@ -864,7 +869,7 @@ const AdminHeader = () => {
                   </li>
 
 
-                
+
 
                 </ul>
               )}
