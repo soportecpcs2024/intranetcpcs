@@ -11,7 +11,7 @@ const DashboardExtraCurricular = () => {
         <div className="grup-links">
           <NavLink to="ingles">Inglés</NavLink>
           <NavLink to="iniciamusical">Iniciación musical</NavLink>
-          <NavLink to="piano">Piano</NavLink>
+          <NavLink to="piano">Piano jueves</NavLink>
         </div>
 
         <div className="grup-links">
