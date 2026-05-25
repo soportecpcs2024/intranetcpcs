@@ -94,7 +94,7 @@ const AdminHeader = () => {
                             <Link to="control_semanal">Control semanal</Link>
                           </li>
                           <li>
-                            <Link to="checkupDashboard">Dashboard</Link>
+                            <Link to="checkupDashboard">Seguimiento</Link>
                           </li>
                         </ul>
                       )}
@@ -811,7 +811,7 @@ const AdminHeader = () => {
                             <Link to="control_semanal">Control semanal</Link>
                           </li>
                           <li>
-                            <Link to="checkupDashboard">Dashboard</Link>
+                            <Link to="checkupDashboard">Seguimiento</Link>
                           </li>
 
 

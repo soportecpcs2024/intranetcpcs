@@ -20,6 +20,7 @@ export const EscuelaPadresProvider = ({ children }) => {
     try {
       const res = await axios.get(`${API_BASE}/api/epEscuelas`);
       setEscuelas(res.data);
+      
     } catch (err) {
       console.error('❌ Error al cargar escuelas:', err);
     }

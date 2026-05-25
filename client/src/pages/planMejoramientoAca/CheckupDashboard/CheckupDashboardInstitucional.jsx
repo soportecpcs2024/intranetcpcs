@@ -17,15 +17,23 @@ import {
 import { CheckupContext } from "../../../contexts/CheckupContext";
 import "../stylePlan.css";
 
-const AREAS = [
-  { value: "", label: "Todas las áreas" },
-  { value: "CIENCIAS_NATURALES", label: "Ciencias Naturales" },
-  { value: "MATEMATICAS", label: "Matemáticas" },
-  { value: "LENGUA_CASTELLANA", label: "Lengua Castellana" },
-  { value: "SOCIALES", label: "Ciencias Sociales" },
-  { value: "INGLES", label: "Inglés" },
+// const AREAS = [
+//   { value: "", label: "Todas las áreas" },
+//   { value: "CIENCIAS_NATURALES", label: "Ciencias Naturales" },
+//   { value: "MATEMATICAS", label: "Matemáticas" },
+//   { value: "LENGUA_CASTELLANA", label: "Lengua Castellana" },
+//   { value: "SOCIALES", label: "Ciencias Sociales" },
+//   { value: "INGLES", label: "Inglés" },
  
+// ];
+const AREAS = [
+  { label: "Ciencias Naturales", value: "CIENCIAS_NATURALES" },
+  { label: "Ciencias Sociales", value: "CIENCIAS_SOCIALES" },
+  { label: "Matemáticas", value: "MATEMATICAS" },
+  { label: "Lectura Crítica", value: "LECTURA_CRITICA" },
+  { label: "Bilingüismo", value: "BILINGUISMO" },
 ];
+
 
 const PERIODOS = [
   { value: "", label: "Todos los períodos" },
@@ -189,7 +197,7 @@ const CheckupDashboardInstitucional = () => {
       <div className="cs-shell">
         <div className="cs-header cs-dashboard-header">
           <div className="cs-card">
-            <div className="cs-badge">Dashboard institucional</div>
+            <div className="cs-badge">Seguimiento al Plan de Mejoramiento</div>
 
             <div className="cs-chequeo-estadistica">
               <div>

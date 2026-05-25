@@ -43,7 +43,7 @@ const DashboardEscPadres = () => {
       setEscuelaSeleccionada(escuelas[0]);
     }
   }, [escuelas, escuelaSeleccionada]);
-
+console.log(escuelas)
   useEffect(() => {
     if (escuelaSeleccionada && estudianteSeleccionado) {
       obtenerAsistencia(escuelaSeleccionada._id, estudianteSeleccionado._id);
