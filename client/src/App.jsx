@@ -251,10 +251,7 @@ const AppContent = () => {
           ) : (
             <Route path="/admin/*" element={<AdminLayout />}>
               <Route path="users" element={<Users />} />
-                {/* <Route
-                path="tv"
-                element={<Digital_Signage_TV/>}
-              /> */}
+               
               <Route path="blog" element={<Blog />} />
               <Route path="academico" element={<Layout />}>
                 <Route index element={<General />} />
