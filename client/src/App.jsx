@@ -243,13 +243,18 @@ const AppContent = () => {
     <BrowserRouter>
       <Suspense fallback={<div>Cargando...</div>}>
         <Routes>
-          
+          {!user ? (
+            <>
+              <Route index element={<Auth />} />
+              <Route path="/admin/*" element={<Navigate to="/admin" />} />
+            </>
+          ) : (
             <Route path="/admin/*" element={<AdminLayout />}>
               <Route path="users" element={<Users />} />
-                <Route
+                {/* <Route
                 path="tv"
                 element={<Digital_Signage_TV/>}
-              />
+              /> */}
               <Route path="blog" element={<Blog />} />
               <Route path="academico" element={<Layout />}>
                 <Route index element={<General />} />
@@ -452,7 +457,7 @@ const AppContent = () => {
             
             </Route>
             
-          
+          )}
         </Routes>
       </Suspense>
     </BrowserRouter>
