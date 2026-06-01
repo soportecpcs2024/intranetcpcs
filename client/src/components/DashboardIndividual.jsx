@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Students } from "../api/DataApi";
 import PromedioGrupos from "./PromedioGrupos";
 import LoadingSpinner from "./LoadingSpinner";
-import FiltrosAreas from "./FiltrosAreas";
+ 
 import DatatableBuscador from "./DataTableBuscador";
 import FiltroIndividual from "./FiltroIndividual";
 import InfoPersonalEstudiante from "./InfoPersonalEstudiante";

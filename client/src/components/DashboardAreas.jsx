@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Students } from "../api/DataApi";
-import MetasGrupo from "./MetasGrupo";
+ 
 import PromedioGrupos from "./PromedioGrupos";
 import LoadingSpinner from "./LoadingSpinner";
 import FiltrosAreas from "./FiltrosAreas";
