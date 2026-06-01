@@ -104,7 +104,6 @@ import GenerarWordAdm from "./components/tesoreria/InformeEscuelasPadres/Informe
 import InformePromAdm from "./components/tesoreria/DashboardTesoreria/Recaudo/Prom_11/InformePromAdm";
 import { CheckupProvider } from "./contexts/CheckupContext";
  
- 
 
 
 
@@ -116,6 +115,7 @@ import { CheckupProvider } from "./contexts/CheckupContext";
 
 const ChequeoSemanal = React.lazy(() => import("./pages/planMejoramientoAca/chequeoSemanal/ChequeoSemanal"));
 const CheckupDashboard = React.lazy(() => import("./pages/planMejoramientoAca/CheckupDashboard/CheckupDashboardInstitucional"));
+const Digital_Signage_TV = React.lazy(() => import("./pages/tvpage/Digital_Signage_TV"));
 
 
 const Prom_11 = React.lazy(() => import("./components/tesoreria/DashboardTesoreria/Recaudo/Prom_11/Prom_11"));
@@ -251,6 +251,10 @@ const AppContent = () => {
           ) : (
             <Route path="/admin/*" element={<AdminLayout />}>
               <Route path="users" element={<Users />} />
+                <Route
+                path="tv"
+                element={<Digital_Signage_TV/>}
+              />
               <Route path="blog" element={<Blog />} />
               <Route path="academico" element={<Layout />}>
                 <Route index element={<General />} />
@@ -450,6 +454,7 @@ const AppContent = () => {
                 path="seguimientoMantenimiento"
                 element={<SeguimientoMantenimiento />}
               />
+            
             </Route>
             
           )}

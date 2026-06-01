@@ -1,49 +1,68 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import './user.css';
-import Footer from '../footer/Footer';
+import { Link } from "react-router-dom";
+import { useAuth } from "../../../../contexts/AuthContext";
+import Digital_Signage_TV from '../../../tvpage/Digital_Signage_TV';
 
 const Users = () => {
+  const { user } = useAuth();
+
+  const tv = user && user.role === "tv";
+
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [imagesLoaded, setImagesLoaded] = useState(false);
 
-  const images = [
+  const images = useMemo(() => [
     '/DSC06247.JPG',
     '/DSC06257.JPG',
     '/DSC06259.JPG',
-    // Agrega más imágenes aquí
-  ];
+  ], []);
 
   useEffect(() => {
-    const preloadImages = (imageArray) => {
-      const promises = imageArray.map((src) => {
-        return new Promise((resolve, reject) => {
-          const img = new Image();
-          img.src = src;
-          img.onload = resolve;
-          img.onerror = reject;
+    const preloadImages = async () => {
+      try {
+        const promises = images.map((src) => {
+          return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.src = src;
+            img.onload = resolve;
+            img.onerror = reject;
+          });
         });
-      });
-      Promise.all(promises)
-        .then(() => setImagesLoaded(true))
-        .catch((err) => console.error("Error loading images", err));
+
+        await Promise.all(promises);
+        setImagesLoaded(true);
+      } catch (err) {
+        console.error("Error loading images", err);
+      }
     };
 
-    preloadImages(images);
+    preloadImages();
   }, [images]);
 
   useEffect(() => {
-    if (imagesLoaded) {
-      const interval = setInterval(() => {
-        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-      }, 3000);
-      return () => clearInterval(interval);
-    }
-  }, [images.length, imagesLoaded]);
+    if (!imagesLoaded) return;
+
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [imagesLoaded, images.length]);
 
   return (
-    <>
-   
     <div className="users-container">
+      {tv ? (
+        <Link to="/tv" className="btn-tv">
+          <Digital_Signage_TV/>
+        </Link>
+      ) : (
+        <>
+          <div className="card-title">
+            <h2>¡Hola equipo, esto te puede ayudar para el informe académico!</h2>
+          </div>
+
+          <div className="users-container">
       {/* <div className="slideshow">
         <div className="slideshow-text">
           <h1>Colegio Panamericano Colombo Sueco</h1>
@@ -63,8 +82,7 @@ const Users = () => {
         )}
       </div> */}
       <div className='card-title'>
-        <h2>¿Hola equipo, esto te puede ayudar para el informe académico! </h2>
-
+       
       </div>
       <section className="cards">
         <div className="card">
@@ -95,10 +113,10 @@ const Users = () => {
       </section>
       
     </div>
-    <div>
-      <Footer />
+    
+        </>
+      )}
     </div>
-    </>
   );
 };
 

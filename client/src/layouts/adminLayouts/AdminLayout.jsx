@@ -12,6 +12,7 @@ const AdminLayout = () => {
       <div className="content-container">
         <Outlet />
       </div>
+       
       
     </div>
   );

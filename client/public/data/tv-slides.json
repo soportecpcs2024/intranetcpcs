@@ -1,0 +1,27 @@
+[
+  {
+    "type": "team",
+    "duration": 15000,
+    "image": "/onces.JPG",
+    "smallTitle": "JUNTOS SOMOS MÁS",
+    "title": "COMPAÑEROS",
+    "subtitle": "¡SOMOS UN EQUIPO!",
+    "phrase": "El esfuerzo de hoy construye nuestro mañana"
+  },
+  {
+    "type": "image",
+    "duration": 15000,
+    "image": "../data/ep.png"
+  },
+  {
+    "type": "video",
+    "duration": 30000,
+    "video": "../data/Intranet CPCS - Google Chrome 2026-05-26 13-47-19.mp4"
+  },
+  {
+    "type": "info",
+    "duration": 15000,
+    "title": "COMPAÑERISMO",
+    "text": "Nos apoyamos, nos escuchamos y crecemos juntos."
+  }
+]

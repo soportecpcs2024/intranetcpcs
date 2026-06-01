@@ -39,6 +39,7 @@ const AdminHeader = () => {
   const contabilidad = user && user.role === "contabilidad";
   const administrativos = user && user.role === "administrativos";
   const directivas = user && user.role === "directivas";
+  const tv = user && user.role === "tv";
 
   return (
     <div className="admin-header">
@@ -870,6 +871,16 @@ const AdminHeader = () => {
 
 
 
+
+                </ul>
+              )}
+              {tv && (
+                <ul>
+                  <li>
+
+                  
+
+                  </li>
 
                 </ul>
               )}

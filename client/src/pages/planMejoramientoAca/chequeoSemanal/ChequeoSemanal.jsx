@@ -250,13 +250,14 @@ const ChequeoSemanal = () => {
           >
             <option value="">Seleccionar grupo</option>
 
-            {grupos.map((g) => (
-              <option key={g.nombre} value={g.nombre}>
-                {g.nombre}
-              </option>
-            ))}
+            {[...grupos]
+              .sort((a, b) => a.orden - b.orden)
+              .map((g) => (
+                <option key={g.nombre} value={g.nombre}>
+                  {g.nombre}
+                </option>
+              ))}
           </select>
-
           <div className="cs-field">
             <label className="cs-label">Periodo</label>
             <select
@@ -283,7 +284,7 @@ const ChequeoSemanal = () => {
             />
           </div>
 
-         
+
         </div>
 
         {/* Alerts */}
