@@ -115,7 +115,7 @@ import { CheckupProvider } from "./contexts/CheckupContext";
 
 const ChequeoSemanal = React.lazy(() => import("./pages/planMejoramientoAca/chequeoSemanal/ChequeoSemanal"));
 const CheckupDashboard = React.lazy(() => import("./pages/planMejoramientoAca/CheckupDashboard/CheckupDashboardInstitucional"));
-const Digital_Signage_TV = React.lazy(() => import("./pages/tvpage/Digital_Signage_TV"));
+ 
 
 
 const Prom_11 = React.lazy(() => import("./components/tesoreria/DashboardTesoreria/Recaudo/Prom_11/Prom_11"));
