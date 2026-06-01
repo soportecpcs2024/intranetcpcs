@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import './user.css';
-import { Link } from "react-router-dom";
+ 
 import { useAuth } from "../../../../contexts/AuthContext";
-import Digital_Signage_TV from '../../../tvpage/Digital_Signage_TV';
+ 
 
 const Users = () => {
   const { user } = useAuth();
 
-  const tv = user && user.role === "tv";
+ 
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [imagesLoaded, setImagesLoaded] = useState(false);
@@ -52,11 +52,7 @@ const Users = () => {
 
   return (
     <div className="users-container">
-      {tv ? (
-        <Link to="/tv" className="btn-tv">
-          <Digital_Signage_TV/>
-        </Link>
-      ) : (
+    
         <>
           <div className="card-title">
             <h2>¡Hola equipo, esto te puede ayudar para el informe académico!</h2>
@@ -115,7 +111,7 @@ const Users = () => {
     </div>
     
         </>
-      )}
+      
     </div>
   );
 };
