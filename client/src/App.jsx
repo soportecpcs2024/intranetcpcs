@@ -243,12 +243,7 @@ const AppContent = () => {
     <BrowserRouter>
       <Suspense fallback={<div>Cargando...</div>}>
         <Routes>
-          {!user ? (
-            <>
-              <Route index element={<Auth />} />
-              <Route path="/admin/*" element={<Navigate to="/admin" />} />
-            </>
-          ) : (
+          
             <Route path="/admin/*" element={<AdminLayout />}>
               <Route path="users" element={<Users />} />
                 <Route
@@ -457,7 +452,7 @@ const AppContent = () => {
             
             </Route>
             
-          )}
+          
         </Routes>
       </Suspense>
     </BrowserRouter>

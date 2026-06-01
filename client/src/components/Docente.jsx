@@ -1,4 +1,3 @@
-import React from 'react';
 
 const Docente = ({ selectedGroup }) => {
   const dr_grup = [
