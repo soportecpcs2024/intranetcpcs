@@ -13,7 +13,7 @@ const Docente = ({ selectedGroup }) => {
     { "grupo": "3. B", "nombre": "CAROLINA GALLEGO PULGARIN" },
     
     { "grupo": "4. A", "nombre": "ELIZABETH JIMÉNEZ BETANCOURT" },
-    { "grupo": "4. B", "nombre": "SULEIMI ANDREA BETANCUR MURCIA" },
+    { "grupo": "4. B", "nombre": "ANA CATALINA CASTRILLON VILLA" },
     { "grupo": "4. C", "nombre": "ELIANA ANDREA VILLA CHAVARRÍA" },
 
     { "grupo": "5. A", "nombre": "MIRIAM YAMILE TORRES RUIZ" },
