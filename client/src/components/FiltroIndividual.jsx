@@ -17,11 +17,12 @@ const FiltroIndividual = ({
         value={selectedPeriodo}
         onChange={(e) => setSelectedPeriodo(e.target.value)}
       >
-        <option value="">Periodo</option>
+       <option value="">Periodo</option>
         <option value="PRIMER PERIODO">Periodo 1</option>
-        <option value="PERIODO 2">Periodo 2</option>
-        <option value="PERIODO 3">Periodo 3</option>
-        <option value="PERIODO 4">Periodo 4</option>
+        <option value="SEGUNDO PERIODO">Periodo 2</option>
+        <option value="TERCER PERIODO">Periodo 3</option>
+        <option value="CUARTO PERIODO">Periodo 4</option>
+        <option value="acumulado">acumulado</option>
       </select>
 
       <select

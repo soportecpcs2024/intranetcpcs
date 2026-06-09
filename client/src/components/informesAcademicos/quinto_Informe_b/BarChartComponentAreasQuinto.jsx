@@ -12,7 +12,7 @@ import {
 } from "recharts";
 
 const BarChartComponentAreasQuinto = ({ students, selectedArea }) => {
-  const periodos = ["PRIMER PERIODO", "PERIODO 2", "PERIODO 3", "PERIODO 4"];
+  const periodos = ["PRIMER PERIODO", "SEGUNDO PERIODO", "TERCER PERIODO", "CUARTO PERIODO"];
   const colors = ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0"];
 
   const data = periodos.map((periodo, index) => {

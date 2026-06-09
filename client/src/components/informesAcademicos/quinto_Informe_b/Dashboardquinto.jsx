@@ -90,9 +90,9 @@ const Dashboardquinto = () => {
   const graphStudents = useMemo(() => {
     const periodosGraficas = [
       "PRIMER PERIODO",
-      "PERIODO 2",
-      "PERIODO 3",
-      "PERIODO 4",
+      "SEGUNDO PERIODO",
+      "TERCER PERIODO",
+      "CUARTO PERIODO",
     ];
 
     let graphFiltered = students;

@@ -4,7 +4,7 @@ import { Students } from "../../../api/DataApi";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import FiltrosAreasDocumentos from "../../../components/FiltrosAreasDocumentos";
 import BarChartComponentAreasPDF from "../../../components/BarChartComponentAreasPDF";
-import PieChartComponentAreas from "../../../components/PieChartComponentAreas";
+ 
  
 
 const Documentos = () => {
