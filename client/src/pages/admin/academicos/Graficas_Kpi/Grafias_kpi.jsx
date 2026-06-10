@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Students } from "../../../../api/DataApi";
 import LoadingSpinner from "../../../../components/LoadingSpinner";
-import FiltrosAreasDocumentos from "../../../../components/FiltrosAreasDocumentos";
+ 
 import BarChartGrafiasKPI from "./BarChartGrafiasKPI";
 import Filtros_grafica from "./Filtros_grafica";
  

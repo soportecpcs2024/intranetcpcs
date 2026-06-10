@@ -13,7 +13,7 @@ const AdminHeader = () => {
   const { descargarAsistenciasJSON } = useEscuelaPadres();
 
 
-  ;
+  
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
@@ -35,7 +35,7 @@ const AdminHeader = () => {
   const escuelaPadres = user && user.role === "escuelaPadres";
   const mantenimiento = user && user.role === "mantenimiento";
   //const admisiones = user && user.role === "admisiones"; 
-  const papeleria = user && user.role === "papeleria";
+ 
   const contabilidad = user && user.role === "contabilidad";
   const administrativos = user && user.role === "administrativos";
   const directivas = user && user.role === "directivas";

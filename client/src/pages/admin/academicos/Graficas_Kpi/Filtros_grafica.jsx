@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 
 const Filtros_grafica = ({
 
@@ -41,18 +42,16 @@ const Filtros_grafica = ({
                 <option value="11. A">11. A</option>
                 <option value="11. B">11. B</option>
             </select>
-
-
-
-
-
-
-
-        </div>
-    );
+    </div>
+  );
 };
 
-
-
+Filtros_grafica.propTypes = {
+  selectedGroup: PropTypes.string.isRequired,
+  setSelectedGroup: PropTypes.func.isRequired,
+};
 
 export default Filtros_grafica;
+
+
+ 
