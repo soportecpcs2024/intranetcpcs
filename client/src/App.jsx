@@ -27,7 +27,7 @@ const DashboardEstDificultades = React.lazy(() =>
 );
 
 // Importación directa (no lazy)
-import Documentos from "./pages/admin/academicos/Documentos";
+ 
 import { InfoIndividual } from "./pages/admin/academicos/InfoIndividual";
 import LlegadasTarde from "./pages/admin/academicos/llegadast/LlegadasTarde";
 import NivelSuperior from "./pages/admin/academicos/nivelSuperior/NivelSuperior";
@@ -105,6 +105,8 @@ import InformePromAdm from "./components/tesoreria/DashboardTesoreria/Recaudo/Pr
 import { CheckupProvider } from "./contexts/CheckupContext";
  
 
+ 
+
 
 
 
@@ -115,6 +117,7 @@ import { CheckupProvider } from "./contexts/CheckupContext";
 
 const ChequeoSemanal = React.lazy(() => import("./pages/planMejoramientoAca/chequeoSemanal/ChequeoSemanal"));
 const CheckupDashboard = React.lazy(() => import("./pages/planMejoramientoAca/CheckupDashboard/CheckupDashboardInstitucional"));
+const GrafiasKpi = React.lazy(() => import("./pages/admin/academicos/Graficas_Kpi/Grafias_kpi"));
  
 
 
@@ -272,7 +275,7 @@ const AppContent = () => {
                 />
               </Route>
 
-              <Route path="documentos" element={<Documentos />} />
+              <Route path="documentos" element={<GrafiasKpi />} />
               <Route path="llegadastarde" element={<LlegadasTarde />} />
               <Route path="descargarpdf" element={<DescargarPdf />} />
               <Route path="soporte" element={<AgregarLlegadasTarde />} />

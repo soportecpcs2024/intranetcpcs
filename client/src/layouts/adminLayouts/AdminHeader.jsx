@@ -78,7 +78,7 @@ const AdminHeader = () => {
                             <Link to="/admin/academico">Reporte académico</Link>
                           </li>
                           <li>
-                            <Link to="/admin/documentos">Documentos</Link>
+                            <Link to="/admin/documentos">Estadística KPI</Link>
                           </li>
                           <li>
                             <Link to="/admin/llegadastarde">
@@ -215,8 +215,8 @@ const AdminHeader = () => {
                       <Link onClick={toggleDropdown}>Sec.Académica</Link>
                       {isDropdownOpen && (
                         <ul className="dropdown-menu">
-                          <li>
-                            <Link to="/admin/documentos">Documentos</Link>
+                         <li>
+                            <Link to="/admin/documentos">Estadística KPI</Link>
                           </li>
 
                           <li>
@@ -323,8 +323,8 @@ const AdminHeader = () => {
                           <li>
                             <Link to="/admin/academico">Reporte académico</Link>
                           </li>
-                          <li>
-                            <Link to="/admin/documentos">Documentos</Link>
+                         <li>
+                            <Link to="/admin/documentos">Estadística KPI</Link>
                           </li>
                           <li>
                             <Link to="/admin/llegadastarde">
@@ -381,8 +381,8 @@ const AdminHeader = () => {
                       <Link onClick={toggleDropdown}>Académico</Link>
                       {isDropdownOpen && (
                         <ul className="dropdown-menu">
-                          <li>
-                            <Link to="/admin/documentos">Documentos</Link>
+                        <li>
+                            <Link to="/admin/documentos">Estadística KPI</Link>
                           </li>
 
                           <li>
@@ -786,8 +786,8 @@ const AdminHeader = () => {
                           <li>
                             <Link to="/admin/academico">Reporte académico</Link>
                           </li>
-                          <li>
-                            <Link to="/admin/documentos">Documentos</Link>
+                           <li>
+                            <Link to="/admin/documentos">Estadística KPI</Link>
                           </li>
                           <li>
                             <Link to="/admin/llegadastarde">
