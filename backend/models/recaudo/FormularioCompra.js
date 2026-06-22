@@ -7,7 +7,7 @@ const formularioCompraSchema = new mongoose.Schema({
   tipoFormulario: {
     type: String,
     required: true,
-    enum: ['2026', '2025', 'Open House'],
+    enum: ['2027','2026', 'Open House'],
     trim: true
   },
   tipoPago: { 

@@ -3,12 +3,14 @@ const FormularioCompra = require('../../models/recaudo/FormularioCompra');
 // Función para calcular el costo según el tipo de formulario
 const calcularCosto = (tipoFormulario) => {
   switch (tipoFormulario) {
+    case '2027':
+      return 70000;
     case '2026':
-      return 65000;
+      return 70000;
     case '2025':
       return 60000;
     case 'Open House':
-      return 30000;
+      return 35000;
     default:
       return 0;
   }
