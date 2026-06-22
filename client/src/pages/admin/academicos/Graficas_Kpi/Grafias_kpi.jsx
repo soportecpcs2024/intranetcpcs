@@ -1,10 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { Students } from "../../../../api/DataApi";
 import LoadingSpinner from "../../../../components/LoadingSpinner";
- 
+
 import BarChartGrafiasKPI from "./BarChartGrafiasKPI";
 import Filtros_grafica from "./Filtros_grafica";
- 
+import './Graficas_KPI.css'
+import Por_grupos from "./Agrupar_grupos/Por_grupos";
+
 
 
 const GrafiasKpi = () => {
@@ -13,7 +15,7 @@ const GrafiasKpi = () => {
   const [error, setError] = useState(null);
 
   const [selectedGroup, setSelectedGroup] = useState("1. A");
- 
+
   const [selectedScale, setSelectedScale] = useState("");
   const [selectedArea, setSelectedArea] = useState("ciencias_naturales");
 
@@ -52,7 +54,7 @@ const GrafiasKpi = () => {
       );
     }
 
-    
+
 
     if (selectedArea) {
       filtered = filtered.filter(
@@ -108,7 +110,7 @@ const GrafiasKpi = () => {
     });
 
     setGroupCounts(counts);
-  }, [students, selectedGroup,   selectedScale, selectedArea]);
+  }, [students, selectedGroup, selectedScale, selectedArea]);
 
   if (loading) {
     return <LoadingSpinner />;
@@ -130,7 +132,7 @@ const GrafiasKpi = () => {
     <div className="dashboard_div-doc" ref={contentRef}>
       <div className="dashboard_div_filtros">
         <Filtros_grafica
-          
+
           selectedGroup={selectedGroup}
           setSelectedGroup={setSelectedGroup}
           selectedScale={selectedScale}
@@ -141,19 +143,20 @@ const GrafiasKpi = () => {
       </div>
 
       <div>
-        <div className="dashboard_div-doc-header">
-          <div>
-            <h2>
-              Grupo: <span className="doc-span">{selectedGroup}</span>
-            </h2>
-          </div>
+        <div className="Barchat_Graficas_header">
+          <div className="Barchat_Graficas_title">
+            <h3>📊 Comparativo de Resultados por Período Académico</h3>
 
-           
+            <div className="Barchat_Graficas_group">
+              <span>Grupo Analizado</span>
+              <span className="Barchat_Graficas_badge">
+                {selectedGroup || "Todos"}
+              </span>
+            </div>
+          </div>
         </div>
 
-        <div className="BarChartComponent_pdf">
-          <h4>Promedios por materia comparados por periodo:</h4>
-
+        <div className="Barchat_Graficas">
           <BarChartGrafiasKPI
             students={students}
             selectedGroup={selectedGroup}
@@ -161,46 +164,37 @@ const GrafiasKpi = () => {
           />
         </div>
 
-        <div className="box_prom_tables-doc">
-          <div className="info-card">
-            <h2 className="info-title">Consolidado de datos:</h2>
 
-            <div className="info-list">
-              <li className="info-item">
-                Número de estudiantes:{" "}
-                <span className="info-value">{totalFilteredStudents}</span>
-              </li>
+      </div>
+      
+      <div>
+        <div className="Barchat_Graficas_header">
+          <div className="Barchat_Graficas_title">
+            <h3>📊 Comparativo de Resultados por Período Académico</h3>
 
-              <li className="info-item">
-                Promedio general:{" "}
-                <span className="info-value">{promedioGeneral}</span>
-              </li>
-
-              <li className="info-item">
-                Estudiantes con promedio DI:{" "}
-                <span className="info-value">{groupCounts.DI}</span>
-              </li>
-
-              <li className="info-item">
-                Estudiantes con promedio BÁSICO:{" "}
-                <span className="info-value">{groupCounts.BÁSICO}</span>
-              </li>
-
-              <li className="info-item">
-                Estudiantes con promedio DA:{" "}
-                <span className="info-value">{groupCounts.DA}</span>
-              </li>
-
-              <li className="info-item">
-                Estudiantes con promedio DS:{" "}
-                <span className="info-value">{groupCounts.DS}</span>
-              </li>
+            <div className="Barchat_Graficas_group">
+              <span>Grupo Analizado</span>
+              <span className="Barchat_Graficas_badge">
+                {selectedGroup || "Todos"}
+              </span>
             </div>
           </div>
         </div>
+
+        <div className="Barchat_Graficas">
+          <BarChartGrafiasKPI
+            students={students}
+            selectedGroup={selectedGroup}
+            error={error}
+          />
+        </div>
+
+
       </div>
 
-      <div className="documentos-btn"></div>
+      
+
+
     </div>
   );
 };

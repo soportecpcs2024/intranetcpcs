@@ -8,14 +8,14 @@ const GenerarPreInscripcion = () => {
     nombreEstudiante: "",
     gradoPostula: "",
     
-    tipoFormulario: "2026",
+    tipoFormulario: "2027",
   });
 
   const [tipoPago, setTipoPago] = useState("");
   const [formularioGuardado, setFormularioGuardado] = useState(null);
 
   const apiBaseUrl = import.meta.env.VITE_BACKEND_URL;
-
+ 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setDatosFormulario((prev) => ({
@@ -23,6 +23,7 @@ const GenerarPreInscripcion = () => {
       [name]: value,
     }));
   };
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,6 +43,7 @@ const GenerarPreInscripcion = () => {
         `${apiBaseUrl}/api/preinscripciones`,
         datosCompletos
       );
+     
       setFormularioGuardado(res.data);
       alert("Formulario guardado y listo para descargar.");
 
@@ -50,13 +52,14 @@ const GenerarPreInscripcion = () => {
         nombreEstudiante: "",
         gradoPostula: "",
          
-        tipoFormulario: "2026",
+        tipoFormulario: "2027",
       });
       setTipoPago("");
     } catch (error) {
       console.error(error);
       alert(error.response?.data?.error || "Error al guardar el formulario.");
     }
+     
   };
 
   return (
@@ -93,9 +96,10 @@ const GenerarPreInscripcion = () => {
           value={datosFormulario.tipoFormulario}
           required
         >
-          <option value="2026">2026 - $65.000</option>
-          <option value="2025">2025 - $60.000</option>
-          <option value="Open House">Open House - $30.000</option>
+          <option value="2027">2027 - $70.000</option>
+          <option value="2026">2026 - $70.000</option>
+         
+          <option value="Open House">Open House - $35.000</option>
         </select>
 
         <div className="container-tipopago">

@@ -9,7 +9,7 @@ import {
     Legend,
 } from "recharts";
 
- 
+
 const CustomTick = ({ x, y, payload }) => (
     <g transform={`translate(${x},${y})`}>
         <text
@@ -19,7 +19,7 @@ const CustomTick = ({ x, y, payload }) => (
             textAnchor="end"
             fill="#000"
             transform="rotate(-45)"
-            fontSize={18}
+            fontSize={15}
         >
             {payload.value}
         </text>
@@ -111,7 +111,7 @@ const BarChartGrafiasKPI = ({ students = [], selectedGroup, error }) => {
         const texto = periodo?.toString().trim().toUpperCase();
 
         if (texto === "PRIMER PERIODO") return "#0e70c5";
-        if (texto === "SEGUNDO PERIODO") return "#44e24c";
+        if (texto === "SEGUNDO PERIODO") return "#0c5c10";
         if (texto === "TERCER PERIODO") return "#FB8C00";
         if (texto === "CUARTO PERIODO") return "#E53935";
         if (texto === "QUINTO PERIODO") return "#8E24AA";
@@ -123,10 +123,10 @@ const BarChartGrafiasKPI = ({ students = [], selectedGroup, error }) => {
 
 
     return (
-        <ResponsiveContainer className="barChartDocument" width="100%" height={300}>
+        <ResponsiveContainer className="barChartDocument" width="100%" height={280}>
             <BarChart
                 data={chartData}
-                margin={{ top: 20, right: 5, left: 5, bottom:80 }}
+                margin={{ top: 20, right: 5, left: 5, bottom: 80 }}
                 barGap={4}
                 barCategoryGap={18}
 
@@ -134,9 +134,9 @@ const BarChartGrafiasKPI = ({ students = [], selectedGroup, error }) => {
                 <XAxis dataKey="area" tick={<CustomTick />} interval={0} />
                 <YAxis domain={[0, 5]} />
                 <Tooltip />
-                <Legend   verticalAlign="top"
-  align="center"
-  height={40} />
+                <Legend verticalAlign="top"
+                    align="center"
+                    height={40} />
 
                 {periodos.map((periodo) => (
                     <Bar
@@ -145,13 +145,16 @@ const BarChartGrafiasKPI = ({ students = [], selectedGroup, error }) => {
                         dataKey={periodo}
                         fill={getColorPeriodo(periodo)}
                         stroke={getColorPeriodo(periodo)}
-                        >
-                        <LabelList dataKey={periodo}
+                    >
+                        <LabelList
+                            dataKey={periodo}
                             position="top"
-                            fill="#000"
-                            
-                            fontSize={18}
-                            fontWeight="bold" />
+                            fill="#070707"
+                            style={{
+                                fontSize: "16px",
+                                fontWeight: "bold"
+                            }}
+                        />
                     </Bar>
                 ))}
             </BarChart>
