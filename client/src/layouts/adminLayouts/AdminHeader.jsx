@@ -13,7 +13,7 @@ const AdminHeader = () => {
   const { descargarAsistenciasJSON } = useEscuelaPadres();
 
 
-  
+
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
@@ -35,11 +35,11 @@ const AdminHeader = () => {
   const escuelaPadres = user && user.role === "escuelaPadres";
   const mantenimiento = user && user.role === "mantenimiento";
   //const admisiones = user && user.role === "admisiones"; 
- 
+
   const contabilidad = user && user.role === "contabilidad";
   const administrativos = user && user.role === "administrativos";
   const directivas = user && user.role === "directivas";
- 
+
 
   return (
     <div className="admin-header">
@@ -184,6 +184,11 @@ const AdminHeader = () => {
                               Informe pagos EP
                             </Link>
                           </li>
+                          <li>
+                            <Link to="historico_ep">
+                              Historico
+                            </Link>
+                          </li>
                         </ul>
                       )}
                     </div>
@@ -215,7 +220,7 @@ const AdminHeader = () => {
                       <Link onClick={toggleDropdown}>Sec.Académica</Link>
                       {isDropdownOpen && (
                         <ul className="dropdown-menu">
-                         <li>
+                          <li>
                             <Link to="/admin/documentos">Estadística KPI</Link>
                           </li>
 
@@ -260,7 +265,7 @@ const AdminHeader = () => {
                       )}
                     </div>
                   </li>
-                  
+
                   <li>
                     <div className="dropdown">
                       <Link onClick={toggleDropdown}>Backup</Link>
@@ -302,7 +307,7 @@ const AdminHeader = () => {
                             </button>
                           </li>
 
-                          
+
                         </ul>
                       )}
                     </div>
@@ -323,7 +328,7 @@ const AdminHeader = () => {
                           <li>
                             <Link to="/admin/academico">Reporte académico</Link>
                           </li>
-                         <li>
+                          <li>
                             <Link to="/admin/documentos">Estadística KPI</Link>
                           </li>
                           <li>
@@ -381,7 +386,7 @@ const AdminHeader = () => {
                       <Link onClick={toggleDropdown}>Académico</Link>
                       {isDropdownOpen && (
                         <ul className="dropdown-menu">
-                        <li>
+                          <li>
                             <Link to="/admin/documentos">Estadística KPI</Link>
                           </li>
 
@@ -485,6 +490,11 @@ const AdminHeader = () => {
                       <li>
                         <Link to="informe_escuela_padres">
                           Informe pagos EP
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="historico_ep">
+                          Historico
                         </Link>
                       </li>
                       <li>
@@ -786,7 +796,7 @@ const AdminHeader = () => {
                           <li>
                             <Link to="/admin/academico">Reporte académico</Link>
                           </li>
-                           <li>
+                          <li>
                             <Link to="/admin/documentos">Estadística KPI</Link>
                           </li>
                           <li>
@@ -877,7 +887,7 @@ const AdminHeader = () => {
 
                 </ul>
               )}
-            
+
 
 
 

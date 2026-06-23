@@ -154,6 +154,11 @@ app.use('/api/epEstudiantes', epEstudiantes);
 const epasistenciasjson= require('./routes/EPadres/estudiantesRoutes.js');
 app.use('/api/epasistenciasjson', epasistenciasjson);
 
+const epHistorico= require('./routes/EPadres/Historico/historicoRoutes');
+app.use('/api/ephistorico', epHistorico);
+
+
+
 
 // ---------------- asistencias ----------------
 

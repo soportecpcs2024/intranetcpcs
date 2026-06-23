@@ -104,6 +104,7 @@ import GenerarWordAdm from "./components/tesoreria/InformeEscuelasPadres/Informe
 import InformePromAdm from "./components/tesoreria/DashboardTesoreria/Recaudo/Prom_11/InformePromAdm";
 import { CheckupProvider } from "./contexts/CheckupContext";
  
+ 
 
  
 
@@ -118,6 +119,7 @@ import { CheckupProvider } from "./contexts/CheckupContext";
 const ChequeoSemanal = React.lazy(() => import("./pages/planMejoramientoAca/chequeoSemanal/ChequeoSemanal"));
 const CheckupDashboard = React.lazy(() => import("./pages/planMejoramientoAca/CheckupDashboard/CheckupDashboardInstitucional"));
 const GrafiasKpi = React.lazy(() => import("./pages/admin/academicos/Graficas_Kpi/Grafias_kpi"));
+const HistoricoEP = React.lazy(() => import("./components/EscPadres/Historico/HistoricoEP"));
  
 
 
@@ -130,7 +132,7 @@ const ListarProductosPapeleria = React.lazy(() => import("./components/papeleria
 const AsistenciaDiaria = React.lazy(() => import("./components/Academico/Asistencia_Diaria/AsistenciaDiaria"));
 const CargarArchivoExcel = React.lazy(() => import("./components/contabilidad/cargarArchivoExcel/CargarArchivoExcel"));
 const Generar_colilla = React.lazy(() => import("./components/contabilidad/solicitarColilla/Generar_colilla"));
-
+ 
 
 
 
@@ -431,6 +433,7 @@ const AppContent = () => {
               <Route path="esc_padres" element={<DashboardEscPadres />} />
               <Route path="crear_ep" element={<CrearEscuelaPadres />} />
               <Route path="estadisticas_ep" element={<EstadisticasEp />} />
+              <Route path="historico_ep" element={<HistoricoEP />} />
               <Route path="eppagas" element={<ListaEPPagas />} />
               <Route
                 path="informe_escuela_padres"
