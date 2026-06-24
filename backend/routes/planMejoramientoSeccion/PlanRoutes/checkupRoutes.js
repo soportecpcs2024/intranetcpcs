@@ -60,4 +60,10 @@ router.get(
   checkupController.dashboardInstitucional
 );
 
+router.get(
+  "/checkups/todas-respuestas",
+  asureAuth,
+  checkupController.getAllWeeklyCheckups
+);
+
 module.exports = router;

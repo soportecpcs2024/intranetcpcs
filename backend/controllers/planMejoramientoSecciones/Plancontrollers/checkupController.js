@@ -441,6 +441,8 @@ async function listWeeklyCheckups(req, res) {
     }
 
     const data = await WeeklyCheckupAnswer.find(filter)
+      .populate("docenteId", "name email role active")
+      .populate("evaluadorId", "name email role active")
       .sort({ weekStart: -1 })
       .limit(1000);
 
@@ -813,6 +815,49 @@ async function dashboardInstitucional(req, res) {
   }
 }
 
+
+async function getAllWeeklyCheckups(req, res) {
+  try {
+    const { planId, area, periodo, grupo, from, to } = req.query;
+
+    const finalPlanId = await resolvePlanId(planId);
+
+    if (!finalPlanId) {
+      return res.status(400).json({
+        message: "planId requerido (no hay plan activo)",
+      });
+    }
+
+    const filter = {
+      planId: finalPlanId,
+    };
+
+    if (area) filter.area = normalizeText(area);
+    if (periodo) filter.periodo = Number(periodo);
+    if (grupo) filter.grupo = normalizeText(grupo);
+
+    if (from || to) {
+      filter.weekStart = {};
+      if (from) filter.weekStart.$gte = new Date(from);
+      if (to) filter.weekStart.$lte = new Date(to);
+    }
+
+    const data = await WeeklyCheckupAnswer.find(filter)
+      .populate("docenteId", "name email role active")
+      .populate("evaluadorId", "name email role active")
+      .populate("planId", "name year description")
+      .populate("answers.questionId", "numero texto area periodo")
+      .sort({ weekStart: -1, createdAt: -1 })
+      .limit(5000);
+
+    return res.json(data);
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error obteniendo todas las respuestas",
+      error: error.message,
+    });
+  }
+}
 module.exports = {
   createPlan,
   getActivePlan,
@@ -822,4 +867,5 @@ module.exports = {
   listWeeklyCheckups,
   dashboardStats,
   dashboardInstitucional,
+  getAllWeeklyCheckups
 };

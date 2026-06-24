@@ -16,6 +16,7 @@ export const CheckupProvider = ({ children }) => {
   const [dashboard, setDashboard] = useState(null);
   const [dashboardInstitucional, setDashboardInstitucional] = useState(null);
   const [grupos, setGrupos] = useState([]);
+  const [todasRespuestas, setTodasRespuestas] = useState([]);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -276,6 +277,36 @@ export const CheckupProvider = ({ children }) => {
     [baseURL],
   );
 
+
+  const listarTodasRespuestas = useCallback(
+    async ({ area, periodo, grupo, from, to, planId } = {}) => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const res = await axios.get(
+          `${baseURL}/api/checkups/todas-respuestas`,
+          {
+            ...getAuthHeaders(),
+            params: { area, periodo, grupo, from, to, planId },
+          }
+        );
+
+        setTodasRespuestas(res.data || []);
+        return res.data || [];
+        
+      } catch (err) {
+        console.error("Error listando todas las respuestas:", err);
+        setError(err);
+        setTodasRespuestas([]);
+        return [];
+      } finally {
+        setLoading(false);
+      }
+    },
+    [baseURL]
+  );
+
   /*
   =========================
   GRUPOS
@@ -306,6 +337,8 @@ export const CheckupProvider = ({ children }) => {
   AUTO-CARGA INICIAL
   =========================
   */
+
+  
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -338,6 +371,8 @@ export const CheckupProvider = ({ children }) => {
       obtenerDashboardStats,
       obtenerDashboardInstitucional,
       listarGrupos,
+      todasRespuestas,
+      listarTodasRespuestas,
     }),
     [
       planActivo,

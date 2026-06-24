@@ -59,14 +59,14 @@ const WeeklyCheckupAnswerSchema = new mongoose.Schema(
 
  docenteId:{
   type:mongoose.Schema.Types.ObjectId,
-  ref:"User",
+  ref:"Usuario",
   required:true,
   index:true
  },
 
  evaluadorId:{
   type:mongoose.Schema.Types.ObjectId,
-  ref:"User",
+  ref:"Usuario",
   default:null
  },
 

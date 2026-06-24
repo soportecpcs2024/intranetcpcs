@@ -87,14 +87,14 @@ useEffect(() => {
 
   const getNombreEscuela = (cod) => {
     switch (cod) {
-      case 1300:
-        return "Ciberfamilias";
+      // case 1300:
+      //   return "Ciberfamilias";
       case 1400:
         return "El arte de ser Padres";
       // case 1600:
       //   return "Guiando a sus adolescentes";
-      // case 1700:
-      //   return "Mayordomía financiera";
+      case 1700:
+        return "Mayordomía financiera";
       case 2400:
         return "Hablando de sexualidad en casa";
       default:
@@ -144,10 +144,10 @@ useEffect(() => {
       <h3>Familias con Escuelas Pagas</h3>
 
       <div className="conteo-clases">
-        <p >🧩 Ciber Familias:{conteoClases[1300] || 0} </p>
+        {/* <p >🧩 Ciber Familias:{conteoClases[1300] || 0} </p> */}
         <p className="conteo-class">🧩 El arte de ser Padres: {conteoClases[1400] || 0}</p>
         {/* <p className="conteo-class">👨‍👧‍👦 Guiando a sus adolescentes: {conteoClases[1600] || 0}</p> */}
-        {/* <p className="conteo-class">💰 Mayordomía financiera: {conteoClases[1700] || 0}</p> */}
+        <p className="conteo-class">💰 Mayordomía financiera: {conteoClases[1700] || 0}</p>
         <p className="conteo-class">💰 Hablando de sexualidad en casa: {conteoClases[2400] || 0}</p>
         <div>
           <p>

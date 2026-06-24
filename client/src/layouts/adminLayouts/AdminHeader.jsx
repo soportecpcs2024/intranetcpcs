@@ -97,6 +97,9 @@ const AdminHeader = () => {
                           <li>
                             <Link to="checkupDashboard">Seguimiento</Link>
                           </li>
+                          <li>
+                            <Link to="listarRegistroscheckup">Lista de Registros</Link>
+                          </li>
                         </ul>
                       )}
                     </div>
@@ -815,6 +818,9 @@ const AdminHeader = () => {
                           </li>
                           <li>
                             <Link to="checkupDashboard">Seguimiento</Link>
+                          </li>
+                          <li>
+                            <Link to="listarRegistroscheckup">Lista de Registros</Link>
                           </li>
 
 
