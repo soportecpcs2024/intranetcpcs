@@ -872,6 +872,11 @@ const AdminHeader = () => {
                               Informe pagos EP
                             </Link>
                           </li>
+                            <li>
+                            <Link to="descargar_colilla">
+                              Descargar colilla
+                            </Link>
+                          </li>
                         </ul>
                       )}
                     </div>
