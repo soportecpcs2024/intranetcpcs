@@ -135,11 +135,11 @@ const AdminHeader = () => {
                               Informe Extraclases
                             </Link>
                           </li>
-                          <li>
+                          {/* <li>
                             <Link to="registroAsistencia">
                               Asistencia Extraclases
                             </Link>
-                          </li>
+                          </li> */}
                         </ul>
                       )}
                     </div>
@@ -388,11 +388,11 @@ const AdminHeader = () => {
                               Informe Extraclases
                             </Link>
                           </li>
-                          <li>
+                          {/* <li>
                             <Link to="registroAsistencia">
                               Asistencia Extraclases
                             </Link>
-                          </li>
+                          </li> */}
                         </ul>
                       )}
                     </div>
@@ -573,12 +573,6 @@ const AdminHeader = () => {
 
                 </ul>
               )}
-
-
-
-
-
-
 
               {isAcademic && (
                 <ul>
@@ -770,8 +764,6 @@ const AdminHeader = () => {
                   )}
                 </div>
               )}
-
-
 
 
               {isAdministrator && (
@@ -1147,7 +1139,6 @@ const AdminHeader = () => {
 
                 </ul>
               )}
-
 
 
 
