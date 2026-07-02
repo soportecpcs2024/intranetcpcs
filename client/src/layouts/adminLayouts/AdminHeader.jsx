@@ -368,11 +368,11 @@ const AdminHeader = () => {
                           <li>
                             <Link to="/admin/administracion">Stock</Link>
                           </li>
-                          <li>
+                          {/* <li>
                             <Link to="/admin/inventario_estadisticas">
                               Estadisticas Inventario
                             </Link>
-                          </li>
+                          </li> */}
                           <li>
                             <Link to="/admin/informesgenerales">
                               Informes de Tareas
