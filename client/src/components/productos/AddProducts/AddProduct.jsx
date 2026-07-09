@@ -191,6 +191,7 @@ const AddProduct = () => {
               <option value="Amplificador Inst.">Amplificador Instrumento</option>
               <option value="Scanner">Scanner</option>
               <option value="AudioVisual">Audio Visuales</option>
+              <option value="laboratorio">Laboratorio</option>
               <option value="Otros">Otros</option>
 
                
