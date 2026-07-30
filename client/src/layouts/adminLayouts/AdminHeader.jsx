@@ -7,7 +7,8 @@ import { useEscuelaPadres } from "../../contexts/EscuelaPadresContext";
 
 
 const AdminHeader = () => {
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const { descargarVentasMensualesJSON } = useRecaudo();
   const { descargarAsistenciasJSON } = useEscuelaPadres();
@@ -15,8 +16,33 @@ const AdminHeader = () => {
 
 
 
-  const toggleDropdown = () => {
-    setDropdownOpen(!isDropdownOpen);
+  const toggleDropdown = (nombreDropdown) => {
+    setActiveDropdown((actual) =>
+      actual === nombreDropdown ? null : nombreDropdown
+    );
+  };
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen((estadoActual) => !estadoActual);
+  };
+
+  const handleNavigationClick = (event) => {
+    const enlace = event.target.closest("a");
+
+    if (!enlace) {
+      return;
+    }
+
+    // Si es el título de un dropdown, permite abrirlo sin cerrar el menú
+    const esTituloDropdown =
+      enlace.parentElement?.classList.contains("dropdown");
+
+    if (esTituloDropdown) {
+      return;
+    }
+
+    // Si es un enlace interno, cierra el menú móvil
+    setIsMobileMenuOpen(false);
+    setActiveDropdown(null);
   };
 
   const navigate = useNavigate();
@@ -41,10 +67,10 @@ const AdminHeader = () => {
   const directivas = user && user.role === "directivas";
   const familiafinke = user && user.role === "familiafinke";
 
-
   return (
     <div className="admin-header">
       <div className="admin-layout-header">
+
         <div className="admin-layout-header-slogan">
           <div className="admin-layout-header-logo-pre">
             <img
@@ -53,6 +79,7 @@ const AdminHeader = () => {
               alt="Logo CPCS"
             />
           </div>
+
           <div className="admin-layout-header-text">
             <p>
               <span className="admin-layout-header-text-span">
@@ -61,19 +88,32 @@ const AdminHeader = () => {
             </p>
           </div>
         </div>
-        <button className="cerrar" onClick={handleLogout}>
-          Cerrar{" "}
+
+         
+        <button
+          type="button"
+          className="mobile-menu-button"
+          onClick={toggleMobileMenu}
+          aria-label="Abrir o cerrar menú"
+        >
+          {isMobileMenuOpen ? "✕" : "☰"}
         </button>
 
-        <div className="admin-layout-header-links-pre">
+       
+
+        <div
+          className={`admin-layout-header-links-pre ${isMobileMenuOpen ? "mobile-menu-open" : ""
+            }`}
+        >
           <div>
-            <nav>
+            <nav onClick={handleNavigationClick}>
               {isAdmin && (
                 <ul>
                   <li>
                     <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Académico</Link>
-                      {isDropdownOpen && (
+                      <Link onClick={() => toggleDropdown("academico")}>Académico</Link>
+
+                      {activeDropdown === "academico" && (
                         <ul className="dropdown-menu">
                           <li>
                             <Link to="/admin/academico">Reporte académico</Link>
@@ -108,9 +148,9 @@ const AdminHeader = () => {
 
                   <li>
                     <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Adm</Link>
+                      <Link onClick={() => toggleDropdown("administracion")}>Adm</Link>
 
-                      {isDropdownOpen && (
+                      {activeDropdown === "administracion" && (
                         <ul className="dropdown-menu">
                           <li>
                             <Link to="/admin/administracion">Stock</Link>
@@ -147,10 +187,10 @@ const AdminHeader = () => {
 
                   <li>
                     <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Tesorería</Link>
+                      <Link onClick={() => toggleDropdown("tesoreria")}>Tesorería</Link>
 
 
-                      {isDropdownOpen && (
+                      {activeDropdown === "tesoreria" && (
                         <ul className="dropdown-menu">
                           <li>
                             <Link to="tesoreria">Recaudo</Link>
@@ -167,9 +207,9 @@ const AdminHeader = () => {
 
                   <li>
                     <div className="dropdown">
-                      <Link onClick={toggleDropdown}>E. Padres</Link>
+                      <Link onClick={() => toggleDropdown("escuelaPadres")}>E. Padres</Link>
 
-                      {isDropdownOpen && (
+                      {activeDropdown === "escuelaPadres" && (
                         <ul className="dropdown-menu">
                           <li>
                             <Link to="esc_padres">Registro Asistencia</Link>
@@ -200,10 +240,10 @@ const AdminHeader = () => {
 
                   <li>
                     <div className="dropdown">
-                      <Link onClick={toggleDropdown}>
+                      <Link onClick={() => toggleDropdown("tareas")}>
                         Tareas y mantenimientos
                       </Link>
-                      {isDropdownOpen && (
+                      {activeDropdown === "tareas" && (
                         <ul className="dropdown-menu">
                           <li>
                             <Link to="programadorTareas">Tareas</Link>
@@ -221,8 +261,8 @@ const AdminHeader = () => {
 
                   <li>
                     <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Sec.Académica</Link>
-                      {isDropdownOpen && (
+                      <Link onClick={() => toggleDropdown("secretaria")}>Sec.Académica</Link>
+                      {activeDropdown === "secretaria" && (
                         <ul className="dropdown-menu">
                           <li>
                             <Link to="/admin/documentos">Estadística KPI</Link>
@@ -245,9 +285,9 @@ const AdminHeader = () => {
 
                   <li>
                     <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Contabilidad</Link>
+                      <Link onClick={() => toggleDropdown("contabilidad")}>Contabilidad</Link>
 
-                      {isDropdownOpen && (
+                      {activeDropdown === "contabilidad" && (
                         <ul className="dropdown-menu">
                           <li>
                             <Link to="cargar_archivo">Cargar Archivo</Link>
@@ -272,9 +312,9 @@ const AdminHeader = () => {
 
                   <li>
                     <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Backup</Link>
+                      <Link onClick={() => toggleDropdown("backup")}>Backup</Link>
 
-                      {isDropdownOpen && (
+                      {activeDropdown === "backup" && (
                         <ul className="dropdown-menu">
 
                           <li>
@@ -325,8 +365,8 @@ const AdminHeader = () => {
                 <ul>
                   <li>
                     <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Académico</Link>
-                      {isDropdownOpen && (
+                      <Link onClick={() => toggleDropdown("academico")}>Académico</Link>
+                      {activeDropdown === "academico" && (
                         <ul className="dropdown-menu">
                           <li>
                             <Link to="/admin/academico">Reporte académico</Link>
@@ -361,9 +401,9 @@ const AdminHeader = () => {
 
                   <li>
                     <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Adm</Link>
+                      <Link onClick={() => toggleDropdown("administracion")}>Adm</Link>
 
-                      {isDropdownOpen && (
+                      {activeDropdown === "administracion" && (
                         <ul className="dropdown-menu">
                           <li>
                             <Link to="/admin/administracion">Stock</Link>
@@ -400,10 +440,10 @@ const AdminHeader = () => {
 
                   <li>
                     <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Tesorería</Link>
+                      <Link onClick={() => toggleDropdown("tesoreria")}>Tesorería</Link>
 
 
-                      {isDropdownOpen && (
+                      {activeDropdown === "tesoreria" && (
                         <ul className="dropdown-menu">
                           <li>
                             <Link to="tesoreria">Recaudo</Link>
@@ -420,9 +460,9 @@ const AdminHeader = () => {
 
                   <li>
                     <div className="dropdown">
-                      <Link onClick={toggleDropdown}>E. Padres</Link>
+                      <Link onClick={() => toggleDropdown("escuelaPadres")}>E. Padres</Link>
 
-                      {isDropdownOpen && (
+                      {activeDropdown === "escuelaPadres" && (
                         <ul className="dropdown-menu">
                           <li>
                             <Link to="esc_padres">Registro Asistencia</Link>
@@ -453,10 +493,10 @@ const AdminHeader = () => {
 
                   <li>
                     <div className="dropdown">
-                      <Link onClick={toggleDropdown}>
+                      <Link onClick={() => toggleDropdown("tareas")}>
                         Tareas y mantenimientos
                       </Link>
-                      {isDropdownOpen && (
+                      {activeDropdown === "tareas" && (
                         <ul className="dropdown-menu">
                           <li>
                             <Link to="programadorTareas">Tareas</Link>
@@ -474,8 +514,8 @@ const AdminHeader = () => {
 
                   <li>
                     <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Sec.Académica</Link>
-                      {isDropdownOpen && (
+                      <Link onClick={() => toggleDropdown("secretaria")}>Sec.Académica</Link>
+                      {activeDropdown === "secretaria" && (
                         <ul className="dropdown-menu">
                           <li>
                             <Link to="/admin/documentos">Estadística KPI</Link>
@@ -498,9 +538,9 @@ const AdminHeader = () => {
 
                   <li>
                     <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Contabilidad</Link>
+                      <Link onClick={() => toggleDropdown("contabilidad")}>Contabilidad</Link>
 
-                      {isDropdownOpen && (
+                      {activeDropdown === "contabilidad" && (
                         <ul className="dropdown-menu">
                           <li>
                             <Link to="cargar_archivo">Cargar Archivo</Link>
@@ -525,9 +565,9 @@ const AdminHeader = () => {
 
                   <li>
                     <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Backup</Link>
+                      <Link onClick={() => toggleDropdown("backup")}>Backup</Link>
 
-                      {isDropdownOpen && (
+                      {activeDropdown === "backup" && (
                         <ul className="dropdown-menu">
 
                           <li>
@@ -579,8 +619,8 @@ const AdminHeader = () => {
 
                   <li>
                     <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Académico</Link>
-                      {isDropdownOpen && (
+                      <Link onClick={() => toggleDropdown("academico")}>Académico</Link>
+                      {activeDropdown === "academico" && (
                         <ul className="dropdown-menu">
                           <li>
                             <Link to="/admin/academico">Reporte académico</Link>
@@ -615,9 +655,9 @@ const AdminHeader = () => {
                   </li>
                   <li>
                     <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Contabilidad</Link>
+                      <Link onClick={() => toggleDropdown("contabilidad")}>Contabilidad</Link>
 
-                      {isDropdownOpen && (
+                      {activeDropdown === "contabilidad" && (
                         <ul className="dropdown-menu">
 
                           <li>
@@ -640,8 +680,8 @@ const AdminHeader = () => {
 
                   <li>
                     <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Académico</Link>
-                      {isDropdownOpen && (
+                      <Link onClick={() => toggleDropdown("academico")}>Académico</Link>
+                      {activeDropdown === "academico" && (
                         <ul className="dropdown-menu">
                           <li>
                             <Link to="/admin/documentos">Estadística KPI</Link>
@@ -678,8 +718,8 @@ const AdminHeader = () => {
 
                   <li>
                     <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Tesoreria</Link>
-                      {isDropdownOpen && (
+                      <Link onClick={() => toggleDropdown("tesoreria")}>Tesoreria</Link>
+                      {activeDropdown === "tesoreria" && (
                         <ul className="dropdown-menu">
                           <li>
                             <Link to="tesoreria">Recaudos</Link>
@@ -728,9 +768,9 @@ const AdminHeader = () => {
 
               {escuelaPadres && (
                 <div className="dropdown">
-                  <Link onClick={toggleDropdown}>E. Padres</Link>
+                  <Link onClick={() => toggleDropdown("escuelaPadres")}>E. Padres</Link>
 
-                  {isDropdownOpen && (
+                  {activeDropdown === "escuelaPadres" && (
                     <ul className="dropdown-menu">
                       <li>
                         <Link to="esc_padres">Registro Asistencia</Link>
@@ -773,9 +813,9 @@ const AdminHeader = () => {
                   <div className="admin-layout-header-links-a">
                     <li>
                       <div className="dropdown">
-                        <Link onClick={toggleDropdown}>Administración</Link>
+                        <Link onClick={() => toggleDropdown("administracion")}>Administración</Link>
 
-                        {isDropdownOpen && (
+                        {activeDropdown === "administracion" && (
                           <ul className="dropdown-menu">
                             <li>
                               <Link to="/admin/administracion">Stock</Link>
@@ -807,10 +847,10 @@ const AdminHeader = () => {
               {mantenimiento && (
                 <li>
                   <div className="dropdown">
-                    <Link onClick={toggleDropdown}>
+                    <Link onClick={() => toggleDropdown("tareas")}>
                       Tareas y mantenimientos
                     </Link>
-                    {isDropdownOpen && (
+                    {activeDropdown === "tareas" && (
                       <ul className="dropdown-menu">
                         <li>
                           <Link to="programadorTareas">Tareas</Link>
@@ -840,9 +880,9 @@ const AdminHeader = () => {
               {contabilidad && (
                 <li>
                   <div className="dropdown">
-                    <Link onClick={toggleDropdown}>Contabilidad</Link>
+                    <Link onClick={() => toggleDropdown("contabilidad")}>Contabilidad</Link>
 
-                    {isDropdownOpen && (
+                    {activeDropdown === "contabilidad" && (
                       <ul className="dropdown-menu">
                         <li>
                           <Link to="cargar_archivo">Cargar Archivo</Link>
@@ -870,8 +910,8 @@ const AdminHeader = () => {
                 <ul>
                   <li>
                     <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Académico</Link>
-                      {isDropdownOpen && (
+                      <Link onClick={() => toggleDropdown("academico")}>Académico</Link>
+                      {activeDropdown === "academico" && (
                         <ul className="dropdown-menu">
                           <li>
                             <Link to="/admin/academico">Reporte académico</Link>
@@ -897,9 +937,9 @@ const AdminHeader = () => {
 
                   <li>
                     <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Adm</Link>
+                      <Link onClick={() => toggleDropdown("administracion")}>Adm</Link>
 
-                      {isDropdownOpen && (
+                      {activeDropdown === "administracion" && (
                         <ul className="dropdown-menu">
                           <li>
                             <Link to="/admin/administracion">Stock</Link>
@@ -936,10 +976,10 @@ const AdminHeader = () => {
 
                   <li>
                     <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Tesorería</Link>
+                      <Link onClick={() => toggleDropdown("tesoreria")}>Tesorería</Link>
 
 
-                      {isDropdownOpen && (
+                      {activeDropdown === "tesoreria" && (
                         <ul className="dropdown-menu">
                           <li>
                             <Link to="tesoreria_adm">Recaudo</Link>
@@ -955,9 +995,9 @@ const AdminHeader = () => {
 
                   <li>
                     <div className="dropdown">
-                      <Link onClick={toggleDropdown}>E. Padres</Link>
+                      <Link onClick={() => toggleDropdown("escuelaPadres")}>E. Padres</Link>
 
-                      {isDropdownOpen && (
+                      {activeDropdown === "escuelaPadres" && (
                         <ul className="dropdown-menu">
                           <li>
                             <Link to="esc_padres">Registro Asistencia</Link>
@@ -983,10 +1023,10 @@ const AdminHeader = () => {
 
                   <li>
                     <div className="dropdown">
-                      <Link onClick={toggleDropdown}>
+                      <Link onClick={() => toggleDropdown("tareas")}>
                         Tareas y mantenimientos
                       </Link>
-                      {isDropdownOpen && (
+                      {activeDropdown === "tareas" && (
                         <ul className="dropdown-menu">
                           <li>
                             <Link to="programadorTareas">Tareas</Link>
@@ -1006,9 +1046,9 @@ const AdminHeader = () => {
 
                   <li>
                     <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Contabilidad</Link>
+                      <Link onClick={() => toggleDropdown("contabilidad")}>Contabilidad</Link>
 
-                      {isDropdownOpen && (
+                      {activeDropdown === "contabilidad" && (
                         <ul className="dropdown-menu">
                           {/* <li>
                             <Link to="cargar_archivo">Cargar Archivo</Link>
@@ -1034,8 +1074,8 @@ const AdminHeader = () => {
                 <ul>
                   <li>
                     <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Académico</Link>
-                      {isDropdownOpen && (
+                      <Link onClick={() => toggleDropdown("academico")}>Académico</Link>
+                      {activeDropdown === "academico" && (
                         <ul className="dropdown-menu">
                           <li>
                             <Link to="/admin/academico">Reporte académico</Link>
@@ -1061,9 +1101,9 @@ const AdminHeader = () => {
 
                   <li>
                     <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Plan de Mejoramiento</Link>
+                      <Link onClick={() => toggleDropdown("planMejoramiento")}>Plan de Mejoramiento</Link>
 
-                      {isDropdownOpen && (
+                      {activeDropdown === "planMejoramiento" && (
                         <ul className="dropdown-menu">
                           <li>
                             <Link to="control_semanal">Control semanal</Link>
@@ -1087,9 +1127,9 @@ const AdminHeader = () => {
 
                   <li>
                     <div className="dropdown">
-                      <Link onClick={toggleDropdown}>Adm</Link>
+                      <Link onClick={() => toggleDropdown("administracion")}>Adm</Link>
 
-                      {isDropdownOpen && (
+                      {activeDropdown === "administracion" && (
                         <ul className="dropdown-menu">
                           {/* <li>
                             <Link to="/admin/administracion">Stock</Link>
@@ -1145,6 +1185,20 @@ const AdminHeader = () => {
             </nav>
           </div>
         </div>
+       
+        
+
+      
+
+          <button
+            type="button"
+            className="cerrar"
+            onClick={handleLogout}
+          >
+            Cerrar
+          </button>
+          
+        
       </div>
     </div>
   );

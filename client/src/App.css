@@ -582,6 +582,7 @@ input::placeholder {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  
 }
  
 
@@ -616,6 +617,8 @@ input::placeholder {
   background-image: radial-gradient(ellipse farthest-corner at 10px 100px , #fff 50%, rgba(0, 255, 0, 0) 0%, yellow 50%);
   min-height: 100vh;
 }
+
+ 
 
 
 .button-container {
@@ -1803,20 +1806,20 @@ p {
 }
 
 
-.cerrar {
-  
+ 
+.cerrar{
   width: 60px;
-  background-color:transparent;
-  position: fixed;
-  color: rgba(247, 247, 247, 0.729);
+  text-align: center;
+  
+  color: rgb(255, 255, 255);
    
   border:1px solid rgba(255, 255, 255, 0.753) ;
-  top: 0;
-  right: 0;
-  padding: 10px;
+  
+  margin: 10px;
+  padding: 8px;
   border-radius: 8px;
 }
-
+ 
 /* ----------------------------------------------------- */
 
 
@@ -1898,11 +1901,6 @@ p {
   margin-left: 20px;
 }
 
-.cerrar{
-  margin-right: 15px;
-   
- 
-}
 }
 
 @media (max-width: 1440px) {
@@ -1990,6 +1988,8 @@ p {
  
 }
 
+ 
+
 @media (max-width: 1024px) {
   .form-base{
    flex-direction: row;
@@ -2063,11 +2063,17 @@ p {
   }
   
 
+.admin-layout-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+ 
+
 .admin-layout-header-links-pre{
-  
-  
   margin-top: -30px;
-  
 }
 
   .admin-layout-header-text-span{
@@ -2090,16 +2096,13 @@ p {
     
  }
 
- .logout-button{
-   
+ .logout-button{ 
   width: 60%;
   margin: 0; /* Elimina el margen */
   margin-top: -50px;
   margin-right: 100px;
-   
 }
 .admin-header{
-
   height: 80px; 
 }
 
@@ -2120,48 +2123,39 @@ p {
 
 
 
+
 @media (max-width: 644px) {
   .admin-header{
- 
-      height: 90px; 
+    
+  
+      height: 80px; 
       width: 100%;
-     
-      
   }
 
   .admin-layout-header{
-   align-items: flex-start;
-
+  
+   margin-top: 10px;
   }
    
-  .admin-layout-header-text-span{
-    font-size: 19px;
-    
-  }
+ 
   
   .admin-layout-header-links li{
     font-size: 10px;
     margin-top: -30px;   
-    
-    
   }
 
   .admin-layout-header-links-pre{
- margin-top: -20px;
-margin-left: 10px;
+    margin-top: -20px;
+    margin-left: 10px;
 }
 
- 
   .form-base{
     flex-direction: column;
     width: 90%;
     margin-bottom: 10px;
-    
   }
   .input-group label {
-    
     margin: 2px 0px;
-   
   }
   .logo-auth{
    width: 100px;
@@ -2175,42 +2169,155 @@ margin-left: 10px;
     margin-bottom: -10px;
   }
   
-
-  
   .logout-button{
     width: 200%;
     margin: 0; /* Elimina el margen */    
-     
   }
 
-
-  
 .cerrar-cession-tarea {
- margin-top: -26px;
+ margin-top: -36px;
   
-}
-.cerrar{
-   width: 60px;
-  
-  position: fixed;
-  color: rgba(247, 247, 247, 0.729);
-  margin-top: 30px;
-  border:1px solid rgba(255, 255, 255, 0.753) ;
-  top: 0;
-  font-size: 12px;
-  right: 0;
-  padding: 4px;
-  border-radius: 4px;
 }
  
+ 
 
-
-.admin-header .dropdown-menu {
-     
+.admin-header .dropdown-menu { 
     margin-left: -30px;
     margin-top: 5px;
   }
+
+  .cerrar{
+  width: 60px;
+  text-align: center;
   
+  color: rgb(255, 255, 255);
+   
+  border:1px solid rgba(255, 255, 255, 0.753) ;
+  
+  margin: 10px 10px 30px 10px;
+  padding: 8px;
+  border-radius: 8px;
+}
 }
  
 /* ----------------------------------------------------- */
+
+/* Botón hamburguesa oculto en PC */
+.admin-header .mobile-menu-button {
+  display: none !important;
+}
+
+/* Botón hamburguesa visible únicamente en móvil */
+@media screen and (max-width: 768px) {
+  .admin-header .mobile-menu-button {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    top: 17px;
+    right: 75px;
+
+    width: 40px !important;
+    height: 36px;
+    margin: 5px;
+    padding: 0;
+
+    color: white;
+    font-size: 24px;
+    background: transparent !important;
+    border: 1px solid white;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  /* Menú inicialmente oculto */
+  .admin-header .admin-layout-header-links-pre {
+    display: none !important;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    max-height: calc(100vh - 70px);
+    margin: 0;
+    overflow-y: auto;
+    background-color: #0861dc;
+    box-shadow: 0 7px 12px rgba(0, 0, 0, 0.25);
+  }
+
+  /* Menú abierto al presionar ☰ */
+  .admin-header .admin-layout-header-links-pre.mobile-menu-open {
+    display: block !important;
+  }
+
+  .admin-header .admin-layout-header-links-pre > div,
+  .admin-header .admin-layout-header-links-pre nav {
+    width: 100%;
+  }
+
+  .admin-header nav > ul {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .admin-header nav > ul > li {
+    width: 100%;
+    margin: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .admin-header nav > ul > li a {
+    display: block;
+    padding: 13px 18px;
+    color: white;
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  
+  .admin-header .dropdown {
+    width: 100%;
+  }
+
+  .admin-header .dropdown-menu {
+    position: static !important;
+    display: block !important;
+    width: 100%;
+    margin: 0 !important;
+    padding: 4px 0;
+    border-radius: 0;
+    background-color: white;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.15);
+  }
+
+  .admin-header .dropdown-menu li {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid #dddddd;
+  }
+
+  .admin-header .dropdown-menu li a {
+    display: block;
+    padding: 12px 25px;
+    color: #111111 !important;
+    font-size: 14px;
+  }
+
+  .admin-header .dropdown-menu h5 {
+    margin: 8px 20px;
+    color: #333333;
+  }
+}
+
+ 
+
+ 
