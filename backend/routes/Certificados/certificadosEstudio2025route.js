@@ -8,8 +8,7 @@ router.post('/studentsActive', studentActiveController.saveStudent);
 // Ruta para obtener todos los estudiantes
 router.get('/studentsActive', studentActiveController.getAllStudents);
 
-// // Ruta para obtener un estudiante por su código de matrícula
-// router.get('/studentsActive/:id', studentActiveController.getStudentById);
+
 
 // Ruta para buscar estudiantes por nombre o número de documento
 router.get('/studentsActive/search', studentActiveController.searchStudents);

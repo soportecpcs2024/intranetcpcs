@@ -201,7 +201,7 @@ const CertificadoEstudios2025 = ({ estudiante }) => (
         >
           {estudiante.SECCION}
         </Text>{" "}
-        durante el año lectivo 2025.
+        durante el año lectivo {new Date().getFullYear()}.
       </Text>
 
       <View>

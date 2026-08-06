@@ -21,28 +21,43 @@ const getAllStudents = async (req, res) => {
 };
 
 const searchStudents = async (req, res) => {
-  const { nombre, numDocumento } = req.query;
-
   try {
-    const filter = {};
+    const nombre = req.query.nombre?.trim();
+    const numDocumento = req.query.numDocumento?.trim();
 
-    if (nombre && nombre.trim() !== '') {
-      filter.nombre = { $regex: nombre.trim(), $options: 'i' };
+    if (!nombre && !numDocumento) {
+      return res.status(400).json({
+        message: 'Debe proporcionar un nombre o número de documento'
+      });
     }
 
-    if (numDocumento && numDocumento.trim() !== '') {
-      filter.numDocumento = numDocumento.trim();
+    const filter = {};
+
+    if (nombre) {
+      filter.NOMBRE = {
+        $regex: nombre,
+        $options: 'i'
+      };
+    }
+
+    if (numDocumento) {
+      filter['Número_de_identificación'] = numDocumento;
     }
 
     const students = await Student.find(filter);
 
-    if (!students || students.length === 0) {
-      return res.status(404).json({ message: 'Estudiante no encontrado' });
+    if (students.length === 0) {
+      return res.status(404).json({
+        message: 'Estudiante no encontrado'
+      });
     }
 
-    res.status(200).json(students);
+    return res.status(200).json(students);
   } catch (error) {
-    res.status(500).json({ message: 'Error al buscar estudiantes', error: error.message });
+    return res.status(500).json({
+      message: 'Error al buscar estudiantes',
+      error: error.message
+    });
   }
 };
 
