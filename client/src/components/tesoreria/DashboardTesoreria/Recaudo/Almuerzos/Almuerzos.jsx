@@ -367,7 +367,7 @@ const Almuerzos = () => {
   return (
     <div className="almuerzos">
       <div className="container-almuerzo box1Almuerzos">
-        <h2 className="title-almuerzo">RECAUDO ALMUERZOS BAZAR 2026 CPCS</h2>
+        <h2 className="title-almuerzo">RECAUDO ALMUERZOS CLAUSURA DE MISIONES2026 CPCS</h2>
 
         <div className="header-almuerzos">
           <div>

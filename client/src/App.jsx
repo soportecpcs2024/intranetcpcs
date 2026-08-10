@@ -105,15 +105,6 @@ import InformePromAdm from "./components/tesoreria/DashboardTesoreria/Recaudo/Pr
 import { CheckupProvider } from "./contexts/CheckupContext";
  
  
- 
-
- 
-
-
-
-
-
-
 
 
 

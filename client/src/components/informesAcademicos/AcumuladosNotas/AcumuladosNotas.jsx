@@ -40,7 +40,7 @@ const AcumuladosNotas = () => {
       const response = await axios.get(
         `${
           import.meta.env.VITE_BACKEND_URL
-        }/api/certificadosestudio/studentsActive/search?Número_de_identificación=${numDocumento}`
+        }/api/certificadosestudio/studentsActive/search?numDocumento=${numDocumento}`
       );
       setResultados(response.data); // Suponiendo que la respuesta es un array de resultados
       setNumDocumento(""); // Limpiar el campo de búsqueda
