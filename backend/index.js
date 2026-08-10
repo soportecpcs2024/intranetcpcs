@@ -1,3 +1,15 @@
+const dns = require("node:dns");
+
+dns.setServers([
+  "1.1.1.1",
+  "1.0.0.1",
+  "8.8.8.8",
+  "8.8.4.4",
+]);
+
+require("dotenv").config();
+
+
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
@@ -198,6 +210,9 @@ app.use("/api/grupos", obtenerListaGrupos);
 
 const historico_2009_2017 = require('./routes/Certificados/data_2009_2017-routes/data_2009_2017_routes');
 app.use("/api/historico", historico_2009_2017);
+
+const asistenciaEstudiantes = require('./routes/AsistenciaEstudiantes/asistenciaEstudiantesRoutes').default
+app.use("/asistenciaEstudiantes", asistenciaEstudiantes)
 
 // Configuración y arranque del servidor
 const PORT = process.env.SERVER_PORT || 3000;
