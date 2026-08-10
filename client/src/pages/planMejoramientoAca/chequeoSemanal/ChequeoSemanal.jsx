@@ -31,7 +31,7 @@ const ChequeoSemanal = () => {
 
   const [area, setArea] = useState(AREAS[0].value);
   const [periodo, setPeriodo] = useState(PERIODOS[0].value);
-  const [semana, setSemana] = useState(1);
+
 
   const [respuestas, setRespuestas] = useState({});
   const [guardando, setGuardando] = useState(false);
@@ -53,29 +53,22 @@ const ChequeoSemanal = () => {
     return d;
   }, []);
 
-  const getWeekStartISO = useCallback(
-    (weekNumber) => {
-      const today = new Date();
-      const currentMonday = getMonday(today);
+  const getWeekStartISO = useCallback(() => {
+    const today = new Date();
+    const currentMonday = getMonday(today);
 
-      const target = new Date(currentMonday);
-      target.setDate(currentMonday.getDate() + (Number(weekNumber) - 1) * 7);
-      target.setHours(0, 0, 0, 0);
-
-      return target.toISOString();
-    },
-    [getMonday]
-  );
+    return currentMonday.toISOString();
+  }, [getMonday]);
 
   const weekStartPreview = useMemo(() => {
-    const d = new Date(getWeekStartISO(semana));
+    const d = new Date(getWeekStartISO());
     return d.toLocaleDateString("es-CO", {
       weekday: "long",
       day: "2-digit",
       month: "long",
       year: "numeric",
     });
-  }, [semana, getWeekStartISO]);
+  }, [getWeekStartISO]);
 
   const respondidas = useMemo(() => {
     if (!preguntas?.length) return 0;
@@ -113,7 +106,7 @@ const ChequeoSemanal = () => {
   const resetForm = () => {
     setArea(AREAS[0].value);
     setPeriodo(PERIODOS[0].value);
-    setSemana(1);
+
     setGrupo("");
     setRespuestas({});
     setMensaje("");
@@ -136,7 +129,7 @@ const ChequeoSemanal = () => {
       if (!grupo) return;
 
       try {
-        const weekStart = getWeekStartISO(semana);
+        const weekStart = getWeekStartISO();
 
         const saved = await obtenerWeeklyCheckup({
           area,
@@ -165,7 +158,6 @@ const ChequeoSemanal = () => {
   }, [
     area,
     periodo,
-    semana,
     grupo,
     getWeekStartISO,
     listarGrupos,
@@ -193,7 +185,7 @@ const ChequeoSemanal = () => {
         return;
       }
 
-      const weekStart = getWeekStartISO(semana);
+      const weekStart = getWeekStartISO();
 
       const fechaSemana = new Date(weekStart);
       const hoy = new Date();
@@ -332,33 +324,14 @@ const ChequeoSemanal = () => {
           </div>
 
           <div className="cs-field">
-            <label className="cs-label">Semana</label>
-            <input
-              className="cs-control"
-              type="number"
-              min={1}
-              max={1}
-              value={semana}
-              onChange={(e) => {
-                const value = Number(e.target.value);
+            <label className="cs-label">Semana actual</label>
 
-                if (value < 1) {
-                  setSemana(1);
-                  return;
-                }
-
-                if (value > 1) {
-                  setSemana(1);
-                  setMensaje("⚠️ Solo puedes registrar la semana actual.");
-                  return;
-                }
-
-                setSemana(value);
-              }}
-            />
+            <div className="cs-control">
+              {weekStartPreview}
+            </div>
 
             <small style={{ fontWeight: 600, color: "#475569" }}>
-              Fecha que se guardará: {weekStartPreview}
+              Esta fecha se asigna automáticamente.
             </small>
           </div>
         </div>
@@ -409,9 +382,8 @@ const ChequeoSemanal = () => {
                       <button
                         key={num}
                         type="button"
-                        className={`cs-chip ${
-                          val === num ? "active score" : ""
-                        }`}
+                        className={`cs-chip ${val === num ? "active score" : ""
+                          }`}
                         onClick={() => cambiarRespuesta(p._id, num)}
                       >
                         {num}
@@ -419,9 +391,8 @@ const ChequeoSemanal = () => {
                     ))}
 
                     <span
-                      className={`cs-status ${
-                        typeof val === "number" ? "done" : ""
-                      }`}
+                      className={`cs-status ${typeof val === "number" ? "done" : ""
+                        }`}
                     >
                       {typeof val === "number"
                         ? `Calificado: ${val}`
