@@ -327,7 +327,7 @@ const ChequeoSemanal = () => {
             <label className="cs-label">Semana actual</label>
 
             <div className="cs-control">
-              {weekStartPreview}
+              Inicia: {weekStartPreview}
             </div>
 
             <small style={{ fontWeight: 600, color: "#475569" }}>
