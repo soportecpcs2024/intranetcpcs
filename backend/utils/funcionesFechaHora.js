@@ -1,4 +1,4 @@
-export const obtenerFechaDeHoy = () => {
+const obtenerFechaDeHoy = () => {
     try {
         const ahora = new Date();
 
@@ -44,10 +44,12 @@ export const obtenerFechaDeHoy = () => {
     }
 }
 
-export const obtenerHora = () => {
+const obtenerHora = () => {
     const fecha = new Date();
     const formato = fecha.toLocaleString("en-US", { timeZone: "America/Bogota" });
     const fechaColombia = new Date(formato);
     const hora = fechaColombia.getHours();
     return hora;
 }
+
+module.exports = {obtenerFechaDeHoy, obtenerHora}
