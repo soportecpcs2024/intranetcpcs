@@ -46,8 +46,8 @@ const LoginForm = () => {
         }
       );
       if (response.data.access && response.data.refresh) {
-        await login(response.data.access, response.data.refresh); // Llama al método de login del contexto con el refreshToken
-        navigate("/admin/users"); // Redirige a AdminLayout después del login exitoso
+        await login(response.data.access, response.data.refresh);   
+        navigate("/admin/users");  
       } else {
         setError(response.data.message);
       }
@@ -75,7 +75,7 @@ const LoginForm = () => {
         <label>Correo:</label>
         <input
           type="email"
-          name="email"
+          name="email"       
           value={formData.email}
           onChange={handleChange}
           placeholder="¡Ingresa el correo!"

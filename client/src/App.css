@@ -7,8 +7,6 @@ body, html {
 
 }
 
- 
-
 h1{
   
   font-family: "Playfair Display", serif;
@@ -160,9 +158,7 @@ h1{
 }
 
 .logo-auth {
-   
   height: auto;
-   
 }
 
 .auth__tabs {
@@ -191,11 +187,10 @@ h1{
   align-items: center;
   justify-content: center;
   background-image: radial-gradient(ellipse farthest-corner at 45px 30px , #fff 50%, rgba(0, 255, 0, 0) 0%, rgba(255, 255, 0, 0.841) 50%);
-  width: 800px;
-  border-radius: 12px;
+   
+  border-radius:4px;
   border-end-end-radius: 70px;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-   
   margin-bottom: 50px;
 
 }
@@ -252,6 +247,7 @@ h1{
 form {
   display: flex;
   flex-wrap: wrap;
+  color: red;
 }
 
 
@@ -262,6 +258,9 @@ form {
   
   width: 100%;
 }
+
+ 
+ 
 .input-group label {
   color: rgb(0, 0, 0);
   margin: 10px 0px;
@@ -275,19 +274,18 @@ form {
 }
 
 input::placeholder {
-  color: rgb(0, 0, 0); /* Cambia "red" al color que desees */
+  color: rgb(5, 5, 5); /* Cambia "red" al color que desees */
   font-weight: 700;
 }
 .input-group input {
-  padding: 10px ;
-  background: hsla(202, 48%, 95%, 0.3);
+  padding: 4px ;
   border: 1px solid hsla(0, 0%, 100%, 0.507);
   outline: none;
   border-radius: 5px;
-  color: rgb(0, 0, 0);
+  color: rgb(5, 5, 5);
   font-weight: 600;
   font-size: 17px;
-  font-weight: lighter;
+  
   box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
 }
 .input-group input:focus {
@@ -337,11 +335,8 @@ input::placeholder {
 
 .logout-button{
   padding: 20px 30px;
-   
-  
   border-radius: 5px;
   background-image: radial-gradient(circle at 50% -20.71%, #a3a7ff 0, #7a8ffc 25%, #3c78f2 50%, #0063e8 75%, #0051de 100%);
- 
   border: 1px solid hsl(0, 0%, 98%);
   outline: none;
   font-size: 14px;
@@ -1710,7 +1705,6 @@ p {
 }
 .graficas-individuales-tabla-infopersonal .box-individual:nth-child(2){
   flex-basis: calc(60% - 1rem);
-   
   padding: 5px;
   border-radius: 8px;
 }
@@ -1993,10 +1987,10 @@ p {
 @media (max-width: 1024px) {
   .form-base{
    flex-direction: row;
-   width: 70%;
+   width: 80%;
   }
   .logo-auth{
-   width: 250px;
+   width: 200px;
   }
   .formulario{
    margin: 30px;
@@ -2053,6 +2047,7 @@ p {
   .form-base{
    flex-direction: row;
    width: 90%;
+   
   }
   
   .logo-auth{
@@ -2082,17 +2077,12 @@ p {
   }
 
   .admin-layout-header-links li{
-    font-size: 14 px;
-    
-    
+    font-size: 14px;
   }
   
   .admin-layout-header-links-a{
-    
     margin: 0 2px; /* Elimina el margen */
     padding: 0; /* Elimina el relleno */
-  
-   
     
  }
 
@@ -2126,14 +2116,11 @@ p {
 
 @media (max-width: 644px) {
   .admin-header{
-    
-  
       height: 80px; 
       width: 100%;
   }
 
   .admin-layout-header{
-  
    margin-top: 10px;
   }
    
