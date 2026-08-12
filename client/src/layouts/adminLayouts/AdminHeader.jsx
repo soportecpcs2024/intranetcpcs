@@ -141,6 +141,12 @@ const AdminHeader = () => {
                           <li>
                             <Link to="listarRegistroscheckup">Lista de Registros</Link>
                           </li>
+                          <li>
+                            <Link to="/">- - - - - - </Link>
+                          </li>
+                          <li>
+                            <Link to="tomaAsistenciaGrupo">Toma Asistencia</Link>
+                          </li>
                         </ul>
                       )}
                     </div>

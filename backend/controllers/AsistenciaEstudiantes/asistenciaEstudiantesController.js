@@ -4,28 +4,43 @@ const Estudiante = require('../../models/recaudo/EstudianteRecaudo');
 
 
 exports.mostrarListaGrupo = async (req, res) => {
-    try {
-        const { grupo } = req.body;
-        if (typeof grupo !== 'string' || grupo.trim() === '') {
-            return res.status(404).json({ message: "Grupo no encontrado." });
-        }
-        const grupoLimpio = grupo.toUpperCase().trim()
-        const listaEstudiantes = await Estudiante.find({ grado: grupoLimpio })
-        if (!listaEstudiantes || listaEstudiantes.length === 0) {
-            return res.status(404).json({ message: "Grupo no encontrado." });
-        }
-        const {asistenciaTomada, message} = await verificarTomaAsistencia(grupo)
-        console.log(message)
+  try {
+    const { grupo } = req.query;
 
-        if (message === undefined) {
-            return res.status(404).json({ message: "Error al validar la asistencia." });
-        }
-
-        return res.status(200).json({ lista: listaEstudiantes, message: message})
-        } catch (error) {
-            return res.status(500).json({ message: "Error al obtener los estudiantes." });
-        }
+    if (typeof grupo !== "string" || grupo.trim() === "") {
+      return res.status(400).json({
+        message: "Debes proporcionar un grupo."
+      });
     }
+
+    const grupoLimpio = grupo.toUpperCase().trim();
+
+    const listaEstudiantes = await Estudiante.find({
+      grado: grupoLimpio
+    });
+
+    if (listaEstudiantes.length === 0) {
+      return res.status(404).json({
+        message: "Grupo no encontrado."
+      });
+    }
+
+    const { asistenciaTomada, message } =
+      await verificarTomaAsistencia(grupoLimpio);
+
+    return res.status(200).json({
+      lista: listaEstudiantes,
+      asistenciaTomada,
+      message
+    });
+  } catch (error) {
+    console.error("Error obteniendo el grupo:", error);
+
+    return res.status(500).json({
+      message: "Error al obtener los estudiantes."
+    });
+  }
+};
 
 exports.guardarAsistenciaDiaria = async (req, res) => {
         try {

@@ -103,6 +103,8 @@ import InformeFormularioMensualAdm from "./components/tesoreria/Formularios_insc
 import GenerarWordAdm from "./components/tesoreria/InformeEscuelasPadres/InformeEScuelasPadresAdm";
 import InformePromAdm from "./components/tesoreria/DashboardTesoreria/Recaudo/Prom_11/InformePromAdm";
 import { CheckupProvider } from "./contexts/CheckupContext";
+import { TomaAsistenciaProvider } from "./contexts/TomaAsistenciaContext";
+ 
  
  
 
@@ -111,9 +113,9 @@ import { CheckupProvider } from "./contexts/CheckupContext";
 const ChequeoSemanal = React.lazy(() => import("./pages/planMejoramientoAca/chequeoSemanal/ChequeoSemanal"));
 const CheckupDashboard = React.lazy(() => import("./pages/planMejoramientoAca/CheckupDashboard/CheckupDashboardInstitucional"));
 const GrafiasKpi = React.lazy(() => import("./pages/admin/academicos/Graficas_Kpi/Grafias_kpi"));
-const HistoricoEP = React.lazy(() => import("./components/EscPadres/Historico/HistoricoEP"));
+const HistoricoEP = React.lazy(() => import("./components/EscPadres/Historico/HistoricoEP")); 
+const TomaAsistenciaGrupo = React.lazy(() => import("./components/tomaAsistenciaGrupo/TomaAsistenciaGrupo")); 
  
-
 
 const Prom_11 = React.lazy(() => import("./components/tesoreria/DashboardTesoreria/Recaudo/Prom_11/Prom_11"));
 const ListarProm = React.lazy(() => import("./components/tesoreria/DashboardTesoreria/Recaudo/Prom_11/ListarProm"));
@@ -216,8 +218,11 @@ const App = () => {
                     <EvaluacionesProvider>
                       <NominaProvider>
                         <CheckupProvider>
-
+                          <TomaAsistenciaProvider>
                           <AppContent />
+
+                          </TomaAsistenciaProvider>
+
                         </CheckupProvider>
 
                       </NominaProvider>
@@ -420,6 +425,7 @@ const AppContent = () => {
               <Route path="control_semanal" element={<ChequeoSemanal />}></Route>
               <Route path="checkupDashboard" element={<CheckupDashboard />}></Route>
               <Route path="listarRegistroscheckup" element={<ListarRegistrosCheckUp />}></Route>
+              <Route path="tomaAsistenciaGrupo" element={<TomaAsistenciaGrupo />}></Route>
 
               <Route path="descargar_colilla" element={<Generar_colilla />}></Route>
               <Route path="eliminar_colillas" element={<EliminarPorFecha />}></Route>
