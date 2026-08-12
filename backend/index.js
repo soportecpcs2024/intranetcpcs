@@ -211,7 +211,7 @@ app.use("/api/grupos", obtenerListaGrupos);
 const historico_2009_2017 = require('./routes/Certificados/data_2009_2017-routes/data_2009_2017_routes');
 app.use("/api/historico", historico_2009_2017);
 
-const asistenciaEstudiantes = require('./routes/AsistenciaEstudiantes/asistenciaEstudiantesRoutes').default
+const asistenciaEstudiantes = require('./routes/AsistenciaEstudiantes/asistenciaEstudiantesRoutes')
 app.use("/asistenciaEstudiantes", asistenciaEstudiantes)
 
 // Configuración y arranque del servidor
