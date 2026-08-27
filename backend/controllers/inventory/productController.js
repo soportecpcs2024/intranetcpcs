@@ -49,8 +49,12 @@ const createProduct = asyncHandler(async (req, res) => {
         fileSize: fileSizeFormatter(req.file.size, 2),
       };
     } catch (error) {
-      res.status(500);
-      throw new Error("Image could not be uploaded");
+      console.error("ERROR CLOUDINARY:", error);
+
+      return res.status(500).json({
+        message: "No se pudo subir la imagen",
+        error: error.message,
+      });
     }
   }
 
