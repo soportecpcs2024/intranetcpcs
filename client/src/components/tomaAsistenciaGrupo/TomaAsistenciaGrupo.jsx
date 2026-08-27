@@ -101,7 +101,7 @@ const TomaAsistenciaGrupo = () => {
                 id="grupo"
                 type="text"
                 value={grupoBusqueda}
-                placeholder="Ejemplo: SEXTO"
+                placeholder="Ejemplo: SEXTO A"
                 autoComplete="off"
                 onChange={(event) => setGrupoBusqueda(event.target.value)}
               />
