@@ -47,8 +47,8 @@ const LlegadasTarde = () => {
     return selectedGroup === ""
       ? llegadasTarde
       : llegadasTarde.filter(
-          (llegada) => llegada.grupo.trim() === selectedGroup.trim()
-        );
+        (llegada) => llegada.grupo.trim() === selectedGroup.trim()
+      );
   }, [selectedGroup, llegadasTarde]);
 
   useEffect(() => {
@@ -81,7 +81,8 @@ const LlegadasTarde = () => {
       ]
         .filter(Boolean)
         .join(" "),
-      Identificación: llegada.num_identificacion,
+      // Identificación: llegada.num_identificacion,
+      grupo: llegada.grupo,
       Fechas: llegada.fechas
         .map((date) => format(new Date(date), "dd/MM/yyyy"))
         .join(", "),
@@ -99,7 +100,7 @@ const LlegadasTarde = () => {
     sheet.getCell("A1").alignment = { horizontal: "center" };
 
     // Encabezados
-    const headers = ["Estudiante", "Identificación", "Fechas", "Cantidad"];
+    const headers = ["Estudiante", "Grupo","Cantidad", "Fechas"];
     const headerRow = sheet.addRow(headers);
     headerRow.eachCell((cell) => {
       cell.fill = {
@@ -121,9 +122,9 @@ const LlegadasTarde = () => {
     datosExport.forEach((dato) => {
       const row = sheet.addRow([
         dato.Estudiante,
-        dato.Identificación,
-        dato.Fechas,
+        dato.grupo,
         dato.Cantidad,
+        dato.Fechas,
       ]);
       row.eachCell((cell) => {
         cell.border = {
@@ -170,7 +171,8 @@ const LlegadasTarde = () => {
           <thead>
             <tr>
               <th>Estudiante</th>
-              <th>Identificación</th>
+              {/* <th>Identificación</th> */}
+              <th>Grupo</th>
               <th>Fechas</th>
               <th>Cantidad</th>
             </tr>
@@ -192,7 +194,8 @@ const LlegadasTarde = () => {
                     .join(" ")}
                 </td>
 
-                <td>{llegada.num_identificacion}</td>
+                {/* <td>{llegada.num_identificacion}</td> */}
+                <td className="cantidad">{llegada.grupo}</td>
 
                 <td>
                   <ul className="fechas">
