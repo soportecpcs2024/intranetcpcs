@@ -123,7 +123,7 @@ const ActasGrados = () => {
             new Paragraph({
               children: [
                 new TextRun({
-                  text: "En la ciudad de Medellín, el día 27 de noviembre del año 2025, se realizó el acto de graduación de los estudiantes que finalizaron el programa correspondiente al nivel de educación media académica, según lo dispuesto por la Ley 115 de 1994 y reglamentado en el Decreto 1860 de 1994 del Ministerio de Educación Nacional y el Decreto 1290 de 2009. Se otorgó a:",
+                  text: "En la ciudad de Medellín, el día 26 de noviembre del año 2026, se realizó el acto de graduación de los estudiantes que finalizaron el programa correspondiente al nivel de educación media académica, según lo dispuesto por la Ley 115 de 1994 y reglamentado en el Decreto 1860 de 1994 del Ministerio de Educación Nacional y el Decreto 1290 de 2009. Se otorgó a:",
                   size: 26,
                 }),
               ],
@@ -208,7 +208,7 @@ const ActasGrados = () => {
                         new Paragraph({
                           children: [
                             new TextRun({
-                              text: "EDGAR GONZÁLEZ FUENTES",
+                              text: "MARCIA RUTH FINKE TEACHOUT",
                               bold: true,
                               size: 24,
                             }),
@@ -252,7 +252,7 @@ const ActasGrados = () => {
                         new Paragraph({
                           children: [
                             new TextRun({
-                              text: "C.C. 16.678.768 de Cali",
+                              text: "C.C. 42.790.897 de Bogoóta",
                               size: 24,
                             }),
                           ],
@@ -292,7 +292,7 @@ const ActasGrados = () => {
                       },
                       children: [
                         new Paragraph({
-                          children: [new TextRun({ text: "Rector", size: 24 })],
+                          children: [new TextRun({ text: "Rectora", size: 24 })],
                           alignment: AlignmentType.CENTER,
                         }),
                       ],

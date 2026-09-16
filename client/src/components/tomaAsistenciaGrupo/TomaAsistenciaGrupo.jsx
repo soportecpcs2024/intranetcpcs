@@ -28,9 +28,20 @@ const TomaAsistenciaGrupo = () => {
   const resumen = useMemo(
     () => ({
       total: estudiantes.length,
-      asistieron: estudiantes.filter(({ estado }) => estado === "ASISTIO").length,
-      tarde: estudiantes.filter(({ estado }) => estado === "LLEGADA_TARDE").length,
-      faltaron: estudiantes.filter(({ estado }) => estado === "FALTO").length,
+
+      // Asistió incluye a quienes llegaron tarde
+      asistieron: estudiantes.filter(
+        ({ estado }) =>
+          estado === "ASISTIO" || estado === "LLEGADA_TARDE"
+      ).length,
+
+      tarde: estudiantes.filter(
+        ({ estado }) => estado === "LLEGADA_TARDE"
+      ).length,
+
+      faltaron: estudiantes.filter(
+        ({ estado }) => estado === "FALTO"
+      ).length,
     }),
     [estudiantes]
   );
@@ -60,15 +71,15 @@ const TomaAsistenciaGrupo = () => {
     `asistencia-estado asistencia-estado--${estado.toLowerCase()}`;
 
   const estudiantesOrdenados = useMemo(() => {
-  return [...estudiantes].sort((a, b) => {
-    const nombreA = a.nombre || a.NOMBRE || "";
-    const nombreB = b.nombre || b.NOMBRE || "";
+    return [...estudiantes].sort((a, b) => {
+      const nombreA = a.nombre || a.NOMBRE || "";
+      const nombreB = b.nombre || b.NOMBRE || "";
 
-    return nombreA.localeCompare(nombreB, "es", {
-      sensitivity: "base",
+      return nombreA.localeCompare(nombreB, "es", {
+        sensitivity: "base",
+      });
     });
-  });
-}, [estudiantes]);
+  }, [estudiantes]);
 
   return (
     <main className="asistencia-pagina">
@@ -140,7 +151,7 @@ const TomaAsistenciaGrupo = () => {
               </div>
 
               <div className="asistencia-resumen">
-                <article><span>Total</span><strong>{resumen.total}</strong></article>
+                <article><span>Total del grupo</span><strong>{resumen.total}</strong></article>
                 <article className="resumen--asistio"><span>Asistieron</span><strong>{resumen.asistieron}</strong></article>
                 <article className="resumen--tarde"><span>Llegada tarde</span><strong>{resumen.tarde}</strong></article>
                 <article className="resumen--falto"><span>Faltaron</span><strong>{resumen.faltaron}</strong></article>
