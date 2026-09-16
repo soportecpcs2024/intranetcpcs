@@ -17,13 +17,45 @@ import { useActasDeGrado } from "../../../contexts/ActasDeGradoContext";
 
 const getImageBufferFromPublic = async (url) => {
   const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(`No fue posible cargar la imagen: ${response.status}`);
+  }
+
   const blob = await response.blob();
   return await blob.arrayBuffer();
 };
 
+const getAbreviaturaDocumento = (tipo) => {
+  if (!tipo) return "";
+
+  const normalizado = String(tipo).toLowerCase().trim();
+
+  if (normalizado.includes("tarjeta") || normalizado === "t.i.") return "T.I.";
+  if (
+    normalizado.includes("cedula") ||
+    normalizado.includes("cédula") ||
+    normalizado === "c.c."
+  ) {
+    return "C.C.";
+  }
+
+  return tipo;
+};
+
+const limpiarNombreArchivo = (valor = "") =>
+  String(valor)
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[<>:"/\\|?*]/g, "")
+    .replace(/\s+/g, "_")
+    .replace(/_+/g, "_")
+    .replace(/^_|_$/g, "");
+
 const GenerarTodasActas = () => {
   const { estudiantes, listarEstudiantes } = useActasDeGrado();
   const [generando, setGenerando] = useState(false);
+  const [progreso, setProgreso] = useState(0);
 
   const fechaActual = new Date();
   const dia = fechaActual.getDate();
@@ -34,17 +66,14 @@ const GenerarTodasActas = () => {
     listarEstudiantes();
   }, []);
 
-  const generarActaParaEstudiante = async (estudiante, imageBuffer) => {
-    // 🔹 Función para abreviar el tipo de documento
-  const getAbreviaturaDocumento = (tipo) => {
-    if (!tipo) return "";
-    const normalizado = tipo.toLowerCase().trim();
-    if (normalizado.includes("tarjeta")) return "T.I.";
-    if (normalizado.includes("cedula") || normalizado.includes("cédula")) return "C.C.";
-    return tipo; // Si no coincide, se deja el valor original
-  };
-
-  const tipoDocumento = getAbreviaturaDocumento(estudiante.identificacion);
+  const generarActaParaEstudiante = async (
+    estudiante,
+    imageBuffer,
+    numeroRegistro
+  ) => {
+    const tipoDocumento = getAbreviaturaDocumento(estudiante.identificacion);
+    const segundoNombre =
+      estudiante.segundo_nombre || estudiante.segundo_nombre_ || "";
     const doc = new Document({
       sections: [
         {
@@ -85,7 +114,7 @@ const GenerarTodasActas = () => {
             new Paragraph({
               children: [
                 new TextRun({
-                  text: `En la ciudad de Medellín, el día 27 de noviembre del año 2025, se realizó el acto de graduación de los estudiantes que finalizaron el programa correspondiente al nivel de educación media académica, según lo dispuesto por la Ley 115 de 1994 y reglamentado en el Decreto 1860 de 1994 del Ministerio de Educación Nacional y el Decreto 1290 de 2009. Se otorgó a:"`,
+                  text: `En la ciudad de Medellín, el día 26 de noviembre del año 2026, se realizó el acto de graduación de los estudiantes que finalizaron el programa correspondiente al nivel de educación media académica, según lo dispuesto por la Ley 115 de 1994 y reglamentado en el Decreto 1860 de 1994 del Ministerio de Educación Nacional y el Decreto 1290 de 2009. Se otorgó a:"`,
                   size: 26,
                 }),
               ],
@@ -95,7 +124,9 @@ const GenerarTodasActas = () => {
             new Paragraph({
               children: [
                 new TextRun({
-                  text: `${estudiante.primer_nombre} ${estudiante.segundo_nombre || ""} ${estudiante.primer_apellido} ${estudiante.segundo_apellido || ""}`,
+                  text: `${estudiante.primer_nombre} ${segundoNombre} ${estudiante.primer_apellido} ${estudiante.segundo_apellido || ""}`
+                    .replace(/\s+/g, " ")
+                    .trim(),
                   bold: true,
                   size: 32,
                 }),
@@ -157,7 +188,7 @@ const GenerarTodasActas = () => {
                   children: [
                     new TableCell({
                       borders: { top: { color: "FFFFFF" }, bottom: { color: "FFFFFF" }, left: { color: "FFFFFF" }, right: { color: "FFFFFF" } },
-                      children: [new Paragraph({ children: [new TextRun({ text: "EDGAR GONZÁLEZ FUENTES", bold: true, size: 24 })], alignment: AlignmentType.CENTER })],
+                      children: [new Paragraph({ children: [new TextRun({ text: "MARCIA RUTH FINKE TEACHOUT", bold: true, size: 24 })], alignment: AlignmentType.CENTER })],
                     }),
                     new TableCell({
                       borders: { top: { color: "FFFFFF" }, bottom: { color: "FFFFFF" }, left: { color: "FFFFFF" }, right: { color: "FFFFFF" } },
@@ -169,7 +200,7 @@ const GenerarTodasActas = () => {
                   children: [
                     new TableCell({
                       borders: { top: { color: "FFFFFF" }, bottom: { color: "FFFFFF" }, left: { color: "FFFFFF" }, right: { color: "FFFFFF" } },
-                      children: [new Paragraph({ children: [new TextRun({ text: "C.C. 16.678.768 de Cali", size: 24 })], alignment: AlignmentType.CENTER })],
+                      children: [new Paragraph({ children: [new TextRun({ text: "C.C. 42.790.897 de Bogotá", size: 24 })], alignment: AlignmentType.CENTER })],
                     }),
                     new TableCell({
                       borders: { top: { color: "FFFFFF" }, bottom: { color: "FFFFFF" }, left: { color: "FFFFFF" }, right: { color: "FFFFFF" } },
@@ -181,7 +212,7 @@ const GenerarTodasActas = () => {
                   children: [
                     new TableCell({
                       borders: { top: { color: "FFFFFF" }, bottom: { color: "FFFFFF" }, left: { color: "FFFFFF" }, right: { color: "FFFFFF" } },
-                      children: [new Paragraph({ children: [new TextRun({ text: "Rector", size: 24 })], alignment: AlignmentType.CENTER })],
+                      children: [new Paragraph({ children: [new TextRun({ text: "Rectora", size: 24 })], alignment: AlignmentType.CENTER })],
                     }),
                     new TableCell({
                       borders: { top: { color: "FFFFFF" }, bottom: { color: "FFFFFF" }, left: { color: "FFFFFF" }, right: { color: "FFFFFF" } },
@@ -197,27 +228,85 @@ const GenerarTodasActas = () => {
     });
 
     const blob = await Packer.toBlob(doc);
-    return {
-      nombre: `${estudiante.primer_apellido}_${estudiante.primer_nombre}_Acta.docx`,
-      blob,
-    };
+    const consecutivo = String(numeroRegistro).padStart(2, "0");
+    const identificadorUnico =
+      estudiante.num_identificacion || estudiante.cod || `registro_${consecutivo}`;
+    const nombreBase = limpiarNombreArchivo(
+      `${consecutivo}_${estudiante.primer_apellido}_${estudiante.primer_nombre}_${identificadorUnico}_Acta`
+    );
+
+    return { nombre: `${nombreBase}.docx`, blob };
   };
 
   const generarTodas = async () => {
     if (!estudiantes || estudiantes.length === 0) return;
 
     setGenerando(true);
-    const zip = new JSZip();
-    const imageBuffer = await getImageBufferFromPublic("/LOGOED.jpg");
+    setProgreso(0);
 
-    for (const estudiante of estudiantes) {
-      const { nombre, blob } = await generarActaParaEstudiante(estudiante, imageBuffer);
-      zip.file(nombre, blob);
+    try {
+      const zip = new JSZip();
+      const imageBuffer = await getImageBufferFromPublic("/LOGOED.jpg");
+      const nombresAgregados = new Set();
+      const errores = [];
+
+      for (const [index, estudiante] of estudiantes.entries()) {
+        try {
+          const { nombre, blob } = await generarActaParaEstudiante(
+            estudiante,
+            imageBuffer,
+            index + 1
+          );
+
+          if (nombresAgregados.has(nombre)) {
+            throw new Error(`Se intentó generar un nombre repetido: ${nombre}`);
+          }
+
+          nombresAgregados.add(nombre);
+          zip.file(nombre, blob);
+        } catch (error) {
+          errores.push({
+            posicion: index + 1,
+            cod: estudiante.cod,
+            identificacion: estudiante.num_identificacion,
+            estudiante: `${estudiante.primer_nombre || ""} ${estudiante.primer_apellido || ""}`.trim(),
+            error: error.message,
+          });
+        } finally {
+          setProgreso(index + 1);
+        }
+      }
+
+      const totalActas = Object.keys(zip.files).filter((nombre) =>
+        nombre.toLowerCase().endsWith(".docx")
+      ).length;
+
+      console.log("Estudiantes recibidos:", estudiantes.length);
+      console.log("Actas generadas:", totalActas);
+
+      if (errores.length > 0) {
+        console.error("Registros que no pudieron procesarse:", errores);
+        alert(
+          `Se recibieron ${estudiantes.length} estudiantes, pero se generaron ${totalActas} actas. Revisa la consola para conocer los registros con error.`
+        );
+      }
+
+      if (totalActas === 0) {
+        throw new Error("No se pudo generar ninguna acta.");
+      }
+
+      const zipBlob = await zip.generateAsync({ type: "blob" });
+      saveAs(zipBlob, `Actas_Graduacion_${año}.zip`);
+
+      if (errores.length === 0) {
+        alert(`Proceso terminado: se generaron ${totalActas} de ${estudiantes.length} actas.`);
+      }
+    } catch (error) {
+      console.error("Error general generando las actas:", error);
+      alert(`No fue posible generar las actas: ${error.message}`);
+    } finally {
+      setGenerando(false);
     }
-
-    const zipBlob = await zip.generateAsync({ type: "blob" });
-    saveAs(zipBlob, `Actas_Graduacion_${año}.zip`);
-    setGenerando(false);
   };
 
   return (
@@ -237,6 +326,11 @@ const GenerarTodasActas = () => {
       >
         {generando ? "Generando..." : "Generar ZIP de Actas"}
       </button>
+      {generando && (
+        <p style={{ marginTop: "10px" }}>
+          Procesando {progreso} de {estudiantes.length} estudiantes...
+        </p>
+      )}
     </div>
   );
 };
