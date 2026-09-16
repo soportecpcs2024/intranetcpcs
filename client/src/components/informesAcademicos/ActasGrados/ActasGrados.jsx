@@ -252,7 +252,7 @@ const ActasGrados = () => {
                         new Paragraph({
                           children: [
                             new TextRun({
-                              text: "C.C. 42.790.897 de Bogoóta",
+                              text: "C.C. 42.790.897 de Bogotá",
                               size: 24,
                             }),
                           ],
