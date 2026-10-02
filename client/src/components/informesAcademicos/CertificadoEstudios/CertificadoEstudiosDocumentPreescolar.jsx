@@ -11,6 +11,10 @@ import {
  
 import PropTypes from "prop-types";
 // Define styles for the PDF
+
+const LOGO_URL =
+  "https://res.cloudinary.com/dvugfmopj/image/upload/v1770665378/logo2025_h8wlte.png";
+
 const styles = StyleSheet.create({
   page: {
     flexDirection: "column",
@@ -146,7 +150,7 @@ const CertificadoEstudiosDocumentPreescolar = ({ estudiante }) => (
           marginBottom: 2,
         }}
       >
-        <Image style={styles.image} src="/logo2025.png" />
+        <Image style={styles.image} src={LOGO_URL} />
         <View style={styles.membrete_header}>
           <View>
             <Text>Carrera 83 N° 78-30 Medellín -Colombia</Text>
