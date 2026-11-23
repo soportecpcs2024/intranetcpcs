@@ -418,8 +418,6 @@ const AppContent = () => {
 
 
 
-
-
               <Route path="cargar_archivo" element={<CargarArchivoExcel />}></Route>
 
               <Route path="control_semanal" element={<ChequeoSemanal />}></Route>
